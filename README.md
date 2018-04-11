@@ -1,0 +1,2 @@
+# minicart
+VTEX Minicart Component 
