@@ -1,0 +1,84 @@
+{
+  "pages": {
+    "store": {
+      "path": "/",
+      "theme": "theme"
+    },
+    "store/home": {
+      "path": "/"
+    },
+    "store/search": {
+      "path": "/:term/s"
+    },
+    "store/product": {
+      "path": "/:id/p"
+    }
+  },
+  "extensions": {
+    "store": {
+      "component": "StoreTemplate"
+    },
+    "store/home": {
+      "component": "HomePage"
+    },
+    "store/home/banner": {
+      "component": "Banner",
+      "props": {
+        "image": "http://clipart-library.com/newimages/clip-art-banner-7.png",
+        "page": "/",
+        "targetParams": {
+          "params": ""
+        }
+      }
+    },
+    "store/home/carousel": {
+      "component": "Carousel",
+      "props": {
+        "banner1": {
+          "image": "http://clipart-library.com/newimages/clip-art-banner-7.png",
+          "page": "/",
+          "targetParams": {
+            "params": ""
+          }
+        },
+        "banner2": {
+          "image": "http://clipart-library.com/newimages/clip-art-banner-7.png",
+          "page": "/",
+          "targetParams": {
+            "params": ""
+          }
+        }
+      }
+    },
+    "store/home/shelf-top": {
+      "component": "Shelf",
+      "props": {
+        "from": 0,
+        "quantity": 8,
+        "orderBy": "OrderByTopSaleDESC"
+      }
+    },
+    "store/home/shelf-mid": {
+      "component": "Shelf",
+      "props": {
+        "from": 8,
+        "quantity": 8,
+        "orderBy": "OrderByTopSaleDESC"
+      }
+    },
+    "store/home/shelf-bottom": {
+      "component": "Shelf",
+      "props": {
+        "from": 16,
+        "quantity": 8,
+        "orderBy": "OrderByTopSaleDESC"
+      }
+    },
+    "store/search": {
+      "component": "SearchPage"
+    },
+    "store/product": {
+      "component": "ProductPage"
+    }
+  }
+}
