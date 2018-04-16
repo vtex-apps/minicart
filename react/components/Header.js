@@ -44,41 +44,41 @@ class Header extends Component {
     const { name } = this.props
     const { searchValue, showCart } = this.state
     return (
-      <div className="z-2 flex-ns justify-between items-center w-100 top-0 pa4 pa5-ns bg-white bb bw1 b--serious-black tc tl-ns">
-        <a className="link b f3 near-black tc tl-ns" href="/">
-          {name || account}
-        </a>
-        <div className="tr-ns flex items-center">
-          <div className="w5-ns mr2">
-            <Input
-              placeholder={this.translate('search-placeholder')}
-              value={searchValue}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="flex items-center justify-center">
-            <Button
-              data-test-id="search"
-              onClick={this.handleSearch}
-              disabled={!searchValue}
-            >
-              {this.translate('search')}
-            </Button>
-            <Button
-              data-test-id="cart"
-              onClick={this.handleCart}
-              onMouseEnter={this.handleCartMouseEnter}
-            >
-              <CartIcon />
-            </Button>
-            {showCart && (
-              <div
-                className="absolute z-4 right-0 top-2 w-30 ma6 mt10 bg-white br2 shadow-2"
-                onMouseLeave={this.handleMouseLeave}
-              >
-                <MiniCart />
-              </div>
-            )}
+      <div className="relative">
+        <div className="z-2 flex-ns justify-between items-center w-100 top-0 pa4 pa5-ns bg-white bb bw1 b--serious-black tc tl-ns">
+          <a className="link b f3 near-black tc tl-ns" href="/">
+            {name || account}
+          </a>
+          <div className="tr-ns flex items-center">
+            <div className="w5-ns mr2">
+              <Input
+                placeholder={this.translate('search-placeholder')}
+                value={searchValue}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="flex items-center justify-center">
+              <Button
+                data-test-id="search"
+                onClick={this.handleSearch}
+                disabled={!searchValue}>
+                {this.translate('search')}
+              </Button>
+              <Button
+                className="hover-mid-gray"
+                data-test-id="cart"
+                onClick={this.handleCart}
+                onMouseEnter={this.handleCartMouseEnter}>
+                <CartIcon />
+              </Button>
+              {showCart && (
+                <div
+                  className="absolute z-2 right-0 w-30 mt9"
+                  onMouseLeave={this.handleMouseLeave}>
+                  <MiniCart />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

@@ -7,8 +7,7 @@ class CartIcon extends Component {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         width="20"
-        height="20"
-      >
+        height="20">
         <g className="nc-icon-wrapper" fill="#142032">
           <circle cx="6.5" cy="21.5" r="2.5" />
           <circle cx="19.5" cy="21.5" r="2.5" />

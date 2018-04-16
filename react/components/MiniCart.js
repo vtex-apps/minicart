@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql, compose } from 'react-apollo'
-import Button from '@vtex/styleguide/lib/Button'
-import CloseIcon from '@vtex/styleguide/lib/icon/Close'
 import orderFormQuery from '../queries/orderFormQuery.gql'
 import updateItemsMutation from '../mutations/updateItemsMutation.gql'
 import MiniCartItem from './MiniCartItem'
@@ -42,24 +40,23 @@ class MiniCart extends Component {
 
   render() {
     const { data } = this.props
+    console.log(data)
     if (data.loading) {
       return null
     }
     return (
-      <div className="pa3">
+      <div className="pa3 bg-white mt9 br2">
         {data.orderForm.items.map(item => (
-          <div className="flex flex-row" key={item.id}>
+          <div key={item.id}>
             <MiniCartItem
               imageUrl={item.imageUrl}
               name={item.name}
               price={item.sellingPrice}
               productId={this.getItemId(item.detailUrl)}
             />
-            <Button id={item.id} onClick={this.handleRemoveItem}>
-              <CloseIcon />
-            </Button>
           </div>
         ))}
+        <hr />
       </div>
     )
   }
