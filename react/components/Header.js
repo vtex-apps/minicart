@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import Input from '@vtex/styleguide/lib/Input'
 import Button from '@vtex/styleguide/lib/Button'
-
 import MiniCart from './MiniCart'
 import CartIcon from '../images/CartIcon'
 
@@ -43,9 +42,12 @@ class Header extends Component {
     const { account } = global.__RUNTIME__
     const { name } = this.props
     const { searchValue, showCart } = this.state
+    const minicartStyle = {
+      top: '100%',
+    }
     return (
-      <div className="relative">
-        <div className="z-2 flex-ns justify-between items-center w-100 top-0 pa4 pa5-ns bg-white bb bw1 b--serious-black tc tl-ns">
+      <div>
+        <div className="relative z-2 flex-ns justify-between items-center w-100 top-0 pa4 pa5-ns bg-white bb bw1 b--serious-black tc tl-ns">
           <a className="link b f3 near-black tc tl-ns" href="/">
             {name || account}
           </a>
@@ -73,7 +75,8 @@ class Header extends Component {
               </Button>
               {showCart && (
                 <div
-                  className="absolute z-2 right-0 w-20 mt9"
+                  style={minicartStyle}
+                  className="absolute z-2 right-0 w-20"
                   onMouseLeave={this.handleMouseLeave}>
                   <MiniCart />
                 </div>

@@ -4,11 +4,18 @@ import { graphql, compose } from 'react-apollo'
 import orderFormQuery from '../queries/orderFormQuery.gql'
 import updateItemsMutation from '../mutations/updateItemsMutation.gql'
 import MiniCartItem from './MiniCartItem'
+import Button from '@vtex/styleguide/lib/Button'
+import { FormattedNumber } from 'react-intl'
 
 class MiniCart extends Component {
   static propTypes = {
+    label: PropTypes.string,
     data: PropTypes.object,
     mutate: PropTypes.func,
+  }
+
+  static contextTypes = {
+    culture: PropTypes.object,
   }
 
   handleRemoveItem = ({ target: { id } }) => {
@@ -48,9 +55,10 @@ class MiniCart extends Component {
 
   componentWithProducts = (data) => {
     return (
-      <div className="pa3 bg-white mt7 br2">
+      <div
+        className="w-100 tc pa3 bg-white br2 br--bottom shadow-5">
         {data.orderForm.items.map(item => (
-          <div key={item.id}>
+          <div className="w-100" key={item.id}>
             <MiniCartItem
               imageUrl={item.imageUrl}
               name={item.name}
@@ -59,7 +67,17 @@ class MiniCart extends Component {
             />
           </div>
         ))}
-        <hr />
+        <div className="fr mb3">
+          <span className="mr2">Total</span>
+          <FormattedNumber
+            value={data.orderForm.value}
+            style="currency"
+            currency={this.context.culture.currency}
+            minimumFractionDigits={2}
+            maximumFractionDigits={2}
+          />
+        </div>
+        <div className="mb4"><Button primary block>Meu carrinho</Button></div>
       </div>
     )
   }
@@ -72,9 +90,9 @@ class MiniCart extends Component {
     } else if (!data.orderForm.items.length) {
       element = this.componentWithoutProducts()
     } else {
+      console.log(data)
       element = this.componentWithProducts(data)
     }
-    console.log(element)
     return element
   }
 }
