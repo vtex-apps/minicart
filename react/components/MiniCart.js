@@ -38,14 +38,17 @@ class MiniCart extends Component {
     return regExp.exec(detailUrl)[1]
   }
 
-  render() {
-    const { data } = this.props
-    console.log(data)
-    if (data.loading) {
-      return null
-    }
+  componentWithoutProducts = () => {
     return (
-      <div className="pa3 bg-white mt9 br2">
+      <div className="tc pv7 pa3 bg-white br2">
+        <span>Sua sacola está vazia!</span>
+      </div>
+    )
+  }
+
+  componentWithProducts = (data) => {
+    return (
+      <div className="pa3 bg-white mt7 br2">
         {data.orderForm.items.map(item => (
           <div key={item.id}>
             <MiniCartItem
@@ -59,6 +62,20 @@ class MiniCart extends Component {
         <hr />
       </div>
     )
+  }
+
+  render() {
+    let element
+    const { data } = this.props
+    if (data.loading) {
+      element = null
+    } else if (!data.orderForm.items.length) {
+      element = this.componentWithoutProducts()
+    } else {
+      element = this.componentWithProducts(data)
+    }
+    console.log(element)
+    return element
   }
 }
 

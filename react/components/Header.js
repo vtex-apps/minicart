@@ -73,7 +73,7 @@ class Header extends Component {
               </Button>
               {showCart && (
                 <div
-                  className="absolute z-2 right-0 w-30 mt9"
+                  className="absolute z-2 right-0 w-20 mt9"
                   onMouseLeave={this.handleMouseLeave}>
                   <MiniCart />
                 </div>
