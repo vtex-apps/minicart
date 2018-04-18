@@ -18,16 +18,16 @@ export default class MiniCartItem extends Component {
   render() {
     const { imageUrl, name, price, productId } = this.props
     return (
-      <div>
+      <div className="relative">
         <Link
           page={'store/product'}
           params={{ id: productId }}>
           <img src={imageUrl} alt={productId} />
-          <div className="w-70 fr items-center">
-            <div className="w-100 tc">
+          <div className="w-70 fr pa1">
+            <div className="w-100">
               <span className="f6">{name}</span>
             </div>
-            <div className="fr f7 mt4">
+            <div className="f7 absolute bottom-0 right-0 mr3">
               <FormattedNumber
                 value={price}
                 style="currency"
@@ -38,7 +38,6 @@ export default class MiniCartItem extends Component {
             </div>
           </div>
         </Link>
-        <hr />
       </div>
     )
   }

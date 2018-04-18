@@ -5,6 +5,7 @@ import orderFormQuery from '../queries/orderFormQuery.gql'
 import updateItemsMutation from '../mutations/updateItemsMutation.gql'
 import MiniCartItem from './MiniCartItem'
 import Button from '@vtex/styleguide/lib/Button'
+import WrappedSpinner from './WrappedSpinner'
 import { FormattedNumber } from 'react-intl'
 
 class MiniCart extends Component {
@@ -47,7 +48,7 @@ class MiniCart extends Component {
 
   componentWithoutProducts = () => {
     return (
-      <div className="tc pv7 pa3 bg-white br2">
+      <div className="w-100">
         <span>Sua sacola está vazia!</span>
       </div>
     )
@@ -56,18 +57,20 @@ class MiniCart extends Component {
   componentWithProducts = (data) => {
     return (
       <div
-        className="w-100 tc pa3 bg-white br2 br--bottom shadow-5">
+        className="relative w-100">
         {data.orderForm.items.map(item => (
-          <div className="w-100" key={item.id}>
+          <div key={item.id}>
             <MiniCartItem
+              className="w-100"
               imageUrl={item.imageUrl}
               name={item.name}
               price={item.sellingPrice}
               productId={this.getItemId(item.detailUrl)}
             />
+            <hr />
           </div>
         ))}
-        <div className="fr mb3">
+        <div className="fr mb3 mr3">
           <span className="mr2">Total</span>
           <FormattedNumber
             value={data.orderForm.value}
@@ -77,16 +80,30 @@ class MiniCart extends Component {
             maximumFractionDigits={2}
           />
         </div>
-        <div className="mb4"><Button primary block>Meu carrinho</Button></div>
+        <div className="mb1">
+          <Button primary block onClick={this.handleCart}>
+            Meu carrinho
+          </Button>
+        </div>
       </div>
     )
   }
+
+  componentLoading = () => {
+    return (
+      <div className="w-100">
+        <WrappedSpinner />
+      </div>
+    )
+  }
+
+  handleCart = () => location.assign('/checkout/#/cart')
 
   render() {
     let element
     const { data } = this.props
     if (data.loading) {
-      element = null
+      element = this.componentLoading()
     } else if (!data.orderForm.items.length) {
       element = this.componentWithoutProducts()
     } else {
