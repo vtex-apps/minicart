@@ -47,7 +47,7 @@ class Header extends Component {
     }
     return (
       <div>
-        <div className="relative z-2 flex-ns justify-between items-center w-100 top-0 pa4 pa5-ns bg-white bb bw1 b--serious-black tc tl-ns">
+        <div className="z-2 flex-ns justify-between items-center w-100 top-0 pa4 pa5-ns bg-white bb bw1 b--serious-black tc tl-ns">
           <a className="link b f3 near-black tc tl-ns" href="/">
             {name || account}
           </a>
@@ -59,7 +59,7 @@ class Header extends Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div className="flex items-center justify-center">
+            <div className="relative flex items-center justify-center">
               <Button
                 data-test-id="search"
                 onClick={this.handleSearch}
@@ -76,7 +76,7 @@ class Header extends Component {
               {showCart && (
                 <div
                   style={minicartStyle}
-                  className="absolute z-2 right-1 w5  tc pa3 bg-white br2 br--bottom shadow-5"
+                  className="absolute z-2 right-0 w5  tc pa3 bg-white br2 br--bottom shadow-5"
                   onMouseLeave={this.handleMouseLeave}>
                   <MiniCart />
                 </div>
