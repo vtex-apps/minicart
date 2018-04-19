@@ -76,7 +76,7 @@ class Header extends Component {
               {showCart && (
                 <div
                   style={minicartStyle}
-                  className="absolute z-2 right-0 w5  tc pa3 bg-white br2 br--bottom shadow-5"
+                  className="absolute z-1 right-0 w5  tc pa3 bg-white br2 br--bottom shadow-5"
                   onMouseLeave={this.handleMouseLeave}>
                   <MiniCart />
                 </div>
