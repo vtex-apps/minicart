@@ -59,12 +59,13 @@ class MiniCart extends Component {
       <div
         className="relative w-100">
         {data.orderForm.items.map(item => (
-          <div key={item.id}>
+          <div className='ph4' key={item.id}>
             <MiniCartItem
               className="w-100"
               imageUrl={item.imageUrl}
               name={item.name}
               price={item.sellingPrice}
+              skuName={item.skuName}
               productId={this.getItemId(item.detailUrl)}
             />
             <hr />
@@ -80,9 +81,10 @@ class MiniCart extends Component {
             maximumFractionDigits={2}
           />
         </div>
-        <div className="mb1">
-          <Button primary block onClick={this.handleCart}>
-            Meu carrinho
+
+        <div className="mb1 w-100">
+          <Button className="w-25" primary onClick={this.handleCart}>
+            Fechar Pedidos
           </Button>
         </div>
       </div>

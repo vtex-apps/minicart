@@ -44,6 +44,7 @@ class Header extends Component {
     const { searchValue, showCart } = this.state
     const minicartStyle = {
       top: '100%',
+      width: '414px',
     }
     return (
       <div>
@@ -76,7 +77,7 @@ class Header extends Component {
               {showCart && (
                 <div
                   style={minicartStyle}
-                  className="absolute z-1 right-0 w5  tc pa3 bg-white br2 br--bottom shadow-5"
+                  className="absolute z-1 right-0 tc pa3 bg-white br2 br--bottom shadow-5"
                   onMouseLeave={this.handleMouseLeave}>
                   <MiniCart />
                 </div>

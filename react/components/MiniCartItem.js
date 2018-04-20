@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { FormattedNumber } from 'react-intl'
 import { Link } from 'render'
+import CloseIcon from '@vtex/styleguide/lib/icon/Close'
 
 export default class MiniCartItem extends Component {
   static propTypes = {
@@ -9,6 +10,7 @@ export default class MiniCartItem extends Component {
     name: PropTypes.string,
     price: PropTypes.number,
     productId: PropTypes.string,
+    skuName: PropTypes.string,
   }
 
   static contextTypes = {
@@ -16,21 +18,30 @@ export default class MiniCartItem extends Component {
   }
 
   render() {
-    const { imageUrl, name, price, productId } = this.props
+    const styleImg = {
+      width: '84px',
+      height: '84px',
+    }
+    const style = {
+      height: '103px',
+    }
+    const { imageUrl, name, price, productId, skuName } = this.props
+    console.log(skuName)
     return (
-      <div className="relative">
+      <div className='relative flex flex-row' style={style}>
         <Link
           page={'store/product'}
           params={{ id: productId }}>
-          <img src={imageUrl} alt={productId} />
-          <div className="w-70 fr pa1">
-            <div className="w-100">
-              <span className="f6">{name}</span>
+          <div className='flex flex-row'>
+            <img style={styleImg} src={imageUrl} alt={productId} />
+            <div className='flex flex-column'>
+              <div className='fl'><span>{name}</span></div>
+              <div className='fl'><span>{skuName}</span></div>
             </div>
-            <div className="f7 absolute bottom-0 right-0 mr3">
+            <div>
               <FormattedNumber
-                value={price}
-                style="currency"
+                value={price / 100}
+                style='currency'
                 currency={this.context.culture.currency}
                 minimumFractionDigits={2}
                 maximumFractionDigits={2}
@@ -38,6 +49,9 @@ export default class MiniCartItem extends Component {
             </div>
           </div>
         </Link>
+        <div className='absolute right-0 top-0'>
+          <CloseIcon size={11} />
+        </div>
       </div>
     )
   }
