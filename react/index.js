@@ -1,10 +1,10 @@
 import React from 'react'
-
+import CartIcon from './CartIcon'
 
 export default function HelloWorld() {
   return (
     <div>
-      <h1>Minicart Component</h1>
+      <div><CartIcon /></div>
     </div>
   )
 }
