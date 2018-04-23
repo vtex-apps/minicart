@@ -1,21 +1,18 @@
 {
+  "name": "minicart",
   "vendor": "vtex",
-  "name": "dreamstore",
-  "version": "0.0.5",
-  "builders": {
-    "pages": "0.x",
-    "react": "2.x"
-  },
-  "mustUpdateAt": "2018-09-05",
+  "version": "0.1.0",
+  "title": "",
+  "description": "",
+  "mustUpdateAt": "2019-04-23",
   "categories": [],
   "registries": [
     "smartcheckout"
   ],
   "settingsSchema": {},
-  "scripts": {
-    "postreleasy": "vtex publish --public --verbose"
-  },
-  "dependencies": {
-    "vtex.store-graphql": "2.x"
+  "dependencies": {},
+  "builders": {
+    "pages": "0.x",
+    "react": "2.x"
   }
 }
