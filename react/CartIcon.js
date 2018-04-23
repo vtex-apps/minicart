@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PropType from 'prop-type'
+import PropTypes from 'prop-types'
 
 /**
  * Cart Icon component in svg
@@ -21,9 +21,9 @@ class CartIcon extends Component {
 
 CartIcon.propTypes = {
   /* Percentage size of the icon */
-  size: PropType.number,
+  size: PropTypes.number,
   /* Fill color for the icon */
-  fillColor: PropType.string,
+  fillColor: PropTypes.string,
 }
 
 CartIcon.defaultProps = {
