@@ -1,9 +1,10 @@
 import React from 'react'
 
-export default function HelloWorld () {
+
+export default function HelloWorld() {
   return (
     <div>
-      <h1>Hello world!</h1>
+      <h1>Minicart Component</h1>
     </div>
   )
 }

@@ -1,11 +1,11 @@
 {
   "pages": {
-    "hello-react": {
+    "minicart": {
       "path": "/"
     }
   },
   "extensions": {
-    "hello-react": {
+    "minicart": {
       "component": "index"
     }
   }

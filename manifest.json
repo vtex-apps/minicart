@@ -1,18 +1,21 @@
 {
-  "name": "minicart",
   "vendor": "vtex",
+  "name": "minicart",
   "version": "0.1.0",
-  "title": "",
-  "description": "",
-  "mustUpdateAt": "2019-04-23",
+  "title": "Mini Cart",
+  "description": "Mini Cart component",
+  "defaultLocale": "pt-BR",
+  "builders": {
+    "pages": "0.x",
+    "react": "2.x"
+  },
+  "mustUpdateAt": "2019-04-20",
   "categories": [],
   "registries": [
     "smartcheckout"
   ],
   "settingsSchema": {},
-  "dependencies": {},
-  "builders": {
-    "pages": "0.x",
-    "react": "2.x"
+  "scripts": {
+    "postreleasy": "vtex publish --public"
   }
 }
