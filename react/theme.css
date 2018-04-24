@@ -1,0 +1,28 @@
+.top-100 {
+    top: 100%
+}
+
+.minicart-item {
+    width: 414px;
+    height: 103px;
+}
+
+.minicart-item-padding {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.image-size {
+    width: 84px;
+    height: 84px;
+}
+
+.name-size {
+    width: 264px;
+    height: 60px;
+}
+
+.sku-size {
+    width: 138px;
+    height: 14px;
+}
