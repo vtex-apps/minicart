@@ -16,7 +16,7 @@ export default function HelloWorld() {
         },
         {
           id: '32',
-          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro1.png',
+          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro5.png',
           name: 'Motorola celular Moto X4',
           quantity: 1,
           sellingPrice: 154000,
@@ -24,7 +24,7 @@ export default function HelloWorld() {
         },
         {
           id: '33',
-          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro1.png',
+          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro8.png',
           name: 'Motorola celular Moto X4',
           quantity: 1,
           sellingPrice: 154000,

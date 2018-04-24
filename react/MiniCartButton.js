@@ -7,26 +7,44 @@ import MiniCart from './MiniCart'
 export default class MiniCartButton extends Component {
   constructor(props) {
     super(props)
-    this.state = { showMiniCartItems: false }
+    this.state = { isMouseOnButton: false, isMouseOnMiniCart: false }
   }
-    handleMouseEnter = () => {
-      this.setState({ showMiniCartItems: true })
-    }
 
-    handleMouseOut = () => {
-      this.setState({ showMiniCartItems: false })
-    }
+  handleMouseEnterButton = () => {
+    this.setState({ isMouseOnButton: true })
+  }
 
-    render() {
-      const { showMiniCartItems } = this.state
-      const { data } = this.props
-      return (
-        <div className="relative">
-          <Button onMouseEnter={this.handleMouseEnter}><CartIcon /></Button>
-          {showMiniCartItems && <div className="absolute top-100" onMouseLeave={this.handleMouseOut}><MiniCart data={data} /></div>}
-        </div>
-      )
-    }
+  handleMouseLeaveButton = () => {
+    this.setState({ isMouseOnButton: false })
+  }
+
+  handleMouseEnterCartItems = () => {
+    this.setState({ isMouseOnMiniCart: true })
+  }
+
+  handleMouseLeaveCartItems = () => {
+    this.setState({ isMouseOnMiniCart: false })
+  }
+
+  render() {
+    const { isMouseOnButton, isMouseOnMiniCart } = this.state
+    const { data } = this.props
+    return (
+      <div className="relative">
+        <Button
+          onMouseEnter={this.handleMouseEnterButton}
+          onMouseLeave={this.handleMouseLeaveButton}><CartIcon /> Hello</Button>
+        {(isMouseOnMiniCart || isMouseOnButton) &&
+          <div
+            className="absolute top-100"
+            onMouseLeave={this.handleMouseLeaveCartItems}
+            onMouseEnter={this.handleMouseEnterCartItems}>
+            <MiniCart data={data} />
+          </div>
+        }
+      </div>
+    )
+  }
 }
 
 MiniCartButton.propTypes = {

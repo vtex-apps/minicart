@@ -3,13 +3,8 @@
 }
 
 .minicart-item {
-    width: 414px;
+    width: 380px;
     height: 103px;
-}
-
-.minicart-item-padding {
-    padding-left: 8px;
-    padding-right: 8px;
 }
 
 .image-size {

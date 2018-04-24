@@ -5,6 +5,10 @@ import Button from '@vtex/styleguide/lib/Button'
 import { Price } from '@vtex/product-details'
 
 export default class MiniCart extends Component {
+  onRemoveItem = () => {
+    console.log('Remove item')
+  }
+
   render() {
     const { data } = this.props
     console.log(data)
@@ -20,13 +24,20 @@ export default class MiniCart extends Component {
               imageUrl={item.imageUrl}
               name={item.name}
               price={item.sellingPrice}
-              skuName={item.skuName} />
+              skuName={item.skuName}
+              callback={this.onRemoveItem} />
             <hr />
           </div>
         ))}
         <div className="relative">
           <Button primary>Fechar Pedidos</Button>
-          <Price sellingPrice={data.orderForm.value} showLabels={false} showListPrice={false} />
+          <div className="fr mt2 mr5">
+            <Price
+              sellingPrice={data.orderForm.value}
+              listPrice={data.orderForm.value}
+              showLabels={false}
+              showListPrice={false} />
+          </div>
         </div>
       </div>
     )
