@@ -31,7 +31,7 @@ export default class MiniCartButton extends Component {
     const { data } = this.props
     return (
       <div className="relative">
-        <Button
+        <Button icon
           onMouseEnter={this.handleMouseEnterButton}
           onMouseLeave={this.handleMouseLeaveButton}><CartIcon /> Hello</Button>
         {(isMouseOnMiniCart || isMouseOnButton) &&

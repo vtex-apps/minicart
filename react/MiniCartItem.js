@@ -6,7 +6,7 @@ import Button from '@vtex/styleguide/lib/Button'
 
 export default class MiniCartItem extends Component {
   render() {
-    const { imageUrl, name, skuName, price, callback } = this.props
+    const { imageUrl, name, skuName, sellingPrice, listPrice, callback } = this.props
     return (
       <div className="minicart-item flex flex-row relative bb b--silver mb3">
         <img className="image-size" src={imageUrl} />
@@ -17,7 +17,7 @@ export default class MiniCartItem extends Component {
           <div className="sku-size">
             <span className="f7 dark-gray">{skuName}</span>
             <div className="absolute right-0 bottom-0 mb5 mr5">
-              <Price sellingPrice={price} listPrice={price} showLabels={false} showListPrice={false} />
+              <Price sellingPrice={sellingPrice} listPrice={listPrice} showLabels={false} showListPrice={false} />
             </div>
           </div>
         </div>
@@ -32,7 +32,8 @@ export default class MiniCartItem extends Component {
 MiniCartItem.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  sellingPrice: PropTypes.number.isRequired,
+  listPrice: PropTypes.number.isRequired,
   skuName: PropTypes.string.isRequired,
   callback: PropTypes.func.isRequired,
 }

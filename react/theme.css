@@ -2,6 +2,10 @@
     top: 100%
 }
 
+.top-50 {
+    top: 50%
+}
+
 .minicart-item {
     width: 380px;
     height: 103px;

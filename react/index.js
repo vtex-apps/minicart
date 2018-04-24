@@ -39,7 +39,7 @@ export default function HelloWorld() {
 
   return (
     <div>
-      <div><MiniCartButton data={mock} /></div>
+      <div><MiniCartButton /></div>
     </div>
   )
 }
