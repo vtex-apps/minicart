@@ -1,5 +1,6 @@
 import React from 'react'
 import MiniCartButton from './MiniCartButton'
+import './global.css'
 
 export default function HelloWorld() {
   return (

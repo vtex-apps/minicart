@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Price } from '@vtex/product-details'
+import './global.css'
 
 /**
  * Minicart item component

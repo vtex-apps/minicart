@@ -6,6 +6,7 @@ import MiniCartItem from './MiniCartItem'
 import Button from '@vtex/styleguide/lib/Button'
 import { Price } from '@vtex/product-details'
 import Spinner from '@vtex/styleguide/lib/Spinner'
+import './global.css'
 
 /**
  * Minicart component
@@ -22,6 +23,38 @@ class MiniCart extends Component {
   }
 
   renderMiniCartWithItems = (orderForm, label) => {
+    orderForm = {
+      items: [
+        {
+          id: '31',
+          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro6.png',
+          name: 'Motorola celular',
+          quantity: 1,
+          sellingPrice: 154000,
+          listPrice: 1,
+          skuName: 'Moto X4',
+        },
+        {
+          id: '32',
+          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro5.png',
+          name: 'Motorola celular',
+          quantity: 1,
+          sellingPrice: 154000,
+          listPrice: 1,
+          skuName: 'Moto X4',
+        },
+        {
+          id: '33',
+          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro8.png',
+          name: 'Motorola celular',
+          quantity: 1,
+          sellingPrice: 154000,
+          listPrice: 1,
+          skuName: 'Moto X4',
+        },
+      ],
+      value: 1632000,
+    }
     let contentStyle = 'pa4'
     if (orderForm.items.length > 3) {
       contentStyle += ' overflow-auto minicart-content mb4'

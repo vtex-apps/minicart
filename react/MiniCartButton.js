@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Button from '@vtex/styleguide/lib/Button'
 import CartIcon from './CartIcon'
 import MiniCart from './MiniCart'
+import './global.css'
 
 /**
  * Minicart button component
