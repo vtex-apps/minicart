@@ -4,6 +4,9 @@ import CloseIcon from '@vtex/styleguide/lib/icon/Close'
 import { Price } from '@vtex/product-details'
 import Button from '@vtex/styleguide/lib/Button'
 
+/**
+ * Minicart item component
+ */
 export default class MiniCartItem extends Component {
   render() {
     const { imageUrl, name, skuName, sellingPrice, listPrice, callback } = this.props
@@ -30,11 +33,17 @@ export default class MiniCartItem extends Component {
 }
 
 MiniCartItem.propTypes = {
+  /* Minicart item's image */
   imageUrl: PropTypes.string.isRequired,
+  /* Minicart item's name */
   name: PropTypes.string.isRequired,
+  /* Minicart item's selling price */
   sellingPrice: PropTypes.number.isRequired,
+  /* Minicart item's list price */
   listPrice: PropTypes.number.isRequired,
+  /* Minicart item's sku */
   skuName: PropTypes.string.isRequired,
+  /* Minicart item's calback function*/
   callback: PropTypes.func.isRequired,
 }
 

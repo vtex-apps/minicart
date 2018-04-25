@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'react-apollo'
-import orderFormQuery from './graphql/orderFormQuery.gql'
 import Button from '@vtex/styleguide/lib/Button'
 import CartIcon from './CartIcon'
 import MiniCart from './MiniCart'
 
-class MiniCartButton extends Component {
+/**
+ * Minicart button component
+ */
+export default class MiniCartButton extends Component {
   constructor(props) {
     super(props)
     this.state = { isMouseOnButton: false, isMouseOnMiniCart: false }
   }
+
+  handleClickButton = () => location.assign('/checkout/#/cart')
 
   handleMouseEnterButton = () => {
     this.setState({ isMouseOnButton: true })
@@ -30,10 +33,11 @@ class MiniCartButton extends Component {
 
   render() {
     const { isMouseOnButton, isMouseOnMiniCart } = this.state
-    const { data, labelMiniCartEmpty, labelButtonFinishShopping } = this.props
+    const { labelMiniCartEmpty, labelButtonFinishShopping } = this.props
     return (
       <div className="relative mr6">
         <Button icon
+          onClick={this.handleClickButton}
           onMouseEnter={this.handleMouseEnterButton}
           onMouseLeave={this.handleMouseLeaveButton}><CartIcon /></Button>
         {(isMouseOnMiniCart || isMouseOnButton) &&
@@ -42,7 +46,6 @@ class MiniCartButton extends Component {
             onMouseLeave={this.handleMouseLeaveCartItems}
             onMouseEnter={this.handleMouseEnterCartItems}>
             <MiniCart
-              orderForm={data.orderForm}
               labelMiniCartEmpty={labelMiniCartEmpty}
               labelButton={labelButtonFinishShopping} />
           </div>
@@ -53,11 +56,8 @@ class MiniCartButton extends Component {
 }
 
 MiniCartButton.propTypes = {
-  data: PropTypes.object,
+  /* Label to appear when the minicart is empty */
   labelMiniCartEmpty: PropTypes.string.isRequired,
+  /* Finish shopping button label */
   labelButtonFinishShopping: PropTypes.string.isRequired,
 }
-
-export default graphql(orderFormQuery)(
-  MiniCartButton
-)

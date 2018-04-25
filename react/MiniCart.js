@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { graphql } from 'react-apollo'
+import orderFormQuery from './graphql/orderFormQuery.gql'
 import MiniCartItem from './MiniCartItem'
 import Button from '@vtex/styleguide/lib/Button'
 import { Price } from '@vtex/product-details'
+import Spinner from '@vtex/styleguide/lib/Spinner'
 
+/**
+ * Minicart component
+ */
 class MiniCart extends Component {
   onRemoveItem = () => {
     console.log('Remove item')
@@ -46,24 +52,36 @@ class MiniCart extends Component {
     )
   }
 
+  renderLoading = () => {
+    return (
+      <div className="minicart-item shadow-3 pa4 flex items-center justify-center">
+        <Spinner />
+      </div>
+    )
+  }
+
   render() {
-    const { orderForm, labelMiniCartEmpty, labelButton } = this.props
+    const { data, labelMiniCartEmpty, labelButton } = this.props
     let content
-    console.log(orderForm)
-    if (!orderForm.length) {
+    console.log(data)
+    if (data.loading) {
+      content = this.renderLoading()
+    } else if (!data.orderForm.length) {
       content = this.renderWithoutProducts(labelMiniCartEmpty)
     } else {
-      content = this.renderMiniCartWithItems(orderForm, labelButton)
+      content = this.renderMiniCartWithItems(data.orderForm, labelButton)
     }
     return content
   }
 }
 
 MiniCart.propTypes = {
-  orderForm: PropTypes.object.isRequired,
+  /* Informations about order form */
+  data: PropTypes.object.isRequired,
+  /* Label to appear when the minicart is empty */
   labelMiniCartEmpty: PropTypes.string.isRequired,
+  /* Label to appear in the finish shopping button */
   labelButton: PropTypes.string.isRequired,
 }
 
-export default MiniCart
-
+export default graphql(orderFormQuery)(MiniCart)
