@@ -16,31 +16,26 @@ export default class MiniCartButton extends Component {
 
   handleClickButton = () => location.assign('/checkout/#/cart')
 
-  handleMouseEnterButton = () => {
-    this.setState({ isMouseOnButton: true })
-  }
+  handleMouseEnterButton = () => this.setState({ isMouseOnButton: true })
 
-  handleMouseLeaveButton = () => {
-    this.setState({ isMouseOnButton: false })
-  }
+  handleMouseLeaveButton = () => this.setState({ isMouseOnButton: false })
 
-  handleMouseEnterCartItems = () => {
-    this.setState({ isMouseOnMiniCart: true })
-  }
+  handleMouseEnterCartItems = () => this.setState({ isMouseOnMiniCart: true })
 
-  handleMouseLeaveCartItems = () => {
-    this.setState({ isMouseOnMiniCart: false })
-  }
+  handleMouseLeaveCartItems = () => this.setState({ isMouseOnMiniCart: false })
 
   render() {
     const { isMouseOnButton, isMouseOnMiniCart } = this.state
     const { labelMiniCartEmpty, labelButtonFinishShopping } = this.props
     return (
       <div>
-        <Button icon
+        <Button
+          icon
           onClick={this.handleClickButton}
           onMouseEnter={this.handleMouseEnterButton}
-          onMouseLeave={this.handleMouseLeaveButton}><CartIcon /></Button>
+          onMouseLeave={this.handleMouseLeaveButton}>
+          <CartIcon />
+        </Button>
         {(isMouseOnMiniCart || isMouseOnButton) &&
           <div
             className="absolute top-100 right-0 minicart"
