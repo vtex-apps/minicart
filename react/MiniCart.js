@@ -30,8 +30,8 @@ class MiniCart extends Component {
       items: [
         {
           id: '31',
-          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro20.png',
-          name: 'Motorola celular Moto X4',
+          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro6.png',
+          name: 'Motorola celular',
           quantity: 1,
           sellingPrice: 154000,
           listPrice: 1,
@@ -40,7 +40,7 @@ class MiniCart extends Component {
         {
           id: '32',
           imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro5.png',
-          name: 'Motorola celular Moto X4',
+          name: 'Motorola celular',
           quantity: 1,
           sellingPrice: 154000,
           listPrice: 1,
@@ -49,7 +49,7 @@ class MiniCart extends Component {
         {
           id: '33',
           imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro8.png',
-          name: 'Motorola celular Moto X4',
+          name: 'Motorola celular',
           quantity: 1,
           sellingPrice: 154000,
           listPrice: 1,
@@ -71,7 +71,6 @@ class MiniCart extends Component {
                 listPrice={item.listPrice}
                 skuName={item.skuName}
                 callback={this.onRemoveItem} />
-              <hr />
             </div>
           ))}
         </div>

@@ -7,23 +7,23 @@
 }
 
 .minicart-item {
-    width: 380px;
-    height: 103px;
+    width: 350px;
+    height: 90px;
 }
 
 .image-size {
-    width: 84px;
-    height: 84px;
+    width: 70px;
+    height: 70px;
 }
 
 .name-size {
     width: 264px;
-    height: 60px;
+    height: 50px;
 }
 
 .sku-size {
     width: 138px;
-    height: 14px;
+    height: 10px;
 }
 
 .minicart {

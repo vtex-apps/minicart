@@ -19,7 +19,7 @@ export default class MiniCartItem extends Component {
           </div>
           <div className="sku-size">
             <span className="f7 dark-gray">{skuName}</span>
-            <div className="absolute right-0 bottom-0 mb5 mr5">
+            <div className="absolute right-0 bottom-0 mb3 mr5">
               <Price sellingPrice={sellingPrice} listPrice={listPrice} showLabels={false} showListPrice={false} />
             </div>
           </div>
