@@ -38,8 +38,8 @@ export default function HelloWorld() {
   console.log(mock)
 
   return (
-    <div>
-      <div><MiniCartButton /></div>
+    <div className="relative">
+      <div className="absolute right-0"><MiniCartButton labelMiniCartEmpty={'Sua sacola está vazia!'} /></div>
     </div>
   )
 }

@@ -1,29 +1,26 @@
 import React, { Component } from 'react'
-import { graphql, compose } from 'react-apollo'
-import orderFormQuery from './graphql/orderFormQuery.gql'
 import PropTypes from 'prop-types'
 import MiniCartItem from './MiniCartItem'
 import Button from '@vtex/styleguide/lib/Button'
 import { Price } from '@vtex/product-details'
-import Spinner from '@vtex/styleguide/lib/Spinner'
 
 class MiniCart extends Component {
   onRemoveItem = () => {
     console.log('Remove item')
   }
 
-  renderWithoutProducts = () => {
+  renderWithoutProducts = (label) => {
     return (
-      <div className="minicart-item pa4 shadow-3">
-        <span className="top-50">Sua sacola está vazia!</span>
+      <div className="minicart-item pa4 shadow-4 flex items-center justify-center">
+        <span className="f5">{label}</span>
       </div>
     )
   }
 
-  renderMiniCartWithItems = (data) => {
+  renderMiniCartWithItems = (orderForm, label) => {
     return (
       <div className="pa4 shadow-3">
-        {data.orderForm.items.map(item => (
+        {orderForm.items.map(item => (
           <div className="flex flex-row" key={item.id}>
             <MiniCartItem
               imageUrl={item.imageUrl}
@@ -36,11 +33,11 @@ class MiniCart extends Component {
           </div>
         ))}
         <div className="relative">
-          <Button primary>Fechar Pedidos</Button>
+          <Button primary>{label}</Button>
           <div className="fr mt2 mr5">
             <Price
-              sellingPrice={data.orderForm.value}
-              listPrice={data.orderForm.value}
+              sellingPrice={orderForm.value}
+              listPrice={orderForm.value}
               showLabels={false}
               showListPrice={false} />
           </div>
@@ -49,33 +46,24 @@ class MiniCart extends Component {
     )
   }
 
-  renderLoading = () => {
-    return (
-      <div className="minicart-item shadow-3 pa4">
-        <Spinner />
-      </div>
-    )
-  }
-
   render() {
-    const { data } = this.props
+    const { orderForm, labelMiniCartEmpty, labelButton } = this.props
     let content
-    console.log(data)
-    if (data.loading) {
-      content = this.renderLoading()
-    } else if (!data.orderForm.length) {
-      content = this.renderWithoutProducts()
+    console.log(orderForm)
+    if (!orderForm.length) {
+      content = this.renderWithoutProducts(labelMiniCartEmpty)
     } else {
-      content = this.renderMiniCartWithItems(data)
+      content = this.renderMiniCartWithItems(orderForm, labelButton)
     }
     return content
   }
 }
 
 MiniCart.propTypes = {
-  data: PropTypes.object,
+  orderForm: PropTypes.object.isRequired,
+  labelMiniCartEmpty: PropTypes.string.isRequired,
+  labelButton: PropTypes.string.isRequired,
 }
 
-export default compose(graphql(orderFormQuery))(
-  MiniCart
-)
+export default MiniCart
+

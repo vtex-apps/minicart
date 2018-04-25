@@ -25,3 +25,15 @@
     width: 138px;
     height: 14px;
 }
+
+.minicart {
+    display: block;
+    visibility: visible;
+}
+
+@media only screen and (max-width: 600px) {
+    .minicart {
+        display: none;
+        visibility: hidden;
+    }
+}
