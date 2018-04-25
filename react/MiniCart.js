@@ -77,7 +77,7 @@ class MiniCart extends Component {
 }
 
 MiniCart.propTypes = {
-  /* Informations about order form */
+  /* Products in the cart */
   data: PropTypes.object,
   /* Label to appear when the minicart is empty */
   labelMiniCartEmpty: PropTypes.string.isRequired,

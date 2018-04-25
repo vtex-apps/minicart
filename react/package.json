@@ -1,5 +1,5 @@
 {
-  "name": "vtex.render-getting-started",
+  "name": "minicart",
   "version": "0.0.0",
   "scripts": {
     "pretest": "yarn",

@@ -35,15 +35,15 @@ export default class MiniCartItem extends Component {
 }
 
 MiniCartItem.propTypes = {
-  /* Minicart item's image */
+  /* Item's image */
   imageUrl: PropTypes.string.isRequired,
-  /* Minicart item's name */
+  /* Item's name */
   name: PropTypes.string.isRequired,
-  /* Minicart item's selling price */
+  /* Item's selling price */
   sellingPrice: PropTypes.number.isRequired,
-  /* Minicart item's list price */
+  /* Item's list price */
   listPrice: PropTypes.number.isRequired,
-  /* Minicart item's sku */
+  /* Item's sku */
   skuName: PropTypes.string.isRequired,
 }
 
