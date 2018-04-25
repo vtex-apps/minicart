@@ -37,3 +37,7 @@
         visibility: hidden;
     }
 }
+
+.minicart-content {
+    height: 250px;
+}

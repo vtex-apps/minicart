@@ -11,6 +11,8 @@ import Spinner from '@vtex/styleguide/lib/Spinner'
  * Minicart component
  */
 class MiniCart extends Component {
+  handleClickButton = () => location.assign('/checkout/#/cart')
+
   onRemoveItem = () => {
     console.log('Remove item')
   }
@@ -23,23 +25,58 @@ class MiniCart extends Component {
     )
   }
 
-  renderMiniCartWithItems = (orderForm, label) => {
+  renderMiniCartWithItems = (data, label) => {
+    const orderForm = {
+      items: [
+        {
+          id: '31',
+          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro20.png',
+          name: 'Motorola celular Moto X4',
+          quantity: 1,
+          sellingPrice: 154000,
+          listPrice: 1,
+          skuName: 'Moto X4',
+        },
+        {
+          id: '32',
+          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro5.png',
+          name: 'Motorola celular Moto X4',
+          quantity: 1,
+          sellingPrice: 154000,
+          listPrice: 1,
+          skuName: 'Moto X4',
+        },
+        {
+          id: '33',
+          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro8.png',
+          name: 'Motorola celular Moto X4',
+          quantity: 1,
+          sellingPrice: 154000,
+          listPrice: 1,
+          skuName: 'Moto X4',
+        },
+      ],
+      value: 1632000,
+    }
+
     return (
-      <div className="pa4 shadow-3">
-        {orderForm.items.map(item => (
-          <div className="flex flex-row" key={item.id}>
-            <MiniCartItem
-              imageUrl={item.imageUrl}
-              name={item.name}
-              sellingPrice={item.sellingPrice}
-              listPrice={item.listPrice}
-              skuName={item.skuName}
-              callback={this.onRemoveItem} />
-            <hr />
-          </div>
-        ))}
-        <div className="relative">
-          <Button primary>{label}</Button>
+      <div className="shadow-3">
+        <div className="pa4 overflow-auto minicart-content">
+          {orderForm.items.map(item => (
+            <div className="flex flex-row" key={item.id}>
+              <MiniCartItem
+                imageUrl={item.imageUrl}
+                name={item.name}
+                sellingPrice={item.sellingPrice}
+                listPrice={item.listPrice}
+                skuName={item.skuName}
+                callback={this.onRemoveItem} />
+              <hr />
+            </div>
+          ))}
+        </div>
+        <div className="relative pa4">
+          <Button primary onClick={this.handleClickButton}>{label}</Button>
           <div className="fr mt2 mr5">
             <Price
               sellingPrice={orderForm.value}
@@ -66,7 +103,7 @@ class MiniCart extends Component {
     console.log(data)
     if (data.loading) {
       content = this.renderLoading()
-    } else if (!data.orderForm.length) {
+    } else if (data.orderForm.length) {
       content = this.renderWithoutProducts(labelMiniCartEmpty)
     } else {
       content = this.renderMiniCartWithItems(data.orderForm, labelButton)
