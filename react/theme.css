@@ -1,3 +1,6 @@
+body {
+    width: 100%;
+}
 .top-100 {
     top: 100%
 }
@@ -39,5 +42,13 @@
 }
 
 .minicart-content {
-    height: 250px;
+    height: 300px;
 }
+
+.arrow-up {
+    width: 0; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid white;
+  }

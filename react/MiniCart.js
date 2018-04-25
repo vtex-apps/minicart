@@ -13,10 +13,6 @@ import Spinner from '@vtex/styleguide/lib/Spinner'
 class MiniCart extends Component {
   handleClickButton = () => location.assign('/checkout/#/cart')
 
-  onRemoveItem = () => {
-    console.log('Remove item')
-  }
-
   renderWithoutProducts = (label) => {
     return (
       <div className="minicart-item pa4 shadow-4 flex items-center justify-center">
@@ -25,66 +21,39 @@ class MiniCart extends Component {
     )
   }
 
-  renderMiniCartWithItems = (data, label) => {
-    const orderForm = {
-      items: [
-        {
-          id: '31',
-          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro6.png',
-          name: 'Motorola celular',
-          quantity: 1,
-          sellingPrice: 154000,
-          listPrice: 1,
-          skuName: 'Moto X4',
-        },
-        {
-          id: '32',
-          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro5.png',
-          name: 'Motorola celular',
-          quantity: 1,
-          sellingPrice: 154000,
-          listPrice: 1,
-          skuName: 'Moto X4',
-        },
-        {
-          id: '33',
-          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro8.png',
-          name: 'Motorola celular',
-          quantity: 1,
-          sellingPrice: 154000,
-          listPrice: 1,
-          skuName: 'Moto X4',
-        },
-      ],
-      value: 1632000,
+  renderMiniCartWithItems = (orderForm, label) => {
+    let contentStyle = 'pa4'
+    if (orderForm.items.length > 3) {
+      contentStyle += ' overflow-auto minicart-content mb4'
     }
-
     return (
-      <div className="shadow-3">
-        <div className="pa4 overflow-auto minicart-content">
-          {orderForm.items.map(item => (
-            <div className="flex flex-row" key={item.id}>
-              <MiniCartItem
-                imageUrl={item.imageUrl}
-                name={item.name}
-                sellingPrice={item.sellingPrice}
-                listPrice={item.listPrice}
-                skuName={item.skuName}
-                callback={this.onRemoveItem} />
+      <div className="flex flex-column">
+        <div className="arrow-up self-end mr3 pr1"></div>
+        <div className="shadow-3">
+          <div className={contentStyle}>
+            {orderForm.items.map(item => (
+              <div className="flex flex-row" key={item.id}>
+                <MiniCartItem
+                  imageUrl={item.imageUrl}
+                  name={item.name}
+                  sellingPrice={item.sellingPrice}
+                  listPrice={item.listPrice}
+                  skuName={item.skuName} />
+              </div>
+            ))}
+          </div>
+          <div className="relative pr4 pl4 pb4">
+            <Button primary onClick={this.handleClickButton}>{label}</Button>
+            <div className="fr mt2">
+              <Price
+                sellingPrice={orderForm.value}
+                listPrice={orderForm.value}
+                showLabels={false}
+                showListPrice={false} />
             </div>
-          ))}
-        </div>
-        <div className="relative pa4">
-          <Button primary onClick={this.handleClickButton}>{label}</Button>
-          <div className="fr mt2 mr5">
-            <Price
-              sellingPrice={orderForm.value}
-              listPrice={orderForm.value}
-              showLabels={false}
-              showListPrice={false} />
           </div>
         </div>
-      </div>
+      </div >
     )
   }
 
@@ -113,7 +82,7 @@ class MiniCart extends Component {
 
 MiniCart.propTypes = {
   /* Informations about order form */
-  data: PropTypes.object.isRequired,
+  data: PropTypes.object,
   /* Label to appear when the minicart is empty */
   labelMiniCartEmpty: PropTypes.string.isRequired,
   /* Label to appear in the finish shopping button */
