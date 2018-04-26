@@ -10,14 +10,14 @@ export default class MiniCartItem extends Component {
   render() {
     const { imageUrl, name, skuName, sellingPrice, listPrice } = this.props
     return (
-      <div className="minicart-item flex flex-row relative bb b--silver mb3">
-        <img className="image-size" src={imageUrl} />
+      <div className="vtex-minicart__item flex flex-row relative bb b--silver mb3">
+        <img className="vtex-minicart__item-image" src={imageUrl} />
         <div className="ml3">
-          <div className="name-size mt3">
+          <div className="vtex-minicart__item-name mt3">
             <span className="b">{name}</span>
           </div>
           <div>
-            <div className="sku-size">
+            <div className="vtex-minicart__sku-name">
               <span className="f7 dark-gray">{skuName}</span>
             </div>
             <div className="absolute right-0 bottom-0 mb3">

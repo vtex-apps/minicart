@@ -15,49 +15,38 @@ class MiniCart extends Component {
   handleClickButton = () => location.assign('/checkout/#/cart')
 
   renderWithoutProducts = (label) => (
-    <div className="minicart-item pa4 shadow-4 flex items-center justify-center">
+    <div className="vtex-minicart__item pa4 shadow-4 flex items-center justify-center">
       <span className="f5">{label}</span>
     </div>
   )
 
-  renderMiniCartWithItems = (orderForm, label) => {
-    let contentStyle = 'pa4'
-    if (orderForm.items.length > 3) {
-      contentStyle += ' overflow-auto minicart-content mb4'
-    }
-    return (
-      <div className="flex flex-column">
-        <div className="arrow-up self-end mr3 pr1"></div>
-        <div className="shadow-3">
-          <div className={contentStyle}>
-            {orderForm.items.map(item => (
-              <div className="flex flex-row" key={item.id}>
-                <MiniCartItem
-                  imageUrl={item.imageUrl}
-                  name={item.name}
-                  sellingPrice={item.sellingPrice}
-                  listPrice={item.listPrice}
-                  skuName={item.skuName} />
-              </div>
-            ))}
-          </div>
-          <div className="relative pr4 pl4 pb4">
-            <Button primary onClick={this.handleClickButton}>{label}</Button>
-            <div className="fr mt2">
-              <Price
-                sellingPrice={orderForm.value}
-                listPrice={orderForm.value}
-                showLabels={false}
-                showListPrice={false} />
+  renderMiniCartWithItems = (orderForm, label) => (
+    <div className="flex flex-column">
+      <div className="vtex-minicart__arrow-up self-end mr3 pr1"></div>
+      <div className="shadow-3">
+        <div className="pa4 overflow-auto vtex-minicart__content">
+          {orderForm.items.map(item => (
+            <div className="flex flex-row" key={item.id}>
+              <MiniCartItem {...item} />
             </div>
+          ))}
+        </div>
+        <div className="relative pr4 pl4 pb4">
+          <Button primary onClick={this.handleClickButton}>{label}</Button>
+          <div className="fr mt2">
+            <Price
+              sellingPrice={orderForm.value}
+              listPrice={orderForm.value}
+              showLabels={false}
+              showListPrice={false} />
           </div>
         </div>
-      </div >
-    )
-  }
+      </div>
+    </div >
+  )
 
   renderLoading = () => (
-    <div className="minicart-item shadow-3 pa4 flex items-center justify-center">
+    <div className="vtex-minicart__item shadow-3 pa4 flex items-center justify-center">
       <Spinner />
     </div>
   )
@@ -70,7 +59,36 @@ class MiniCart extends Component {
     } else if (data.orderForm.length) {
       content = this.renderWithoutProducts(labelMiniCartEmpty)
     } else {
-      content = this.renderMiniCartWithItems(data.orderForm, labelButton)
+      const orderForm = {
+        items: [
+          {
+            id: '31',
+            imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro20.png',
+            name: 'Motorola celular Moto X4',
+            quantity: 1,
+            sellingPrice: 154000,
+            skuName: 'Moto X4',
+          },
+          {
+            id: '32',
+            imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro1.png',
+            name: 'Motorola celular Moto X4',
+            quantity: 1,
+            sellingPrice: 154000,
+            skuName: 'Moto X4',
+          },
+          {
+            id: '33',
+            imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro1.png',
+            name: 'Motorola celular Moto X4',
+            quantity: 1,
+            sellingPrice: 154000,
+            skuName: 'Moto X4',
+          },
+        ],
+        value: 1632000,
+      }
+      content = this.renderMiniCartWithItems(orderForm, labelButton)
     }
     return content
   }
