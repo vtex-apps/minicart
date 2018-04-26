@@ -18,6 +18,15 @@
   "scripts": {
     "postreleasy": "vtex publish --public"
   },
+  "policies": [
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "{{account}}.vtexcommercestable.com.br",
+        "path": "/api/checkout/*"
+      }
+    }
+  ],
   "dependencies": {
     "vtex.store-graphql": "2.x"
   }
