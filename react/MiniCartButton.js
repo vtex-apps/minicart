@@ -53,7 +53,7 @@ export default class MiniCartButton extends Component {
 
 MiniCartButton.propTypes = {
   /* Label to appear when the minicart is empty */
-  labelMiniCartEmpty: PropTypes.string.isRequired,
+  labelMiniCartEmpty: PropTypes.string,
   /* Finish shopping button label */
-  labelButtonFinishShopping: PropTypes.string.isRequired,
+  labelButtonFinishShopping: PropTypes.string,
 }

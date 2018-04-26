@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
+import { injectIntl } from 'react-intl'
 import orderFormQuery from './graphql/orderFormQuery.gql'
 import MiniCartItem from './MiniCartItem'
 import Button from '@vtex/styleguide/lib/Button'
@@ -21,7 +22,7 @@ class MiniCart extends Component {
   )
 
   renderMiniCartWithItems = (orderForm, label) => (
-    <div className="flex flex-column">
+    <div className="flex flex-column" >
       <div className="vtex-minicart__arrow-up self-end mr3 pr1"></div>
       <div className="shadow-3">
         <div className="vtex-minicart__content pa4 overflow-auto">
@@ -57,9 +58,11 @@ class MiniCart extends Component {
     if (data.loading) {
       content = this.renderLoading()
     } else if (!data.orderForm.length) {
-      content = this.renderWithoutItems(labelMiniCartEmpty)
+      console.log(labelMiniCartEmpty)
+      content = this.renderWithoutItems(labelMiniCartEmpty || this.context.intl.formatMessage({ id: 'minicart-empty' }))
     } else {
-      content = this.renderMiniCartWithItems(data.orderForm, labelButton)
+      content = this.renderMiniCartWithItems(data.orderForm,
+        labelButton || this.context.intl.formatMessage({ id: 'finish-shopping-button-label' }))
     }
     return content
   }
@@ -69,9 +72,13 @@ MiniCart.propTypes = {
   /* Products in the cart */
   data: PropTypes.object,
   /* Label to appear when the minicart is empty */
-  labelMiniCartEmpty: PropTypes.string.isRequired,
+  labelMiniCartEmpty: PropTypes.string,
   /* Label to appear in the finish shopping button */
-  labelButton: PropTypes.string.isRequired,
+  labelButton: PropTypes.string,
 }
 
-export default graphql(orderFormQuery)(MiniCart)
+MiniCart.contextTypes = {
+  intl: PropTypes.object.isRequired,
+}
+
+export default injectIntl(graphql(orderFormQuery)(MiniCart))
