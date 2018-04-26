@@ -1,4 +1,4 @@
-# minicart
+# Mini Cart Component
 VTEX Minicart Component 
 
 This is an extension point component.
