@@ -14,7 +14,7 @@ import './global.css'
 class MiniCart extends Component {
   handleClickButton = () => location.assign('/checkout/#/cart')
 
-  renderWithoutProducts = (label) => (
+  renderWithoutItems = (label) => (
     <div className="vtex-minicart__item pa4 shadow-4 flex items-center justify-center">
       <span className="f5">{label}</span>
     </div>
@@ -24,7 +24,7 @@ class MiniCart extends Component {
     <div className="flex flex-column">
       <div className="vtex-minicart__arrow-up self-end mr3 pr1"></div>
       <div className="shadow-3">
-        <div className="pa4 overflow-auto vtex-minicart__content">
+        <div className="vtex-minicart__content pa4 overflow-auto">
           {orderForm.items.map(item => (
             <div className="flex flex-row" key={item.id}>
               <MiniCartItem {...item} />
@@ -57,7 +57,7 @@ class MiniCart extends Component {
     if (data.loading) {
       content = this.renderLoading()
     } else if (!data.orderForm.length) {
-      content = this.renderWithoutProducts(labelMiniCartEmpty)
+      content = this.renderWithoutItems(labelMiniCartEmpty)
     } else {
       content = this.renderMiniCartWithItems(data.orderForm, labelButton)
     }

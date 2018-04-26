@@ -1,12 +1,12 @@
 {
   "pages": {
     "minicart": {
-      "path": "/minicart"
+      "path": "/"
     }
   },
   "extensions": {
     "minicart": {
-      "component": "index"
+      "component": "MiniCartButton"
     }
   }
 }

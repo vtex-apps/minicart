@@ -23,7 +23,7 @@
       "name": "outbound-access",
       "attrs": {
         "host": "{{account}}.vtexcommercestable.com.br",
-        "path": "/api/checkout/*"
+        "path": "/api/checkout/pub/*"
       }
     }
   ],
