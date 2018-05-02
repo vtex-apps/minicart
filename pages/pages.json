@@ -1,7 +1,7 @@
 {
   "pages": {
     "minicart": {
-      "path": "/"
+      "path": "/_v/minicart"
     }
   },
   "extensions": {
