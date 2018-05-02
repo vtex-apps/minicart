@@ -7,6 +7,19 @@ import './global.css'
  * Minicart item component
  */
 export default class MiniCartItem extends Component {
+  static propTypes = {
+    /* Item's image */
+    imageUrl: PropTypes.string.isRequired,
+    /* Item's name */
+    name: PropTypes.string.isRequired,
+    /* Item's selling price */
+    sellingPrice: PropTypes.number.isRequired,
+    /* Item's list price */
+    listPrice: PropTypes.number.isRequired,
+    /* Item's sku */
+    skuName: PropTypes.string.isRequired,
+  }
+
   render() {
     const { imageUrl, name, skuName, sellingPrice, listPrice } = this.props
     return (
@@ -32,18 +45,5 @@ export default class MiniCartItem extends Component {
       </div>
     )
   }
-}
-
-MiniCartItem.propTypes = {
-  /* Item's image */
-  imageUrl: PropTypes.string.isRequired,
-  /* Item's name */
-  name: PropTypes.string.isRequired,
-  /* Item's selling price */
-  sellingPrice: PropTypes.number.isRequired,
-  /* Item's list price */
-  listPrice: PropTypes.number.isRequired,
-  /* Item's sku */
-  skuName: PropTypes.string.isRequired,
 }
 

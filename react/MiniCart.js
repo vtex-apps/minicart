@@ -13,6 +13,19 @@ import './global.css'
  * Minicart component
  */
 class MiniCart extends Component {
+  static propTypes = {
+    /* Products in the cart */
+    data: PropTypes.object,
+    /* Label to appear when the minicart is empty */
+    labelMiniCartEmpty: PropTypes.string,
+    /* Label to appear in the finish shopping button */
+    labelButton: PropTypes.string,
+  }
+
+  static contextTypes = {
+    intl: PropTypes.object.isRequired,
+  }
+
   handleClickButton = () => location.assign('/checkout/#/cart')
 
   renderWithoutItems = (label) => (
@@ -65,19 +78,6 @@ class MiniCart extends Component {
     }
     return content
   }
-}
-
-MiniCart.propTypes = {
-  /* Products in the cart */
-  data: PropTypes.object,
-  /* Label to appear when the minicart is empty */
-  labelMiniCartEmpty: PropTypes.string,
-  /* Label to appear in the finish shopping button */
-  labelButton: PropTypes.string,
-}
-
-MiniCart.contextTypes = {
-  intl: PropTypes.object.isRequired,
 }
 
 export default injectIntl(graphql(orderFormQuery)(MiniCart))

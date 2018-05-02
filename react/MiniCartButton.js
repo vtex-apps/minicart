@@ -9,6 +9,13 @@ import './global.css'
  * Minicart button component
  */
 export default class MiniCartButton extends Component {
+  static propTypes = {
+    /* Label to appear when the minicart is empty */
+    labelMiniCartEmpty: PropTypes.string,
+    /* Finish shopping button label */
+    labelButtonFinishShopping: PropTypes.string,
+  }
+
   constructor(props) {
     super(props)
     this.state = { isMouseOnButton: false, isMouseOnMiniCart: false }
@@ -49,11 +56,4 @@ export default class MiniCartButton extends Component {
       </div>
     )
   }
-}
-
-MiniCartButton.propTypes = {
-  /* Label to appear when the minicart is empty */
-  labelMiniCartEmpty: PropTypes.string,
-  /* Finish shopping button label */
-  labelButtonFinishShopping: PropTypes.string,
 }

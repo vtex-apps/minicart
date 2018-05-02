@@ -4,7 +4,19 @@ import PropTypes from 'prop-types'
 /**
  * Cart Icon component in svg
  */
-class CartIcon extends Component {
+export default class CartIcon extends Component {
+  static propTypes = {
+    /* Percentage size of the icon */
+    size: PropTypes.number,
+    /* Fill color for the icon */
+    fillColor: PropTypes.string,
+  }
+
+  static defaultProps = {
+    size: 20,
+    fillColor: '#000000',
+  }
+
   render() {
     const { size, fillColor } = this.props
     return (
@@ -19,16 +31,3 @@ class CartIcon extends Component {
   }
 }
 
-CartIcon.propTypes = {
-  /* Percentage size of the icon */
-  size: PropTypes.number,
-  /* Fill color for the icon */
-  fillColor: PropTypes.string,
-}
-
-CartIcon.defaultProps = {
-  size: 20,
-  fillColor: '#000000',
-}
-
-export default CartIcon
