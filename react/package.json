@@ -7,8 +7,7 @@
   },
   "dependencies": {
     "@vtex/product-details": "^1.1.0",
-    "@vtex/styleguide": "2.0.0-rc.39",
-    "lodash": "^4.17.5"
+    "@vtex/styleguide": "2.0.0-rc.39"
   },
   "devDependencies": {
     "babel": "^6.23.0",
