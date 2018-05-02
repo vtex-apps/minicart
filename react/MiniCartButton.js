@@ -28,7 +28,7 @@ export default class MiniCartButton extends Component {
     const { isMouseOnButton, isMouseOnMiniCart } = this.state
     const { labelMiniCartEmpty, labelButtonFinishShopping } = this.props
     return (
-      <div>
+      <div className="relative fr">
         <Button
           icon
           onClick={this.handleClickButton}
