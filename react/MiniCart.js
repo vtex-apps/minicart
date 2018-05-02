@@ -58,7 +58,6 @@ class MiniCart extends Component {
     if (data.loading) {
       content = this.renderLoading()
     } else if (!data.orderForm.length) {
-      console.log(labelMiniCartEmpty)
       content = this.renderWithoutItems(labelMiniCartEmpty || this.context.intl.formatMessage({ id: 'minicart-empty' }))
     } else {
       content = this.renderMiniCartWithItems(data.orderForm,
