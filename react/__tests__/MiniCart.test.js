@@ -8,17 +8,48 @@ import { IntlProvider } from 'react-intl'
 import MiniCart from '../MiniCart'
 
 describe('MiniCart component', () => {
-  let wrapper
+  let minicartWithProducts
 
-  beforeEach(() => {
+  beforeEach((done) => {
+    const messages = require('../locales/en-US')
     const mockedOrderFrom = {
       orderFormId: '1092',
-      items: [],
+      items: [
+        {
+          id: '31',
+          detailUrl: '',
+          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro20.png',
+          name: 'Celular',
+          quantity: 1,
+          sellingPrice: 154000,
+          listPrice: 1000,
+          skuName: 'Moto X4',
+        },
+        {
+          id: '32',
+          detailUrl: '',
+          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro1.png',
+          name: 'NoteBook',
+          quantity: 1,
+          sellingPrice: 154000,
+          listPrice: 1000,
+          skuName: 'Moto X4',
+        },
+        {
+          id: '33',
+          detailUrl: '',
+          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro1.png',
+          name: 'Monitor',
+          quantity: 1,
+          sellingPrice: 154000,
+          listPrice: 1000,
+          skuName: 'Moto X4',
+        },
+      ],
       value: 1632000,
     }
-    const messages = require('../locales/en-US')
 
-    wrapper = render(
+    minicartWithProducts = render(
       <MockedProvider
         mocks={[
           {
@@ -35,13 +66,21 @@ describe('MiniCart component', () => {
         </IntlProvider>
       </MockedProvider>
     )
+
+    setTimeout(() => {
+      done()
+    }, 0)
   })
 
   it('should be rendered', () => {
-    expect(wrapper).toBeDefined()
+    expect(minicartWithProducts).toBeDefined()
   })
 
   it('should match snapshot', () => {
-    expect(wrapper).toMatchSnapshot()
+    expect(minicartWithProducts).toMatchSnapshot()
+  })
+
+  it('minicart with products should render three minicart items', () => {
+    expect(minicartWithProducts.container.querySelectorAll('.vtex-minicart__item').length).toBe(3)
   })
 })

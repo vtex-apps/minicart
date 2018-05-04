@@ -4,37 +4,157 @@ exports[`MiniCart component should match snapshot 1`] = `
 Object {
   "container": <div>
     <div
-      class="vtex-minicart__item shadow-3 pa4 flex items-center justify-center"
+      class="flex flex-column"
     >
-      <svg
-        height="40"
-        preserveAspectRatio="xMidYMid"
-        viewBox="0 0 100 100"
-        width="40"
-        xmlns="http://www.w3.org/2000/svg"
+      <div
+        class="vtex-minicart__arrow-up self-end mr3 pr1"
+      />
+      <div
+        class="shadow-3"
       >
-        <circle
-          cx="50"
-          cy="50"
-          fill="none"
-          r="40"
-          stroke="#368DF7"
-          stroke-dasharray="188.49555921538757 64.83185307179586"
-          stroke-width="10"
-          transform="rotate(96 50 50)"
+        <div
+          class="vtex-minicart__content pa4 overflow-auto"
         >
-          <animatetransform
-            attributeName="transform"
-            begin="0s"
-            calcMode="linear"
-            dur="1s"
-            keyTimes="0;1"
-            repeatCount="indefinite"
-            type="rotate"
-            values="0 50 50;360 50 50"
-          />
-        </circle>
-      </svg>
+          <div
+            class="flex flex-row"
+          >
+            <div
+              class="vtex-minicart__item flex flex-row relative bb b--silver mb3"
+            >
+              <img
+                class="vtex-minicart__item-image"
+                src="https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro20.png"
+              />
+              <div
+                class="ml3"
+              >
+                <div
+                  class="vtex-minicart__item-name mt3"
+                >
+                  <span
+                    class="b"
+                  >
+                    Celular
+                  </span>
+                </div>
+                <div>
+                  <div
+                    class="vtex-minicart__sku-name"
+                  >
+                    <span
+                      class="f7 dark-gray"
+                    >
+                      Moto X4
+                    </span>
+                  </div>
+                  <div
+                    class="absolute right-0 bottom-0 mb3"
+                  >
+                    <span />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-row"
+          >
+            <div
+              class="vtex-minicart__item flex flex-row relative bb b--silver mb3"
+            >
+              <img
+                class="vtex-minicart__item-image"
+                src="https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro1.png"
+              />
+              <div
+                class="ml3"
+              >
+                <div
+                  class="vtex-minicart__item-name mt3"
+                >
+                  <span
+                    class="b"
+                  >
+                    NoteBook
+                  </span>
+                </div>
+                <div>
+                  <div
+                    class="vtex-minicart__sku-name"
+                  >
+                    <span
+                      class="f7 dark-gray"
+                    >
+                      Moto X4
+                    </span>
+                  </div>
+                  <div
+                    class="absolute right-0 bottom-0 mb3"
+                  >
+                    <span />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-row"
+          >
+            <div
+              class="vtex-minicart__item flex flex-row relative bb b--silver mb3"
+            >
+              <img
+                class="vtex-minicart__item-image"
+                src="https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro1.png"
+              />
+              <div
+                class="ml3"
+              >
+                <div
+                  class="vtex-minicart__item-name mt3"
+                >
+                  <span
+                    class="b"
+                  >
+                    Monitor
+                  </span>
+                </div>
+                <div>
+                  <div
+                    class="vtex-minicart__sku-name"
+                  >
+                    <span
+                      class="f7 dark-gray"
+                    >
+                      Moto X4
+                    </span>
+                  </div>
+                  <div
+                    class="absolute right-0 bottom-0 mb3"
+                  >
+                    <span />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="relative pr4 pl4 pb4"
+        >
+          <button
+            class="vtex-button bw1 ba fw5 ttu br2 fw4 v-mid pv3 ph5 f6 b--blue bg-blue white hover-bg-heavy-blue hover-b--heavy-blue pointer "
+            type="button"
+          >
+            Close request
+          </button>
+          <div
+            class="fr mt2"
+          >
+            <span />
+          </div>
+        </div>
+      </div>
     </div>
   </div>,
   "getAllByAltText": [Function],
