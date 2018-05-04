@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MiniCart component should match snapshot 1`] = `
+Object {
+  "container": <div>
+    <div
+      class="vtex-minicart__item shadow-3 pa4 flex items-center justify-center"
+    >
+      <svg
+        height="40"
+        preserveAspectRatio="xMidYMid"
+        viewBox="0 0 100 100"
+        width="40"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="50"
+          cy="50"
+          fill="none"
+          r="40"
+          stroke="#368DF7"
+          stroke-dasharray="188.49555921538757 64.83185307179586"
+          stroke-width="10"
+          transform="rotate(96 50 50)"
+        >
+          <animatetransform
+            attributeName="transform"
+            begin="0s"
+            calcMode="linear"
+            dur="1s"
+            keyTimes="0;1"
+            repeatCount="indefinite"
+            type="rotate"
+            values="0 50 50;360 50 50"
+          />
+        </circle>
+      </svg>
+    </div>
+  </div>,
+  "getAllByAltText": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getByAltText": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryByAltText": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "unmount": [Function],
+}
+`;

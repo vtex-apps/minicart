@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
-import { injectIntl } from 'react-intl'
+import { injectIntl, intlShape } from 'react-intl'
 import orderFormQuery from './graphql/orderFormQuery.gql'
 import MiniCartItem from './MiniCartItem'
 import Button from '@vtex/styleguide/lib/Button'
@@ -15,15 +15,16 @@ import './global.css'
 class MiniCart extends Component {
   static propTypes = {
     /* Products in the cart */
-    data: PropTypes.object,
+    data: PropTypes.shape({
+      loading: PropTypes.bool,
+      orderForm: PropTypes.object,
+    }).isRequired,
     /* Label to appear when the minicart is empty */
     labelMiniCartEmpty: PropTypes.string,
     /* Label to appear in the finish shopping button */
     labelButton: PropTypes.string,
-  }
-
-  static contextTypes = {
-    intl: PropTypes.object.isRequired,
+    /* Internationalization */
+    intl: intlShape.isRequired,
   }
 
   handleClickButton = () => location.assign('/checkout/#/cart')
@@ -66,15 +67,15 @@ class MiniCart extends Component {
   )
 
   render() {
-    const { data, labelMiniCartEmpty, labelButton } = this.props
+    const { data, labelMiniCartEmpty, labelButton, intl } = this.props
     let content
     if (data.loading) {
       content = this.renderLoading()
-    } else if (!data.orderForm.length) {
-      content = this.renderWithoutItems(labelMiniCartEmpty || this.context.intl.formatMessage({ id: 'minicart-empty' }))
+    } else if (!data.orderForm.items.length) {
+      content = this.renderWithoutItems(labelMiniCartEmpty || intl.formatMessage({ id: 'minicart-empty' }))
     } else {
       content = this.renderMiniCartWithItems(data.orderForm,
-        labelButton || this.context.intl.formatMessage({ id: 'finish-shopping-button-label' }))
+        labelButton || intl.formatMessage({ id: 'finish-shopping-button-label' }))
     }
     return content
   }
