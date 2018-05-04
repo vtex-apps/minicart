@@ -1,0 +1,32 @@
+{
+  "vendor": "vtex",
+  "name": "minicart",
+  "title": "Mini Cart",
+  "description": "Mini Cart component",
+  "defaultLocale": "pt-BR",
+  "builders": {
+    "pages": "0.x",
+    "react": "2.x"
+  },
+  "mustUpdateAt": "2019-04-20",
+  "categories": [],
+  "registries": [
+    "smartcheckout"
+  ],
+  "settingsSchema": {},
+  "scripts": {
+    "postreleasy": "vtex publish --public"
+  },
+  "policies": [
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "{{account}}.vtexcommercestable.com.br",
+        "path": "/api/checkout/pub/*"
+      }
+    }
+  ],
+  "dependencies": {
+    "vtex.store-graphql": "2.x"
+  }
+}

@@ -1,0 +1,48 @@
+body {
+    width: 100%;
+}
+
+.vtex-minicart__item {
+    width: 350px;
+    height: 90px;
+}
+
+.vtex-minicart__item-image {
+    width: 70px;
+    height: 70px;
+}
+
+.vtex-minicart__item-name {
+    width: 264px;
+    height: 50px;
+}
+
+.vtex-minicart__sku-name {
+    width: 138px;
+    height: 10px;
+}
+
+.vtex-minicart__box {
+    top: 100%;
+    display: block;
+    visibility: visible;
+}
+
+@media only screen and (max-width: 600px) {
+    .vtex-minicart__box {
+        display: none;
+        visibility: hidden;
+    }
+}
+
+.vtex-minicart__content {
+    max-height: 350px;
+}
+
+.vtex-minicart__arrow-up {
+    width: 0; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid white;
+  }
