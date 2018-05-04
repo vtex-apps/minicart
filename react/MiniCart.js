@@ -17,7 +17,20 @@ class MiniCart extends Component {
     /* Products in the cart */
     data: PropTypes.shape({
       loading: PropTypes.bool,
-      orderForm: PropTypes.object,
+      orderForm: PropTypes.shape({
+        orderFormId: PropTypes.string,
+        value: PropTypes.number,
+        items: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+          detailUrl: PropTypes.string,
+          imageUrl: PropTypes.string,
+          quantity: PropTypes.number,
+          sellingPrice: PropTypes.number,
+          listPrice: PropTypes.number,
+          skuName: PropTypes.number,
+        }))
+      })
     }).isRequired,
     /* Label to appear when the minicart is empty */
     labelMiniCartEmpty: PropTypes.string,
@@ -71,7 +84,7 @@ class MiniCart extends Component {
     let content
     if (data.loading) {
       content = this.renderLoading()
-    } else if (!data.orderForm.items.length) {
+    } else if (!data.orderForm || !data.orderForm.items.length) {
       content = this.renderWithoutItems(labelMiniCartEmpty || intl.formatMessage({ id: 'minicart-empty' }))
     } else {
       content = this.renderMiniCartWithItems(data.orderForm,

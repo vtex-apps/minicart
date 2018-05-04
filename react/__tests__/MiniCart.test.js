@@ -24,27 +24,7 @@ describe('MiniCart component', () => {
           sellingPrice: 154000,
           listPrice: 1000,
           skuName: 'Moto X4',
-        },
-        {
-          id: '32',
-          detailUrl: '',
-          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro1.png',
-          name: 'NoteBook',
-          quantity: 1,
-          sellingPrice: 154000,
-          listPrice: 1000,
-          skuName: 'Moto X4',
-        },
-        {
-          id: '33',
-          detailUrl: '',
-          imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro1.png',
-          name: 'Monitor',
-          quantity: 1,
-          sellingPrice: 154000,
-          listPrice: 1000,
-          skuName: 'Moto X4',
-        },
+        }
       ],
       value: 1632000,
     }
@@ -81,6 +61,6 @@ describe('MiniCart component', () => {
   })
 
   it('minicart with products should render three minicart items', () => {
-    expect(minicartWithProducts.container.querySelectorAll('.vtex-minicart__item').length).toBe(3)
+    expect(minicartWithProducts.container.querySelectorAll('.vtex-minicart__item').length).toBe(1)
   })
 })
