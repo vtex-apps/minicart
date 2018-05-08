@@ -43,8 +43,6 @@ class MiniCartContent extends Component {
         })),
       }),
     }).isRequired,
-    /* Mutate to update the items */
-    mutate: PropTypes.func.isRequired,
     /* Label to appear when the minicart is empty */
     labelMiniCartEmpty: PropTypes.string,
     /* Label to appear in the finish shopping button */
