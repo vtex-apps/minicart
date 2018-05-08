@@ -53,7 +53,7 @@ class MiniCartContent extends Component {
 
   handleClickButton = () => location.assign('/checkout/#/cart')
 
-  renderWithoutItems = (label) => (
+  renderWithoutItems = label => (
     <div className="vtex-minicart__item pa4 shadow-4 flex items-center justify-center">
       <span className="f5">{label}</span>
     </div>
