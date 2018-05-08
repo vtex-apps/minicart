@@ -66,8 +66,7 @@ class MiniCartContent extends Component {
         <div className="vtex-minicart__content pa4 overflow-auto">
           {orderForm.items.map(item => (
             <div className="flex flex-row" key={item.id}>
-              <MiniCartItem
-                {...item} />
+              <MiniCartItem {...item} />
             </div>
           ))}
         </div>
