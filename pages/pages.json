@@ -6,7 +6,7 @@
   },
   "extensions": {
     "minicart": {
-      "component": "MiniCartButton"
+      "component": "MiniCart"
     }
   }
 }

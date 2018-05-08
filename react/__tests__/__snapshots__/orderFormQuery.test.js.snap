@@ -16,7 +16,7 @@ Object {
               "value": Object {
                 "block": false,
                 "kind": "StringValue",
-                "value": "public",
+                "value": "private",
               },
             },
           ],
@@ -161,9 +161,9 @@ Object {
   ],
   "kind": "Document",
   "loc": Object {
-    "end": 223,
+    "end": 224,
     "source": Object {
-      "body": "query orderForm @context(scope: \\"public\\") {
+      "body": "query orderForm @context(scope: \\"private\\") {
   orderForm {
     orderFormId
     value
@@ -203,7 +203,7 @@ Object {
                 "value": Object {
                   "block": false,
                   "kind": "StringValue",
-                  "value": "public",
+                  "value": "private",
                 },
               },
             ],
@@ -348,9 +348,9 @@ Object {
     ],
     "kind": "Document",
     "loc": Object {
-      "end": 223,
+      "end": 224,
       "source": Object {
-        "body": "query orderForm @context(scope: \\"public\\") {
+        "body": "query orderForm @context(scope: \\"private\\") {
   orderForm {
     orderFormId
     value

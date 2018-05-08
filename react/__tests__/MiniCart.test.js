@@ -5,7 +5,7 @@ import { MockedProvider } from 'react-apollo/test-utils'
 import orderFormQuery from '../graphql/orderFormQuery.gql'
 import { IntlProvider } from 'react-intl'
 
-import MiniCart from '../MiniCart'
+import MiniCartContent from '../MiniCartContent'
 
 describe('MiniCart component', () => {
   let minicartWithProducts
@@ -17,7 +17,7 @@ describe('MiniCart component', () => {
       items: [
         {
           id: '31',
-          detailUrl: '',
+          detailUrl: 'celular',
           imageUrl: 'https://raw.githubusercontent.com/vtex-apps/product-summary/feature/product-image/images/500x500-img-pro20.png',
           name: 'Celular',
           quantity: 1,
@@ -42,7 +42,7 @@ describe('MiniCart component', () => {
           locale="en-US"
           messages={messages}
         >
-          <MiniCart />
+          <MiniCartContent />
         </IntlProvider>
       </MockedProvider>
     )

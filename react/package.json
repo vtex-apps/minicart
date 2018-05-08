@@ -8,9 +8,11 @@
   "dependencies": {
     "@vtex/product-details": "^1.1.0",
     "@vtex/styleguide": "2.0.0-rc.39",
-    "classnames": "^2.2.5"
+    "classnames": "^2.2.5",
+    "react-slick": "^0.16.0"
   },
   "devDependencies": {
+    "react-test-renderer": "^16.2.0",
     "@vtex/vtex-scripts": "^0.4.2",
     "apollo-client": "^2.2.8",
     "enzyme": "^3.3.0",
