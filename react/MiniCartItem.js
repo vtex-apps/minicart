@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Price } from '@vtex/product-details'
-import CloseIcon from '@vtex/styleguide/lib/icon/Close'
-import Button from '@vtex/styleguide/lib/Button'
 import { Link } from 'render'
+
 import './global.css'
 
 /**
@@ -34,22 +33,19 @@ export default class MiniCartItem extends Component {
 
   render() {
     const {
-      id,
       detailUrl,
       imageUrl,
       name,
       skuName,
       sellingPrice,
-      listPrice
+      listPrice,
     } = this.props
-
-    itemId = this.getItemId(detailUrl)
 
     return (
       <Link
         className="pointer link black-90"
         page={'store/product'}
-        params={{ id: itemId }}>
+        params={{ slug: this.getItemId(detailUrl) }}>
         <div className="vtex-minicart__item flex flex-row relative bb b--silver">
           <img className="vtex-minicart__item-image" src={imageUrl} alt={name} />
           <div className="ml3">

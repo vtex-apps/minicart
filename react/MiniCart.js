@@ -47,7 +47,7 @@ export default class MiniCart extends Component {
         </Button>
         {(isMouseOnMiniCart || isMouseOnButton) &&
           <div
-            className="absolute right-0 vtex-minicart__box bg-white"
+            className="absolute right-0 vtex-minicart__box bg-white z-max"
             onMouseLeave={this.handleMouseLeaveCartItems}
             onMouseEnter={this.handleMouseEnterCartItems}>
             <MiniCartContent

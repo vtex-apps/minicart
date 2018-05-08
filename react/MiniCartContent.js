@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { graphql, compose } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import { injectIntl, intlShape } from 'react-intl'
 import orderFormQuery from './graphql/orderFormQuery.gql'
 import MiniCartItem from './MiniCartItem'
@@ -40,8 +40,8 @@ class MiniCartContent extends Component {
           listPrice: PropTypes.number,
           /* Item's sku name */
           skuName: PropTypes.string,
-        }))
-      })
+        })),
+      }),
     }).isRequired,
     /* Mutate to update the items */
     mutate: PropTypes.func.isRequired,
@@ -94,8 +94,7 @@ class MiniCartContent extends Component {
   )
 
   render() {
-    const { data, labelMiniCartEmpty, labelButton, intl, showRemoveButton } = this.props
-    console.log(data)
+    const { data, labelMiniCartEmpty, labelButton, intl } = this.props
     let content
     if (data.loading) {
       content = this.renderLoading()
