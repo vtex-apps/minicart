@@ -5,7 +5,7 @@ This is an extension point component.
 
 ### Travis CI 
 
-[![Build Status](https://travis-ci.org/vtex-apps/menu.svg?branch=master)](https://travis-ci.org/vtex-apps/menu)
+[![Build Status](https://travis-ci.org/vtex-apps/menu.svg?branch=master)](https://travis-ci.org/vtex-apps/minicart)
 
 ## Usage
 
