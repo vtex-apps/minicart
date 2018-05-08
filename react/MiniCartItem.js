@@ -10,7 +10,7 @@ import './global.css'
  */
 export default class MiniCartItem extends Component {
   static propTypes = {
-    /* Item s id */
+    /* Item's id */
     id: PropTypes.string.isRequired,
     /* Item's image */
     imageUrl: PropTypes.string.isRequired,
@@ -52,17 +52,15 @@ export default class MiniCartItem extends Component {
             <div className="vtex-minicart__item-name mt3 tl">
               <span className="b">{name}</span>
             </div>
-            <div>
-              <div className="vtex-minicart__sku-name tl">
-                <span className="f7 dark-gray">{skuName}</span>
-              </div>
-              <div className="absolute right-0 bottom-0 mb3 f3">
-                <Price
-                  sellingPrice={sellingPrice}
-                  listPrice={listPrice}
-                  showLabels={false}
-                  showListPrice={false} />
-              </div>
+            <div className="vtex-minicart__sku-name tl">
+              <span className="f7 dark-gray">{skuName}</span>
+            </div>
+            <div className="absolute right-0 bottom-0 mb3 f3">
+              <Price
+                sellingPrice={sellingPrice}
+                listPrice={listPrice}
+                showLabels={false}
+                showListPrice={false} />
             </div>
           </div>
         </div>
