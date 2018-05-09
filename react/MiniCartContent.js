@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 import { injectIntl, intlShape } from 'react-intl'
 import orderFormQuery from './graphql/orderFormQuery.gql'
+import updateItemsMutation from './graphql/updateItemsMutation.gql'
 import MiniCartItem from './MiniCartItem'
 import Button from '@vtex/styleguide/lib/Button'
 import { Price } from '@vtex/product-details'
 import Spinner from '@vtex/styleguide/lib/Spinner'
+
 import './global.css'
 
 /**
@@ -43,6 +45,8 @@ class MiniCartContent extends Component {
         })),
       }),
     }).isRequired,
+    /* Mutate function */
+    mutate: PropTypes.func.isRequired,
     /* Label to appear when the minicart is empty */
     labelMiniCartEmpty: PropTypes.string,
     /* Label to appear in the finish shopping button */
@@ -52,6 +56,33 @@ class MiniCartContent extends Component {
   }
 
   handleClickButton = () => location.assign('/checkout/#/cart')
+
+  onRemoveItem = (id) => {
+    const { mutate, data: { orderForm } } = this.props
+    console.log('>>>>>>>>>>>>>>>>', id)
+    console.log(orderForm.items)
+    const itemPayload = orderForm.items.find(item => item.id === id)
+    console.log(itemPayload)
+    const index = orderForm.items.indexOf(itemPayload)
+    const updatedItem = [itemPayload].map(item => {
+      return {
+        id: parseInt(item.id),
+        index: index,
+        quantity: 0,
+        seller: 1,
+      }
+    })
+
+    console.log(updatedItem)
+
+    mutate({
+      variables: {
+        orderFormId: orderForm.orderFormId,
+        items: updatedItem,
+      },
+      refetchQueries: [{ query: orderFormQuery }],
+    })
+  }
 
   renderWithoutItems = label => (
     <div className="vtex-minicart__item pa4 shadow-4 flex items-center justify-center">
@@ -66,7 +97,7 @@ class MiniCartContent extends Component {
         <div className="vtex-minicart__content pa4 overflow-auto">
           {orderForm.items.map(item => (
             <div className="flex flex-row" key={item.id}>
-              <MiniCartItem {...item} />
+              <MiniCartItem {...item} removeItem={this.onRemoveItem} />
             </div>
           ))}
         </div>
@@ -98,6 +129,7 @@ class MiniCartContent extends Component {
     } else if (!data.orderForm || !data.orderForm.items.length) {
       content = this.renderWithoutItems(labelMiniCartEmpty || intl.formatMessage({ id: 'minicart-empty' }))
     } else {
+      console.log(data.orderForm)
       content = this.renderMiniCartWithItems(data.orderForm,
         labelButton || intl.formatMessage({ id: 'finish-shopping-button-label' }))
     }
@@ -105,4 +137,4 @@ class MiniCartContent extends Component {
   }
 }
 
-export default injectIntl(graphql(orderFormQuery)(MiniCartContent))
+export default injectIntl(compose(graphql(orderFormQuery), graphql(updateItemsMutation))(MiniCartContent))

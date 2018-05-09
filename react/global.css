@@ -46,3 +46,8 @@ body {
     border-right: 10px solid transparent;
     border-bottom: 10px solid white;
   }
+
+  .vtex-minicart-item__remove-btn > .vtex-button {
+    padding: 0px;
+    margin-top: 0.6rem;
+  }
