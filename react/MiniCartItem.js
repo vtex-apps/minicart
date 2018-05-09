@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Price } from '@vtex/product-details'
 import { Link } from 'render'
+import { convertIntToFloat } from './Util'
 
 import './global.css'
 
@@ -57,8 +58,8 @@ export default class MiniCartItem extends Component {
             </div>
             <div className="absolute right-0 bottom-0 mb3 f3">
               <Price
-                sellingPrice={sellingPrice}
-                listPrice={listPrice}
+                sellingPrice={convertIntToFloat(sellingPrice)}
+                listPrice={convertIntToFloat(listPrice)}
                 showLabels={false}
                 showListPrice={false} />
             </div>

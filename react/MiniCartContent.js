@@ -7,6 +7,8 @@ import MiniCartItem from './MiniCartItem'
 import Button from '@vtex/styleguide/lib/Button'
 import { Price } from '@vtex/product-details'
 import Spinner from '@vtex/styleguide/lib/Spinner'
+import { convertIntToFloat } from './Util'
+
 import './global.css'
 
 /**
@@ -75,8 +77,8 @@ class MiniCartContent extends Component {
         </div>
         <div className="fr mt2 mr4">
           <Price
-            sellingPrice={orderForm.value}
-            listPrice={orderForm.value}
+            sellingPrice={convertIntToFloat(orderForm.value)}
+            listPrice={convertIntToFloat(orderForm.value)}
             showLabels={false}
             showListPrice={false} />
         </div>
