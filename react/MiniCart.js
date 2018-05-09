@@ -16,6 +16,30 @@ export default class MiniCart extends Component {
     labelButtonFinishShopping: PropTypes.string,
     /* Mini cart icon color */
     miniCartIconColor: PropTypes.string,
+    /* Show the remove item button or not */
+    showRemoveButton: PropTypes.bool.isRequired,
+  }
+
+  static schema = {
+    title: 'Mini Cart',
+    description: 'The mini cart component',
+    type: 'object',
+    properties: {
+      showRemoveButton: {
+        title: 'Show remove item button',
+        type: 'boolean',
+      },
+      labelMiniCartEmpty: {
+        title: 'Text to appear when the mini cart is empty',
+        type: 'string',
+        default: 'Your bag is empty!',
+      },
+      labelButtonFinishShopping: {
+        title: 'Text to appear in the finish shopping button',
+        type: 'string',
+        default: 'Close request',
+      },
+    },
   }
 
   constructor(props) {
@@ -35,7 +59,7 @@ export default class MiniCart extends Component {
 
   render() {
     const { isMouseOnButton, isMouseOnMiniCart } = this.state
-    const { labelMiniCartEmpty, labelButtonFinishShopping, miniCartIconColor } = this.props
+    const { labelMiniCartEmpty, labelButtonFinishShopping, miniCartIconColor, showRemoveButton } = this.props
     return (
       <div className="relative fr">
         <Button
@@ -45,12 +69,14 @@ export default class MiniCart extends Component {
           onMouseLeave={this.handleMouseLeaveButton}>
           <CartIcon fillColor={miniCartIconColor} />
         </Button>
-        {(isMouseOnMiniCart || isMouseOnButton) &&
+        {
+          (isMouseOnMiniCart || isMouseOnButton) &&
           <div
             className="vtex-minicart__box absolute right-0 bg-white z-max"
             onMouseLeave={this.handleMouseLeaveCartItems}
             onMouseEnter={this.handleMouseEnterCartItems}>
             <MiniCartContent
+              showRemoveButton={showRemoveButton}
               labelMiniCartEmpty={labelMiniCartEmpty}
               labelButton={labelButtonFinishShopping} />
           </div>
