@@ -57,8 +57,8 @@ export default class MiniCartItem extends Component {
             </div>
             <div className="absolute right-0 bottom-0 mb3 f3">
               <Price
-                sellingPrice={sellingPrice}
-                listPrice={listPrice}
+                sellingPrice={sellingPrice * 0.01}
+                listPrice={listPrice * 0.01}
                 showLabels={false}
                 showListPrice={false} />
             </div>

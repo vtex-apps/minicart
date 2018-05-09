@@ -75,8 +75,8 @@ class MiniCartContent extends Component {
         </div>
         <div className="fr mt2 mr4">
           <Price
-            sellingPrice={orderForm.value}
-            listPrice={orderForm.value}
+            sellingPrice={orderForm.value * 0.01}
+            listPrice={orderForm.value * 0.01}
             showLabels={false}
             showListPrice={false} />
         </div>
