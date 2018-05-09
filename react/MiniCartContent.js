@@ -51,6 +51,8 @@ class MiniCartContent extends Component {
     labelMiniCartEmpty: PropTypes.string,
     /* Label to appear in the finish shopping button */
     labelButton: PropTypes.string,
+    /* Show remove item button or not */
+    showRemoveButton: PropTypes.bool,
     /* Internationalization */
     intl: intlShape.isRequired,
   }
@@ -59,10 +61,7 @@ class MiniCartContent extends Component {
 
   onRemoveItem = (id) => {
     const { mutate, data: { orderForm } } = this.props
-    console.log('>>>>>>>>>>>>>>>>', id)
-    console.log(orderForm.items)
     const itemPayload = orderForm.items.find(item => item.id === id)
-    console.log(itemPayload)
     const index = orderForm.items.indexOf(itemPayload)
     const updatedItem = [itemPayload].map(item => {
       return {
@@ -72,9 +71,6 @@ class MiniCartContent extends Component {
         seller: 1,
       }
     })
-
-    console.log(updatedItem)
-
     mutate({
       variables: {
         orderFormId: orderForm.orderFormId,
@@ -90,14 +86,14 @@ class MiniCartContent extends Component {
     </div>
   )
 
-  renderMiniCartWithItems = (orderForm, label) => (
+  renderMiniCartWithItems = (orderForm, label, showRemoveButton) => (
     <div className="flex flex-column" >
       <div className="vtex-minicart__arrow-up self-end mr3 pr1"></div>
       <div className="shadow-3">
         <div className="vtex-minicart__content pa4 overflow-auto">
           {orderForm.items.map(item => (
             <div className="flex flex-row" key={item.id}>
-              <MiniCartItem {...item} removeItem={this.onRemoveItem} />
+              <MiniCartItem {...item} removeItem={this.onRemoveItem} showRemoveButton={showRemoveButton} />
             </div>
           ))}
         </div>
@@ -122,16 +118,16 @@ class MiniCartContent extends Component {
   )
 
   render() {
-    const { data, labelMiniCartEmpty, labelButton, intl } = this.props
+    const { data, labelMiniCartEmpty, labelButton, intl, showRemoveButton } = this.props
     let content
     if (data.loading) {
       content = this.renderLoading()
     } else if (!data.orderForm || !data.orderForm.items.length) {
-      content = this.renderWithoutItems(labelMiniCartEmpty || intl.formatMessage({ id: 'minicart-empty' }))
+      const label = labelMiniCartEmpty || intl.formatMessage({ id: 'minicart-empty' })
+      content = this.renderWithoutItems(label)
     } else {
-      console.log(data.orderForm)
-      content = this.renderMiniCartWithItems(data.orderForm,
-        labelButton || intl.formatMessage({ id: 'finish-shopping-button-label' }))
+      const label = labelButton || intl.formatMessage({ id: 'finish-shopping-button-label' })
+      content = this.renderMiniCartWithItems(data.orderForm, label, showRemoveButton)
     }
     return content
   }
