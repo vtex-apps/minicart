@@ -19,6 +19,8 @@ class MiniCartContent extends Component {
     /* Products in the cart */
     data: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
+      /* Function to refetch the orderForm query */
+      refetch: PropTypes.func.isRequired,
       /* Order form */
       orderForm: PropTypes.shape({
         /* Order form id */
@@ -116,6 +118,10 @@ class MiniCartContent extends Component {
       <Spinner />
     </div>
   )
+
+  componentDidMount() {
+    this.props.data.refetch()
+  }
 
   render() {
     const { data, labelMiniCartEmpty, labelButton, intl, showRemoveButton } = this.props
