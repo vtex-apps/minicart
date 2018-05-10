@@ -60,7 +60,7 @@ export default class MiniCartItem extends Component {
           className="pointer link black-90"
           page={'store/product'}
           params={{ slug: this.getItemId(detailUrl) }}>
-          <div className="vtex-minicart__item flex flex-row relative bb b--silver">
+          <div className="vtex-minicart__item flex flex-row relative bb b--silver mt4">
             <img className="vtex-minicart__item-image" src={imageUrl} alt={name} />
             <div className="ml3">
               <div className="vtex-minicart__item-name mt3 tl">
