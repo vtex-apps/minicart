@@ -7,11 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.2.1] - 2018-05-10
+### Fixed
+- Refetch order form data when a new product is added to the mini cart.
+
 ## [0.2.0] - 2018-05-10
 ### Added
 - Add a spinner when remove button is pressed.
-### Fixed
-- Refetch order form data when a new product is added to the mini cart.
 
 ## [0.1.0] - 2018-05-09
 ### Added
