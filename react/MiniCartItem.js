@@ -4,6 +4,7 @@ import { Price } from '@vtex/product-details'
 import { Link } from 'render'
 import CloseIcon from '@vtex/styleguide/lib/icon/Close'
 import Button from '@vtex/styleguide/lib/Button'
+import Spinner from '@vtex/styleguide/lib/Spinner'
 
 import './global.css'
 
@@ -36,9 +37,23 @@ export default class MiniCartItem extends Component {
     showRemoveButton: false,
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      isRemovingItem: false,
+    }
+  }
+
   getItemId = detailUrl => {
     const regExp = /\/([^)]+)\//
     return regExp.exec(detailUrl)[1]
+  }
+
+  onClickRemove = (id) => {
+    this.setState({
+      isRemovingItem: true,
+    })
+    this.props.removeItem(id)
   }
 
   render() {
@@ -50,9 +65,11 @@ export default class MiniCartItem extends Component {
       skuName,
       sellingPrice,
       listPrice,
-      removeItem,
       showRemoveButton,
     } = this.props
+
+    const { isRemovingItem } = this.state
+    console.log(isRemovingItem)
 
     return (
       <div className="relative">
@@ -80,11 +97,17 @@ export default class MiniCartItem extends Component {
           </div>
         </Link>
         {
-          showRemoveButton &&
+          (showRemoveButton && !isRemovingItem) &&
           <div className="vtex-minicart-item__remove-btn absolute right-0 top-0">
-            <Button onClick={(e) => removeItem(id, e)}>
+            <Button onClick={(e) => this.onClickRemove(id, e)}>
               <CloseIcon size={12} color="#BDBDBD" />
             </Button>
+          </div>
+        }
+        {
+          (showRemoveButton && isRemovingItem) &&
+          <div className="vtex-minicart-item__remove-btn absolute right-0 top-0 flex items-center justify-center mt3">
+            <Spinner size={20} />
           </div>
         }
       </div>
