@@ -7,15 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-
-## [0.1.1] - 2018-05-10
+## [0.2.0] - 2018-05-10
+### Added
+- Add a spinner when remove button is pressed.
 ### Fixed
-- Refetch order form data when a new product is added to the mini cart
+- Refetch order form data when a new product is added to the mini cart.
 
 ## [0.1.0] - 2018-05-09
 ### Added
-- Add feature that allows to remove a minicart item
+- Add feature that allows to remove a minicart item.
 
 ## [0.0.1] - 2018-05-09
 ### Added
-- Publish first version of the app
+- Publish first version of the app.
