@@ -69,7 +69,6 @@ export default class MiniCartItem extends Component {
     } = this.props
 
     const { isRemovingItem } = this.state
-    console.log(isRemovingItem)
 
     return (
       <div className="relative">
