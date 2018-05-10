@@ -92,17 +92,17 @@ class MiniCartContent extends Component {
     <div className="flex flex-column" >
       <div className="vtex-minicart__arrow-up self-end mr3 pr1"></div>
       <div className="shadow-3">
-        <div className="vtex-minicart__content pa4 overflow-auto">
+        <div className="vtex-minicart__content pr4 pl4 overflow-auto">
           {orderForm.items.map(item => (
             <div className="flex flex-row" key={item.id}>
               <MiniCartItem {...item} removeItem={this.onRemoveItem} showRemoveButton={showRemoveButton} />
             </div>
           ))}
         </div>
-        <div className="fl pr4 pl4 pb4">
+        <div className="fl pa4">
           <Button primary onClick={this.handleClickButton}>{label}</Button>
         </div>
-        <div className="fr mt2 mr4">
+        <div className="fr pt4 mt2 mr4">
           <Price
             sellingPrice={orderForm.value}
             listPrice={orderForm.value}
