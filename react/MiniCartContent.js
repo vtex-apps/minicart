@@ -8,6 +8,7 @@ import MiniCartItem from './MiniCartItem'
 import Button from '@vtex/styleguide/lib/Button'
 import { Price } from '@vtex/product-details'
 import Spinner from '@vtex/styleguide/lib/Spinner'
+import { MiniCartPropTypes } from './MiniCartPropTypes'
 
 import './global.css'
 
@@ -17,36 +18,7 @@ import './global.css'
 class MiniCartContent extends Component {
   static propTypes = {
     /* Products in the cart */
-    data: PropTypes.shape({
-      loading: PropTypes.bool.isRequired,
-      /* Function to refetch the orderForm query */
-      refetch: PropTypes.func.isRequired,
-      /* Order form */
-      orderForm: PropTypes.shape({
-        /* Order form id */
-        orderFormId: PropTypes.string,
-        /* Total price of the order */
-        value: PropTypes.number,
-        /* Items in the mini cart */
-        items: PropTypes.arrayOf(PropTypes.shape({
-          id: PropTypes.string,
-          /* Item's name */
-          name: PropTypes.string,
-          /* Item's url details */
-          detailUrl: PropTypes.string,
-          /* Item's image url */
-          imageUrl: PropTypes.string,
-          /* Item's quantity */
-          quantity: PropTypes.number,
-          /* Item's selling price */
-          sellingPrice: PropTypes.number,
-          /* Item's list price */
-          listPrice: PropTypes.number,
-          /* Item's sku name */
-          skuName: PropTypes.string,
-        })),
-      }),
-    }).isRequired,
+    data: MiniCartPropTypes.data,
     /* Mutate function */
     mutate: PropTypes.func.isRequired,
     /* Label to appear when the minicart is empty */
@@ -93,7 +65,6 @@ class MiniCartContent extends Component {
 
   renderMiniCartWithItems = (orderForm, label, showRemoveButton) => (
     <div className="flex flex-column" >
-      <div className="vtex-minicart__arrow-up self-end mr3 pr1"></div>
       <div className="shadow-3">
         <div className="vtex-minicart__content pr4 pl4 overflow-auto">
           {orderForm.items.map(item => (

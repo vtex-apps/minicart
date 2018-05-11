@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+### Added
+- Add badge to show the quantity of items in the mini cart
 ### Changed
 - Add event listener on minicart that will be used to update minicart badge.
 
