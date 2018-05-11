@@ -7,8 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.3.0] - 2018-05-11
 ### Added
-- Add badge to show the quantity of items in the mini cart
+- Add badge to show the quantity of items in the mini cart.
+- Add arrow indicator to mini cart content.
 ### Changed
 - Add event listener on minicart that will be used to update minicart badge.
 
