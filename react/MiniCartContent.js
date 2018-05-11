@@ -34,7 +34,7 @@ class MiniCartContent extends Component {
 
   handleClickButton = () => location.assign('/checkout/#/cart')
 
-  onRemoveItem = (id) => {
+  onRemoveItem = id => {
     const { mutate, data: { orderForm } } = this.props
     const itemPayload = orderForm.items.find(item => item.id === id)
     const index = orderForm.items.indexOf(itemPayload)

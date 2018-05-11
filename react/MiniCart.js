@@ -45,7 +45,7 @@ export class MiniCart extends Component {
     })
   }
 
-  handleUpdateQuantityItems = (quantity) => this.setState({ quantityItems: quantity })
+  handleUpdateQuantityItems = quantity => this.setState({ quantityItems: quantity })
 
   handleClickButton = () => location.assign('/checkout/#/cart')
 
