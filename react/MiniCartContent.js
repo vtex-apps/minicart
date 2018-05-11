@@ -58,14 +58,14 @@ class MiniCartContent extends Component {
   }
 
   renderWithoutItems = label => (
-    <div className="vtex-minicart__item pa4 shadow-4 flex items-center justify-center">
+    <div className="vtex-minicart__item pa4 flex items-center justify-center relative bg-white">
       <span className="f5">{label}</span>
     </div>
   )
 
   renderMiniCartWithItems = (orderForm, label, showRemoveButton) => (
-    <div className="flex flex-column" >
-      <div className="shadow-3">
+    <div className="flex flex-column relative" >
+      <div className="bg-white">
         <div className="vtex-minicart__content pr4 pl4 overflow-auto">
           {orderForm.items.map(item => (
             <div className="flex flex-row" key={item.id}>
@@ -88,7 +88,7 @@ class MiniCartContent extends Component {
   )
 
   renderLoading = () => (
-    <div className="vtex-minicart__item shadow-3 pa4 flex items-center justify-center">
+    <div className="vtex-minicart__item pa4 flex items-center justify-center relative bg-white">
       <Spinner />
     </div>
   )
