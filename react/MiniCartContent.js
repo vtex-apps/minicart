@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { graphql, compose } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import { injectIntl, intlShape } from 'react-intl'
-import orderFormQuery from './graphql/orderFormQuery.gql'
 import updateItemsMutation from './graphql/updateItemsMutation.gql'
+import orderFormQuery from './graphql/orderFormQuery.gql'
 import MiniCartItem from './MiniCartItem'
 import Button from '@vtex/styleguide/lib/Button'
 import { Price } from '@vtex/product-details'
@@ -55,6 +55,7 @@ class MiniCartContent extends Component {
     labelButton: PropTypes.string,
     /* Show remove item button or not */
     showRemoveButton: PropTypes.bool,
+    onUpdateItemsQuantity: PropTypes.func,
     /* Internationalization */
     intl: intlShape.isRequired,
   }
@@ -79,6 +80,8 @@ class MiniCartContent extends Component {
         items: updatedItem,
       },
       refetchQueries: [{ query: orderFormQuery }],
+    }).then(() => {
+      this.props.onUpdateItemsQuantity(this.props.data.orderForm.items.length - 1)
     })
   }
 
@@ -120,7 +123,9 @@ class MiniCartContent extends Component {
   )
 
   componentDidMount() {
-    this.props.data.refetch()
+    this.props.data.refetch().then(() => {
+      this.props.onUpdateItemsQuantity(this.props.data.orderForm.items.length)
+    })
   }
 
   render() {
@@ -139,4 +144,4 @@ class MiniCartContent extends Component {
   }
 }
 
-export default injectIntl(compose(graphql(orderFormQuery), graphql(updateItemsMutation))(MiniCartContent))
+export default injectIntl(graphql(updateItemsMutation)(MiniCartContent))
