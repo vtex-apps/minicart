@@ -39,29 +39,29 @@ body {
     max-height: 310px;
 }
 
+.vtex-minicart-item__remove-btn > .vtex-button {
+padding: 0px;
+margin-top: 0.6rem;
+}
+
+.vtex-minicart__bagde {
+font-size: .71429rem;
+background-color: #1790de;
+border-radius: 50%;
+color: #fff;
+height: 18px;
+line-height: 18px;
+right: -10px;
+text-align: center;
+top: -8px;
+width: 18px;
+position: absolute;
+}
+
 .vtex-minicart__arrow-up {
-    width: 0; 
-    height: 0; 
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid white;
-  }
-
-  .vtex-minicart-item__remove-btn > .vtex-button {
-    padding: 0px;
-    margin-top: 0.6rem;
-  }
-
-  .vtex-minicart__bagde {
-    font-size: .71429rem;
-    background-color: #1790de;
-    border-radius: 50%;
-    color: #fff;
-    height: 18px;
-    line-height: 18px;
-    right: -10px;
-    text-align: center;
-    top: -8px;
-    width: 18px;
-    position: absolute;
-  }
+    transform: rotate(45deg);
+    width: 25px;
+    height: 25px;
+    right: 7px;
+    background-color: white;
+}
