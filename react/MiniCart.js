@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Button from '@vtex/styleguide/lib/Button'
 import CartIcon from './CartIcon'
 import MiniCartContent from './MiniCartContent'
+
 import './global.css'
 
 /**
@@ -46,6 +47,11 @@ export default class MiniCart extends Component {
     super(props)
     this.state = { isMouseOnButton: false, isMouseOnMiniCart: false }
   }
+  componentDidMount() {
+    document.addEventListener('item:adicionado', () => {
+      // TODO - UPDATE BADGE COUNT
+    })
+  }
 
   handleClickButton = () => location.assign('/checkout/#/cart')
 
@@ -61,7 +67,7 @@ export default class MiniCart extends Component {
     const { isMouseOnButton, isMouseOnMiniCart } = this.state
     const { labelMiniCartEmpty, labelButtonFinishShopping, miniCartIconColor, showRemoveButton } = this.props
     return (
-      <div className="relative fr">
+      <div className="relative fr" >
         <Button
           icon
           onClick={this.handleClickButton}
