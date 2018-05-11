@@ -76,15 +76,19 @@ export class MiniCart extends Component {
         {
           (isMouseOnMiniCart || isMouseOnButton) &&
           <div
-            className="vtex-minicart__box absolute right-0 bg-white z-max flex flex-colunm"
+            className="vtex-minicart__box absolute right-0 z-max flex flex-colunm"
             onMouseLeave={this.handleMouseLeaveCartItems}
             onMouseEnter={this.handleMouseEnterCartItems}>
-            <MiniCartContent
-              data={this.props.data}
-              onUpdateItemsQuantity={this.handleUpdateQuantityItems}
-              showRemoveButton={showRemoveButton}
-              labelMiniCartEmpty={labelMiniCartEmpty}
-              labelButton={labelButtonFinishShopping} />
+            <div className="vtex-minicart__arrow-up absolute top-0 right-0 shadow-3">
+            </div>
+            <div className="shadow-3 mt3">
+              <MiniCartContent
+                data={this.props.data}
+                onUpdateItemsQuantity={this.handleUpdateQuantityItems}
+                showRemoveButton={showRemoveButton}
+                labelMiniCartEmpty={labelMiniCartEmpty}
+                labelButton={labelButtonFinishShopping} />
+            </div>
           </div>
         }
       </div>
