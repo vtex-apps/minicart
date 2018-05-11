@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 /**
- * Arraw Icon component in svg
+ * Arrow Icon component in svg
  */
 export default class ArrowIcon extends Component {
   static propTypes = {
