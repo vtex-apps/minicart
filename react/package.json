@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@vtex/product-details": "1.1.1",
-    "@vtex/styleguide": "2.0.0-rc.39",
+    "@vtex/styleguide": "^3.0.2",
     "classnames": "^2.2.5",
     "eslint-config-vtex": "^8.0.0",
     "identity-obj-proxy": "^3.0.0",
