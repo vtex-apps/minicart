@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ## [0.3.0] - 2018-05-11
+### Fixed
+- Fix minicart locales
+
+## [0.3.0] - 2018-05-11
 ### Added
 - Add badge to show the quantity of items in the mini cart.
 - Add arrow indicator to mini cart content.
