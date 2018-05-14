@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Fixed
-- Fix minicart render errro when cannot fetch the orderForm from graphql.
+- Fix minicart render erro when cannot fetch the orderForm from graphql.
 
 ## [0.3.0] - 2018-05-11
 ### Fixed
