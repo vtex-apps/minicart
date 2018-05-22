@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Price } from '@vtex/product-details'
 import { Link } from 'render'
 import CloseIcon from '@vtex/styleguide/lib/icon/Close'
 import Button from '@vtex/styleguide/lib/Button'
 import Spinner from '@vtex/styleguide/lib/Spinner'
+import ProductName from 'vtex.storecomponents/ProductName'
+import ProductPrice from 'vtex.storecomponents/ProductPrice'
 
 import './global.css'
 
@@ -80,13 +81,15 @@ export default class MiniCartItem extends Component {
             <img className="vtex-minicart__item-image" src={imageUrl} alt={name} />
             <div className="ml3">
               <div className="vtex-minicart__item-name mt3 tl">
-                <span className="b">{name}</span>
+                <ProductName name={name} large={false} />
               </div>
               <div className="vtex-minicart__sku-name tl">
-                <span className="f7 dark-gray">{skuName}</span>
+                <div className="f7 dark-gray">
+                  <ProductName name={skuName} large={false} />
+                </div>
               </div>
-              <div className="absolute right-0 bottom-0 mb3 f3">
-                <Price
+              <div className="absolute right-0 bottom-0 mb4">
+                <ProductPrice
                   sellingPrice={sellingPrice}
                   listPrice={listPrice}
                   showLabels={false}
@@ -97,7 +100,7 @@ export default class MiniCartItem extends Component {
         </Link>
         {
           (showRemoveButton && !isRemovingItem) &&
-          <div className="vtex-minicart-item__remove-btn absolute right-0 top-0">
+          <div className="vtex-minicart-item__remove-btn absolute right-0 top-0 mt4">
             <Button onClick={(e) => this.onClickRemove(id, e)}>
               <CloseIcon size={12} color="#BDBDBD" />
             </Button>
@@ -105,7 +108,7 @@ export default class MiniCartItem extends Component {
         }
         {
           (showRemoveButton && isRemovingItem) &&
-          <div className="vtex-minicart-item__remove-btn absolute right-0 top-0 flex items-center justify-center mt3">
+          <div className="vtex-minicart-item__remove-btn absolute right-0 top-0 flex items-center justify-center mt5 pt2">
             <Spinner size={20} />
           </div>
         }
