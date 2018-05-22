@@ -6,7 +6,7 @@ import updateItemsMutation from './graphql/updateItemsMutation.gql'
 import orderFormQuery from './graphql/orderFormQuery.gql'
 import MiniCartItem from './MiniCartItem'
 import Button from '@vtex/styleguide/lib/Button'
-import { Price } from '@vtex/product-details'
+import ProductPrice from 'vtex.storecomponents/ProductPrice'
 import Spinner from '@vtex/styleguide/lib/Spinner'
 import { MiniCartPropTypes } from './MiniCartPropTypes'
 
@@ -77,7 +77,7 @@ class MiniCartContent extends Component {
           <Button primary onClick={this.handleClickButton}>{label}</Button>
         </div>
         <div className="fr pt4 mt2 mr4">
-          <Price
+          <ProductPrice
             sellingPrice={orderForm.value}
             listPrice={orderForm.value}
             showLabels={false}
