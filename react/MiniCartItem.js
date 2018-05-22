@@ -81,11 +81,11 @@ export default class MiniCartItem extends Component {
             <img className="vtex-minicart__item-image" src={imageUrl} alt={name} />
             <div className="ml3">
               <div className="vtex-minicart__item-name mt3 tl">
-                <ProductName name={name} large={false} />
+                <ProductName name={name} />
               </div>
               <div className="vtex-minicart__sku-name tl">
                 <div className="f7 dark-gray">
-                  <ProductName name={skuName} large={false} />
+                  <ProductName name={skuName} />
                 </div>
               </div>
               <div className="absolute right-0 bottom-0 mb4">
