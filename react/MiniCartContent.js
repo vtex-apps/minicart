@@ -19,15 +19,16 @@ class MiniCartContent extends Component {
   static propTypes = {
     /* Products in the cart */
     data: MiniCartPropTypes.data,
+    /* Label to appear when the minicart is empty */
+    labelMiniCartEmpty: MiniCartPropTypes.labelMiniCartEmpty,
+    /* Label to appear in the finish shopping button */
+    labelButton: MiniCartPropTypes.labelButtonFinishShopping,
+    /* Show remove item button or not */
+    showRemoveButton: MiniCartPropTypes.showRemoveButton,
+    /* Function to be called when a item is removed */
+    onUpdateItemsQuantity: PropTypes.func,
     /* Mutate function */
     mutate: PropTypes.func.isRequired,
-    /* Label to appear when the minicart is empty */
-    labelMiniCartEmpty: PropTypes.string,
-    /* Label to appear in the finish shopping button */
-    labelButton: PropTypes.string,
-    /* Show remove item button or not */
-    showRemoveButton: PropTypes.bool,
-    onUpdateItemsQuantity: PropTypes.func,
     /* Internationalization */
     intl: intlShape.isRequired,
   }

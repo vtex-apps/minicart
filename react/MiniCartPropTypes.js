@@ -8,7 +8,7 @@ export const MiniCartPropTypes = {
   /* Mini cart icon color */
   miniCartIconColor: PropTypes.string,
   /* Show the remove item button or not */
-  showRemoveButton: PropTypes.bool.isRequired,
+  showRemoveButton: PropTypes.bool,
   /* Products in the cart */
   data: PropTypes.shape({
     loading: PropTypes.bool.isRequired,
@@ -22,6 +22,7 @@ export const MiniCartPropTypes = {
       value: PropTypes.number,
       /* Items in the mini cart */
       items: PropTypes.arrayOf(PropTypes.shape({
+        /* Item's id */
         id: PropTypes.string,
         /* Item's name */
         name: PropTypes.string,

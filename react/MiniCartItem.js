@@ -6,6 +6,7 @@ import Button from '@vtex/styleguide/lib/Button'
 import Spinner from '@vtex/styleguide/lib/Spinner'
 import ProductName from 'vtex.storecomponents/ProductName'
 import ProductPrice from 'vtex.storecomponents/ProductPrice'
+import { MiniCartPropTypes } from './MiniCartPropTypes'
 
 import './global.css'
 
@@ -31,7 +32,7 @@ export default class MiniCartItem extends Component {
     /* Remove item function */
     removeItem: PropTypes.func.isRequired,
     /* Show remove button or not */
-    showRemoveButton: PropTypes.bool,
+    showRemoveButton: MiniCartPropTypes.showRemoveButton,
   }
 
   static defaultProps = {
