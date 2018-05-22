@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Changed
 - Change the mini cart components to use the store components.
+- Change PropTypes to reuse the mini cart's one.
 
 ## [0.3.2] - 2018-05-19
 ### Fixed
