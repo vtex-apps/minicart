@@ -31,7 +31,7 @@ export default class MiniCartItem extends Component {
     detailUrl: PropTypes.string.isRequired,
     /* Remove item function */
     removeItem: PropTypes.func.isRequired,
-    /* Show remove button or not */
+    /* Reused props */
     showRemoveButton: MiniCartPropTypes.showRemoveButton,
   }
 

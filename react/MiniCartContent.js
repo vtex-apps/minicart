@@ -17,16 +17,20 @@ import './global.css'
  */
 class MiniCartContent extends Component {
   static propTypes = {
-    data: MiniCartPropTypes.data,
-    labelMiniCartEmpty: MiniCartPropTypes.labelMiniCartEmpty,
-    labelButton: MiniCartPropTypes.labelButtonFinishShopping,
-    showRemoveButton: MiniCartPropTypes.showRemoveButton,
     /* Function to be called when an item is removed */
     onUpdateItemsQuantity: PropTypes.func,
     /* Mutate function */
     mutate: PropTypes.func.isRequired,
     /* Internationalization */
     intl: intlShape.isRequired,
+    /* Reused props */
+    data: MiniCartPropTypes.data,
+    /* Reused props */
+    labelMiniCartEmpty: MiniCartPropTypes.labelMiniCartEmpty,
+    /* Reused props */
+    labelButton: MiniCartPropTypes.labelButtonFinishShopping,
+    /* Reused props */
+    showRemoveButton: MiniCartPropTypes.showRemoveButton,
   }
 
   handleClickButton = () => location.assign('/checkout/#/cart')
