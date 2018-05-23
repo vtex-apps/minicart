@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 
 export const MiniCartPropTypes = {
-  /* Label to appear when the minicart is empty */
+  /* Label that wiil appear when the minicart is empty */
   labelMiniCartEmpty: PropTypes.string,
   /* Finish shopping button label */
   labelButtonFinishShopping: PropTypes.string,
