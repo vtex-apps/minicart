@@ -7,7 +7,7 @@ export const MiniCartPropTypes = {
   labelButtonFinishShopping: PropTypes.string,
   /* Mini cart icon color */
   miniCartIconColor: PropTypes.string,
-  /* Show the remove item button or not */
+  /* Set the visibility of remove button */
   showRemoveButton: PropTypes.bool,
   /* Products in the cart */
   data: PropTypes.shape({
