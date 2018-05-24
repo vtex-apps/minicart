@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types'
 
 export const MiniCartPropTypes = {
-  /* Label to appear when the minicart is empty */
+  /* Label that wiil appear when the minicart is empty */
   labelMiniCartEmpty: PropTypes.string,
   /* Finish shopping button label */
   labelButtonFinishShopping: PropTypes.string,
   /* Mini cart icon color */
   miniCartIconColor: PropTypes.string,
-  /* Show the remove item button or not */
-  showRemoveButton: PropTypes.bool.isRequired,
+  /* Set the visibility of remove button */
+  showRemoveButton: PropTypes.bool,
   /* Products in the cart */
   data: PropTypes.shape({
     loading: PropTypes.bool.isRequired,
@@ -21,23 +21,7 @@ export const MiniCartPropTypes = {
       /* Total price of the order */
       value: PropTypes.number,
       /* Items in the mini cart */
-      items: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.string,
-        /* Item's name */
-        name: PropTypes.string,
-        /* Item's url details */
-        detailUrl: PropTypes.string,
-        /* Item's image url */
-        imageUrl: PropTypes.string,
-        /* Item's quantity */
-        quantity: PropTypes.number,
-        /* Item's selling price */
-        sellingPrice: PropTypes.number,
-        /* Item's list price */
-        listPrice: PropTypes.number,
-        /* Item's sku name */
-        skuName: PropTypes.string,
-      })),
+      items: PropTypes.arrayOf(PropTypes.object),
     }),
   }).isRequired,
 }

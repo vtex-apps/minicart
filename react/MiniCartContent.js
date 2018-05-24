@@ -6,7 +6,7 @@ import updateItemsMutation from './graphql/updateItemsMutation.gql'
 import orderFormQuery from './graphql/orderFormQuery.gql'
 import MiniCartItem from './MiniCartItem'
 import Button from '@vtex/styleguide/lib/Button'
-import ProductPrice from 'vtex.storecomponents/ProductPrice'
+import ProductPrice from 'vtex.store-components/ProductPrice'
 import Spinner from '@vtex/styleguide/lib/Spinner'
 import { MiniCartPropTypes } from './MiniCartPropTypes'
 
@@ -17,19 +17,17 @@ import './global.css'
  */
 class MiniCartContent extends Component {
   static propTypes = {
-    /* Products in the cart */
-    data: MiniCartPropTypes.data,
+    /* Function to be called when an item is removed */
+    onUpdateItemsQuantity: PropTypes.func,
     /* Mutate function */
     mutate: PropTypes.func.isRequired,
-    /* Label to appear when the minicart is empty */
-    labelMiniCartEmpty: PropTypes.string,
-    /* Label to appear in the finish shopping button */
-    labelButton: PropTypes.string,
-    /* Show remove item button or not */
-    showRemoveButton: PropTypes.bool,
-    onUpdateItemsQuantity: PropTypes.func,
     /* Internationalization */
     intl: intlShape.isRequired,
+    /* Reused props */
+    data: MiniCartPropTypes.data,
+    labelMiniCartEmpty: MiniCartPropTypes.labelMiniCartEmpty,
+    labelButton: MiniCartPropTypes.labelButtonFinishShopping,
+    showRemoveButton: MiniCartPropTypes.showRemoveButton,
   }
 
   handleClickButton = () => location.assign('/checkout/#/cart')

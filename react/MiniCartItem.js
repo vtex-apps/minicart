@@ -4,8 +4,9 @@ import { Link } from 'render'
 import CloseIcon from '@vtex/styleguide/lib/icon/Close'
 import Button from '@vtex/styleguide/lib/Button'
 import Spinner from '@vtex/styleguide/lib/Spinner'
-import ProductName from 'vtex.storecomponents/ProductName'
-import ProductPrice from 'vtex.storecomponents/ProductPrice'
+import ProductName from 'vtex.store-components/ProductName'
+import ProductPrice from 'vtex.store-components/ProductPrice'
+import { MiniCartPropTypes } from './MiniCartPropTypes'
 
 import './global.css'
 
@@ -30,8 +31,8 @@ export default class MiniCartItem extends Component {
     detailUrl: PropTypes.string.isRequired,
     /* Remove item function */
     removeItem: PropTypes.func.isRequired,
-    /* Show remove button or not */
-    showRemoveButton: PropTypes.bool,
+    /* Reused props */
+    showRemoveButton: MiniCartPropTypes.showRemoveButton,
   }
 
   static defaultProps = {
