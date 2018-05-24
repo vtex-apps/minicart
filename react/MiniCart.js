@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import orderFormQuery from './graphql/orderFormQuery.gql'
 import { graphql } from 'react-apollo'
 import Button from '@vtex/styleguide/lib/Button'
-import CartIcon from './CartIcon'
-import MiniCartContent from './MiniCartContent'
-import { MiniCartPropTypes } from './MiniCartPropTypes'
+import CartIcon from './images/CartIcon'
+import MiniCartContent from './components/MiniCartContent'
+import { MiniCartPropTypes } from './propTypes'
 
 import './global.css'
 

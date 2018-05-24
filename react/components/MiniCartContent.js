@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import { injectIntl, intlShape } from 'react-intl'
-import updateItemsMutation from './graphql/updateItemsMutation.gql'
-import orderFormQuery from './graphql/orderFormQuery.gql'
+import updateItemsMutation from '../graphql/updateItemsMutation.gql'
+import orderFormQuery from '../graphql/orderFormQuery.gql'
 import MiniCartItem from './MiniCartItem'
 import Button from '@vtex/styleguide/lib/Button'
 import ProductPrice from 'vtex.store-components/ProductPrice'
 import Spinner from '@vtex/styleguide/lib/Spinner'
-import { MiniCartPropTypes } from './MiniCartPropTypes'
+import { MiniCartPropTypes } from '../propTypes'
 
-import './global.css'
+import '../global.css'
 
 /**
  * Minicart content component
