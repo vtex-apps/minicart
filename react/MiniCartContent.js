@@ -25,11 +25,8 @@ class MiniCartContent extends Component {
     intl: intlShape.isRequired,
     /* Reused props */
     data: MiniCartPropTypes.data,
-    /* Reused props */
     labelMiniCartEmpty: MiniCartPropTypes.labelMiniCartEmpty,
-    /* Reused props */
     labelButton: MiniCartPropTypes.labelButtonFinishShopping,
-    /* Reused props */
     showRemoveButton: MiniCartPropTypes.showRemoveButton,
   }
 
