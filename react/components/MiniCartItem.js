@@ -6,9 +6,9 @@ import Button from '@vtex/styleguide/lib/Button'
 import Spinner from '@vtex/styleguide/lib/Spinner'
 import ProductName from 'vtex.store-components/ProductName'
 import ProductPrice from 'vtex.store-components/ProductPrice'
-import { MiniCartPropTypes } from './MiniCartPropTypes'
+import { MiniCartPropTypes } from '../propTypes'
 
-import './global.css'
+import '../global.css'
 
 /**
  * Minicart item component
