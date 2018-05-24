@@ -6,7 +6,7 @@ import updateItemsMutation from './graphql/updateItemsMutation.gql'
 import orderFormQuery from './graphql/orderFormQuery.gql'
 import MiniCartItem from './MiniCartItem'
 import Button from '@vtex/styleguide/lib/Button'
-import ProductPrice from 'vtex.storecomponents/ProductPrice'
+import ProductPrice from 'vtex.store-components/ProductPrice'
 import Spinner from '@vtex/styleguide/lib/Spinner'
 import { MiniCartPropTypes } from './MiniCartPropTypes'
 
