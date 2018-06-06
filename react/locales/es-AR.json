@@ -1,4 +1,9 @@
 {
+    "editor.minicart.title": "Cesta",
+    "editor.minicart.description": "Una cesta simple que muestra todos los productos agregados",
+    "editor.minicart.showRemoveButton.title": "Mostrar el botón para retirar producto",
+    "editor.minicart.labelMiniCartEmpty.title": "Texto que aparecerá cuando el carrito esté vacío",
+    "editor.minicart.labelButtonFinishShopping.title": "Texto para que aparezca en el botón de finalizar compra",
     "finish-shopping-button-label": "Cerrar pedido",
     "minicart-empty": "Su cesta está vacía!"
 }
