@@ -1,4 +1,9 @@
 {
+    "editor.minicart.title": "Mini Cart",
+    "editor.minicart.description": "A simple mini cart that shows all products added to it",
+    "editor.minicart.showRemoveButton.title": "Show remove product button",
+    "editor.minicart.labelMiniCartEmpty.title": "Text to appear when the mini cart is empty",
+    "editor.minicart.labelButtonFinishShopping.title": "Text to appear in the finish shopping button",
     "finish-shopping-button-label": "Proceed to checkout",
     "minicart-empty": "Your cart is empty!"
 }

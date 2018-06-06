@@ -15,20 +15,20 @@ export class MiniCart extends Component {
   static propTypes = MiniCartPropTypes
 
   static schema = {
-    title: 'Mini Cart',
-    description: 'The mini cart component',
+    title: 'editor.minicart.title',
+    description: 'editor.minicart.description',
     type: 'object',
     properties: {
       showRemoveButton: {
-        title: 'Show remove item button',
+        title: 'editor.minicart.showRemoveButton.title',
         type: 'boolean',
       },
       labelMiniCartEmpty: {
-        title: 'Text to appear when the mini cart is empty',
+        title: 'editor.minicart.labelMiniCartEmpty.title',
         type: 'string',
       },
       labelButtonFinishShopping: {
-        title: 'Text to appear in the finish shopping button',
+        title: 'editor.minicart.labelButtonFinishShopping.title',
         type: 'string',
       },
     },
