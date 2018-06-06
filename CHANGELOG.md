@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- Schema internationalization
+- Add internationalization into minicart schema
 
 ## [0.4.0] - 2018-05-24
 ### Changed
