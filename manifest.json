@@ -15,7 +15,7 @@
   ],
   "settingsSchema": {},
   "scripts": {
-    "postreleasy": "vtex publish --public"
+    "postreleasy": "vtex publish --verbose"
   },
   "policies": [
     {
