@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { NoSSR } from 'render'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import { injectIntl, intlShape } from 'react-intl'
@@ -99,18 +100,17 @@ class MiniCartContent extends Component {
 
   render() {
     const { data, labelMiniCartEmpty, labelButton, intl, showRemoveButton } = this.props
-    let content
-    if (data.loading) {
-      content = this.renderLoading()
-    } else if (!data.orderForm || !data.orderForm.items.length) {
-      const label = labelMiniCartEmpty || intl.formatMessage({ id: 'minicart-empty' })
-      content = this.renderWithoutItems(label)
-    } else {
-      const label = labelButton || intl.formatMessage({ id: 'finish-shopping-button-label' })
-      content = this.renderMiniCartWithItems(data.orderForm, label, showRemoveButton)
-    }
-    return content
+    const labelEmpty = labelMiniCartEmpty || intl.formatMessage({ id: 'minicart-empty' })
+    const label = labelButton || intl.formatMessage({ id: 'finish-shopping-button-label' })
+    return (
+      <NoSSR onSSR={this.renderLoading()}>
+        {
+          (!data.orderForm || !data.orderForm.items.length)
+            ? this.renderWithoutItems(labelEmpty)
+            : this.renderMiniCartWithItems(data.orderForm, label, showRemoveButton)
+        }
+      </NoSSR>
+    )
   }
 }
-
 export default injectIntl(graphql(updateItemsMutation)(MiniCartContent))
