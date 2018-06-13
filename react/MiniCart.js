@@ -69,9 +69,9 @@ export class MiniCart extends Component {
           onMouseEnter={this.handleMouseEnterButton}
           onMouseLeave={this.handleMouseLeaveButton}>
           <CartIcon fillColor={miniCartIconColor} />
-          <span className="vtex-minicart__bagde mt1 mr1">
+          {quantity > 0 && <span className="vtex-minicart__bagde mt1 mr1">
             {quantity}
-          </span>
+          </span>}
         </Button>
         {
           (isMouseOnMiniCart || isMouseOnButton) &&
