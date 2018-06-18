@@ -32,7 +32,7 @@ export class MiniCart extends Component {
         type: 'string',
       },
       enableQuantitySelector: {
-        title: 'Enable quantity selector',
+        title: 'editor.minicart.enableQuantitySelector.title',
         type: 'boolean',
       },
     },
