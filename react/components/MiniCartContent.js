@@ -129,7 +129,6 @@ class MiniCartContent extends Component {
 
   render() {
     const { data, labelMiniCartEmpty, labelButton, intl, showRemoveButton, enableQuantitySelector } = this.props
-    console.log('waaaza2', enableQuantitySelector)
     let content
     if (data.loading) {
       content = this.renderLoading()
