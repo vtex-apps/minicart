@@ -25,9 +25,14 @@ class MiniCartContent extends Component {
     intl: intlShape.isRequired,
     /* Reused props */
     data: MiniCartPropTypes.data,
+    /* Reused props */
     labelMiniCartEmpty: MiniCartPropTypes.labelMiniCartEmpty,
+    /* Reused props */
     labelButton: MiniCartPropTypes.labelButtonFinishShopping,
+    /* Reused props */
     showRemoveButton: MiniCartPropTypes.showRemoveButton,
+    /* Reused props */
+    enableQuantitySelector: MiniCartPropTypes.enableQuantitySelector,
   }
 
   handleClickButton = () => location.assign('/checkout/#/cart')
@@ -61,13 +66,13 @@ class MiniCartContent extends Component {
     </div>
   )
 
-  renderMiniCartWithItems = (orderForm, label, showRemoveButton) => (
+  renderMiniCartWithItems = (orderForm, label, showRemoveButton, enableQuantitySelector) => (
     <div className="flex flex-column relative" >
       <div className="bg-white">
         <div className="vtex-minicart__content pr4 pl4 overflow-auto">
           {orderForm.items.map(item => (
             <div className="flex flex-row" key={item.id}>
-              <MiniCartItem {...item} removeItem={this.onRemoveItem} showRemoveButton={showRemoveButton} />
+              <MiniCartItem {...item} removeItem={this.onRemoveItem} showRemoveButton={showRemoveButton} enableQuantitySelector={enableQuantitySelector} />
             </div>
           ))}
         </div>
@@ -98,7 +103,8 @@ class MiniCartContent extends Component {
   }
 
   render() {
-    const { data, labelMiniCartEmpty, labelButton, intl, showRemoveButton } = this.props
+    const { data, labelMiniCartEmpty, labelButton, intl, showRemoveButton, enableQuantitySelector } = this.props
+    console.log('waaaza2', enableQuantitySelector)
     let content
     if (data.loading) {
       content = this.renderLoading()
@@ -107,7 +113,7 @@ class MiniCartContent extends Component {
       content = this.renderWithoutItems(label)
     } else {
       const label = labelButton || intl.formatMessage({ id: 'finish-shopping-button-label' })
-      content = this.renderMiniCartWithItems(data.orderForm, label, showRemoveButton)
+      content = this.renderMiniCartWithItems(data.orderForm, label, showRemoveButton, enableQuantitySelector)
     }
     return content
   }

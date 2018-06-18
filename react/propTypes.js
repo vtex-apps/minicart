@@ -9,6 +9,7 @@ export const MiniCartPropTypes = {
   miniCartIconColor: PropTypes.string,
   /* Set the visibility of remove button */
   showRemoveButton: PropTypes.bool,
+  enableQuantitySelector: PropTypes.bool,
   /* Products in the cart */
   data: PropTypes.shape({
     loading: PropTypes.bool.isRequired,

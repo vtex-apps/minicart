@@ -31,6 +31,10 @@ export class MiniCart extends Component {
         title: 'editor.minicart.labelButtonFinishShopping.title',
         type: 'string',
       },
+      enableQuantitySelector: {
+        title: 'Enable quantity selector',
+        type: 'boolean',
+      },
     },
   }
 
@@ -38,6 +42,7 @@ export class MiniCart extends Component {
     super(props)
     this.state = { isMouseOnButton: false, isMouseOnMiniCart: false, quantityItems: 0 }
   }
+
   componentDidMount() {
     document.addEventListener('item:add', () => {
       const { quantityItems } = this.state
@@ -59,7 +64,7 @@ export class MiniCart extends Component {
 
   render() {
     const { isMouseOnButton, isMouseOnMiniCart, quantityItems } = this.state
-    const { labelMiniCartEmpty, labelButtonFinishShopping, miniCartIconColor, showRemoveButton, data: { orderForm } } = this.props
+    const { labelMiniCartEmpty, labelButtonFinishShopping, miniCartIconColor, showRemoveButton, enableQuantitySelector, data: { orderForm } } = this.props
     const quantity = !quantityItems && orderForm && orderForm.items ? orderForm.items.length : quantityItems
     return (
       <div className="relative fr" >
@@ -87,7 +92,8 @@ export class MiniCart extends Component {
                 onUpdateItemsQuantity={this.handleUpdateQuantityItems}
                 showRemoveButton={showRemoveButton}
                 labelMiniCartEmpty={labelMiniCartEmpty}
-                labelButton={labelButtonFinishShopping} />
+                labelButton={labelButtonFinishShopping}
+                enableQuantitySelector={enableQuantitySelector} />
             </div>
           </div>
         }

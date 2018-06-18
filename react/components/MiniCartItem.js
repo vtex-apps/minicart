@@ -6,6 +6,7 @@ import Button from '@vtex/styleguide/lib/Button'
 import Spinner from '@vtex/styleguide/lib/Spinner'
 import ProductName from 'vtex.store-components/ProductName'
 import ProductPrice from 'vtex.store-components/ProductPrice'
+import QuantitySelector from 'vtex.store-components/QuantitySelector'
 import { MiniCartPropTypes } from '../propTypes'
 
 import '../global.css'
@@ -27,12 +28,18 @@ export default class MiniCartItem extends Component {
     listPrice: PropTypes.number.isRequired,
     /* Item's sku */
     skuName: PropTypes.string.isRequired,
+    /* Quantity of the item in the card */
+    quantity: PropTypes.number.isRequired,
     /* Detail url */
     detailUrl: PropTypes.string.isRequired,
     /* Remove item function */
     removeItem: PropTypes.func.isRequired,
     /* Reused props */
     showRemoveButton: MiniCartPropTypes.showRemoveButton,
+    /* Reused props */
+    enableQuantitySelector: MiniCartPropTypes.enableQuantitySelector,
+    /* Max quantity of the item */
+    maxQuantity: PropTypes.number.isRequired,
   }
 
   static defaultProps = {
@@ -43,7 +50,14 @@ export default class MiniCartItem extends Component {
     super(props)
     this.state = {
       isRemovingItem: false,
+      currentQuantity: props.quantity,
     }
+  }
+
+  handleQuantityChange = quantity => {
+    this.setState({
+      currentQuantity: quantity,
+    })
   }
 
   getItemId = detailUrl => {
@@ -68,9 +82,10 @@ export default class MiniCartItem extends Component {
       sellingPrice,
       listPrice,
       showRemoveButton,
+      enableQuantitySelector,
     } = this.props
 
-    const { isRemovingItem } = this.state
+    const { isRemovingItem, currentQuantity } = this.state
 
     return (
       <div className="relative">
@@ -80,16 +95,18 @@ export default class MiniCartItem extends Component {
           params={{ slug: this.getItemId(detailUrl) }}>
           <div className="vtex-minicart__item flex flex-row relative bb b--silver mt4">
             <img className="vtex-minicart__item-image" src={imageUrl} alt={name} />
-            <div className="ml3">
-              <div className="vtex-minicart__item-name mt3 tl">
-                <ProductName name={name} />
-              </div>
-              <div className="vtex-minicart__sku-name tl">
-                <div className="f7 dark-gray">
-                  <ProductName name={skuName} />
+            <div className="ml3 relative">
+              <div>
+                <div className="vtex-minicart__item-name mt3 tl">
+                  <ProductName name={name} />
+                </div>
+                <div className="vtex-minicart__sku-name tl absolute">
+                  <div className="f7 dark-gray">
+                    <ProductName name={skuName} />
+                  </div>
                 </div>
               </div>
-              <div className="absolute right-0 bottom-0 mb4">
+              <div className="absolute right-0 bottom-0 mb4 flex flex-column">
                 <ProductPrice
                   sellingPrice={sellingPrice}
                   listPrice={listPrice}
@@ -99,6 +116,11 @@ export default class MiniCartItem extends Component {
             </div>
           </div>
         </Link>
+        {enableQuantitySelector &&
+          <div className="absolute bottom-0 right-0 mb7 pb2">
+            <QuantitySelector maxQuantity={10} currentQuantity={currentQuantity} onQuantityChange={this.handleQuantityChange} onMaxReached={() => { console.log('quantity reached') }} />
+          </div>
+        }
         {
           (showRemoveButton && !isRemovingItem) &&
           <div className="vtex-minicart-item__remove-btn absolute right-0 top-0 mt4">

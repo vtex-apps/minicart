@@ -4,12 +4,12 @@ body {
 
 .vtex-minicart__item {
     width: 350px;
-    height: 90px;
+    height: 110px;
 }
 
 .vtex-minicart__item-image {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
 }
 
 .vtex-minicart__item-name {
@@ -20,6 +20,7 @@ body {
 .vtex-minicart__sku-name {
     width: 138px;
     height: 10px;
+    bottom: 18px;
 }
 
 .vtex-minicart__box {
@@ -36,26 +37,26 @@ body {
 }
 
 .vtex-minicart__content {
-    max-height: 310px;
+    max-height: 368px;
 }
 
 .vtex-minicart-item__remove-btn > .vtex-button {
-padding: 0px;
-margin-top: 0.6rem;
+    padding: 0px;
+    margin-top: 0.6rem;
 }
 
 .vtex-minicart__bagde {
-font-size: .71429rem;
-background-color: #1790de;
-border-radius: 50%;
-color: #fff;
-height: 18px;
-line-height: 18px;
-right: -10px;
-text-align: center;
-top: -8px;
-width: 18px;
-position: absolute;
+    font-size: .71429rem;
+    background-color: #1790de;
+    border-radius: 50%;
+    color: #fff;
+    height: 18px;
+    line-height: 18px;
+    right: -10px;
+    text-align: center;
+    top: -8px;
+    width: 18px;
+    position: absolute;
 }
 
 .vtex-minicart__arrow-up {
