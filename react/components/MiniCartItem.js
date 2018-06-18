@@ -34,6 +34,8 @@ export default class MiniCartItem extends Component {
     detailUrl: PropTypes.string.isRequired,
     /* Remove item function */
     removeItem: PropTypes.func.isRequired,
+    /* Update item function */
+    updateItem: PropTypes.func.isRequired,
     /* Reused props */
     showRemoveButton: MiniCartPropTypes.showRemoveButton,
     /* Reused props */
@@ -50,14 +52,11 @@ export default class MiniCartItem extends Component {
     super(props)
     this.state = {
       isRemovingItem: false,
-      currentQuantity: props.quantity,
     }
   }
 
   handleQuantityChange = quantity => {
-    this.setState({
-      currentQuantity: quantity,
-    })
+    this.props.updateItem(this.props.id, quantity)
   }
 
   getItemId = detailUrl => {
@@ -83,9 +82,10 @@ export default class MiniCartItem extends Component {
       listPrice,
       showRemoveButton,
       enableQuantitySelector,
+      quantity,
     } = this.props
 
-    const { isRemovingItem, currentQuantity } = this.state
+    const { isRemovingItem } = this.state
 
     return (
       <div className="relative">
@@ -118,7 +118,7 @@ export default class MiniCartItem extends Component {
         </Link>
         {enableQuantitySelector &&
           <div className="absolute bottom-0 right-0 mb7 pb2">
-            <QuantitySelector maxQuantity={10} currentQuantity={currentQuantity} onQuantityChange={this.handleQuantityChange} onMaxReached={() => { console.log('quantity reached') }} />
+            <QuantitySelector maxQuantity={10} currentQuantity={quantity} onQuantityChange={this.handleQuantityChange} onMaxReached={() => { console.log('quantity reached') }} />
           </div>
         }
         {

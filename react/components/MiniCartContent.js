@@ -60,6 +60,31 @@ class MiniCartContent extends Component {
     })
   }
 
+  onUpdateItems = (id, quantity) => {
+    const { mutate, data: { orderForm } } = this.props
+    const itemPayload = orderForm.items.find(item => item.id === id)
+    const index = orderForm.items.indexOf(itemPayload)
+    const updatedItem = [itemPayload].map(item => {
+      return {
+        id: parseInt(item.id),
+        index: index,
+        quantity: quantity,
+        seller: 1,
+      }
+    })
+    mutate({
+      variables: {
+        orderFormId: orderForm.orderFormId,
+        items: updatedItem,
+      },
+      refetchQueries: [{ query: orderFormQuery }],
+    }).then(() => {
+      this.setState({
+
+      })
+    })
+  }
+
   renderWithoutItems = label => (
     <div className="vtex-minicart__item pa4 flex items-center justify-center relative bg-white">
       <span className="f5">{label}</span>
@@ -72,7 +97,7 @@ class MiniCartContent extends Component {
         <div className="vtex-minicart__content pr4 pl4 overflow-auto">
           {orderForm.items.map(item => (
             <div className="flex flex-row" key={item.id}>
-              <MiniCartItem {...item} removeItem={this.onRemoveItem} showRemoveButton={showRemoveButton} enableQuantitySelector={enableQuantitySelector} />
+              <MiniCartItem {...item} removeItem={this.onRemoveItem} updateItem={this.onUpdateItems} showRemoveButton={showRemoveButton} enableQuantitySelector={enableQuantitySelector} />
             </div>
           ))}
         </div>
