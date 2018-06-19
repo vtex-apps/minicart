@@ -7,9 +7,15 @@ body {
     height: 110px;
 }
 
-.vtex-minicart__item-image {
+.vtex-minicart__img-container {
     width: 100px;
     height: 100px;
+    min-width: 100px;
+}
+
+.vtex-minicart__item-image {
+    width: auto;
+    height: 100%;
 }
 
 .vtex-minicart__item-name {
