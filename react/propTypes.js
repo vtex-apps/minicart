@@ -10,6 +10,7 @@ export const MiniCartPropTypes = {
   /* Set the visibility of remove button */
   showRemoveButton: PropTypes.bool,
   enableQuantitySelector: PropTypes.bool,
+  maxQuantity: PropTypes.number,
   /* Products in the cart */
   data: PropTypes.shape({
     loading: PropTypes.bool.isRequired,

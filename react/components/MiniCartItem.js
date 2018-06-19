@@ -83,6 +83,7 @@ export default class MiniCartItem extends Component {
       showRemoveButton,
       enableQuantitySelector,
       quantity,
+      maxQuantity,
     } = this.props
 
     const { isRemovingItem } = this.state
@@ -118,7 +119,7 @@ export default class MiniCartItem extends Component {
         </Link>
         {enableQuantitySelector &&
           <div className="absolute bottom-0 right-0 mb7 pb2">
-            <QuantitySelector maxQuantity={10} currentQuantity={quantity} onQuantityChange={this.handleQuantityChange} onMaxReached={() => { console.log('quantity reached') }} />
+            <QuantitySelector maxQuantity={maxQuantity} currentQuantity={quantity} onQuantityChange={this.handleQuantityChange} onMaxReached={() => { }} />
           </div>
         }
         {

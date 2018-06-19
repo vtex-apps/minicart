@@ -33,6 +33,8 @@ class MiniCartContent extends Component {
     showRemoveButton: MiniCartPropTypes.showRemoveButton,
     /* Reused props */
     enableQuantitySelector: MiniCartPropTypes.enableQuantitySelector,
+    /* Reused props */
+    maxQuantity: MiniCartPropTypes.maxQuantity,
   }
 
   handleClickButton = () => location.assign('/checkout/#/cart')
@@ -91,13 +93,19 @@ class MiniCartContent extends Component {
     </div>
   )
 
-  renderMiniCartWithItems = (orderForm, label, showRemoveButton, enableQuantitySelector) => (
+  renderMiniCartWithItems = (orderForm, label, showRemoveButton, enableQuantitySelector, maxQuantity) => (
     <div className="flex flex-column relative" >
       <div className="bg-white">
         <div className="vtex-minicart__content pr4 pl4 overflow-auto">
           {orderForm.items.map(item => (
             <div className="flex flex-row" key={item.id}>
-              <MiniCartItem {...item} removeItem={this.onRemoveItem} updateItem={this.onUpdateItems} showRemoveButton={showRemoveButton} enableQuantitySelector={enableQuantitySelector} />
+              <MiniCartItem
+                {...item}
+                removeItem={this.onRemoveItem}
+                updateItem={this.onUpdateItems}
+                showRemoveButton={showRemoveButton}
+                enableQuantitySelector={enableQuantitySelector}
+                maxQuantity={maxQuantity} />
             </div>
           ))}
         </div>
@@ -128,7 +136,7 @@ class MiniCartContent extends Component {
   }
 
   render() {
-    const { data, labelMiniCartEmpty, labelButton, intl, showRemoveButton, enableQuantitySelector } = this.props
+    const { data, labelMiniCartEmpty, labelButton, intl, showRemoveButton, enableQuantitySelector, maxQuantity } = this.props
     let content
     if (data.loading) {
       content = this.renderLoading()
@@ -137,7 +145,7 @@ class MiniCartContent extends Component {
       content = this.renderWithoutItems(label)
     } else {
       const label = labelButton || intl.formatMessage({ id: 'finish-shopping-button-label' })
-      content = this.renderMiniCartWithItems(data.orderForm, label, showRemoveButton, enableQuantitySelector)
+      content = this.renderMiniCartWithItems(data.orderForm, label, showRemoveButton, enableQuantitySelector, maxQuantity)
     }
     return content
   }

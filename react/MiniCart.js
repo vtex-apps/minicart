@@ -84,7 +84,7 @@ export class MiniCart extends Component {
 
   render() {
     const { isMouseOnButton, isMouseOnMiniCart, quantityItems } = this.state
-    const { labelMiniCartEmpty, labelButtonFinishShopping, miniCartIconColor, showRemoveButton, enableQuantitySelector, data: { orderForm } } = this.props
+    const { labelMiniCartEmpty, labelButtonFinishShopping, miniCartIconColor, showRemoveButton, enableQuantitySelector, maxQuantity, data: { orderForm } } = this.props
     const quantity = !quantityItems && orderForm && orderForm.items ? orderForm.items.length : quantityItems
     return (
       <div className="relative fr" >
@@ -113,7 +113,8 @@ export class MiniCart extends Component {
                 showRemoveButton={showRemoveButton}
                 labelMiniCartEmpty={labelMiniCartEmpty}
                 labelButton={labelButtonFinishShopping}
-                enableQuantitySelector={enableQuantitySelector} />
+                enableQuantitySelector={enableQuantitySelector}
+                maxQuantity={maxQuantity} />
             </div>
           </div>
         }
