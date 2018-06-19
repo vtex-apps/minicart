@@ -5,5 +5,7 @@
     "editor.minicart.labelMiniCartEmpty.title": "Text to appear when the mini cart is empty",
     "editor.minicart.labelButtonFinishShopping.title": "Text to appear in the finish shopping button",
     "finish-shopping-button-label": "Proceed to checkout",
-    "minicart-empty": "Your cart is empty!"
+    "minicart-empty": "Your cart is empty!",
+    "editor.minicart.enableQuantitySelector.title": "Enable quantity selector",
+    "editor.minicart.maxQuantity.title": "Max quantity by item"
 }

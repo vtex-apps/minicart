@@ -14,30 +14,55 @@ import './global.css'
 export class MiniCart extends Component {
   static propTypes = MiniCartPropTypes
 
-  static schema = {
-    title: 'editor.minicart.title',
-    description: 'editor.minicart.description',
-    type: 'object',
-    properties: {
-      showRemoveButton: {
-        title: 'editor.minicart.showRemoveButton.title',
-        type: 'boolean',
+  static getSchema = props => {
+    const getQuantitySelectorSchema = () => {
+      return {
+        maxQuantity: {
+          title: 'editor.minicart.maxQuantity.title',
+          type: 'number',
+          minimum: 1,
+          maximum: 10,
+          default: 1,
+          widget: {
+            'ui:widget': 'range',
+          },
+        },
+      }
+    }
+
+    const generatedSchema = props.enableQuantitySelector && getQuantitySelectorSchema()
+
+    return {
+      title: 'editor.minicart.title',
+      description: 'editor.minicart.description',
+      type: 'object',
+      properties: {
+        showRemoveButton: {
+          title: 'editor.minicart.showRemoveButton.title',
+          type: 'boolean',
+        },
+        labelMiniCartEmpty: {
+          title: 'editor.minicart.labelMiniCartEmpty.title',
+          type: 'string',
+        },
+        labelButtonFinishShopping: {
+          title: 'editor.minicart.labelButtonFinishShopping.title',
+          type: 'string',
+        },
+        enableQuantitySelector: {
+          title: 'editor.minicart.enableQuantitySelector.title',
+          type: 'boolean',
+        },
+        ...generatedSchema,
       },
-      labelMiniCartEmpty: {
-        title: 'editor.minicart.labelMiniCartEmpty.title',
-        type: 'string',
-      },
-      labelButtonFinishShopping: {
-        title: 'editor.minicart.labelButtonFinishShopping.title',
-        type: 'string',
-      },
-    },
+    }
   }
 
   constructor(props) {
     super(props)
     this.state = { isMouseOnButton: false, isMouseOnMiniCart: false, quantityItems: 0 }
   }
+
   componentDidMount() {
     document.addEventListener('item:add', () => {
       const { quantityItems } = this.state
@@ -59,7 +84,7 @@ export class MiniCart extends Component {
 
   render() {
     const { isMouseOnButton, isMouseOnMiniCart, quantityItems } = this.state
-    const { labelMiniCartEmpty, labelButtonFinishShopping, miniCartIconColor, showRemoveButton, data: { orderForm } } = this.props
+    const { labelMiniCartEmpty, labelButtonFinishShopping, miniCartIconColor, showRemoveButton, enableQuantitySelector, maxQuantity, data: { orderForm } } = this.props
     const quantity = !quantityItems && orderForm && orderForm.items ? orderForm.items.length : quantityItems
     return (
       <div className="relative fr" >
@@ -87,7 +112,9 @@ export class MiniCart extends Component {
                 onUpdateItemsQuantity={this.handleUpdateQuantityItems}
                 showRemoveButton={showRemoveButton}
                 labelMiniCartEmpty={labelMiniCartEmpty}
-                labelButton={labelButtonFinishShopping} />
+                labelButton={labelButtonFinishShopping}
+                enableQuantitySelector={enableQuantitySelector}
+                maxQuantity={maxQuantity} />
             </div>
           </div>
         }

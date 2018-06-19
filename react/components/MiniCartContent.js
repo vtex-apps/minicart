@@ -28,6 +28,13 @@ class MiniCartContent extends Component {
     labelMiniCartEmpty: MiniCartPropTypes.labelMiniCartEmpty,
     labelButton: MiniCartPropTypes.labelButtonFinishShopping,
     showRemoveButton: MiniCartPropTypes.showRemoveButton,
+    enableQuantitySelector: MiniCartPropTypes.enableQuantitySelector,
+    maxQuantity: MiniCartPropTypes.maxQuantity,
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = { showSpinner: false }
   }
 
   handleClickButton = () => location.assign('/checkout/#/cart')
@@ -55,26 +62,61 @@ class MiniCartContent extends Component {
     })
   }
 
+  onUpdateItems = (id, quantity) => {
+    this.setState({ showSpinner: true })
+    const { mutate, data: { orderForm } } = this.props
+    const itemPayload = orderForm.items.find(item => item.id === id)
+    const index = orderForm.items.indexOf(itemPayload)
+    const updatedItem = [itemPayload].map(item => {
+      return {
+        id: parseInt(item.id),
+        index: index,
+        quantity: quantity,
+        seller: 1,
+      }
+    })
+    mutate({
+      variables: {
+        orderFormId: orderForm.orderFormId,
+        items: updatedItem,
+      },
+      refetchQueries: [{ query: orderFormQuery }],
+    }).then(() => {
+      this.setState({
+        showSpinner: false,
+      })
+    })
+  }
+
   renderWithoutItems = label => (
     <div className="vtex-minicart__item pa4 flex items-center justify-center relative bg-white">
       <span className="f5">{label}</span>
     </div>
   )
 
-  renderMiniCartWithItems = (orderForm, label, showRemoveButton) => (
+  renderMiniCartWithItems = (orderForm, label, showRemoveButton, enableQuantitySelector, maxQuantity, showSpinner) => (
     <div className="flex flex-column relative" >
       <div className="bg-white">
-        <div className="vtex-minicart__content pr4 pl4 overflow-auto">
+        <div className="vtex-minicart__content pr4 pl4 overflow-auto overflow-x-hidden">
           {orderForm.items.map(item => (
             <div className="flex flex-row" key={item.id}>
-              <MiniCartItem {...item} removeItem={this.onRemoveItem} showRemoveButton={showRemoveButton} />
+              <MiniCartItem
+                {...item}
+                removeItem={this.onRemoveItem}
+                updateItem={this.onUpdateItems}
+                showRemoveButton={showRemoveButton}
+                enableQuantitySelector={enableQuantitySelector}
+                maxQuantity={maxQuantity} />
             </div>
           ))}
         </div>
         <div className="fl pa4">
           <Button primary onClick={this.handleClickButton}>{label}</Button>
         </div>
-        <div className="fr pt4 mt2 mr4">
+        <div className="flex flex-row fr pt4 mt2 mr4">
+          {showSpinner &&
+            <Spinner size={18} />
+          }
           <ProductPrice
             sellingPrice={orderForm.value}
             listPrice={orderForm.value}
@@ -98,7 +140,8 @@ class MiniCartContent extends Component {
   }
 
   render() {
-    const { data, labelMiniCartEmpty, labelButton, intl, showRemoveButton } = this.props
+    const { data, labelMiniCartEmpty, labelButton, intl, showRemoveButton, enableQuantitySelector, maxQuantity } = this.props
+    const { showSpinner } = this.state
     let content
     if (data.loading) {
       content = this.renderLoading()
@@ -107,7 +150,7 @@ class MiniCartContent extends Component {
       content = this.renderWithoutItems(label)
     } else {
       const label = labelButton || intl.formatMessage({ id: 'finish-shopping-button-label' })
-      content = this.renderMiniCartWithItems(data.orderForm, label, showRemoveButton)
+      content = this.renderMiniCartWithItems(data.orderForm, label, showRemoveButton, enableQuantitySelector, maxQuantity, showSpinner)
     }
     return content
   }
