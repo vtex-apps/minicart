@@ -20,12 +20,12 @@ export class MiniCart extends Component {
         maxQuantity: {
           title: 'editor.minicart.maxQuantity.title',
           type: 'number',
-          maximum: 10,
           minimum: 1,
+          maximum: 10,
+          default: 1,
           widget: {
             'ui:widget': 'range',
           },
-          default: 1,
         },
       }
     }

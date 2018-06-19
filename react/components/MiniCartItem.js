@@ -107,16 +107,16 @@ export default class MiniCartItem extends Component {
                   </div>
                 </div>
               </div>
-              <div className="absolute right-0 bottom-0 mb4 flex flex-column">
-                <ProductPrice
-                  sellingPrice={sellingPrice * quantity}
-                  listPrice={listPrice * quantity}
-                  showLabels={false}
-                  showListPrice={false} />
-              </div>
             </div>
           </div>
         </Link>
+        <div className="absolute right-0 bottom-0 mb4 flex flex-column">
+          <ProductPrice
+            sellingPrice={sellingPrice * quantity}
+            listPrice={listPrice * quantity}
+            showLabels={false}
+            showListPrice={false} />
+        </div>
         {enableQuantitySelector &&
           <div className="absolute bottom-0 right-0 mb7 pb2">
             <QuantitySelector maxQuantity={maxQuantity} currentQuantity={quantity} onQuantityChange={this.handleQuantityChange} onMaxReached={() => { }} />
