@@ -109,8 +109,8 @@ export default class MiniCartItem extends Component {
               </div>
               <div className="absolute right-0 bottom-0 mb4 flex flex-column">
                 <ProductPrice
-                  sellingPrice={sellingPrice}
-                  listPrice={listPrice}
+                  sellingPrice={sellingPrice * quantity}
+                  listPrice={listPrice * quantity}
                   showLabels={false}
                   showListPrice={false} />
               </div>
