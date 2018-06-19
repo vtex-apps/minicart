@@ -100,7 +100,7 @@ export default class MiniCartItem extends Component {
             </div>
             <div className="ml3 relative">
               <div>
-                <div className="vtex-minicart__item-name mt3 tl">
+                <div className="vtex-minicart__item-name mt3 tl overflow-hidden">
                   <ProductName name={name} />
                 </div>
                 <div className="vtex-minicart__sku-name tl absolute">

@@ -19,8 +19,8 @@ body {
 }
 
 .vtex-minicart__item-name {
-    width: 264px;
-    height: 50px;
+    max-width: 234px;
+    max-height: 20px;
 }
 
 .vtex-minicart__sku-name {
