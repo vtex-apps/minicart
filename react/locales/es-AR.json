@@ -7,5 +7,5 @@
     "finish-shopping-button-label": "Cerrar pedido",
     "minicart-empty": "Su cesta está vacía!",
     "editor.minicart.enableQuantitySelector.title": "Enable quantity selector",
-    "editor.minicart.maxQuantity.title": "Max quantity by item"
+    "editor.minicart.maxQuantity.title": "Cantidad máxima por producto"
 }
