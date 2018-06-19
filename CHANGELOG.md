@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Quantity Selector into the `MiniCartItem`
 
+## [0.5.1] - 2018-6-14
 ### Changed
 - Hide the quantity badge when the quantity is less then 0
 
