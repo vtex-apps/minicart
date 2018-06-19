@@ -121,7 +121,7 @@ export default class MiniCartItem extends Component {
         </div>
         {enableQuantitySelector &&
           <div className="absolute bottom-0 right-0 mb7 pb2">
-            <QuantitySelector maxQuantity={maxQuantity} currentQuantity={quantity} onQuantityChange={this.handleQuantityChange} onMaxReached={() => { }} />
+            <QuantitySelector maxQuantity={maxQuantity} currentQuantity={quantity} onQuantityChange={this.handleQuantityChange} />
           </div>
         }
         {
