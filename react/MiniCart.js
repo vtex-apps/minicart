@@ -14,28 +14,48 @@ import './global.css'
 export class MiniCart extends Component {
   static propTypes = MiniCartPropTypes
 
-  static schema = {
-    title: 'editor.minicart.title',
-    description: 'editor.minicart.description',
-    type: 'object',
-    properties: {
-      showRemoveButton: {
-        title: 'editor.minicart.showRemoveButton.title',
-        type: 'boolean',
+  static getSchema = props => {
+    const getQuantitySelectorSchema = () => {
+      return {
+        maxQuantity: {
+          title: 'editor.minicart.maxQuantity.title',
+          type: 'number',
+          maximum: 10,
+          minimum: 1,
+          widget: {
+            'ui:widget': 'range',
+          },
+          default: 1,
+        },
+      }
+    }
+
+    const generatedSchema = props.enableQuantitySelector && getQuantitySelectorSchema()
+
+    return {
+      title: 'editor.minicart.title',
+      description: 'editor.minicart.description',
+      type: 'object',
+      properties: {
+        showRemoveButton: {
+          title: 'editor.minicart.showRemoveButton.title',
+          type: 'boolean',
+        },
+        labelMiniCartEmpty: {
+          title: 'editor.minicart.labelMiniCartEmpty.title',
+          type: 'string',
+        },
+        labelButtonFinishShopping: {
+          title: 'editor.minicart.labelButtonFinishShopping.title',
+          type: 'string',
+        },
+        enableQuantitySelector: {
+          title: 'editor.minicart.enableQuantitySelector.title',
+          type: 'boolean',
+        },
+        ...generatedSchema,
       },
-      labelMiniCartEmpty: {
-        title: 'editor.minicart.labelMiniCartEmpty.title',
-        type: 'string',
-      },
-      labelButtonFinishShopping: {
-        title: 'editor.minicart.labelButtonFinishShopping.title',
-        type: 'string',
-      },
-      enableQuantitySelector: {
-        title: 'editor.minicart.enableQuantitySelector.title',
-        type: 'boolean',
-      },
-    },
+    }
   }
 
   constructor(props) {
