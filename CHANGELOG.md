@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Quantity Selector into the `MiniCartItem`
+
 ### Changed
 - Hide the quantity badge when the quantity is less then 0
 
