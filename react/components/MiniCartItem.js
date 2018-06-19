@@ -36,12 +36,11 @@ export default class MiniCartItem extends Component {
     removeItem: PropTypes.func.isRequired,
     /* Update item function */
     updateItem: PropTypes.func.isRequired,
-    /* Reused props */
-    showRemoveButton: MiniCartPropTypes.showRemoveButton,
-    /* Reused props */
-    enableQuantitySelector: MiniCartPropTypes.enableQuantitySelector,
     /* Max quantity of the item */
     maxQuantity: PropTypes.number.isRequired,
+    /* Reused props */
+    showRemoveButton: MiniCartPropTypes.showRemoveButton,
+    enableQuantitySelector: MiniCartPropTypes.enableQuantitySelector,
   }
 
   static defaultProps = {
