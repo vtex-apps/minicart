@@ -6,6 +6,6 @@
     "editor.minicart.labelButtonFinishShopping.title": "Texto para que aparezca en el botón de finalizar compra",
     "finish-shopping-button-label": "Cerrar pedido",
     "minicart-empty": "Su cesta está vacía!",
-    "editor.minicart.enableQuantitySelector.title": "Enable quantity selector",
+    "editor.minicart.enableQuantitySelector.title": "Habilitar el selector de cantidad",
     "editor.minicart.maxQuantity.title": "Cantidad máxima por producto"
 }
