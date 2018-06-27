@@ -6,6 +6,7 @@ import CartIcon from './images/CartIcon'
 import MiniCartContent from './components/MiniCartContent'
 import { MiniCartPropTypes } from './propTypes'
 import Popup from './components/Popup'
+import Sidebar from './components/Sidebar'
 
 import './global.css'
 
@@ -101,11 +102,11 @@ export class MiniCart extends Component {
 
   render() {
     const { isMouseOnButton, isMouseOnMiniCart, quantityItems } = this.state
-    const { labelMiniCartEmpty, labelButtonFinishShopping, miniCartIconColor,
+    const { type, labelMiniCartEmpty, labelButtonFinishShopping, miniCartIconColor,
       showRemoveButton, enableQuantitySelector, maxQuantity, data: { orderForm } } = this.props
     const quantity = !quantityItems && orderForm && orderForm.items ? orderForm.items.length : quantityItems
     return (
-      <div className="relative fr" >
+      <div className="relative" >
         <Button
           icon
           onClick={this.handleClickButton}
@@ -117,19 +118,23 @@ export class MiniCart extends Component {
           </span>}
         </Button>
         {
-          (isMouseOnMiniCart || isMouseOnButton) &&
-          <Popup
-            onMouseLeave={this.handleMouseLeaveCartItems}
-            onMouseEnter={this.handleMouseEnterCartItems}>
-            <MiniCartContent
-              data={this.props.data}
-              onUpdateItemsQuantity={this.handleUpdateQuantityItems}
-              showRemoveButton={showRemoveButton}
-              labelMiniCartEmpty={labelMiniCartEmpty}
-              labelButton={labelButtonFinishShopping}
-              enableQuantitySelector={enableQuantitySelector}
-              maxQuantity={maxQuantity} />
-          </Popup>
+          (type && type === 'sidebar' && (isMouseOnMiniCart || isMouseOnButton) &&
+            <Sidebar />
+          ) || (
+            (isMouseOnMiniCart || isMouseOnButton) &&
+            <Popup
+              onMouseLeave={this.handleMouseLeaveCartItems}
+              onMouseEnter={this.handleMouseEnterCartItems}>
+              <MiniCartContent
+                data={this.props.data}
+                onUpdateItemsQuantity={this.handleUpdateQuantityItems}
+                showRemoveButton={showRemoveButton}
+                labelMiniCartEmpty={labelMiniCartEmpty}
+                labelButton={labelButtonFinishShopping}
+                enableQuantitySelector={enableQuantitySelector}
+                maxQuantity={maxQuantity} />
+            </Popup>
+          )
         }
       </div>
     )
