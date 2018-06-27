@@ -37,6 +37,22 @@ export class MiniCart extends Component {
       description: 'editor.minicart.description',
       type: 'object',
       properties: {
+        type: {
+          title: 'editor.minicart.type.title',
+          type: 'string',
+          default: 'popup',
+          enum: ['popup', 'sidebar'],
+          enumNames: [
+            'editor.minicart.type.popup',
+            'editor.minicart.type.sidebar',
+          ],
+          widget: {
+            'ui:widget': 'radio',
+            'ui:options': {
+              'inline': true,
+            },
+          },
+        },
         showRemoveButton: {
           title: 'editor.minicart.showRemoveButton.title',
           type: 'boolean',

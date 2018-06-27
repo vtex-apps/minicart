@@ -1,11 +1,14 @@
 {
-    "editor.minicart.title": "Cesta",
-    "editor.minicart.description": "Una cesta simple que muestra todos los productos agregados",
+    "editor.minicart.title": "Cesta de Compras",
+    "editor.minicart.description": "Una cesta de compras simple que muestra todos los productos agregados",
     "editor.minicart.showRemoveButton.title": "Mostrar el botón para retirar producto",
     "editor.minicart.labelMiniCartEmpty.title": "Texto que aparecerá cuando el carrito esté vacío",
     "editor.minicart.labelButtonFinishShopping.title": "Texto para que aparezca en el botón de finalizar compra",
     "finish-shopping-button-label": "Cerrar pedido",
     "minicart-empty": "Su cesta está vacía!",
     "editor.minicart.enableQuantitySelector.title": "Habilitar el selector de cantidad",
-    "editor.minicart.maxQuantity.title": "Cantidad máxima por producto"
+    "editor.minicart.maxQuantity.title": "Cantidad máxima por producto",
+    "editor.minicart.type.title": "Tipo de Cesta de Compras",
+    "editor.minicart.type.popup": "Pop Up",
+    "editor.minicart.type.sidebar": "Sidebar"
 }

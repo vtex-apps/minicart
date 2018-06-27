@@ -7,5 +7,8 @@
     "finish-shopping-button-label": "Finalizar compra",
     "minicart-empty": "Seu carrinho está vazio!",
     "editor.minicart.enableQuantitySelector.title": "Habilitar o seletor de quantidade",
-    "editor.minicart.maxQuantity.title": "Quantidade máxima por item"
+    "editor.minicart.maxQuantity.title": "Quantidade máxima por item",
+    "editor.minicart.type.title": "Tipo de Carrinho de Compras",
+    "editor.minicart.type.popup": "Pop Up",
+    "editor.minicart.type.sidebar": "Sidebar"
 }
