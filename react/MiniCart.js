@@ -5,6 +5,7 @@ import Button from '@vtex/styleguide/lib/Button'
 import CartIcon from './images/CartIcon'
 import MiniCartContent from './components/MiniCartContent'
 import { MiniCartPropTypes } from './propTypes'
+import Popup from './components/Popup'
 
 import './global.css'
 
@@ -86,8 +87,6 @@ export class MiniCart extends Component {
     })
   }
 
-  handleUpdateQuantityItems = quantity => this.setState({ quantityItems: quantity })
-
   handleClickButton = () => location.assign('/checkout/#/cart')
 
   handleMouseEnterButton = () => this.setState({ isMouseOnButton: true })
@@ -97,6 +96,8 @@ export class MiniCart extends Component {
   handleMouseEnterCartItems = () => this.setState({ isMouseOnMiniCart: true })
 
   handleMouseLeaveCartItems = () => this.setState({ isMouseOnMiniCart: false })
+
+  handleUpdateQuantityItems = quantity => this.setState({ quantityItems: quantity })
 
   render() {
     const { isMouseOnButton, isMouseOnMiniCart, quantityItems } = this.state
@@ -117,23 +118,18 @@ export class MiniCart extends Component {
         </Button>
         {
           (isMouseOnMiniCart || isMouseOnButton) &&
-          <div
-            className="vtex-minicart__box absolute right-0 z-max flex flex-colunm"
+          <Popup
             onMouseLeave={this.handleMouseLeaveCartItems}
             onMouseEnter={this.handleMouseEnterCartItems}>
-            <div className="vtex-minicart__arrow-up absolute top-0 right-0 shadow-3">
-            </div>
-            <div className="shadow-3 mt3">
-              <MiniCartContent
-                data={this.props.data}
-                onUpdateItemsQuantity={this.handleUpdateQuantityItems}
-                showRemoveButton={showRemoveButton}
-                labelMiniCartEmpty={labelMiniCartEmpty}
-                labelButton={labelButtonFinishShopping}
-                enableQuantitySelector={enableQuantitySelector}
-                maxQuantity={maxQuantity} />
-            </div>
-          </div>
+            <MiniCartContent
+              data={this.props.data}
+              onUpdateItemsQuantity={this.handleUpdateQuantityItems}
+              showRemoveButton={showRemoveButton}
+              labelMiniCartEmpty={labelMiniCartEmpty}
+              labelButton={labelButtonFinishShopping}
+              enableQuantitySelector={enableQuantitySelector}
+              maxQuantity={maxQuantity} />
+          </Popup>
         }
       </div>
     )
