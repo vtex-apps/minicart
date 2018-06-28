@@ -118,7 +118,7 @@ export class MiniCart extends Component {
           </span>}
         </Button>
         {
-          (type && type === 'sidebar' && (isMouseOnMiniCart || isMouseOnButton) &&
+          (type && type === 'sidebar' &&
             <Sidebar />
           ) || (
             (isMouseOnMiniCart || isMouseOnButton) &&
