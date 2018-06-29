@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import orderFormQuery from './graphql/orderFormQuery.gql'
 import { graphql } from 'react-apollo'
-import Button from '@vtex/styleguide/lib/Button'
+import { Button } from 'vtex.styleguide'
 import CartIcon from './images/CartIcon'
 import MiniCartContent from './components/MiniCartContent'
 import { MiniCartPropTypes } from './propTypes'
@@ -78,7 +78,7 @@ export class MiniCart extends Component {
 
   constructor(props) {
     super(props)
-    this.state = { isMouseOnButton: false, isMouseOnMiniCart: false, quantityItems: 0 }
+    this.state = { isMouseOnButton: false, isMouseOnMiniCart: false, quantityItems: 0, showSideBar: false }
   }
 
   componentDidMount() {
@@ -88,7 +88,24 @@ export class MiniCart extends Component {
     })
   }
 
-  handleClickButton = () => location.assign('/checkout/#/cart')
+  handleClickButton = () => {
+    if (!this.props.showContent) {
+      console.log('waza2')
+      if (this.props.type && this.props.type === 'sidebar') {
+        this.setState({
+          showSideBar: true,
+        })
+      } else {
+        location.assign('/checkout/#/cart')
+      }
+    }
+  }
+
+  handleCloseSideBarButtonClick = () => {
+    this.setState({
+      showSideBar: false,
+    })
+  }
 
   handleMouseEnterButton = () => this.setState({ isMouseOnButton: true })
 
@@ -101,13 +118,14 @@ export class MiniCart extends Component {
   handleUpdateQuantityItems = quantity => this.setState({ quantityItems: quantity })
 
   render() {
-    const { isMouseOnButton, isMouseOnMiniCart, quantityItems } = this.state
+    const { isMouseOnButton, isMouseOnMiniCart, quantityItems, showSideBar } = this.state
     const { type, showContent, labelMiniCartEmpty, labelButtonFinishShopping, miniCartIconColor,
       showRemoveButton, enableQuantitySelector, maxQuantity, data: { orderForm } } = this.props
     const quantity = !quantityItems && orderForm && orderForm.items ? orderForm.items.length : quantityItems
     return (
       <div className="relative" >
         <Button
+          variation="tertiary"
           icon
           onClick={this.handleClickButton}
           onMouseEnter={this.handleMouseEnterButton}
@@ -118,10 +136,9 @@ export class MiniCart extends Component {
           </span>}
         </Button>
         {
-          !showContent && ((type && type === 'sidebar' && (isMouseOnMiniCart || isMouseOnButton) &&
+          !showContent && ((type && type === 'sidebar') ? (showSideBar &&
             <Sidebar
-              onMouseLeave={this.handleMouseLeaveCartItems}
-              onMouseEnter={this.handleMouseEnterCartItems}>
+              onBackClick={this.handleCloseSideBarButtonClick}>
               <MiniCartContent
                 data={this.props.data}
                 onUpdateItemsQuantity={this.handleUpdateQuantityItems}
@@ -130,9 +147,9 @@ export class MiniCart extends Component {
                 labelButton={labelButtonFinishShopping}
                 enableQuantitySelector={enableQuantitySelector}
                 maxQuantity={maxQuantity} />
-            </Sidebar>
-          ) || (
-            (isMouseOnMiniCart || isMouseOnButton) &&
+            </Sidebar>)
+            : (
+              (isMouseOnMiniCart || isMouseOnButton) && !showSideBar &&
               <Popup
                 onMouseLeave={this.handleMouseLeaveCartItems}
                 onMouseEnter={this.handleMouseEnterCartItems}>
@@ -145,7 +162,7 @@ export class MiniCart extends Component {
                   enableQuantitySelector={enableQuantitySelector}
                   maxQuantity={maxQuantity} />
               </Popup>
-          ))
+            ))
         }
       </div>
     )

@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'render'
-import CloseIcon from '@vtex/styleguide/lib/icon/Close'
-import Button from '@vtex/styleguide/lib/Button'
-import Spinner from '@vtex/styleguide/lib/Spinner'
+import { Button, Spinner, IconClose } from 'vtex.styleguide'
 import ProductName from 'vtex.store-components/ProductName'
 import ProductPrice from 'vtex.store-components/ProductPrice'
 import QuantitySelector from 'vtex.store-components/QuantitySelector'
@@ -125,9 +123,9 @@ export default class MiniCartItem extends Component {
         }
         {
           (showRemoveButton && !isRemovingItem) &&
-          <div className="vtex-minicart-item__remove-btn absolute right-0 top-0 mt4">
-            <Button onClick={(e) => this.onClickRemove(id, e)}>
-              <CloseIcon size={12} color="#BDBDBD" />
+          <div className="vtex-minicart-item__remove-btn absolute right-0 top-0 mt3">
+            <Button icon variation="tertiary" onClick={(e) => this.onClickRemove(id, e)}>
+              <IconClose size={20} color="#BDBDBD" />
             </Button>
           </div>
         }

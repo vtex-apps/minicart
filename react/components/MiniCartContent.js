@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import { injectIntl, intlShape } from 'react-intl'
+
 import updateItemsMutation from '../graphql/updateItemsMutation.gql'
 import orderFormQuery from '../graphql/orderFormQuery.gql'
+
 import MiniCartItem from './MiniCartItem'
-import Button from '@vtex/styleguide/lib/Button'
+import { Button, Spinner } from 'vtex.styleguide'
 import ProductPrice from 'vtex.store-components/ProductPrice'
-import Spinner from '@vtex/styleguide/lib/Spinner'
 import { MiniCartPropTypes } from '../propTypes'
 
 import '../global.css'
@@ -111,7 +112,7 @@ class MiniCartContent extends Component {
           ))}
         </div>
         <div className="fl pa4">
-          <Button primary onClick={this.handleClickButton}>{label}</Button>
+          <Button variation="primary" size="small" onClick={this.handleClickButton}>{label}</Button>
         </div>
         <div className="flex flex-row fr pt4 mt2 mr4">
           {showSpinner &&
