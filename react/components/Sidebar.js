@@ -17,10 +17,10 @@ export default class Sidebar extends Component {
             className="vtex-minicart__sidebar-header flex flex-row items-center pa4"
             onClick={this.props.onBackClick}>
             <IconCaretLeft size={18} color="#FFFFFF" />
-            <div className="mt2">
+            <div className="mt3 ml4">
               <MiniCart showContent miniCartIconColor={'#FFFFFF'} />
             </div>
-            <span className="ml3 white">Meu Carrinho</span>
+            <span className="ml4 white b ttu">Meu Carrinho</span>
           </div>
           {this.props.children}
         </div>,

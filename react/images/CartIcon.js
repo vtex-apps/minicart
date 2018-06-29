@@ -14,19 +14,18 @@ export default class CartIcon extends Component {
 
   static defaultProps = {
     size: 20,
-    fillColor: '#000000',
+    fillColor: '#444444',
   }
 
   render() {
     const { size, fillColor } = this.props
     return (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={size} height={size}>
-        <g className="nc-icon-wrapper" fill={fillColor}>
-          <circle cx="6.5" cy="21.5" r="2.5" />
-          <circle cx="19.5" cy="21.5" r="2.5" />
-          <path d="M20,17H6c-0.501,0-0.925-0.371-0.991-0.868L3.125,2H0V0h4c0.501,0,0.925,0.371,0.991,0.868L5.542,5H23 c0.316,0,0.614,0.149,0.802,0.403c0.189,0.254,0.247,0.582,0.156,0.884l-3,10C20.831,16.71,20.441,17,20,17z" />
-        </g>
+      <svg width={size} height={size} viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0H8L10.6667 24H34.6667L40 8H16" transform="translate(2 2)" stroke={fillColor} strokeWidth="3" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M8 4C8 6.20914 6.20914 8 4 8C1.79086 8 0 6.20914 0 4C0 1.79086 1.79086 0 4 0C6.20914 0 8 1.79086 8 4Z" transform="translate(10 34)" stroke={fillColor} strokeWidth="3" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M8 4C8 6.20914 6.20914 8 4 8C1.79086 8 0 6.20914 0 4C0 1.79086 1.79086 0 4 0C6.20914 0 8 1.79086 8 4Z" transform="translate(31.3335 34)" stroke={fillColor} strokeWidth="3" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
+
     )
   }
 }
