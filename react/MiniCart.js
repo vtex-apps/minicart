@@ -102,7 +102,7 @@ export class MiniCart extends Component {
 
   render() {
     const { isMouseOnButton, isMouseOnMiniCart, quantityItems } = this.state
-    const { type, labelMiniCartEmpty, labelButtonFinishShopping, miniCartIconColor,
+    const { type, showContent, labelMiniCartEmpty, labelButtonFinishShopping, miniCartIconColor,
       showRemoveButton, enableQuantitySelector, maxQuantity, data: { orderForm } } = this.props
     const quantity = !quantityItems && orderForm && orderForm.items ? orderForm.items.length : quantityItems
     return (
@@ -118,11 +118,8 @@ export class MiniCart extends Component {
           </span>}
         </Button>
         {
-          (type && type === 'sidebar' &&
-            <Sidebar />
-          ) || (
-            (isMouseOnMiniCart || isMouseOnButton) &&
-            <Popup
+          !showContent && ((type && type === 'sidebar' && (isMouseOnMiniCart || isMouseOnButton) &&
+            <Sidebar
               onMouseLeave={this.handleMouseLeaveCartItems}
               onMouseEnter={this.handleMouseEnterCartItems}>
               <MiniCartContent
@@ -133,8 +130,22 @@ export class MiniCart extends Component {
                 labelButton={labelButtonFinishShopping}
                 enableQuantitySelector={enableQuantitySelector}
                 maxQuantity={maxQuantity} />
-            </Popup>
-          )
+            </Sidebar>
+          ) || (
+            (isMouseOnMiniCart || isMouseOnButton) &&
+              <Popup
+                onMouseLeave={this.handleMouseLeaveCartItems}
+                onMouseEnter={this.handleMouseEnterCartItems}>
+                <MiniCartContent
+                  data={this.props.data}
+                  onUpdateItemsQuantity={this.handleUpdateQuantityItems}
+                  showRemoveButton={showRemoveButton}
+                  labelMiniCartEmpty={labelMiniCartEmpty}
+                  labelButton={labelButtonFinishShopping}
+                  enableQuantitySelector={enableQuantitySelector}
+                  maxQuantity={maxQuantity} />
+              </Popup>
+          ))
         }
       </div>
     )
