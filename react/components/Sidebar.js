@@ -5,8 +5,6 @@ import { IconCaretLeft } from 'vtex.styleguide'
 
 import MiniCart from '../MiniCart'
 
-// import { CaretLeft } from 'vtex.styleguide'
-
 import '../global.css'
 
 export default class Sidebar extends Component {
