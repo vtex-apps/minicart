@@ -7,6 +7,8 @@ import MiniCart from '../MiniCart'
 
 import '../global.css'
 
+const whiteColor = '#FFFFFF'
+
 export default class Sidebar extends Component {
   render() {
     if (typeof window !== 'undefined') {
@@ -16,13 +18,15 @@ export default class Sidebar extends Component {
           <div
             className="vtex-minicart__sidebar-header flex flex-row items-center pa5"
             onClick={this.props.onBackClick}>
-            <IconCaretLeft size={18} color="#FFFFFF" />
+            <IconCaretLeft size={18} color={whiteColor} />
             <div className="mt3 ml4">
-              <MiniCart showContent miniCartIconColor={'#FFFFFF'} />
+              <MiniCart showContent miniCartIconColor={whiteColor} />
             </div>
             <span className="ml4 white b ttu">Meu Carrinho</span>
           </div>
-          {this.props.children}
+          <div className="w-100">
+            {this.props.children}
+          </div>
         </div>,
         document.body
       )

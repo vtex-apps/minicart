@@ -88,7 +88,7 @@ export default class MiniCartItem extends Component {
     const { isRemovingItem } = this.state
 
     return (
-      <div className="relative">
+      <div className="relative w-100">
         <Link
           className="pointer link black-90"
           page={'store/product'}

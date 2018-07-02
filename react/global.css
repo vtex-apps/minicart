@@ -3,7 +3,6 @@ body {
 }
 
 .vtex-minicart__item {
-    width: 280px;
     height: 110px;
 }
 
@@ -65,10 +64,18 @@ body {
     right: 7px;
     background-color: white;
 }
+@media only screen and (min-width: 22em) {
+    .vtex-minicart__sidebar {
+        width: 300px;
+        height: 100vh;
+    }
+}
 
-.vtex-minicart__sidebar {
-    width: 300px;
-    height: 100vh;
+@media only screen and (min-width: 22em) and (max-width: 25em) {
+    .vtex-minicart__sidebar {
+        width: 100vw;
+        height: 100vh;
+    }
 }
 
 .vtex-minicart__sidebar-header {
