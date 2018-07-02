@@ -18,6 +18,8 @@ import '../global.css'
  */
 class MiniCartContent extends Component {
   static propTypes = {
+    /* Set the mini cart content size */
+    large: PropTypes.bool,
     /* Function to be called when an item is removed */
     onUpdateItemsQuantity: PropTypes.func,
     /* Mutate function */
@@ -95,14 +97,15 @@ class MiniCartContent extends Component {
     </div>
   )
 
-  renderMiniCartWithItems = (orderForm, label, showRemoveButton, enableQuantitySelector, maxQuantity, showSpinner) => (
+  renderMiniCartWithItems = (orderForm, label, showRemoveButton, enableQuantitySelector, maxQuantity, showSpinner, large) => (
     <div className="flex flex-column relative" >
       <div className="bg-white">
-        <div className="vtex-minicart__content pr4 pl4 overflow-auto overflow-x-hidden">
+        <div className={`vtex-minicart__content pr4 pl4 overflow-auto overflow-x-hidden ${!large ? 'vtex-minicart__content-small' : ''}`}>
           {orderForm.items.map(item => (
             <div className="flex flex-row" key={item.id}>
               <MiniCartItem
                 {...item}
+                large
                 removeItem={this.onRemoveItem}
                 updateItem={this.onUpdateItems}
                 showRemoveButton={showRemoveButton}
@@ -134,14 +137,8 @@ class MiniCartContent extends Component {
     </div>
   )
 
-  componentDidMount() {
-    this.props.data.refetch().then(() => {
-      this.props.onUpdateItemsQuantity(this.props.data.orderForm.items.length)
-    })
-  }
-
   render() {
-    const { data, labelMiniCartEmpty, labelButton, intl, showRemoveButton, enableQuantitySelector, maxQuantity } = this.props
+    const { data, labelMiniCartEmpty, labelButton, intl, showRemoveButton, enableQuantitySelector, maxQuantity, large } = this.props
     const { showSpinner } = this.state
     let content
     if (data.loading) {
@@ -151,7 +148,7 @@ class MiniCartContent extends Component {
       content = this.renderWithoutItems(label)
     } else {
       const label = labelButton || intl.formatMessage({ id: 'finish-shopping-button-label' })
-      content = this.renderMiniCartWithItems(data.orderForm, label, showRemoveButton, enableQuantitySelector, maxQuantity, showSpinner)
+      content = this.renderMiniCartWithItems(data.orderForm, label, showRemoveButton, enableQuantitySelector, maxQuantity, showSpinner, large)
     }
     return content
   }

@@ -140,6 +140,7 @@ export class MiniCart extends Component {
             <Sidebar
               onBackClick={this.handleCloseSideBarButtonClick}>
               <MiniCartContent
+                large
                 data={this.props.data}
                 onUpdateItemsQuantity={this.handleUpdateQuantityItems}
                 showRemoveButton={showRemoveButton}

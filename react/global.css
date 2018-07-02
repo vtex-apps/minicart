@@ -43,6 +43,10 @@ body {
 }
 
 .vtex-minicart__content {
+    height: 84vh;
+}
+
+.vtex-minicart__content-small {
     max-height: 368px;
 }
 
@@ -74,7 +78,7 @@ body {
 }
 
 .vtex-minicart__sidebar {
-    width: 368px;
+    width: 370px;
     height: 100vh;
 }
 
