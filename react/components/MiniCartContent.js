@@ -100,7 +100,7 @@ class MiniCartContent extends Component {
   renderMiniCartWithItems = (orderForm, label, showRemoveButton, enableQuantitySelector, maxQuantity, showSpinner, large) => (
     <div className="flex flex-column relative" >
       <div className="bg-white">
-        <div className={`${large ? 'vtex-minicart__content-large' : 'vtex-minicart__content-small'} pr4 pl4 overflow-auto overflow-x-hidden`}>
+        <div className={`${large ? 'vtex-minicart__content-large' : 'vtex-minicart__content-small'} ph4 overflow-auto overflow-x-hidden`}>
           {orderForm.items.map(item => (
             <div className="flex flex-row" key={item.id}>
               <MiniCartItem

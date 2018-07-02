@@ -93,29 +93,38 @@ export default class MiniCartItem extends Component {
           className="pointer link black-90"
           page={'store/product'}
           params={{ slug: this.getItemId(detailUrl) }}>
-          <div className="vtex-minicart__item relative bb b--silver mt4">
-            <div className="w-100">
+          <div className="vtex-minicart__item relative bb b--silver pv3">
+            <div className="w-100 mb2">
               <ProductName name={name} />
-              <ProductName name={skuName} />
+              <div className="f7">
+                <ProductName name={skuName} />
+              </div>
             </div>
-            <div className="flex flex-row">
+            <div className="vtex-minicart__item-footer relative flex flex-row pb2 items-center w-100">
               <div className="vtex-minicart__img-container">
                 <img className="vtex-minicart__item-image" src={imageUrl} alt={name} />
+              </div>
+              <div className="justify-end absolute right-0 pt6">
+                <ProductPrice
+                  sellingPrice={sellingPrice * quantity}
+                  listPrice={listPrice * quantity}
+                  showLabels={false}
+                  showListPrice={false} />
               </div>
             </div>
           </div>
         </Link>
-        <div className="absolute right-0 bottom-0 mb4 flex flex-row">
+        <div className="absolute right-0 bottom-0 mb4 flex flex-row w-100 pl9">
           {enableQuantitySelector &&
             <QuantitySelector maxQuantity={maxQuantity} currentQuantity={quantity} onQuantityChange={this.handleQuantityChange} />
           }
-          <div className="vtex-minicart__price-container flex justify-end">
+          {/* <div className="vtex-minicart__price-container flex justify-end absolute right-0">
             <ProductPrice
               sellingPrice={sellingPrice * quantity}
               listPrice={listPrice * quantity}
               showLabels={false}
               showListPrice={false} />
-          </div>
+          </div> */}
         </div>
         {
           (showRemoveButton && !isRemovingItem) &&
@@ -127,7 +136,7 @@ export default class MiniCartItem extends Component {
         }
         {
           (showRemoveButton && isRemovingItem) &&
-          <div className="vtex-minicart-item__remove-btn absolute right-0 top-0 flex items-center justify-center mt5 pt2">
+          <div className="vtex-minicart-item__remove-btn absolute right-0 top-0 flex items-center justify-center mt3">
             <Spinner size={20} />
           </div>
         }

@@ -16,7 +16,7 @@ export default class Sidebar extends Component {
         <div
           className="vtex-minicart__sidebar fixed top-0 right-0 z-max bg-white mt8 shadow-2">
           <div
-            className="vtex-minicart__sidebar-header flex flex-row items-center pa5"
+            className="vtex-minicart__sidebar-header pointer flex flex-row items-center pa5"
             onClick={this.props.onBackClick}>
             <IconCaretLeft size={18} color={whiteColor} />
             <div className="mt3 ml4">
@@ -24,7 +24,7 @@ export default class Sidebar extends Component {
             </div>
             <span className="ml4 white b ttu">Meu Carrinho</span>
           </div>
-          <div className="w-100">
+          <div className="h-100">
             {this.props.children}
           </div>
         </div>,

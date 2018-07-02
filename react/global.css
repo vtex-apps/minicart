@@ -3,13 +3,13 @@ body {
 }
 
 .vtex-minicart__item {
-    height: 110px;
+    height: 109px;
 }
 
 .vtex-minicart__img-container {
-    width: 70px;
-    height: 70px;
-    min-width: 70px;
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
 }
 
 .vtex-minicart__item-image {
@@ -36,7 +36,7 @@ body {
 }
 
 .vtex-minicart__content-small {
-    max-height: 368px;
+    max-height: 327px;
 }
 
 .vtex-minicart-item__remove-btn > .vtex-button {
@@ -75,7 +75,7 @@ body {
 @media only screen and (min-width: 22em) and (max-width: 25em) {
     .vtex-minicart__sidebar {
         width: 100vw;
-        height: 100vh;
+        height: 100%;
     }
 }
 
@@ -87,4 +87,8 @@ body {
 
 .vtex-minicart__price-container {
     width: 110px;
+}
+
+.vtex-minicart__item-footer {
+    height: 68px;
 }
