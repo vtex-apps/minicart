@@ -14,7 +14,7 @@ export default class Sidebar extends Component {
         <div
           className="vtex-minicart__sidebar fixed top-0 right-0 z-max bg-white mt8 shadow-2">
           <div
-            className="vtex-minicart__sidebar-header flex flex-row items-center pa4"
+            className="vtex-minicart__sidebar-header flex flex-row items-center pa5"
             onClick={this.props.onBackClick}>
             <IconCaretLeft size={18} color="#FFFFFF" />
             <div className="mt3 ml4">

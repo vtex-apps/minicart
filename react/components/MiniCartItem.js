@@ -16,6 +16,8 @@ export default class MiniCartItem extends Component {
   static propTypes = {
     /* Item's id */
     id: PropTypes.string.isRequired,
+    /* Item's type */
+    type: PropTypes.string,
     /* Item's image */
     imageUrl: PropTypes.string.isRequired,
     /* Item's name */
@@ -91,39 +93,33 @@ export default class MiniCartItem extends Component {
           className="pointer link black-90"
           page={'store/product'}
           params={{ slug: this.getItemId(detailUrl) }}>
-          <div className="vtex-minicart__item flex flex-row relative bb b--silver mt4">
-            <div className="vtex-minicart__img-container">
-              <img className="vtex-minicart__item-image" src={imageUrl} alt={name} />
+          <div className="vtex-minicart__item relative bb b--silver mt4">
+            <div className="w-100">
+              <ProductName name={name} />
+              <ProductName name={skuName} />
             </div>
-            <div className="ml3 relative">
-              <div>
-                <div className="vtex-minicart__item-name mt3 tl overflow-hidden">
-                  <ProductName name={name} />
-                </div>
-                <div className="vtex-minicart__sku-name tl absolute">
-                  <div className="f7 dark-gray">
-                    <ProductName name={skuName} />
-                  </div>
-                </div>
+            <div className="flex flex-row">
+              <div className="vtex-minicart__img-container">
+                <img className="vtex-minicart__item-image" src={imageUrl} alt={name} />
               </div>
             </div>
           </div>
         </Link>
-        <div className="absolute right-0 bottom-0 mb4 flex flex-column">
-          <ProductPrice
-            sellingPrice={sellingPrice * quantity}
-            listPrice={listPrice * quantity}
-            showLabels={false}
-            showListPrice={false} />
-        </div>
-        {enableQuantitySelector &&
-          <div className="absolute bottom-0 right-0 mb7 pb2">
+        <div className="absolute right-0 bottom-0 mb4 flex flex-row">
+          {enableQuantitySelector &&
             <QuantitySelector maxQuantity={maxQuantity} currentQuantity={quantity} onQuantityChange={this.handleQuantityChange} />
+          }
+          <div className="vtex-minicart__price-container flex justify-end">
+            <ProductPrice
+              sellingPrice={sellingPrice * quantity}
+              listPrice={listPrice * quantity}
+              showLabels={false}
+              showListPrice={false} />
           </div>
-        }
+        </div>
         {
           (showRemoveButton && !isRemovingItem) &&
-          <div className="vtex-minicart-item__remove-btn absolute right-0 top-0 mt3">
+          <div className="vtex-minicart-item__remove-btn absolute right-0 top-0">
             <Button icon variation="tertiary" onClick={(e) => this.onClickRemove(id, e)}>
               <IconClose size={20} color="#BDBDBD" />
             </Button>
