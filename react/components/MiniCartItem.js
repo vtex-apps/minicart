@@ -114,17 +114,10 @@ export default class MiniCartItem extends Component {
             </div>
           </div>
         </Link>
-        <div className="absolute right-0 bottom-0 mb4 flex flex-row w-100 pl9">
+        <div className="absolute right-0 bottom-0 mb4 pl9">
           {enableQuantitySelector &&
             <QuantitySelector maxQuantity={maxQuantity} currentQuantity={quantity} onQuantityChange={this.handleQuantityChange} />
           }
-          {/* <div className="vtex-minicart__price-container flex justify-end absolute right-0">
-            <ProductPrice
-              sellingPrice={sellingPrice * quantity}
-              listPrice={listPrice * quantity}
-              showLabels={false}
-              showListPrice={false} />
-          </div> */}
         </div>
         {
           (showRemoveButton && !isRemovingItem) &&
