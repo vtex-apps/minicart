@@ -18,6 +18,7 @@ body {
 }
 
 .vtex-minicart__box {
+    width: 320px;
     top: 100%;
     display: block;
     visibility: visible;
