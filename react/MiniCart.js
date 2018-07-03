@@ -58,16 +58,21 @@ export class MiniCart extends Component {
     }
   }
 
-  constructor(props) {
-    super(props)
-    this.state = { isMouseOnButton: false, isMouseOnMiniCart: false, quantityItems: 0 }
+  state = {
+    quantityItems: 0,
   }
 
   componentDidMount() {
-    document.addEventListener('item:add', () => {
-      const { quantityItems } = this.state
-      this.setState({ quantityItems: quantityItems + 1 })
-    })
+    document.addEventListener('item:add', this.handleItemAdd)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('item:add', this.handleItemAdd)
+  }
+
+  handleItemAdd = () => {
+    const { quantityItems } = this.state
+    this.setState({ quantityItems: quantityItems + 1 })
   }
 
   handleUpdateQuantityItems = quantity => this.setState({ quantityItems: quantity })
@@ -76,7 +81,16 @@ export class MiniCart extends Component {
 
   render() {
     const { quantityItems } = this.state
-    const { labelMiniCartEmpty, labelButtonFinishShopping, miniCartIconColor, showRemoveButton, enableQuantitySelector, maxQuantity, data: { orderForm } } = this.props
+    const {
+      labelMiniCartEmpty,
+      labelButtonFinishShopping,
+      miniCartIconColor,
+      showRemoveButton,
+      enableQuantitySelector,
+      maxQuantity,
+      data,
+    } = this.props
+    const { orderForm } = data
     const quantity = !quantityItems && orderForm && orderForm.items ? orderForm.items.length : quantityItems
     return (
       <div className="vtex-minicart relative fr">
@@ -100,7 +114,8 @@ export class MiniCart extends Component {
               labelMiniCartEmpty={labelMiniCartEmpty}
               labelButton={labelButtonFinishShopping}
               enableQuantitySelector={enableQuantitySelector}
-              maxQuantity={maxQuantity} />
+              maxQuantity={maxQuantity}
+            />
           </div>
         </div>
       </div>
