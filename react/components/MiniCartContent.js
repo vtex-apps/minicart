@@ -123,7 +123,7 @@ class MiniCartContent extends Component {
           <div
             className={`
             ${large ? 'vtex-minicart__content-large' : 'vtex-minicart__content-small'}
-            ${(items.length > 3) ? 'overflow-y-scroll' : 'overflow-y-hidden'} ph4 overflow-x-hidden`}>
+            ${(items.length > 3 && !large) ? 'overflow-y-scroll' : 'overflow-y-hidden'} ph4 overflow-x-hidden`}>
             {items.map(item => (
               <MiniCartItem
                 {...item}

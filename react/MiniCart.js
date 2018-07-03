@@ -87,9 +87,10 @@ export class MiniCart extends Component {
   }
 
   handleClickButton = () => {
-    if (!this.props.showContent) {
-      console.log('waza2')
-      if (this.props.type && this.props.type === 'sidebar') {
+    const { showContent, type } = this.props
+    console.log(showContent, type)
+    if (!showContent) {
+      if (type && type === 'sidebar') {
         this.setState({
           showSideBar: true,
         })
@@ -115,8 +116,6 @@ export class MiniCart extends Component {
   }
 
   handleUpdateQuantityItems = quantity => this.setState({ quantityItems: quantity })
-
-  handleClickButton = () => location.assign('/checkout/#/cart')
 
   render() {
     const { quantityItems, showSideBar } = this.state

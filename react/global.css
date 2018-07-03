@@ -37,6 +37,7 @@ body {
 
 .vtex-minicart__content-large {
   height: 83vh;
+  overflow-y: scroll;
 }
 
 .vtex-minicart__content-small {
@@ -71,7 +72,7 @@ body {
 }
 @media only screen and (min-width: 22em) {
   .vtex-minicart__sidebar {
-    width: 300px;
+    width: 340px;
     height: 100vh;
   }
 }
