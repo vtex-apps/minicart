@@ -115,7 +115,7 @@ export default class MiniCartItem extends Component {
           </div>
         </Link>
         {enableQuantitySelector &&
-          <div className="absolute bottom-0 right-0 mb4 pl9">
+          <div className="absolute bottom-0 left-0 mb4 pl9">
             <QuantitySelector
               maxQuantity={maxQuantity}
               currentQuantity={quantity}
