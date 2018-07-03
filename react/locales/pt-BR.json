@@ -4,11 +4,12 @@
     "editor.minicart.showRemoveButton.title": "Mostrar botão de remover produto",
     "editor.minicart.labelMiniCartEmpty.title": "Texto que irá aparecer quando o carrinho estiver vazio",
     "editor.minicart.labelButtonFinishShopping.title": "Texto que irá aparecer no botão de finalizar compra",
-    "finish-shopping-button-label": "Finalizar compra",
-    "minicart-empty": "Seu carrinho está vazio!",
     "editor.minicart.enableQuantitySelector.title": "Habilitar o seletor de quantidade",
     "editor.minicart.maxQuantity.title": "Quantidade máxima por item",
     "editor.minicart.type.title": "Tipo de Carrinho de Compras",
     "editor.minicart.type.popup": "Pop Up",
-    "editor.minicart.type.sidebar": "Sidebar"
+    "editor.minicart.type.sidebar": "Sidebar",
+    "finish-shopping-button-label": "Finalizar compra",
+    "minicart-empty": "Seu carrinho está vazio!",
+    "sidebar-title": "Meu carrinho"
 }

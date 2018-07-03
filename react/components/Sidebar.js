@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import { IconCaretLeft } from 'vtex.styleguide'
+import { injectIntl, intlShape } from 'react-intl'
 
 import MiniCart from '../MiniCart'
 
@@ -9,7 +10,7 @@ import '../global.css'
 
 const whiteColor = '#FFFFFF'
 
-export default class Sidebar extends Component {
+class Sidebar extends Component {
   render() {
     if (typeof window !== 'undefined') {
       return ReactDOM.createPortal(
@@ -22,7 +23,7 @@ export default class Sidebar extends Component {
             <div className="mt3 ml4">
               <MiniCart showContent miniCartIconColor={whiteColor} />
             </div>
-            <span className="ml4 white b ttu">Meu Carrinho</span>
+            <span className="ml4 white b ttu">{this.props.intl.formatMessage({ id: 'sidebar-title' })}</span>
           </div>
           <div className="h-100">
             {this.props.children}
@@ -36,6 +37,12 @@ export default class Sidebar extends Component {
 }
 
 Sidebar.propTypes = {
+  /* Internationalization */
+  intl: intlShape.isRequired,
+  /* Sidebar content */
   children: PropTypes.object.isRequired,
+  /* Function to be called when click in the close sidebar button */
   onBackClick: PropTypes.func,
 }
+
+export default injectIntl(Sidebar)
