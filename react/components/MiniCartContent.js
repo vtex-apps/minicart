@@ -2,12 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import { injectIntl, intlShape } from 'react-intl'
+import { reduceBy, values } from 'ramda'
+
+import Button from '@vtex/styleguide/lib/Button'
+import Spinner from '@vtex/styleguide/lib/Spinner'
+import ProductPrice from 'vtex.store-components/ProductPrice'
+
 import updateItemsMutation from '../graphql/updateItemsMutation.gql'
 import orderFormQuery from '../graphql/orderFormQuery.gql'
 import MiniCartItem from './MiniCartItem'
-import Button from '@vtex/styleguide/lib/Button'
-import ProductPrice from 'vtex.store-components/ProductPrice'
-import Spinner from '@vtex/styleguide/lib/Spinner'
 import { MiniCartPropTypes } from '../propTypes'
 
 import '../global.css'
@@ -94,38 +97,55 @@ class MiniCartContent extends Component {
     </div>
   )
 
-  renderMiniCartWithItems = (orderForm, label, showRemoveButton, enableQuantitySelector, maxQuantity, showSpinner) => (
-    <div className="flex flex-column relative" >
-      <div className="bg-white">
-        <div className="vtex-minicart__content pr4 pl4 overflow-auto overflow-x-hidden">
-          {orderForm.items.map(item => (
-            <div className="flex flex-row" key={item.id}>
+  renderMiniCartWithItems = (
+    orderForm,
+    label,
+    showRemoveButton,
+    enableQuantitySelector,
+    maxQuantity,
+    showSpinner
+  ) => {
+    const items = values(
+      reduceBy(
+        (acc, item) =>
+          acc ? { ...acc, quantity: acc.quantity + item.quantity } : item,
+        undefined,
+        item => item.id,
+        orderForm.items
+      )
+    )
+    return (
+      <div className="flex flex-column relative" >
+        <div className="bg-white">
+          <div className="vtex-minicart__content pr4 pl4 overflow-auto overflow-x-hidden">
+            {items.map(item => (
               <MiniCartItem
                 {...item}
+                key={item.id}
                 removeItem={this.onRemoveItem}
                 updateItem={this.onUpdateItems}
                 showRemoveButton={showRemoveButton}
                 enableQuantitySelector={enableQuantitySelector}
-                maxQuantity={maxQuantity} />
-            </div>
-          ))}
-        </div>
-        <div className="fl pa4">
-          <Button primary onClick={this.handleClickButton}>{label}</Button>
-        </div>
-        <div className="flex flex-row fr pt4 mt2 mr4">
-          {showSpinner &&
-            <Spinner size={18} />
-          }
-          <ProductPrice
-            sellingPrice={orderForm.value}
-            listPrice={orderForm.value}
-            showLabels={false}
-            showListPrice={false} />
+                maxQuantity={maxQuantity}
+              />
+            ))}
+          </div>
+          <div className="fl pa4">
+            <Button primary onClick={this.handleClickButton}>{label}</Button>
+          </div>
+          <div className="flex flex-row fr pt4 mt2 mr4">
+            {showSpinner && <Spinner size={18} />}
+            <ProductPrice
+              sellingPrice={orderForm.value}
+              listPrice={orderForm.value}
+              showLabels={false}
+              showListPrice={false}
+            />
+          </div>
         </div>
       </div>
-    </div >
-  )
+    )
+  }
 
   renderLoading = () => (
     <div className="vtex-minicart__item pa4 flex items-center justify-center relative bg-white">
@@ -140,19 +160,36 @@ class MiniCartContent extends Component {
   }
 
   render() {
-    const { data, labelMiniCartEmpty, labelButton, intl, showRemoveButton, enableQuantitySelector, maxQuantity } = this.props
+    const {
+      data,
+      labelMiniCartEmpty,
+      labelButton,
+      intl,
+      showRemoveButton,
+      enableQuantitySelector,
+      maxQuantity,
+    } = this.props
     const { showSpinner } = this.state
-    let content
+
     if (data.loading) {
-      content = this.renderLoading()
-    } else if (!data.orderForm || !data.orderForm.items.length) {
-      const label = labelMiniCartEmpty || intl.formatMessage({ id: 'minicart-empty' })
-      content = this.renderWithoutItems(label)
-    } else {
-      const label = labelButton || intl.formatMessage({ id: 'finish-shopping-button-label' })
-      content = this.renderMiniCartWithItems(data.orderForm, label, showRemoveButton, enableQuantitySelector, maxQuantity, showSpinner)
+      return this.renderLoading()
     }
-    return content
+
+    if (!data.orderForm || !data.orderForm.items.length) {
+      const label = labelMiniCartEmpty || intl.formatMessage({ id: 'minicart-empty' })
+      return this.renderWithoutItems(label)
+    }
+
+    const label = labelButton || intl.formatMessage({ id: 'finish-shopping-button-label' })
+
+    return this.renderMiniCartWithItems(
+      data.orderForm,
+      label,
+      showRemoveButton,
+      enableQuantitySelector,
+      maxQuantity,
+      showSpinner
+    )
   }
 }
 
