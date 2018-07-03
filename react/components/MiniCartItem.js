@@ -120,23 +120,26 @@ export default class MiniCartItem extends Component {
         </div>
         {enableQuantitySelector &&
           <div className="absolute bottom-0 right-0 mb7 pb2">
-            <QuantitySelector maxQuantity={maxQuantity} currentQuantity={quantity} onQuantityChange={this.handleQuantityChange} />
+            <QuantitySelector
+              maxQuantity={maxQuantity}
+              currentQuantity={quantity}
+              onQuantityChange={this.handleQuantityChange}
+            />
           </div>
         }
-        {
-          (showRemoveButton && !isRemovingItem) &&
-          <div className="vtex-minicart-item__remove-btn absolute right-0 top-0 mt4">
+        {(showRemoveButton && !isRemovingItem) && (
+          <div className="vtex-minicart-item__remove-btn absolute right-0 top-0">
             <Button onClick={(e) => this.onClickRemove(id, e)}>
               <CloseIcon size={12} color="#BDBDBD" />
             </Button>
           </div>
-        }
-        {
-          (showRemoveButton && isRemovingItem) &&
-          <div className="vtex-minicart-item__remove-btn absolute right-0 top-0 flex items-center justify-center mt5 pt2">
+        )}
+        {(showRemoveButton && isRemovingItem) && (
+          <div
+            className="vtex-minicart-item__remove-btn absolute right-0 top-0 flex items-center justify-center pt2">
             <Spinner size={20} />
           </div>
-        }
+        )}
       </div>
     )
   }
