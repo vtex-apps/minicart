@@ -94,7 +94,14 @@ class MiniCartContent extends Component {
     </div>
   )
 
-  renderMiniCartWithItems = (orderForm, label, showRemoveButton, enableQuantitySelector, maxQuantity, showSpinner) => (
+  renderMiniCartWithItems = (
+    orderForm,
+    label,
+    showRemoveButton,
+    enableQuantitySelector,
+    maxQuantity,
+    showSpinner
+  ) => (
     <div className="flex flex-column relative" >
       <div className="bg-white">
         <div className="vtex-minicart__content pr4 pl4 overflow-auto overflow-x-hidden">
@@ -124,7 +131,7 @@ class MiniCartContent extends Component {
             showListPrice={false} />
         </div>
       </div>
-    </div >
+    </div>
   )
 
   renderLoading = () => (
@@ -140,19 +147,36 @@ class MiniCartContent extends Component {
   }
 
   render() {
-    const { data, labelMiniCartEmpty, labelButton, intl, showRemoveButton, enableQuantitySelector, maxQuantity } = this.props
+    const {
+      data,
+      labelMiniCartEmpty,
+      labelButton,
+      intl,
+      showRemoveButton,
+      enableQuantitySelector,
+      maxQuantity,
+    } = this.props
     const { showSpinner } = this.state
-    let content
+
     if (data.loading) {
-      content = this.renderLoading()
-    } else if (!data.orderForm || !data.orderForm.items.length) {
-      const label = labelMiniCartEmpty || intl.formatMessage({ id: 'minicart-empty' })
-      content = this.renderWithoutItems(label)
-    } else {
-      const label = labelButton || intl.formatMessage({ id: 'finish-shopping-button-label' })
-      content = this.renderMiniCartWithItems(data.orderForm, label, showRemoveButton, enableQuantitySelector, maxQuantity, showSpinner)
+      return this.renderLoading()
     }
-    return content
+
+    if (!data.orderForm || !data.orderForm.items.length) {
+      const label = labelMiniCartEmpty || intl.formatMessage({ id: 'minicart-empty' })
+      return this.renderWithoutItems(label)
+    }
+
+    const label = labelButton || intl.formatMessage({ id: 'finish-shopping-button-label' })
+
+    return this.renderMiniCartWithItems(
+      data.orderForm,
+      label,
+      showRemoveButton,
+      enableQuantitySelector,
+      maxQuantity,
+      showSpinner
+    )
   }
 }
 
