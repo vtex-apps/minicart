@@ -6,7 +6,6 @@ import { Button } from 'vtex.styleguide'
 import CartIcon from './images/CartIcon'
 import MiniCartContent from './components/MiniCartContent'
 import { MiniCartPropTypes } from './propTypes'
-import Popup from './components/Popup'
 import Sidebar from './components/Sidebar'
 
 import './global.css'
