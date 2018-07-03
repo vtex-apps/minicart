@@ -120,7 +120,10 @@ class MiniCartContent extends Component {
     return (
       <div className="flex flex-column relative" >
         <div className="bg-white">
-          <div className={`${large ? 'vtex-minicart__content-large' : 'vtex-minicart__content-small'} ph4 overflow-auto overflow-x-hidden`}>
+          <div
+            className={`
+            ${large ? 'vtex-minicart__content-large' : 'vtex-minicart__content-small'}
+            ${(items.length > 3) ? 'overflow-y-scroll' : 'overflow-y-hidden'} ph4 overflow-x-hidden`}>
             {items.map(item => (
               <MiniCartItem
                 {...item}
