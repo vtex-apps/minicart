@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import orderFormQuery from './graphql/orderFormQuery.gql'
 import { graphql } from 'react-apollo'
 import { Button } from 'vtex.styleguide'
+
 import CartIcon from './images/CartIcon'
 import MiniCartContent from './components/MiniCartContent'
 import { MiniCartPropTypes } from './propTypes'
@@ -76,16 +77,13 @@ export class MiniCart extends Component {
     }
   }
 
-  constructor(props) {
-    super(props)
-    this.state = { isMouseOnButton: false, isMouseOnMiniCart: false, quantityItems: 0, showSideBar: false }
+  state = {
+    quantityItems: 0,
+    showSideBar: false,
   }
 
   componentDidMount() {
-    document.addEventListener('item:add', () => {
-      const { quantityItems } = this.state
-      this.setState({ quantityItems: quantityItems + 1 })
-    })
+    document.addEventListener('item:add', this.handleItemAdd)
   }
 
   handleClickButton = () => {
@@ -107,53 +105,66 @@ export class MiniCart extends Component {
     })
   }
 
-  handleMouseEnterButton = () => this.setState({ isMouseOnButton: true })
+  componentWillUnmount() {
+    document.removeEventListener('item:add', this.handleItemAdd)
+  }
 
-  handleMouseLeaveButton = () => this.setState({ isMouseOnButton: false })
-
-  handleMouseEnterCartItems = () => this.setState({ isMouseOnMiniCart: true })
-
-  handleMouseLeaveCartItems = () => this.setState({ isMouseOnMiniCart: false })
+  handleItemAdd = () => {
+    const { quantityItems } = this.state
+    this.setState({ quantityItems: quantityItems + 1 })
+  }
 
   handleUpdateQuantityItems = quantity => this.setState({ quantityItems: quantity })
 
+  handleClickButton = () => location.assign('/checkout/#/cart')
+
   render() {
-    const { isMouseOnButton, isMouseOnMiniCart, quantityItems, showSideBar } = this.state
-    const { type, showContent, labelMiniCartEmpty, labelButtonFinishShopping, miniCartIconColor,
-      showRemoveButton, enableQuantitySelector, maxQuantity, data: { orderForm } } = this.props
+    const { quantityItems, showSideBar } = this.state
+    const {
+      labelMiniCartEmpty,
+      labelButtonFinishShopping,
+      miniCartIconColor,
+      showRemoveButton,
+      enableQuantitySelector,
+      maxQuantity,
+      data,
+      type,
+      showContent,
+    } = this.props
+    const { orderForm } = data
     const quantity = !quantityItems && orderForm && orderForm.items ? orderForm.items.length : quantityItems
     return (
-      <div className="relative" >
+      <div className="vtex-minicart relative fr">
         <Button
           variation="tertiary"
           icon
           onClick={this.handleClickButton}
-          onMouseEnter={this.handleMouseEnterButton}
-          onMouseLeave={this.handleMouseLeaveButton}>
+        >
           <CartIcon fillColor={miniCartIconColor} />
           {quantity > 0 && <span className="vtex-minicart__bagde mt1 mr1">
             {quantity}
           </span>}
         </Button>
-        {
-          !showContent && ((type && type === 'sidebar') ? (showSideBar &&
-            <Sidebar
-              onBackClick={this.handleCloseSideBarButtonClick}>
-              <MiniCartContent
-                large
-                data={this.props.data}
-                onUpdateItemsQuantity={this.handleUpdateQuantityItems}
-                showRemoveButton={showRemoveButton}
-                labelMiniCartEmpty={labelMiniCartEmpty}
-                labelButton={labelButtonFinishShopping}
-                enableQuantitySelector={enableQuantitySelector}
-                maxQuantity={maxQuantity} />
-            </Sidebar>)
-            : (
-              (isMouseOnMiniCart || isMouseOnButton) && !showSideBar &&
-              <Popup
-                onMouseLeave={this.handleMouseLeaveCartItems}
-                onMouseEnter={this.handleMouseEnterCartItems}>
+        {!showContent && ((type && type === 'sidebar') ? (showSideBar &&
+          <Sidebar
+            onBackClick={this.handleCloseSideBarButtonClick}
+          >
+            <MiniCartContent
+              large
+              data={this.props.data}
+              onUpdateItemsQuantity={this.handleUpdateQuantityItems}
+              showRemoveButton={showRemoveButton}
+              labelMiniCartEmpty={labelMiniCartEmpty}
+              labelButton={labelButtonFinishShopping}
+              enableQuantitySelector={enableQuantitySelector}
+              maxQuantity={maxQuantity}
+            />
+          </Sidebar>)
+          : (!showSideBar &&
+            <div className="vtex-minicart__box absolute right-0 z-max flex flex-colunm">
+              <div className="vtex-minicart__arrow-up absolute top-0 right-0 shadow-3">
+              </div>
+              <div className="shadow-3 mt3">
                 <MiniCartContent
                   data={this.props.data}
                   onUpdateItemsQuantity={this.handleUpdateQuantityItems}
@@ -161,10 +172,11 @@ export class MiniCart extends Component {
                   labelMiniCartEmpty={labelMiniCartEmpty}
                   labelButton={labelButtonFinishShopping}
                   enableQuantitySelector={enableQuantitySelector}
-                  maxQuantity={maxQuantity} />
-              </Popup>
-            ))
-        }
+                  maxQuantity={maxQuantity}
+                />
+              </div>
+            </div>
+          ))}
       </div>
     )
   }
