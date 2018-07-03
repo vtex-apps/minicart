@@ -87,7 +87,6 @@ export class MiniCart extends Component {
 
   handleClickButton = () => {
     const { showContent, type } = this.props
-    console.log(showContent, type)
     if (!showContent) {
       if (type && type === 'sidebar') {
         this.setState({
