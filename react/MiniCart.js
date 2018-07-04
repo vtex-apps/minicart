@@ -86,8 +86,8 @@ export class MiniCart extends Component {
   }
 
   handleClickButton = () => {
-    const { showContent, type } = this.props
-    if (!showContent) {
+    const { hideContent, type } = this.props
+    if (!hideContent) {
       if (type && type === 'sidebar') {
         this.setState({
           showSideBar: true,
@@ -126,7 +126,7 @@ export class MiniCart extends Component {
       maxQuantity,
       data,
       type,
-      showContent,
+      hideContent,
     } = this.props
     const { orderForm } = data
     const quantity = !quantityItems && orderForm && orderForm.items ? orderForm.items.length : quantityItems
@@ -142,7 +142,7 @@ export class MiniCart extends Component {
             {quantity}
           </span>}
         </Button>
-        {!showContent && ((type && type === 'sidebar') ? (showSideBar &&
+        {!hideContent && ((type && type === 'sidebar') ? (showSideBar &&
           <Sidebar
             onBackClick={this.handleCloseSideBarButtonClick}
           >

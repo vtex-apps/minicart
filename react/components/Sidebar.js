@@ -35,7 +35,7 @@ class Sidebar extends Component {
             >
               <IconCaretRight size={18} color={whiteColor} />
               <div className="mt3 ml4">
-                <MiniCart showContent miniCartIconColor={whiteColor} />
+                <MiniCart hideContent miniCartIconColor={whiteColor} />
               </div>
               <span className="ml4 white b ttu">{intl.formatMessage({ id: 'sidebar-title' })}</span>
             </div>
