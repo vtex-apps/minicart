@@ -148,7 +148,7 @@ export class MiniCart extends Component {
           >
             <MiniCartContent
               large
-              data={this.props.data}
+              data={data}
               onUpdateItemsQuantity={this.handleUpdateQuantityItems}
               showRemoveButton={showRemoveButton}
               labelMiniCartEmpty={labelMiniCartEmpty}
