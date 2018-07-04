@@ -6,11 +6,12 @@
     "test": "jest"
   },
   "dependencies": {
-    "@vtex/styleguide": "^3.0.2",
     "@vtex/product-details": "1.1.1",
+    "@vtex/styleguide": "^3.0.2",
     "classnames": "^2.2.5",
     "eslint-config-vtex": "^8.0.0",
     "identity-obj-proxy": "^3.0.0",
+    "react-outside-click-handler": "^1.2.0",
     "react-sidebar": "^2.3.2",
     "react-slick": "^0.16.0"
   },
