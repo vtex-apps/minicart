@@ -93,7 +93,7 @@ class MiniCartContent extends Component {
   }
 
   renderWithoutItems = label => (
-    <div className="vtex-minicart__item pa4 flex items-center justify-center relative bg-white">
+    <div className="vtex-minicart__item pa4 flex items-center justify-center relative bg-white pt9">
       <span className="f5">{label}</span>
     </div>
   )
