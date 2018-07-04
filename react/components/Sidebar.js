@@ -15,7 +15,7 @@ class Sidebar extends Component {
     if (typeof window !== 'undefined') {
       return ReactDOM.createPortal(
         <div
-          className="vtex-minicart__sidebar fixed top-0 right-0 z-max bg-white mt8 shadow-2">
+          className="vtex-minicart__sidebar fixed top-0 right-0 z-9999 bg-white shadow-2">
           <div
             className="vtex-minicart__sidebar-header pointer flex flex-row items-center pa5"
             onClick={this.props.onBackClick}>

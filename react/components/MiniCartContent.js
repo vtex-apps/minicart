@@ -118,8 +118,8 @@ class MiniCartContent extends Component {
       )
     )
     return (
-      <div className="flex flex-column relative" >
-        <div className="bg-white">
+      <div className="flex flex-column">
+        <div className={`bg-white ${!large ? 'relative' : ''}`}>
           <div
             className={`
             ${large ? 'vtex-minicart__content-large' : 'vtex-minicart__content-small'}
@@ -137,17 +137,19 @@ class MiniCartContent extends Component {
               />
             ))}
           </div>
-          <div className="fl pa4">
-            <Button variation="primary" size="small" onClick={this.handleClickButton}>{label}</Button>
-          </div>
-          <div className="flex flex-row fr pt4 mt2 mr4">
-            {showSpinner && <Spinner size={18} />}
-            <ProductPrice
-              sellingPrice={orderForm.value}
-              listPrice={orderForm.value}
-              showLabels={false}
-              showListPrice={false}
-            />
+          <div className={`${large ? 'absolute bottom-0' : ''} w-100`}>
+            <div className="fl pa4">
+              <Button variation="primary" size="small" onClick={this.handleClickButton}>{label}</Button>
+            </div>
+            <div className="flex flex-row fr pt4 mt2 mr4">
+              {showSpinner && <Spinner size={18} />}
+              <ProductPrice
+                sellingPrice={orderForm.value}
+                listPrice={orderForm.value}
+                showLabels={false}
+                showListPrice={false}
+              />
+            </div>
           </div>
         </div>
       </div>
