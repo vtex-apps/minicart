@@ -130,7 +130,7 @@ export default class MiniCartItem extends Component {
         )}
         {(showRemoveButton && isRemovingItem) && (
           <div
-            className="vtex-minicart-item__remove-btn absolute right-0 top-0 flex items-center justify-center mt3">
+            className="vtex-minicart-item__remove-btn absolute right-0 top-0 flex items-center justify-center mt3 mr4">
             <Spinner size={20} />
           </div>
         )}
