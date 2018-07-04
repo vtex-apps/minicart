@@ -12,6 +12,14 @@ const whiteColor = '#FFFFFF'
 
 /* SideBar component */
 class Sidebar extends Component {
+  componentDidMount() {
+    document.body.classList.add('vtex-minicart-sidebar-open')
+  }
+
+  componentWillUnmount() {
+    document.body.classList.remove('vtex-minicart-sidebar-open')
+  }
+
   render() {
     const { onBackClick, intl } = this.props
 

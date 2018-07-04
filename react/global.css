@@ -70,6 +70,7 @@ body {
   right: 7px;
   background-color: white;
 }
+
 @media only screen and (min-width: 22em) {
   .vtex-minicart__sidebar {
     width: 340px;
@@ -78,6 +79,10 @@ body {
 }
 
 @media only screen and (max-width: 25em) {
+  body.vtex-minicart-sidebar-open {
+    overflow: hidden;
+  }
+
   .vtex-minicart__sidebar {
     width: 100vw;
     height: 100vh;
