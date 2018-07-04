@@ -109,14 +109,13 @@ export class MiniCart extends Component {
   }
 
   handleItemAdd = () => {
-    const { quantityItems } = this.state
-    this.setState({ quantityItems: quantityItems + 1 })
+    this.props.data.refetch()
   }
 
   handleUpdateQuantityItems = quantity => this.setState({ quantityItems: quantity })
 
   render() {
-    const { quantityItems, showSideBar } = this.state
+    const { showSideBar } = this.state
     const {
       labelMiniCartEmpty,
       labelButtonFinishShopping,
@@ -129,7 +128,7 @@ export class MiniCart extends Component {
       hideContent,
     } = this.props
     const { orderForm } = data
-    const quantity = !quantityItems && orderForm && orderForm.items ? orderForm.items.length : quantityItems
+    const quantity = orderForm && orderForm.items ? orderForm.items.length : 0
     return (
       <div className="vtex-minicart relative fr">
         <Button
@@ -163,7 +162,7 @@ export class MiniCart extends Component {
                 <div className="vtex-minicart__arrow-up absolute top-0 right-0 shadow-3" />
                 <div className="vtex-minicart__content-container mt3 bg-white relative">
                   <MiniCartContent
-                    data={this.props.data}
+                    data={data}
                     onUpdateItemsQuantity={this.handleUpdateQuantityItems}
                     showRemoveButton={showRemoveButton}
                     labelMiniCartEmpty={labelMiniCartEmpty}

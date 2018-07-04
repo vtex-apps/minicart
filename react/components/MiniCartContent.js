@@ -177,6 +177,8 @@ class MiniCartContent extends Component {
     } = this.props
     const { showSpinner } = this.state
 
+    if (!data) return null
+
     if (data.loading) {
       return this.renderLoading()
     }
