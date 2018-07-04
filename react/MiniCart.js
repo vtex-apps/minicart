@@ -159,18 +159,19 @@ export class MiniCart extends Component {
           </Sidebar>)
           : (!showSideBar &&
             <div className="vtex-minicart__box absolute right-0 z-max flex flex-colunm">
-              <div className="vtex-minicart__arrow-up absolute top-0 right-0 shadow-3">
-              </div>
-              <div className="shadow-3 mt3">
-                <MiniCartContent
-                  data={this.props.data}
-                  onUpdateItemsQuantity={this.handleUpdateQuantityItems}
-                  showRemoveButton={showRemoveButton}
-                  labelMiniCartEmpty={labelMiniCartEmpty}
-                  labelButton={labelButtonFinishShopping}
-                  enableQuantitySelector={enableQuantitySelector}
-                  maxQuantity={maxQuantity}
-                />
+              <div className="shadow-3">
+                <div className="vtex-minicart__arrow-up absolute top-0 right-0 shadow-3" />
+                <div className="vtex-minicart__content-container mt3 bg-white relative">
+                  <MiniCartContent
+                    data={this.props.data}
+                    onUpdateItemsQuantity={this.handleUpdateQuantityItems}
+                    showRemoveButton={showRemoveButton}
+                    labelMiniCartEmpty={labelMiniCartEmpty}
+                    labelButton={labelButtonFinishShopping}
+                    enableQuantitySelector={enableQuantitySelector}
+                    maxQuantity={maxQuantity}
+                  />
+                </div>
               </div>
             </div>
           ))}

@@ -35,16 +35,13 @@ body {
   }
 }
 
-.vtex-minicart__content {
+.vtex-minicart__content--large {
+  overflow-y: auto;
   margin-bottom: 60px;
 }
 
-.vtex-minicart__content--large {
-  overflow-y: scroll;
-}
-
 .vtex-minicart__content--small {
-  max-height: 327px;
+  max-height: 338px;
   background-color: white;
 }
 
@@ -105,4 +102,8 @@ body {
 
 .vtex-minicart__item-footer {
   height: 68px;
+}
+
+.vtex-minicart__content-container {
+  padding-bottom: 60px;
 }

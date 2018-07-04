@@ -86,7 +86,7 @@ export default class MiniCartItem extends Component {
     const { isRemovingItem } = this.state
 
     return (
-      <div className="vtex-minicart__item relative pv3 w-100 ph4">
+      <div className="vtex-minicart__item relative pv3 w-100 ph4 mb2">
         <Link
           className="pointer link black-90"
           page={'store/product'}
