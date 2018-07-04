@@ -35,13 +35,17 @@ body {
   }
 }
 
+.vtex-minicart__content {
+  margin-bottom: 60px;
+}
+
 .vtex-minicart__content--large {
   overflow-y: scroll;
-  margin-bottom: 60px;
 }
 
 .vtex-minicart__content--small {
   max-height: 327px;
+  background-color: white;
 }
 
 .vtex-minicart-item__remove-btn > .vtex-button {
