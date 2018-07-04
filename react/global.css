@@ -35,12 +35,12 @@ body {
   }
 }
 
-.vtex-minicart__content-large {
+.vtex-minicart__content--large {
   overflow-y: scroll;
-  height: 88vh;
+  margin-bottom: 60px;
 }
 
-.vtex-minicart__content-small {
+.vtex-minicart__content--small {
   max-height: 327px;
 }
 

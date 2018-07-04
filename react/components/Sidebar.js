@@ -8,8 +8,6 @@ import OutsideClickHandler from 'react-outside-click-handler'
 
 import MiniCart from '../MiniCart'
 
-import '../global.css'
-
 const whiteColor = '#FFFFFF'
 
 /* SideBar component */
@@ -22,7 +20,7 @@ class Sidebar extends Component {
         <OutsideClickHandler
           onOutsideClick={onBackClick}
         >
-          <div className="vtex-minicart__sidebar fixed top-0 right-0 z-9999 bg-white shadow-2">
+          <div className="vtex-minicart__sidebar fixed top-0 right-0 z-9999 bg-white shadow-2 flex flex-column">
             <div
               className="vtex-minicart__sidebar-header pointer flex flex-row items-center pa5"
               onClick={onBackClick}
@@ -33,9 +31,7 @@ class Sidebar extends Component {
               </div>
               <span className="ml4 white b ttu">{intl.formatMessage({ id: 'sidebar-title' })}</span>
             </div>
-            <div className="h-100">
-              {this.props.children}
-            </div>
+            {this.props.children}
           </div>
         </OutsideClickHandler>,
         document.body

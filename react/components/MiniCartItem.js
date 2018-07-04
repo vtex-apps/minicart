@@ -7,8 +7,6 @@ import ProductPrice from 'vtex.store-components/ProductPrice'
 import QuantitySelector from 'vtex.store-components/QuantitySelector'
 import { MiniCartPropTypes } from '../propTypes'
 
-import '../global.css'
-
 /**
  * Minicart item component
  */
@@ -88,12 +86,12 @@ export default class MiniCartItem extends Component {
     const { isRemovingItem } = this.state
 
     return (
-      <div className="relative w-100">
+      <div className="vtex-minicart__item relative pv3 w-100 ph4">
         <Link
           className="pointer link black-90"
           page={'store/product'}
           params={{ slug: this.getItemId(detailUrl) }}>
-          <div className="vtex-minicart__item relative bb b--silver pv3">
+          <div className="relative bb b--silver">
             <div className="w-100 mb2">
               <ProductName name={name} />
               <div className="f7">
@@ -124,7 +122,7 @@ export default class MiniCartItem extends Component {
           </div>
         }
         {(showRemoveButton && !isRemovingItem) && (
-          <div className="vtex-minicart-item__remove-btn absolute right-0 top-0">
+          <div className="vtex-minicart-item__remove-btn absolute right-0 top-0 mr4">
             <Button icon variation="tertiary" onClick={(e) => this.onClickRemove(id, e)}>
               <IconClose size={20} color="#BDBDBD" />
             </Button>

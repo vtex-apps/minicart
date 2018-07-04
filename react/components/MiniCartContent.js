@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import { injectIntl, intlShape } from 'react-intl'
 import { reduceBy, values } from 'ramda'
+import classNames from 'classnames'
 
 import { Button, Spinner } from 'vtex.styleguide'
 import ProductPrice from 'vtex.store-components/ProductPrice'
@@ -12,8 +13,6 @@ import orderFormQuery from '../graphql/orderFormQuery.gql'
 
 import MiniCartItem from './MiniCartItem'
 import { MiniCartPropTypes } from '../propTypes'
-
-import '../global.css'
 
 /**
  * Minicart content component
@@ -117,42 +116,45 @@ class MiniCartContent extends Component {
         orderForm.items
       )
     )
+
+    const classes = classNames('vtex-minicart__content overflow-x-hidden', {
+      'vtex-minicart__content--large': large,
+      'vtex-minicart__content--small': !large,
+      'overflow-y-scroll': items.length > 3 && !large,
+      'overflow-y-hidden': items.length <= 3 && !large,
+    })
+
     return (
-      <div className="flex flex-column">
-        <div className={`bg-white ${!large ? 'relative' : ''}`}>
-          <div
-            className={`
-            ${large ? 'vtex-minicart__content-large' : 'vtex-minicart__content-small'}
-            ${(items.length > 3 && !large) ? 'overflow-y-scroll' : 'overflow-y-hidden'} ph4 overflow-x-hidden`}>
-            {items.map(item => (
-              <MiniCartItem
-                {...item}
-                key={item.id}
-                large
-                removeItem={this.onRemoveItem}
-                updateItem={this.onUpdateItems}
-                showRemoveButton={showRemoveButton}
-                enableQuantitySelector={enableQuantitySelector}
-                maxQuantity={maxQuantity}
-              />
-            ))}
+      <Fragment>
+        <div className={classes}>
+          {items.map(item => (
+            <MiniCartItem
+              {...item}
+              key={item.id}
+              large
+              removeItem={this.onRemoveItem}
+              updateItem={this.onUpdateItems}
+              showRemoveButton={showRemoveButton}
+              enableQuantitySelector={enableQuantitySelector}
+              maxQuantity={maxQuantity}
+            />
+          ))}
+        </div>
+        <div className="vtex-minicart__content-footer absolute bottom-0 w-100 bg-white">
+          <div className="fl pa4">
+            <Button variation="primary" size="small" onClick={this.handleClickButton}>{label}</Button>
           </div>
-          <div className={`${large ? 'absolute bottom-0' : ''} w-100`}>
-            <div className="fl pa4">
-              <Button variation="primary" size="small" onClick={this.handleClickButton}>{label}</Button>
-            </div>
-            <div className="flex flex-row fr pt4 mt2 mr4">
-              {showSpinner && <Spinner size={18} />}
-              <ProductPrice
-                sellingPrice={orderForm.value}
-                listPrice={orderForm.value}
-                showLabels={false}
-                showListPrice={false}
-              />
-            </div>
+          <div className="flex flex-row fr pt4 mt2 mr4">
+            {showSpinner && <Spinner size={18} />}
+            <ProductPrice
+              sellingPrice={orderForm.value}
+              listPrice={orderForm.value}
+              showLabels={false}
+              showListPrice={false}
+            />
           </div>
         </div>
-      </div>
+      </Fragment>
     )
   }
 
