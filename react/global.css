@@ -40,36 +40,6 @@ body {
   height: 88vh;
 }
 
-/* @media only screen and (max-height: 640px) {
-  .vtex-minicart__content-large {
-    height: 74vh;
-  }
-}
-
-@media only screen and (min-height: 641px) and (max-height: 731px) {
-  .vtex-minicart__content-large {
-    height: 77vh;
-  }
-}
-
-@media only screen and (min-height: 732px) and (max-height: 812px) {
-  .vtex-minicart__content-large {
-    height: 80vh;
-  }
-}
-
-@media only screen and (min-height: 813px) and (max-height: 1024px) {
-  .vtex-minicart__content-large {
-    height: 80vh;
-  }
-}
-
-@media only screen and (min-height: 1025px) and (max-height: 1366px) {
-  .vtex-minicart__content-large {
-    height: 88vh;
-  }
-} */
-
 .vtex-minicart__content-small {
   max-height: 327px;
 }
