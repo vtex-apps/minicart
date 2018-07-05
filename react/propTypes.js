@@ -13,6 +13,8 @@ export const MiniCartPropTypes = {
   miniCartIconColor: PropTypes.string,
   /* Set the visibility of remove button */
   showRemoveButton: PropTypes.bool,
+  /* Set the discount visibility */
+  showDiscount: PropTypes.bool,
   /* Set the visibility of the Quantity Selector */
   enableQuantitySelector: PropTypes.bool,
   /* Max quantity for the Quantity Selector */

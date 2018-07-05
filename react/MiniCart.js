@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import orderFormQuery from './graphql/orderFormQuery.gql'
 import { graphql } from 'react-apollo'
 import { Button } from 'vtex.styleguide'
+import classNames from 'classnames'
 
 import CartIcon from './images/CartIcon'
 import MiniCartContent from './components/MiniCartContent'
@@ -59,6 +60,11 @@ export class MiniCart extends Component {
         },
         showRemoveButton: {
           title: 'editor.minicart.showRemoveButton.title',
+          type: 'boolean',
+          isLayout: true,
+        },
+        showDiscount: {
+          title: 'editor.minicart.showDiscount.title',
           type: 'boolean',
           isLayout: true,
         },
@@ -127,6 +133,7 @@ export class MiniCart extends Component {
       labelButtonFinishShopping,
       miniCartIconColor,
       showRemoveButton,
+      showDiscount,
       enableQuantitySelector,
       maxQuantity,
       data,
@@ -135,6 +142,11 @@ export class MiniCart extends Component {
     } = this.props
     const { orderForm } = data
     const quantity = orderForm && orderForm.items ? orderForm.items.length : 0
+    const classes = classNames('mt3 bg-white relative', {
+      'vtex-minicart__content-container--footer-small': !showDiscount,
+      'vtex-minicart__content-container--footer-large': showDiscount,
+    })
+
     return (
       <div className="vtex-minicart relative fr">
         <Button
@@ -156,6 +168,7 @@ export class MiniCart extends Component {
               data={data}
               onUpdateItemsQuantity={this.handleUpdateQuantityItems}
               showRemoveButton={showRemoveButton}
+              showDiscount={showDiscount}
               labelMiniCartEmpty={labelMiniCartEmpty}
               labelButton={labelButtonFinishShopping}
               enableQuantitySelector={enableQuantitySelector}
@@ -166,11 +179,12 @@ export class MiniCart extends Component {
             <div className="vtex-minicart__box absolute right-0 z-max flex flex-colunm">
               <div className="shadow-3">
                 <div className="vtex-minicart__arrow-up absolute top-0 right-0 shadow-3" />
-                <div className="vtex-minicart__content-container mt3 bg-white relative">
+                <div className={classes}>
                   <MiniCartContent
                     data={data}
                     onUpdateItemsQuantity={this.handleUpdateQuantityItems}
                     showRemoveButton={showRemoveButton}
+                    showDiscount={showDiscount}
                     labelMiniCartEmpty={labelMiniCartEmpty}
                     labelButton={labelButtonFinishShopping}
                     enableQuantitySelector={enableQuantitySelector}

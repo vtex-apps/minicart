@@ -34,6 +34,7 @@ class MiniCartContent extends Component {
     showRemoveButton: MiniCartPropTypes.showRemoveButton,
     enableQuantitySelector: MiniCartPropTypes.enableQuantitySelector,
     maxQuantity: MiniCartPropTypes.maxQuantity,
+    showDiscount: MiniCartPropTypes.showDiscount,
   }
 
   constructor(props) {
@@ -116,6 +117,7 @@ class MiniCartContent extends Component {
     label,
     labelDiscount,
     showRemoveButton,
+    showDiscount,
     enableQuantitySelector,
     maxQuantity,
     showSpinner,
@@ -132,8 +134,10 @@ class MiniCartContent extends Component {
     )
 
     const classes = classNames('vtex-minicart__content overflow-x-hidden h-100', {
-      'vtex-minicart__content--large': large,
       'vtex-minicart__content--small': !large,
+      'vtex-minicart__content--large': large,
+      'vtex-minicart__content-large--footer-small': large && !showDiscount,
+      'vtex-minicart__content-large--footer-large': large && showDiscount,
       'overflow-y-scroll': items.length > 3 && !large,
       'overflow-y-hidden': items.length <= 3 && !large,
     })
@@ -157,7 +161,7 @@ class MiniCartContent extends Component {
           ))}
         </div>
         <div className="absolute bottom-0 w-100 bg-white flex flex-column pa4 bt b--silver pt4">
-          {large && <div className="vtex-minicart__content-discount w-100 mb4">
+          {showDiscount && <div className="vtex-minicart__content-discount w-100 mb4">
             <span className="ttu b">{labelDiscount}</span>
             <div className="fr">
               <ProductPrice
@@ -201,6 +205,7 @@ class MiniCartContent extends Component {
       labelButton,
       intl,
       showRemoveButton,
+      showDiscount,
       enableQuantitySelector,
       maxQuantity,
       large,
@@ -224,6 +229,7 @@ class MiniCartContent extends Component {
       label,
       labelDiscount,
       showRemoveButton,
+      showDiscount,
       enableQuantitySelector,
       maxQuantity,
       showSpinner,

@@ -37,12 +37,27 @@ body {
 
 .vtex-minicart__content--large {
   overflow-y: auto;
-  margin-bottom: 92px;
 }
 
 .vtex-minicart__content--small {
   max-height: 338px;
   background-color: white;
+}
+
+.vtex-minicart__content-large--footer-small {
+  margin-bottom: 59px;
+}
+
+.vtex-minicart__content-large--footer-large {
+  margin-bottom: 93px;
+}
+
+.vtex-minicart__content-container--footer-small {
+  padding-bottom: 59px;
+}
+
+.vtex-minicart__content-container--footer-large {
+  padding-bottom: 93px;
 }
 
 .vtex-minicart-item__remove-btn > .vtex-button {
@@ -102,10 +117,6 @@ body {
 
 .vtex-minicart__item-footer {
   height: 68px;
-}
-
-.vtex-minicart__content-container {
-  padding-bottom: 59px;
 }
 
 .vtex-minicart__content-discount {
