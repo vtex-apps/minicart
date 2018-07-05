@@ -37,7 +37,7 @@ body {
 
 .vtex-minicart__content--large {
   overflow-y: auto;
-  margin-bottom: 60px;
+  margin-bottom: 100px;
 }
 
 .vtex-minicart__content--small {
@@ -106,4 +106,8 @@ body {
 
 .vtex-minicart__content-container {
   padding-bottom: 60px;
+}
+
+.vtex-minicart__content-discount {
+  color: coral;
 }

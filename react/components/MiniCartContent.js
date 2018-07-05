@@ -41,6 +41,19 @@ class MiniCartContent extends Component {
     this.state = { showSpinner: false }
   }
 
+  sumItemsPrice = items => {
+    let sum = 0
+    items.forEach(item => {
+      sum += item.sellingPrice
+    })
+    return sum
+  }
+
+  calculateDiscount = (items, totalPrice) => {
+    const liquidPrice = this.sumItemsPrice(items)
+    return totalPrice - liquidPrice
+  }
+
   handleClickButton = () => location.assign('/checkout/#/cart')
 
   onRemoveItem = id => {
@@ -124,6 +137,8 @@ class MiniCartContent extends Component {
       'overflow-y-hidden': items.length <= 3 && !large,
     })
 
+    const discount = this.calculateDiscount(orderForm.items, orderForm.value)
+
     return (
       <Fragment>
         <div className={classes}>
@@ -140,18 +155,31 @@ class MiniCartContent extends Component {
             />
           ))}
         </div>
-        <div className="vtex-minicart__content-footer absolute bottom-0 w-100 bg-white">
-          <div className="fl pa4">
-            <Button variation="primary" size="small" onClick={this.handleClickButton}>{label}</Button>
+        <div className="absolute bottom-0 w-100 bg-white flex flex-column pa4 bt b--silver pt4">
+          <div className="vtex-minicart__content-discount w-100 mb4">
+            <span className="ttu b">Desconto</span>
+            <div className="fr">
+              <ProductPrice
+                sellingPrice={discount}
+                listPrice={discount}
+                showLabels={false}
+                showListPrice={false}
+              />
+            </div>
           </div>
-          <div className="flex flex-row fr pt4 mt2 mr4">
-            {showSpinner && <Spinner size={18} />}
-            <ProductPrice
-              sellingPrice={orderForm.value}
-              listPrice={orderForm.value}
-              showLabels={false}
-              showListPrice={false}
-            />
+          <div className="w-100">
+            <div className="fl">
+              <Button variation="primary" size="small" onClick={this.handleClickButton}>{label}</Button>
+            </div>
+            <div className="flex flex-row fr pt4 mt2">
+              {showSpinner && <Spinner size={18} />}
+              <ProductPrice
+                sellingPrice={orderForm.value}
+                listPrice={orderForm.value}
+                showLabels={false}
+                showListPrice={false}
+              />
+            </div>
           </div>
         </div>
       </Fragment>
@@ -176,6 +204,8 @@ class MiniCartContent extends Component {
       large,
     } = this.props
     const { showSpinner } = this.state
+
+    console.log(data)
 
     if (!data) return null
 
