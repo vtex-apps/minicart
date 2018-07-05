@@ -44,7 +44,7 @@ class MiniCartContent extends Component {
   sumItemsPrice = items => {
     let sum = 0
     items.forEach(item => {
-      sum += item.sellingPrice
+      sum += (item.listPrice * item.quantity)
     })
     return sum
   }
@@ -207,11 +207,7 @@ class MiniCartContent extends Component {
     } = this.props
     const { showSpinner } = this.state
 
-    console.log(data)
-
-    if (!data) return null
-
-    if (data.loading) {
+    if (!data || data.loading) {
       return this.renderLoading()
     }
 
