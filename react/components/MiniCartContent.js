@@ -114,6 +114,7 @@ class MiniCartContent extends Component {
   renderMiniCartWithItems = (
     orderForm,
     label,
+    labelDiscount,
     showRemoveButton,
     enableQuantitySelector,
     maxQuantity,
@@ -157,7 +158,7 @@ class MiniCartContent extends Component {
         </div>
         <div className="absolute bottom-0 w-100 bg-white flex flex-column pa4 bt b--silver pt4">
           <div className="vtex-minicart__content-discount w-100 mb4">
-            <span className="ttu b">Desconto</span>
+            <span className="ttu b">{labelDiscount}</span>
             <div className="fr">
               <ProductPrice
                 sellingPrice={discount}
@@ -219,10 +220,12 @@ class MiniCartContent extends Component {
     }
 
     const label = labelButton || intl.formatMessage({ id: 'finish-shopping-button-label' })
+    const labelDiscount = intl.formatMessage({ id: 'minicart-content-footer-discount' })
 
     return this.renderMiniCartWithItems(
       data.orderForm,
       label,
+      labelDiscount,
       showRemoveButton,
       enableQuantitySelector,
       maxQuantity,
