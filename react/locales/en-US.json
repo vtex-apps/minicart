@@ -11,5 +11,6 @@
     "editor.minicart.type.sidebar": "Sidebar",
     "finish-shopping-button-label": "Go to checkout",
     "minicart-empty": "Your cart is empty!",
-    "sidebar-title": "My mini cart"
+    "sidebar-title": "My mini cart",
+    "minicart-content-footer-discount": "Discount"
 }

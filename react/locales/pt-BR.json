@@ -11,5 +11,6 @@
     "editor.minicart.type.sidebar": "Sidebar",
     "finish-shopping-button-label": "Finalizar compra",
     "minicart-empty": "Seu carrinho está vazio!",
-    "sidebar-title": "Meu carrinho"
+    "sidebar-title": "Meu carrinho",
+    "minicart-content-footer-discount": "Desconto"
 }
