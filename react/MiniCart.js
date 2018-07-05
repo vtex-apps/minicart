@@ -28,6 +28,7 @@ export class MiniCart extends Component {
           widget: {
             'ui:widget': 'range',
           },
+          isLayout: true,
         },
       }
     }
@@ -54,22 +55,27 @@ export class MiniCart extends Component {
               'inline': true,
             },
           },
+          isLayout: true,
         },
         showRemoveButton: {
           title: 'editor.minicart.showRemoveButton.title',
           type: 'boolean',
+          isLayout: true,
         },
         labelMiniCartEmpty: {
           title: 'editor.minicart.labelMiniCartEmpty.title',
           type: 'string',
+          isLayout: false,
         },
         labelButtonFinishShopping: {
           title: 'editor.minicart.labelButtonFinishShopping.title',
           type: 'string',
+          isLayout: false,
         },
         enableQuantitySelector: {
           title: 'editor.minicart.enableQuantitySelector.title',
           type: 'boolean',
+          isLayout: true,
         },
         ...generatedSchema,
       },
