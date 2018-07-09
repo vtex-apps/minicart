@@ -11,11 +11,19 @@ import Sidebar from './components/Sidebar'
 
 import './global.css'
 
+const MINIMUM_MAX_QUANTITY = 1
+const MAXIMUM_MAX_QUANTITY = 10
+const DEFAULT_MAX_QUANTITY = 1
+
 /**
  * Minicart component
  */
 export class MiniCart extends Component {
   static propTypes = MiniCartPropTypes
+
+  static defaultProps = {
+    maxQuantity: DEFAULT_MAX_QUANTITY
+  }
 
   static getSchema = props => {
     const getQuantitySelectorSchema = () => {
@@ -23,9 +31,9 @@ export class MiniCart extends Component {
         maxQuantity: {
           title: 'editor.minicart.maxQuantity.title',
           type: 'number',
-          minimum: 1,
-          maximum: 10,
-          default: 1,
+          minimum: MINIMUM_MAX_QUANTITY,
+          maximum: MAXIMUM_MAX_QUANTITY,
+          default: DEFAULT_MAX_QUANTITY,
           widget: {
             'ui:widget': 'range',
           },
