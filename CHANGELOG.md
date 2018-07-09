@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Fixed 
 - `maxQuantity` undefined warning.
+- Loading mixed (insecure) display content warning.
 
 ## [0.7.0] - 2018-7-6
 ### Added
