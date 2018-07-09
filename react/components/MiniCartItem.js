@@ -69,7 +69,7 @@ export default class MiniCartItem extends Component {
   }
 
   stripImageUrl(url) {
-    return url//.replace(/^(http(s?):)/, '')
+    return url.replace(/^(http(s?):)/, '')
   }
 
   render() {
