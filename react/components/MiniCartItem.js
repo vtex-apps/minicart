@@ -68,6 +68,10 @@ export default class MiniCartItem extends Component {
     this.props.removeItem(id)
   }
 
+  stripImageUrl(url) {
+    return url.replace(/^(http(s?):)/, '')
+  }
+
   render() {
     const {
       id,
@@ -100,7 +104,7 @@ export default class MiniCartItem extends Component {
             </div>
             <div className="vtex-minicart__item-footer relative flex flex-row pb2 items-center w-100">
               <div className="vtex-minicart__img-container">
-                <img className="vtex-minicart__item-image" src={imageUrl} alt={name} />
+                <img className="vtex-minicart__item-image" src={this.stripImageUrl(imageUrl)} alt={name} />
               </div>
               <div className="justify-end absolute right-0 pt6">
                 <ProductPrice
