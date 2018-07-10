@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Changed
-- `Popup` appear when the `MiniCart` button is clicked instead of on hover.
+- `Popup` to appear when the `MiniCart` button is clicked instead of on hover.
 
 ### Fixed 
 - `maxQuantity` undefined warning.
