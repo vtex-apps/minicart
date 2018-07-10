@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 import { IconCaretRight } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
 
-import OutsideClickHandler from 'react-outside-click-handler'
-
 import MiniCart from '../MiniCart'
 
 const WHITE_COLOR = '#FFFFFF'
@@ -25,23 +23,19 @@ class Sidebar extends Component {
 
     if (typeof window !== 'undefined') {
       return ReactDOM.createPortal(
-        <OutsideClickHandler
-          onOutsideClick={onBackClick}
-        >
-          <div className="vtex-minicart__sidebar fixed top-0 right-0 z-9999 bg-white shadow-2 flex flex-column">
-            <div
-              className="vtex-minicart__sidebar-header pointer flex flex-row items-center pa5"
-              onClick={onBackClick}
-            >
-              <IconCaretRight size={18} color={WHITE_COLOR} />
-              <div className="mt3 ml4">
-                <MiniCart hideContent miniCartIconColor={WHITE_COLOR} />
-              </div>
-              <span className="ml4 white b ttu">{intl.formatMessage({ id: 'sidebar-title' })}</span>
+        <div className="vtex-minicart__sidebar fixed top-0 right-0 z-9999 bg-white shadow-2 flex flex-column">
+          <div
+            className="vtex-minicart__sidebar-header pointer flex flex-row items-center pa5"
+            onClick={onBackClick}
+          >
+            <IconCaretRight size={18} color={WHITE_COLOR} />
+            <div className="mt3 ml4">
+              <MiniCart hideContent miniCartIconColor={WHITE_COLOR} />
             </div>
-            {this.props.children}
+            <span className="ml4 white b ttu">{intl.formatMessage({ id: 'sidebar-title' })}</span>
           </div>
-        </OutsideClickHandler>,
+          {this.props.children}
+        </div>,
         document.body
       )
     }
