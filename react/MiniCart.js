@@ -112,7 +112,9 @@ export class MiniCart extends Component {
       if (isMobile && this.props.type !== 'sidebar') {
         location.assign('/checkout/#/cart')
       } else {
-        this.handleUpdateContentVisibility()
+        this.setState({
+          openContent: !this.state.openContent,
+        })
       }
     }
     event.persist()
@@ -120,7 +122,7 @@ export class MiniCart extends Component {
 
   handleUpdateContentVisibility = () => {
     this.setState({
-      openContent: !this.state.openContent,
+      openContent: false,
     })
   }
 
