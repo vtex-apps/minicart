@@ -1,7 +1,3 @@
-body {
-  width: 100%;
-}
-
 .vtex-minicart__item {
   height: 109px;
 }
@@ -20,12 +16,8 @@ body {
 .vtex-minicart__box {
   width: 364px;
   top: 100%;
-  display: none;
-  visibility: visible;
-}
-
-.vtex-minicart:hover .vtex-minicart__box {
   display: block;
+  visibility: visible;
 }
 
 @media only screen and (max-width: 600px) {
