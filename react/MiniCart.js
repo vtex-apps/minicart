@@ -169,7 +169,6 @@ export class MiniCart extends Component {
     )
 
     return (
-      
       <div className="vtex-minicart relative fr">
         <Button variation="tertiary" icon onClick={event => this.handleClickButton(event)} >
           <CartIcon fillColor={miniCartIconColor} />
