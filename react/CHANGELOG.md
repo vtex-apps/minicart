@@ -7,5 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+ - not expected behavior when a click occurs inside the `MiniCart` of `SideBar` type.
+
 ### Added
  - Initial files and logic created.
