@@ -10,7 +10,7 @@ import { MiniCartPropTypes } from './propTypes'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
 import OutsideClickHandler from 'react-outside-click-handler'
-import orderFormConsumer from 'vtex.store/OrderFormContext'
+import orderFormContext from 'vtex.store/OrderFormContext'
 import './global.css'
 
 const MINIMUM_MAX_QUANTITY = 1
@@ -141,7 +141,8 @@ class MiniCart extends Component {
   render() {
     console.log('PROPS', this.props)
 
-    return <div />
+    if (!this.props.orderFormData) return null
+
     const { openContent } = this.state
     const {
       labelMiniCartEmpty,
@@ -151,17 +152,20 @@ class MiniCart extends Component {
       showDiscount,
       enableQuantitySelector,
       maxQuantity,
-      data,
+      orderFormData,
       type,
       hideContent,
     } = this.props
-    const { orderForm } = data
-    const quantity = orderForm && orderForm.items ? orderForm.items.length : 0
+    const { orderForm } = orderFormData
+    const quantity =
+      orderForm && !orderForm.loading && orderForm.items
+        ? orderForm.items.length
+        : 0
     const large = type && type === 'sidebar'
     const miniCartContent = (
       <MiniCartContent
         large={large}
-        data={data}
+        data={orderFormData}
         onUpdateItemsQuantity={this.handleUpdateQuantityItems}
         showRemoveButton={showRemoveButton}
         showDiscount={showDiscount}
@@ -200,10 +204,4 @@ class MiniCart extends Component {
   }
 }
 
-const options = {
-  options: () => ({
-    ssr: false,
-  }),
-}
-
-export default orderFormConsumer(MiniCart)
+export default orderFormContext.orderFormConsumer(MiniCart)
