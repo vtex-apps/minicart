@@ -10,17 +10,17 @@ import { MiniCartPropTypes } from './propTypes'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
 import OutsideClickHandler from 'react-outside-click-handler'
-
+import orderFormConsumer from 'vtex.store/OrderFormContext'
 import './global.css'
 
 const MINIMUM_MAX_QUANTITY = 1
 const MAXIMUM_MAX_QUANTITY = 10
 const DEFAULT_MAX_QUANTITY = 1
-
 /**
+
  * Minicart component
  */
-export class MiniCart extends Component {
+class MiniCart extends Component {
   static propTypes = MiniCartPropTypes
 
   static defaultProps = {
@@ -44,7 +44,8 @@ export class MiniCart extends Component {
       }
     }
 
-    const generatedSchema = props.enableQuantitySelector && getQuantitySelectorSchema()
+    const generatedSchema =
+      props.enableQuantitySelector && getQuantitySelectorSchema()
 
     return {
       title: 'editor.minicart.title',
@@ -63,7 +64,7 @@ export class MiniCart extends Component {
           widget: {
             'ui:widget': 'radio',
             'ui:options': {
-              'inline': true,
+              inline: true,
             },
           },
           isLayout: true,
@@ -107,7 +108,7 @@ export class MiniCart extends Component {
     document.addEventListener('item:add', this.handleItemAdd)
   }
 
-  handleClickButton = (event) => {
+  handleClickButton = event => {
     if (!this.props.hideContent) {
       if (isMobile && this.props.type !== 'sidebar') {
         location.assign('/checkout/#/cart')
@@ -134,12 +135,14 @@ export class MiniCart extends Component {
     this.props.data.refetch()
   }
 
-  handleUpdateQuantityItems = quantity => this.setState({ quantityItems: quantity })
+  handleUpdateQuantityItems = quantity =>
+    this.setState({ quantityItems: quantity })
 
   render() {
-    const {
-      openContent,
-    } = this.state
+    console.log('PROPS', this.props)
+
+    return <div />
+    const { openContent } = this.state
     const {
       labelMiniCartEmpty,
       labelButtonFinishShopping,
@@ -172,23 +175,25 @@ export class MiniCart extends Component {
     return (
       <OutsideClickHandler onOutsideClick={this.handleUpdateContentVisibility}>
         <div className="vtex-minicart relative fr">
-          <Button variation="tertiary" icon onClick={event => this.handleClickButton(event)} >
+          <Button
+            variation="tertiary"
+            icon
+            onClick={event => this.handleClickButton(event)}
+          >
             <CartIcon fillColor={miniCartIconColor} />
-            {quantity > 0 &&
-              <span className="vtex-minicart__bagde mt1 mr1">
-                {quantity}
-              </span>
-            }
+            {quantity > 0 && (
+              <span className="vtex-minicart__bagde mt1 mr1">{quantity}</span>
+            )}
           </Button>
-          {!hideContent && large ? openContent &&
-            <Sidebar onBackClick={this.handleUpdateContentVisibility}>
-              {miniCartContent}
-            </Sidebar>
-            : openContent &&
-            <Popup showDiscount={showDiscount}>
-              {miniCartContent}
-            </Popup>
-          }
+          {!hideContent && large
+            ? openContent && (
+                <Sidebar onBackClick={this.handleUpdateContentVisibility}>
+                  {miniCartContent}
+                </Sidebar>
+              )
+            : openContent && (
+                <Popup showDiscount={showDiscount}>{miniCartContent}</Popup>
+              )}
         </div>
       </OutsideClickHandler>
     )
@@ -201,4 +206,4 @@ const options = {
   }),
 }
 
-export default graphql(orderFormQuery, options)(MiniCart)
+export default orderFormConsumer(MiniCart)
