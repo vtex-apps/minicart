@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import orderFormQuery from './graphql/orderFormQuery.gql'
-import { graphql } from 'react-apollo'
 import { Button } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
 
@@ -9,8 +7,8 @@ import MiniCartContent from './components/MiniCartContent'
 import { MiniCartPropTypes } from './propTypes'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
-import OutsideClickHandler from 'react-outside-click-handler'
 import orderFormContext from 'vtex.store/OrderFormContext'
+
 import './global.css'
 
 const MINIMUM_MAX_QUANTITY = 1
@@ -177,29 +175,32 @@ class MiniCart extends Component {
     )
 
     return (
-      <OutsideClickHandler onOutsideClick={this.handleUpdateContentVisibility}>
-        <div className="vtex-minicart relative fr">
-          <Button
-            variation="tertiary"
-            icon
-            onClick={event => this.handleClickButton(event)}
-          >
-            <CartIcon fillColor={miniCartIconColor} />
-            {quantity > 0 && (
-              <span className="vtex-minicart__bagde mt1 mr1">{quantity}</span>
+      <div className="vtex-minicart relative fr">
+        <Button
+          variation="tertiary"
+          icon
+          onClick={event => this.handleClickButton(event)}
+        >
+          <CartIcon fillColor={miniCartIconColor} />
+          {quantity > 0 && (
+            <span className="vtex-minicart__bagde mt1 mr1">{quantity}</span>
+          )}
+        </Button>
+        {!hideContent && large
+          ? openContent && (
+              <Sidebar onOutsideClick={this.handleUpdateContentVisibility}>
+                {miniCartContent}
+              </Sidebar>
+            )
+          : openContent && (
+              <Popup
+                showDiscount={showDiscount}
+                onOutsideClick={this.handleUpdateContentVisibility}
+              >
+                {miniCartContent}
+              </Popup>
             )}
-          </Button>
-          {!hideContent && large
-            ? openContent && (
-                <Sidebar onBackClick={this.handleUpdateContentVisibility}>
-                  {miniCartContent}
-                </Sidebar>
-              )
-            : openContent && (
-                <Popup showDiscount={showDiscount}>{miniCartContent}</Popup>
-              )}
-        </div>
-      </OutsideClickHandler>
+      </div>
     )
   }
 }

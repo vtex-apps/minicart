@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import { IconCaretRight } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
+import OutsideClickHandler from 'react-outside-click-handler'
 
 import MiniCart from '../MiniCart'
 
@@ -19,23 +20,25 @@ class Sidebar extends Component {
   }
 
   render() {
-    const { onBackClick, intl } = this.props
+    const { onOutsideClick, intl } = this.props
 
     if (typeof window !== 'undefined') {
       return ReactDOM.createPortal(
-        <div className="vtex-minicart__sidebar fixed top-0 right-0 z-9999 bg-white shadow-2 flex flex-column">
-          <div
-            className="vtex-minicart__sidebar-header pointer flex flex-row items-center pa5"
-            onClick={onBackClick}
-          >
-            <IconCaretRight size={18} color={WHITE_COLOR} />
-            <div className="mt3 ml4">
-              <MiniCart hideContent miniCartIconColor={WHITE_COLOR} />
+        <OutsideClickHandler onOutsideClick={onOutsideClick}>
+          <div className="vtex-minicart__sidebar fixed top-0 right-0 z-9999 bg-white shadow-2 flex flex-column">
+            <div
+              className="vtex-minicart__sidebar-header pointer flex flex-row items-center pa5"
+              onClick={onOutsideClick}
+            >
+              <IconCaretRight size={18} color={WHITE_COLOR} />
+              <div className="mt3 ml4">
+                <MiniCart hideContent miniCartIconColor={WHITE_COLOR} />
+              </div>
+              <span className="ml4 white b ttu">{intl.formatMessage({ id: 'sidebar-title' })}</span>
             </div>
-            <span className="ml4 white b ttu">{intl.formatMessage({ id: 'sidebar-title' })}</span>
+            {this.props.children}
           </div>
-          {this.props.children}
-        </div>,
+        </OutsideClickHandler>,
         document.body
       )
     }
@@ -48,8 +51,8 @@ Sidebar.propTypes = {
   intl: intlShape.isRequired,
   /* Sidebar content */
   children: PropTypes.object.isRequired,
-  /* Function to be called when click in the close sidebar button */
-  onBackClick: PropTypes.func,
+  /* Function to be called when click in the close sidebar button or outside the sidebar */
+  onOutsideClick: PropTypes.func,
 }
 
 export default injectIntl(Sidebar)
