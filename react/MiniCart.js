@@ -7,7 +7,7 @@ import MiniCartContent from './components/MiniCartContent'
 import { MiniCartPropTypes } from './propTypes'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
-import orderFormContext from 'vtex.store/OrderFormContext'
+import { orderFormConsumer } from 'vtex.store/OrderFormContext'
 
 import './global.css'
 
@@ -130,15 +130,13 @@ class MiniCart extends Component {
   }
 
   handleItemAdd = () => {
-    this.props.data.refetch()
+    this.props.orderFormData.refetch()
   }
 
   handleUpdateQuantityItems = quantity =>
     this.setState({ quantityItems: quantity })
 
   render() {
-    console.log('PROPS', this.props)
-
     if (!this.props.orderFormData) return null
 
     const { openContent } = this.state
@@ -205,4 +203,4 @@ class MiniCart extends Component {
   }
 }
 
-export default orderFormContext.orderFormConsumer(MiniCart)
+export default orderFormConsumer(MiniCart)
