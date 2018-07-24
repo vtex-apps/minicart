@@ -98,12 +98,7 @@ class MiniCart extends Component {
   }
 
   state = {
-    quantityItems: 0,
     openContent: false,
-  }
-
-  componentDidMount() {
-    document.addEventListener('item:add', this.handleItemAdd)
   }
 
   handleClickButton = event => {
@@ -125,16 +120,9 @@ class MiniCart extends Component {
     })
   }
 
-  componentWillUnmount() {
-    document.removeEventListener('item:add', this.handleItemAdd)
-  }
-
   handleItemAdd = () => {
     this.props.orderFormData.refetch()
   }
-
-  handleUpdateQuantityItems = quantity =>
-    this.setState({ quantityItems: quantity })
 
   render() {
     if (!this.props.orderFormData) return null
@@ -162,7 +150,6 @@ class MiniCart extends Component {
       <MiniCartContent
         large={large}
         data={orderFormData}
-        onUpdateItemsQuantity={this.handleUpdateQuantityItems}
         showRemoveButton={showRemoveButton}
         showDiscount={showDiscount}
         labelMiniCartEmpty={labelMiniCartEmpty}

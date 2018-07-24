@@ -21,8 +21,6 @@ class MiniCartContent extends Component {
   static propTypes = {
     /* Set the mini cart content size */
     large: PropTypes.bool,
-    /* Function to be called when an item is removed */
-    onUpdateItemsQuantity: PropTypes.func,
     /* Mutate function */
     mutate: PropTypes.func.isRequired,
     /* Internationalization */
@@ -45,7 +43,7 @@ class MiniCartContent extends Component {
   sumItemsPrice = items => {
     let sum = 0
     items.forEach(item => {
-      sum += (item.listPrice * item.quantity)
+      sum += item.listPrice * item.quantity
     })
     return sum
   }
@@ -58,7 +56,10 @@ class MiniCartContent extends Component {
   handleClickButton = () => location.assign('/checkout/#/cart')
 
   onRemoveItem = id => {
-    const { mutate, data: { orderForm } } = this.props
+    const {
+      mutate,
+      data: { orderForm },
+    } = this.props
     const itemPayload = orderForm.items.find(item => item.id === id)
     const index = orderForm.items.indexOf(itemPayload)
     const updatedItem = [itemPayload].map(item => {
@@ -75,14 +76,15 @@ class MiniCartContent extends Component {
         items: updatedItem,
       },
       refetchQueries: [{ query: orderFormQuery }],
-    }).then(() => {
-      this.props.onUpdateItemsQuantity(this.props.data.orderForm.items.length - 1)
     })
   }
 
   onUpdateItems = (id, quantity) => {
     this.setState({ showSpinner: true })
-    const { mutate, data: { orderForm } } = this.props
+    const {
+      mutate,
+      data: { orderForm },
+    } = this.props
     const itemPayload = orderForm.items.find(item => item.id === id)
     const index = orderForm.items.indexOf(itemPayload)
     const updatedItem = [itemPayload].map(item => {
@@ -133,14 +135,17 @@ class MiniCartContent extends Component {
       )
     )
 
-    const classes = classNames('vtex-minicart__content overflow-x-hidden h-100', {
-      'vtex-minicart__content--small': !large,
-      'vtex-minicart__content--large': large,
-      'vtex-minicart__content-large--footer-small': large && !showDiscount,
-      'vtex-minicart__content-large--footer-large': large && showDiscount,
-      'overflow-y-scroll': items.length > 3 && !large,
-      'overflow-y-hidden': items.length <= 3 && !large,
-    })
+    const classes = classNames(
+      'vtex-minicart__content overflow-x-hidden h-100',
+      {
+        'vtex-minicart__content--small': !large,
+        'vtex-minicart__content--large': large,
+        'vtex-minicart__content-large--footer-small': large && !showDiscount,
+        'vtex-minicart__content-large--footer-large': large && showDiscount,
+        'overflow-y-scroll': items.length > 3 && !large,
+        'overflow-y-hidden': items.length <= 3 && !large,
+      }
+    )
 
     const discount = this.calculateDiscount(orderForm.items, orderForm.value)
 
@@ -161,21 +166,28 @@ class MiniCartContent extends Component {
           ))}
         </div>
         <div className="absolute bottom-0 w-100 bg-white flex flex-column pa4 bt b--silver pt4">
-          {showDiscount && <div className="vtex-minicart__content-discount w-100 mb4">
-            <span className="ttu b">{labelDiscount}</span>
-            <div className="fr">
-              <ProductPrice
-                sellingPrice={discount}
-                listPrice={discount}
-                showLabels={false}
-                showListPrice={false}
-              />
+          {showDiscount && (
+            <div className="vtex-minicart__content-discount w-100 mb4">
+              <span className="ttu b">{labelDiscount}</span>
+              <div className="fr">
+                <ProductPrice
+                  sellingPrice={discount}
+                  listPrice={discount}
+                  showLabels={false}
+                  showListPrice={false}
+                />
+              </div>
             </div>
-          </div>
-          }
+          )}
           <div className="relative">
             <div className="fl">
-              <Button variation="primary" size="small" onClick={this.handleClickButton}>{label}</Button>
+              <Button
+                variation="primary"
+                size="small"
+                onClick={this.handleClickButton}
+              >
+                {label}
+              </Button>
             </div>
             <div className="absolute right-0 mt3 flex flex-row">
               {showSpinner && <Spinner size={18} />}
@@ -217,12 +229,16 @@ class MiniCartContent extends Component {
     }
 
     if (!data.orderForm || !data.orderForm.items.length) {
-      const label = labelMiniCartEmpty || intl.formatMessage({ id: 'minicart-empty' })
+      const label =
+        labelMiniCartEmpty || intl.formatMessage({ id: 'minicart-empty' })
       return this.renderWithoutItems(label)
     }
 
-    const label = labelButton || intl.formatMessage({ id: 'finish-shopping-button-label' })
-    const labelDiscount = intl.formatMessage({ id: 'minicart-content-footer-discount' })
+    const label =
+      labelButton || intl.formatMessage({ id: 'finish-shopping-button-label' })
+    const labelDiscount = intl.formatMessage({
+      id: 'minicart-content-footer-discount',
+    })
 
     return this.renderMiniCartWithItems(
       data.orderForm,
