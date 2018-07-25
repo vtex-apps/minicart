@@ -20,10 +20,12 @@ export const MiniCartPropTypes = {
   /* Max quantity for the Quantity Selector */
   maxQuantity: PropTypes.number,
   /* Products in the cart */
-  data: PropTypes.shape({
+  orderFormContext: PropTypes.shape({
     loading: PropTypes.bool.isRequired,
     /* Function to refetch the orderForm query */
     refetch: PropTypes.func.isRequired,
+    /* Function to update the orderForm */
+    updateOrderForm: PropTypes.func.isRequired,
     /* Order form */
     orderForm: PropTypes.shape({
       /* Order form id */

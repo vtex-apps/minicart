@@ -121,11 +121,11 @@ class MiniCart extends Component {
   }
 
   handleItemAdd = () => {
-    this.props.orderFormData.refetch()
+    this.props.orderFormContext.refetch()
   }
 
   render() {
-    if (!this.props.orderFormData) return null
+    if (!this.props.orderFormContext) return null
 
     const { openContent } = this.state
     const {
@@ -136,11 +136,11 @@ class MiniCart extends Component {
       showDiscount,
       enableQuantitySelector,
       maxQuantity,
-      orderFormData,
+      orderFormContext,
       type,
       hideContent,
     } = this.props
-    const { orderForm } = orderFormData
+    const { orderForm } = orderFormContext
     const quantity =
       orderForm && !orderForm.loading && orderForm.items
         ? orderForm.items.length
@@ -149,7 +149,7 @@ class MiniCart extends Component {
     const miniCartContent = (
       <MiniCartContent
         large={large}
-        data={orderFormData}
+        data={orderFormContext}
         showRemoveButton={showRemoveButton}
         showDiscount={showDiscount}
         labelMiniCartEmpty={labelMiniCartEmpty}
