@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import orderFormQuery from './graphql/orderFormQuery.gql'
 import { graphql } from 'react-apollo'
 import { Button } from 'vtex.styleguide'
-import { isMobile } from 'react-device-detect'
+import isMobile from 'ismobilejs'
 
 import CartIcon from './images/CartIcon'
 import MiniCartContent from './components/MiniCartContent'
@@ -108,13 +108,9 @@ export class MiniCart extends Component {
 
   handleClickButton = (event) => {
     if (!this.props.hideContent) {
-      if (isMobile && this.props.type !== 'sidebar') {
-        location.assign('/checkout/#/cart')
-      } else {
-        this.setState({
-          openContent: !this.state.openContent,
-        })
-      }
+      this.setState({
+        openContent: !this.state.openContent,
+      })
     }
     event.persist()
   }
@@ -153,7 +149,7 @@ export class MiniCart extends Component {
     } = this.props
     const { orderForm } = data
     const quantity = orderForm && orderForm.items ? orderForm.items.length : 0
-    const large = type && type === 'sidebar'
+    const large = type && type === 'sidebar' || isMobile.any
     const miniCartContent = (
       <MiniCartContent
         large={large}
