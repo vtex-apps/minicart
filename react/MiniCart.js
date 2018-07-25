@@ -18,7 +18,7 @@ const DEFAULT_MAX_QUANTITY = 1
 /**
  * Minicart component
  */
-class MiniCart extends Component {
+export class MiniCart extends Component {
   static propTypes = MiniCartPropTypes
 
   static defaultProps = {
