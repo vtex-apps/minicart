@@ -25,78 +25,6 @@ class MiniCart extends Component {
     maxQuantity: DEFAULT_MAX_QUANTITY,
   }
 
-  static getSchema = props => {
-    const getQuantitySelectorSchema = () => {
-      return {
-        maxQuantity: {
-          title: 'editor.minicart.maxQuantity.title',
-          type: 'number',
-          minimum: MINIMUM_MAX_QUANTITY,
-          maximum: MAXIMUM_MAX_QUANTITY,
-          default: DEFAULT_MAX_QUANTITY,
-          widget: {
-            'ui:widget': 'range',
-          },
-          isLayout: true,
-        },
-      }
-    }
-
-    const generatedSchema =
-      props.enableQuantitySelector && getQuantitySelectorSchema()
-
-    return {
-      title: 'editor.minicart.title',
-      description: 'editor.minicart.description',
-      type: 'object',
-      properties: {
-        type: {
-          title: 'editor.minicart.type.title',
-          type: 'string',
-          default: 'popup',
-          enum: ['popup', 'sidebar'],
-          enumNames: [
-            'editor.minicart.type.popup',
-            'editor.minicart.type.sidebar',
-          ],
-          widget: {
-            'ui:widget': 'radio',
-            'ui:options': {
-              inline: true,
-            },
-          },
-          isLayout: true,
-        },
-        showRemoveButton: {
-          title: 'editor.minicart.showRemoveButton.title',
-          type: 'boolean',
-          isLayout: true,
-        },
-        showDiscount: {
-          title: 'editor.minicart.showDiscount.title',
-          type: 'boolean',
-          isLayout: true,
-        },
-        labelMiniCartEmpty: {
-          title: 'editor.minicart.labelMiniCartEmpty.title',
-          type: 'string',
-          isLayout: false,
-        },
-        labelButtonFinishShopping: {
-          title: 'editor.minicart.labelButtonFinishShopping.title',
-          type: 'string',
-          isLayout: false,
-        },
-        enableQuantitySelector: {
-          title: 'editor.minicart.enableQuantitySelector.title',
-          type: 'boolean',
-          isLayout: true,
-        },
-        ...generatedSchema,
-      },
-    }
-  }
-
   state = {
     openContent: false,
   }
@@ -190,4 +118,78 @@ class MiniCart extends Component {
   }
 }
 
-export default orderFormConsumer(MiniCart)
+const miniHOC = orderFormConsumer(MiniCart)
+
+miniHOC.getSchema = props => {
+  const getQuantitySelectorSchema = () => {
+    return {
+      maxQuantity: {
+        title: 'editor.minicart.maxQuantity.title',
+        type: 'number',
+        minimum: MINIMUM_MAX_QUANTITY,
+        maximum: MAXIMUM_MAX_QUANTITY,
+        default: DEFAULT_MAX_QUANTITY,
+        widget: {
+          'ui:widget': 'range',
+        },
+        isLayout: true,
+      },
+    }
+  }
+
+  const generatedSchema =
+    props.enableQuantitySelector && getQuantitySelectorSchema()
+
+  return {
+    title: 'editor.minicart.title',
+    description: 'editor.minicart.description',
+    type: 'object',
+    properties: {
+      type: {
+        title: 'editor.minicart.type.title',
+        type: 'string',
+        default: 'popup',
+        enum: ['popup', 'sidebar'],
+        enumNames: [
+          'editor.minicart.type.popup',
+          'editor.minicart.type.sidebar',
+        ],
+        widget: {
+          'ui:widget': 'radio',
+          'ui:options': {
+            inline: true,
+          },
+        },
+        isLayout: true,
+      },
+      showRemoveButton: {
+        title: 'editor.minicart.showRemoveButton.title',
+        type: 'boolean',
+        isLayout: true,
+      },
+      showDiscount: {
+        title: 'editor.minicart.showDiscount.title',
+        type: 'boolean',
+        isLayout: true,
+      },
+      labelMiniCartEmpty: {
+        title: 'editor.minicart.labelMiniCartEmpty.title',
+        type: 'string',
+        isLayout: false,
+      },
+      labelButtonFinishShopping: {
+        title: 'editor.minicart.labelButtonFinishShopping.title',
+        type: 'string',
+        isLayout: false,
+      },
+      enableQuantitySelector: {
+        title: 'editor.minicart.enableQuantitySelector.title',
+        type: 'boolean',
+        isLayout: true,
+      },
+      ...generatedSchema,
+    },
+  }
+}
+
+export default miniHOC
