@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.7.2] - 2018-07-25
+
 ## [0.7.1] - 2018-07-11
 ### Changed
 - `Popup` to appear when the `MiniCart` button is clicked instead of on hover.
