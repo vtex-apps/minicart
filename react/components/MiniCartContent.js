@@ -1,15 +1,11 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'react-apollo'
 import { injectIntl, intlShape } from 'react-intl'
 import { reduceBy, values } from 'ramda'
 import classNames from 'classnames'
 
 import { Button, Spinner } from 'vtex.styleguide'
 import ProductPrice from 'vtex.store-components/ProductPrice'
-
-import updateItemsMutation from '../graphql/updateItemsMutation.gql'
-import orderFormQuery from '../graphql/orderFormQuery.gql'
 
 import MiniCartItem from './MiniCartItem'
 import { MiniCartPropTypes } from '../propTypes'
@@ -21,8 +17,6 @@ class MiniCartContent extends Component {
   static propTypes = {
     /* Set the mini cart content size */
     large: PropTypes.bool,
-    /* Mutate function */
-    mutate: PropTypes.func.isRequired,
     /* Internationalization */
     intl: intlShape.isRequired,
     /* Reused props */
@@ -35,10 +29,7 @@ class MiniCartContent extends Component {
     showDiscount: MiniCartPropTypes.showDiscount,
   }
 
-  constructor(props) {
-    super(props)
-    this.state = { showSpinner: false }
-  }
+  state = { showSpinner: false }
 
   sumItemsPrice = items => {
     let sum = 0
@@ -48,17 +39,14 @@ class MiniCartContent extends Component {
     return sum
   }
 
-  calculateDiscount = (items, totalPrice) => {
-    const liquidPrice = this.sumItemsPrice(items)
-    return totalPrice - liquidPrice
-  }
+  calculateDiscount = (items, totalPrice) =>
+    totalPrice - this.sumItemsPrice(items)
 
   handleClickButton = () => location.assign('/checkout/#/cart')
 
   onRemoveItem = id => {
     const {
-      mutate,
-      data: { orderForm },
+      data: { orderForm, updateNRefetchOrderForm },
     } = this.props
     const itemPayload = orderForm.items.find(item => item.id === id)
     const index = orderForm.items.indexOf(itemPayload)
@@ -70,20 +58,19 @@ class MiniCartContent extends Component {
         seller: 1,
       }
     })
-    mutate({
+
+    updateNRefetchOrderForm({
       variables: {
         orderFormId: orderForm.orderFormId,
         items: updatedItem,
       },
-      refetchQueries: [{ query: orderFormQuery }],
     })
   }
 
   onUpdateItems = (id, quantity) => {
     this.setState({ showSpinner: true })
     const {
-      mutate,
-      data: { orderForm },
+      data: { orderForm, updateNRefetchOrderForm },
     } = this.props
     const itemPayload = orderForm.items.find(item => item.id === id)
     const index = orderForm.items.indexOf(itemPayload)
@@ -95,12 +82,12 @@ class MiniCartContent extends Component {
         seller: 1,
       }
     })
-    mutate({
+
+    updateNRefetchOrderForm({
       variables: {
         orderFormId: orderForm.orderFormId,
         items: updatedItem,
       },
-      refetchQueries: [{ query: orderFormQuery }],
     }).then(() => {
       this.setState({
         showSpinner: false,
@@ -254,4 +241,4 @@ class MiniCartContent extends Component {
   }
 }
 
-export default injectIntl(graphql(updateItemsMutation)(MiniCartContent))
+export default injectIntl(MiniCartContent)

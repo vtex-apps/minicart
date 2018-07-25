@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import { contextPropTypes } from 'vtex.store/OrderFormContext'
 
 export const MiniCartPropTypes = {
   /* Set the minicart type */
@@ -20,20 +21,5 @@ export const MiniCartPropTypes = {
   /* Max quantity for the Quantity Selector */
   maxQuantity: PropTypes.number,
   /* Products in the cart */
-  orderFormContext: PropTypes.shape({
-    loading: PropTypes.bool.isRequired,
-    /* Function to refetch the orderForm query */
-    refetch: PropTypes.func.isRequired,
-    /* Function to update the orderForm */
-    updateOrderForm: PropTypes.func.isRequired,
-    /* Order form */
-    orderForm: PropTypes.shape({
-      /* Order form id */
-      orderFormId: PropTypes.string,
-      /* Total price of the order */
-      value: PropTypes.number,
-      /* Items in the mini cart */
-      items: PropTypes.arrayOf(PropTypes.object),
-    }),
-  }).isRequired,
+  orderFormContext: contextPropTypes,
 }

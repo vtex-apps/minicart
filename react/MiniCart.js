@@ -14,8 +14,8 @@ import './global.css'
 const MINIMUM_MAX_QUANTITY = 1
 const MAXIMUM_MAX_QUANTITY = 10
 const DEFAULT_MAX_QUANTITY = 1
-/**
 
+/**
  * Minicart component
  */
 class MiniCart extends Component {
