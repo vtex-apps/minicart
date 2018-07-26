@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import orderFormQuery from './graphql/orderFormQuery.gql'
 import { graphql } from 'react-apollo'
 import { Button } from 'vtex.styleguide'
-import isMobile from 'ismobilejs'
 
 import CartIcon from './images/CartIcon'
 import MiniCartContent from './components/MiniCartContent'
@@ -97,13 +96,30 @@ export class MiniCart extends Component {
     }
   }
 
+  _mounted = false
+
   state = {
     quantityItems: 0,
     openContent: false,
+    isMobile: false,
   }
 
   componentDidMount() {
+    this._mounted = true
+
     document.addEventListener('item:add', this.handleItemAdd)
+
+    import('ismobilejs')
+      .then(module => module.default)
+      .then(isMobile => {
+        if (!this._mounted) {
+          return
+        }
+
+        this.setState({
+          isMobile: isMobile.any,
+        })
+      })
   }
 
   handleClickButton = (event) => {
@@ -122,6 +138,7 @@ export class MiniCart extends Component {
   }
 
   componentWillUnmount() {
+    this._mounted = false
     document.removeEventListener('item:add', this.handleItemAdd)
   }
 
@@ -134,6 +151,7 @@ export class MiniCart extends Component {
   render() {
     const {
       openContent,
+      isMobile,
     } = this.state
     const {
       labelMiniCartEmpty,
@@ -149,7 +167,7 @@ export class MiniCart extends Component {
     } = this.props
     const { orderForm } = data
     const quantity = orderForm && orderForm.items ? orderForm.items.length : 0
-    const large = type && type === 'sidebar' || isMobile.any
+    const large = type && type === 'sidebar' || isMobile
     const miniCartContent = (
       <MiniCartContent
         large={large}
