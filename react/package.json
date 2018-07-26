@@ -10,7 +10,7 @@
     "@vtex/styleguide": "^3.0.2",
     "classnames": "^2.2.5",
     "identity-obj-proxy": "^3.0.0",
-    "ismobilejs": "^0.4.1",
+    "react-device-detect": "^1.5.8",
     "react-outside-click-handler": "^1.2.0",
     "react-sidebar": "^2.3.2",
     "react-slick": "^0.16.0"

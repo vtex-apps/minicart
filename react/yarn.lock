@@ -2336,10 +2336,6 @@ isexe@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
 
-ismobilejs@^0.4.1:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/ismobilejs/-/ismobilejs-0.4.1.tgz#1a5f126c70fed39c93da380fa62cbae5723e7dc2"
-
 isobject@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-2.1.0.tgz#f065561096a3f1da2ef46272f815c840d87e0c89"
@@ -3610,6 +3606,10 @@ react-apollo@^2.0.4:
     invariant "^2.2.2"
     lodash "4.17.5"
     prop-types "^15.6.0"
+
+react-device-detect@^1.5.8:
+  version "1.5.8"
+  resolved "https://registry.yarnpkg.com/react-device-detect/-/react-device-detect-1.5.8.tgz#a26434195145e9b23f19ade031376656e1a8e135"
 
 react-dom@^16.2.0, react-dom@^16.3.2:
   version "16.3.2"
