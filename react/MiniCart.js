@@ -108,13 +108,9 @@ export class MiniCart extends Component {
 
   handleClickButton = (event) => {
     if (!this.props.hideContent) {
-      if (isMobile && this.props.type !== 'sidebar') {
-        location.assign('/checkout/#/cart')
-      } else {
-        this.setState({
-          openContent: !this.state.openContent,
-        })
-      }
+      this.setState({
+        openContent: !this.state.openContent,
+      })
     }
     event.persist()
   }
@@ -136,9 +132,7 @@ export class MiniCart extends Component {
   handleUpdateQuantityItems = quantity => this.setState({ quantityItems: quantity })
 
   render() {
-    const {
-      openContent,
-    } = this.state
+    const { openContent } = this.state
     const {
       labelMiniCartEmpty,
       labelButtonFinishShopping,
@@ -152,8 +146,13 @@ export class MiniCart extends Component {
       hideContent,
     } = this.props
     const { orderForm } = data
+
     const quantity = orderForm && orderForm.items ? orderForm.items.length : 0
-    const large = type && type === 'sidebar'
+
+    const large = type && type === 'sidebar' ||
+      isMobile ||
+      (window && window.innerWidth <= 480)
+
     const miniCartContent = (
       <MiniCartContent
         large={large}

@@ -11,7 +11,7 @@ export default class Popup extends Component {
     const {
       showDiscount,
       children,
-      onOutsideClick
+      onOutsideClick,
     } = this.props
     const classes = classNames('mt3 bg-white relative', {
       'vtex-minicart__content-container--footer-small': !showDiscount,
