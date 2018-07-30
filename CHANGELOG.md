@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - OrderFormContext component
 ### Changed
 - Removed Graphql queries and mutation
+- Open sidebar independent of configuration if on mobile.
 
 ## [0.7.2] - 2018-07-25
 
