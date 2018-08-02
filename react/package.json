@@ -6,14 +6,10 @@
     "test": "jest"
   },
   "dependencies": {
-    "@vtex/product-details": "1.1.1",
-    "@vtex/styleguide": "^3.0.2",
     "classnames": "^2.2.5",
     "identity-obj-proxy": "^3.0.0",
     "react-device-detect": "^1.5.8",
-    "react-outside-click-handler": "^1.2.0",
-    "react-sidebar": "^2.3.2",
-    "react-slick": "^0.16.0"
+    "react-outside-click-handler": "^1.2.0"
   },
   "devDependencies": {
     "apollo-client-preset": "^1.0.8",
