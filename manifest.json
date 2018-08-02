@@ -2,7 +2,7 @@
   "vendor": "vtex",
   "name": "minicart",
   "title": "Mini Cart",
-  "version": "0.7.2",
+  "version": "0.8.0",
   "defaultLocale": "pt-BR",
   "builders": {
     "pages": "0.x",
@@ -10,7 +10,9 @@
   },
   "mustUpdateAt": "2019-04-20",
   "categories": [],
-  "registries": ["smartcheckout"],
+  "registries": [
+    "smartcheckout"
+  ],
   "settingsSchema": {},
   "scripts": {
     "postreleasy": "vtex publish --verbose"
