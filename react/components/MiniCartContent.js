@@ -20,7 +20,7 @@ class MiniCartContent extends Component {
     /* Internationalization */
     intl: intlShape.isRequired,
     /* Reused props */
-    data: MiniCartPropTypes.data,
+    data: MiniCartPropTypes.orderFormContext,
     labelMiniCartEmpty: MiniCartPropTypes.labelMiniCartEmpty,
     labelButton: MiniCartPropTypes.labelButtonFinishShopping,
     showRemoveButton: MiniCartPropTypes.showRemoveButton,
