@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - `MiniCartContent` prop-types.
 
+### Added
+- Animation into the `SideBar`.
+
 ## [0.8.0] - 2018-08-02
 ### Added
 - OrderFormContext component
