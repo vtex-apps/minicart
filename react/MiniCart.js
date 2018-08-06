@@ -62,7 +62,7 @@ export class MiniCart extends Component {
       type,
       hideContent,
     } = this.props
-    
+
     const { orderForm } = orderFormContext
     const quantity = orderForm && orderForm.items ? orderForm.items.length : 0
 
@@ -95,20 +95,19 @@ export class MiniCart extends Component {
             <span className="vtex-minicart__bagde mt1 mr1">{quantity}</span>
           )}
         </Button>
-        {!hideContent && large
-          ? openContent && (
-              <Sidebar onOutsideClick={this.handleUpdateContentVisibility}>
-                {miniCartContent}
-              </Sidebar>
-            )
-          : openContent && (
-              <Popup
-                showDiscount={showDiscount}
-                onOutsideClick={this.handleUpdateContentVisibility}
-              >
-                {miniCartContent}
-              </Popup>
-            )}
+        {!hideContent && (
+          large
+            ? <Sidebar onOutsideClick={this.handleUpdateContentVisibility} isOpen={openContent}>
+              {miniCartContent}
+            </Sidebar>
+            : openContent &&
+            <Popup
+              showDiscount={showDiscount}
+              onOutsideClick={this.handleUpdateContentVisibility}
+            >
+              {miniCartContent}
+            </Popup>
+        )}
       </div>
     )
   }
