@@ -26,7 +26,8 @@ class Sidebar extends Component {
     return (
       <OutsideClickHandler onOutsideClick={onOutsideClick}>
         <div className="vtex-minicart__sidebar fixed top-0 right-0 z-9999 bg-white shadow-2 flex flex-column"
-          style={styles}>
+          style={styles}
+        >
           <div
             className="vtex-minicart__sidebar-header pointer flex flex-row items-center pa5"
             onClick={onOutsideClick}
