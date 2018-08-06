@@ -95,20 +95,19 @@ export class MiniCart extends Component {
             <span className="vtex-minicart__bagde mt1 mr1">{quantity}</span>
           )}
         </Button>
-        {!hideContent && (large
-          ? (
-            <Sidebar onOutsideClick={this.handleUpdateContentVisibility} isOpen={openContent}>
+        {!hideContent && (
+          large
+            ? <Sidebar onOutsideClick={this.handleUpdateContentVisibility} isOpen={openContent}>
               {miniCartContent}
             </Sidebar>
-          )
-          : openContent && (
+            : openContent &&
             <Popup
               showDiscount={showDiscount}
               onOutsideClick={this.handleUpdateContentVisibility}
             >
               {miniCartContent}
             </Popup>
-          ))}
+        )}
       </div>
     )
   }
