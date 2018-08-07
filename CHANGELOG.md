@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Fixed
 - `MiniCartContent` prop-types.
+- Remove item.
 
 ### Added
 - Animation into the `SideBar`.
