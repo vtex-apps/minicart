@@ -21,11 +21,11 @@ export default class Image extends Component {
   )
 
   render() {
-    const { imageUrl, alt } = this.props
+    const { url, alt } = this.props
 
     return (
       <Fragment>
-        <img className="vtex-minicart__item-image" onLoad={() => this.setState({ isLaoded: true })} src={this.stripImageUrl(imageUrl)} alt={alt} />
+        <img className="vtex-minicart__item-image" onLoad={() => this.setState({ isLaoded: true })} src={this.stripImageUrl(url)} alt={alt} />
         {!this.state.isLaoded && this.imgLoader()}
       </Fragment>
     )
@@ -34,7 +34,7 @@ export default class Image extends Component {
 
 Image.propTypes = {
   /* Image's url */
-  imageUrl: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
   /* Image's alt */
   alt: PropTypes.string.isRequired,
 }
