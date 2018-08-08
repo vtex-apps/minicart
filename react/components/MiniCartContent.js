@@ -46,7 +46,7 @@ class MiniCartContent extends Component {
 
   onRemoveItem = id => {
     const {
-      data: { orderForm, updateNRefetchOrderForm },
+      data: { orderForm, updateAndRefetchOrderForm },
     } = this.props
     const itemPayload = orderForm.items.find(item => item.id === id)
     const index = orderForm.items.indexOf(itemPayload)
@@ -59,7 +59,7 @@ class MiniCartContent extends Component {
       }
     })
 
-    updateNRefetchOrderForm({
+    updateAndRefetchOrderForm({
       variables: {
         orderFormId: orderForm.orderFormId,
         items: updatedItem,
@@ -70,7 +70,7 @@ class MiniCartContent extends Component {
   onUpdateItems = (id, quantity) => {
     this.setState({ showSpinner: true })
     const {
-      data: { orderForm, updateNRefetchOrderForm },
+      data: { orderForm, updateAndRefetchOrderForm },
     } = this.props
     const itemPayload = orderForm.items.find(item => item.id === id)
     const index = orderForm.items.indexOf(itemPayload)
@@ -83,7 +83,7 @@ class MiniCartContent extends Component {
       }
     })
 
-    updateNRefetchOrderForm({
+    updateAndRefetchOrderForm({
       variables: {
         orderFormId: orderForm.orderFormId,
         items: updatedItem,
