@@ -101,7 +101,7 @@ export default class MiniCartItem extends Component {
             </div>
             <div className="vtex-minicart__item-footer relative flex flex-row pb2 items-center w-100">
               <div className="vtex-minicart__img-container">
-                <Image imageUrl={imageUrl} alt={name} />
+                <Image url={imageUrl} alt={name} />
               </div>
               <div className="justify-end absolute right-0 pt6">
                 <ProductPrice
