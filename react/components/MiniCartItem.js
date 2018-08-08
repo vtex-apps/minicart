@@ -98,7 +98,7 @@ export default class MiniCartItem extends Component {
           <div className="relative bb b--silver">
             <div className="vtex-minicart__item-name mb2">
               <ProductName name={name} />
-              <div className="f7">
+              <div className="vtex-minicart__item-sku f7">
                 <ProductName name={skuName} />
               </div>
             </div>

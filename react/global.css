@@ -121,3 +121,10 @@
   text-overflow: ellipsis;
   max-width: 90%;
 }
+
+.vtex-minicart__item-sku > .vtex-product-name > .vtex-product-name__brand {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%;
+}
