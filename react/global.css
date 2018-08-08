@@ -114,3 +114,10 @@
 .vtex-minicart__content-discount {
   color: coral;
 }
+
+.vtex-minicart__item-name > .vtex-product-name > .vtex-product-name__brand {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%;
+}

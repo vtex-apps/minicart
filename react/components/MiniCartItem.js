@@ -96,7 +96,7 @@ export default class MiniCartItem extends Component {
           page={'store/product'}
           params={{ slug: this.getItemId(detailUrl) }}>
           <div className="relative bb b--silver">
-            <div className="w-100 mb2">
+            <div className="vtex-minicart__item-name mb2">
               <ProductName name={name} />
               <div className="f7">
                 <ProductName name={skuName} />
