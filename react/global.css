@@ -115,6 +115,11 @@
   color: coral;
 }
 
+.vtex-minicart__item-image-loader {
+  width: 100%;
+  height: 100%;
+}
+
 .vtex-minicart__item-name > .vtex-product-name > .vtex-product-name__brand {
   white-space: nowrap;
   overflow: hidden;
