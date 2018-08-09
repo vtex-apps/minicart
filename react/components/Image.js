@@ -15,7 +15,14 @@ export default class Image extends Component {
   }
 
   imgLoader = () => (
-    <ContentLoader height={100} width={100}>
+    <ContentLoader
+      style={{
+        width: '100%',
+        height: '100%',
+      }}
+      height={100}
+      width={100}
+    >
       <rect className="vtex-minicart__item-image-loader" />
     </ContentLoader>
   )
