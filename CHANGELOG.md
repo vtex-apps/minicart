@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Content Loader while the `MiniCartItem`'s image isn't loaded.
 
+### Fixed
+- `MiniCartItem`'s name width.
+
 ## [0.9.0] - 2018-08-08
 ### Fixed
 - `MiniCartContent` prop-types.
