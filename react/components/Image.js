@@ -15,8 +15,8 @@ export default class Image extends Component {
   }
 
   imgLoader = () => (
-    <ContentLoader height={140} width={140} speed={1}>
-      <rect x="0" y="0" rx="5" ry="5" width="500" height="500" />
+    <ContentLoader height={100} width={100}>
+      <rect className="vtex-minicart__item-image-loader" />
     </ContentLoader>
   )
 

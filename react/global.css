@@ -114,3 +114,8 @@
 .vtex-minicart__content-discount {
   color: coral;
 }
+
+.vtex-minicart__item-image-loader {
+  width: 100%;
+  height: 100%;
+}
