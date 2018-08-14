@@ -22,7 +22,7 @@ export class MiniCart extends Component {
   static propTypes = MiniCartPropTypes
 
   static defaultProps = {
-    maxQuantity: DEFAULT_MAX_QUANTITY,
+    maxQuantity: DEFAULT_MAX_QUANTITY
   }
 
   state = {
@@ -53,7 +53,9 @@ export class MiniCart extends Component {
     const {
       labelMiniCartEmpty,
       labelButtonFinishShopping,
-      miniCartIconColor,
+      iconColor,
+      iconSize,
+      iconLabel,
       showRemoveButton,
       showDiscount,
       enableQuantitySelector,
@@ -90,10 +92,17 @@ export class MiniCart extends Component {
           icon
           onClick={event => this.handleClickButton(event)}
         >
-          <CartIcon fillColor={miniCartIconColor} />
-          {quantity > 0 && (
-            <span className="vtex-minicart__bagde mt1 mr1">{quantity}</span>
-          )}
+          <div className="flex items-center">
+            <CartIcon color={iconColor} size={iconSize} />
+            {quantity > 0 && (
+              <span className="vtex-minicart__bagde mt1 mr1">{quantity}</span>
+            )}
+            {iconLabel && (
+              <span className="white f6 pl4">
+                {iconLabel} 
+              </span>
+            )}
+          </div>
         </Button>
         {!hideContent && (
           large
