@@ -10,8 +10,12 @@ export const MiniCartPropTypes = {
   labelMiniCartEmpty: PropTypes.string,
   /* Finish shopping button label */
   labelButtonFinishShopping: PropTypes.string,
-  /* Mini cart icon color */
-  miniCartIconColor: PropTypes.string,
+  /* Icon's color */
+  iconColor: PropTypes.string,
+  /* Icon's size */
+  iconSize: PropTypes.number,
+  /* Icon's label */
+  iconLabel: PropTypes.string,
   /* Set the visibility of remove button */
   showRemoveButton: PropTypes.bool,
   /* Set the discount visibility */

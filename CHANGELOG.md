@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Animation into the `SideBar`.
+- props `iconLabel`, `iconSize`, `iconColor` to `Minicart` component
 
 ## [0.9.2] - 2018-08-10
 ### Fixed
