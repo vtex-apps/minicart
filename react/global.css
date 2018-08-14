@@ -58,15 +58,15 @@
 }
 
 .vtex-minicart__bagde {
-  font-size: 0.71429rem;
+  font-size: .71429rem;
   background-color: #1790de;
   border-radius: 50%;
   color: #fff;
   height: 18px;
   line-height: 18px;
-  right: -5px;
+  left: 2.4rem;
   text-align: center;
-  top: -4px;
+  top: 0.15rem;
   width: 18px;
   position: absolute;
 }
@@ -94,6 +94,10 @@
   .vtex-minicart__sidebar {
     width: 100vw;
     height: 100vh;
+  }
+
+  .vtex-minicart__bagde {
+    left: 1.8rem;
   }
 }
 
@@ -132,4 +136,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 90%;
+}
+
+.vtex-minicart > .vtex-button {
+  display: flex;
+  align-items: center;
 }
