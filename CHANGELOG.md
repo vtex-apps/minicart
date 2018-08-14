@@ -7,7 +7,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- Animation into the `SideBar`.
 - props `iconLabel`, `iconSize`, `iconColor` to `Minicart` component
 
 ## [0.9.2] - 2018-08-10
