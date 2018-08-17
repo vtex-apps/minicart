@@ -22,7 +22,7 @@ export class MiniCart extends Component {
   static propTypes = MiniCartPropTypes
 
   static defaultProps = {
-    maxQuantity: DEFAULT_MAX_QUANTITY
+    maxQuantity: DEFAULT_MAX_QUANTITY,
   }
 
   state = {
@@ -68,7 +68,8 @@ export class MiniCart extends Component {
     const { orderForm } = orderFormContext
     const quantity = orderForm && orderForm.items ? orderForm.items.length : 0
 
-    const large = type && type === 'sidebar' ||
+    const large =
+      (type && type === 'sidebar') ||
       isMobile ||
       (window && window.innerWidth <= 480)
 
@@ -97,24 +98,29 @@ export class MiniCart extends Component {
             <span className="vtex-minicart__bagde mt1 mr1">{quantity}</span>
           )}
           {iconLabel && (
-            <span className="white f6 pl4">
-              {iconLabel} 
+            <span className={`white f6 pl${quantity > 0 ? '6' : '4'} `}>
+              {iconLabel}
             </span>
           )}
         </Button>
-        {!hideContent && (
-          large
-            ? <Sidebar onOutsideClick={this.handleUpdateContentVisibility} isOpen={openContent}>
-              {miniCartContent}
-            </Sidebar>
-            : openContent &&
-            <Popup
-              showDiscount={showDiscount}
+        {!hideContent &&
+          (large ? (
+            <Sidebar
               onOutsideClick={this.handleUpdateContentVisibility}
+              isOpen={openContent}
             >
               {miniCartContent}
-            </Popup>
-        )}
+            </Sidebar>
+          ) : (
+            openContent && (
+              <Popup
+                showDiscount={showDiscount}
+                onOutsideClick={this.handleUpdateContentVisibility}
+              >
+                {miniCartContent}
+              </Popup>
+            )
+          ))}
       </div>
     )
   }
