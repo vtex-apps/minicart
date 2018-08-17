@@ -2,7 +2,7 @@
     "editor.minicart.title": "Carrinho de Compras",
     "editor.minicart.description": "Um simples carrinho de compras que mostra todos os produtos adicionados a ele",
     "editor.minicart.showRemoveButton.title": "Mostrar botão de remover produto",
-    "editor.minicart.showDiscount.title": "Mostrar a quantidade de dinheiro economizada",
+    "editor.minicart.showDiscount.title": "Mostrar a quantidade de dinheiro economizado",
     "editor.minicart.labelMiniCartEmpty.title": "Texto que irá aparecer quando o carrinho estiver vazio",
     "editor.minicart.labelButtonFinishShopping.title": "Texto que irá aparecer no botão de finalizar compra",
     "editor.minicart.enableQuantitySelector.title": "Habilitar o seletor de quantidade",
