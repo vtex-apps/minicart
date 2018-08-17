@@ -40,7 +40,7 @@ class MiniCartContent extends Component {
   }
 
   calculateDiscount = (items, totalPrice) =>
-    totalPrice - this.sumItemsPrice(items)
+    this.sumItemsPrice(items) - totalPrice
 
   handleClickButton = () => location.assign('/checkout/#/cart')
 
