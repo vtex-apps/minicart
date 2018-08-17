@@ -93,15 +93,21 @@ export class MiniCart extends Component {
           icon
           onClick={event => this.handleClickButton(event)}
         >
-          <CartIcon fillColor={iconColor} size={iconSize} />
-          {quantity > 0 && (
-            <span className="vtex-minicart__bagde mt1 mr1">{quantity}</span>
-          )}
-          {iconLabel && (
-            <span className={`white f6 pl${quantity > 0 ? '6' : '4'} `}>
-              {iconLabel}
-            </span>
-          )}
+          <div
+            ref={e => {
+              this.iconRef = e
+            }}
+          >
+            <CartIcon fillColor={iconColor} size={iconSize} />
+            {quantity > 0 && (
+              <span className="vtex-minicart__bagde mt1 mr1">{quantity}</span>
+            )}
+            {iconLabel && (
+              <span className={`white f6 pl${quantity > 0 ? '6' : '4'} `}>
+                {iconLabel}
+              </span>
+            )}
+          </div>
         </Button>
         {!hideContent &&
           (large ? (
@@ -116,6 +122,7 @@ export class MiniCart extends Component {
               <Popup
                 showDiscount={showDiscount}
                 onOutsideClick={this.handleUpdateContentVisibility}
+                buttonOffsetWidth={this.iconRef.offsetWidth}
               >
                 {miniCartContent}
               </Popup>
