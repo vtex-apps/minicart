@@ -20,7 +20,7 @@ export default class Popup extends Component {
     })
 
     const boxPositionStyle = {
-      right: buttonOffsetWidth && buttonOffsetWidth - 24,
+      right: buttonOffsetWidth && buttonOffsetWidth - 49,
     }
 
     return (
