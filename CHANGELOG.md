@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - Fix box position to be compatible with the new header design
 
+## [1.0.1] - 2018-08-17
+### Fixed
+- Discount label text.
+
 ## [1.0.0] - 2018-08-17
 ### Added
 - props `iconLabel`, `iconSize`, `iconColor` to `Minicart` component
