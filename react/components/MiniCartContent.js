@@ -39,6 +39,17 @@ class MiniCartContent extends Component {
     return sum
   }
 
+  getNoRepetedItems = () =>
+    values(
+      reduceBy(
+        (acc, item) =>
+          acc ? { ...acc, quantity: acc.quantity + item.quantity } : item,
+        undefined,
+        item => item.id,
+        this.props.data.orderForm.items
+      )
+    )
+
   calculateDiscount = (items, totalPrice) =>
     this.sumItemsPrice(items) - totalPrice
 
@@ -70,29 +81,72 @@ class MiniCartContent extends Component {
   onUpdateItems = (id, quantity) => {
     this.setState({ showSpinner: true })
     const {
-      data: { orderForm, updateAndRefetchOrderForm },
+      data: { orderForm, updateAndRefetchOrderForm, updateOrderForm },
     } = this.props
-    const itemPayload = orderForm.items.find(item => item.id === id)
-    const index = orderForm.items.indexOf(itemPayload)
-    const updatedItem = [itemPayload].map(item => {
-      return {
-        id: parseInt(item.id),
-        index: index,
-        quantity: quantity,
-        seller: 1,
-      }
-    })
 
-    updateAndRefetchOrderForm({
-      variables: {
-        orderFormId: orderForm.orderFormId,
-        items: updatedItem,
-      },
-    }).then(() => {
-      this.setState({
-        showSpinner: false,
+    const items = this.getNoRepetedItems()
+    const itemPayloadConcatenated = items.find(item => item.id === id)
+    const itemsPayload = orderForm.items.filter(item => item.id === id)
+    const index = orderForm.items.indexOf(itemsPayload[0])
+    const newQuantity = quantity - (itemPayloadConcatenated.quantity - itemsPayload[0].quantity)
+
+    if (newQuantity > 0) {
+      const updatedItem = [itemsPayload[0]].map(item => {
+        return {
+          id: item.id,
+          index: index,
+          quantity: newQuantity,
+          seller: 1,
+        }
       })
-    })
+
+      updateAndRefetchOrderForm({
+        variables: {
+          orderFormId: orderForm.orderFormId,
+          items: updatedItem,
+        },
+      }).then(() => {
+        this.setState({
+          showSpinner: false,
+        })
+      })
+    } else {
+      let updatedItem = [itemsPayload[0]].map(item => {
+        return {
+          id: item.id,
+          index: index,
+          quantity: 0,
+          seller: 1,
+        }
+      })
+
+      updateOrderForm({
+        variables: {
+          orderFormId: orderForm.orderFormId,
+          items: updatedItem,
+        },
+      })
+
+      updatedItem = [itemsPayload[1]].map(item => {
+        return {
+          id: item.id,
+          index: index + 1,
+          quantity: itemsPayload[1].quantity + newQuantity,
+          seller: 1,
+        }
+      })
+
+      updateAndRefetchOrderForm({
+        variables: {
+          orderFormId: orderForm.orderFormId,
+          items: updatedItem,
+        },
+      }).then(() => {
+        this.setState({
+          showSpinner: false,
+        })
+      })
+    }
   }
 
   renderWithoutItems = label => (
@@ -112,15 +166,7 @@ class MiniCartContent extends Component {
     showSpinner,
     large
   ) => {
-    const items = values(
-      reduceBy(
-        (acc, item) =>
-          acc ? { ...acc, quantity: acc.quantity + item.quantity } : item,
-        undefined,
-        item => item.id,
-        orderForm.items
-      )
-    )
+    const items = this.getNoRepetedItems()
 
     const classes = classNames(
       'vtex-minicart__content overflow-x-hidden h-100',
@@ -134,7 +180,7 @@ class MiniCartContent extends Component {
       }
     )
 
-    const discount = this.calculateDiscount(orderForm.items, orderForm.value)
+    const discount = this.calculateDiscount(items, orderForm.value)
 
     return (
       <Fragment>
