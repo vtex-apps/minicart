@@ -6,6 +6,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@vtex/styleguide": "5.6.2",
     "classnames": "^2.2.5",
     "identity-obj-proxy": "^3.0.0",
     "react-content-loader": "^3.1.2",

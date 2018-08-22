@@ -4,7 +4,7 @@ import { Link } from 'render'
 import { Button, Spinner, IconClose } from 'vtex.styleguide'
 import ProductName from 'vtex.store-components/ProductName'
 import ProductPrice from 'vtex.store-components/ProductPrice'
-import QuantitySelector from 'vtex.store-components/QuantitySelector'
+import NumericStepper from '@vtex/styleguide/lib/NumericStepper'
 import { MiniCartPropTypes } from '../propTypes'
 import Image from './Image'
 
@@ -54,7 +54,7 @@ export default class MiniCartItem extends Component {
   }
 
   handleQuantityChange = quantity => {
-    this.props.updateItem(this.props.id, quantity)
+    this.props.updateItem(this.props.id, quantity.value)
   }
 
   getItemId = detailUrl => {
@@ -115,10 +115,11 @@ export default class MiniCartItem extends Component {
         </Link>
         {enableQuantitySelector &&
           <div className="absolute bottom-0 left-0 mb4 pl9">
-            <QuantitySelector
-              maxQuantity={maxQuantity}
-              currentQuantity={quantity}
-              onQuantityChange={this.handleQuantityChange}
+            <NumericStepper
+              minValue={1}
+              maxValue={maxQuantity}
+              value={quantity}
+              onChange={this.handleQuantityChange}
             />
           </div>
         }
