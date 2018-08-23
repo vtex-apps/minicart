@@ -130,7 +130,7 @@ class MiniCartContent extends Component {
       updatedItem = [itemsPayload[1]].map(item => {
         return {
           id: item.id,
-          index: index + 1,
+          index: orderForm.items.indexOf(itemsPayload[1]),
           quantity: itemsPayload[1].quantity + newQuantity,
           seller: 1,
         }
