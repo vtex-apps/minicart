@@ -103,7 +103,7 @@ export class MiniCart extends Component {
             <span className="vtex-minicart__bagde mt1 mr1">{quantity}</span>
           )}
           {iconLabel && (
-            <span className={`white f6 pl${quantity > 0 ? '6' : '4'} `}>
+            <span className={`vtex-minicart__label white f6 pl${quantity > 0 ? '6' : '4'} `}>
               {iconLabel}
             </span>
           )}
