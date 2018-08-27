@@ -117,7 +117,6 @@ export default class MiniCartItem extends Component {
         {enableQuantitySelector &&
           <div className="absolute top-0 right-0 mt8 pr1 mr4">
             <NumericStepper
-              size="small"
               minValue={1}
               maxValue={maxQuantity}
               value={quantity}
