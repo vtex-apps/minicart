@@ -58,6 +58,7 @@ export class MiniCart extends Component {
       iconLabel,
       showRemoveButton,
       showDiscount,
+      showSku,
       enableQuantitySelector,
       maxQuantity,
       orderFormContext,
@@ -79,6 +80,7 @@ export class MiniCart extends Component {
         data={orderFormContext}
         showRemoveButton={showRemoveButton}
         showDiscount={showDiscount}
+        showSku={showSku}
         labelMiniCartEmpty={labelMiniCartEmpty}
         labelButton={labelButtonFinishShopping}
         enableQuantitySelector={enableQuantitySelector}
@@ -183,6 +185,11 @@ miniHOC.getSchema = props => {
       },
       showDiscount: {
         title: 'editor.minicart.showDiscount.title',
+        type: 'boolean',
+        isLayout: true,
+      },
+      showSku: {
+        title: 'editor.minicart.showSku.title',
         type: 'boolean',
         isLayout: true,
       },

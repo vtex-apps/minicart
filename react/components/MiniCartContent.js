@@ -24,6 +24,7 @@ class MiniCartContent extends Component {
     labelMiniCartEmpty: MiniCartPropTypes.labelMiniCartEmpty,
     labelButton: MiniCartPropTypes.labelButtonFinishShopping,
     showRemoveButton: MiniCartPropTypes.showRemoveButton,
+    showSku: MiniCartPropTypes.showSku,
     enableQuantitySelector: MiniCartPropTypes.enableQuantitySelector,
     maxQuantity: MiniCartPropTypes.maxQuantity,
     showDiscount: MiniCartPropTypes.showDiscount,
@@ -161,6 +162,7 @@ class MiniCartContent extends Component {
     labelDiscount,
     showRemoveButton,
     showDiscount,
+    showSku,
     enableQuantitySelector,
     maxQuantity,
     showSpinner,
@@ -193,6 +195,7 @@ class MiniCartContent extends Component {
               removeItem={this.onRemoveItem}
               updateItem={this.onUpdateItems}
               showRemoveButton={showRemoveButton}
+              showSku={showSku}
               enableQuantitySelector={enableQuantitySelector}
               maxQuantity={maxQuantity}
             />
@@ -251,6 +254,7 @@ class MiniCartContent extends Component {
       intl,
       showRemoveButton,
       showDiscount,
+      showSku,
       enableQuantitySelector,
       maxQuantity,
       large,
@@ -279,6 +283,7 @@ class MiniCartContent extends Component {
       labelDiscount,
       showRemoveButton,
       showDiscount,
+      showSku,
       enableQuantitySelector,
       maxQuantity,
       showSpinner,
