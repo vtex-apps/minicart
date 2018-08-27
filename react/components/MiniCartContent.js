@@ -40,7 +40,7 @@ class MiniCartContent extends Component {
     return sum
   }
 
-  getNoRepetedItems = () =>
+  getGroupedItems = () =>
     values(
       reduceBy(
         (acc, item) =>
@@ -85,7 +85,7 @@ class MiniCartContent extends Component {
       data: { orderForm, updateAndRefetchOrderForm, updateOrderForm },
     } = this.props
 
-    const items = this.getNoRepetedItems()
+    const items = this.getGroupedItems()
     const itemPayloadConcatenated = items.find(item => item.id === id)
     const itemsPayload = orderForm.items.filter(item => item.id === id)
     const index = orderForm.items.indexOf(itemsPayload[0])
@@ -168,7 +168,7 @@ class MiniCartContent extends Component {
     showSpinner,
     large
   ) => {
-    const items = this.getNoRepetedItems()
+    const items = this.getGroupedItems()
 
     const classes = classNames(
       'vtex-minicart__content overflow-x-hidden h-100',
