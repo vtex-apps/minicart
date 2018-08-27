@@ -90,10 +90,11 @@ class MiniCartContent extends Component {
     const itemsPayload = orderForm.items.filter(item => item.id === id)
     const index = orderForm.items.indexOf(itemsPayload[0])
     const newQuantity = quantity - (itemPayloadConcatenated.quantity - itemsPayload[0].quantity)
+    let itemPayload = itemsPayload[0]
 
     if (newQuantity > 0) {
       const updatedItem = {
-        id: itemsPayload[0].id,
+        id: itemPayload.id,
         index: index,
         quantity: newQuantity,
         seller: 1,
@@ -111,7 +112,7 @@ class MiniCartContent extends Component {
       })
     } else {
       let updatedItem = {
-        id: itemsPayload[0].id,
+        id: itemPayload.id,
         index: index,
         quantity: 0,
         seller: 1,
@@ -124,10 +125,12 @@ class MiniCartContent extends Component {
         },
       })
 
+      itemPayload = itemsPayload[1]
+
       updatedItem = {
-        id: itemsPayload[1].id,
+        id: itemPayload.id,
         index: orderForm.items.indexOf(itemsPayload[1]),
-        quantity: itemsPayload[1].quantity + newQuantity,
+        quantity: itemPayload.quantity + newQuantity,
         seller: 1,
       }
 
