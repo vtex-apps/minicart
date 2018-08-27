@@ -8,6 +8,7 @@
     "editor.minicart.enableQuantitySelector.title": "Habilitar el selector de cantidad",
     "editor.minicart.maxQuantity.title": "Cantidad máxima por producto",
     "editor.minicart.type.title": "Tipo de Cesta de Compras",
+    "editor.minicart.showSku.title": "Muestre el sku",
     "editor.minicart.type.popup": "Pop Up",
     "editor.minicart.type.sidebar": "Sidebar",
     "finish-shopping-button-label": "Cerrar pedido",
