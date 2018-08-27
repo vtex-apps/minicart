@@ -92,19 +92,17 @@ class MiniCartContent extends Component {
     const newQuantity = quantity - (itemPayloadConcatenated.quantity - itemsPayload[0].quantity)
 
     if (newQuantity > 0) {
-      const updatedItem = [itemsPayload[0]].map(item => {
-        return {
-          id: item.id,
-          index: index,
-          quantity: newQuantity,
-          seller: 1,
-        }
-      })
+      const updatedItem = {
+        id: itemsPayload[0].id,
+        index: index,
+        quantity: newQuantity,
+        seller: 1,
+      }
 
       updateAndRefetchOrderForm({
         variables: {
           orderFormId: orderForm.orderFormId,
-          items: updatedItem,
+          items: [updatedItem],
         },
       }).then(() => {
         this.setState({
@@ -112,35 +110,31 @@ class MiniCartContent extends Component {
         })
       })
     } else {
-      let updatedItem = [itemsPayload[0]].map(item => {
-        return {
-          id: item.id,
-          index: index,
-          quantity: 0,
-          seller: 1,
-        }
-      })
+      let updatedItem = {
+        id: itemsPayload[0].id,
+        index: index,
+        quantity: 0,
+        seller: 1,
+      }
 
       updateOrderForm({
         variables: {
           orderFormId: orderForm.orderFormId,
-          items: updatedItem,
+          items: [updatedItem],
         },
       })
 
-      updatedItem = [itemsPayload[1]].map(item => {
-        return {
-          id: item.id,
-          index: orderForm.items.indexOf(itemsPayload[1]),
-          quantity: itemsPayload[1].quantity + newQuantity,
-          seller: 1,
-        }
-      })
+      updatedItem = {
+        id: itemsPayload[1].id,
+        index: orderForm.items.indexOf(itemsPayload[1]),
+        quantity: itemsPayload[1].quantity + newQuantity,
+        seller: 1,
+      }
 
       updateAndRefetchOrderForm({
         variables: {
           orderFormId: orderForm.orderFormId,
-          items: updatedItem,
+          items: [updatedItem],
         },
       }).then(() => {
         this.setState({
