@@ -38,6 +38,7 @@ export default class MiniCartItem extends Component {
     maxQuantity: PropTypes.number.isRequired,
     /* Reused props */
     showRemoveButton: MiniCartPropTypes.showRemoveButton,
+    showSku: MiniCartPropTypes.showSku,
     enableQuantitySelector: MiniCartPropTypes.enableQuantitySelector,
   }
 
@@ -78,6 +79,7 @@ export default class MiniCartItem extends Component {
       sellingPrice,
       listPrice,
       showRemoveButton,
+      showSku,
       enableQuantitySelector,
       quantity,
       maxQuantity,
@@ -86,23 +88,23 @@ export default class MiniCartItem extends Component {
     const { isRemovingItem } = this.state
 
     return (
-      <div className="vtex-minicart__item relative pv3 w-100 ph4 mb2">
+      <div className="vtex-minicart__item relative w-100">
         <Link
           className="pointer link black-90"
           page={'store/product'}
           params={{ slug: this.getItemId(detailUrl) }}>
-          <div className="relative bb b--silver">
-            <div className="vtex-minicart__item-name mb2">
-              <ProductName name={name} />
-              <div className="vtex-minicart__item-sku f7">
-                <ProductName name={skuName} />
-              </div>
+          <div className="relative bb b--silver h-100 pa4">
+            <div className={`${showRemoveButton ? 'vtex-minicart__item-name' : 'vtex-minicart__item-name-100'} mb2`}>
+              <ProductName
+                name={name}
+                skuName={skuName}
+                showSku={showSku} />
             </div>
             <div className="vtex-minicart__item-footer relative flex flex-row pb2 items-center w-100">
               <div className="vtex-minicart__img-container">
                 <Image url={imageUrl} alt={name} />
               </div>
-              <div className="justify-end absolute right-0 pt6">
+              <div className="absolute right-0 bottom-0 mb1">
                 <ProductPrice
                   sellingPrice={sellingPrice * quantity}
                   listPrice={listPrice * quantity}
@@ -113,7 +115,7 @@ export default class MiniCartItem extends Component {
           </div>
         </Link>
         {enableQuantitySelector &&
-          <div className="absolute bottom-0 left-0 mb3 pl9 ml4">
+          <div className="absolute top-0 right-0 mt8 pr1 mr4">
             <NumericStepper
               size="small"
               minValue={1}
