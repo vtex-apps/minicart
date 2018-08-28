@@ -53,8 +53,8 @@ export default class MiniCartItem extends Component {
     }
   }
 
-  handleQuantityChange = quantity => {
-    this.props.updateItem(this.props.id, quantity.value)
+  handleQuantityChange = event => {
+    this.props.updateItem(this.props.id, event.value)
   }
 
   getItemId = detailUrl => {

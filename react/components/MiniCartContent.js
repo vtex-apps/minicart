@@ -95,7 +95,7 @@ class MiniCartContent extends Component {
     if (newQuantity > 0) {
       const updatedItem = {
         id: itemPayload.id,
-        index: index,
+        index,
         quantity: newQuantity,
         seller: 1,
       }
@@ -113,7 +113,7 @@ class MiniCartContent extends Component {
     } else {
       let updatedItem = {
         id: itemPayload.id,
-        index: index,
+        index,
         quantity: 0,
         seller: 1,
       }

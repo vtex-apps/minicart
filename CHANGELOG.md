@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `NumericStepper` from styleguide into the `MiniCartItem`.
 
 ### Fixed
-- Changing `MiniCartItem` quantity.
+- Change `MiniCartItem` quantity.
 
 ## [1.0.3] - 2018-08-24
 ### Added
