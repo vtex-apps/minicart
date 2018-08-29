@@ -82,69 +82,45 @@ class MiniCartContent extends Component {
   onUpdateItems = (id, quantity) => {
     this.setState({ showSpinner: true })
     const {
-      data: { orderForm, updateAndRefetchOrderForm, updateOrderForm },
+      data: {
+        orderForm,
+        updateAndRefetchOrderForm,
+      },
     } = this.props
-
     const items = this.getGroupedItems()
-    const itemPayloadConcatenated = items.find(item => item.id === id)
+    const itemPayloadGrouped = items.find(item => item.id === id)
     const itemsPayload = orderForm.items.filter(item => item.id === id)
-    const index = orderForm.items.indexOf(itemsPayload[0])
-    const newQuantity = quantity - (itemPayloadConcatenated.quantity - itemsPayload[0].quantity)
     let itemPayload = itemsPayload[0]
-
-    if (newQuantity > 0) {
-      const updatedItem = {
+    const index = orderForm.items.indexOf(itemsPayload[0])
+    const newQuantity = quantity - (itemPayloadGrouped.quantity - itemPayload.quantity)
+    let updatedItems = [
+      {
         id: itemPayload.id,
         index,
         quantity: newQuantity,
-        seller: 1,
       }
+    ]
 
-      updateAndRefetchOrderForm({
-        variables: {
-          orderFormId: orderForm.orderFormId,
-          items: [updatedItem],
-        },
-      }).then(() => {
-        this.setState({
-          showSpinner: false,
-        })
-      })
-    } else {
-      let updatedItem = {
-        id: itemPayload.id,
-        index,
-        quantity: 0,
-        seller: 1,
-      }
-
-      updateOrderForm({
-        variables: {
-          orderFormId: orderForm.orderFormId,
-          items: [updatedItem],
-        },
-      })
-
+    if (newQuantity <= 0) {
+      updatedItems[0].quantity = 0;
       itemPayload = itemsPayload[1]
-
-      updatedItem = {
-        id: itemPayload.id,
-        index: orderForm.items.indexOf(itemsPayload[1]),
-        quantity: itemPayload.quantity + newQuantity,
-        seller: 1,
-      }
-
-      updateAndRefetchOrderForm({
-        variables: {
-          orderFormId: orderForm.orderFormId,
-          items: [updatedItem],
-        },
-      }).then(() => {
-        this.setState({
-          showSpinner: false,
-        })
-      })
+      updatedItems.push(
+        {
+          id: itemPayload.id,
+          index: orderForm.items.indexOf(itemPayload),
+          quantity: itemPayload.quantity + newQuantity,
+        }
+      )
     }
+
+    updateAndRefetchOrderForm({
+      variables: {
+        orderFormId: orderForm.orderFormId,
+        items: updatedItems,
+      },
+    }).then(() => {
+      this.setState({ showSpinner: false })
+    })
   }
 
   renderWithoutItems = label => (
