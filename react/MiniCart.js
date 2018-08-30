@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
-import { Button } from 'vtex.styleguide'
-import { isMobile } from 'react-device-detect'
-
-import CartIcon from './images/CartIcon'
-import MiniCartContent from './components/MiniCartContent'
-import { MiniCartPropTypes } from './propTypes'
-import Sidebar from './components/Sidebar'
-import Popup from './components/Popup'
-import { orderFormConsumer } from 'vtex.store/OrderFormContext'
-
 import './global.css'
+
+import React, { Component } from 'react'
+import { isMobile } from 'react-device-detect'
+import { orderFormConsumer } from 'vtex.store/OrderFormContext'
+import { Button } from 'vtex.styleguide'
+
+import MiniCartContent from './components/MiniCartContent'
+import Popup from './components/Popup'
+import Sidebar from './components/Sidebar'
+import CartIcon from './images/CartIcon'
+import { MiniCartPropTypes } from './propTypes'
 
 const MINIMUM_MAX_QUANTITY = 1
 const MAXIMUM_MAX_QUANTITY = 10
@@ -93,19 +93,20 @@ export class MiniCart extends Component {
         className="vtex-minicart relative fr"
         ref={e => {
           this.iconRef = e
-        }}
-      >
+        }}>
         <Button
           variation="tertiary"
           icon
-          onClick={event => this.handleClickButton(event)}
-        >
+          onClick={event => this.handleClickButton(event)}>
           <CartIcon fillColor={iconColor} size={iconSize} />
           {quantity > 0 && (
             <span className="vtex-minicart__bagde mt1 mr1">{quantity}</span>
           )}
           {iconLabel && (
-            <span className={`vtex-minicart__label white f6 pl${quantity > 0 ? '6' : '4'} `}>
+            <span
+              className={`vtex-minicart__label white f6 pl${
+                quantity > 0 ? '6' : '4'
+              } `}>
               {iconLabel}
             </span>
           )}
@@ -114,8 +115,7 @@ export class MiniCart extends Component {
           (large ? (
             <Sidebar
               onOutsideClick={this.handleUpdateContentVisibility}
-              isOpen={openContent}
-            >
+              isOpen={openContent}>
               {miniCartContent}
             </Sidebar>
           ) : (
@@ -123,8 +123,7 @@ export class MiniCart extends Component {
               <Popup
                 showDiscount={showDiscount}
                 onOutsideClick={this.handleUpdateContentVisibility}
-                buttonOffsetWidth={this.iconRef.offsetWidth}
-              >
+                buttonOffsetWidth={this.iconRef.offsetWidth}>
                 {miniCartContent}
               </Popup>
             )
