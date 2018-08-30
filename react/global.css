@@ -58,7 +58,8 @@
 }
 
 .vtex-minicart__bagde {
-  bottom: 65%;
+  top: -0.7rem;
+  right: -0.8rem;
 }
 
 .vtex-minicart__arrow-up {
