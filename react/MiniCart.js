@@ -136,7 +136,7 @@ export class MiniCart extends Component {
 
 const miniHOC = orderFormConsumer(MiniCart)
 
-miniHOC.getSchema = props => {
+miniHOC.getSchema = (props = {}) => {
   const getQuantitySelectorSchema = () => {
     return {
       maxQuantity: {
