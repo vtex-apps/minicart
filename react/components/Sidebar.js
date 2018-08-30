@@ -8,7 +8,7 @@ import { Transition } from 'react-spring'
 
 import MiniCart from '../MiniCart'
 
-const WHITE_COLOR = '#FFFFFF'
+const ICON_COLOR = '#727273'
 
 /* SideBar component */
 class Sidebar extends Component {
@@ -29,14 +29,15 @@ class Sidebar extends Component {
           style={styles}
         >
           <div
-            className="vtex-minicart__sidebar-header pointer flex flex-row items-center pa5"
+            className="vtex-minicart__sidebar-header pointer flex flex-row items-center pa5 h3 shadow-4 bg-white w-100 z-max"
             onClick={onOutsideClick}
           >
-            <IconCaretRight size={18} color={WHITE_COLOR} />
-            <div className="mt3 ml4">
-              <MiniCart hideContent miniCartIconColor={WHITE_COLOR} />
-            </div>
-            <span className="ml4 white b ttu">{intl.formatMessage({ id: 'sidebar-title' })}</span>
+            <IconCaretRight size={17} color={ICON_COLOR} />
+            <MiniCart
+              hideContent
+              miniCartIconColor={ICON_COLOR}
+              labelColor={ICON_COLOR}
+              iconLabel={intl.formatMessage({ id: 'sidebar-title' })} />
           </div>
           {this.props.children}
         </div>
