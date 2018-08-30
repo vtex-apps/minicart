@@ -28,7 +28,7 @@
   ],
   "dependencies": {
     "vtex.store": "1.x",
-    "vtex.store-components": "1.x",
+    "vtex.store-components": "2.x",
     "vtex.styleguide": "6.x"
   }
 }
