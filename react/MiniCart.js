@@ -53,7 +53,7 @@ export class MiniCart extends Component {
     const {
       labelMiniCartEmpty,
       labelButtonFinishShopping,
-      iconColor,
+      iconClasses,
       iconSize,
       iconLabel,
       labelClasses,
@@ -102,8 +102,8 @@ export class MiniCart extends Component {
           onClick={event => this.handleClickButton(event)}
         >
           <div className="flex items-center">
-            <div className="relative">
-              <CartIcon fillColor={iconColor} size={iconSize} />
+            <div className={`relative ${iconClasses || 'gray'}`}>
+              <CartIcon size={iconSize} />
               {quantity > 0 && (
                 <span className="vtex-minicart__bagde white absolute f7 bg-blue h1 w1 pa1 br4 tc lh-copy">{quantity}</span>
               )}
