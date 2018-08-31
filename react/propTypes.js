@@ -10,8 +10,8 @@ export const MiniCartPropTypes = {
   labelMiniCartEmpty: PropTypes.string,
   /* Finish shopping button label */
   labelButtonFinishShopping: PropTypes.string,
-  /* Icon's color */
-  iconColor: PropTypes.string,
+  /* Icon's classnames */
+  iconClasses: PropTypes.string,
   /* Icon's size */
   iconSize: PropTypes.number,
   /* Icon's label */
