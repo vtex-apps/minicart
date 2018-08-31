@@ -12,6 +12,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - `MiniCart` bagde position.
 
+## [1.1.0] - 2018-08-31
+### Changed
+- Update the `Styleguide` version.
+- Update the `store-component` version.
+
+## [1.0.6] - 2018-08-30
+
+## [1.0.5] - 2018-08-30
+
 ## [1.0.4] - 2018-08-30
 ### Added
 - `NumericStepper` from styleguide into the `MiniCartItem`.
