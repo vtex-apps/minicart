@@ -36,7 +36,7 @@ class Sidebar extends Component {
             <MiniCart
               hideContent
               miniCartIconColor={ICON_COLOR}
-              labelColor={ICON_COLOR}
+              labelClasses="mid-gray"
               iconLabel={intl.formatMessage({ id: 'sidebar-title' })} />
           </div>
           {this.props.children}
