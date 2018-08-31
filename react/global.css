@@ -129,8 +129,3 @@
   text-overflow: ellipsis;
   max-width: 90%;
 }
-
-.vtex-minicart > .vtex-button {
-  display: flex;
-  align-items: center;
-}

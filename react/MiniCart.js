@@ -14,7 +14,6 @@ import './global.css'
 const MINIMUM_MAX_QUANTITY = 1
 const MAXIMUM_MAX_QUANTITY = 10
 const DEFAULT_MAX_QUANTITY = 1
-const DEFAULT_LABEL_COLOR = '#FFFFFF'
 
 /**
  * Minicart component
@@ -24,7 +23,6 @@ export class MiniCart extends Component {
 
   static defaultProps = {
     maxQuantity: DEFAULT_MAX_QUANTITY,
-    labelColor: DEFAULT_LABEL_COLOR,
   }
 
   state = {
@@ -58,7 +56,7 @@ export class MiniCart extends Component {
       iconColor,
       iconSize,
       iconLabel,
-      labelColor,
+      labelClasses,
       showRemoveButton,
       showDiscount,
       showSku,
@@ -103,20 +101,21 @@ export class MiniCart extends Component {
           icon
           onClick={event => this.handleClickButton(event)}
         >
-          <div className="relative">
-            <CartIcon fillColor={iconColor} size={iconSize} />
-            {quantity > 0 && (
-              <span className="vtex-minicart__bagde white absolute f7 bg-blue h1 w1 pa1 br4 tc lh-copy">{quantity}</span>
+          <div className="flex items-center">
+            <div className="relative">
+              <CartIcon fillColor={iconColor} size={iconSize} />
+              {quantity > 0 && (
+                <span className="vtex-minicart__bagde white absolute f7 bg-blue h1 w1 pa1 br4 tc lh-copy">{quantity}</span>
+              )}
+            </div>
+            {iconLabel && (
+              <span
+                className={`vtex-minicart__label f6 pl${quantity > 0 ? '6' : '4'} ${labelClasses || ''}`}
+              >
+                {iconLabel}
+              </span>
             )}
           </div>
-          {iconLabel && (
-            <span
-              className={`vtex-minicart__label f6 pl${quantity > 0 ? '6' : '4'} `}
-              style={{ color: labelColor }}
-            >
-              {iconLabel}
-            </span>
-          )}
         </Button>
         {!hideContent &&
           (large ? (
@@ -222,3 +221,4 @@ miniHOC.getSchema = props => {
 }
 
 export default miniHOC
+
