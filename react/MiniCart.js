@@ -14,6 +14,8 @@ import './global.css'
 const MINIMUM_MAX_QUANTITY = 1
 const MAXIMUM_MAX_QUANTITY = 10
 const DEFAULT_MAX_QUANTITY = 1
+const DEFAULT_LABEL_CLASSES = ''
+const DEFAULT_ICON_CLASSES = 'gray'
 
 /**
  * Minicart component
@@ -23,6 +25,8 @@ export class MiniCart extends Component {
 
   static defaultProps = {
     maxQuantity: DEFAULT_MAX_QUANTITY,
+    labelClasses: DEFAULT_LABEL_CLASSES,
+    iconClasses: DEFAULT_ICON_CLASSES,
   }
 
   state = {
@@ -102,7 +106,7 @@ export class MiniCart extends Component {
           onClick={event => this.handleClickButton(event)}
         >
           <div className="flex items-center">
-            <div className={`relative ${iconClasses || 'gray'}`}>
+            <div className={`relative ${iconClasses}`}>
               <CartIcon size={iconSize} />
               {quantity > 0 && (
                 <span className="vtex-minicart__bagde white absolute f7 bg-blue h1 w1 pa1 br4 tc lh-copy">{quantity}</span>
@@ -110,7 +114,7 @@ export class MiniCart extends Component {
             </div>
             {iconLabel && (
               <span
-                className={`vtex-minicart__label f6 pl${quantity > 0 ? '6' : '4'} ${labelClasses || ''}`}
+                className={`vtex-minicart__label f6 pl${quantity > 0 ? '6' : '4'} ${labelClasses}`}
               >
                 {iconLabel}
               </span>
@@ -126,16 +130,16 @@ export class MiniCart extends Component {
               {miniCartContent}
             </Sidebar>
           ) : (
-            openContent && (
-              <Popup
-                showDiscount={showDiscount}
-                onOutsideClick={this.handleUpdateContentVisibility}
-                buttonOffsetWidth={this.iconRef.offsetWidth}
-              >
-                {miniCartContent}
-              </Popup>
-            )
-          ))}
+              openContent && (
+                <Popup
+                  showDiscount={showDiscount}
+                  onOutsideClick={this.handleUpdateContentVisibility}
+                  buttonOffsetWidth={this.iconRef.offsetWidth}
+                >
+                  {miniCartContent}
+                </Popup>
+              )
+            ))}
       </div>
     )
   }
