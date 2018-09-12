@@ -93,16 +93,16 @@ class MiniCartContent extends Component {
     let itemPayload = itemsPayload[0]
     const index = orderForm.items.indexOf(itemsPayload[0])
     const newQuantity = quantity - (itemPayloadGrouped.quantity - itemPayload.quantity)
-    let updatedItems = [
+    const updatedItems = [
       {
         id: itemPayload.id,
         index,
         quantity: newQuantity,
-      }
+      },
     ]
 
     if (newQuantity <= 0) {
-      updatedItems[0].quantity = 0;
+      updatedItems[0].quantity = 0
       itemPayload = itemsPayload[1]
       updatedItems.push(
         {
@@ -144,12 +144,10 @@ class MiniCartContent extends Component {
     const items = this.getGroupedItems()
 
     const classes = classNames(
-      'vtex-minicart__content overflow-x-hidden h-100',
+      'vtex-minicart__content overflow-x-hidden',
       {
-        'vtex-minicart__content--small': !large,
-        'vtex-minicart__content--large': large,
-        'vtex-minicart__content-large--footer-small': large && !showDiscount,
-        'vtex-minicart__content-large--footer-large': large && showDiscount,
+        'vtex-minicart__content--small bg-white': !large,
+        'overflow-y-auto': large,
         'overflow-y-scroll': items.length > 3 && !large,
         'overflow-y-hidden': items.length <= 3 && !large,
       }
@@ -174,9 +172,9 @@ class MiniCartContent extends Component {
             />
           ))}
         </div>
-        <div className="absolute bottom-0 w-100 bg-white flex flex-column pa4 bt b--silver pt4">
+        <div className="vtex-minicart-content__footer w-100 bg-white pa4 bt b--silver pt4">
           {showDiscount && (
-            <div className="vtex-minicart__content-discount w-100 mb4">
+            <div className="vtex-minicart__content-discount blue w-100 mb4">
               <span className="ttu b">{labelDiscount}</span>
               <div className="fr">
                 <ProductPrice
