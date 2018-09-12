@@ -8,31 +8,23 @@ import { Transition } from 'react-spring'
 
 import MiniCart from '../MiniCart'
 
-const ICON_COLOR = '#727273'
-
 /* SideBar component */
 class Sidebar extends Component {
-  componentDidMount() {
-    document.body.classList.add('vtex-minicart-sidebar-open')
-  }
-
-  componentWillUnmount() {
-    document.body.classList.remove('vtex-minicart-sidebar-open')
-  }
-
   renderChildren = styles => {
     const { onOutsideClick, intl } = this.props
 
     return (
       <OutsideClickHandler onOutsideClick={onOutsideClick}>
-        <div className="vtex-minicart__sidebar fixed top-0 right-0 z-9999 bg-white shadow-2 flex flex-column"
+        <div className="vtex-minicart__sidebar w-100 w-auto-ns h-100 fixed top-0 right-0 z-9999 bg-white shadow-2 flex flex-column"
           style={styles}
         >
           <div
             className="vtex-minicart__sidebar-header pointer flex flex-row items-center pa5 h3 shadow-4 bg-white w-100 z-max"
             onClick={onOutsideClick}
           >
-            <IconCaretRight size={17} color={ICON_COLOR} />
+            <div className="mid-gray">
+              <IconCaretRight size={17} color="currentColor" />
+            </div>
             <MiniCart
               hideContent
               iconClasses="mid-gray"
