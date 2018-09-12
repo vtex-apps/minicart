@@ -1,60 +1,16 @@
-.vtex-minicart__item {
-  height: 125px;
-}
-
-.vtex-minicart__img-container {
-  width: 65px;
-  height: 65px;
-  min-width: 65px;
-}
-
-.vtex-minicart__item-image {
-  width: auto;
-  height: 100%;
-}
-
 .vtex-minicart__box {
   width: 364px;
   top: 100%;
-  display: block;
-  visibility: visible;
 }
 
-@media only screen and (max-width: 600px) {
-  .vtex-minicart__box {
-    display: none;
-    visibility: hidden;
+@media only screen and (min-width: 40em) {
+  .vtex-minicart__sidebar {
+    width: 340px;
   }
 }
 
-.vtex-minicart__content--large {
-  overflow-y: auto;
-}
-
 .vtex-minicart__content--small {
-  max-height: 374px;
-  background-color: white;
-}
-
-.vtex-minicart__content-large--footer-small {
-  margin-bottom: 56px;
-}
-
-.vtex-minicart__content-large--footer-large {
-  margin-bottom: 95px;
-}
-
-.vtex-minicart__content-container--footer-small {
-  padding-bottom: 56px;
-}
-
-.vtex-minicart__content-container--footer-large {
-  padding-bottom: 90px;
-}
-
-.vtex-minicart-item__remove-btn > .vtex-button {
-  padding: 0px;
-  margin-top: 0.6rem;
+  max-height: 383px;
 }
 
 .vtex-minicart__bagde {
@@ -63,50 +19,12 @@
 }
 
 .vtex-minicart__arrow-up {
-  transform: rotate(45deg);
-  width: 25px;
-  height: 25px;
   right: 7px;
-  background-color: white;
-}
-
-@media only screen and (min-width: 22em) {
-  .vtex-minicart__sidebar {
-    width: 340px;
-    height: 100vh;
-  }
-}
-
-@media only screen and (max-width: 25em) {
-  body .vtex-minicart-sidebar-open {
-    overflow: hidden;
-  }
-
-  .vtex-minicart__sidebar {
-    width: 100vw;
-    height: 100vh;
-  }
-}
-
-.vtex-minicart__price-container {
-  width: 110px;
-}
-
-.vtex-minicart__item-footer {
-  height: 68px;
-}
-
-.vtex-minicart__content-discount {
-  color: coral;
 }
 
 .vtex-minicart__item-image-loader {
   width: 100%;
   height: 100%;
-}
-
-.vtex-minicart__item-name {
-  height: 34px;
 }
 
 .vtex-minicart__item-name > .vtex-product-name > .vtex-product-name__brand {
@@ -128,4 +46,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 90%;
+}
+
+.vtex-minicart-item__remove-btn > .vtex-button {
+  padding: 0px;
+  margin-top: 0.6rem;
+}
+
+.vtex-minicart-content__footer {
+  margin-top: auto;
 }
