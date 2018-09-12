@@ -32,7 +32,11 @@ export default class Image extends Component {
 
     return (
       <Fragment>
-        <img className="vtex-minicart__item-image" onLoad={() => this.setState({ isLaoded: true })} src={this.stripImageUrl(url)} alt={alt} />
+        <img
+          className="vtex-minicart__item-image w-auto h-100"
+          onLoad={() => this.setState({ isLaoded: true })}
+          src={this.stripImageUrl(url)} alt={alt}
+        />
         {!this.state.isLaoded && this.imgLoader()}
       </Fragment>
     )
