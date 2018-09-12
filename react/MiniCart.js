@@ -130,16 +130,15 @@ export class MiniCart extends Component {
               {miniCartContent}
             </Sidebar>
           ) : (
-              openContent && (
-                <Popup
-                  showDiscount={showDiscount}
-                  onOutsideClick={this.handleUpdateContentVisibility}
-                  buttonOffsetWidth={this.iconRef.offsetWidth}
-                >
-                  {miniCartContent}
-                </Popup>
-              )
-            ))}
+            openContent && (
+              <Popup
+                onOutsideClick={this.handleUpdateContentVisibility}
+                buttonOffsetWidth={this.iconRef.offsetWidth}
+              >
+                {miniCartContent}
+              </Popup>
+            )
+          ))}
       </div>
     )
   }

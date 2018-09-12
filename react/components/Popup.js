@@ -34,7 +34,9 @@ export default class Popup extends Component {
 }
 
 Popup.propTypes = {
+  /* The pop-up's content */
   children: PropTypes.object,
+  /* Offset width to set the arrow position */
   buttonOffsetWidth: PropTypes.number,
   /* Function to be called when click occurs outside the popup */
   onOutsideClick: PropTypes.func,
