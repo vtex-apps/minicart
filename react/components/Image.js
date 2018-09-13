@@ -6,7 +6,7 @@ export default class Image extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isLaoded: false,
+      isLoaded: false,
     }
   }
 
@@ -34,10 +34,10 @@ export default class Image extends Component {
       <Fragment>
         <img
           className="vtex-minicart__item-image w-auto h-100"
-          onLoad={() => this.setState({ isLaoded: true })}
+          onLoad={() => this.setState({ isLoaded: true })}
           src={this.stripImageUrl(url)} alt={alt}
         />
-        {!this.state.isLaoded && this.imgLoader()}
+        {!this.state.isLoaded && this.imgLoader()}
       </Fragment>
     )
   }
