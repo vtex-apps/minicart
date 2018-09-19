@@ -43,7 +43,7 @@ class Sidebar extends Component {
         >
           <div className="vtex-minicart__sidebar-header pointer flex flex-row items-center pa5 h3 shadow-4 bg-white w-100 z-max">
             <div
-              className="mid-gray"
+              className="mid-gray pa4 flex items-center"
               onClick={onOutsideClick}
             >
               <IconCaretRight size={17} />
