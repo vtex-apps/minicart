@@ -54,7 +54,7 @@
   margin-top: auto;
 }
 
-@media only screen and (max-width: 20rem) {
+@media only screen and (max-width: 40rem) {
   body.vtex-minicart-sidebar-open {
     overflow: hidden;
   }
