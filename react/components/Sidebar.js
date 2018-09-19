@@ -8,13 +8,15 @@ import { Transition } from 'react-spring'
 
 import MiniCart from '../MiniCart'
 
+const OPEN_SIDEBAR_CLASS = 'vtex-minicart-sidebar-open'
+
 /* SideBar component */
 class Sidebar extends Component {
   updateComponent() {
     if (this.props.isOpen) {
-      document.body.classList.add('vtex-minicart-sidebar-open')
+      document.body.classList.add(OPEN_SIDEBAR_CLASS)
     } else {
-      document.body.classList.remove('vtex-minicart-sidebar-open')
+      document.body.classList.remove(OPEN_SIDEBAR_CLASS)
     }
   }
 
@@ -27,7 +29,7 @@ class Sidebar extends Component {
   }
 
   componentWillUnmount() {
-    document.body.classList.remove('vtex-minicart-sidebar-open')
+    document.body.classList.remove(OPEN_SIDEBAR_CLASS)
   }
 
   renderSidebar = styles => {
