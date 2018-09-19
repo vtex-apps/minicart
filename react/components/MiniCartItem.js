@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'render'
 import { Button, Spinner, IconClose, NumericStepper } from 'vtex.styleguide'
-import ProductName from 'vtex.store-components/ProductName'
-import ProductPrice from 'vtex.store-components/ProductPrice'
+import { ProductName, ProductPrice } from 'vtex.store-components'
+import classNames from 'classnames'
+
 import { MiniCartPropTypes } from '../propTypes'
 import Image from './Image'
 
@@ -46,11 +47,8 @@ export default class MiniCartItem extends Component {
     showRemoveButton: false,
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      isRemovingItem: false,
-    }
+  state = {
+    isRemovingItem: false,
   }
 
   handleQuantityChange = event => {
@@ -87,6 +85,10 @@ export default class MiniCartItem extends Component {
 
     const { isRemovingItem } = this.state
 
+    const nameClasses = classNames('vtex-minicart__item-name h2 mb3', {
+      'vtex-minicart__item-name--large': showRemoveButton,
+    })
+
     return (
       <div className="vtex-minicart__item h4 relative w-100">
         <Link
@@ -94,11 +96,12 @@ export default class MiniCartItem extends Component {
           page={'store/product'}
           params={{ slug: this.getItemId(detailUrl) }}>
           <div className="relative bb b--silver h-100 pa4">
-            <div className={`${showRemoveButton ? 'vtex-minicart__item-name' : 'vtex-minicart__item-name-100'} h2 mb3`}>
+            <div className={nameClasses}>
               <ProductName
                 name={name}
                 skuName={skuName}
-                showSku={showSku} />
+                showSku={showSku}
+              />
             </div>
             <div className="vtex-minicart__item-footer relative flex flex-row pb2 items-center w-100">
               <div className="vtex-minicart__img-container h3 w3 mw3">
@@ -109,7 +112,8 @@ export default class MiniCartItem extends Component {
                   sellingPrice={sellingPrice * quantity}
                   listPrice={listPrice * quantity}
                   showLabels={false}
-                  showListPrice={false} />
+                  showListPrice={false}
+                />
               </div>
             </div>
           </div>
@@ -133,7 +137,8 @@ export default class MiniCartItem extends Component {
         )}
         {(showRemoveButton && isRemovingItem) && (
           <div
-            className="vtex-minicart-item__remove-btn absolute right-0 top-0 flex items-center justify-center mt3 mr4">
+            className="vtex-minicart-item__remove-btn absolute right-0 top-0 flex items-center justify-center mt3 mr4"
+          >
             <Spinner size={20} />
           </div>
         )}

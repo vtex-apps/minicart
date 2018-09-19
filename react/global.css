@@ -34,10 +34,7 @@
   max-width: 90%;
 }
 
-.vtex-minicart__item-name-100 > .vtex-product-name > .vtex-product-name__brand {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.vtex-minicart__item-name--large > .vtex-product-name > .vtex-product-name__brand {
   max-width: 100%;
 }
 
@@ -56,3 +53,10 @@
 .vtex-minicart-content__footer {
   margin-top: auto;
 }
+
+@media only screen and (max-width: 20rem) {
+  body.vtex-minicart-sidebar-open {
+    overflow: hidden;
+  }
+}
+
