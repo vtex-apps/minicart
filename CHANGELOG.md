@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.1.5] - 2018-09-24
+### Changed
+- Hide label in screens thinner than the laptop resolution.
+
 ## [1.1.4] - 2018-09-20
 ### Fixed
 - Fixes being able to scroll the body on mobile with the `Sidebar` open.

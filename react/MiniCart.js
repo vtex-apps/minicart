@@ -114,7 +114,7 @@ export class MiniCart extends Component {
             </div>
             {iconLabel && (
               <span
-                className={`vtex-minicart__label f6 pl${quantity > 0 ? '6' : '4'} ${labelClasses}`}
+                className={`vtex-minicart__label dn-m db-l f6 pl${quantity > 0 ? '6' : '4'} ${labelClasses}`}
               >
                 {iconLabel}
               </span>
