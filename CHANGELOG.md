@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Update the `SideBar` component to use the `Animation` from the `store-components`.
 
 ## [1.1.6] - 2018-10-05
 ### Fixed
@@ -38,7 +40,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.1.0] - 2018-08-31
 ### Changed
 - Update the `Styleguide` version.
-- Update the `store-component` version.
+- Update the `store-components` version.
 
 ## [1.0.6] - 2018-08-30
 
