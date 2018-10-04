@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { IconCaretRight } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
 import OutsideClickHandler from 'react-outside-click-handler'
-import { Transition } from 'react-spring'
+import Animation from 'vtex.store-components/Animation'
 
 import MiniCart from '../MiniCart'
 
@@ -32,14 +32,19 @@ class Sidebar extends Component {
     document.body.classList.remove(OPEN_SIDEBAR_CLASS)
   }
 
-  renderSidebar = styles => {
-    const { onOutsideClick, intl } = this.props
+  render() {
+    const { isOpen, onOutsideClick, intl } = this.props
 
-    return (
+    if (typeof document === 'undefined') {
+      return null
+    }
+
+    return ReactDOM.createPortal(
       <OutsideClickHandler onOutsideClick={onOutsideClick}>
-        <div
+        <Animation
           className="vtex-minicart__sidebar w-100 w-auto-ns h-100 fixed top-0 right-0 z-9999 bg-white shadow-2 flex flex-column"
-          style={styles}
+          isActive={isOpen}
+          type="drawerRight"
         >
           <div className="vtex-minicart__sidebar-header pointer flex flex-row items-center pa5 h3 shadow-4 bg-white w-100 z-max">
             <div
@@ -56,27 +61,8 @@ class Sidebar extends Component {
             />
           </div>
           {this.props.children}
-        </div>
-      </OutsideClickHandler>
-    )
-  }
-
-  render() {
-    const { isOpen } = this.props
-
-    if (typeof document === 'undefined') {
-      return null
-    }
-
-    return ReactDOM.createPortal(
-      <Transition
-        keys={isOpen ? ['children'] : []}
-        from={{ transform: 'translateX(100%)' }}
-        enter={{ transform: 'translateX(0%)' }}
-        leave={{ transform: 'translateX(100%)' }}
-      >
-        {isOpen ? [this.renderSidebar] : []}
-      </Transition>,
+        </Animation>
+      </OutsideClickHandler>,
       document.body
     )
   }
