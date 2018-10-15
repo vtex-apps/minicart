@@ -54,6 +54,16 @@
   margin-top: auto;
 }
 
+.vtex-minicart__content-discount .vtex-price-selling {
+  color: #134cd8;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.vtex-minicart__content-price .vtex-price-selling {
+  font-size: 1rem;
+}
+
 @media only screen and (max-width: 40rem) {
   body.vtex-minicart-sidebar-open {
     overflow: hidden;
