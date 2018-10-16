@@ -65,6 +65,7 @@ class Sidebar extends Component {
       </OutsideClickHandler>,
       document.body
     )
+    
   }
 }
 
