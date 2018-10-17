@@ -3,6 +3,11 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { reduceBy, values } from 'ramda'
 import classNames from 'classnames'
+<<<<<<< HEAD
+=======
+import { ExtensionPoint } from 'render'
+
+>>>>>>> Update MinicartItem para Product Summary
 import { Button, Spinner } from 'vtex.styleguide'
 import ProductPrice from 'vtex.store-components/ProductPrice'
 
@@ -54,6 +59,8 @@ class MiniCartContent extends Component {
     this.sumItemsPrice(items) - totalPrice
 
   handleClickButton = () => location.assign('/checkout/#/cart')
+
+
 
   onRemoveItem = id => {
     const {
@@ -128,6 +135,27 @@ class MiniCartContent extends Component {
     </div>
   )
 
+  createProductShapeFromItem = (item) => {
+
+    return {
+      productName: item.name,
+      linkText: item.detailUrl,
+      sku: {
+        seller: {
+          commertialOffer: {
+            Price: item.sellingPrice,
+            ListPrice: item.ListPrice
+          }
+        },
+        name: item.skuName,
+        itemId: item.id,
+        image: {
+          imageUrl: item.imageUrl
+        },
+      },
+    }
+  }
+
   renderMiniCartWithItems = (
     orderForm,
     label,
@@ -152,26 +180,42 @@ class MiniCartContent extends Component {
       }
     )
 
+
+
     const discount = this.calculateDiscount(items, orderForm.value)
     const { onClickProduct } = this.props
+
 
     return (
       <Fragment>
         <div className={classes}>
           {items.map(item => (
-            <MiniCartItem
-              {...item}
+
+            <ExtensionPoint id="product-summary"
               key={item.id}
-              large
-              removeItem={this.onRemoveItem}
-              updateItem={this.onUpdateItems}
-              showRemoveButton={showRemoveButton}
-              showSku={showSku}
-              enableQuantitySelector={enableQuantitySelector}
-              maxQuantity={maxQuantity}
-              onClickProduct={onClickProduct}
+              product={this.createProductShapeFromItem(item)}
+              name={item.name}
+              displayMode="inline"
+
+
+
             />
+
+            // <MiniCartItem
+            //   {...item}
+            //   key={item.id}
+            //   large
+            //   removeItem={this.onRemoveItem}
+            //   updateItem={this.onUpdateItems}
+            //   showRemoveButton={showRemoveButton}
+            //   showSku={showSku}
+            //   enableQuantitySelector={enableQuantitySelector}
+            //   maxQuantity={maxQuantity}
+            // />
           ))}
+
+
+
         </div>
         <div
           className="vtex-minicart-content__footer w-100 bg-white pa4 bt b--silver pt4 flex flex-column items-end"
