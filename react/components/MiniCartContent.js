@@ -172,40 +172,36 @@ class MiniCartContent extends Component {
             />
           ))}
         </div>
-        <div className="vtex-minicart-content__footer w-100 bg-white pa4 bt b--silver pt4">
+        <div
+          className="vtex-minicart-content__footer w-100 bg-white pa4 bt b--silver pt4 flex flex-column items-end"
+        >
           {showDiscount && (
-            <div className="vtex-minicart__content-discount blue w-100 mb4">
-              <span className="ttu b">{labelDiscount}</span>
-              <div className="fr">
-                <ProductPrice
-                  sellingPrice={discount}
-                  listPrice={discount}
-                  showLabels={false}
-                  showListPrice={false}
-                />
-              </div>
-            </div>
-          )}
-          <div className="relative">
-            <div className="fl">
-              <Button
-                variation="primary"
-                size="small"
-                onClick={this.handleClickButton}
-              >
-                {label}
-              </Button>
-            </div>
-            <div className="absolute right-0 mt3 flex flex-row">
-              {showSpinner && <Spinner size={18} />}
+            <div className="vtex-minicart__content-discount blue w-100 flex justify-end items-center">
+              <span className="ttl c-action-primary">{labelDiscount}</span>
               <ProductPrice
-                sellingPrice={orderForm.value}
-                listPrice={orderForm.value}
+                sellingPrice={discount}
+                listPrice={discount}
                 showLabels={false}
                 showListPrice={false}
               />
             </div>
+          )}
+          <div className="vtex-minicart__content-price mb3">
+            {showSpinner && <Spinner size={18} />}
+            <ProductPrice
+              sellingPrice={orderForm.value}
+              listPrice={orderForm.value}
+              showLabels={false}
+              showListPrice={false}
+            />
           </div>
+          <Button
+            variation="primary"
+            size="small"
+            onClick={this.handleClickButton}
+          >
+            {label}
+          </Button>
         </div>
       </Fragment>
     )
