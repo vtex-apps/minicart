@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.2.2] - 2018-10-18
+### Changed
+- Update the `SideBar` component to use the `Animation` from the `store-components`.
+
 ## [1.2.1] - 2018-10-18
 ### Changed
 - `Sidebar` header to use border instead of shadow, according to the design.
@@ -46,7 +50,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.1.0] - 2018-08-31
 ### Changed
 - Update the `Styleguide` version.
-- Update the `store-component` version.
+- Update the `store-components` version.
 
 ## [1.0.6] - 2018-08-30
 
