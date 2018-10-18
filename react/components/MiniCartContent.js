@@ -11,7 +11,6 @@ import { ExtensionPoint } from 'render'
 import { Button, Spinner } from 'vtex.styleguide'
 import ProductPrice from 'vtex.store-components/ProductPrice'
 
-import MiniCartItem from './MiniCartItem'
 import { MiniCartPropTypes } from '../propTypes'
 
 /**
