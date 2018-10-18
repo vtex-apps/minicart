@@ -6,9 +6,13 @@ import classNames from 'classnames'
 <<<<<<< HEAD
 =======
 import { ExtensionPoint } from 'render'
+<<<<<<< HEAD
 
 >>>>>>> Update MinicartItem para Product Summary
 import { Button, Spinner } from 'vtex.styleguide'
+=======
+import { Button, Spinner, IconDelete } from 'vtex.styleguide'
+>>>>>>> Pass deleteButton to product-summary extension point
 import ProductPrice from 'vtex.store-components/ProductPrice'
 
 import { MiniCartPropTypes } from '../propTypes'
@@ -170,7 +174,7 @@ class MiniCartContent extends Component {
     const items = this.getGroupedItems()
 
     const classes = classNames(
-      'vtex-minicart__content overflow-x-hidden',
+      'vtex-minicart__content overflow-x-hidden pa1',
       {
         'vtex-minicart__content--small bg-white': !large,
         'overflow-y-auto': large,
@@ -181,24 +185,32 @@ class MiniCartContent extends Component {
 
     const discount = this.calculateDiscount(items, orderForm.value)
     const { onClickProduct } = this.props
+    const deleteButton = <Fragment>
+      <div className="ma0 pa0 ph0"><Button icon variation="tertiary">
+        <IconDelete className="ma0 pa0 ph8" size={20} color="#BDBDBD" />
+      </Button></div>
+
+    </Fragment>
 
 
     return (
       <Fragment>
         <div className={classes}>
           {items.map(item => (
+
+
             <ExtensionPoint id="product-summary"
               key={item.id}
               product={this.createProductShapeFromItem(item)}
               name={item.name}
               displayMode="inline"
-              showInstallments={true}
-              showLabels={true}
               showListPrice={false}
+              showBadge={false}
+              showBorders={true}
+              deleteButton={deleteButton}
             />
+
           ))}
-
-
 
         </div>
         <div
