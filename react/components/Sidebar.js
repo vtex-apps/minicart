@@ -41,7 +41,7 @@ class Sidebar extends Component {
           className="vtex-minicart__sidebar w-100 w-auto-ns h-100 fixed top-0 right-0 z-9999 bg-white shadow-2 flex flex-column"
           style={styles}
         >
-          <div className="vtex-minicart__sidebar-header pointer flex flex-row items-center pa5 h3 shadow-4 bg-white w-100 z-max">
+          <div className="vtex-minicart__sidebar-header pointer flex flex-row items-center pa5 h3 bg-white w-100 z-max bb b--silver bw1">
             <div
               className="mid-gray pa4 flex items-center"
               onClick={onOutsideClick}

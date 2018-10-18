@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.2.1] - 2018-10-18
+### Changed
+- `Sidebar` header to use border instead of shadow, according to the design.
+
 ## [1.2.0] - 2018-10-18
 ### Changed
 - Redesign of the `MiniCartContent` footer layout, now there are three rows aligned on the right side of the footer.
