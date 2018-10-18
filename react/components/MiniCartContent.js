@@ -180,8 +180,6 @@ class MiniCartContent extends Component {
       }
     )
 
-
-
     const discount = this.calculateDiscount(items, orderForm.value)
     const { onClickProduct } = this.props
 
@@ -190,28 +188,15 @@ class MiniCartContent extends Component {
       <Fragment>
         <div className={classes}>
           {items.map(item => (
-
             <ExtensionPoint id="product-summary"
               key={item.id}
               product={this.createProductShapeFromItem(item)}
               name={item.name}
               displayMode="inline"
-
-
-
+              showInstallments={true}
+              showLabels={true}
+              showListPrice={false}
             />
-
-            // <MiniCartItem
-            //   {...item}
-            //   key={item.id}
-            //   large
-            //   removeItem={this.onRemoveItem}
-            //   updateItem={this.onUpdateItems}
-            //   showRemoveButton={showRemoveButton}
-            //   showSku={showSku}
-            //   enableQuantitySelector={enableQuantitySelector}
-            //   maxQuantity={maxQuantity}
-            // />
           ))}
 
 
