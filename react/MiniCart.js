@@ -101,7 +101,11 @@ export class MiniCart extends Component {
         labelButton={labelButtonFinishShopping}
         enableQuantitySelector={enableQuantitySelector}
         maxQuantity={maxQuantity}
+<<<<<<< HEAD
         onClickProduct={this.onClickProduct}
+=======
+        handleUpdateContentVisibility={this.handleUpdateContentVisibility}
+>>>>>>> Redirect the user to product when click on item
       />
     )
 

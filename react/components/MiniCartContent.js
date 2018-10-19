@@ -3,16 +3,10 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { reduceBy, values } from 'ramda'
 import classNames from 'classnames'
-<<<<<<< HEAD
-=======
-import { ExtensionPoint } from 'render'
-<<<<<<< HEAD
 
->>>>>>> Update MinicartItem para Product Summary
-import { Button, Spinner } from 'vtex.styleguide'
-=======
+import { ExtensionPoint } from 'render'
+
 import { Button, Spinner, IconDelete } from 'vtex.styleguide'
->>>>>>> Pass deleteButton to product-summary extension point
 import ProductPrice from 'vtex.store-components/ProductPrice'
 
 import { MiniCartPropTypes } from '../propTypes'
@@ -26,6 +20,10 @@ class MiniCartContent extends Component {
     large: PropTypes.bool,
     /* Internationalization */
     intl: intlShape.isRequired,
+    /** Close the minicart sidebar when an item on click */
+    handleUpdateContentVisibility: PropTypes.func,
+
+
     /* Reused props */
     data: MiniCartPropTypes.orderFormContext,
     labelMiniCartEmpty: MiniCartPropTypes.labelMiniCartEmpty,
@@ -66,6 +64,8 @@ class MiniCartContent extends Component {
 
 
   onRemoveItem = id => {
+    this.setState({ showSpinner: true })
+
     const {
       data: { orderForm, updateAndRefetchOrderForm },
     } = this.props
@@ -142,7 +142,7 @@ class MiniCartContent extends Component {
 
     return {
       productName: item.name,
-      linkText: item.detailUrl,
+      linkText: item.detailUrl.replace(/^\//, '').replace(/\/p$/, ''),
       sku: {
         seller: {
           commertialOffer: {
@@ -162,9 +162,12 @@ class MiniCartContent extends Component {
   renderDeleteButton = (id) => {
     return (
       <Fragment>
-        <Button icon className="pa0" variation="tertiary" onClick={(e) => this.onRemoveItem(id, e)}>
-          <IconDelete size={15} color="#BDBDBD" />
-        </Button>
+        <div className="pa0-m">
+          <Button icon variation="tertiary" onClick={(e) => this.onRemoveItem(id, e)}>
+            <IconDelete size={15} color="#BDBDBD" />
+          </Button>
+        </div>
+
       </Fragment>
     )
   }
@@ -206,7 +209,6 @@ class MiniCartContent extends Component {
       <Fragment>
         <div className={classes}>
           {items.map(item => (
-
 
             <ExtensionPoint id="product-summary"
               key={item.id}
