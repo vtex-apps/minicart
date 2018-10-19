@@ -159,6 +159,16 @@ class MiniCartContent extends Component {
     }
   }
 
+  renderDeleteButton = (id) => {
+    return (
+      <Fragment>
+        <Button icon className="pa0" variation="tertiary" onClick={(e) => this.onRemoveItem(id, e)}>
+          <IconDelete size={15} color="#BDBDBD" />
+        </Button>
+      </Fragment>
+    )
+  }
+
   renderMiniCartWithItems = (
     orderForm,
     label,
@@ -192,7 +202,6 @@ class MiniCartContent extends Component {
 
     </Fragment>
 
-
     return (
       <Fragment>
         <div className={classes}>
@@ -209,6 +218,7 @@ class MiniCartContent extends Component {
               showBorders={true}
               deleteButton={deleteButton}
             />
+
 
           ))}
 
