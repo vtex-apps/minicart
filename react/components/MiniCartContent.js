@@ -20,10 +20,6 @@ class MiniCartContent extends Component {
     large: PropTypes.bool,
     /* Internationalization */
     intl: intlShape.isRequired,
-    /** Close the minicart sidebar when an item on click */
-    handleUpdateContentVisibility: PropTypes.func,
-
-
     /* Reused props */
     data: MiniCartPropTypes.orderFormContext,
     labelMiniCartEmpty: MiniCartPropTypes.labelMiniCartEmpty,
@@ -182,6 +178,7 @@ class MiniCartContent extends Component {
     enableQuantitySelector,
     maxQuantity,
     showSpinner,
+    handleUpdateContentVisibility,
     large
   ) => {
     const items = this.getGroupedItems()
@@ -204,6 +201,7 @@ class MiniCartContent extends Component {
       </Button></div>
 
     </Fragment>
+
 
     return (
       <Fragment>

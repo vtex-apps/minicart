@@ -90,6 +90,7 @@ export class MiniCart extends Component {
       isMobile ||
       (window && window.innerWidth <= 480)
 
+    
     const miniCartContent = (
       <MiniCartContent
         large={large}
@@ -102,10 +103,13 @@ export class MiniCart extends Component {
         enableQuantitySelector={enableQuantitySelector}
         maxQuantity={maxQuantity}
 <<<<<<< HEAD
+<<<<<<< HEAD
         onClickProduct={this.onClickProduct}
 =======
         handleUpdateContentVisibility={this.handleUpdateContentVisibility}
 >>>>>>> Redirect the user to product when click on item
+=======
+>>>>>>> Render product-summary fine
       />
     )
 
