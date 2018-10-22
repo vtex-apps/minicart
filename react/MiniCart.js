@@ -104,12 +104,16 @@ export class MiniCart extends Component {
         maxQuantity={maxQuantity}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         onClickProduct={this.onClickProduct}
 =======
         handleUpdateContentVisibility={this.handleUpdateContentVisibility}
 >>>>>>> Redirect the user to product when click on item
 =======
 >>>>>>> Render product-summary fine
+=======
+        actionOnClick={this.handleUpdateContentVisibility}
+>>>>>>> Closes the minicart sidebar when the item is clicked
       />
     )
 

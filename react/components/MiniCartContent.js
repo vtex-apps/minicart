@@ -20,6 +20,8 @@ class MiniCartContent extends Component {
     large: PropTypes.bool,
     /* Internationalization */
     intl: intlShape.isRequired,
+    /** Define a function that is executed when the item is clicked */
+    actionOnClick: PropTypes.func,
     /* Reused props */
     data: MiniCartPropTypes.orderFormContext,
     labelMiniCartEmpty: MiniCartPropTypes.labelMiniCartEmpty,
@@ -177,8 +179,8 @@ class MiniCartContent extends Component {
     showSku,
     enableQuantitySelector,
     maxQuantity,
+    actionOnClick,
     showSpinner,
-    handleUpdateContentVisibility,
     large
   ) => {
     const items = this.getGroupedItems()
@@ -208,18 +210,21 @@ class MiniCartContent extends Component {
         <div className={classes}>
           {items.map(item => (
 
-            <ExtensionPoint id="product-summary"
-              key={item.id}
-              product={this.createProductShapeFromItem(item)}
-              name={item.name}
-              displayMode="inline"
-              showListPrice={false}
-              showBadge={false}
-              showBorders={true}
-              deleteButton={deleteButton}
-            />
-
-
+            <div >
+              <ExtensionPoint id="product-summary"
+                key={item.id}
+                product={this.createProductShapeFromItem(item)}
+                name={item.name}
+                displayMode="inline"
+                showListPrice={false}
+                showBadge={false}
+                showBorders={true}
+                showInstallments={false}
+                showLabels={false}
+                deleteButton={this.renderDeleteButton(item.id)}
+                actionOnClick={actionOnClick}
+              />
+            </div>
           ))}
 
         </div>
@@ -274,6 +279,7 @@ class MiniCartContent extends Component {
       showDiscount,
       showSku,
       enableQuantitySelector,
+      actionOnClick,
       maxQuantity,
       large,
     } = this.props
