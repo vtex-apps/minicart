@@ -59,8 +59,6 @@ class MiniCartContent extends Component {
 
   handleClickButton = () => location.assign('/checkout/#/cart')
 
-
-
   onRemoveItem = id => {
     this.setState({ showSpinner: true })
 
@@ -136,7 +134,7 @@ class MiniCartContent extends Component {
     </div>
   )
 
-  createProductShapeFromItem = (item) => {
+  createProductShapeFromItem = item => {
 
     return {
       productName: item.name,
@@ -157,16 +155,13 @@ class MiniCartContent extends Component {
     }
   }
 
-  renderDeleteButton = (id) => {
+  renderDeleteButton = id => {
     return (
-      <Fragment>
-        <div className="pa0-m">
-          <Button icon variation="tertiary" onClick={(e) => this.onRemoveItem(id, e)}>
-            <IconDelete size={15} color="#BDBDBD" />
-          </Button>
-        </div>
-
-      </Fragment>
+      <div className="pa0-m">
+        <Button icon variation="tertiary" onClick={e => this.onRemoveItem(id, e)}>
+          <IconDelete size={15} color="#BDBDBD" />
+        </Button>
+      </div>
     )
   }
 
@@ -204,7 +199,6 @@ class MiniCartContent extends Component {
 
     </Fragment>
 
-
     return (
       <Fragment>
         <div className={classes}>
@@ -226,11 +220,9 @@ class MiniCartContent extends Component {
               />
             </Fragment>
           ))}
-
         </div>
         <div
-          className="vtex-minicart-content__footer w-100 bg-white pa4 bt b--silver pt4 flex flex-column items-end"
-        >
+          className="vtex-minicart-content__footer w-100 bg-white pa4 bt b--silver pt4 flex flex-column items-end">
           {showDiscount && (
             <div className="vtex-minicart__content-discount blue w-100 flex justify-end items-center">
               <span className="ttl c-action-primary">{labelDiscount}</span>
