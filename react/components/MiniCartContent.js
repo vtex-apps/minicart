@@ -159,7 +159,7 @@ class MiniCartContent extends Component {
     return (
       <div className="pa0-m">
         <Button icon variation="tertiary" onClick={e => this.onRemoveItem(id, e)}>
-          <IconDelete size={15} color="#BDBDBD" />
+          <IconDelete size={15} color="silver" />
         </Button>
       </div>
     )
