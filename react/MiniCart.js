@@ -90,7 +90,6 @@ export class MiniCart extends Component {
       isMobile ||
       (window && window.innerWidth <= 480)
 
-    
     const miniCartContent = (
       <MiniCartContent
         large={large}

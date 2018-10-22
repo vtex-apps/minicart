@@ -310,6 +310,7 @@ class MiniCartContent extends Component {
       showSku,
       enableQuantitySelector,
       maxQuantity,
+      actionOnClick,
       showSpinner,
       large
     )
