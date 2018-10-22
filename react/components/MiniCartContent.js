@@ -210,7 +210,7 @@ class MiniCartContent extends Component {
         <div className={classes}>
           {items.map(item => (
 
-            <div >
+            <Fragment>
               <ExtensionPoint id="product-summary"
                 key={item.id}
                 product={this.createProductShapeFromItem(item)}
@@ -224,7 +224,7 @@ class MiniCartContent extends Component {
                 deleteButton={this.renderDeleteButton(item.id)}
                 actionOnClick={actionOnClick}
               />
-            </div>
+            </Fragment>
           ))}
 
         </div>
