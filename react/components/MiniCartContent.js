@@ -203,21 +203,26 @@ class MiniCartContent extends Component {
       <Fragment>
         <div className={classes}>
           {items.map(item => (
-
             <Fragment>
-              <ExtensionPoint id="product-summary"
-                key={item.id}
-                product={this.createProductShapeFromItem(item)}
-                name={item.name}
-                displayMode="inline"
-                showListPrice={false}
-                showBadge={false}
-                showBorders={true}
-                showInstallments={false}
-                showLabels={false}
-                deleteButton={this.renderDeleteButton(item.id)}
-                actionOnClick={actionOnClick}
-              />
+              <div className="relative">
+                <div className="fr absolute bottom-0 right-0">
+                  <Button icon variation="tertiary" onClick={e => this.onRemoveItem(item.id, e)}>
+                    <IconDelete size={15} color="silver" />
+                  </Button>
+                </div>
+                <ExtensionPoint id="product-summary"
+                  key={item.id}
+                  product={this.createProductShapeFromItem(item)}
+                  name={item.name}
+                  displayMode="inline"
+                  showListPrice={false}
+                  showBadge={false}
+                  showBorders={true}
+                  showInstallments={false}
+                  showLabels={false}
+                  actionOnClick={actionOnClick}
+                />
+              </div>
             </Fragment>
           ))}
         </div>
