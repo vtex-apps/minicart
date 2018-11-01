@@ -92,7 +92,11 @@ export default class MiniCartItem extends Component {
 
     return (
       <div className="vtex-minicart__item h4 relative w-100">
-          <div className="relative bb b--silver h-100 pa4 pointer" onClick={() => {onClickProduct(detailUrl)}}>
+        <Link
+          className="pointer link black-90"
+          page={'store/product'}
+          params={{ slug: this.getItemId(detailUrl) }}>
+          <div className="relative bb b--muted-3 h-100 pa4">
             <div className={nameClasses}>
               <ProductName
                 name={name}
@@ -127,7 +131,7 @@ export default class MiniCartItem extends Component {
         {(showRemoveButton && !isRemovingItem) && (
           <div className="vtex-minicart-item__remove-btn absolute right-0 top-0 mr4">
             <Button icon variation="tertiary" onClick={(e) => this.onClickRemove(id, e)}>
-              <IconClose size={20} color="#BDBDBD" />
+              <IconClose size={20} color="b--muted-3" />
             </Button>
           </div>
         )}
@@ -138,6 +142,7 @@ export default class MiniCartItem extends Component {
             <Spinner size={20} />
           </div>
         )}
+        </Link>
       </div>
     )
   }
