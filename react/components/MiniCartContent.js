@@ -124,7 +124,7 @@ class MiniCartContent extends Component {
 
   renderWithoutItems = label => (
     <div className="vtex-minicart__item pa9 flex items-center justify-center relative bg-base">
-      <span className="f5">{label}</span>
+      <span className="t-action">{label}</span>
     </div>
   )
 
