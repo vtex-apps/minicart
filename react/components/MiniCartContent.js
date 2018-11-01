@@ -123,7 +123,7 @@ class MiniCartContent extends Component {
   }
 
   renderWithoutItems = label => (
-    <div className="vtex-minicart__item pa9 flex items-center justify-center relative bg-white">
+    <div className="vtex-minicart__item pa9 flex items-center justify-center relative bg-base">
       <span className="f5">{label}</span>
     </div>
   )
@@ -145,7 +145,7 @@ class MiniCartContent extends Component {
     const classes = classNames(
       'vtex-minicart__content overflow-x-hidden',
       {
-        'vtex-minicart__content--small bg-white': !large,
+        'vtex-minicart__content--small bg-base': !large,
         'overflow-y-auto': large,
         'overflow-y-scroll': items.length > 3 && !large,
         'overflow-y-hidden': items.length <= 3 && !large,
@@ -174,7 +174,7 @@ class MiniCartContent extends Component {
           ))}
         </div>
         <div
-          className="vtex-minicart-content__footer w-100 bg-white pa4 bt b--silver pt4 flex flex-column items-end"
+          className="vtex-minicart-content__footer w-100 bg-base pa4 bt b--silver pt4 flex flex-column items-end"
         >
           {showDiscount && (
             <div className="vtex-minicart__content-discount blue w-100 flex justify-end items-center">
@@ -209,7 +209,7 @@ class MiniCartContent extends Component {
   }
 
   renderLoading = () => (
-    <div className="vtex-minicart__item pa4 flex items-center justify-center relative bg-white">
+    <div className="vtex-minicart__item pa4 flex items-center justify-center relative bg-base">
       <Spinner />
     </div>
   )
