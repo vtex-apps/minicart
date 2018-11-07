@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { reduceBy, values } from 'ramda'
 import classNames from 'classnames'
-import { withRuntimeContext } from 'render'
 import { Button, Spinner } from 'vtex.styleguide'
 import ProductPrice from 'vtex.store-components/ProductPrice'
 
@@ -261,4 +260,4 @@ class MiniCartContent extends Component {
   }
 }
 
-export default withRuntimeContext(injectIntl(MiniCartContent))
+export default injectIntl(MiniCartContent)
