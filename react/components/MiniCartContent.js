@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { reduceBy, values } from 'ramda'
 import classNames from 'classnames'
-
 import { Button, Spinner } from 'vtex.styleguide'
 import ProductPrice from 'vtex.store-components/ProductPrice'
 
@@ -154,6 +153,7 @@ class MiniCartContent extends Component {
     )
 
     const discount = this.calculateDiscount(items, orderForm.value)
+    const { onClickProduct } = this.props
 
     return (
       <Fragment>
@@ -169,6 +169,7 @@ class MiniCartContent extends Component {
               showSku={showSku}
               enableQuantitySelector={enableQuantitySelector}
               maxQuantity={maxQuantity}
+              onClickProduct={onClickProduct}
             />
           ))}
         </div>

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.2.3] - 2018-11-07
+### Changed
+- Close the `SideBar` after clicking some product's link.
+
 ## [1.2.2] - 2018-10-18
 ### Changed
 - Update the `SideBar` component to use the `Animation` from the `store-components`.

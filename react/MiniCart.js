@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
+import { withRuntimeContext } from 'render'
 
 import CartIcon from './images/CartIcon'
 import MiniCartContent from './components/MiniCartContent'
@@ -52,6 +53,16 @@ export class MiniCart extends Component {
     this.props.orderFormContext.refetch()
   }
 
+  onClickProduct = detailUrl => {
+    this.setState({
+      openContent: false,
+    })
+    const { runtime: { navigate } } = this.props
+    navigate({
+      to: detailUrl
+    })
+  }
+
   render() {
     const { openContent } = this.state
     const {
@@ -90,6 +101,7 @@ export class MiniCart extends Component {
         labelButton={labelButtonFinishShopping}
         enableQuantitySelector={enableQuantitySelector}
         maxQuantity={maxQuantity}
+        onClickProduct={this.onClickProduct}
       />
     )
 
@@ -223,5 +235,5 @@ miniHOC.getSchema = props => {
   }
 }
 
-export default miniHOC
+export default withRuntimeContext(miniHOC)
 
