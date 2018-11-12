@@ -101,18 +101,9 @@ export class MiniCart extends Component {
         labelButton={labelButtonFinishShopping}
         enableQuantitySelector={enableQuantitySelector}
         maxQuantity={maxQuantity}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         onClickProduct={this.onClickProduct}
-=======
         handleUpdateContentVisibility={this.handleUpdateContentVisibility}
->>>>>>> Redirect the user to product when click on item
-=======
->>>>>>> Render product-summary fine
-=======
         actionOnClick={this.handleUpdateContentVisibility}
->>>>>>> Closes the minicart sidebar when the item is clicked
       />
     )
 
@@ -153,15 +144,15 @@ export class MiniCart extends Component {
               {miniCartContent}
             </Sidebar>
           ) : (
-            openContent && (
-              <Popup
-                onOutsideClick={this.handleUpdateContentVisibility}
-                buttonOffsetWidth={this.iconRef.offsetWidth}
-              >
-                {miniCartContent}
-              </Popup>
-            )
-          ))}
+              openContent && (
+                <Popup
+                  onOutsideClick={this.handleUpdateContentVisibility}
+                  buttonOffsetWidth={this.iconRef.offsetWidth}
+                >
+                  {miniCartContent}
+                </Popup>
+              )
+            ))}
       </div>
     )
   }

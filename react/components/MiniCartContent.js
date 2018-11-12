@@ -181,19 +181,12 @@ class MiniCartContent extends Component {
     )
 
     const discount = this.calculateDiscount(items, orderForm.value)
-    const { onClickProduct } = this.props
-    const deleteButton = <Fragment>
-      <div className="ma0 pa0 ph0"><Button icon variation="tertiary">
-        <IconDelete className="ma0 pa0 ph8" size={20} color="#BDBDBD" />
-      </Button></div>
-
-    </Fragment>
 
     return (
       <Fragment>
         <div className={classes}>
           {items.map(item => (
-            <Fragment>
+            <Fragment key={item.id}>
               <div className="relative">
                 <div className="fr absolute bottom-0 right-0">
                   <Button icon variation="tertiary" onClick={e => this.onRemoveItem(item.id, e)}>
@@ -201,7 +194,6 @@ class MiniCartContent extends Component {
                   </Button>
                 </div>
                 <ExtensionPoint id="product-summary"
-                  key={item.id}
                   product={this.createProductShapeFromItem(item)}
                   name={item.name}
                   displayMode="inline"
