@@ -134,26 +134,23 @@ class MiniCartContent extends Component {
     </div>
   )
 
-  createProductShapeFromItem = item => {
-
-    return {
-      productName: item.name,
-      linkText: item.detailUrl.replace(/^\//, '').replace(/\/p$/, ''),
-      sku: {
-        seller: {
-          commertialOffer: {
-            Price: item.sellingPrice,
-            ListPrice: item.ListPrice
-          }
-        },
-        name: item.skuName,
-        itemId: item.id,
-        image: {
-          imageUrl: item.imageUrl
-        },
+  createProductShapeFromItem = item => ({
+    productName: item.name,
+    linkText: item.detailUrl.replace(/^\//, '').replace(/\/p$/, ''),
+    sku: {
+      seller: {
+        commertialOffer: {
+          Price: item.sellingPrice,
+          ListPrice: item.ListPrice
+        }
       },
-    }
-  }
+      name: item.skuName,
+      itemId: item.id,
+      image: {
+        imageUrl: item.imageUrl
+      },
+    },
+  })
 
   renderMiniCartWithItems = (
     orderForm,
@@ -189,7 +186,7 @@ class MiniCartContent extends Component {
             <Fragment key={item.id}>
               <div className="relative">
                 <div className="fr absolute bottom-0 right-0">
-                  <Button icon variation="tertiary" onClick={e => this.onRemoveItem(item.id, e)}>
+                  <Button icon variation="tertiary" onClick={e => this.onRemoveItem(item.id)}>
                     <IconDelete size={15} color="silver" />
                   </Button>
                 </div>
