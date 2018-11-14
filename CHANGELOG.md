@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Changed
 - Update the `MiniCartContent` component to use the `ProductSummary` from the `vtex.product-summary` instead `MiniCartItem`.
+- Add shadow scrim.
 
 
 ## [1.2.3] - 2018-11-07
