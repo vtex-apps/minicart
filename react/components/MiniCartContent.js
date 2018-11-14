@@ -3,12 +3,9 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { reduceBy, values } from 'ramda'
 import classNames from 'classnames'
-
 import { ExtensionPoint } from 'render'
-
 import { Button, Spinner, IconDelete } from 'vtex.styleguide'
 import ProductPrice from 'vtex.store-components/ProductPrice'
-
 import { MiniCartPropTypes } from '../propTypes'
 
 /**
@@ -191,12 +188,12 @@ class MiniCartContent extends Component {
                   </Button>
                 </div>
                 <ExtensionPoint id="product-summary"
+                  showBorders
                   product={this.createProductShapeFromItem(item)}
                   name={item.name}
                   displayMode="inline"
                   showListPrice={false}
                   showBadge={false}
-                  showBorders={true}
                   showInstallments={false}
                   showLabels={false}
                   actionOnClick={actionOnClick}

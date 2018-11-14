@@ -2,14 +2,12 @@ import React, { Component } from 'react'
 import { Button } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
 import { withRuntimeContext } from 'render'
-
 import CartIcon from './images/CartIcon'
 import MiniCartContent from './components/MiniCartContent'
 import { MiniCartPropTypes } from './propTypes'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
 import { orderFormConsumer } from 'vtex.store/OrderFormContext'
-
 import './global.css'
 
 const MINIMUM_MAX_QUANTITY = 1
