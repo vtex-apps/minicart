@@ -8,8 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Changed
 - Use icons from the dreamstore icon pack.
-  
-  
+
 ## [1.2.3] - 2018-11-07
 ### Changed
 - Close the `SideBar` after clicking some product's link.
