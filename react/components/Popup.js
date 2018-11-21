@@ -24,8 +24,8 @@ export default class Popup extends Component {
           style={boxPositionStyle}
         >
           <div className="shadow-3">
-            <div className="vtex-minicart__arrow-up absolute top-0 shadow-3 bg-white h1 w1 pa4 rotate-45" />
-            <div className="mt3 bg-white relative flex flex-column">{children}</div>
+            <div className="vtex-minicart__arrow-up absolute top-0 shadow-3 bg-base h1 w1 pa4 rotate-45" />
+            <div className="mt3 bg-base relative flex flex-column">{children}</div>
           </div>
         </div>
       </OutsideClickHandler>

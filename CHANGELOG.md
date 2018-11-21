@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Update the size of `Sidebar` to 80% of original value.
 - Add shadow scrim.
 
+### Fixed
+- Replace typography and color classes with design tokens.
+
 ## [1.3.0] - 2018-11-21
 ### Changed
 - Use icons from the dreamstore icon pack.
