@@ -121,14 +121,14 @@ export class MiniCart extends Component {
             <div className={`relative ${iconClasses}`}>
               <CartIcon size={iconSize} />
               {quantity > 0 && (
-                <span className="vtex-minicart__bagde white absolute f7 bg-blue h1 w1 pa1 br4 tc lh-copy">{quantity}</span>
+                <span className="vtex-minicart__bagde c-on-base--inverted absolute t-mini bg-blue h1 w1 pa1 br4 tc lh-copy">{quantity}</span>
               )}
             </div>
             {iconLabel && (
               <span
-                className={`vtex-minicart__label dn-m db-l f6 pl${quantity > 0 ? '6' : '4'} ${labelClasses}`}
+                className={`vtex-minicart__label dn-m db-l t-action--small pl${quantity > 0 ? '6' : '4'} ${labelClasses}`}
               >
-                {iconLabel}
+              {iconLabel}
               </span>
             )}
           </div>
