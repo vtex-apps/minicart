@@ -78,6 +78,8 @@ class MiniCartContent extends Component {
         orderFormId: orderForm.orderFormId,
         items: updatedItem,
       },
+    }).then(() => {
+      this.setState({ showSpinner: false })
     })
   }
 
