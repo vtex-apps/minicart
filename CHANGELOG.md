@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Update the `MiniCartContent` component to use the `ProductSummary` from the `vtex.product-summary` instead `MiniCartItem`.
+- Update the size of `Sidebar` to 80% of original value.
+- Add shadow scrim.
+
 ### Fixed
 - Replace typography and color classes with design tokens.
 
@@ -16,6 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.2.3] - 2018-11-07
 ### Changed
 - Close the `SideBar` after clicking some product's link.
+
 
 ## [1.2.2] - 2018-10-18
 ### Changed

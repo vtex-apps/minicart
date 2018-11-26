@@ -5,6 +5,7 @@ import { IconCaretRight } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
 import OutsideClickHandler from 'react-outside-click-handler'
 import Animation from 'vtex.store-components/Animation'
+import classNames from 'classnames'
 
 import MiniCart from '../MiniCart'
 
@@ -39,10 +40,16 @@ class Sidebar extends Component {
       return null
     }
 
+    const scrimClasses = classNames('vtex-menu-sidebar__scrim fixed dim bg-base--inverted top-0 z-9999 w-100 vh-100 o-40', {
+      dn: !isOpen,
+    })
+
     return ReactDOM.createPortal(
       <OutsideClickHandler onOutsideClick={onOutsideClick}>
+        <div style={{ willChange: 'opacity' }} className={scrimClasses} onClick={onOutsideClick} />
+
         <Animation
-          className="vtex-minicart__sidebar w-100 w-auto-ns h-100 fixed top-0 right-0 z-9999 bg-base shadow-2 flex flex-column"
+          className="vtex-minicart__sidebar w-80 w-auto-ns h-100 fixed top-0 right-0 z-9999 bg-base shadow-2 flex flex-column"
           isActive={isOpen}
           type="drawerLeft"
         >

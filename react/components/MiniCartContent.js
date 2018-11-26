@@ -3,10 +3,9 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { reduceBy, values } from 'ramda'
 import classNames from 'classnames'
-import { Button, Spinner } from 'vtex.styleguide'
+import { ExtensionPoint } from 'render'
+import { Button, Spinner, IconDelete } from 'vtex.styleguide'
 import ProductPrice from 'vtex.store-components/ProductPrice'
-
-import MiniCartItem from './MiniCartItem'
 import { MiniCartPropTypes } from '../propTypes'
 
 /**
@@ -18,6 +17,8 @@ class MiniCartContent extends Component {
     large: PropTypes.bool,
     /* Internationalization */
     intl: intlShape.isRequired,
+    /** Define a function that is executed when the item is clicked */
+    actionOnClick: PropTypes.func,
     /* Reused props */
     data: MiniCartPropTypes.orderFormContext,
     labelMiniCartEmpty: MiniCartPropTypes.labelMiniCartEmpty,
@@ -56,6 +57,8 @@ class MiniCartContent extends Component {
   handleClickButton = () => location.assign('/checkout/#/cart')
 
   onRemoveItem = id => {
+    this.setState({ showSpinner: true })
+
     const {
       data: { orderForm, updateAndRefetchOrderForm },
     } = this.props
@@ -75,6 +78,8 @@ class MiniCartContent extends Component {
         orderFormId: orderForm.orderFormId,
         items: updatedItem,
       },
+    }).then(() => {
+      this.setState({ showSpinner: false })
     })
   }
 
@@ -128,6 +133,24 @@ class MiniCartContent extends Component {
     </div>
   )
 
+  createProductShapeFromItem = item => ({
+    productName: item.name,
+    linkText: item.detailUrl.replace(/^\//, '').replace(/\/p$/, ''),
+    sku: {
+      seller: {
+        commertialOffer: {
+          Price: item.sellingPrice,
+          ListPrice: item.ListPrice
+        }
+      },
+      name: item.skuName,
+      itemId: item.id,
+      image: {
+        imageUrl: item.imageUrl
+      },
+    },
+  })
+
   renderMiniCartWithItems = (
     orderForm,
     label,
@@ -137,13 +160,14 @@ class MiniCartContent extends Component {
     showSku,
     enableQuantitySelector,
     maxQuantity,
+    actionOnClick,
     showSpinner,
     large
   ) => {
     const items = this.getGroupedItems()
 
     const classes = classNames(
-      'vtex-minicart__content overflow-x-hidden',
+      'vtex-minicart__content overflow-x-hidden pa1',
       {
         'vtex-minicart__content--small bg-base': !large,
         'overflow-y-auto': large,
@@ -153,29 +177,34 @@ class MiniCartContent extends Component {
     )
 
     const discount = this.calculateDiscount(items, orderForm.value)
-    const { onClickProduct } = this.props
 
     return (
       <Fragment>
         <div className={classes}>
           {items.map(item => (
-            <MiniCartItem
-              {...item}
-              key={item.id}
-              large
-              removeItem={this.onRemoveItem}
-              updateItem={this.onUpdateItems}
-              showRemoveButton={showRemoveButton}
-              showSku={showSku}
-              enableQuantitySelector={enableQuantitySelector}
-              maxQuantity={maxQuantity}
-              onClickProduct={onClickProduct}
-            />
+            <Fragment key={item.id}>
+              <div className="relative flex">
+                <div className="fr absolute bottom-0 right-0">
+                  <Button icon variation="tertiary" onClick={e => this.onRemoveItem(item.id)}>
+                    <IconDelete size={15} color="silver" />
+                  </Button>
+                </div>
+                <ExtensionPoint id="product-summary"
+                  showBorders
+                  product={this.createProductShapeFromItem(item)}
+                  name={item.name}
+                  displayMode="inline"
+                  showListPrice={false}
+                  showBadge={false}
+                  showInstallments={false}
+                  showLabels={false}
+                  actionOnClick={actionOnClick}
+                />
+              </div>
+            </Fragment>
           ))}
         </div>
-        <div
-          className="vtex-minicart-content__footer w-100 bg-base pa4 bt b--muted-3 pt4 flex flex-column items-end"
-        >
+        <div className="vtex-minicart-content__footer w-100 bg-base pa4 bt b--muted-3 pt4 flex flex-column items-end">
           {showDiscount && (
             <div className="vtex-minicart__content-discount blue w-100 flex justify-end items-center">
               <span className="ttl c-action-primary">{labelDiscount}</span>
@@ -224,6 +253,7 @@ class MiniCartContent extends Component {
       showDiscount,
       showSku,
       enableQuantitySelector,
+      actionOnClick,
       maxQuantity,
       large,
     } = this.props
@@ -254,6 +284,7 @@ class MiniCartContent extends Component {
       showSku,
       enableQuantitySelector,
       maxQuantity,
+      actionOnClick,
       showSpinner,
       large
     )
