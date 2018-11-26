@@ -181,7 +181,7 @@ class MiniCartContent extends Component {
         <div className={classes}>
           {items.map(item => (
             <Fragment key={item.id}>
-              <div className="relative">
+              <div className="relative flex">
                 <div className="fr absolute bottom-0 right-0">
                   <Button icon variation="tertiary" onClick={e => this.onRemoveItem(item.id)}>
                     <IconDelete size={15} color="silver" />
