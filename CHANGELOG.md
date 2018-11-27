@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Changed
-- Replace icons from icon with pure svg pack in `1.x`.
+- Replace cart icon from icon pack with svg paths in `1.x`.
 
 ## [1.3.0] - 2018-11-21
 ### Changed
