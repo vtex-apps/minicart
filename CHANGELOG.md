@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.3.1] - 2018-11-27
+### Changed
+- Replace cart icon from icon pack with svg paths in `1.x`.
+
 ## [1.3.0] - 2018-11-21
 ### Changed
 - Use icons from the dreamstore icon pack.
