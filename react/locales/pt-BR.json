@@ -14,5 +14,6 @@
     "finish-shopping-button-label": "Finalizar compra",
     "minicart-empty": "Seu carrinho está vazio!",
     "sidebar-title": "Meu carrinho",
-    "minicart-content-footer-discount": "Economize"
+    "minicart-content-footer-discount": "Economize",
+    "minicart.error-removal": "A remoção do item falhou, por favor tente novamente"
 }

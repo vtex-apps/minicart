@@ -14,5 +14,6 @@
     "finish-shopping-button-label": "Go to checkout",
     "minicart-empty": "Your cart is empty!",
     "sidebar-title": "My mini cart",
-    "minicart-content-footer-discount": "Save"
+    "minicart-content-footer-discount": "Save",
+    "minicart.error-removal": "Item removal failed, please try again"
 }

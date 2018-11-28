@@ -60,7 +60,9 @@ class MiniCartContent extends Component {
     this.setState({ isUpdating: true })
 
     const {
+      data: orderFormContext,
       data: { orderForm, updateAndRefetchOrderForm },
+      intl,
     } = this.props
     const itemPayload = orderForm.items.find(item => item.id === id)
     const index = orderForm.items.indexOf(itemPayload)
@@ -78,7 +80,10 @@ class MiniCartContent extends Component {
         orderFormId: orderForm.orderFormId,
         items: updatedItem,
       },
-    }).then(() => {
+    }).catch(() => {
+      //TODO improve the way this error is presented.
+      orderFormContext.updateToastMessage({isSuccess: false, text: intl.formatMessage({id: 'minicart.error-removal'})});
+    }).finally(() => {
       this.setState({ isUpdating: false })
     })
   }
