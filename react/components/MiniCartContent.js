@@ -30,7 +30,7 @@ class MiniCartContent extends Component {
     showDiscount: MiniCartPropTypes.showDiscount,
   }
 
-  state = { showSpinner: false }
+  state = { isUpdating: false }
 
   sumItemsPrice = items => {
     let sum = 0
@@ -57,7 +57,7 @@ class MiniCartContent extends Component {
   handleClickButton = () => location.assign('/checkout/#/cart')
 
   onRemoveItem = id => {
-    this.setState({ showSpinner: true })
+    this.setState({ isUpdating: true })
 
     const {
       data: { orderForm, updateAndRefetchOrderForm },
@@ -79,12 +79,12 @@ class MiniCartContent extends Component {
         items: updatedItem,
       },
     }).then(() => {
-      this.setState({ showSpinner: false })
+      this.setState({ isUpdating: false })
     })
   }
 
   onUpdateItems = (id, quantity) => {
-    this.setState({ showSpinner: true })
+    this.setState({ isUpdating: true })
     const {
       data: {
         orderForm,
@@ -123,7 +123,7 @@ class MiniCartContent extends Component {
         items: updatedItems,
       },
     }).then(() => {
-      this.setState({ showSpinner: false })
+      this.setState({ isUpdating: false })
     })
   }
 
@@ -161,7 +161,7 @@ class MiniCartContent extends Component {
     enableQuantitySelector,
     maxQuantity,
     actionOnClick,
-    showSpinner,
+    isUpdating,
     large
   ) => {
     const items = this.getGroupedItems()
@@ -185,7 +185,7 @@ class MiniCartContent extends Component {
             <Fragment key={item.id}>
               <div className="relative flex">
                 <div className="fr absolute bottom-0 right-0">
-                  <Button icon variation="tertiary" onClick={e => this.onRemoveItem(item.id)}>
+                  <Button icon variation="tertiary" disabled={isUpdating} onClick={e => this.onRemoveItem(item.id)}>
                     <IconDelete size={15} color="silver" />
                   </Button>
                 </div>
@@ -217,7 +217,7 @@ class MiniCartContent extends Component {
             </div>
           )}
           <div className="vtex-minicart__content-price mb3">
-            {showSpinner && <Spinner size={18} />}
+            {isUpdating && <Spinner size={18} />}
             <ProductPrice
               sellingPrice={orderForm.value}
               listPrice={orderForm.value}
@@ -257,7 +257,7 @@ class MiniCartContent extends Component {
       maxQuantity,
       large,
     } = this.props
-    const { showSpinner } = this.state
+    const { isUpdating } = this.state
 
     if (!data || data.loading) {
       return this.renderLoading()
@@ -285,7 +285,7 @@ class MiniCartContent extends Component {
       enableQuantitySelector,
       maxQuantity,
       actionOnClick,
-      showSpinner,
+      isUpdating,
       large
     )
   }
