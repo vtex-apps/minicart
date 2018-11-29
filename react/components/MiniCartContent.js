@@ -86,14 +86,17 @@ class MiniCartContent extends Component {
       },
     }).catch(() => {
       //TODO improve the way this error is presented.
-      orderFormContext.updateToastMessage({ isSuccess: false, text: intl.formatMessage({ id: 'minicart.error-removal' }) });
+      orderFormContext.updateToastMessage({
+        isSuccess: false,
+        text: intl.formatMessage({ id: 'minicart.error-removal' })
+      })
+
+      window.setTimeout(() => {
+        orderFormContext.updateToastMessage({ isSuccess: null, text: null })
+      }, TOAST_TIMEOUT)
     }).finally(() => {
       this.setState({ isUpdating: false })
     })
-
-    window.setTimeout(() => {
-      orderFormContext.updateToastMessage({ isSuccess: null, text: null })
-    }, TOAST_TIMEOUT)
   }
 
   onUpdateItems = (id, quantity) => {
