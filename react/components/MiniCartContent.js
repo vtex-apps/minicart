@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { reduceBy, values } from 'ramda'
+import { reduceBy, values, clone } from 'ramda'
 import classNames from 'classnames'
 import { ExtensionPoint } from 'render'
 import { Button, Spinner, IconDelete } from 'vtex.styleguide'
@@ -34,14 +34,10 @@ class MiniCartContent extends Component {
     showDiscount: MiniCartPropTypes.showDiscount,
   }
 
-  state = { isUpdating: false }
+  state = { isUpdating: [] }
 
   sumItemsPrice = items => {
-    let sum = 0
-    items.forEach(item => {
-      sum += item.listPrice * item.quantity
-    })
-    return sum
+    return items.reduce((sum, { listPrice, quantity }) => sum + listPrice * quantity, 0)
   }
 
   getGroupedItems = () =>
@@ -60,8 +56,8 @@ class MiniCartContent extends Component {
 
   handleClickButton = () => location.assign('/checkout/#/cart')
 
-  onRemoveItem = id => {
-    this.setState({ isUpdating: true })
+  handleItemRemoval = async id => {
+    this.updateItemLoad(id, true)
 
     const {
       data: orderFormContext,
@@ -79,12 +75,14 @@ class MiniCartContent extends Component {
       }
     })
 
-    updateAndRefetchOrderForm({
-      variables: {
-        orderFormId: orderForm.orderFormId,
-        items: updatedItem,
-      },
-    }).catch(() => {
+    try {
+      await updateAndRefetchOrderForm({
+        variables: {
+          orderFormId: orderForm.orderFormId,
+          items: updatedItem,
+        },
+      })
+    } catch (error) {
       //TODO improve the way this error is presented.
       orderFormContext.updateToastMessage({
         isSuccess: false,
@@ -94,19 +92,25 @@ class MiniCartContent extends Component {
       window.setTimeout(() => {
         orderFormContext.updateToastMessage({ isSuccess: null, text: null })
       }, TOAST_TIMEOUT)
-    }).finally(() => {
-      this.setState({ isUpdating: false })
-    })
+    }
+    this.updateItemLoad(id, false)
+  }
+
+  updateItemLoad = (itemId, newStatus) => {
+    const isUpdating = clone(this.state.isUpdating)
+    isUpdating[itemId] = newStatus
+    this.setState({ isUpdating })
   }
 
   onUpdateItems = (id, quantity) => {
-    this.setState({ isUpdating: true })
+    this.updateItemLoad(id, true)
     const {
       data: {
         orderForm,
         updateAndRefetchOrderForm,
       },
     } = this.props
+
     const items = this.getGroupedItems()
     const itemPayloadGrouped = items.find(item => item.id === id)
     const itemsPayload = orderForm.items.filter(item => item.id === id)
@@ -139,7 +143,7 @@ class MiniCartContent extends Component {
         items: updatedItems,
       },
     }).then(() => {
-      this.setState({ isUpdating: false })
+      this.updateItemLoad(id, false)
     })
   }
 
@@ -201,9 +205,17 @@ class MiniCartContent extends Component {
             <Fragment key={item.id}>
               <div className="relative flex">
                 <div className="fr absolute bottom-0 right-0">
-                  <Button icon variation="tertiary" disabled={isUpdating} onClick={e => this.onRemoveItem(item.id)}>
-                    <IconDelete size={15} color="silver" />
-                  </Button>
+                  {isUpdating[item.id] ?
+                    (
+                      <div className="ma4">
+                        <Spinner size={18} />
+                      </div>
+                    ) : (
+                      <Button icon variation="tertiary" onClick={e => this.handleItemRemoval(item.id)}>
+                        <IconDelete size={15} color="silver" />
+                      </Button>
+                    )
+                  }
                 </div>
                 <ExtensionPoint id="product-summary"
                   showBorders
@@ -233,7 +245,6 @@ class MiniCartContent extends Component {
             </div>
           )}
           <div className="vtex-minicart__content-price mb3">
-            {isUpdating && <Spinner size={18} />}
             <ProductPrice
               sellingPrice={orderForm.value}
               listPrice={orderForm.value}
