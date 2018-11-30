@@ -83,10 +83,10 @@ class MiniCartContent extends Component {
         },
       })
     } catch (error) {
-      //TODO improve the way this error is presented.
+      // TODO improve the way this error is presented.
       orderFormContext.updateToastMessage({
         isSuccess: false,
-        text: intl.formatMessage({ id: 'minicart.error-removal' })
+        text: intl.formatMessage({ id: 'minicart.error-removal' }),
       })
 
       window.setTimeout(() => {
@@ -147,12 +147,6 @@ class MiniCartContent extends Component {
     })
   }
 
-  renderWithoutItems = label => (
-    <div className="vtex-minicart__item pa9 flex items-center justify-center relative bg-base">
-      <span className="t-body">{label}</span>
-    </div>
-  )
-
   createProductShapeFromItem = item => ({
     productName: item.name,
     linkText: item.detailUrl.replace(/^\//, '').replace(/\/p$/, ''),
@@ -160,26 +154,33 @@ class MiniCartContent extends Component {
       seller: {
         commertialOffer: {
           Price: item.sellingPrice,
-          ListPrice: item.ListPrice
-        }
+          ListPrice: item.ListPrice,
+        },
       },
       name: item.skuName,
       itemId: item.id,
       image: {
-        imageUrl: item.imageUrl
+        imageUrl: item.imageUrl,
       },
     },
   })
+
+  get isUpdating() {
+    const { isUpdating } = this.state
+    return isUpdating.some(status => status)
+  }
+
+  renderWithoutItems = label => (
+    <div className="vtex-minicart__item pa9 flex items-center justify-center relative bg-base">
+      <span className="t-body">{label}</span>
+    </div>
+  )
 
   renderMiniCartWithItems = (
     orderForm,
     label,
     labelDiscount,
-    showRemoveButton,
     showDiscount,
-    showSku,
-    enableQuantitySelector,
-    maxQuantity,
     actionOnClick,
     isUpdating,
     large
@@ -205,13 +206,13 @@ class MiniCartContent extends Component {
             <Fragment key={item.id}>
               <div className="relative flex">
                 <div className="fr absolute bottom-0 right-0">
-                  {isUpdating[item.id] ?
-                    (
+                  {isUpdating[item.id]
+                    ? (
                       <div className="ma4">
                         <Spinner size={18} />
                       </div>
                     ) : (
-                      <Button icon variation="tertiary" onClick={e => this.handleItemRemoval(item.id)}>
+                      <Button icon variation="tertiary" onClick={() => this.handleItemRemoval(item.id)}>
                         <IconDelete size={15} color="silver" />
                       </Button>
                     )
@@ -232,6 +233,7 @@ class MiniCartContent extends Component {
             </Fragment>
           ))}
         </div>
+
         <div className="vtex-minicart-content__footer w-100 bg-base pa4 bt b--muted-3 pt4 flex flex-column items-end">
           {showDiscount && (
             <div className="vtex-minicart__content-discount blue w-100 flex justify-end items-center">
@@ -245,6 +247,7 @@ class MiniCartContent extends Component {
             </div>
           )}
           <div className="vtex-minicart__content-price mb3">
+            {this.isUpdating && <Spinner size={18} />}
             <ProductPrice
               sellingPrice={orderForm.value}
               listPrice={orderForm.value}
@@ -276,12 +279,8 @@ class MiniCartContent extends Component {
       labelMiniCartEmpty,
       labelButton,
       intl,
-      showRemoveButton,
       showDiscount,
-      showSku,
-      enableQuantitySelector,
       actionOnClick,
-      maxQuantity,
       large,
     } = this.props
     const { isUpdating } = this.state
@@ -306,11 +305,7 @@ class MiniCartContent extends Component {
       data.orderForm,
       label,
       labelDiscount,
-      showRemoveButton,
       showDiscount,
-      showSku,
-      enableQuantitySelector,
-      maxQuantity,
       actionOnClick,
       isUpdating,
       large
