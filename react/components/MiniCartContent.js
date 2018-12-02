@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { reduceBy, values } from 'ramda'
+import { reduceBy, values, clone } from 'ramda'
 import classNames from 'classnames'
 import { ExtensionPoint } from 'render'
 import { Button, Spinner, IconDelete } from 'vtex.styleguide'
@@ -11,6 +11,10 @@ import { MiniCartPropTypes } from '../propTypes'
 /**
  * Minicart content component
  */
+
+/** Four seconds */
+const TOAST_TIMEOUT = 4000
+
 class MiniCartContent extends Component {
   static propTypes = {
     /* Set the mini cart content size */
@@ -30,14 +34,10 @@ class MiniCartContent extends Component {
     showDiscount: MiniCartPropTypes.showDiscount,
   }
 
-  state = { showSpinner: false }
+  state = { isUpdating: [] }
 
   sumItemsPrice = items => {
-    let sum = 0
-    items.forEach(item => {
-      sum += item.listPrice * item.quantity
-    })
-    return sum
+    return items.reduce((sum, { listPrice, quantity }) => sum + listPrice * quantity, 0)
   }
 
   getGroupedItems = () =>
@@ -56,11 +56,13 @@ class MiniCartContent extends Component {
 
   handleClickButton = () => location.assign('/checkout/#/cart')
 
-  onRemoveItem = id => {
-    this.setState({ showSpinner: true })
+  handleItemRemoval = async id => {
+    this.updateItemLoad(id, true)
 
     const {
+      data: orderFormContext,
       data: { orderForm, updateAndRefetchOrderForm },
+      intl,
     } = this.props
     const itemPayload = orderForm.items.find(item => item.id === id)
     const index = orderForm.items.indexOf(itemPayload)
@@ -73,24 +75,42 @@ class MiniCartContent extends Component {
       }
     })
 
-    updateAndRefetchOrderForm({
-      variables: {
-        orderFormId: orderForm.orderFormId,
-        items: updatedItem,
-      },
-    }).then(() => {
-      this.setState({ showSpinner: false })
-    })
+    try {
+      await updateAndRefetchOrderForm({
+        variables: {
+          orderFormId: orderForm.orderFormId,
+          items: updatedItem,
+        },
+      })
+    } catch (error) {
+      // TODO improve the way this error is presented.
+      orderFormContext.updateToastMessage({
+        isSuccess: false,
+        text: intl.formatMessage({ id: 'minicart.error-removal' }),
+      })
+
+      window.setTimeout(() => {
+        orderFormContext.updateToastMessage({ isSuccess: null, text: null })
+      }, TOAST_TIMEOUT)
+    }
+    this.updateItemLoad(id, false)
+  }
+
+  updateItemLoad = (itemId, newStatus) => {
+    const isUpdating = clone(this.state.isUpdating)
+    isUpdating[itemId] = newStatus
+    this.setState({ isUpdating })
   }
 
   onUpdateItems = (id, quantity) => {
-    this.setState({ showSpinner: true })
+    this.updateItemLoad(id, true)
     const {
       data: {
         orderForm,
         updateAndRefetchOrderForm,
       },
     } = this.props
+
     const items = this.getGroupedItems()
     const itemPayloadGrouped = items.find(item => item.id === id)
     const itemsPayload = orderForm.items.filter(item => item.id === id)
@@ -123,15 +143,9 @@ class MiniCartContent extends Component {
         items: updatedItems,
       },
     }).then(() => {
-      this.setState({ showSpinner: false })
+      this.updateItemLoad(id, false)
     })
   }
-
-  renderWithoutItems = label => (
-    <div className="vtex-minicart__item pa9 flex items-center justify-center relative bg-base">
-      <span className="t-body">{label}</span>
-    </div>
-  )
 
   createProductShapeFromItem = item => ({
     productName: item.name,
@@ -140,28 +154,35 @@ class MiniCartContent extends Component {
       seller: {
         commertialOffer: {
           Price: item.sellingPrice,
-          ListPrice: item.ListPrice
-        }
+          ListPrice: item.ListPrice,
+        },
       },
       name: item.skuName,
       itemId: item.id,
       image: {
-        imageUrl: item.imageUrl
+        imageUrl: item.imageUrl,
       },
     },
   })
+
+  get isUpdating() {
+    const { isUpdating } = this.state
+    return isUpdating.some(status => status)
+  }
+
+  renderWithoutItems = label => (
+    <div className="vtex-minicart__item pa9 flex items-center justify-center relative bg-base">
+      <span className="t-body">{label}</span>
+    </div>
+  )
 
   renderMiniCartWithItems = (
     orderForm,
     label,
     labelDiscount,
-    showRemoveButton,
     showDiscount,
-    showSku,
-    enableQuantitySelector,
-    maxQuantity,
     actionOnClick,
-    showSpinner,
+    isUpdating,
     large
   ) => {
     const items = this.getGroupedItems()
@@ -185,9 +206,17 @@ class MiniCartContent extends Component {
             <Fragment key={item.id}>
               <div className="relative flex">
                 <div className="fr absolute bottom-0 right-0">
-                  <Button icon variation="tertiary" onClick={e => this.onRemoveItem(item.id)}>
-                    <IconDelete size={15} color="silver" />
-                  </Button>
+                  {isUpdating[item.id]
+                    ? (
+                      <div className="ma4">
+                        <Spinner size={18} />
+                      </div>
+                    ) : (
+                      <Button icon variation="tertiary" onClick={() => this.handleItemRemoval(item.id)}>
+                        <IconDelete size={15} color="silver" />
+                      </Button>
+                    )
+                  }
                 </div>
                 <ExtensionPoint id="product-summary"
                   showBorders
@@ -204,6 +233,7 @@ class MiniCartContent extends Component {
             </Fragment>
           ))}
         </div>
+
         <div className="vtex-minicart-content__footer w-100 bg-base pa4 bt b--muted-3 pt4 flex flex-column items-end">
           {showDiscount && (
             <div className="vtex-minicart__content-discount blue w-100 flex justify-end items-center">
@@ -217,13 +247,17 @@ class MiniCartContent extends Component {
             </div>
           )}
           <div className="vtex-minicart__content-price mb3">
-            {showSpinner && <Spinner size={18} />}
-            <ProductPrice
-              sellingPrice={orderForm.value}
-              listPrice={orderForm.value}
-              showLabels={false}
-              showListPrice={false}
-            />
+            {this.isUpdating
+              ? (<Spinner size={18} />)
+              : (
+                <ProductPrice
+                  sellingPrice={orderForm.value}
+                  listPrice={orderForm.value}
+                  showLabels={false}
+                  showListPrice={false}
+                />
+              )
+            }
           </div>
           <Button
             variation="primary"
@@ -249,15 +283,11 @@ class MiniCartContent extends Component {
       labelMiniCartEmpty,
       labelButton,
       intl,
-      showRemoveButton,
       showDiscount,
-      showSku,
-      enableQuantitySelector,
       actionOnClick,
-      maxQuantity,
       large,
     } = this.props
-    const { showSpinner } = this.state
+    const { isUpdating } = this.state
 
     if (!data || data.loading) {
       return this.renderLoading()
@@ -279,13 +309,9 @@ class MiniCartContent extends Component {
       data.orderForm,
       label,
       labelDiscount,
-      showRemoveButton,
       showDiscount,
-      showSku,
-      enableQuantitySelector,
-      maxQuantity,
       actionOnClick,
-      showSpinner,
+      isUpdating,
       large
     )
   }
