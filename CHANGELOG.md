@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.1] - 2018-12-02
+### Fixed
+- Fix scrim not covering entire screen.
+
 ## [2.0.0] - 2018-11-26
 ### Changed
 - Update the `MiniCartContent` component to use the `ProductSummary` from the `vtex.product-summary` instead `MiniCartItem`.

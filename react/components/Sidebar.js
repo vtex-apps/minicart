@@ -40,7 +40,7 @@ class Sidebar extends Component {
       return null
     }
 
-    const scrimClasses = classNames('vtex-menu-sidebar__scrim fixed dim bg-base--inverted top-0 z-9999 w-100 vh-100 o-40', {
+    const scrimClasses = classNames('vtex-menu-sidebar__scrim fixed dim bg-base--inverted top-0 left-0 z-9999 w-100 vh-100 o-40', {
       dn: !isOpen,
     })
 
