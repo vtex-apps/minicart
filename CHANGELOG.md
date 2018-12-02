@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.2] - 2018-12-02
+### Changed
+- Use of `vtex.use-svg` lib to display icons.
+
 ## [2.0.1] - 2018-12-02
 ### Fixed
 - Fix scrim not covering entire screen.

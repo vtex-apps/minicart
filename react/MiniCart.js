@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Button } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
 import { withRuntimeContext } from 'render'
-import CartIcon from './images/CartIcon'
+import Icon from 'vtex.use-svg/Icon'
 import MiniCartContent from './components/MiniCartContent'
 import { MiniCartPropTypes } from './propTypes'
 import Sidebar from './components/Sidebar'
@@ -119,7 +119,7 @@ export class MiniCart extends Component {
         >
           <div className="flex items-center">
             <div className={`relative ${iconClasses}`}>
-              <CartIcon size={iconSize} />
+              <Icon id="hpa-cart" size={iconSize} />
               {quantity > 0 && (
                 <span className="vtex-minicart__bagde c-on-base--inverted absolute t-mini bg-blue h1 w1 pa1 br4 tc lh-copy">{quantity}</span>
               )}
