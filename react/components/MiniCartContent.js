@@ -247,13 +247,17 @@ class MiniCartContent extends Component {
             </div>
           )}
           <div className="vtex-minicart__content-price mb3">
-            {this.isUpdating && <Spinner size={18} />}
-            <ProductPrice
-              sellingPrice={orderForm.value}
-              listPrice={orderForm.value}
-              showLabels={false}
-              showListPrice={false}
-            />
+            {this.isUpdating
+              ? (<Spinner size={18} />)
+              : (
+                <ProductPrice
+                  sellingPrice={orderForm.value}
+                  listPrice={orderForm.value}
+                  showLabels={false}
+                  showListPrice={false}
+                />
+              )
+            }
           </div>
           <Button
             variation="primary"

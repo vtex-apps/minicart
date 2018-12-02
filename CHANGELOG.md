@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Fixed
-- Disable delete button after click and add error when something goes wrong when removing from cart.
+- Replace delete button after click with spinner, Fix price loading and add error when something goes wrong when removing from cart.
 
 ## [2.0.2] - 2018-12-02
 ### Changed
