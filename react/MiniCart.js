@@ -121,7 +121,16 @@ export class MiniCart extends Component {
             <div className={`relative ${iconClasses}`}>
               <Icon id="hpa-cart" size={iconSize} />
               {quantity > 0 && (
-                <span className="vtex-minicart__bagde c-on-base--inverted absolute t-mini bg-blue h1 w1 pa1 br4 tc lh-copy">{quantity}</span>
+                <span
+                  className="vtex-minicart__bagde c-on-base--inverted absolute t-mini bg-blue br4 tc"
+                  style={{
+                    height: '1.25rem',
+                    width: '1.25rem',
+                    lineHeight: '1.25rem',
+                  }}
+                >
+                  {quantity}
+                </span>
               )}
             </div>
             {iconLabel && (
