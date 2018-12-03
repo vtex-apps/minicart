@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.4] - 2018-12-03
+
+### Fixed
+- Vertically center number on mini cart badge
+
 ## [2.0.3] - 2018-12-02
 ### Fixed
 - Replace delete button after click with spinner, Fix price loading and add error when something goes wrong when removing from cart.
