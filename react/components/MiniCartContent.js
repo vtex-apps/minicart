@@ -7,6 +7,7 @@ import { ExtensionPoint } from 'render'
 import { Button, Spinner, IconDelete } from 'vtex.styleguide'
 import ProductPrice from 'vtex.store-components/ProductPrice'
 import { MiniCartPropTypes } from '../propTypes'
+import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
 
 /**
  * Minicart content component
@@ -160,7 +161,7 @@ class MiniCartContent extends Component {
       name: item.skuName,
       itemId: item.id,
       image: {
-        imageUrl: item.imageUrl,
+        imageUrl: changeImageUrlSize(toHttps(item.imageUrl), 240),
       },
     },
   })
