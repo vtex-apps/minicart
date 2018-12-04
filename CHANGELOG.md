@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.5] - 2018-12-03
+### Changed
+- Set cart badge color to bg-emphasis
+
 ## [2.0.4] - 2018-12-03
 
 ### Fixed
