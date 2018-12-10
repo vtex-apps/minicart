@@ -82,6 +82,8 @@ export class MiniCart extends Component {
     } = this.props
 
     const { orderForm } = orderFormContext
+    console.log(orderForm)
+
     const quantity = orderForm && orderForm.items ? orderForm.items.length : 0
 
     const large =
