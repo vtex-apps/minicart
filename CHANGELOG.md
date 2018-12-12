@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.1.2] - 2018-12-12
+### Fixed
+- Don't render the discount label when there is no discount.
+
 ## [2.1.1] - 2018-12-12
 ### Fixed
 - Items sort by insertion order.
