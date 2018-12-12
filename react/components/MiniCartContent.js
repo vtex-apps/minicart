@@ -249,7 +249,7 @@ class MiniCartContent extends Component {
               />
             </div>
           )}
-          <div className="mb3">
+          <div className={`${minicart.content__price} mb3`}>
             {this.isUpdating
               ? (<Spinner size={18} />)
               : (

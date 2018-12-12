@@ -24,7 +24,7 @@ export default class Image extends Component {
       height={100}
       width={100}
     >
-      <rect className={`${minicart.item_imageLoader}`} />
+      <rect className={`${minicart.item__imageLoader}`} />
     </ContentLoader>
   )
 
@@ -34,7 +34,7 @@ export default class Image extends Component {
     return (
       <Fragment>
         <img
-          className={`${minicart.item_imageLoader} w-auto h-100`}
+          className={`${minicart.item__image} w-auto h-100`}
           onLoad={() => this.setState({ isLoaded: true })}
           src={this.stripImageUrl(url)} alt={alt}
         />
