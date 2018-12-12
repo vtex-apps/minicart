@@ -188,7 +188,7 @@ class MiniCartContent extends Component {
     isUpdating,
     large
   ) => {
-    const items = this.getGroupedItems()
+    const items = this.props.data.orderForm.items
 
     const classes = classNames(
       `${minicart.content} overflow-x-hidden pa1`,
@@ -201,7 +201,6 @@ class MiniCartContent extends Component {
     )
 
     const discount = this.calculateDiscount(items, orderForm.value)
-
     return (
       <Fragment>
         <div className={classes}>
