@@ -88,7 +88,7 @@ export default class MiniCartItem extends Component {
     const { isRemovingItem } = this.state
 
     const nameClasses = classNames(`${minicart.item__name} h2 mb3`, {
-      'vtex-minicart__item-name--large': showRemoveButton,
+      [`${minicart.item__name__large}`]: showRemoveButton,
     })
 
     return (

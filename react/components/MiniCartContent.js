@@ -193,7 +193,7 @@ class MiniCartContent extends Component {
     const classes = classNames(
       `${minicart.content} overflow-x-hidden pa1`,
       {
-        'vtex-minicart.content__small bg-base': !large,
+        [`${minicart.content__small} bg-base`]: !large,
         'overflow-y-auto': large,
         'overflow-y-scroll': items.length > 3 && !large,
         'overflow-y-hidden': items.length <= 3 && !large,
