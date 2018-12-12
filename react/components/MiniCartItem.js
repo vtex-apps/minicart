@@ -7,6 +7,7 @@ import classNames from 'classnames'
 
 import { MiniCartPropTypes } from '../propTypes'
 import Image from './Image'
+import minicart from '../minicart.css'
 
 /**
  * Minicart item component
@@ -86,12 +87,12 @@ export default class MiniCartItem extends Component {
 
     const { isRemovingItem } = this.state
 
-    const nameClasses = classNames('vtex-minicart__item-name h2 mb3', {
-      'vtex-minicart__item-name--large': showRemoveButton,
+    const nameClasses = classNames(`${minicart.item__name} h2 mb3`, {
+      [`${minicart.item__name__large}`]: showRemoveButton,
     })
 
     return (
-      <div className="vtex-minicart__item h4 relative w-100">
+      <div className={`${minicart.item} h4 relative w-100`}>
         <Link
           className="pointer link black-90"
           page={'store/product'}
@@ -104,8 +105,8 @@ export default class MiniCartItem extends Component {
                 showSku={showSku}
               />
             </div>
-            <div className="vtex-minicart__item-footer relative flex flex-row pb2 items-center w-100">
-              <div className="vtex-minicart__img-container h3 w3 mw3">
+            <div className={`${minicart.item__footer} relative flex flex-row pb2 items-center w-100`}>
+              <div className={`${minicart.img__container} h3 w3 mw3`}>
                 <Image url={imageUrl} alt={name} />
               </div>
               <div className="absolute right-0 bottom-0 mb1">
@@ -118,30 +119,30 @@ export default class MiniCartItem extends Component {
               </div>
             </div>
           </div>
-        {enableQuantitySelector &&
-          <div className="absolute top-0 right-0 mt8 pr1 mr4 pt2">
-            <NumericStepper
-              minValue={1}
-              maxValue={maxQuantity}
-              value={quantity}
-              onChange={this.handleQuantityChange}
-            />
-          </div>
-        }
-        {(showRemoveButton && !isRemovingItem) && (
-          <div className="vtex-minicart-item__remove-btn absolute right-0 top-0 mr4">
-            <Button icon variation="tertiary" onClick={(e) => this.onClickRemove(id, e)}>
-              <IconClose size={20} color="b--muted-3" />
-            </Button>
-          </div>
-        )}
-        {(showRemoveButton && isRemovingItem) && (
-          <div
-            className="vtex-minicart-item__remove-btn absolute right-0 top-0 flex items-center justify-center mt3 mr4"
-          >
-            <Spinner size={20} />
-          </div>
-        )}
+          {enableQuantitySelector &&
+            <div className="absolute top-0 right-0 mt8 pr1 mr4 pt2">
+              <NumericStepper
+                minValue={1}
+                maxValue={maxQuantity}
+                value={quantity}
+                onChange={this.handleQuantityChange}
+              />
+            </div>
+          }
+          {(showRemoveButton && !isRemovingItem) && (
+            <div className={`${minicart.item__removeBtn} absolute right-0 top-0 mr4`}>
+              <Button icon variation="tertiary" onClick={(e) => this.onClickRemove(id, e)}>
+                <IconClose size={20} color="b--muted-3" />
+              </Button>
+            </div>
+          )}
+          {(showRemoveButton && isRemovingItem) && (
+            <div
+              className={`${minicart.item__removeBtn} absolute right-0 top-0 flex items-center justify-center mt3 mr4`}
+            >
+              <Spinner size={20} />
+            </div>
+          )}
         </Link>
       </div>
     )
