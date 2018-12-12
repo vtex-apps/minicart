@@ -9,6 +9,7 @@ import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
 import { orderFormConsumer } from 'vtex.store/OrderFormContext'
 import './global.css'
+import minicart from './minicart.css'
 
 const MINIMUM_MAX_QUANTITY = 1
 const MAXIMUM_MAX_QUANTITY = 10
@@ -107,7 +108,7 @@ export class MiniCart extends Component {
 
     return (
       <div
-        className="vtex-minicart relative fr"
+        className={`${minicart.container} relative fr`}
         ref={e => {
           this.iconRef = e
         }}
@@ -121,16 +122,16 @@ export class MiniCart extends Component {
             <div className={`relative ${iconClasses}`}>
               <Icon id="hpa-cart" size={iconSize} />
               {quantity > 0 && (
-                <span className="vtex-minicart__bagde c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid">
+                <span className={`${minicart.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}>
                   {quantity}
                 </span>
               )}
             </div>
             {iconLabel && (
               <span
-                className={`vtex-minicart__label dn-m db-l t-action--small pl${quantity > 0 ? '6' : '4'} ${labelClasses}`}
+                className={`${minicart.label} dn-m db-l t-action--small pl${quantity > 0 ? '6' : '4'} ${labelClasses}`}
               >
-              {iconLabel}
+                {iconLabel}
               </span>
             )}
           </div>
