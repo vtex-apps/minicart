@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import ContentLoader from 'react-content-loader'
 
+import minicart from '../minicart.css'
 export default class Image extends Component {
   constructor(props) {
     super(props)
@@ -23,7 +24,7 @@ export default class Image extends Component {
       height={100}
       width={100}
     >
-      <rect className="vtex-minicart__item-image-loader" />
+      <rect className={`${minicart.item_imageLoader}`} />
     </ContentLoader>
   )
 
@@ -33,7 +34,7 @@ export default class Image extends Component {
     return (
       <Fragment>
         <img
-          className="vtex-minicart__item-image w-auto h-100"
+          className={`${minicart.item_imageLoader} w-auto h-100`}
           onLoad={() => this.setState({ isLoaded: true })}
           src={this.stripImageUrl(url)} alt={alt}
         />

@@ -8,7 +8,7 @@ import { MiniCartPropTypes } from './propTypes'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
 import { orderFormConsumer } from 'vtex.store/OrderFormContext'
-import './global.css'
+
 import minicart from './minicart.css'
 
 const MINIMUM_MAX_QUANTITY = 1

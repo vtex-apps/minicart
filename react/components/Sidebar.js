@@ -8,8 +8,9 @@ import Animation from 'vtex.store-components/Animation'
 import classNames from 'classnames'
 
 import MiniCart from '../MiniCart'
+import minicart from '../minicart.css'
 
-const OPEN_SIDEBAR_CLASS = 'vtex-minicart-sidebar-open'
+const OPEN_SIDEBAR_CLASS = minicart.sidebar__open
 
 /* SideBar component */
 class Sidebar extends Component {
@@ -40,7 +41,7 @@ class Sidebar extends Component {
       return null
     }
 
-    const scrimClasses = classNames('vtex-menu-sidebar__scrim fixed dim bg-base--inverted top-0 left-0 z-9999 w-100 vh-100 o-40', {
+    const scrimClasses = classNames(`${minicart.sidebar__scrim} fixed dim bg-base--inverted top-0 left-0 z-9999 w-100 vh-100 o-40`, {
       dn: !isOpen,
     })
 
@@ -49,11 +50,11 @@ class Sidebar extends Component {
         <div style={{ willChange: 'opacity' }} className={scrimClasses} onClick={onOutsideClick} />
 
         <Animation
-          className="vtex-minicart__sidebar w-80 w-auto-ns h-100 fixed top-0 right-0 z-9999 bg-base shadow-2 flex flex-column"
+          className={`${minicart.sidebar} w-80 w-auto-ns h-100 fixed top-0 right-0 z-9999 bg-base shadow-2 flex flex-column`}
           isActive={isOpen}
           type="drawerLeft"
         >
-          <div className="vtex-minicart__sidebar-header pointer flex flex-row items-center pa5 h3 bg-base w-100 z-max bb b--muted-3 bw1">
+          <div className={`${minicart.sidebar__header} pointer flex flex-row items-center pa5 h3 bg-base w-100 z-max bb b--muted-3 bw1`}>
             <div
               className="c-muted-1 pa4 flex items-center"
               onClick={onOutsideClick}
