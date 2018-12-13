@@ -10,7 +10,7 @@ import classNames from 'classnames'
 import MiniCart from '../MiniCart'
 import minicart from '../minicart.css'
 
-const OPEN_SIDEBAR_CLASS = minicart.sidebar__open
+const OPEN_SIDEBAR_CLASS = minicart.sidebarOpen
 
 /* SideBar component */
 class Sidebar extends Component {

@@ -1,4 +1,4 @@
-.content__small {
+.contentSmall {
   max-height: 383px;
 }
 
@@ -16,17 +16,17 @@
   top: 100%;
 }
 
-.item_imageLoader {
+.itemImageLoader {
   width: 100%;
   height: 100%;
 }
 
-.content__footer {
+.contentFooter {
   margin-top: auto;
 }
 
 @media only screen and (max-width: 40rem) {
-  body.sidebar__open {
+  body.sidebarOpen {
     overflow: hidden;
   }
 }
