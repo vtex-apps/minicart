@@ -195,8 +195,8 @@ class MiniCartContent extends Component {
       {
         [`${minicart.contentSmall} bg-base`]: !large,
         'overflow-y-auto': large,
-        'overflow-y-scroll': items.length > 3 && !large,
-        'overflow-y-hidden': items.length <= 3 && !large,
+        'overflow-y-scroll': items.length > 2 && !large,
+        'overflow-y-hidden': items.length <= 2 && !large,
       }
     )
 
