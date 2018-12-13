@@ -238,7 +238,7 @@ class MiniCartContent extends Component {
 
         <div className={`${minicart.contentFooter} w-100 bg-base pa4 bt b--muted-3 pt4 flex flex-column items-end`}>
           {showDiscount && discount > 0 && (
-            <div className={`${minicart.content__discount} w-100 flex justify-end items-center`}>
+            <div className={`${minicart.contentDiscount} w-100 flex justify-end items-center`}>
               <span className="ttl c-action-primary">{labelDiscount}</span>
               <ProductPrice
                 sellingPrice={discount}
@@ -248,7 +248,7 @@ class MiniCartContent extends Component {
               />
             </div>
           )}
-          <div className={`${minicart.content__price} mb3`}>
+          <div className={`${minicart.contentPrice} mb3`}>
             {this.isUpdating
               ? (<Spinner size={18} />)
               : (
