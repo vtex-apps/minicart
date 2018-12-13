@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Fixed
-- Change minimum items length to scrolling.
+- Fix minimum items length to scrolling in minicart.
 
 ## [2.1.3] - 2018-12-14
 ### Changed
