@@ -3,14 +3,16 @@ import { Button } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
 import { withRuntimeContext } from 'render'
 import Icon from 'vtex.use-svg/Icon'
+
 import MiniCartContent from './components/MiniCartContent'
 import { MiniCartPropTypes } from './propTypes'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
-import { orderFormConsumer } from 'vtex.store/OrderFormContext'
 import { isParentItem } from './utils/itemsHelper'
+import { orderFormConsumer } from 'vtex.store-resources/OrderFormContext'
 
 import minicart from './minicart.css'
+import './global.css'
 
 const MINIMUM_MAX_QUANTITY = 1
 const MAXIMUM_MAX_QUANTITY = 10
@@ -62,9 +64,9 @@ export class MiniCart extends Component {
       to: detailUrl
     })
   }
-  
+
   get itemsQuantity() {
-    const { orderFormContext: { orderForm }} = this.props
+    const { orderFormContext: { orderForm } } = this.props
     if (!orderForm || !orderForm.items) return 0
     return orderForm.items.filter(isParentItem).length
   }
