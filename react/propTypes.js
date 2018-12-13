@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { contextPropTypes } from 'vtex.store/OrderFormContext'
+// import { contextPropTypes } from 'vtex.store/OrderFormContext'
 
 export const MiniCartPropTypes = {
   /* Set the minicart type */
@@ -29,5 +29,5 @@ export const MiniCartPropTypes = {
   /* Max quantity for the Quantity Selector */
   maxQuantity: PropTypes.number,
   /* Products in the cart */
-  orderFormContext: contextPropTypes,
+  // orderFormContext: contextPropTypes,
 }
