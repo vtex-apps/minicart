@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Fixed
-- Change minimum items length to scrolling
+- Change minimum items length to scrolling.
 
 ## [2.1.3] - 2018-12-14
 ### Changed
