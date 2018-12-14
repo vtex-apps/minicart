@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ContentLoader from 'react-content-loader'
 
 import minicart from '../minicart.css'
+
 export default class Image extends Component {
   constructor(props) {
     super(props)
@@ -24,7 +25,7 @@ export default class Image extends Component {
       height={100}
       width={100}
     >
-      <rect className={`${minicart.item__imageLoader}`} />
+      <rect className={`${minicart.itemImageLoader}`} />
     </ContentLoader>
   )
 
@@ -34,7 +35,7 @@ export default class Image extends Component {
     return (
       <Fragment>
         <img
-          className={`${minicart.item__image} w-auto h-100`}
+          className={`${minicart.itemImage} w-auto h-100`}
           onLoad={() => this.setState({ isLoaded: true })}
           src={this.stripImageUrl(url)} alt={alt}
         />

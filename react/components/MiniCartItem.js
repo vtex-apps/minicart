@@ -87,8 +87,8 @@ export default class MiniCartItem extends Component {
 
     const { isRemovingItem } = this.state
 
-    const nameClasses = classNames(`${minicart.item__name} h2 mb3`, {
-      [`${minicart.item__name__large}`]: showRemoveButton,
+    const nameClasses = classNames(`${minicart.itemName} h2 mb3`, {
+      [`${minicart.itemNameLarge}`]: showRemoveButton,
     })
 
     return (
@@ -105,8 +105,8 @@ export default class MiniCartItem extends Component {
                 showSku={showSku}
               />
             </div>
-            <div className={`${minicart.item__footer} relative flex flex-row pb2 items-center w-100`}>
-              <div className={`${minicart.img__container} h3 w3 mw3`}>
+            <div className={`${minicart.itemFooter} relative flex flex-row pb2 items-center w-100`}>
+              <div className={`${minicart.imgContainer} h3 w3 mw3`}>
                 <Image url={imageUrl} alt={name} />
               </div>
               <div className="absolute right-0 bottom-0 mb1">
@@ -138,7 +138,7 @@ export default class MiniCartItem extends Component {
           )}
           {(showRemoveButton && isRemovingItem) && (
             <div
-              className={`${minicart.item__removeBtn} absolute right-0 top-0 flex items-center justify-center mt3 mr4`}
+              className={`${minicart.itemRemoveBtn} absolute right-0 top-0 flex items-center justify-center mt3 mr4`}
             >
               <Spinner size={20} />
             </div>

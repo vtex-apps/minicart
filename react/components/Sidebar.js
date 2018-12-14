@@ -10,7 +10,7 @@ import classNames from 'classnames'
 import MiniCart from '../MiniCart'
 import minicart from '../minicart.css'
 
-const OPEN_SIDEBAR_CLASS = minicart.sidebar__open
+const OPEN_SIDEBAR_CLASS = minicart.sidebarOpen
 
 /* SideBar component */
 class Sidebar extends Component {
@@ -41,7 +41,7 @@ class Sidebar extends Component {
       return null
     }
 
-    const scrimClasses = classNames(`${minicart.sidebar__scrim} fixed dim bg-base--inverted top-0 left-0 z-9999 w-100 vh-100 o-40`, {
+    const scrimClasses = classNames(`${minicart.sidebarScrim} fixed dim bg-base--inverted top-0 left-0 z-9999 w-100 vh-100 o-40`, {
       dn: !isOpen,
     })
 
@@ -54,7 +54,7 @@ class Sidebar extends Component {
           isActive={isOpen}
           type="drawerLeft"
         >
-          <div className={`${minicart.sidebar__header} pointer flex flex-row items-center pa5 h3 bg-base w-100 z-max bb b--muted-3 bw1`}>
+          <div className={`${minicart.sidebarHeader} pointer flex flex-row items-center pa5 h3 bg-base w-100 z-max bb b--muted-3 bw1`}>
             <div
               className="c-muted-1 pa4 flex items-center"
               onClick={onOutsideClick}
