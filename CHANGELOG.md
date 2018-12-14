@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.1.5] - 2018-12-14
+### Changed
+- Bump major version of `vtex.styleguide` and `vtex.store-components`. 
+- Add design tokens on selling price label. 
+
 ## [2.1.4] - 2018-12-14
 ### Fixed
 - Fix minimum items length to scrolling in minicart.
