@@ -189,14 +189,15 @@ class MiniCartContent extends Component {
     large
   ) => {
     const items = this.props.data.orderForm.items
+    const MIN_ITEMS_TO_SCROLL = 2
 
     const classes = classNames(
       `${minicart.content} overflow-x-hidden pa1`,
       {
         [`${minicart.contentSmall} bg-base`]: !large,
         'overflow-y-auto': large,
-        'overflow-y-scroll': items.length > 3 && !large,
-        'overflow-y-hidden': items.length <= 3 && !large,
+        'overflow-y-scroll': items.length > MIN_ITEMS_TO_SCROLL && !large,
+        'overflow-y-hidden': items.length <= MIN_ITEMS_TO_SCROLL && !large,
       }
     )
 
