@@ -242,6 +242,7 @@ class MiniCartContent extends Component {
             <div className={`${minicart.contentDiscount} w-100 flex justify-end items-center`}>
               <span className="ttl c-action-primary">{labelDiscount}</span>
               <ProductPrice
+                sellingPriceClass='c-action-primary ph2 dib'
                 sellingPrice={discount}
                 listPrice={discount}
                 showLabels={false}
@@ -254,6 +255,7 @@ class MiniCartContent extends Component {
               ? (<Spinner size={18} />)
               : (
                 <ProductPrice
+                  sellingPriceClass='c-muted-1 b ph2 dib'
                   sellingPrice={orderForm.value}
                   listPrice={orderForm.value}
                   showLabels={false}

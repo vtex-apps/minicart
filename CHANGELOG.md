@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Bump major version of `vtex.styleguide` and `vtex.store-components`. 
+- Add design tokens on selling price label. 
 
 ## [2.1.4] - 2018-12-14
 ### Fixed
