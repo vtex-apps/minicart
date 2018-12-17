@@ -6,6 +6,7 @@
   "defaultLocale": "pt-BR",
   "builders": {
     "pages": "0.x",
+    "messages": "0.x",
     "react": "2.x"
   },
   "mustUpdateAt": "2019-04-20",
@@ -13,19 +14,9 @@
   "registries": [
     "smartcheckout"
   ],
-  "settingsSchema": {},
   "scripts": {
     "postreleasy": "vtex publish --verbose"
   },
-  "policies": [
-    {
-      "name": "outbound-access",
-      "attrs": {
-        "host": "{{account}}.vtexcommercestable.com.br",
-        "path": "/api/checkout/pub/*"
-      }
-    }
-  ],
   "dependencies": {
     "vtex.store": "1.x",
     "vtex.store-components": "3.x",
