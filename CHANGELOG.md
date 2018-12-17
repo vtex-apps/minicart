@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.2.0] - 2018-12-17
+### Added
+- Support to messages builder.
+
+### Fixed
+- Remove unnecessary declarations on `manifes.json`.
+
 ## [2.1.5] - 2018-12-14
 ### Changed
 - Bump major version of `vtex.styleguide` and `vtex.store-components`. 
