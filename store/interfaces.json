@@ -1,6 +1,7 @@
 {
   "minicart": {
     "allowed": ["product-summary"],
-    "required": []
+    "required": [],
+    "component": "MiniCart"
   }
 }
