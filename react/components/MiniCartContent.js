@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { reduceBy, values, clone, partition, map, prop } from 'ramda'
+import { reduceBy, values, clone, partition } from 'ramda'
 import classNames from 'classnames'
 import { ExtensionPoint } from 'render'
 import { Button, Spinner, IconDelete } from 'vtex.styleguide'
@@ -185,6 +185,7 @@ class MiniCartContent extends Component {
         imageUrl: changeImageUrlSize(toHttps(item.imageUrl), 240),
       },
     },
+    addedOptions: (item.addedOptions || []).map(option => this.createProductShapeFromItem(option)),
   })
 
   get isUpdating() {
