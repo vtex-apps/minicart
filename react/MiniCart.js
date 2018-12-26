@@ -8,6 +8,7 @@ import { MiniCartPropTypes } from './propTypes'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
 import { orderFormConsumer } from 'vtex.store/OrderFormContext'
+import { isParentItem } from './utils/itemsHelper'
 
 import minicart from './minicart.css'
 
@@ -65,7 +66,6 @@ export class MiniCart extends Component {
   get itemsQuantity() {
     const { orderFormContext: { orderForm }} = this.props
     if (!orderForm || !orderForm.items) return 0
-    const isParentItem = ({ parentItemIndex, parentAssemblyBinding }) => parentItemIndex == null && parentAssemblyBinding == null
     return orderForm.items.filter(isParentItem).length
   }
 
