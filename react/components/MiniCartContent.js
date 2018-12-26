@@ -8,6 +8,7 @@ import { Button, Spinner, IconDelete } from 'vtex.styleguide'
 import ProductPrice from 'vtex.store-components/ProductPrice'
 import { MiniCartPropTypes } from '../propTypes'
 import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
+import { groupItemsWithParents } from '../utils/itemsHelper'
 
 import minicart from '../minicart.css'
 
@@ -166,6 +167,7 @@ class MiniCartContent extends Component {
         imageUrl: changeImageUrlSize(toHttps(item.imageUrl), 240),
       },
     },
+    addedOptions: (item.addedOptions || []).map(option => this.createProductShapeFromItem(option)),
   })
 
   get isUpdating() {
@@ -188,7 +190,7 @@ class MiniCartContent extends Component {
     isUpdating,
     large
   ) => {
-    const items = this.props.data.orderForm.items
+    const items = groupItemsWithParents(this.props.data.orderForm)
     const MIN_ITEMS_TO_SCROLL = 2
 
     const classes = classNames(
