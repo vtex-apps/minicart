@@ -61,6 +61,13 @@ export class MiniCart extends Component {
       to: detailUrl
     })
   }
+  
+  get itemsQuantity() {
+    const { orderFormContext: { orderForm }} = this.props
+    if (!orderForm || !orderForm.items) return 0
+    const isParentItem = ({ parentItemIndex, parentAssemblyBinding }) => parentItemIndex == null && parentAssemblyBinding == null
+    return orderForm.items.filter(isParentItem).length
+  }
 
   render() {
     const { openContent } = this.state
@@ -81,8 +88,7 @@ export class MiniCart extends Component {
       hideContent,
     } = this.props
 
-    const { orderForm } = orderFormContext
-    const quantity = orderForm && orderForm.items ? orderForm.items.length : 0
+    const quantity = this.itemsQuantity
 
     const large =
       (type && type === 'sidebar') ||

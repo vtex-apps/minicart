@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { reduceBy, values, clone } from 'ramda'
+import { reduceBy, values, clone, partition, map, prop } from 'ramda'
 import classNames from 'classnames'
 import { ExtensionPoint } from 'render'
 import { Button, Spinner, IconDelete } from 'vtex.styleguide'
@@ -53,6 +53,25 @@ class MiniCartContent extends Component {
         this.props.data.orderForm.items
       )
     )
+
+  itemWithOptions = (groupedItems) => {
+    const isParentItem = ({ parentItemIndex, parentAssemblyBinding }) => parentItemIndex == null && parentAssemblyBinding == null
+    const [parentItems, options] = partition(isParentItem, groupedItems)
+
+    const parentMap = parentItems.reduce((prev, curr) => ({ ...prev, [curr.id]: { ...curr, addedOptions: [] } }),{})
+    return values(
+      options.reduce((prev, curr) => {
+        const { parentItemIndex } = curr
+        const parentId = this.props.data.orderForm.items[parentItemIndex].id
+        const parentObj = prev[parentId]
+        parentObj.addedOptions.push({ ...curr })
+        return { 
+          ...prev,
+          [parentId]: parentObj,
+        }
+      }, parentMap)
+    )
+  }
 
   calculateDiscount = (items, totalPrice) =>
     this.sumItemsPrice(items) - totalPrice
@@ -188,7 +207,7 @@ class MiniCartContent extends Component {
     isUpdating,
     large
   ) => {
-    const items = this.props.data.orderForm.items
+    const items = this.itemWithOptions(this.props.data.orderForm.items)
     const MIN_ITEMS_TO_SCROLL = 2
 
     const classes = classNames(
