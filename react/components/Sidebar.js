@@ -7,7 +7,7 @@ import OutsideClickHandler from 'react-outside-click-handler'
 import Animation from 'vtex.store-components/Animation'
 import classNames from 'classnames'
 
-import MiniCart from '../MiniCart'
+import MiniCart from '../index'
 import minicart from '../minicart.css'
 
 const OPEN_SIDEBAR_CLASS = minicart.sidebarOpen
