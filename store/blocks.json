@@ -1,6 +1,8 @@
 {
   "minicart": {
-    "blocks": [],
+    "blocks": [
+      "product-summary"
+    ],
     "inheritComponent": true
   }
 }
