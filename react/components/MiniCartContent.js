@@ -8,7 +8,7 @@ import { Button, Spinner, IconDelete } from 'vtex.styleguide'
 import ProductPrice from 'vtex.store-components/ProductPrice'
 import { MiniCartPropTypes } from '../propTypes'
 import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
-import { groupItemsWithParents } from '../utils/itemsHelper'
+import { groupItemsWithParents, isParentItem, isRequiredOption } from '../utils/itemsHelper'
 
 import minicart from '../minicart.css'
 
@@ -151,13 +151,22 @@ class MiniCartContent extends Component {
     })
   }
 
+  sumTotalPriceWithAttachs = (addedOptions) => {
+    return addedOptions.reduce((acc, option) =>  acc + option.sellingPrice * option.quantity, 0)
+  }
+
+  createOptionShapeFromItem = option => ({
+    ...this.createProductShapeFromItem(option),
+    isRequired: isRequiredOption(option, this.props.data.orderForm),
+  })
+
   createProductShapeFromItem = item => ({
     productName: item.name,
     linkText: item.detailUrl.replace(/^\//, '').replace(/\/p$/, ''),
     sku: {
       seller: {
         commertialOffer: {
-          Price: item.sellingPrice,
+          Price: isParentItem(item) ? this.sumTotalPriceWithAttachs(item.addedOptions) : item.sellingPrice,
           ListPrice: item.ListPrice,
         },
       },
@@ -167,7 +176,8 @@ class MiniCartContent extends Component {
         imageUrl: changeImageUrlSize(toHttps(item.imageUrl), 240),
       },
     },
-    addedOptions: (item.addedOptions || []).map(option => this.createProductShapeFromItem(option)),
+    addedOptions: (item.addedOptions || []).map(option => this.createOptionShapeFromItem(option)),
+    quantity: item.quantity,
   })
 
   get isUpdating() {
@@ -190,7 +200,7 @@ class MiniCartContent extends Component {
     isUpdating,
     large
   ) => {
-    const items = groupItemsWithParents(this.props.data.orderForm)
+    const items = groupItemsWithParents(orderForm)
     const MIN_ITEMS_TO_SCROLL = 2
 
     const classes = classNames(
@@ -224,7 +234,7 @@ class MiniCartContent extends Component {
           {items.map(item => (
             <Fragment key={item.id}>
               <div className="relative flex">
-                <div className="fr absolute bottom-0 right-0">
+                <div className="fr absolute top-0 right-0">
                   {isUpdating[item.id]
                     ? (
                       <div className="ma4">
