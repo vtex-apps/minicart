@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import { isParentItem, isRequiredOption, groupItemsWithParents } from '../itemsHelper'
+import { isParentItem, isSingleChoiceOption, groupItemsWithParents } from '../itemsHelper'
 import orderForm from '../__mocks__/orderForm.json'
 
 it('should return only items that dont have parent', () => {
@@ -21,14 +21,14 @@ it('should group items and its attachments', () => {
   expect(parentItemsCount + addedOptionsCount).toBe(items.length)
 })
 
-it('should return crust item as required', () => {
+it('should return crust item as single choice', () => {
   const items = orderForm.items
   const classicCrust = items.find(({ name }) => name === 'Classic Crust')
-  const isCrustRequired = isRequiredOption(classicCrust, orderForm)
+  const isCrustRequired = isSingleChoiceOption(classicCrust, orderForm)
   expect(isCrustRequired).toBe(true)
   
   const pepperoni = items.find(({ name }) => name === 'Pepperoni')
-  const isPepperoniRequired = isRequiredOption(pepperoni, orderForm)
+  const isPepperoniRequired = isSingleChoiceOption(pepperoni, orderForm)
   // should be false
   expect(isPepperoniRequired).toBe(false)
 })

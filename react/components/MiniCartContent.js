@@ -8,7 +8,7 @@ import { Button, Spinner, IconDelete } from 'vtex.styleguide'
 import ProductPrice from 'vtex.store-components/ProductPrice'
 import { MiniCartPropTypes } from '../propTypes'
 import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
-import { groupItemsWithParents, isParentItem, isRequiredOption } from '../utils/itemsHelper'
+import { groupItemsWithParents, isParentItem, isSingleChoiceOption } from '../utils/itemsHelper'
 
 import minicart from '../minicart.css'
 
@@ -157,7 +157,7 @@ class MiniCartContent extends Component {
 
   createOptionShapeFromItem = option => ({
     ...this.createProductShapeFromItem(option),
-    isRequired: isRequiredOption(option, this.props.data.orderForm),
+    isSingleChoice: isSingleChoiceOption(option, this.props.data.orderForm),
   })
 
   createProductShapeFromItem = item => ({

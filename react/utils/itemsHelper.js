@@ -21,7 +21,7 @@ export const groupItemsWithParents = (orderForm) => {
   )
 }
 
-export const isRequiredOption = (item, orderForm) => {
+export const isSingleChoiceOption = (item, orderForm) => {
   const { parentItemIndex, parentAssemblyBinding } = item
   if (isParentItem(item)) { return false }
   const parentId = orderForm.items[parentItemIndex].id
