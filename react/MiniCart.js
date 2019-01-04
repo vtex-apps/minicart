@@ -126,7 +126,7 @@ export class MiniCart extends Component {
         >
           <div className="flex items-center">
             <div className={`relative ${iconClasses}`}>
-              <Icon id="hpa-cart" viewBox="0 0 16 16" size={iconSize} />
+              <Icon id="hpa-cart" size={iconSize} />
               {quantity > 0 && (
                 <span className={`${minicart.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}>
                   {quantity}
@@ -151,15 +151,15 @@ export class MiniCart extends Component {
               {miniCartContent}
             </Sidebar>
           ) : (
-            openContent && (
-              <Popup
-                onOutsideClick={this.handleUpdateContentVisibility}
-                buttonOffsetWidth={this.iconRef.offsetWidth}
-              >
-                {miniCartContent}
-              </Popup>
-            )
-          ))}
+              openContent && (
+                <Popup
+                  onOutsideClick={this.handleUpdateContentVisibility}
+                  buttonOffsetWidth={this.iconRef.offsetWidth}
+                >
+                  {miniCartContent}
+                </Popup>
+              )
+            ))}
       </div>
     )
   }
