@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.3.1] - 2019-01-04
+### Fixed
+- Icon aligment.
+
 ## [2.3.0] - 2018-12-26
 ### Added
 - Create `groupItemsWithParents` function, add tests. Group parent items with its attachments.

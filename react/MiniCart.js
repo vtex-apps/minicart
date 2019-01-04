@@ -59,7 +59,7 @@ export class MiniCart extends Component {
     })
     const { runtime: { navigate } } = this.props
     navigate({
-      to: detailUrl
+      to: detailUrl,
     })
   }
   
@@ -114,7 +114,7 @@ export class MiniCart extends Component {
 
     return (
       <div
-        className={`${minicart.container} relative fr`}
+        className={`${minicart.container} relative flex items-center fr`}
         ref={e => {
           this.iconRef = e
         }}
