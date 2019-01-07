@@ -87,12 +87,12 @@ export default class MiniCartItem extends Component {
 
     const { isRemovingItem } = this.state
 
-    const nameClasses = classNames(`${minicart.itemName} h2 mb3`, {
-      [`${minicart.itemNameLarge}`]: showRemoveButton,
+    const nameClasses = classNames('vtex-minicart__itemName h2 mb3', {
+      'vtex-minicart__itemNameLarge': showRemoveButton,
     })
 
     return (
-      <div className={`${minicart.item} h4 relative w-100`}>
+      <div className="vtex-minicart__item h4 relative w-100">
         <Link
           className="pointer link black-90"
           page={'store/product'}
@@ -105,8 +105,8 @@ export default class MiniCartItem extends Component {
                 showSku={showSku}
               />
             </div>
-            <div className={`${minicart.itemFooter} relative flex flex-row pb2 items-center w-100`}>
-              <div className={`${minicart.imgContainer} h3 w3 mw3`}>
+            <div className="vtex-minicart__itemFooter relative flex flex-row pb2 items-center w-100">
+              <div className="vtex-minicart__imgContainer h3 w3 mw3">
                 <Image url={imageUrl} alt={name} />
               </div>
               <div className="absolute right-0 bottom-0 mb1">
@@ -130,7 +130,7 @@ export default class MiniCartItem extends Component {
             </div>
           }
           {(showRemoveButton && !isRemovingItem) && (
-            <div className={`${minicart.item__removeBtn} absolute right-0 top-0 mr4`}>
+            <div className="vtex-minicart__itemRemoveBtn absolute right-0 top-0 mr4">
               <Button icon variation="tertiary" onClick={(e) => this.onClickRemove(id, e)}>
                 <IconClose size={20} color="b--muted-3" />
               </Button>
@@ -138,7 +138,7 @@ export default class MiniCartItem extends Component {
           )}
           {(showRemoveButton && isRemovingItem) && (
             <div
-              className={`${minicart.itemRemoveBtn} absolute right-0 top-0 flex items-center justify-center mt3 mr4`}
+              className="vtex-minicart__itemRemoveBtn absolute right-0 top-0 flex items-center justify-center mt3 mr4"
             >
               <Spinner size={20} />
             </div>

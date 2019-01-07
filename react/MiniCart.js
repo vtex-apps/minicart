@@ -114,7 +114,7 @@ export class MiniCart extends Component {
 
     return (
       <div
-        className={`${minicart.container} relative flex items-center fr`}
+        className="vtex-minicart__container relative flex items-center fr"
         ref={e => {
           this.iconRef = e
         }}
@@ -128,14 +128,14 @@ export class MiniCart extends Component {
             <div className={`relative ${iconClasses}`}>
               <Icon id="hpa-cart" size={iconSize} />
               {quantity > 0 && (
-                <span className={`${minicart.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}>
+                <span className={`${minicart.badge} vtex-minicart__badge c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}>
                   {quantity}
                 </span>
               )}
             </div>
             {iconLabel && (
               <span
-                className={`${minicart.label} dn-m db-l t-action--small pl${quantity > 0 ? '6' : '4'} ${labelClasses}`}
+                className={`vtex-minicart__label dn-m db-l t-action--small pl${quantity > 0 ? '6' : '4'} ${labelClasses}`}
               >
                 {iconLabel}
               </span>

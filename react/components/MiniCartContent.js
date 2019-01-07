@@ -176,7 +176,7 @@ class MiniCartContent extends Component {
   }
 
   renderWithoutItems = label => (
-    <div className={`${minicart.item} pa9 flex items-center justify-center relative bg-base`}>
+    <div className={`vtex-minicart__item pa9 flex items-center justify-center relative bg-base`}>
       <span className="t-body">{label}</span>
     </div>
   )
@@ -194,9 +194,9 @@ class MiniCartContent extends Component {
     const MIN_ITEMS_TO_SCROLL = 2
 
     const classes = classNames(
-      `${minicart.content} overflow-x-hidden pa1`,
+      `vtex-minicart__content overflow-x-hidden pa1`,
       {
-        [`${minicart.contentSmall} bg-base`]: !large,
+        [`${minicart.contentSmall} vtex-minicart__contentSmall bg-base`]: !large,
         'overflow-y-auto': large,
         'overflow-y-scroll': items.length > MIN_ITEMS_TO_SCROLL && !large,
         'overflow-y-hidden': items.length <= MIN_ITEMS_TO_SCROLL && !large,
@@ -239,9 +239,9 @@ class MiniCartContent extends Component {
           ))}
         </div>
 
-        <div className={`${minicart.contentFooter} w-100 bg-base pa4 bt b--muted-3 pt4 flex flex-column items-end`}>
+        <div className={`${minicart.contentFooter} vtex-minicart__contentFooter w-100 bg-base pa4 bt b--muted-3 pt4 flex flex-column items-end`}>
           {showDiscount && discount > 0 && (
-            <div className={`${minicart.contentDiscount} w-100 flex justify-end items-center`}>
+            <div className="vtex-minicart__contentDiscount w-100 flex justify-end items-center">
               <span className="ttl c-action-primary">{labelDiscount}</span>
               <ProductPrice
                 sellingPriceClass='c-action-primary ph2 dib'
@@ -252,7 +252,7 @@ class MiniCartContent extends Component {
               />
             </div>
           )}
-          <div className={`${minicart.contentPrice} mb3`}>
+          <div className="vtex-minicart__contentPrice mb3">
             {this.isUpdating
               ? (<Spinner size={18} />)
               : (
@@ -279,7 +279,7 @@ class MiniCartContent extends Component {
   }
 
   renderLoading = () => (
-    <div className={`${minicart.item} pa4 flex items-center justify-center relative bg-base`}>
+    <div className="vtex-minicart__item pa4 flex items-center justify-center relative bg-base">
       <Spinner />
     </div>
   )
