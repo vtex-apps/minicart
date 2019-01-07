@@ -155,9 +155,10 @@ class MiniCartContent extends Component {
     return addedOptions.reduce((acc, option) =>  acc + option.sellingPrice * option.quantity, 0)
   }
 
-  createOptionShapeFromItem = option => ({
+  createOptionShapeFromItem = (option, parent) => ({
     ...this.createProductShapeFromItem(option),
     isSingleChoice: isSingleChoiceOption(option, this.props.data.orderForm),
+    quantity: option.quantity / parent.quantity,
   })
 
   createProductShapeFromItem = item => ({
@@ -169,6 +170,7 @@ class MiniCartContent extends Component {
           Price: isParentItem(item) ? this.sumTotalPriceWithAttachs(item.addedOptions) : item.sellingPrice,
           ListPrice: item.ListPrice,
         },
+        sellerId: item.seller,
       },
       name: item.skuName,
       itemId: item.id,
@@ -176,7 +178,7 @@ class MiniCartContent extends Component {
         imageUrl: changeImageUrlSize(toHttps(item.imageUrl), 240),
       },
     },
-    addedOptions: (item.addedOptions || []).map(option => this.createOptionShapeFromItem(option)),
+    addedOptions: (item.addedOptions || []).map(option => this.createOptionShapeFromItem(option, item)),
     quantity: item.quantity,
   })
 
