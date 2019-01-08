@@ -29,8 +29,10 @@ export function cleanImageUrl(imageUrl) {
   if (result.length > 0) return result[0]
 }
 
-function replaceLegacyFileManager(imageUrl, width, height) {
-  if (!imageUrl.includes('/arquivos/ids/')) return imageUrl
+function replaceLegacyFileManagerUrl(imageUrl, width, height) {
+  const legacyUrlPattern = '/arquivos/ids/'
+  const isLegacyUrl = imageUrl.includes(legacyUrlPattern)
+  if (!isLegacyUrl) return imageUrl
   imageUrl = cleanImageUrl(imageUrl)
   imageUrl = `${imageUrl}-${width}-${height}`
   return imageUrl
@@ -45,8 +47,9 @@ export function changeImageUrlSize(
   typeof width === 'number' && (width = Math.min(width, MAX_WIDTH))
   typeof height === 'number' && (height = Math.min(height, MAX_HEIGHT))
 
-  imageUrl = replaceLegacyFileManager(imageUrl, width, height)
-  imageUrl = `${imageUrl}${imageUrl.split('?')[1] ? '&' : '?'}width=${width}&height=${height}&aspect=true`
+  imageUrl = replaceLegacyFileManagerUrl(imageUrl, width, height)
+  const queryStringSeparator = imageUrl.includes('?') ? '&' : '?'
+  imageUrl = `${imageUrl}${queryStringSeparator}width=${width}&height=${height}&aspect=true`
 
   return imageUrl
 }
