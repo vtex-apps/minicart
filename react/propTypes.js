@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { contextPropTypes } from 'vtex.store/OrderFormContext'
+import { contextPropTypes } from 'vtex.store-resources/OrderFormContext'
 
 export const MiniCartPropTypes = {
   /* Set the minicart type */

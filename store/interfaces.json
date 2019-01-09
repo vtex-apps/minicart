@@ -1,0 +1,9 @@
+{
+  "minicart": {
+    "required": [
+      "product-summary"
+    ],
+    "allowed": [],
+    "component": "index"
+  }
+}

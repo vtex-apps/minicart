@@ -3,12 +3,13 @@ import { Button } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
 import { withRuntimeContext } from 'render'
 import Icon from 'vtex.use-svg/Icon'
+
 import MiniCartContent from './components/MiniCartContent'
 import { MiniCartPropTypes } from './propTypes'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
-import { orderFormConsumer } from 'vtex.store/OrderFormContext'
 import { isParentItem } from './utils/itemsHelper'
+import { orderFormConsumer } from 'vtex.store-resources/OrderFormContext'
 
 import minicart from './minicart.css'
 
@@ -59,12 +60,12 @@ export class MiniCart extends Component {
     })
     const { runtime: { navigate } } = this.props
     navigate({
-      to: detailUrl,
+      to: detailUrl
     })
   }
-  
+
   get itemsQuantity() {
-    const { orderFormContext: { orderForm }} = this.props
+    const { orderFormContext: { orderForm } } = this.props
     if (!orderForm || !orderForm.items) return 0
     return orderForm.items.filter(isParentItem).length
   }
@@ -114,7 +115,7 @@ export class MiniCart extends Component {
 
     return (
       <div
-        className={`${minicart.container} relative flex items-center fr`}
+        className={`${minicart.container} relative fr`}
         ref={e => {
           this.iconRef = e
         }}
