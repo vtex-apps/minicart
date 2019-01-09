@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Replace URL just for legacy file manager url format.
 
 ## [2.3.1] - 2019-01-04
 ### Fixed
@@ -24,8 +26,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [2.1.5] - 2018-12-14
 ### Changed
-- Bump major version of `vtex.styleguide` and `vtex.store-components`. 
-- Add design tokens on selling price label. 
+- Bump major version of `vtex.styleguide` and `vtex.store-components`.
+- Add design tokens on selling price label.
 
 ## [2.1.4] - 2018-12-14
 ### Fixed
@@ -195,7 +197,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - `Popup` to appear when the `MiniCart` button is clicked instead of on hover.
 
-### Fixed 
+### Fixed
 - `maxQuantity` undefined warning.
 - Loading mixed (insecure) display content warning.
 
