@@ -219,9 +219,9 @@ export class MiniCart extends Component {
           icon
           onClick={event => this.handleClickButton(event)}
         >
-          <div className="flex items-center">
-            <div className={`relative ${iconClasses}`}>
-              <IconCart size={iconSize} />
+          <span className="flex items-center">
+            <span className={`relative ${iconClasses}`}>
+              <Icon id="hpa-cart" size={iconSize} />
               {quantity > 0 && (
                 <span
                   className={`${
@@ -231,7 +231,7 @@ export class MiniCart extends Component {
                   {quantity}
                 </span>
               )}
-            </div>
+            </span>
             {iconLabel && (
               <span
                 className={`${minicart.label} dn-m db-l t-action--small pl${
@@ -241,7 +241,7 @@ export class MiniCart extends Component {
                 {iconLabel}
               </span>
             )}
-          </div>
+          </span>
         </Button>
         {!hideContent &&
           (isSizeLarge ? (
