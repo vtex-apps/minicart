@@ -231,7 +231,7 @@ class MiniCartContent extends Component {
           isSizeLarge={isSizeLarge}
           labelDiscount={labelDiscount}
           showDiscount={showDiscount}
-          showShippingCost={showShippingCost}
+          showShippingCost={showShippingCost} 
         />
       </Fragment>
     )
