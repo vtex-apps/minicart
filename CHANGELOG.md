@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.4.0] - 2019-01-09
+
 ## [2.3.1-beta] - 2019-01-04
 ### Changed
 - Bye `pages.json`! Welcome `store-builder`.
