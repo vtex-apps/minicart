@@ -155,10 +155,10 @@ class MiniCartContent extends Component {
     return addedOptions.reduce((acc, option) =>  acc + option.sellingPrice * option.quantity, 0)
   }
 
-  createOptionShapeFromItem = (option, parent) => ({
+  createOptionShapeFromItem = (option) => ({
     ...this.createProductShapeFromItem(option),
     isSingleChoice: isSingleChoiceOption(option, this.props.data.orderForm),
-    quantity: option.quantity / parent.quantity,
+    optionType: option.parentAssemblyBinding.split('_')[1],
   })
 
   createProductShapeFromItem = item => ({
@@ -167,7 +167,7 @@ class MiniCartContent extends Component {
     sku: {
       seller: {
         commertialOffer: {
-          Price: isParentItem(item) ? this.sumTotalPriceWithAttachs(item.addedOptions) : item.sellingPrice,
+          Price: item.sellingPrice * item.quantity + this.sumTotalPriceWithAttachs(item.addedOptions || []),
           ListPrice: item.ListPrice,
         },
         sellerId: item.seller,
