@@ -17,6 +17,14 @@
   max-height: 383px;
 }
 
+.contentLarge {
+  max-height: stretch;
+}
+
+.contentPrice {
+  margin-top: .5rem;
+}
+
 .badge {
   top: -0.7rem;
   right: -0.8rem;
