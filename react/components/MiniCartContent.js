@@ -203,6 +203,20 @@ class MiniCartContent extends Component {
       }
     )
 
+    const priceAndDiscountClasses = classNames(
+      `${minicart.contentDiscount} w-100 flex justify-end items-center mb3`,
+      {
+        [`pv3`]: large
+      }
+    )
+
+    const checkoutButtonClasses = classNames(
+      ``,
+      {
+        [`bb bw4 bw2-m b--transparent`]: large
+      }
+    )
+
     const discount = this.calculateDiscount(items, orderForm.value)
     return (
       <Fragment>
@@ -239,9 +253,9 @@ class MiniCartContent extends Component {
           ))}
         </div>
 
-        <div className={`${minicart.contentFooter} w-100 bg-base pa4 bt b--muted-3 pt5 pb5 flex flex-column items-end`}>
+        <div className={`${minicart.contentFooter} w-100 bg-base pa4 bt b--muted-3 pv5 flex flex-column items-end`}>
           {showDiscount && discount > 0 && (
-            <div className={`${minicart.contentDiscount} w-100 flex justify-end items-center pb3`}>
+            <div className={priceAndDiscountClasses}>
               <span className="ttl c-action-primary">{labelDiscount}</span>
               <ProductPrice
                 sellingPriceClass='c-action-primary ph2 dib'
@@ -266,13 +280,15 @@ class MiniCartContent extends Component {
               )
             }
           </div>
-          <Button
-            variation="primary"
-            size="small"
-            onClick={this.handleClickButton}
-          >
-            {label}
-          </Button>
+          <div className={checkoutButtonClasses}>
+            <Button
+              variation="primary"
+              size="small"
+              onClick={this.handleClickButton}
+              >
+              {label}
+            </Button>
+          </div>
         </div>
       </Fragment>
     )
