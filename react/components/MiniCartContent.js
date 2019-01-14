@@ -239,12 +239,12 @@ class MiniCartContent extends Component {
           ))}
         </div>
 
-        <div className={`${minicart.contentFooter} w-100 bg-base pa4 bt b--muted-3 pt4 flex flex-column items-end`}>
+        <div className={`${minicart.contentFooter} w-100 bg-base pa4 bt b--muted-3 pt5 pb5 flex flex-column items-end`}>
           {showDiscount && discount > 0 && (
-            <div className={`${minicart.contentDiscount} w-100 flex justify-end items-center`}>
-              <span className="ttl c-action-primary pb5">{labelDiscount}</span>
+            <div className={`${minicart.contentDiscount} w-100 flex justify-end items-center pb3`}>
+              <span className="ttl c-action-primary">{labelDiscount}</span>
               <ProductPrice
-                sellingPriceClass='c-action-primary ph2 dib pb5'
+                sellingPriceClass='c-action-primary ph2 dib'
                 sellingPrice={discount}
                 listPrice={discount}
                 showLabels={false}
