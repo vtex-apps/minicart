@@ -1,3 +1,18 @@
+.container {}
+.label {}
+.itemImage {}
+.item {}
+.content {}
+.contentDiscount {}
+.contentPrice {}
+.itemName {}
+.itemNameLarge {}
+.itemFooter {}
+.imgContainer {}
+.itemRemoveBtn {}
+.sidebarScrim {}
+.sidebarHeader {}
+
 .contentSmall {
   max-height: 383px;
 }

@@ -95,7 +95,7 @@ export default class MiniCartItem extends Component {
       <div className={`${minicart.item} h4 relative w-100`}>
         <Link
           className="pointer link black-90"
-          page={'store/product'}
+          page={'store.product'}
           params={{ slug: this.getItemId(detailUrl) }}>
           <div className="relative bb b--muted-3 h-100 pa4">
             <div className={nameClasses}>
@@ -130,7 +130,7 @@ export default class MiniCartItem extends Component {
             </div>
           }
           {(showRemoveButton && !isRemovingItem) && (
-            <div className={`${minicart.item__removeBtn} absolute right-0 top-0 mr4`}>
+            <div className={`${minicart.itemRemoveBtn} absolute right-0 top-0 mr4`}>
               <Button icon variation="tertiary" onClick={(e) => this.onClickRemove(id, e)}>
                 <IconClose size={20} color="b--muted-3" />
               </Button>
