@@ -206,10 +206,10 @@ class MiniCartContent extends Component {
     const MIN_ITEMS_TO_SCROLL = 2
 
     const classes = classNames(
-      `${minicart.content} overflow-x-hidden pa1`,
+      `${minicart.content} overflow-x-hidden pa1 overflow-y-auto`,
       {
         [`${minicart.contentSmall} bg-base`]: !large,
-        [`${minicart.contentLarge} overflow-y-auto`]: large,
+        [`${minicart.contentLarge}`]: large,
         'overflow-y-scroll': items.length > MIN_ITEMS_TO_SCROLL && !large,
         'overflow-y-hidden': items.length <= MIN_ITEMS_TO_SCROLL && !large,
       }
