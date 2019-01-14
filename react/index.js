@@ -115,7 +115,7 @@ export class MiniCart extends Component {
 
     return (
       <div
-        className={`${minicart.container} relative fr`}
+        className={`${minicart.container} relative fr flex items-center`}
         ref={e => {
           this.iconRef = e
         }}
