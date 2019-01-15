@@ -136,7 +136,7 @@ export class MiniCart extends Component {
             </div>
             {iconLabel && (
               <span
-                className={`${minicart.label} dn-m db-l t-action--small pl${quantity > 0 ? '6' : '4'} ${labelClasses}`}
+                className={`${minicart.label} dn-m db-l t-action pl${quantity > 0 ? '6' : '4'} ${labelClasses}`}
               >
                 {iconLabel}
               </span>
