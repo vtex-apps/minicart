@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.4.2] - 2019-01-15
+### Fixed
+- Fix icon vertical aligment in the header in mobile view.
+
 ## [2.4.1] - 2019-01-14
 ### Fixed
 - Remove `undefined` css classes.
