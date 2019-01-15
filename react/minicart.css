@@ -17,6 +17,10 @@
   max-height: 383px;
 }
 
+.contentLarge {
+  max-height: stretch;
+}
+
 .badge {
   top: -0.7rem;
   right: -0.8rem;
