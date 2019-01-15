@@ -151,7 +151,7 @@ class MiniCartContent extends Component {
     })
   }
 
-  sumTotalPriceWithAttachs = (addedOptions) => {
+  sumOptionsPrice = (addedOptions) => {
     return addedOptions.reduce((acc, option) =>  acc + option.sellingPrice * option.quantity, 0)
   }
 
@@ -167,7 +167,7 @@ class MiniCartContent extends Component {
     sku: {
       seller: {
         commertialOffer: {
-          Price: item.sellingPrice * item.quantity + this.sumTotalPriceWithAttachs(item.addedOptions || []),
+          Price: item.sellingPrice * item.quantity + this.sumOptionsPrice(item.addedOptions || []),
           ListPrice: item.ListPrice,
         },
         sellerId: item.seller,
