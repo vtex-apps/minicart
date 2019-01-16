@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { reduceBy, values, clone } from 'ramda'
+import { reduceBy, values, clone, last, split } from 'ramda'
 import classNames from 'classnames'
 import { ExtensionPoint } from 'render'
 import { Button, Spinner, IconDelete } from 'vtex.styleguide'
 import ProductPrice from 'vtex.store-components/ProductPrice'
 import { MiniCartPropTypes } from '../propTypes'
 import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
-import { groupItemsWithParents } from '../utils/itemsHelper'
+import { groupItemsWithParents, isParentItem, isSingleChoiceOption } from '../utils/itemsHelper'
 
 import minicart from '../minicart.css'
 
@@ -151,15 +151,26 @@ class MiniCartContent extends Component {
     })
   }
 
+  sumOptionsPrice = (addedOptions = []) => {
+    return addedOptions.reduce((acc, option) =>  acc + option.sellingPrice * option.quantity, 0)
+  }
+
+  createProductShapeFromOption = (option) => ({
+    ...this.createProductShapeFromItem(option),
+    isSingleChoice: isSingleChoiceOption(option, this.props.data.orderForm),
+    optionType: option.parentAssemblyBinding && last(split('_', option.parentAssemblyBinding)),
+  })
+
   createProductShapeFromItem = item => ({
     productName: item.name,
     linkText: item.detailUrl.replace(/^\//, '').replace(/\/p$/, ''),
     sku: {
       seller: {
         commertialOffer: {
-          Price: item.sellingPrice,
+          Price: item.sellingPrice * item.quantity + this.sumOptionsPrice(item.addedOptions),
           ListPrice: item.ListPrice,
         },
+        sellerId: item.seller,
       },
       name: item.skuName,
       itemId: item.id,
@@ -167,7 +178,8 @@ class MiniCartContent extends Component {
         imageUrl: changeImageUrlSize(toHttps(item.imageUrl), 240),
       },
     },
-    addedOptions: (item.addedOptions || []).map(option => this.createProductShapeFromItem(option)),
+    addedOptions: (item.addedOptions || []).map(option => this.createProductShapeFromOption(option)),
+    quantity: item.quantity,
   })
 
   get isUpdating() {
@@ -190,14 +202,14 @@ class MiniCartContent extends Component {
     isUpdating,
     large
   ) => {
-    const items = groupItemsWithParents(this.props.data.orderForm)
+    const items = groupItemsWithParents(orderForm)
     const MIN_ITEMS_TO_SCROLL = 2
 
     const classes = classNames(
-      `${minicart.content} overflow-x-hidden pa1`,
+      `${minicart.content} overflow-x-hidden pa1 overflow-y-auto`,
       {
         [`${minicart.contentSmall} bg-base`]: !large,
-        [`${minicart.contentLarge} overflow-y-auto`]: large,
+        [`${minicart.contentLarge}`]: large,
         'overflow-y-scroll': items.length > MIN_ITEMS_TO_SCROLL && !large,
         'overflow-y-hidden': items.length <= MIN_ITEMS_TO_SCROLL && !large,
       }
@@ -224,7 +236,7 @@ class MiniCartContent extends Component {
           {items.map(item => (
             <Fragment key={item.id}>
               <div className="relative flex">
-                <div className="fr absolute bottom-0 right-0">
+                <div className="fr absolute top-0 right-0">
                   {isUpdating[item.id]
                     ? (
                       <div className="ma4">
