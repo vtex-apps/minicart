@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { reduceBy, values, clone } from 'ramda'
+import { reduceBy, values, clone, last, split } from 'ramda'
 import classNames from 'classnames'
 import { ExtensionPoint } from 'render'
 import { Button, Spinner, IconDelete } from 'vtex.styleguide'
@@ -151,14 +151,14 @@ class MiniCartContent extends Component {
     })
   }
 
-  sumOptionsPrice = (addedOptions) => {
+  sumOptionsPrice = (addedOptions = []) => {
     return addedOptions.reduce((acc, option) =>  acc + option.sellingPrice * option.quantity, 0)
   }
 
-  createOptionShapeFromItem = (option) => ({
+  createProductShapeFromOption = (option) => ({
     ...this.createProductShapeFromItem(option),
     isSingleChoice: isSingleChoiceOption(option, this.props.data.orderForm),
-    optionType: option.parentAssemblyBinding.split('_')[1],
+    optionType: option.parentAssemblyBinding && last(split('_', option.parentAssemblyBinding)),
   })
 
   createProductShapeFromItem = item => ({
@@ -167,7 +167,7 @@ class MiniCartContent extends Component {
     sku: {
       seller: {
         commertialOffer: {
-          Price: item.sellingPrice * item.quantity + this.sumOptionsPrice(item.addedOptions || []),
+          Price: item.sellingPrice * item.quantity + this.sumOptionsPrice(item.addedOptions),
           ListPrice: item.ListPrice,
         },
         sellerId: item.seller,
@@ -178,7 +178,7 @@ class MiniCartContent extends Component {
         imageUrl: changeImageUrlSize(toHttps(item.imageUrl), 240),
       },
     },
-    addedOptions: (item.addedOptions || []).map(option => this.createOptionShapeFromItem(option, item)),
+    addedOptions: (item.addedOptions || []).map(option => this.createProductShapeFromOption(option)),
     quantity: item.quantity,
   })
 
