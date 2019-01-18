@@ -22,6 +22,6 @@
     "vtex.store-resources": "0.x",
     "vtex.store-components": "3.x",
     "vtex.styleguide": "9.x",
-    "vtex.use-svg": "0.x"
+    "vtex.use-svg": "1.x"
   }
 }
