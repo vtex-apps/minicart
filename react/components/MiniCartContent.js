@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { reduceBy, values, clone, last, split } from 'ramda'
 import classNames from 'classnames'
-import { ExtensionPoint } from 'render'
+import { ExtensionPoint } from 'vtex.render-runtime
 import { Button, Spinner, IconDelete } from 'vtex.styleguide'
 import ProductPrice from 'vtex.store-components/ProductPrice'
 import { MiniCartPropTypes } from '../propTypes'

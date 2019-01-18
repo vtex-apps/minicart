@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'render'
+import { Link } from 'vtex.render-runtime
 import { Button, Spinner, IconClose, NumericStepper } from 'vtex.styleguide'
 import { ProductName, ProductPrice } from 'vtex.store-components'
 import classNames from 'classnames'
