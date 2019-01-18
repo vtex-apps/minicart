@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
-import { withRuntimeContext } from 'vtex.render-runtime
+import { withRuntimeContext } from 'vtex.render-runtime'
 import Icon from 'vtex.use-svg/Icon'
 
 import MiniCartContent from './components/MiniCartContent'
