@@ -126,8 +126,8 @@ export class MiniCart extends Component {
           onClick={event => this.handleClickButton(event)}
         >
           <div className="flex items-center">
-            <div className={`relative ${iconClasses}`}>
-              <Icon id="hpa-cart" size={iconSize} />
+            <div className="relative">
+              <Icon id="hpa-cart" size={iconSize} className={iconClasses} />
               {quantity > 0 && (
                 <span className={`${minicart.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}>
                   {quantity}
