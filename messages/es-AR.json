@@ -15,5 +15,6 @@
     "minicart-empty": "Su cesta está vacía!",
     "sidebar-title": "Mi cesta de compras",
     "minicart-content-footer-discount": "Guarde",
-    "minicart.error-removal": "Falló la eliminación del artículo, por favor intente de nuevo"
+    "minicart.error-removal": "Falló la eliminación del artículo, por favor intente de nuevo",
+    "minicart.shipping-cost": "Costo total del envío"
 }

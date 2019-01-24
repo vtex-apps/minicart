@@ -15,5 +15,6 @@
     "minicart-empty": "Seu carrinho está vazio!",
     "sidebar-title": "Meu carrinho",
     "minicart-content-footer-discount": "Economize",
-    "minicart.error-removal": "A remoção do item falhou, por favor tente novamente"
+    "minicart.error-removal": "A remoção do item falhou, por favor tente novamente",
+    "minicart.shipping-cost": "Custo de entrega"
 }

@@ -1,16 +1,16 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { reduceBy, values, clone, last, split } from 'ramda'
+import { reduceBy, values, clone, last, split, find, propEq } from 'ramda'
 import classNames from 'classnames'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { Button, Spinner, IconDelete } from 'vtex.styleguide'
-import ProductPrice from 'vtex.store-components/ProductPrice'
 import { MiniCartPropTypes } from '../propTypes'
 import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
-import { groupItemsWithParents, isParentItem, isSingleChoiceOption } from '../utils/itemsHelper'
+import { groupItemsWithParents, isSingleChoiceOption } from '../utils/itemsHelper'
 
 import minicart from '../minicart.css'
+import MiniCartFooter from './MiniCartFooter';
 
 /**
  * Minicart content component
@@ -54,11 +54,14 @@ class MiniCartContent extends Component {
         this.props.data.orderForm.items
       )
     )
+  
+  getShippingCost = orderForm => {
+    const totalizer = find(propEq('id', 'Shipping'))(orderForm.totalizers)
+    return totalizer && totalizer.value / 100
+  }
 
   calculateDiscount = (items, totalPrice) =>
     this.sumItemsPrice(items) - totalPrice
-
-  handleClickButton = () => location.assign('/checkout/#/cart')
 
   handleItemRemoval = async id => {
     this.updateItemLoad(id, true)
@@ -215,21 +218,6 @@ class MiniCartContent extends Component {
       }
     )
 
-    const priceAndDiscountClasses = classNames(
-      `${minicart.contentDiscount} w-100 flex justify-end items-center mb3`,
-      {
-        [`pv3`]: large
-      }
-    )
-
-    const checkoutButtonClasses = classNames(
-      ``,
-      {
-        [`bb bw4 bw2-m b--transparent`]: large
-      }
-    )
-
-    const discount = this.calculateDiscount(items, orderForm.value)
     return (
       <Fragment>
         <div className={classes}>
@@ -264,44 +252,15 @@ class MiniCartContent extends Component {
             </Fragment>
           ))}
         </div>
-
-        <div className={`${minicart.contentFooter} w-100 bg-base pa4 bt b--muted-3 pv5 flex flex-column items-end`}>
-          {showDiscount && discount > 0 && (
-            <div className={priceAndDiscountClasses}>
-              <span className="ttl c-action-primary">{labelDiscount}</span>
-              <ProductPrice
-                sellingPriceClass='c-action-primary ph2 dib'
-                sellingPrice={discount}
-                listPrice={discount}
-                showLabels={false}
-                showListPrice={false}
-              />
-            </div>
-          )}
-          <div className={`${minicart.contentPrice} mb3`}>
-            {this.isUpdating
-              ? (<Spinner size={18} />)
-              : (
-                <ProductPrice
-                  sellingPriceClass='c-muted-1 b ph2 dib'
-                  sellingPrice={orderForm.value}
-                  listPrice={orderForm.value}
-                  showLabels={false}
-                  showListPrice={false}
-                />
-              )
-            }
-          </div>
-          <div className={checkoutButtonClasses}>
-            <Button
-              variation="primary"
-              size="small"
-              onClick={this.handleClickButton}
-              >
-              {label}
-            </Button>
-          </div>
-        </div>
+        <MiniCartFooter
+          shippingCost={this.getShippingCost(orderForm)}
+          isUpdating={this.isUpdating}
+          totalValue={orderForm.value}
+          buttonLabel={label}
+          large={large}
+          labelDiscount={labelDiscount}
+          showDiscount={showDiscount}
+        />
       </Fragment>
     )
   }
