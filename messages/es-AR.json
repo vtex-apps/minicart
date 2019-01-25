@@ -6,6 +6,7 @@
     "editor.minicart.labelMiniCartEmpty.title": "Texto que aparecerá cuando el carrito esté vacío",
     "editor.minicart.labelButtonFinishShopping.title": "Texto para que aparezca en el botón de finalizar compra",
     "editor.minicart.enableQuantitySelector.title": "Habilitar el selector de cantidad",
+    "editor.minicart.showShippingCost.title": "Mostrar el costo total del envío",
     "editor.minicart.maxQuantity.title": "Cantidad máxima por producto",
     "editor.minicart.type.title": "Tipo de Cesta de Compras",
     "editor.minicart.showSku.title": "Muestre el sku",

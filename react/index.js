@@ -87,7 +87,10 @@ export class MiniCart extends Component {
       orderFormContext,
       type,
       hideContent,
+      showShippingCost,
     } = this.props
+
+    console.log('teste showShippingCost: ', showShippingCost)
 
     const quantity = this.itemsQuantity
 
@@ -110,6 +113,7 @@ export class MiniCart extends Component {
         onClickProduct={this.onClickProduct}
         handleUpdateContentVisibility={this.handleUpdateContentVisibility}
         actionOnClick={this.handleUpdateContentVisibility}
+        showShippingCost={showShippingCost}
       />
     )
 

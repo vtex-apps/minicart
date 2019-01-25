@@ -36,6 +36,7 @@ class MiniCartContent extends Component {
     enableQuantitySelector: MiniCartPropTypes.enableQuantitySelector,
     maxQuantity: MiniCartPropTypes.maxQuantity,
     showDiscount: MiniCartPropTypes.showDiscount,
+    showShippingCost: MiniCartPropTypes.showShippingCost,
   }
 
   state = { isUpdating: [] }
@@ -203,7 +204,8 @@ class MiniCartContent extends Component {
     showDiscount,
     actionOnClick,
     isUpdating,
-    large
+    large,
+    showShippingCost
   ) => {
     const items = groupItemsWithParents(orderForm)
     const MIN_ITEMS_TO_SCROLL = 2
@@ -260,6 +262,7 @@ class MiniCartContent extends Component {
           large={large}
           labelDiscount={labelDiscount}
           showDiscount={showDiscount}
+          showShippingCost={showShippingCost}
         />
       </Fragment>
     )
@@ -280,6 +283,7 @@ class MiniCartContent extends Component {
       showDiscount,
       actionOnClick,
       large,
+      showShippingCost,
     } = this.props
     const { isUpdating } = this.state
 
@@ -306,7 +310,8 @@ class MiniCartContent extends Component {
       showDiscount,
       actionOnClick,
       isUpdating,
-      large
+      large,
+      showShippingCost
     )
   }
 }

@@ -5,6 +5,7 @@ import { Button, Spinner } from 'vtex.styleguide'
 import { FormattedMessage } from 'react-intl'
 import PropTypes from 'prop-types'
 
+import { MiniCartPropTypes } from '../propTypes'
 import minicart from '../minicart.css'
 
 class MiniCartFooter extends PureComponent {
@@ -14,15 +15,26 @@ class MiniCartFooter extends PureComponent {
     isUpdating: PropTypes.bool,
     totalValue: PropTypes.number.isRequired,
     buttonLabel: PropTypes.string.isRequired,
-    showDiscount: PropTypes.bool,
+    showDiscount: MiniCartPropTypes.showDiscount,
     discount: PropTypes.number,
     labelDiscount: PropTypes.string,
+    showShippingCost: MiniCartPropTypes.showShippingCost,
   }
 
   handleClickButton = () => location.assign('/checkout/#/cart')
 
   render() {
-    const { shippingCost, large, isUpdating, totalValue, buttonLabel, showDiscount, discount, labelDiscount } = this.props
+    const { 
+      shippingCost, 
+      large, 
+      isUpdating, 
+      totalValue, 
+      buttonLabel, 
+      showDiscount, 
+      discount, 
+      labelDiscount,
+      showShippingCost
+     } = this.props
 
     const priceAndDiscountClasses = classNames(
       `${minicart.contentDiscount} w-100 flex justify-end items-center mb3`,
@@ -38,18 +50,18 @@ class MiniCartFooter extends PureComponent {
       }
     )
 
-    const showShippingCost = shippingCost > 0
+    const shouldShowShippingCost = showShippingCost && shippingCost > 0
 
     const footerClasses = classNames(
       `${minicart.contentFooter} w-100 bg-base pa4 pv5 flex flex-column items-end`,
       {
-        'bt b--muted-3': showShippingCost || large,
+        'bt b--muted-3': shouldShowShippingCost || large,
       }
     )
 
     return (
       <Fragment>
-        {showShippingCost && (
+        {shouldShowShippingCost && (
           <div className="flex w-100 items-center justify-between ph4 pv4">
             <div className="t-body c-muted-1">
               <FormattedMessage id="minicart.shipping-cost" />
