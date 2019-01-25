@@ -90,18 +90,16 @@ export class MiniCart extends Component {
       showShippingCost,
     } = this.props
 
-    console.log('teste showShippingCost: ', showShippingCost)
-
     const quantity = this.itemsQuantity
 
-    const large =
+    const isSizeLarge =
       (type && type === 'sidebar') ||
       isMobile ||
       (window && window.innerWidth <= 480)
 
     const miniCartContent = (
       <MiniCartContent
-        large={large}
+        isSizeLarge={isSizeLarge}
         data={orderFormContext}
         showRemoveButton={showRemoveButton}
         showDiscount={showDiscount}
@@ -148,7 +146,7 @@ export class MiniCart extends Component {
           </div>
         </Button>
         {!hideContent &&
-          (large ? (
+          (isSizeLarge ? (
             <Sidebar
               onOutsideClick={this.handleUpdateContentVisibility}
               isOpen={openContent}

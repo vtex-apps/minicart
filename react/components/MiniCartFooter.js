@@ -11,7 +11,7 @@ import minicart from '../minicart.css'
 class MiniCartFooter extends PureComponent {
   static propTypes = {
     shippingCost: PropTypes.number,
-    large: PropTypes.bool,
+    isSizeLarge: PropTypes.bool,
     isUpdating: PropTypes.bool,
     totalValue: PropTypes.number.isRequired,
     buttonLabel: PropTypes.string.isRequired,
@@ -26,7 +26,7 @@ class MiniCartFooter extends PureComponent {
   render() {
     const { 
       shippingCost, 
-      large, 
+      isSizeLarge, 
       isUpdating, 
       totalValue, 
       buttonLabel, 
@@ -39,14 +39,13 @@ class MiniCartFooter extends PureComponent {
     const priceAndDiscountClasses = classNames(
       `${minicart.contentDiscount} w-100 flex justify-end items-center mb3`,
       {
-        'pv3': large,
+        'pv3': isSizeLarge,
       }
     )
 
     const checkoutButtonClasses = classNames(
-      '',
       {
-        'bb bw4 bw2-m b--transparent': large,
+        'bb bw4 bw2-m b--transparent': isSizeLarge,
       }
     )
 
@@ -55,7 +54,7 @@ class MiniCartFooter extends PureComponent {
     const footerClasses = classNames(
       `${minicart.contentFooter} w-100 bg-base pa4 pv5 flex flex-column items-end`,
       {
-        'bt b--muted-3': shouldShowShippingCost || large,
+        'bt b--muted-3': shouldShowShippingCost || isSizeLarge,
       }
     )
 

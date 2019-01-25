@@ -22,7 +22,7 @@ const TOAST_TIMEOUT = 4000
 class MiniCartContent extends Component {
   static propTypes = {
     /* Set the mini cart content size */
-    large: PropTypes.bool,
+    isSizeLarge: PropTypes.bool,
     /* Internationalization */
     intl: intlShape.isRequired,
     /** Define a function that is executed when the item is clicked */
@@ -204,7 +204,7 @@ class MiniCartContent extends Component {
     showDiscount,
     actionOnClick,
     isUpdating,
-    large,
+    isSizeLarge,
     showShippingCost
   ) => {
     const items = groupItemsWithParents(orderForm)
@@ -213,10 +213,10 @@ class MiniCartContent extends Component {
     const classes = classNames(
       `${minicart.content} overflow-x-hidden pa1 overflow-y-auto`,
       {
-        [`${minicart.contentSmall} bg-base`]: !large,
-        [`${minicart.contentLarge}`]: large,
-        'overflow-y-scroll': items.length > MIN_ITEMS_TO_SCROLL && !large,
-        'overflow-y-hidden': items.length <= MIN_ITEMS_TO_SCROLL && !large,
+        [`${minicart.contentSmall} bg-base`]: !isSizeLarge,
+        [`${minicart.contentLarge}`]: isSizeLarge,
+        'overflow-y-scroll': items.length > MIN_ITEMS_TO_SCROLL && !isSizeLarge,
+        'overflow-y-hidden': items.length <= MIN_ITEMS_TO_SCROLL && !isSizeLarge,
       }
     )
 
@@ -259,7 +259,7 @@ class MiniCartContent extends Component {
           isUpdating={this.isUpdating}
           totalValue={orderForm.value}
           buttonLabel={label}
-          large={large}
+          isSizeLarge={isSizeLarge}
           labelDiscount={labelDiscount}
           showDiscount={showDiscount}
           showShippingCost={showShippingCost}
@@ -282,7 +282,7 @@ class MiniCartContent extends Component {
       intl,
       showDiscount,
       actionOnClick,
-      large,
+      isSizeLarge,
       showShippingCost,
     } = this.props
     const { isUpdating } = this.state
@@ -310,7 +310,7 @@ class MiniCartContent extends Component {
       showDiscount,
       actionOnClick,
       isUpdating,
-      large,
+      isSizeLarge,
       showShippingCost
     )
   }
