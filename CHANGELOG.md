@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.9.0] - 2019-01-25
+### Added
+Add possibility of showing shipping cost above footer
+
+### Changed
+Rename `large` prop to `isSizeLarge` for better description
+
 ## [2.8.0] - 2019-01-22
 
 ## [2.7.3] - 2019-01-18

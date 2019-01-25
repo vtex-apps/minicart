@@ -6,6 +6,7 @@
     "editor.minicart.labelMiniCartEmpty.title": "Texto que irá aparecer quando o carrinho estiver vazio",
     "editor.minicart.labelButtonFinishShopping.title": "Texto que irá aparecer no botão de finalizar compra",
     "editor.minicart.enableQuantitySelector.title": "Habilitar o seletor de quantidade",
+    "editor.minicart.showShippingCost.title": "Mostrar o custo de entrega",
     "editor.minicart.maxQuantity.title": "Quantidade máxima por item",
     "editor.minicart.type.title": "Tipo de Carrinho de Compras",
     "editor.minicart.type.popup": "Pop Up",
@@ -15,5 +16,6 @@
     "minicart-empty": "Seu carrinho está vazio!",
     "sidebar-title": "Meu carrinho",
     "minicart-content-footer-discount": "Economize",
-    "minicart.error-removal": "A remoção do item falhou, por favor tente novamente"
+    "minicart.error-removal": "A remoção do item falhou, por favor tente novamente",
+    "minicart.shipping-cost": "Custo de entrega"
 }

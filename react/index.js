@@ -87,18 +87,19 @@ export class MiniCart extends Component {
       orderFormContext,
       type,
       hideContent,
+      showShippingCost,
     } = this.props
 
     const quantity = this.itemsQuantity
 
-    const large =
+    const isSizeLarge =
       (type && type === 'sidebar') ||
       isMobile ||
       (window && window.innerWidth <= 480)
 
     const miniCartContent = (
       <MiniCartContent
-        large={large}
+        isSizeLarge={isSizeLarge}
         data={orderFormContext}
         showRemoveButton={showRemoveButton}
         showDiscount={showDiscount}
@@ -110,6 +111,7 @@ export class MiniCart extends Component {
         onClickProduct={this.onClickProduct}
         handleUpdateContentVisibility={this.handleUpdateContentVisibility}
         actionOnClick={this.handleUpdateContentVisibility}
+        showShippingCost={showShippingCost}
       />
     )
 
@@ -144,7 +146,7 @@ export class MiniCart extends Component {
           </div>
         </Button>
         {!hideContent &&
-          (large ? (
+          (isSizeLarge ? (
             <Sidebar
               onOutsideClick={this.handleUpdateContentVisibility}
               isOpen={openContent}

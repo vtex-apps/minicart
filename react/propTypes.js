@@ -30,4 +30,6 @@ export const MiniCartPropTypes = {
   maxQuantity: PropTypes.number,
   /* Products in the cart */
   orderFormContext: contextPropTypes,
+  /* Set the shipping fee visibility */
+  showShippingCost: PropTypes.bool,
 }
