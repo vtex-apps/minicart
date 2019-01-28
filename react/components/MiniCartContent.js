@@ -7,7 +7,7 @@ import { ExtensionPoint } from 'vtex.render-runtime'
 import { Button, Spinner, IconDelete } from 'vtex.styleguide'
 import { MiniCartPropTypes } from '../propTypes'
 import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
-import { groupItemsWithParents, isSingleChoiceOption } from '../utils/itemsHelper'
+import { groupItemsWithParents, getOptionChoiceType } from '../utils/itemsHelper'
 
 import minicart from '../minicart.css'
 import MiniCartFooter from './MiniCartFooter';
@@ -161,7 +161,7 @@ class MiniCartContent extends Component {
 
   createProductShapeFromOption = (option) => ({
     ...this.createProductShapeFromItem(option),
-    isSingleChoice: isSingleChoiceOption(option, this.props.data.orderForm),
+    choiceType: getOptionChoiceType(option, this.props.data.orderForm),
     optionType: option.parentAssemblyBinding && last(split('_', option.parentAssemblyBinding)),
   })
 

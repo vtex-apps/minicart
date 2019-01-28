@@ -1,4 +1,10 @@
-import { values, partition, propEq, find } from 'ramda'
+import { all, values, partition, propEq, find } from 'ramda'
+
+export const CHOICE_TYPES = {
+  SINGLE: 'SINGLE',
+  MULTIPLE: 'MULTIPLE',
+  TOGGLE: 'TOGGLE',
+}
 
 export const isParentItem = 
   ({ parentItemIndex, parentAssemblyBinding }) => parentItemIndex == null && parentAssemblyBinding == null
@@ -21,17 +27,29 @@ export const groupItemsWithParents = (orderForm) => {
   )
 }
 
-export const isSingleChoiceOption = (item, orderForm) => {
+const findParentOption = (item, orderForm) => {
   const { parentItemIndex, parentAssemblyBinding } = item
-  if (isParentItem(item)) { return false }
+  if (isParentItem(item)) { return null }
   const parentId = orderForm.items[parentItemIndex].id
 
   const parentMetadata = find(propEq('id', parentId))(orderForm.itemMetadata.items)
-  if (!parentMetadata) { return false }
+  if (!parentMetadata) { return null }
 
-  const parentOptions = find(propEq('id', parentAssemblyBinding))(parentMetadata.assemblyOptions)
-  if (!parentOptions) { return false }
+  return find(propEq('id', parentAssemblyBinding))(parentMetadata.assemblyOptions)
+}
 
-  const { composition: { minQuantity, maxQuantity } } = parentOptions
-  return minQuantity === 1 && maxQuantity === 1
+const isParentOptionSingleChoice = ({composition: { minQuantity, maxQuantity }}) =>
+  minQuantity === 1 && maxQuantity === 1
+
+const isParentOptionToggleChoice = ({ composition: { items }}) => all(propEq('maxQuantity', 1))(items)
+
+export const getOptionChoiceType = (item, orderForm) => {
+  const parentOption = findParentOption(item, orderForm)
+  if (!parentOption) { return CHOICE_TYPES.MULTIPLE }
+  const isSingle = isParentOptionSingleChoice(parentOption)
+  if (isSingle) { return CHOICE_TYPES.SINGLE }
+  const isToggle = isParentOptionToggleChoice(parentOption)
+  if (isToggle) { return CHOICE_TYPES.TOGGLE }
+
+  return CHOICE_TYPES.MULTIPLE
 }
