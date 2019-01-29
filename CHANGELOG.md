@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.9.1] - 2019-01-29
+### Fixed
+- Remove inherit component from `blocks.json`
+
+### Changed
+- Send to product-summary the "choice type" of each assembly option (SINGLE, TOGGLE or MULTIPLE)
+
 ## [2.9.0] - 2019-01-25
 ### Added
 Add possibility of showing shipping cost above footer
