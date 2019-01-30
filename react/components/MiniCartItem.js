@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'vtex.render-runtime'
-import { Button, Spinner, IconClose, NumericStepper } from 'vtex.styleguide'
-import { ProductName, ProductPrice } from 'vtex.store-components'
 import classNames from 'classnames'
+
+import { Link } from 'vtex.render-runtime'
+import { Button, Spinner, NumericStepper } from 'vtex.styleguide'
+import { ProductName, ProductPrice } from 'vtex.store-components'
+import { IconClose } from 'vtex.dreamstore-icons'
 
 import { MiniCartPropTypes } from '../propTypes'
 import Image from './Image'

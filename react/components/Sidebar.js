@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import { IconCaretRight } from 'vtex.styleguide'
+import { IconCaret } from 'vtex.dreamstore-icons'
 import { injectIntl, intlShape } from 'react-intl'
 import OutsideClickHandler from 'react-outside-click-handler'
 import Animation from 'vtex.store-components/Animation'
@@ -59,7 +59,7 @@ class Sidebar extends Component {
               className="c-muted-1 pa4 flex items-center"
               onClick={onOutsideClick}
             >
-              <IconCaretRight size={17} />
+              <IconCaret orientation="right" size={17} />
             </div>
             <MiniCart
               hideContent
