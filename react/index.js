@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Button } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
+import { graphql } from 'react-apollo'
+import gql from "graphql-tag";
 import { withRuntimeContext } from 'vtex.render-runtime'
 import Icon from 'vtex.use-svg/Icon'
 
@@ -37,17 +39,21 @@ export class MiniCart extends Component {
 
   handleClickButton = event => {
     if (!this.props.hideContent) {
-      this.setState({
-        openContent: !this.state.openContent,
-      })
+      // this.setState({
+      //   openContent: !this.state.openContent,
+      // })
+      const { setContentOpened, isContentOpened} = this.props
+      setContentOpened(!isContentOpened)
     }
     event.persist()
   }
 
   handleUpdateContentVisibility = () => {
-    this.setState({
-      openContent: false,
-    })
+    // this.setState({
+    //   openContent: false,
+    // })
+    const { setContentOpened } = this.props
+    setContentOpened(false)
   }
 
   handleItemAdd = () => {
@@ -55,23 +61,30 @@ export class MiniCart extends Component {
   }
 
   onClickProduct = detailUrl => {
-    this.setState({
-      openContent: false,
-    })
-    const { runtime: { navigate } } = this.props
+    // this.setState({
+    //   openContent: false,
+    // })
+    const { setContentOpened } = this.props
+    setContentOpened(false)
+    const {
+      runtime: { navigate },
+    } = this.props
     navigate({
-      to: detailUrl
+      to: detailUrl,
     })
   }
 
   get itemsQuantity() {
-    const { orderFormContext: { orderForm } } = this.props
+    const {
+      orderFormContext: { orderForm },
+    } = this.props
     if (!orderForm || !orderForm.items) return 0
     return orderForm.items.filter(isParentItem).length
   }
 
   render() {
-    const { openContent } = this.state
+    // const { openContent } = this.state
+    
     const {
       labelMiniCartEmpty,
       labelButtonFinishShopping,
@@ -87,7 +100,11 @@ export class MiniCart extends Component {
       orderFormContext,
       type,
       hideContent,
+      isContentOpened,
+      setContentOpened,
     } = this.props
+
+    const openContent = isContentOpened
 
     const quantity = this.itemsQuantity
 
@@ -129,14 +146,20 @@ export class MiniCart extends Component {
             <div className={`relative ${iconClasses}`}>
               <Icon id="hpa-cart" size={iconSize} />
               {quantity > 0 && (
-                <span className={`${minicart.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}>
+                <span
+                  className={`${
+                    minicart.badge
+                  } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
+                >
                   {quantity}
                 </span>
               )}
             </div>
             {iconLabel && (
               <span
-                className={`${minicart.label} dn-m db-l t-action--small pl${quantity > 0 ? '6' : '4'} ${labelClasses}`}
+                className={`${minicart.label} dn-m db-l t-action--small pl${
+                  quantity > 0 ? '6' : '4'
+                } ${labelClasses}`}
               >
                 {iconLabel}
               </span>
@@ -152,15 +175,15 @@ export class MiniCart extends Component {
               {miniCartContent}
             </Sidebar>
           ) : (
-              openContent && (
-                <Popup
-                  onOutsideClick={this.handleUpdateContentVisibility}
-                  buttonOffsetWidth={this.iconRef.offsetWidth}
-                >
-                  {miniCartContent}
-                </Popup>
-              )
-            ))}
+            openContent && (
+              <Popup
+                onOutsideClick={this.handleUpdateContentVisibility}
+                buttonOffsetWidth={this.iconRef.offsetWidth}
+              >
+                {miniCartContent}
+              </Popup>
+            )
+          ))}
       </div>
     )
   }
@@ -245,5 +268,15 @@ miniHOC.getSchema = props => {
   }
 }
 
-export default withRuntimeContext(miniHOC)
+const withQuery = graphql(gql`
+query {
+  isContentOpened @client
+}`, { props: ({data: { isContentOpened }}) => ({isContentOpened})})
 
+const withMutation = graphql(gql`
+mutation setContentOpened($isContentOpened: Boolean) {
+  setContentOpened(isContentOpened: $isContentOpened) @client
+}
+`, { props: ({mutate}) => ({setContentOpened: isContentOpened => mutate({ variables: { isContentOpened } })})})
+
+export default withMutation(withQuery(withRuntimeContext(miniHOC)))
