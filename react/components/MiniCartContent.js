@@ -226,7 +226,7 @@ class MiniCartContent extends Component {
           {items.map(item => (
             <Fragment key={item.id}>
               <div className="relative flex">
-                <div className="fr absolute top-0 right-0">
+                <div className="fr absolute top-0 right-0 nr1">
                   {isUpdating[item.id]
                     ? (
                       <div className="ma4">
