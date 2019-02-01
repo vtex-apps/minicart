@@ -215,7 +215,7 @@ class MiniCartContent extends Component {
     const MIN_ITEMS_TO_SCROLL = 2
 
     const classes = classNames(
-      `${minicart.content} overflow-x-hidden pa1 overflow-y-auto`,
+      `${minicart.content} overflow-x-hidden pa1`,
       {
         [`${minicart.contentSmall} bg-base`]: !isSizeLarge,
         [`${minicart.contentLarge}`]: isSizeLarge,
