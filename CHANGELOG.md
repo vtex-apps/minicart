@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.10.0] - 2019-01-31
+### Changed
+- Add icons from `vtex.dreamstore-icons`.
+
 ## [2.9.1] - 2019-01-29
 ### Fixed
 - Remove inherit component from `blocks.json`

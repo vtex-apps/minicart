@@ -3,8 +3,11 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { reduceBy, values, clone, last, split, find, propEq } from 'ramda'
 import classNames from 'classnames'
+
 import { ExtensionPoint } from 'vtex.render-runtime'
-import { Button, Spinner, IconDelete } from 'vtex.styleguide'
+import { Button, Spinner } from 'vtex.styleguide'
+import { IconDelete } from 'vtex.dreamstore-icons'
+
 import { MiniCartPropTypes } from '../propTypes'
 import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
 import { groupItemsWithParents, getOptionChoiceType } from '../utils/itemsHelper'
@@ -55,7 +58,7 @@ class MiniCartContent extends Component {
         this.props.data.orderForm.items
       )
     )
-  
+
   getShippingCost = orderForm => {
     const totalizer = find(propEq('id', 'Shipping'))(orderForm.totalizers)
     return totalizer && totalizer.value / 100
@@ -156,7 +159,7 @@ class MiniCartContent extends Component {
   }
 
   sumOptionsPrice = (addedOptions = []) => {
-    return addedOptions.reduce((acc, option) =>  acc + option.sellingPrice * option.quantity, 0)
+    return addedOptions.reduce((acc, option) => acc + option.sellingPrice * option.quantity, 0)
   }
 
   createProductShapeFromOption = (option) => ({
@@ -234,7 +237,7 @@ class MiniCartContent extends Component {
                       </div>
                     ) : (
                       <Button icon variation="tertiary" onClick={() => this.handleItemRemoval(item.id)}>
-                        <IconDelete size={15} color="silver" />
+                        <IconDelete size={15} activeClassName="c-muted-2" />
                       </Button>
                     )
                   }
