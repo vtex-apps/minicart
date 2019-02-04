@@ -77,7 +77,6 @@ export class MiniCart extends Component {
   }
 
   render() {
-    console.log('items', this.props.items)
     const { openContent } = this.state
     const {
       labelMiniCartEmpty,
@@ -95,6 +94,7 @@ export class MiniCart extends Component {
       type,
       hideContent,
       showShippingCost,
+      minicartItems,
     } = this.props
 
     const quantity = this.itemsQuantity
@@ -268,7 +268,11 @@ const withQuery = graphql(
       }
     }
   `,
-  { props: ({ data: { items } }) => ({ items }) }
+  {
+    props: ({ data: { minicart } }) => ({
+      minicartItems: minicart && minicart.items,
+    }),
+  }
 )
 
 export default withQuery(withRuntimeContext(miniHOC))
