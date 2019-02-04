@@ -242,6 +242,11 @@ miniHOC.getSchema = props => {
         type: 'boolean',
         isLayout: true,
       },
+      showShippingCost: {
+        title: 'editor.minicart.showShippingCost.title',
+        type: 'boolean',
+        isLayout: true,
+      },
       ...generatedSchema,
     },
   }
