@@ -29,7 +29,7 @@ export const groupItemsWithParents = (orderForm) => {
 
 const findParentOption = (item, orderForm) => {
   const { parentItemIndex, parentAssemblyBinding } = item
-  if (isParentItem(item)) { return null }
+  if (!orderForm.itemMetadata || isParentItem(item)) { return null }
   const parentId = orderForm.items[parentItemIndex].id
 
   const parentMetadata = find(propEq('id', parentId))(orderForm.itemMetadata.items)
