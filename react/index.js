@@ -377,17 +377,3 @@ export default compose(
   withRuntimeContext,
   Pixel
 )(MiniCart)
-=======
-const withQuery = graphql(
-  gql`
-    query {
-      minicart @client {
-        items
-      }
-    }
-  `,
-  { props: ({ data: { items } }) => ({ items }) }
-)
-
-export default withQuery(withRuntimeContext(miniHOC))
->>>>>>> Add the initial LinkState configuration
