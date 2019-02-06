@@ -5,7 +5,7 @@ VTEX Minicart
 The VTEX minicart app shows a list of all items that a customer add in our Checkout OrderForm API. 
 This is a VTEX app that is used by Dreamstore product.
 
-**Disclaimer:** Don't fork this project, use, contribute, or open issue with your feature request.
+:loudspeaker: **Disclaimer:** Don't fork this project, use, contribute, or open issue with your feature request.
 
 ## Release schedule
 | Release  | Status              | Initial Release | Maintenance LTS Start | End-of-life | Dreamstore Compatibility
@@ -24,10 +24,13 @@ See our [LTS policy](https://github.com/vtex-apps/awesome-io#lts-policy) for mor
 - [Troubleshooting](#troubleshooting)
 
 ## Usage
+:construction: :construction: :construction:
 
 ## API 
+:construction: :construction: :construction:
 
 ### Blocks API
+:construction: :construction: :construction:
 
 #### Configuration 
 You can check all props that Minicart exports that can change their behavior and interface.
@@ -47,7 +50,7 @@ You can check all props that Minicart exports that can change their behavior and
 Also, you can configure the props of the product summary that is used in minicart. See [here](https://github.com/vtex-apps/product-summary/blob/master/README.md#configuration) the Product Summary API. 
 
 ### Styles API
-
+:construction: :construction: :construction:
 
 ## Troubleshooting
 You can check if others are passing through similar issues [here](https://github.com/vtex-apps/minicart/issues). Also feel free to [open issues](https://github.com/vtex-apps/minicart/issues/new) or contribute with pull requests.
