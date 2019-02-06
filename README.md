@@ -33,7 +33,7 @@ See our [LTS policy](https://github.com/vtex-apps/awesome-io#lts-policy) for mor
 :construction: :construction: :construction:
 
 #### Configuration 
-You can check all props that Minicart exports that can change their behavior and interface.
+You can check all props of minicart that can change their behavior and interface.
 
 
 | Prop name          | Type       | Description                                                                 |
