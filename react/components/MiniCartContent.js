@@ -91,7 +91,7 @@ class MiniCartContent extends Component {
     try {
       await updateItems(updatedItem)
     } catch (error) {
-      // TODO: Toast message
+      // TODO: Toast error message
       console.error(error)
     }
   }

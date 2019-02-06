@@ -95,7 +95,7 @@ export class MiniCart extends Component {
         items,
       })
     } catch (err) {
-      // TODO: Toast message
+      // TODO: Toast error message
       console.error(err)
     } finally {
       this.setState({ updatingOrderForm: false })
