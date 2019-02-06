@@ -88,7 +88,6 @@ export class MiniCart extends Component {
 
     this.setState({ updatingOrderForm: true })
     try {
-      // TODO: Push pixel events
       await this.addItems(items)
       await this.updateItems(items)
       this.props.push({
@@ -96,6 +95,7 @@ export class MiniCart extends Component {
         items,
       })
     } catch (err) {
+      // TODO: Toast message
       console.error(err)
     } finally {
       this.setState({ updatingOrderForm: false })

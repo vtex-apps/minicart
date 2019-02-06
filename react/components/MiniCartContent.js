@@ -23,10 +23,6 @@ import MiniCartFooter from './MiniCartFooter'
 /**
  * Minicart content component
  */
-
-/** Four seconds */
-// const TOAST_TIMEOUT = 4000
-
 class MiniCartContent extends Component {
   static propTypes = {
     /* Set the mini cart content size */
