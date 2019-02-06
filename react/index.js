@@ -14,6 +14,7 @@ import { MiniCartPropTypes } from './propTypes'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
 import { isParentItem } from './utils/itemsHelper'
+import { minicartItemsQuery } from './LinkState'
 
 import minicart from './minicart.css'
 
@@ -346,26 +347,7 @@ MiniCart.getSchema = props => {
   }
 }
 
-export const minicartLinkStateQuery = gql`
-  query {
-    minicart @client {
-      items {
-        id
-        name
-        imageUrl
-        detailUrl
-        skuName
-        quantity
-        sellingPrice
-        listPrice
-        seller
-        index
-      }
-    }
-  }
-`
-
-const withLinkStateQuery = graphql(minicartLinkStateQuery, {
+const withLinkStateQuery = graphql(minicartItemsQuery, {
   props: ({ data: { minicart } }) => ({
     linkState: {
       minicartItems: minicart && minicart.items,

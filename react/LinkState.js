@@ -95,4 +95,4 @@ const initialState = {
   minicart: { __typename: 'Minicart', items: [] },
 }
 
-module.exports = { resolvers, initialState }
+module.exports = { resolvers, initialState, minicartItemsQuery }
