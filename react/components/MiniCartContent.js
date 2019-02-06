@@ -75,7 +75,7 @@ class MiniCartContent extends Component {
 
   handleItemRemoval = async id => {
     const {
-      data: { orderForm, refetch },
+      data: { orderForm },
       updateItems,
     } = this.props
     const itemPayload = orderForm.items.find(item => item.id === id)
@@ -93,7 +93,6 @@ class MiniCartContent extends Component {
     } catch (error) {
       // TODO: Toast message
       console.error(error)
-      await refetch()
     }
   }
 
