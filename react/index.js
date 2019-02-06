@@ -86,6 +86,7 @@ export class MiniCart extends Component {
 
     this.setState({ updatingOrderForm: true })
     try {
+      // TODO: Push pixel events
       await this.addItems(items)
       await this.updateItems(items)
     } catch (err) {

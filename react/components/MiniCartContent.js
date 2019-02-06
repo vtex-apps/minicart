@@ -3,16 +3,7 @@ import React, { Component, Fragment } from 'react'
 import { compose, graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { injectIntl, intlShape } from 'react-intl'
-import {
-  equals,
-  reduceBy,
-  values,
-  clone,
-  last,
-  split,
-  find,
-  propEq,
-} from 'ramda'
+import { reduceBy, values, clone, last, split, find, propEq, path } from 'ramda'
 import classNames from 'classnames'
 
 import { ExtensionPoint } from 'vtex.render-runtime'
@@ -279,7 +270,7 @@ class MiniCartContent extends Component {
       return this.renderLoading()
     }
 
-    if (!data.orderForm || !data.orderForm.items.length) {
+    if (!path(['orderForm', 'items', 'length'], data)) {
       const label =
         labelMiniCartEmpty || intl.formatMessage({ id: 'minicart-empty' })
       return this.renderWithoutItems(label)
