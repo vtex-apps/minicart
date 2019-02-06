@@ -6,6 +6,7 @@ import { withRuntimeContext } from 'vtex.render-runtime'
 import { IconCart } from 'vtex.dreamstore-icons'
 import { orderForm } from 'vtex.store-resources/Queries'
 import { addToCart, updateItems } from 'vtex.store-resources/Mutations'
+import { Pixel } from 'vtex.pixel-manager/PixelContext'
 import { compose, graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -48,7 +49,6 @@ export class MiniCart extends Component {
     const clientItems = path(['linkState', 'minicartItems'], this.props)
 
     if (serverItems && clientItems) {
-      const prevServerItems = path(['data', 'orderForm', 'items'], prevProps)
       const prevClientItems = path(['linkState', 'minicartItems'], prevProps)
 
       if (!equals(prevClientItems, clientItems)) {
@@ -59,13 +59,15 @@ export class MiniCart extends Component {
           () => this.handleItemsDifference({ clientItems }),
           2e3
         )
-      } else if (
-        (serverItems.length && !clientItems.length) ||
-        (!equals(prevServerItems, serverItems) && !this.state.updatingOrderForm)
-      ) {
+      } else if (serverItems.length && !clientItems.length) {
         return this.fillClientMinicart(serverItems)
       } else if (prevState.updatingOrderForm && !this.state.updatingOrderForm) {
-        return this.props.data.refetch()
+        const {
+          data: {
+            orderForm: { items },
+          },
+        } = await this.props.data.refetch()
+        return this.fillClientMinicart(items)
       }
     }
   }
@@ -89,6 +91,10 @@ export class MiniCart extends Component {
       // TODO: Push pixel events
       await this.addItems(items)
       await this.updateItems(items)
+      this.props.push({
+        event: 'addToCart',
+        items,
+      })
     } catch (err) {
       console.error(err)
     } finally {
@@ -376,5 +382,6 @@ export default compose(
   graphql(updateItems, { name: 'updateItems' }),
   withLinkStateQuery,
   withLinkStateFillCartMutation,
-  withRuntimeContext
+  withRuntimeContext,
+  Pixel
 )(MiniCart)
