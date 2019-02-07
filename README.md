@@ -47,7 +47,7 @@ Through the Storefront you can change the behavior and interface of minicart. Bu
 | `enableQuantitySelector`    | `Boolean`  | Enable the quantity selector component                             |
 | `maxQuantity`               | `String`   | Define the maximum quantity of an item in cart                     |
 
-Also, you can configure the props of the product summary that is used in minicart. See [here](https://github.com/vtex-apps/product-summary/blob/master/README.md#configuration) the Product Summary API. 
+Also, you can configure the product summary that is used in minicart. See [here](https://github.com/vtex-apps/product-summary/blob/master/README.md#configuration) the Product Summary API. 
 
 ### Styles API
 :construction: :construction: :construction:
