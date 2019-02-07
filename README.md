@@ -33,7 +33,7 @@ See our [LTS policy](https://github.com/vtex-apps/awesome-io#lts-policy) for mor
 :construction: :construction: :construction:
 
 #### Configuration 
-You can check all props of minicart that can change their behavior and interface.
+Through the Storefront you can change the behavior and interface of minicart. But, you also can make adjusts in your theme app, like [Dreamstore](https://github.com/vtex-apps/dreamstore/blob/master/store/blocks.json) does.
 
 
 | Prop name          | Type       | Description                                                                 |
