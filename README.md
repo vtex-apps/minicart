@@ -26,6 +26,14 @@ See our [LTS policy](https://github.com/vtex-apps/awesome-io#lts-policy) for mor
 ## Usage
 :construction: :construction: :construction:
 
+To use this app you need to import in your dependencies on `manifest.json`.
+
+```json
+  dependencies: {
+    "vtex.minicart": "2.x"
+  }
+```
+
 ## API 
 :construction: :construction: :construction:
 
@@ -34,7 +42,6 @@ See our [LTS policy](https://github.com/vtex-apps/awesome-io#lts-policy) for mor
 
 #### Configuration 
 Through the Storefront you can change the behavior and interface of minicart. But, you also can make adjusts in your theme app, like [Dreamstore](https://github.com/vtex-apps/dreamstore/blob/master/store/blocks.json) does.
-
 
 | Prop name          | Type       | Description                                                                 |
 | ------------------ | ---------- | --------------------------------------------------------------------------- |
