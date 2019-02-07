@@ -46,7 +46,7 @@ const MiniCartFooter =({
   return (
     <Fragment>
       {shouldShowShippingCost && (
-        <div className="flex w-100 items-center justify-between ph4 pv4">
+        <div className="flex items-center justify-between ma5">
           <div className="t-body c-muted-1">
             <FormattedMessage id="minicart.shipping-cost" />
           </div>
