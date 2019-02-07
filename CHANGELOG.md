@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Pass composition item to product summary
+
+### Fixed
+- Small margin adjustments for shipping cost view
 
 ## [2.10.3] - 2019-02-07
 ### Fixed
