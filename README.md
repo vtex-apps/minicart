@@ -2,7 +2,7 @@ VTEX Minicart
 =====
 
 ## Description
-The VTEX minicart app shows a list of all items that a customer add in our Checkout OrderForm API, and this app is used by Dreamstore product.
+The VTEX minicart app shows a list of all items that a customer added in our Checkout OrderForm API, and this app is used by Dreamstore product.
 
 :loudspeaker: **Disclaimer:** Don't fork this project, use, contribute, or open issue with your feature request.
 
@@ -38,7 +38,7 @@ Then, add `minicart` block into our app theme, as we do in our [Dreamstore app](
 ### Blocks API
 :construction: :construction: :construction:
 
-This app has an interface that describes what the rules that must a block implement when you want to use the minicart. 
+This app has an interface that describes which rules must be implemented by a block when you want to use the minicart.
 
 ```json
   "minicart": {
