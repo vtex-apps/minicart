@@ -24,7 +24,8 @@ See our [LTS policy](https://github.com/vtex-apps/awesome-io#lts-policy) for mor
 - [Troubleshooting](#troubleshooting)
 
 ## Usage
-:construction: :construction: :construction:
+
+This app use our store builder with the blocks architecture. To know more about Store Builder [click here.](https://help.vtex.com/en/tutorial/understanding-storebuilder-and-stylesbuilder#structuring-and-configuring-our-store-with-object-object)
 
 To use this app you need to import in your dependencies on `manifest.json`.
 
@@ -34,14 +35,26 @@ To use this app you need to import in your dependencies on `manifest.json`.
   }
 ```
 
-## API 
-:construction: :construction: :construction:
+Then, add `minicart` block into our app theme, like we do in our [Dreamstore app](https://github.com/vtex-apps/dreamstore/blob/master/store/blocks.json). 
 
 ### Blocks API
 :construction: :construction: :construction:
 
+This app have an interface that describes what are the rules that the blocks must implement when you want to use the minicart block. 
+
+```json
+  "minicart": {
+    "required": [
+      "product-summary"
+    ],
+    "component": "index"
+  }
+}
+```
+The minicart has as a required block the `product-summary` block. So minicart implementation that will be created must add a product-summary as block that is inside of minicart. To know how is the API of `product-summary` see the next section.
+
 #### Configuration 
-Through the Storefront you can change the behavior and interface of minicart. But, you also can make adjusts in your theme app, like [Dreamstore](https://github.com/vtex-apps/dreamstore/blob/master/store/blocks.json) does.
+Through the Storefront you can change the behavior and interface of minicart. But, you also can make adjusts in your theme app, like Dreamstore does.
 
 | Prop name          | Type       | Description                                                                 |
 | ------------------ | ---------- | --------------------------------------------------------------------------- |
