@@ -10,7 +10,7 @@ import { IconDelete } from 'vtex.dreamstore-icons'
 
 import { MiniCartPropTypes } from '../propTypes'
 import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
-import { groupItemsWithParents, getOptionChoiceType } from '../utils/itemsHelper'
+import { groupItemsWithParents, getOptionChoiceType, getOptionComposition } from '../utils/itemsHelper'
 
 import minicart from '../minicart.css'
 import MiniCartFooter from './MiniCartFooter';
@@ -164,6 +164,7 @@ class MiniCartContent extends Component {
 
   createProductShapeFromOption = (option) => ({
     ...this.createProductShapeFromItem(option),
+    compositionItem: getOptionComposition(option, this.props.data.orderForm),
     choiceType: getOptionChoiceType(option, this.props.data.orderForm),
     optionType: option.parentAssemblyBinding && last(split('_', option.parentAssemblyBinding)),
   })

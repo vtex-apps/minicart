@@ -53,3 +53,9 @@ export const getOptionChoiceType = (item, orderForm) => {
 
   return CHOICE_TYPES.MULTIPLE
 }
+
+export const getOptionComposition = (option, orderForm) => {
+  const parentOption = findParentOption(option, orderForm)
+  if (!parentOption) { return {} }
+  return find(propEq('id', option.id))(parentOption.composition.items) || {}
+}

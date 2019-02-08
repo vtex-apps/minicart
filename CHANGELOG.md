@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.10.4] - 2019-02-08
+### Changed
+- Pass composition item to product summary
+
+### Fixed
+- Small margin adjustments for shipping cost view
+
 ## [2.10.3] - 2019-02-07
 ### Fixed
 - Add shipping fee string id to context.json
