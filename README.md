@@ -36,8 +36,6 @@ To use this app, you need to import in your dependencies on `manifest.json`.
 Then, add `minicart` block into our app theme, as we do in our [Dreamstore app](https://github.com/vtex-apps/dreamstore/blob/master/store/blocks.json). 
 
 ### Blocks API
-:construction: :construction: :construction:
-
 This app has an interface that describes which rules must be implemented by a block when you want to use the minicart.
 
 ```json
