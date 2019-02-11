@@ -67,7 +67,38 @@ Through the Storefront, you can change the minicart's behavior and interface. Ho
 Also, you can configure the product summary that is defined on minicart. See [here](https://github.com/vtex-apps/product-summary/blob/master/README.md#configuration) the Product Summary API. 
 
 ### Styles API
-:construction: :construction: :construction:
+This app has CSS customization through `CSS Modules`. CSS Modules is a CSS file in which all class names and animation names are scoped locally by default. You can read more about CSS Modules [here](https://github.com/css-modules/css-modules) .
+
+We use it `css-loader` to generate a CSS token on a HTML element. For example, the builder generate a CSS token based on app vendor, name and major version. Like `container` token declared in minicart, generate the classname `vtex.minicart-2-x-container`.
+
+Below, we describe the tokens, their explanation and the component where it is located.
+
+| Token name         | Component          | Description                                            |
+| ------------------ | ----------         |------------------------------------------------------- |
+| `container`        | [index](https://github.com/vtex-apps/minicart/blob/master/react/index.js)           | The main container of minicart                         |
+| `label`            | [index](https://github.com/vtex-apps/minicart/blob/master/react/index.js)            | Minicart icon label                                    |
+| `badge`            | [index](https://github.com/vtex-apps/minicart/blob/master/react/index.js)            | Minicart badge with the product quantity on it         |
+| `content`          | [MinicartContent](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartContent.js)  | Minicart products' container                            |
+| `contentSmall`     | [MinicartContent](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartContent.js)   | Minicart content for small sidebar                     |
+| `contentLarge`     | [MinicartContent](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartContent.js)  | Minicart content for large sidebar                     |
+| `contentDiscount`  | [MinicartFooter](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartFooter.js)   | The total discount on the minicart footer              | 
+| `contentPrice`     | [MinicartFooter](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartFooter.js)   | Total price of the products on the minicart footer     |
+| `contentFooter`    | [MinicartFooter](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartFooter.js)   | The minicart footer main container                     |
+| `sidebarHeader`    | [Sidebar](https://github.com/vtex-apps/minicart/blob/master/react/components/Sidebar.js)          | Minicart sidebar header container                      |
+| `sidebar`          | [Sidebar](https://github.com/vtex-apps/minicart/blob/master/react/components/Sidebar.js)          | Minicart sidebar main container                        |
+| `sidebarOpen`      | [Sidebar](https://github.com/vtex-apps/minicart/blob/master/react/components/Sidebar.js)          | Active when the sidebar is opened                      |
+| `arrowUp`          | [Popup](https://github.com/vtex-apps/minicart/blob/master/react/components/Popup.js)            | Popup box arrow                                        |
+| `box`              | [Popup](https://github.com/vtex-apps/minicart/blob/master/react/components/Popup.js)            | The main container of the popup                        | 
+
+To override the default CSS, you need to import `styles` on your manifest:
+
+```json
+  "builders": {
+    "styles": "1.x"
+  }
+```
+
+Also, create a `vtex.minicart.css` file in `styles/css` for your handlers customization.
 
 ## Troubleshooting
 You can check if others are passing through similar issues [here](https://github.com/vtex-apps/minicart/issues). Also feel free to [open issues](https://github.com/vtex-apps/minicart/issues/new) or contribute with pull requests.
