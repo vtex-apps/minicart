@@ -1,4 +1,4 @@
-import { equals, isNil, path, pathOr } from 'ramda'
+import { equals, isNil, path, pathOr, pick } from 'ramda'
 import React, { Component } from 'react'
 import { Button } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
@@ -57,7 +57,7 @@ export class MiniCart extends Component {
         }
         this.debounce = setTimeout(
           () => this.handleItemsDifference({ clientItems }),
-          2e3
+          2000
         )
       } else if (serverItems.length && !clientItems.length) {
         return this.fillClientMinicart(serverItems)
@@ -73,26 +73,18 @@ export class MiniCart extends Component {
   }
 
   handleItemsDifference = async ({ clientItems }) => {
-    const items = clientItems
-      .map(({ id, index, quantity, seller }) => ({
-        id,
-        index,
-        quantity,
-        seller,
-      }))
-      .filter(
-        ({ id, index, quantity, seller }) =>
-          !isNil(id) && !isNil(index) && !isNil(quantity) && !isNil(seller)
-      )
-    if (!items.length) return
+    const clientOnlyItems = clientItems
+      .map(pick(['id', 'index', 'quantity', 'seller']))
+      .filter(({ seller }) => !isNil(seller))
+    if (!clientOnlyItems.length) return
 
     this.setState({ updatingOrderForm: true })
     try {
-      await this.addItems(items)
-      await this.updateItems(items)
+      await this.addItems(clientOnlyItems)
+      await this.updateItems(clientOnlyItems)
       this.props.push({
         event: 'addToCart',
-        items,
+        items: clientOnlyItems,
       })
     } catch (err) {
       // TODO: Toast error message

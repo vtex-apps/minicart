@@ -80,7 +80,7 @@ class MiniCartContent extends Component {
     } = this.props
     const itemPayload = orderForm.items.find(item => item.id === id)
     const index = orderForm.items.indexOf(itemPayload)
-    const updatedItem = [itemPayload].map(({ id, ...rest }) => ({
+    const updatedItems = [itemPayload].map(({ id, ...rest }) => ({
       id,
       ...rest,
       index,
@@ -89,7 +89,7 @@ class MiniCartContent extends Component {
     }))
 
     try {
-      await updateItems(updatedItem)
+      await updateItems(updatedItems)
     } catch (error) {
       // TODO: Toast error message
       console.error(error)
@@ -134,8 +134,8 @@ class MiniCartContent extends Component {
         imageUrl: changeImageUrlSize(toHttps(item.imageUrl), 240),
       },
     },
-    addedOptions: (item.addedOptions || []).map(option =>
-      this.createProductShapeFromOption(option)
+    addedOptions: (item.addedOptions || []).map(
+      this.createProductShapeFromOption
     ),
     quantity: item.quantity,
   })
