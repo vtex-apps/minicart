@@ -40,6 +40,7 @@ export class MiniCart extends Component {
   state = {
     openContent: false,
     updatingOrderForm: false,
+    refetching: false,
   }
 
   debounce = null
@@ -47,44 +48,40 @@ export class MiniCart extends Component {
   async componentDidUpdate(prevProps, prevState) {
     const serverItems = path(['data', 'orderForm', 'items'], this.props)
     const clientItems = path(['linkState', 'minicartItems'], this.props)
+    const upToDate = path(['linkState', 'upToDate'], this.props)
 
     if (serverItems && clientItems && !this.state.updatingOrderForm) {
-      const prevServerItems = path(['data', 'orderForm', 'items'], prevProps)
-      const prevClientItems = path(['linkState', 'minicartItems'], prevProps)
+      const clientOnlyItems = clientItems.filter(({ seller }) => !isNil(seller))
+      if (clientOnlyItems.length) {
+        return this.handleItemsDifference(clientOnlyItems)
+      }
 
-      if (!equals(prevClientItems, clientItems)) {
-        return this.handleItemsDifference({ clientItems })
-      } else if (prevState.updatingOrderForm) {
-        return this.props.data.refetch()
-      } else if (
-        (serverItems.length && !clientItems.length) ||
-        !equals(prevServerItems, serverItems)
-      ) {
+      if (this.state.refetching) return
+      if (prevState.updatingOrderForm) {
+        this.setState({ refetching: true })
+        await this.props.data.refetch()
+        this.setState({ refetching: false })
+      } else if (!upToDate) {
         return this.fillClientMinicart(serverItems)
       }
     }
   }
 
-  handleItemsDifference = async ({ clientItems }) => {
-    const clientOnlyItems = clientItems.filter(({ seller }) => !isNil(seller))
-    if (!clientOnlyItems.length) return
-
+  handleItemsDifference = async clientItems => {
     this.setState({ updatingOrderForm: true })
     try {
-      const items = clientOnlyItems.map(
-        pick(['id', 'index', 'quantity', 'seller'])
-      )
+      const items = clientItems.map(pick(['id', 'index', 'quantity', 'seller']))
       await this.addItems(items)
       await this.updateItems(items)
       await this.props.updateLinkStateItems(
-        clientOnlyItems.map(item => ({
+        clientItems.map(item => ({
           ...item,
           seller: null,
         }))
       )
       this.props.push({
         event: 'addToCart',
-        items: clientOnlyItems,
+        items: clientItems,
       })
     } catch (err) {
       // TODO: Toast error message
@@ -352,6 +349,7 @@ const withLinkStateQuery = graphql(minicartItemsQuery, {
   props: ({ data: { minicart } }) => ({
     linkState: {
       minicartItems: minicart && minicart.items,
+      upToDate: minicart && minicart.upToDate,
     },
   }),
 })
