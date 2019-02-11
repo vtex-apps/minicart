@@ -67,7 +67,40 @@ Through the Storefront, you can change the minicart's behavior and interface. Ho
 Also, you can configure the product summary that is defined on minicart. See [here](https://github.com/vtex-apps/product-summary/blob/master/README.md#configuration) the Product Summary API. 
 
 ### Styles API
-:construction: :construction: :construction:
+This app has CSS customization through `CSS Modules`. 
+
+CSS Modules is a CSS file in which all class names and animation names are scoped locally by default. You can read more about CSS Modules [here](https://github.com/css-modules/css-modules) .
+
+We use it `css-loader` to generate a CSS token on a HTML element. For example, the builder generate a CSS token based on app vendor, name and version. Like `container` token declared in minicart, generate the classname `vtex.minicart-2-x-container`.
+
+Below, we describe the tokens, their explanation and the component where it is located.
+
+| Token name         | Component          | Description                                            |
+| ------------------ | ----------         |------------------------------------------------------- |
+| `container`        | `index`            | The main container of minicart                         |
+| `label`            | `index`            | Minicart icon label                                    |
+| `badge`            | `index`            | Minicart badge with the product quantity on it         |
+| `content`          | `MinicartContent`  | Minicart products' container                            |
+| `contentSmall`     | `MinicartContent`  | Minicart content for small sidebar                     |
+| `contentLarge`     | `MinicartContent`  | Minicart content for large sidebar                     |
+| `contentDiscount`  | `MinicartFooter`   | The total discount on the minicart footer              | 
+| `contentPrice`     | `MinicartFooter`   | Total price of the products on the minicart footer     |
+| `contentFooter`    | `MinicartFooter`   | The minicart footer main container                     |
+| `sidebarHeader`    | `Sidebar`          | Minicart sidebar header container                      |
+| `sidebar`          | `Sidebar`          | Minicart sidebar main container                        |
+| `sidebarOpen`      | `Sidebar`          | Active when the sidebar is opened                      |
+| `arrowUp`          | `Popup`            | Popup box arrow                                        |
+| `box`              | `Popup`            | The main container of the popup                        | 
+
+To override the default CSS, you need to import `styles` on your manifest:
+
+```json
+  "builders": {
+    "styles": "1.x"
+  }
+```
+
+Also, create a `vtex.minicart.css` file in `styles/css` for your handlers customization.
 
 ## Troubleshooting
 You can check if others are passing through similar issues [here](https://github.com/vtex-apps/minicart/issues). Also feel free to [open issues](https://github.com/vtex-apps/minicart/issues/new) or contribute with pull requests.
