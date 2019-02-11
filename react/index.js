@@ -48,34 +48,40 @@ export class MiniCart extends Component {
     const serverItems = path(['data', 'orderForm', 'items'], this.props)
     const clientItems = path(['linkState', 'minicartItems'], this.props)
 
-    if (serverItems && clientItems) {
+    if (serverItems && clientItems && !this.state.updatingOrderForm) {
+      const prevServerItems = path(['data', 'orderForm', 'items'], prevProps)
       const prevClientItems = path(['linkState', 'minicartItems'], prevProps)
 
       if (!equals(prevClientItems, clientItems)) {
-        this.handleItemsDifference({ clientItems })
-      } else if (serverItems.length && !clientItems.length) {
+        return this.handleItemsDifference({ clientItems })
+      } else if (prevState.updatingOrderForm) {
+        return this.props.data.refetch()
+      } else if (
+        (serverItems.length && !clientItems.length) ||
+        !equals(prevServerItems, serverItems)
+      ) {
         return this.fillClientMinicart(serverItems)
-      } else if (prevState.updatingOrderForm && !this.state.updatingOrderForm) {
-        const {
-          data: {
-            orderForm: { items },
-          },
-        } = await this.props.data.refetch()
-        return this.fillClientMinicart(items)
       }
     }
   }
 
   handleItemsDifference = async ({ clientItems }) => {
-    const clientOnlyItems = clientItems
-      .map(pick(['id', 'index', 'quantity', 'seller']))
-      .filter(({ seller }) => !isNil(seller))
+    const clientOnlyItems = clientItems.filter(({ seller }) => !isNil(seller))
     if (!clientOnlyItems.length) return
 
     this.setState({ updatingOrderForm: true })
     try {
-      await this.addItems(clientOnlyItems)
-      await this.updateItems(clientOnlyItems)
+      const items = clientOnlyItems.map(
+        pick(['id', 'index', 'quantity', 'seller'])
+      )
+      await this.addItems(items)
+      await this.updateItems(items)
+      await this.props.updateLinkStateItems(
+        clientOnlyItems.map(item => ({
+          ...item,
+          seller: null,
+        }))
+      )
       this.props.push({
         event: 'addToCart',
         items: clientOnlyItems,
@@ -243,6 +249,8 @@ export class MiniCart extends Component {
         {!hideContent &&
           (isSizeLarge ? (
             <Sidebar
+              quantity={quantity}
+              iconSize={iconSize}
               onOutsideClick={this.handleUpdateContentVisibility}
               isOpen={openContent}
             >
@@ -362,12 +370,28 @@ const withLinkStateFillCartMutation = graphql(
   }
 )
 
+const withLinkStateUpdateItemsMutation = graphql(
+  gql`
+    mutation updateItems($items: [MinicartItem]) {
+      updateItems(items: $items) @client
+    }
+  `,
+  {
+    name: 'updateLinkStateItems',
+    props: ({ updateLinkStateItems }) => ({
+      updateLinkStateItems: items =>
+        updateLinkStateItems({ variables: { items } }),
+    }),
+  }
+)
+
 export default compose(
   graphql(orderForm, { options: () => ({ ssr: false }) }),
   graphql(addToCart, { name: 'addToCart' }),
   graphql(updateItems, { name: 'updateItems' }),
   withLinkStateQuery,
   withLinkStateFillCartMutation,
+  withLinkStateUpdateItemsMutation,
   withRuntimeContext,
   Pixel
 )(MiniCart)

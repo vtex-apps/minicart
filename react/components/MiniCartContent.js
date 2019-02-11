@@ -80,9 +80,8 @@ class MiniCartContent extends Component {
     } = this.props
     const itemPayload = orderForm.items.find(item => item.id === id)
     const index = orderForm.items.indexOf(itemPayload)
-    const updatedItems = [itemPayload].map(({ id, ...rest }) => ({
-      id,
-      ...rest,
+    const updatedItems = [itemPayload].map(item => ({
+      ...item,
       index,
       quantity: 0,
       seller: 1,
