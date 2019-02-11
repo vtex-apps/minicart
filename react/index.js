@@ -52,13 +52,7 @@ export class MiniCart extends Component {
       const prevClientItems = path(['linkState', 'minicartItems'], prevProps)
 
       if (!equals(prevClientItems, clientItems)) {
-        if (this.debounce) {
-          clearTimeout(this.debounce)
-        }
-        this.debounce = setTimeout(
-          () => this.handleItemsDifference({ clientItems }),
-          2000
-        )
+        this.handleItemsDifference({ clientItems })
       } else if (serverItems.length && !clientItems.length) {
         return this.fillClientMinicart(serverItems)
       } else if (prevState.updatingOrderForm && !this.state.updatingOrderForm) {
@@ -94,7 +88,7 @@ export class MiniCart extends Component {
     }
   }
 
-  addItems = async items => {
+  addItems = items => {
     const {
       orderForm: { orderFormId, items: serverItems },
     } = this.props.data
@@ -107,7 +101,7 @@ export class MiniCart extends Component {
     }
   }
 
-  updateItems = async items => {
+  updateItems = items => {
     const {
       orderForm: { orderFormId, items: serverItems },
     } = this.props.data

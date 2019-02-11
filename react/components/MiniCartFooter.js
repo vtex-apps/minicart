@@ -89,6 +89,7 @@ const MiniCartFooter =({
           <Button
             variation="primary"
             size="small"
+            disabled={isUpdating}
             onClick={handleClickButton}
           >
             {buttonLabel}
@@ -97,7 +98,6 @@ const MiniCartFooter =({
       </div>
     </Fragment>
   )
-
 }
 
 MiniCartFooter.propTypes = {
