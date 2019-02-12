@@ -91,9 +91,7 @@ Class name | Description | Component Source
 
 To use this CSS API, you must add the `styles` builder and create an app styling CSS file.
 
-#### Adding the `styles` builder
-
-Add the `styles` builder to your `manifest.json`:
+1. Add the `styles` builder to your `manifest.json`:
 
 ```json
   "builders": {
@@ -101,9 +99,7 @@ Add the `styles` builder to your `manifest.json`:
   }
 ```
 
-#### Creating an app styling CSS
-
-Create a file called `vtex.minicart.css` inside the `styles/css` folder. Add your custom styles:
+2. Create a file called `vtex.minicart.css` inside the `styles/css` folder. Add your custom styles:
 
 ```css
 .vtex-minicart-2.x-container {
