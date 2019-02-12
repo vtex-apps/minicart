@@ -7,7 +7,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- Implement an optimistic strategy using apollo-link-state so the minicart operations feel faster.
 - Styles section on docs.
 - Improve tokens description on docs.
 - Implement an optimistic strategy using apollo-link-state so the minicart operations feel faster.
