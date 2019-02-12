@@ -4,7 +4,7 @@ VTEX Minicart
 ## Description
 The VTEX minicart app shows a list of all items that a customer added in our Checkout OrderForm API, and this app is used by Dreamstore product.
 
-:loudspeaker: **Disclaimer:** Don't fork this project, use, contribute, or open issue with your feature request.
+:loudspeaker: **Disclaimer:** Don't fork this project; use, contribute, or open issue with your feature request.
 
 ## Release schedule
 | Release  | Status              | Initial Release | Maintenance LTS Start | End-of-life | Dreamstore Compatibility
