@@ -1,4 +1,4 @@
-import { equals, isNil, path, pathOr, pick } from 'ramda'
+import { isNil, path, pathOr, pick } from 'ramda'
 import React, { Component } from 'react'
 import { Button } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
