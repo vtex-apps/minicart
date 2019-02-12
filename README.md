@@ -72,20 +72,20 @@ This app provides some CSS classes as an API for style customization.
 
 Class name | Description | Component Source
 ---|---|---
-`vtex-minicart-2-x-container` | The main container of minicart | [index](/react/index.js)
-`vtex-minicart-2-x-label` | Minicart icon label | [index](/react/index.js)
-`vtex-minicart-2-x-badge` | Minicart badge with the product quantity on it | [index](/react/index.js)
-`vtex-minicart-2-x-arrowUp` | Popup box arrow | [Popup](/react/components/Popup.js)
-`vtex-minicart-2-x-box` | The main container of the popup | [Popup](/react/components/Popup.js)
-`vtex-minicart-2-x-sidebarHeader` | Minicart sidebar header container | [Sidebar](/react/components/Sidebar.js)
-`vtex-minicart-2-x-sidebar` | Minicart sidebar main container | [Sidebar](/react/components/Sidebar.js)
-`vtex-minicart-2-x-sidebarOpen` | Active when the sidebar is opened | [Sidebar](/react/components/Sidebar.js)
-`vtex-minicart-2-x-content` | The container for the Minicart contents | [MinicartContent](/react/components/MinicartContent.js)
-`vtex-minicart-2-x-contentSmall` | The container for the minicart contents when on desktop size | [MinicartContent](/react/components/MinicartContent.js)
-`vtex-minicart-2-x-contentLarge` | The container for the minicart contents when on mobile size | [MinicartContent](/react/components/MinicartContent.js)
-`vtex-minicart-2-x-contentDiscount` | The total discount on the minicart footer | [MinicartFooter](/react/components/MinicartFooter.js)
-`vtex-minicart-2-x-contentPrice` | Total price of the products on the minicart footer | [MinicartFooter](/react/components/MinicartFooter.js)
-`vtex-minicart-2-x-contentFooter` | The minicart footer main container | [MinicartFooter](/react/components/MinicartFooter.js)
+`container` | The main container of minicart | [index](/react/index.js)
+`label` | Minicart icon label | [index](/react/index.js)
+`badge` | Minicart badge with the product quantity on it | [index](/react/index.js)
+`arrowUp` | Popup box arrow | [Popup](/react/components/Popup.js)
+`box` | The main container of the popup | [Popup](/react/components/Popup.js)
+`sidebarHeader` | Minicart sidebar header container | [Sidebar](/react/components/Sidebar.js)
+`sidebar` | Minicart sidebar main container | [Sidebar](/react/components/Sidebar.js)
+`sidebarOpen` | Active when the sidebar is opened | [Sidebar](/react/components/Sidebar.js)
+`content` | The container for the Minicart contents | [MinicartContent](/react/components/MinicartContent.js)
+`contentSmall` | The container for the minicart contents when on desktop size | [MinicartContent](/react/components/MinicartContent.js)
+`contentLarge` | The container for the minicart contents when on mobile size | [MinicartContent](/react/components/MinicartContent.js)
+`contentDiscount` | The total discount on the minicart footer | [MinicartFooter](/react/components/MinicartFooter.js)
+`contentPrice` | Total price of the products on the minicart footer | [MinicartFooter](/react/components/MinicartFooter.js)
+`contentFooter` | The minicart footer main container | [MinicartFooter](/react/components/MinicartFooter.js)
 
 ### Usage
 
@@ -102,7 +102,7 @@ To use this CSS API, you must add the `styles` builder and create an app styling
 2. Create a file called `vtex.minicart.css` inside the `styles/css` folder. Add your custom styles:
 
 ```css
-.vtex-minicart-2.x-container {
+.container {
   color: red;
 }
 ```
