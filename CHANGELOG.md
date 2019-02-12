@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Styles section on docs.
+- Improve tokens description on docs.
 
 ## [2.10.5] - 2019-02-08
 ### Added
