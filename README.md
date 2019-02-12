@@ -78,17 +78,17 @@ Below, we describe the tokens, their explanation and the component where it is l
 | `container`        | [index](https://github.com/vtex-apps/minicart/blob/master/react/index.js)           | The main container of minicart                         |
 | `label`            | [index](https://github.com/vtex-apps/minicart/blob/master/react/index.js)            | Minicart icon label                                    |
 | `badge`            | [index](https://github.com/vtex-apps/minicart/blob/master/react/index.js)            | Minicart badge with the product quantity on it         |
-| `content`          | [MinicartContent](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartContent.js)  | Minicart products' container                            |
-| `contentSmall`     | [MinicartContent](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartContent.js)   | Minicart content for small sidebar                     |
-| `contentLarge`     | [MinicartContent](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartContent.js)  | Minicart content for large sidebar                     |
-| `contentDiscount`  | [MinicartFooter](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartFooter.js)   | The total discount on the minicart footer              | 
-| `contentPrice`     | [MinicartFooter](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartFooter.js)   | Total price of the products on the minicart footer     |
-| `contentFooter`    | [MinicartFooter](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartFooter.js)   | The minicart footer main container                     |
+| `arrowUp`          | [Popup](https://github.com/vtex-apps/minicart/blob/master/react/components/Popup.js)            | Popup box arrow                                        |
+| `box`              | [Popup](https://github.com/vtex-apps/minicart/blob/master/react/components/Popup.js)            | The main container of the popup                        | 
 | `sidebarHeader`    | [Sidebar](https://github.com/vtex-apps/minicart/blob/master/react/components/Sidebar.js)          | Minicart sidebar header container                      |
 | `sidebar`          | [Sidebar](https://github.com/vtex-apps/minicart/blob/master/react/components/Sidebar.js)          | Minicart sidebar main container                        |
 | `sidebarOpen`      | [Sidebar](https://github.com/vtex-apps/minicart/blob/master/react/components/Sidebar.js)          | Active when the sidebar is opened                      |
-| `arrowUp`          | [Popup](https://github.com/vtex-apps/minicart/blob/master/react/components/Popup.js)            | Popup box arrow                                        |
-| `box`              | [Popup](https://github.com/vtex-apps/minicart/blob/master/react/components/Popup.js)            | The main container of the popup                        | 
+| `content`          | [MinicartContent](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartContent.js)  | The container for the Minicart contents                            |
+| `contentSmall`     | [MinicartContent](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartContent.js)   | The container for the Minicart contents when on desktop size                     |
+| `contentLarge`     | [MinicartContent](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartContent.js)  | The container for the Minicart contents when on mobile size                     |
+| `contentDiscount`  | [MinicartFooter](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartFooter.js)   | The total discount on the minicart footer              | 
+| `contentPrice`     | [MinicartFooter](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartFooter.js)   | Total price of the products on the minicart footer     |
+| `contentFooter`    | [MinicartFooter](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartFooter.js)   | The minicart footer main container                     |
 
 To override the default CSS, you need to import `styles` on your manifest:
 
