@@ -2,15 +2,15 @@ VTEX Minicart
 =====
 
 ## Description
-The VTEX minicart app shows a list of all items that a customer added in our Checkout OrderForm API, and this app is used by Dreamstore product.
+The VTEX minicart app is a store component that shows a list of all items that a customer added in our _Checkout OrderForm API_, and this app is used by store theme.
 
 :loudspeaker: **Disclaimer:** Don't fork this project; use, contribute, or open issue with your feature request.
 
 ## Release schedule
 | Release  | Status              | Initial Release | Maintenance LTS Start | End-of-life | Dreamstore Compatibility
 | :--:     | :---:               |  :---:          | :---:                 | :---:       | :---: 
-| [1.x]    | **Maintenance LTS** |  2018-08-17     | 2018-11-26            | March 2019  | 1.x
 | [2.x]    | **Current Release** |  2018-11-26     |                       |             | 2.x
+| [1.x]    | **Maintenance LTS** |  2018-08-17     | 2018-11-26            | March 2019  | 1.x
 
 See our [LTS policy](https://github.com/vtex-apps/awesome-io#lts-policy) for more information.
 
@@ -74,16 +74,16 @@ The minicart has as a required block the `product-summary`. So, any minicart blo
 #### Configuration 
 Through the Storefront, you can change the minicart's behavior and interface. However, you also can make in your theme app, as Dreamstore does.
 
-| Prop name                   | Type       | Description                                                        |
-| --------------------------- | ---------- | ------------------------------------------------------------------ |
-| `type`                      | `String`   | Define Minicart mode. (values: 'popup' or 'sidebar')               |
-| `showRemoveButton`          | `Boolean`  | Shows the remove button in each item                               |
-| `showDiscount`              | `Boolean`  | Shows the total discount of your cart                              |
-| `showSku`                   | `Boolean`  | Shows the SKU name of the item                                     |
-| `labelMiniCartEmpty`        | `String`   | Text that is displayed when the cart is empty                      |
-| `labelButtonFinishShopping` | `String`   | Text displayed in the finish shopping button                       |
-| `enableQuantitySelector`    | `Boolean`  | Enable the quantity selector component                             |
-| `maxQuantity`               | `String`   | Define the maximum quantity of an item in cart                     |
+| Prop name                   | Type       | Description                                             | Default value |
+| --------------------------- | ---------- | --------------------------------------------------------| ------------- |
+| `type`                      | `String`   | Define Minicart mode. (values: 'popup' or 'sidebar')    | popup
+| `showRemoveButton`          | `Boolean`  | Shows the remove button in each item                    | true
+| `showDiscount`              | `Boolean`  | Shows the total discount of your cart                   | true
+| `showSku`                   | `Boolean`  | Shows the SKU name of the item                          | true
+| `labelMiniCartEmpty`        | `String`   | Text that is displayed when the cart is empty           | 
+| `labelButtonFinishShopping` | `String`   | Text displayed in the finish shopping button            |
+| `enableQuantitySelector`    | `Boolean`  | Enable the quantity selector component                  |
+| `maxQuantity`               | `String`   | Define the maximum quantity of an item in cart          |
 
 Also, you can configure the product summary that is defined on minicart. See [here](https://github.com/vtex-apps/product-summary/blob/master/README.md#configuration) the Product Summary API. 
 
@@ -91,7 +91,7 @@ Also, you can configure the product summary that is defined on minicart. See [he
 
 This app provides some CSS classes as an API for style customization.
 
-Class name        | Description                    | Component Source
+Class name        | Description                    | Component Source        
 ----------------- | ------------------------------ | ------------------------
 `container`       | The main container of minicart | [index](/react/index.js)
 `label`           | Minicart icon label | [index](/react/index.js)
