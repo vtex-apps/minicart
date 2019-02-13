@@ -19,7 +19,7 @@ See our [LTS policy](https://github.com/vtex-apps/awesome-io#lts-policy) for mor
   - [Blocks API](#blocks-api)
     - [Configuration](#configuration)
   - [Styles API](#styles-api)
-  - [CSS namespaces](#css-namespaces)
+    - [CSS namespaces](#css-namespaces)
 - [Troubleshooting](#troubleshooting)
 - [Tests](#tests)
 
