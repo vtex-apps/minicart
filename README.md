@@ -7,7 +7,7 @@ The VTEX minicart app is a store component that shows a list of all items that a
 :loudspeaker: **Disclaimer:** Don't fork this project; use, contribute, or open issue with your feature request.
 
 ## Release schedule
-| Release  | Status              | Initial Release | Maintenance LTS Start | End-of-life | Dreamstore Compatibility
+| Release  | Status              | Initial Release | Maintenance LTS Start | End-of-life | Store Compatibility
 | :--:     | :---:               |  :---:          | :---:                 | :---:       | :---: 
 | [2.x]    | **Current Release** |  2018-11-26     |                       |             | 2.x
 | [1.x]    | **Maintenance LTS** |  2018-08-17     | 2018-11-26            | March 2019  | 1.x
@@ -37,7 +37,7 @@ To configure or customize this app, you need to import it in your dependencies i
   }
 ```
 
-Then, add `minicart` block into your app theme as we do in our [Dreamstore app](https://github.com/vtex-apps/dreamstore/blob/master/store/blocks.json). 
+Then, add `minicart` block into your app theme as we do in our [Store theme app](https://github.com/vtex-apps/store-theme/blob/master/store/blocks.json). 
 
 Now, you can change the behavior of the minicart block that is in the store header. See an example of how to configure: 
 ```json
@@ -73,7 +73,7 @@ When implementing this app as a block, various inner blocks may be available. Th
 The minicart has as a required block the `product-summary`. So, any minicart block implementation created must add a product-summary as a block that is inside of minicart. (Similarly, `product-summary` has its own inner block structure that can be configured. There is a link to its API in the next section.)
 
 #### Configuration 
-Through the Storefront, you can change the minicart's behavior and interface. However, you also can make in your theme app, as Dreamstore does.
+Through the Storefront, you can change the minicart's behavior and interface. However, you also can make in your theme app, as Store theme does.
 
 | Prop name                   | Type       | Description                                             | Default value |
 | --------------------------- | ---------- | --------------------------------------------------------| ------------- |
