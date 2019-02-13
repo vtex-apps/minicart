@@ -206,7 +206,7 @@ class MiniCartContent extends Component {
                           <IconDelete size={15} activeClassName="c-muted-2" />
                         </Button>
                       )}
-                  </div>a
+                  </div>
                   <ExtensionPoint
                     id="product-summary"
                     showBorders

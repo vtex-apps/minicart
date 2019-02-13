@@ -221,7 +221,7 @@ export class MiniCart extends Component {
         >
           <span className="flex items-center">
             <span className={`relative ${iconClasses}`}>
-              <Icon id="hpa-cart" size={iconSize} />
+              <IconCart size={iconSize} />
               {quantity > 0 && (
                 <span
                   className={`${
