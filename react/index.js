@@ -7,14 +7,19 @@ import { IconCart } from 'vtex.dreamstore-icons'
 import { orderForm } from 'vtex.store-resources/Queries'
 import { addToCart, updateItems } from 'vtex.store-resources/Mutations'
 import { Pixel } from 'vtex.pixel-manager/PixelContext'
-import { compose, graphql } from 'react-apollo'
-import gql from 'graphql-tag'
+import { compose, graphql, withApollo } from 'react-apollo'
 
 import MiniCartContent from './components/MiniCartContent'
 import { MiniCartPropTypes } from './propTypes'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
 import { isParentItem } from './utils/itemsHelper'
+
+import { fullMinicartQuery } from './linkState/queries'
+import {
+  updateItemsMutation,
+  updateOrderFormMutation,
+} from './linkState/mutations'
 
 import minicart from './minicart.css'
 
@@ -49,10 +54,9 @@ export class MiniCart extends Component {
   }
 
   handleItemsUpdate = async () => {
-    const serverItems = path(['data', 'orderForm', 'items'], this.props)
     const clientItems = path(['linkState', 'minicartItems'], this.props)
 
-    if (serverItems && clientItems && !this.state.updatingOrderForm) {
+    if (clientItems && !this.state.updatingOrderForm) {
       const clientOnlyItems = clientItems.filter(({ seller }) => !isNil(seller))
       if (clientOnlyItems.length) {
         return this.handleItemsDifference(clientOnlyItems)
@@ -88,8 +92,7 @@ export class MiniCart extends Component {
     const prevOrderForm = path(['data', 'orderForm'], prevProps)
     const orderForm = path(['data', 'orderForm'], this.props)
     if (!prevOrderForm && orderForm) {
-      console.log('update orderform', orderForm)
-      console.log(await this.props.updateOrderForm(orderForm))
+      await this.props.updateOrderForm(orderForm)
     }
   }
 
@@ -119,8 +122,6 @@ export class MiniCart extends Component {
     }
   }
 
-  fillClientMinicart = items => this.props.fillCart(items)
-
   handleClickButton = event => {
     if (!this.props.hideContent) {
       this.setState({
@@ -134,10 +135,6 @@ export class MiniCart extends Component {
     this.setState({
       openContent: false,
     })
-  }
-
-  handleItemAdd = () => {
-    this.props.data.refetch()
   }
 
   handleClickProduct = detailUrl => {
@@ -203,7 +200,6 @@ export class MiniCart extends Component {
         enableQuantitySelector={enableQuantitySelector}
         maxQuantity={maxQuantity}
         onClickProduct={this.handleClickProduct}
-        onUpdateContentVisibility={this.handleUpdateContentVisibility}
         onClickAction={this.handleUpdateContentVisibility}
         showShippingCost={showShippingCost}
       />
@@ -347,162 +343,38 @@ MiniCart.getSchema = props => {
   }
 }
 
-const withLinkStateMinicartQuery = graphql(
-  gql`
-    query {
-      minicart @client {
-        upToDate
-        items {
-          id
-          name
-          imageUrl
-          detailUrl
-          skuName
-          quantity
-          sellingPrice
-          listPrice
-          seller
-          index
-          parentItemIndex
-          parentAssemblyBinding
-        }
-        orderForm {
-          cacheId
-          orderFormId
-          value
-          totalizers {
-            id
-            name
-            value
-          }
-          shippingData {
-            address {
-              id
-              neighborhood
-              complement
-              number
-              street
-              postalCode
-              city
-              reference
-              addressName
-              addressType
-            }
-            availableAddresses {
-              id
-              neighborhood
-              complement
-              number
-              street
-              postalCode
-              city
-              reference
-              addressName
-              addressType
-            }
-          }
-          clientProfileData {
-            email
-            firstName
-          }
-          storePreferencesData {
-            countryCode
-            currencyCode
-            timeZone
-          }
-          itemMetadata {
-            items {
-              id
-              name
-              skuName
-              productId
-              refId
-              ean
-              imageUrl
-              detailUrl
-              assemblyOptions {
-                id
-                name
-                required
-                composition {
-                  minQuantity
-                  maxQuantity
-                  items {
-                    maxQuantity
-                    initialQuantity
-                    id
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `,
-  {
-    props: ({ data: { minicart } }) => ({
-      linkState: {
-        minicartItems: minicart && minicart.items,
-        upToDate: minicart && minicart.upToDate,
-        orderForm: minicart && minicart.orderForm,
-      },
-    }),
-  }
-)
+const withLinkStateMinicartQuery = graphql(fullMinicartQuery, {
+  props: ({ data: { minicart } }) => ({
+    linkState: {
+      minicartItems: minicart && minicart.items,
+      orderForm: minicart && minicart.orderForm,
+    },
+  }),
+})
 
-const withLinkStateFillCartMutation = graphql(
-  gql`
-    mutation fillCart($items: [MinicartItem]) {
-      fillCart(items: $items) @client
-    }
-  `,
-  {
-    name: 'fillCart',
-    props: ({ fillCart }) => ({
-      fillCart: items => fillCart({ variables: { items } }),
-    }),
-  }
-)
+const withLinkStateUpdateItemsMutation = graphql(updateItemsMutation, {
+  name: 'updateLinkStateItems',
+  props: ({ updateLinkStateItems }) => ({
+    updateLinkStateItems: items =>
+      updateLinkStateItems({ variables: { items } }),
+  }),
+})
 
-const withLinkStateUpdateItemsMutation = graphql(
-  gql`
-    mutation updateItems($items: [MinicartItem]) {
-      updateItems(items: $items) @client
-    }
-  `,
-  {
-    name: 'updateLinkStateItems',
-    props: ({ updateLinkStateItems }) => ({
-      updateLinkStateItems: items =>
-        updateLinkStateItems({ variables: { items } }),
-    }),
-  }
-)
-
-const withLinkStateUpdateOrderFormMutation = graphql(
-  gql`
-    mutation updateOrderForm($orderForm: [OrderForm]) {
-      updateOrderForm(orderForm: $orderForm) @client
-    }
-  `,
-  {
-    name: 'updateOrderForm',
-    props: ({ updateOrderForm }) => ({
-      updateOrderForm: orderForm =>
-        updateOrderForm({ variables: { orderForm } }),
-    }),
-  }
-)
+const withLinkStateUpdateOrderFormMutation = graphql(updateOrderFormMutation, {
+  name: 'updateOrderForm',
+  props: ({ updateOrderForm }) => ({
+    updateOrderForm: orderForm => updateOrderForm({ variables: { orderForm } }),
+  }),
+})
 
 export default compose(
   graphql(orderForm, { options: () => ({ ssr: false }) }),
   graphql(addToCart, { name: 'addToCart' }),
   graphql(updateItems, { name: 'updateItems' }),
   withLinkStateMinicartQuery,
-  withLinkStateFillCartMutation,
   withLinkStateUpdateItemsMutation,
   withLinkStateUpdateOrderFormMutation,
   withRuntimeContext,
+  withApollo,
   Pixel
 )(MiniCart)

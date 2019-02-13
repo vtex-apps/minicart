@@ -76,15 +76,6 @@ const resolvers = {
       })
       return items
     },
-    fillCart: (_, { items: newItems }, { cache }) => {
-      const items = newItems.map(mapToMinicartItem)
-      cache.writeData({
-        data: {
-          minicart: { __typename: 'Minicart', items, upToDate: true },
-        },
-      })
-      return items
-    },
     updateOrderForm: (_, { orderForm: newOrderForm }, { cache }) => {
       const orderForm = mapToLinkStateOrderForm(newOrderForm)
       cache.writeData({
