@@ -28,7 +28,7 @@ This app uses our store builder with the blocks architecture. To know more about
 
 We add the minicart as a block in our [Store Header](https://github.com/vtex-apps/store-header/blob/master/store/interfaces.json).
 
-To configure or customize this app, you need to import in your dependencies on `manifest.json`.
+To configure or customize this app, you need to import it in your dependencies in `manifest.json`.
 
 ```json
   dependencies: {
@@ -58,7 +58,7 @@ Now, you can change the behavior of the minicart block that is in the store head
 ```
 ### Blocks API
 
-Also, is important to understand which are the constraints of the minicart interface that must be implemented by a block when you want to use the minicart.
+When implementing this app as a block, various inner blocks may be available. The following interface lists the available blocks within minicart and describes if they are required or optional.
 
 ```json
   "minicart": {
@@ -69,7 +69,7 @@ Also, is important to understand which are the constraints of the minicart inter
   }
 }
 ```
-The minicart has as a required block the `product-summary`. So, any minicart block implementation created must add a product-summary as a block that is inside of minicart. To know how is the API of `product-summary` see the next section.
+The minicart has as a required block the `product-summary`. So, any minicart block implementation created must add a product-summary as a block that is inside of minicart. (Similarly, `product-summary` has its own inner block structure that can be configured. There is a link to its API in the next section.)
 
 #### Configuration 
 Through the Storefront, you can change the minicart's behavior and interface. However, you also can make in your theme app, as Dreamstore does.
