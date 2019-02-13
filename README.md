@@ -26,7 +26,7 @@ See our [LTS policy](https://github.com/vtex-apps/awesome-io#lts-policy) for mor
 
 This app uses our store builder with the blocks architecture. To know more about Store Builder [click here.](https://help.vtex.com/en/tutorial/understanding-storebuilder-and-stylesbuilder#structuring-and-configuring-our-store-with-object-object)
 
-This app is used as a block in our [Store Header](https://github.com/vtex-apps/store-header/blob/master/store/interfaces.json). You can configure the minicart properties 
+We add the minicart as a block in our [Store Header](https://github.com/vtex-apps/store-header/blob/master/store/interfaces.json).
 
 To configure or customize this app, you need to import in your dependencies on `manifest.json`.
 
@@ -38,7 +38,7 @@ To configure or customize this app, you need to import in your dependencies on `
 
 Then, add `minicart` block into your app theme as we do in our [Dreamstore app](https://github.com/vtex-apps/dreamstore/blob/master/store/blocks.json). 
 
-An example of use: 
+Now, you can change the behavior of the minicart block that is in the store header. See an example of how to configure: 
 ```json
 "minicart": {
   "blocks": [
