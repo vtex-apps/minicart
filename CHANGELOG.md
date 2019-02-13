@@ -6,9 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.11.0] - 2019-02-13
 ### Added
 - Styles section on docs.
 - Improve tokens description on docs.
+- Implement an optimistic strategy using apollo-link-state so the minicart operations feel faster.
 
 ## [2.10.5] - 2019-02-08
 ### Added
