@@ -154,7 +154,7 @@ class MiniCartContent extends Component {
     <div
       className={`${
         minicart.item
-      } pa9 flex items-center justify-center relative bg-base`}
+        } pa9 flex items-center justify-center relative bg-base`}
     >
       <span className="t-body">{label}</span>
     </div>
@@ -191,21 +191,21 @@ class MiniCartContent extends Component {
             .filter(({ quantity }) => !!quantity)
             .map(item => (
               <Fragment key={item.id}>
-                <div className="relative flex">
+                <section className="relative flex">
                   <div className="fr absolute top-0 right-0">
                     {isUpdating[item.id] ? (
                       <div className="ma4">
                         <Spinner size={18} />
                       </div>
                     ) : (
-                      <Button
-                        icon
-                        variation="tertiary"
-                        onClick={() => this.handleItemRemoval(item.id)}
-                      >
-                        <IconDelete size={15} activeClassName="c-muted-2" />
-                      </Button>
-                    )}
+                        <Button
+                          icon
+                          variation="tertiary"
+                          onClick={() => this.handleItemRemoval(item.id)}
+                        >
+                          <IconDelete size={15} activeClassName="c-muted-2" />
+                        </Button>
+                      )}
                   </div>
                   <ExtensionPoint
                     id="product-summary"
@@ -219,7 +219,7 @@ class MiniCartContent extends Component {
                     showLabels={false}
                     onClickAction={onClickAction}
                   />
-                </div>
+                </section>
               </Fragment>
             ))}
         </div>
@@ -241,7 +241,7 @@ class MiniCartContent extends Component {
     <div
       className={`${
         minicart.item
-      } pa4 flex items-center justify-center relative bg-base`}
+        } pa4 flex items-center justify-center relative bg-base`}
     >
       <Spinner />
     </div>
