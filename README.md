@@ -26,7 +26,9 @@ See our [LTS policy](https://github.com/vtex-apps/awesome-io#lts-policy) for mor
 
 This app uses our store builder with the blocks architecture. To know more about Store Builder [click here.](https://help.vtex.com/en/tutorial/understanding-storebuilder-and-stylesbuilder#structuring-and-configuring-our-store-with-object-object)
 
-To use this app, you need to import in your dependencies on `manifest.json`.
+This app is used as a block in our [Store Header](https://github.com/vtex-apps/store-header/blob/master/store/interfaces.json). You can configure the minicart properties 
+
+To configure or customize this app, you need to import in your dependencies on `manifest.json`.
 
 ```json
   dependencies: {
@@ -34,10 +36,29 @@ To use this app, you need to import in your dependencies on `manifest.json`.
   }
 ```
 
-Then, add `minicart` block into our app theme, as we do in our [Dreamstore app](https://github.com/vtex-apps/dreamstore/blob/master/store/blocks.json). 
+Then, add `minicart` block into your app theme as we do in our [Dreamstore app](https://github.com/vtex-apps/dreamstore/blob/master/store/blocks.json). 
 
+An example of use: 
+```json
+"minicart": {
+  "blocks": [
+    "product-summary"
+  ],
+  "props": {
+    "type": "popup",
+    "showRemoveButton": true,
+    "showDiscount": true,
+    "showSku": true,
+    "labelMiniCartEmpty": "",
+    "labelButtonFinishShopping": "Ir para o checkout",
+    "enableQuantitySelector": true,
+    "maxQuantity": 10
+  }
+}
+```
 ### Blocks API
-This app has an interface that describes which rules must be implemented by a block when you want to use the minicart.
+
+Also, is important to understand ho are the constraints of the minicart interface that must be implemented by a block when you want to use the minicart.
 
 ```json
   "minicart": {
@@ -53,8 +74,8 @@ The minicart has as a required block the `product-summary`. So, any minicart imp
 #### Configuration 
 Through the Storefront, you can change the minicart's behavior and interface. However, you also can make in your theme app, as Dreamstore does.
 
-| Prop name          | Type       | Description                                                                 |
-| ------------------ | ---------- | --------------------------------------------------------------------------- |
+| Prop name                   | Type       | Description                                                        |
+| --------------------------- | ---------- | ------------------------------------------------------------------ |
 | `type`                      | `String`   | Define Minicart mode. (values: 'popup' or 'sidebar')               |
 | `showRemoveButton`          | `Boolean`  | Shows the remove button in each item                               |
 | `showDiscount`              | `Boolean`  | Shows the total discount of your cart                              |
@@ -70,22 +91,22 @@ Also, you can configure the product summary that is defined on minicart. See [he
 
 This app provides some CSS classes as an API for style customization.
 
-Class name | Description | Component Source
----|---|---
-`container` | The main container of minicart | [index](/react/index.js)
-`label` | Minicart icon label | [index](/react/index.js)
-`badge` | Minicart badge with the product quantity on it | [index](/react/index.js)
-`arrowUp` | Popup box arrow | [Popup](/react/components/Popup.js)
-`box` | The main container of the popup | [Popup](/react/components/Popup.js)
-`sidebarHeader` | Minicart sidebar header container | [Sidebar](/react/components/Sidebar.js)
-`sidebar` | Minicart sidebar main container | [Sidebar](/react/components/Sidebar.js)
-`sidebarOpen` | Active when the sidebar is opened | [Sidebar](/react/components/Sidebar.js)
-`content` | The container for the Minicart contents | [MinicartContent](/react/components/MinicartContent.js)
-`contentSmall` | The container for the minicart contents when on desktop size | [MinicartContent](/react/components/MinicartContent.js)
-`contentLarge` | The container for the minicart contents when on mobile size | [MinicartContent](/react/components/MinicartContent.js)
+Class name        | Description                    | Component Source
+----------------- | ------------------------------ | ------------------------
+`container`       | The main container of minicart | [index](/react/index.js)
+`label`           | Minicart icon label | [index](/react/index.js)
+`badge`           | Minicart badge with the product quantity on it | [index](/react/index.js)
+`arrowUp`         | Popup box arrow | [Popup](/react/components/Popup.js)
+`box`             | The main container of the popup | [Popup](/react/components/Popup.js)
+`sidebarHeader`   | Minicart sidebar header container | [Sidebar](/react/components/Sidebar.js)
+`sidebar`         | Minicart sidebar main container | [Sidebar](/react/components/Sidebar.js)
+`sidebarOpen`     | Active when the sidebar is opened | [Sidebar](/react/components/Sidebar.js)
+`content`         | The container for the Minicart contents | [MinicartContent](/react/components/MinicartContent.js)
+`contentSmall`    | The container for the minicart contents when on desktop size | [MinicartContent](/react/components/MinicartContent.js)
+`contentLarge`    | The container for the minicart contents when on mobile size | [MinicartContent](/react/components/MinicartContent.js)
 `contentDiscount` | The total discount on the minicart footer | [MinicartFooter](/react/components/MinicartFooter.js)
-`contentPrice` | Total price of the products on the minicart footer | [MinicartFooter](/react/components/MinicartFooter.js)
-`contentFooter` | The minicart footer main container | [MinicartFooter](/react/components/MinicartFooter.js)
+`contentPrice`    | Total price of the products on the minicart footer | [MinicartFooter](/react/components/MinicartFooter.js)
+`contentFooter`   | The minicart footer main container | [MinicartFooter](/react/components/MinicartFooter.js)
 
 ### Usage
 
