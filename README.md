@@ -19,6 +19,7 @@ See our [LTS policy](https://github.com/vtex-apps/awesome-io#lts-policy) for mor
   - [Blocks API](#blocks-api)
     - [Configuration](#configuration)
   - [Styles API](#styles-api)
+  - [CSS namespaces](#css-namespaces)
 - [Troubleshooting](#troubleshooting)
 - [Tests](#tests)
 
@@ -80,35 +81,16 @@ Through the Storefront, you can change the minicart's behavior and interface. Ho
 | `showRemoveButton`          | `Boolean`  | Shows the remove button in each item                    | true
 | `showDiscount`              | `Boolean`  | Shows the total discount of your cart                   | true
 | `showSku`                   | `Boolean`  | Shows the SKU name of the item                          | true
-| `labelMiniCartEmpty`        | `String`   | Text that is displayed when the cart is empty           | 
-| `labelButtonFinishShopping` | `String`   | Text displayed in the finish shopping button            |
-| `enableQuantitySelector`    | `Boolean`  | Enable the quantity selector component                  |
-| `maxQuantity`               | `String`   | Define the maximum quantity of an item in cart          |
+| `labelMiniCartEmpty`        | `String`   | Text that is displayed when the cart is empty           | `Your cart is empty`
+| `labelButtonFinishShopping` | `String`   | Text displayed in the finish shopping button            | `Go to checkout`
+| `enableQuantitySelector`    | `Boolean`  | Enable the quantity selector component                  | false
+| `maxQuantity`               | `String`   | Define the maximum quantity of an item in cart          | 10
 
 Also, you can configure the product summary that is defined on minicart. See [here](https://github.com/vtex-apps/product-summary/blob/master/README.md#configuration) the Product Summary API. 
 
-## Styles API
+### Styles API
 
 This app provides some CSS classes as an API for style customization.
-
-Class name        | Description                    | Component Source        
------------------ | ------------------------------ | ------------------------
-`container`       | The main container of minicart | [index](/react/index.js)
-`label`           | Minicart icon label | [index](/react/index.js)
-`badge`           | Minicart badge with the product quantity on it | [index](/react/index.js)
-`arrowUp`         | Popup box arrow | [Popup](/react/components/Popup.js)
-`box`             | The main container of the popup | [Popup](/react/components/Popup.js)
-`sidebarHeader`   | Minicart sidebar header container | [Sidebar](/react/components/Sidebar.js)
-`sidebar`         | Minicart sidebar main container | [Sidebar](/react/components/Sidebar.js)
-`sidebarOpen`     | Active when the sidebar is opened | [Sidebar](/react/components/Sidebar.js)
-`content`         | The container for the Minicart contents | [MinicartContent](/react/components/MinicartContent.js)
-`contentSmall`    | The container for the minicart contents when on desktop size | [MinicartContent](/react/components/MinicartContent.js)
-`contentLarge`    | The container for the minicart contents when on mobile size | [MinicartContent](/react/components/MinicartContent.js)
-`contentDiscount` | The total discount on the minicart footer | [MinicartFooter](/react/components/MinicartFooter.js)
-`contentPrice`    | Total price of the products on the minicart footer | [MinicartFooter](/react/components/MinicartFooter.js)
-`contentFooter`   | The minicart footer main container | [MinicartFooter](/react/components/MinicartFooter.js)
-
-### Usage
 
 To use this CSS API, you must add the `styles` builder and create an app styling CSS file.
 
@@ -127,6 +109,26 @@ To use this CSS API, you must add the `styles` builder and create an app styling
   margin-top: 10px;
 }
 ```
+#### CSS namespaces
+Below, we describe the namespaces that is define in the minicart.
+
+Class name        | Description                    | Component Source        
+----------------- | ------------------------------ | ------------------------
+`container`       | The main container of minicart | [index](/react/index.js)
+`label`           | Minicart icon label | [index](/react/index.js)
+`badge`           | Minicart badge with the product quantity on it | [index](/react/index.js)
+`arrowUp`         | Popup box arrow | [Popup](/react/components/Popup.js)
+`box`             | The main container of the popup | [Popup](/react/components/Popup.js)
+`sidebarHeader`   | Minicart sidebar header container | [Sidebar](/react/components/Sidebar.js)
+`sidebar`         | Minicart sidebar main container | [Sidebar](/react/components/Sidebar.js)
+`sidebarOpen`     | Active when the sidebar is opened | [Sidebar](/react/components/Sidebar.js)
+`content`         | The container for the Minicart contents | [MinicartContent](/react/components/MinicartContent.js)
+`contentSmall`    | The container for the minicart contents when on desktop size | [MinicartContent](/react/components/MinicartContent.js)
+`contentLarge`    | The container for the minicart contents when on mobile size | [MinicartContent](/react/components/MinicartContent.js)
+`contentDiscount` | The total discount on the minicart footer | [MinicartFooter](/react/components/MinicartFooter.js)
+`contentPrice`    | Total price of the products on the minicart footer | [MinicartFooter](/react/components/MinicartFooter.js)
+`contentFooter`   | The minicart footer main container | [MinicartFooter](/react/components/MinicartFooter.js)
+
 
 ## Troubleshooting
 You can check if others are passing through similar issues [here](https://github.com/vtex-apps/minicart/issues). Also feel free to [open issues](https://github.com/vtex-apps/minicart/issues/new) or contribute with pull requests.
