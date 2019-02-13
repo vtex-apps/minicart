@@ -110,7 +110,7 @@ To use this CSS API, you must add the `styles` builder and create an app styling
 }
 ```
 #### CSS namespaces
-Below, we describe the namespaces that is define in the minicart.
+Below, we describe the namespaces that are defined in the minicart.
 
 Class name        | Description                    | Component Source        
 ----------------- | ------------------------------ | ------------------------
