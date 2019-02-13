@@ -15,6 +15,8 @@ const minicartItemsQuery = gql`
         listPrice
         seller
         index
+        parentItemIndex
+        parentAssemblyBinding
       }
     }
   }
@@ -83,18 +85,92 @@ const resolvers = {
       })
       return items
     },
+    updateOrderForm: (_, { orderForm: newOrderForm }, { cache }) => {
+      const orderForm = mapToLinkStateOrderForm(newOrderForm)
+      cache.writeData({
+        data: {
+          minicart: { __typename: 'Minicart', orderForm },
+        },
+      })
+      if (orderForm.items) {
+        updateLinkStateItems(orderForm.items, cache)
+      }
+      return orderForm
+    },
   },
 }
+
+function updateLinkStateItems(newItems, cache) {
+  const items = newItems.map(mapToMinicartItem)
+  cache.writeData({
+    data: {
+      minicart: { __typename: 'Minicart', items, upToDate: true },
+    },
+  })
+  return items
+}
+
+const mapToLinkStateOrderForm = orderForm => ({
+  __typename: 'OrderForm',
+  ...orderForm,
+  items: orderForm.items && orderForm.items.map(mapToOrderFormItem),
+  totalizers:
+    orderForm.totalizers && orderForm.totalizers.map(mapToOrderFormTotalizer),
+  clientProfileData: orderForm.clientProfileData && {
+    __typename: 'OrderFormClientProfileData',
+    ...orderForm.clientProfileData,
+  },
+  shippingData:
+    orderForm.shippingData &&
+    mapToOrderFormShippingData(orderForm.shippingData),
+  storePreferencesData:
+    orderForm.storePreferencesData &&
+    mapToOrderFormStorePreferences(orderForm.storePreferencesData),
+})
+
+const mapToOrderFormItem = item => ({
+  __typename: 'OrderFormItem',
+  ...item,
+})
+
+const mapToOrderFormTotalizer = totalizer => ({
+  __typename: 'OrderFormTotalizer',
+  ...totalizer,
+})
+
+const mapToOrderFormShippingData = ({ address, availableAddresses }) => ({
+  __typename: 'OrderFormShippingData',
+  address: address && mapToAddress(address),
+  availableAddresses:
+    availableAddresses && availableAddresses.map(mapToAddress),
+})
+
+const mapToAddress = address => ({
+  __typename: 'Address',
+  ...address,
+})
+
+const mapToOrderFormStorePreferences = storePreferencesData => ({
+  __typename: 'OrderFormStorePreferencesData',
+  ...storePreferencesData,
+})
 
 const mapToMinicartItem = item => ({
   __typename: 'MinicartItem',
   seller: null,
   index: null,
+  parentItemIndex: null,
+  parentAssemblyBinding: null,
   ...item,
 })
 
 const initialState = {
-  minicart: { __typename: 'Minicart', items: [], upToDate: false },
+  minicart: {
+    __typename: 'Minicart',
+    items: [],
+    upToDate: false,
+    orderForm: null,
+  },
 }
 
 module.exports = { resolvers, initialState, minicartItemsQuery }
