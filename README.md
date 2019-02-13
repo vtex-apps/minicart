@@ -103,7 +103,7 @@ To use this CSS API, you must add the `styles` builder and create an app styling
 
 ```css
 .container {
-  color: red;
+  margin-top: 10px;
 }
 ```
 
