@@ -4,7 +4,7 @@ VTEX Minicart
 ## Description
 The VTEX minicart app shows a list of all items that a customer added in our Checkout OrderForm API, and this app is used by Dreamstore product.
 
-:loudspeaker: **Disclaimer:** Don't fork this project, use, contribute, or open issue with your feature request.
+:loudspeaker: **Disclaimer:** Don't fork this project; use, contribute, or open issue with your feature request.
 
 ## Release schedule
 | Release  | Status              | Initial Release | Maintenance LTS Start | End-of-life | Dreamstore Compatibility
@@ -66,31 +66,32 @@ Through the Storefront, you can change the minicart's behavior and interface. Ho
 
 Also, you can configure the product summary that is defined on minicart. See [here](https://github.com/vtex-apps/product-summary/blob/master/README.md#configuration) the Product Summary API. 
 
-### Styles API
-This app has CSS customization through `CSS Modules`. CSS Modules is a CSS file in which all class names and animation names are scoped locally by default. You can read more about CSS Modules [here](https://github.com/css-modules/css-modules) .
+## Styles API
 
-We use it `css-loader` to generate a CSS token on a HTML element. For example, the builder generate a CSS token based on app vendor, name and major version. Like `container` token declared in minicart, generate the classname `vtex.minicart-2-x-container`.
+This app provides some CSS classes as an API for style customization.
 
-Below, we describe the tokens, their explanation and the component where it is located.
+Class name | Description | Component Source
+---|---|---
+`container` | The main container of minicart | [index](/react/index.js)
+`label` | Minicart icon label | [index](/react/index.js)
+`badge` | Minicart badge with the product quantity on it | [index](/react/index.js)
+`arrowUp` | Popup box arrow | [Popup](/react/components/Popup.js)
+`box` | The main container of the popup | [Popup](/react/components/Popup.js)
+`sidebarHeader` | Minicart sidebar header container | [Sidebar](/react/components/Sidebar.js)
+`sidebar` | Minicart sidebar main container | [Sidebar](/react/components/Sidebar.js)
+`sidebarOpen` | Active when the sidebar is opened | [Sidebar](/react/components/Sidebar.js)
+`content` | The container for the Minicart contents | [MinicartContent](/react/components/MinicartContent.js)
+`contentSmall` | The container for the minicart contents when on desktop size | [MinicartContent](/react/components/MinicartContent.js)
+`contentLarge` | The container for the minicart contents when on mobile size | [MinicartContent](/react/components/MinicartContent.js)
+`contentDiscount` | The total discount on the minicart footer | [MinicartFooter](/react/components/MinicartFooter.js)
+`contentPrice` | Total price of the products on the minicart footer | [MinicartFooter](/react/components/MinicartFooter.js)
+`contentFooter` | The minicart footer main container | [MinicartFooter](/react/components/MinicartFooter.js)
 
-| Token name         | Component          | Description                                            |
-| ------------------ | ----------         |------------------------------------------------------- |
-| `container`        | [index](https://github.com/vtex-apps/minicart/blob/master/react/index.js)           | The main container of minicart                         |
-| `label`            | [index](https://github.com/vtex-apps/minicart/blob/master/react/index.js)            | Minicart icon label                                    |
-| `badge`            | [index](https://github.com/vtex-apps/minicart/blob/master/react/index.js)            | Minicart badge with the product quantity on it         |
-| `arrowUp`          | [Popup](https://github.com/vtex-apps/minicart/blob/master/react/components/Popup.js)            | Popup box arrow                                        |
-| `box`              | [Popup](https://github.com/vtex-apps/minicart/blob/master/react/components/Popup.js)            | The main container of the popup                        | 
-| `sidebarHeader`    | [Sidebar](https://github.com/vtex-apps/minicart/blob/master/react/components/Sidebar.js)          | Minicart sidebar header container                      |
-| `sidebar`          | [Sidebar](https://github.com/vtex-apps/minicart/blob/master/react/components/Sidebar.js)          | Minicart sidebar main container                        |
-| `sidebarOpen`      | [Sidebar](https://github.com/vtex-apps/minicart/blob/master/react/components/Sidebar.js)          | Active when the sidebar is opened                      |
-| `content`          | [MinicartContent](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartContent.js)  | The container for the Minicart contents                            |
-| `contentSmall`     | [MinicartContent](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartContent.js)   | The container for the Minicart contents when on desktop size                     |
-| `contentLarge`     | [MinicartContent](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartContent.js)  | The container for the Minicart contents when on mobile size                     |
-| `contentDiscount`  | [MinicartFooter](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartFooter.js)   | The total discount on the minicart footer              | 
-| `contentPrice`     | [MinicartFooter](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartFooter.js)   | Total price of the products on the minicart footer     |
-| `contentFooter`    | [MinicartFooter](https://github.com/vtex-apps/minicart/blob/master/react/components/MiniCartFooter.js)   | The minicart footer main container                     |
+### Usage
 
-To override the default CSS, you need to import `styles` on your manifest:
+To use this CSS API, you must add the `styles` builder and create an app styling CSS file.
+
+1. Add the `styles` builder to your `manifest.json`:
 
 ```json
   "builders": {
@@ -98,7 +99,13 @@ To override the default CSS, you need to import `styles` on your manifest:
   }
 ```
 
-Also, create a `vtex.minicart.css` file in `styles/css` for your handlers customization.
+2. Create a file called `vtex.minicart.css` inside the `styles/css` folder. Add your custom styles:
+
+```css
+.container {
+  margin-top: 10px;
+}
+```
 
 ## Troubleshooting
 You can check if others are passing through similar issues [here](https://github.com/vtex-apps/minicart/issues). Also feel free to [open issues](https://github.com/vtex-apps/minicart/issues/new) or contribute with pull requests.
