@@ -221,7 +221,6 @@ export class MiniCart extends Component {
         >
           <span className="flex items-center">
             <span className={`relative ${iconClasses}`}>
-<<<<<<< HEAD
               <Icon id="hpa-cart" size={iconSize} />
               {quantity > 0 && (
                 <span
@@ -229,11 +228,6 @@ export class MiniCart extends Component {
                     minicart.badge
                     } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
                 >
-=======
-            <IconCart size={iconSize} />
-               {quantity > 0 && (
-                <span className={`${minicart.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}>
->>>>>>> Fix erro ssr
                   {quantity}
                 </span>
               )}

@@ -191,7 +191,7 @@ class MiniCartContent extends Component {
             .filter(({ quantity }) => !!quantity)
             .map(item => (
               <Fragment key={item.id}>
-                <div className="relative flex">
+                <section className="relative flex">
                   <div className="fr absolute top-0 right-0">
                     {isUpdating[item.id] ? (
                       <div className="ma4">
@@ -219,7 +219,7 @@ class MiniCartContent extends Component {
                     showLabels={false}
                     onClickAction={onClickAction}
                   />
-                </div>
+                </section>
               </Fragment>
             ))}
         </div>
