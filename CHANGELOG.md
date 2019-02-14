@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.11.4-beta] - 2019-02-14
+
 ## [2.11.1-beta] - 2019-02-14
 ### Fixed
 - Remove `pixel-manager` dependency because of `React is not defined` error.
