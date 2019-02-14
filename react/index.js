@@ -6,7 +6,6 @@ import { withRuntimeContext } from 'vtex.render-runtime'
 import { IconCart } from 'vtex.dreamstore-icons'
 import { orderForm } from 'vtex.store-resources/Queries'
 import { addToCart, updateItems } from 'vtex.store-resources/Mutations'
-import { Pixel } from 'vtex.pixel-manager/PixelContext'
 import { compose, graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -79,10 +78,6 @@ export class MiniCart extends Component {
           seller: null,
         }))
       )
-      this.props.push({
-        event: 'addToCart',
-        items: clientItems,
-      })
     } catch (err) {
       // TODO: Toast error message
       console.error(err)
@@ -390,6 +385,5 @@ export default compose(
   withLinkStateQuery,
   withLinkStateFillCartMutation,
   withLinkStateUpdateItemsMutation,
-  withRuntimeContext,
-  Pixel
+  withRuntimeContext
 )(MiniCart)
