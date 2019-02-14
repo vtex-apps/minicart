@@ -1,4 +1,4 @@
-import { isNil, path, pathOr, pick } from 'ramda'
+import { path, pathOr, pick } from 'ramda'
 import React, { Component } from 'react'
 import { Button } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
@@ -53,14 +53,15 @@ export class MiniCart extends Component {
     this.handleOrderFormUpdate(prevProps)
   }
 
-  handleItemsUpdate = async () => {
-    const clientItems = path(['linkState', 'minicartItems'], this.props)
+  getClientOnlyItems = () => {
+    const clientItems = pathOr([], ['linkState', 'minicartItems'], this.props)
+    return clientItems.filter(({ upToDate }) => !upToDate)
+  }
 
-    if (clientItems && !this.state.updatingOrderForm) {
-      const clientOnlyItems = clientItems.filter(({ seller }) => !isNil(seller))
-      if (clientOnlyItems.length) {
-        return this.handleItemsDifference(clientOnlyItems)
-      }
+  handleItemsUpdate = async () => {
+    const clientOnlyItems = this.getClientOnlyItems()
+    if (clientOnlyItems.length && !this.state.updatingOrderForm) {
+      return this.handleItemsDifference(clientOnlyItems)
     }
   }
 
@@ -202,6 +203,7 @@ export class MiniCart extends Component {
         onClickProduct={this.handleClickProduct}
         onClickAction={this.handleUpdateContentVisibility}
         showShippingCost={showShippingCost}
+        updatingOrderForm={this.state.updatingOrderForm}
       />
     )
 
@@ -224,7 +226,7 @@ export class MiniCart extends Component {
                 <span
                   className={`${
                     minicart.badge
-                    } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
+                  } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
                 >
                   {quantity}
                 </span>
@@ -234,7 +236,7 @@ export class MiniCart extends Component {
               <span
                 className={`${minicart.label} dn-m db-l t-action--small pl${
                   quantity > 0 ? '6' : '4'
-                  } ${labelClasses}`}
+                } ${labelClasses}`}
               >
                 {iconLabel}
               </span>
@@ -252,15 +254,15 @@ export class MiniCart extends Component {
               {miniCartContent}
             </Sidebar>
           ) : (
-              openContent && (
-                <Popup
-                  onOutsideClick={this.handleUpdateContentVisibility}
-                  buttonOffsetWidth={this.iconRef.offsetWidth}
-                >
-                  {miniCartContent}
-                </Popup>
-              )
-            ))}
+            openContent && (
+              <Popup
+                onOutsideClick={this.handleUpdateContentVisibility}
+                buttonOffsetWidth={this.iconRef.offsetWidth}
+              >
+                {miniCartContent}
+              </Popup>
+            )
+          ))}
       </aside>
     )
   }

@@ -3,8 +3,8 @@ const gql = require('graphql-tag')
 const minicartItemsQuery = gql`
   query {
     minicart @client {
-      upToDate
       items {
+        upToDate
         id
         name
         imageUrl
@@ -50,7 +50,6 @@ const resolvers = {
           minicart: {
             __typename: 'Minicart',
             items: newItems.concat(prevItems).map(mapToMinicartItem),
-            upToDate: false,
           },
         },
       })
@@ -71,7 +70,7 @@ const resolvers = {
 
       cache.writeData({
         data: {
-          minicart: { __typename: 'Minicart', items, upToDate: false },
+          minicart: { __typename: 'Minicart', items },
         },
       })
       return items
@@ -92,10 +91,15 @@ const resolvers = {
 }
 
 function updateLinkStateItems(newItems, cache) {
-  const items = newItems.map(mapToMinicartItem)
+  const items = newItems.map(item =>
+    mapToMinicartItem({
+      upToDate: true,
+      ...item,
+    })
+  )
   cache.writeData({
     data: {
-      minicart: { __typename: 'Minicart', items, upToDate: true },
+      minicart: { __typename: 'Minicart', items },
     },
   })
   return items
@@ -147,19 +151,19 @@ const mapToOrderFormStorePreferences = storePreferencesData => ({
 })
 
 const mapToMinicartItem = item => ({
-  __typename: 'MinicartItem',
   seller: null,
   index: null,
   parentItemIndex: null,
   parentAssemblyBinding: null,
+  upToDate: false,
   ...item,
+  __typename: 'MinicartItem',
 })
 
 const initialState = {
   minicart: {
     __typename: 'Minicart',
     items: [],
-    upToDate: false,
     orderForm: null,
   },
 }

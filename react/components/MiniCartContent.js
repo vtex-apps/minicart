@@ -44,6 +44,8 @@ class MiniCartContent extends Component {
 
     /* Update Items mutation */
     updateItems: PropTypes.func.isRequired,
+    /* Determines if the orderform is updating */
+    updatingOrderForm: PropTypes.bool,
   }
 
   state = { isUpdating: [] }
@@ -142,9 +144,13 @@ class MiniCartContent extends Component {
   get isUpdating() {
     const { isUpdating } = this.state
     const {
-      orderForm: { items },
-    } = this.props.data
+      data: {
+        orderForm: { items },
+      },
+      updatingOrderForm,
+    } = this.props
     return (
+      updatingOrderForm ||
       items.some(item => !!item.seller || item.quantity === 0) ||
       isUpdating.some(status => status)
     )
@@ -154,7 +160,7 @@ class MiniCartContent extends Component {
     <div
       className={`${
         minicart.item
-        } pa9 flex items-center justify-center relative bg-base`}
+      } pa9 flex items-center justify-center relative bg-base`}
     >
       <span className="t-body">{label}</span>
     </div>
@@ -198,14 +204,14 @@ class MiniCartContent extends Component {
                         <Spinner size={18} />
                       </div>
                     ) : (
-                        <Button
-                          icon
-                          variation="tertiary"
-                          onClick={() => this.handleItemRemoval(item.id)}
-                        >
-                          <IconDelete size={15} activeClassName="c-muted-2" />
-                        </Button>
-                      )}
+                      <Button
+                        icon
+                        variation="tertiary"
+                        onClick={() => this.handleItemRemoval(item.id)}
+                      >
+                        <IconDelete size={15} activeClassName="c-muted-2" />
+                      </Button>
+                    )}
                   </div>
                   <ExtensionPoint
                     id="product-summary"
@@ -241,7 +247,7 @@ class MiniCartContent extends Component {
     <div
       className={`${
         minicart.item
-        } pa4 flex items-center justify-center relative bg-base`}
+      } pa4 flex items-center justify-center relative bg-base`}
     >
       <Spinner />
     </div>

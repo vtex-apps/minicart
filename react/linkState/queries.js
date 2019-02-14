@@ -4,6 +4,7 @@ export const fullMinicartQuery = gql`
   query {
     minicart @client {
       items {
+        upToDate
         id
         name
         imageUrl
