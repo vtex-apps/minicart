@@ -60,7 +60,6 @@ export class MiniCart extends Component {
 
   handleItemsUpdate = async () => {
     const clientOnlyItems = this.getClientOnlyItems()
-    console.log(clientOnlyItems)
     if (clientOnlyItems.length && !this.state.updatingOrderForm) {
       return this.handleItemsDifference(clientOnlyItems)
     }
