@@ -15,6 +15,7 @@ import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
 import {
   groupItemsWithParents,
   getOptionChoiceType,
+  getOptionComposition,
 } from '../utils/itemsHelper'
 
 import minicart from '../minicart.css'
@@ -32,7 +33,7 @@ class MiniCartContent extends Component {
     /** Define a function that is executed when the item is clicked */
     onClickAction: PropTypes.func,
     /* Reused props */
-    data: MiniCartPropTypes.orderFormContext,
+    data: PropTypes.object,
     labelMiniCartEmpty: MiniCartPropTypes.labelMiniCartEmpty,
     labelButton: MiniCartPropTypes.labelButtonFinishShopping,
     showRemoveButton: MiniCartPropTypes.showRemoveButton,
@@ -111,6 +112,7 @@ class MiniCartContent extends Component {
 
   createProductShapeFromOption = option => ({
     ...this.createProductShapeFromItem(option),
+    compositionItem: getOptionComposition(option, this.props.data.orderForm),
     choiceType: getOptionChoiceType(option, this.props.data.orderForm),
     optionType:
       option.parentAssemblyBinding &&
@@ -126,7 +128,7 @@ class MiniCartContent extends Component {
           Price:
             item.sellingPrice * item.quantity +
             this.sumOptionsSellingPrice(item.addedOptions),
-          ListPrice: item.ListPrice,
+          ListPrice: item.listPrice,
         },
       },
       name: item.skuName,
