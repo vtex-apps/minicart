@@ -219,7 +219,6 @@ class MiniCartContent extends Component {
                     id="product-summary"
                     showBorders
                     product={this.createProductShapeFromItem(item)}
-                    name={item.name}
                     displayMode="inline"
                     showListPrice={false}
                     showBadge={false}
