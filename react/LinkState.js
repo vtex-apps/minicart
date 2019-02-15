@@ -49,7 +49,12 @@ const resolvers = {
         data: {
           minicart: {
             __typename: 'Minicart',
-            items: newItems.concat(prevItems).map(mapToMinicartItem),
+            items: newItems.concat(prevItems).map(item =>
+              mapToMinicartItem({
+                ...item,
+                upToDate: false,
+              })
+            ),
           },
         },
       })
@@ -64,7 +69,7 @@ const resolvers = {
       const items = prevItems
         .map(prevItem => {
           const newItem = newItems.find(({ id }) => id === prevItem.id)
-          return newItem || prevItem
+          return newItem ? { ...newItem, upToDate: false } : prevItem
         })
         .map(mapToMinicartItem)
 
@@ -155,7 +160,6 @@ const mapToMinicartItem = item => ({
   index: null,
   parentItemIndex: null,
   parentAssemblyBinding: null,
-  upToDate: false,
   ...item,
   __typename: 'MinicartItem',
 })
