@@ -3,8 +3,6 @@ import { Button } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
 import { withRuntimeContext } from 'vtex.render-runtime'
 import { IconCart } from 'vtex.dreamstore-icons'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 
 import MiniCartContent from './components/MiniCartContent'
 import { MiniCartPropTypes } from './propTypes'
@@ -60,18 +58,14 @@ export class MiniCart extends Component {
     this.setState({
       openContent: false,
     })
-    const {
-      runtime: { navigate },
-    } = this.props
+    const { runtime: { navigate } } = this.props
     navigate({
-      to: detailUrl,
+      to: detailUrl
     })
   }
 
   get itemsQuantity() {
-    const {
-      orderFormContext: { orderForm },
-    } = this.props
+    const { orderFormContext: { orderForm } } = this.props
     if (!orderForm || !orderForm.items) return 0
     return orderForm.items.filter(isParentItem).length
   }
@@ -94,7 +88,6 @@ export class MiniCart extends Component {
       type,
       hideContent,
       showShippingCost,
-      minicartItems,
     } = this.props
 
     const quantity = this.itemsQuantity
@@ -123,8 +116,8 @@ export class MiniCart extends Component {
     )
 
     return (
-      <aside
-        className={`${minicart.container} relative flex items-center fr`}
+      <div
+        className={`${minicart.container} relative fr flex items-center`}
         ref={e => {
           this.iconRef = e
         }}
@@ -134,29 +127,23 @@ export class MiniCart extends Component {
           icon
           onClick={event => this.handleClickButton(event)}
         >
-          <span className="flex items-center">
-            <span className={`relative ${iconClasses}`}>
+          <div className="flex items-center">
+            <div className={`relative ${iconClasses}`}>
               <IconCart size={iconSize} />
               {quantity > 0 && (
-                <span
-                  className={`${
-                    minicart.badge
-                    } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
-                >
+                <span className={`${minicart.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}>
                   {quantity}
                 </span>
               )}
-            </span>
+            </div>
             {iconLabel && (
               <span
-                className={`${minicart.label} dn-m db-l t-action--small pl${
-                  quantity > 0 ? '6' : '4'
-                  } ${labelClasses}`}
+                className={`${minicart.label} dn-m db-l t-action--small pl${quantity > 0 ? '6' : '4'} ${labelClasses}`}
               >
                 {iconLabel}
               </span>
             )}
-          </span>
+          </div>
         </Button>
         {!hideContent &&
           (isSizeLarge ? (
@@ -176,7 +163,7 @@ export class MiniCart extends Component {
                 </Popup>
               )
             ))}
-      </aside>
+      </div>
     )
   }
 }
@@ -260,19 +247,5 @@ miniHOC.getSchema = props => {
   }
 }
 
-const withQuery = graphql(
-  gql`
-    query {
-      minicart @client {
-        items
-      }
-    }
-  `,
-  {
-    props: ({ data: { minicart } }) => ({
-      minicartItems: minicart && minicart.items,
-    }),
-  }
-)
+export default withRuntimeContext(miniHOC)
 
-export default withQuery(withRuntimeContext(miniHOC))

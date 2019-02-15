@@ -13,7 +13,7 @@ import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
 import { groupItemsWithParents, getOptionChoiceType, getOptionComposition } from '../utils/itemsHelper'
 
 import minicart from '../minicart.css'
-import MiniCartFooter from './MiniCartFooter'
+import MiniCartFooter from './MiniCartFooter';
 
 /**
  * Minicart content component
