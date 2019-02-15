@@ -1,13 +1,9 @@
-import { equals, isNil, path, pathOr, pick } from 'ramda'
 import React, { Component } from 'react'
 import { Button } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
 import { withRuntimeContext } from 'vtex.render-runtime'
 import { IconCart } from 'vtex.dreamstore-icons'
-import { orderForm } from 'vtex.store-resources/Queries'
-import { addToCart, updateItems } from 'vtex.store-resources/Mutations'
-import { Pixel } from 'vtex.pixel-manager/PixelContext'
-import { compose, graphql } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
 import MiniCartContent from './components/MiniCartContent'
@@ -15,7 +11,7 @@ import { MiniCartPropTypes } from './propTypes'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
 import { isParentItem } from './utils/itemsHelper'
-import { minicartItemsQuery } from './LinkState'
+import { orderFormConsumer } from 'vtex.store-resources/OrderFormContext'
 
 import minicart from './minicart.css'
 
@@ -39,88 +35,7 @@ export class MiniCart extends Component {
 
   state = {
     openContent: false,
-    updatingOrderForm: false,
   }
-
-  debounce = null
-
-  async componentDidUpdate(prevProps, prevState) {
-    const serverItems = path(['data', 'orderForm', 'items'], this.props)
-    const clientItems = path(['linkState', 'minicartItems'], this.props)
-
-    if (serverItems && clientItems) {
-      const prevClientItems = path(['linkState', 'minicartItems'], prevProps)
-
-      if (!equals(prevClientItems, clientItems)) {
-        if (this.debounce) {
-          clearTimeout(this.debounce)
-        }
-        this.debounce = setTimeout(
-          () => this.handleItemsDifference({ clientItems }),
-          2000
-        )
-      } else if (serverItems.length && !clientItems.length) {
-        return this.fillClientMinicart(serverItems)
-      } else if (prevState.updatingOrderForm && !this.state.updatingOrderForm) {
-        const {
-          data: {
-            orderForm: { items },
-          },
-        } = await this.props.data.refetch()
-        return this.fillClientMinicart(items)
-      }
-    }
-  }
-
-  handleItemsDifference = async ({ clientItems }) => {
-    const clientOnlyItems = clientItems
-      .map(pick(['id', 'index', 'quantity', 'seller']))
-      .filter(({ seller }) => !isNil(seller))
-    if (!clientOnlyItems.length) return
-
-    this.setState({ updatingOrderForm: true })
-    try {
-      await this.addItems(clientOnlyItems)
-      await this.updateItems(clientOnlyItems)
-      this.props.push({
-        event: 'addToCart',
-        items: clientOnlyItems,
-      })
-    } catch (err) {
-      // TODO: Toast error message
-      console.error(err)
-    } finally {
-      this.setState({ updatingOrderForm: false })
-    }
-  }
-
-  addItems = async items => {
-    const {
-      orderForm: { orderFormId, items: serverItems },
-    } = this.props.data
-    const itemsToAdd = items.filter(
-      ({ id }) => !serverItems.find(({ id: serverId }) => serverId === id)
-    )
-
-    if (itemsToAdd.length) {
-      return this.props.addToCart({ variables: { orderFormId, items } })
-    }
-  }
-
-  updateItems = async items => {
-    const {
-      orderForm: { orderFormId, items: serverItems },
-    } = this.props.data
-    const itemsToUpdate = items.filter(({ id }) =>
-      serverItems.find(({ id: serverId }) => serverId === id)
-    )
-
-    if (itemsToUpdate.length) {
-      return this.props.updateItems({ variables: { orderFormId, items } })
-    }
-  }
-
-  fillClientMinicart = items => this.props.fillCart(items)
 
   handleClickButton = event => {
     if (!this.props.hideContent) {
@@ -138,10 +53,10 @@ export class MiniCart extends Component {
   }
 
   handleItemAdd = () => {
-    this.props.data.refetch()
+    this.props.orderFormContext.refetch()
   }
 
-  handleClickProduct = detailUrl => {
+  onClickProduct = detailUrl => {
     this.setState({
       openContent: false,
     })
@@ -154,8 +69,11 @@ export class MiniCart extends Component {
   }
 
   get itemsQuantity() {
-    const items = pathOr([], ['linkState', 'minicartItems'], this.props)
-    return items.filter(item => isParentItem(item) && item.quantity).length
+    const {
+      orderFormContext: { orderForm },
+    } = this.props
+    if (!orderForm || !orderForm.items) return 0
+    return orderForm.items.filter(isParentItem).length
   }
 
   render() {
@@ -172,11 +90,11 @@ export class MiniCart extends Component {
       showSku,
       enableQuantitySelector,
       maxQuantity,
-      data,
+      orderFormContext,
       type,
       hideContent,
       showShippingCost,
-      linkState,
+      minicartItems,
     } = this.props
 
     const quantity = this.itemsQuantity
@@ -189,13 +107,7 @@ export class MiniCart extends Component {
     const miniCartContent = (
       <MiniCartContent
         isSizeLarge={isSizeLarge}
-        data={{
-          ...data,
-          orderForm: {
-            ...data.orderForm,
-            items: linkState.minicartItems,
-          },
-        }}
+        data={orderFormContext}
         showRemoveButton={showRemoveButton}
         showDiscount={showDiscount}
         showSku={showSku}
@@ -203,9 +115,9 @@ export class MiniCart extends Component {
         labelButton={labelButtonFinishShopping}
         enableQuantitySelector={enableQuantitySelector}
         maxQuantity={maxQuantity}
-        onClickProduct={this.handleClickProduct}
-        onUpdateContentVisibility={this.handleUpdateContentVisibility}
-        onClickAction={this.handleUpdateContentVisibility}
+        onClickProduct={this.onClickProduct}
+        handleUpdateContentVisibility={this.handleUpdateContentVisibility}
+        actionOnClick={this.handleUpdateContentVisibility}
         showShippingCost={showShippingCost}
       />
     )
@@ -269,7 +181,9 @@ export class MiniCart extends Component {
   }
 }
 
-MiniCart.getSchema = props => {
+const miniHOC = orderFormConsumer(MiniCart)
+
+miniHOC.getSchema = props => {
   const getQuantitySelectorSchema = () => {
     return {
       maxQuantity: {
@@ -346,34 +260,19 @@ MiniCart.getSchema = props => {
   }
 }
 
-const withLinkStateQuery = graphql(minicartItemsQuery, {
-  props: ({ data: { minicart } }) => ({
-    linkState: {
-      minicartItems: minicart && minicart.items,
-    },
-  }),
-})
-
-const withLinkStateFillCartMutation = graphql(
+const withQuery = graphql(
   gql`
-    mutation fillCart($items: [MinicartItem]) {
-      fillCart(items: $items) @client
+    query {
+      minicart @client {
+        items
+      }
     }
   `,
   {
-    name: 'fillCart',
-    props: ({ fillCart }) => ({
-      fillCart: items => fillCart({ variables: { items } }),
+    props: ({ data: { minicart } }) => ({
+      minicartItems: minicart && minicart.items,
     }),
   }
 )
 
-export default compose(
-  graphql(orderForm, { options: () => ({ ssr: false }) }),
-  graphql(addToCart, { name: 'addToCart' }),
-  graphql(updateItems, { name: 'updateItems' }),
-  withLinkStateQuery,
-  withLinkStateFillCartMutation,
-  withRuntimeContext,
-  Pixel
-)(MiniCart)
+export default withQuery(withRuntimeContext(miniHOC))

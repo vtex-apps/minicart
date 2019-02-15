@@ -24,7 +24,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Styles section on docs.
 - Improve tokens description on docs.
-- Implement an optimistic strategy using apollo-link-state so the minicart operations feel faster.
 
 ## [2.10.5] - 2019-02-08
 ### Added
@@ -36,11 +35,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [2.10.4] - 2019-02-08
 ### Changed
 - Pass composition item to product summary
-- Minor refact on blocks language. 
 
 ### Fixed
 - Small margin adjustments for shipping cost view
-- Create a API docs
 
 ## [2.10.3] - 2019-02-07
 ### Fixed
