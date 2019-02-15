@@ -116,7 +116,7 @@ export class MiniCart extends Component {
     )
 
     return (
-      <div
+      <aside
         className={`${minicart.container} relative fr flex items-center`}
         ref={e => {
           this.iconRef = e
@@ -127,15 +127,15 @@ export class MiniCart extends Component {
           icon
           onClick={event => this.handleClickButton(event)}
         >
-          <div className="flex items-center">
-            <div className={`relative ${iconClasses}`}>
+          <span className="flex items-center">
+            <span className={`relative ${iconClasses}`}>
               <IconCart size={iconSize} />
               {quantity > 0 && (
                 <span className={`${minicart.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}>
                   {quantity}
                 </span>
               )}
-            </div>
+            </span>
             {iconLabel && (
               <span
                 className={`${minicart.label} dn-m db-l t-action--small pl${quantity > 0 ? '6' : '4'} ${labelClasses}`}
@@ -143,7 +143,7 @@ export class MiniCart extends Component {
                 {iconLabel}
               </span>
             )}
-          </div>
+          </span>
         </Button>
         {!hideContent &&
           (isSizeLarge ? (
@@ -163,7 +163,7 @@ export class MiniCart extends Component {
                 </Popup>
               )
             ))}
-      </div>
+      </aside>
     )
   }
 }
