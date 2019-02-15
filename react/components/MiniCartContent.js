@@ -80,8 +80,9 @@ class MiniCartContent extends Component {
     } = this.props
     const itemPayload = orderForm.items.find(item => item.id === id)
     const index = orderForm.items.indexOf(itemPayload)
-    const updatedItems = [itemPayload].map(item => ({
-      ...item,
+    const updatedItems = [itemPayload].map(({ id, ...rest }) => ({
+      id,
+      ...rest,
       index,
       quantity: 0,
       seller: 1,
@@ -101,7 +102,7 @@ class MiniCartContent extends Component {
     this.setState({ isUpdating })
   }
 
-  sumOptionsSellingPrice = (addedOptions = []) =>
+  sumOptionsPrice = (addedOptions = []) =>
     addedOptions.reduce(
       (acc, option) => acc + option.sellingPrice * option.quantity,
       0
@@ -123,7 +124,7 @@ class MiniCartContent extends Component {
         commertialOffer: {
           Price:
             item.sellingPrice * item.quantity +
-            this.sumOptionsSellingPrice(item.addedOptions),
+            this.sumOptionsPrice(item.addedOptions),
           ListPrice: item.ListPrice,
         },
       },

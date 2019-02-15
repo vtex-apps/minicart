@@ -3,7 +3,6 @@ const gql = require('graphql-tag')
 const minicartItemsQuery = gql`
   query {
     minicart @client {
-      upToDate
       items {
         id
         name
@@ -48,7 +47,6 @@ const resolvers = {
           minicart: {
             __typename: 'Minicart',
             items: newItems.concat(prevItems).map(mapToMinicartItem),
-            upToDate: false,
           },
         },
       })
@@ -69,7 +67,7 @@ const resolvers = {
 
       cache.writeData({
         data: {
-          minicart: { __typename: 'Minicart', items, upToDate: false },
+          minicart: { __typename: 'Minicart', items },
         },
       })
       return items
@@ -78,7 +76,7 @@ const resolvers = {
       const items = newItems.map(mapToMinicartItem)
       cache.writeData({
         data: {
-          minicart: { __typename: 'Minicart', items, upToDate: true },
+          minicart: { __typename: 'Minicart', items },
         },
       })
       return items
@@ -94,7 +92,7 @@ const mapToMinicartItem = item => ({
 })
 
 const initialState = {
-  minicart: { __typename: 'Minicart', items: [], upToDate: false },
+  minicart: { __typename: 'Minicart', items: [] },
 }
 
 module.exports = { resolvers, initialState, minicartItemsQuery }
