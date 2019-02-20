@@ -20,7 +20,7 @@ const baseUrlRegex = new RegExp(/.+ids\/(\d+)/)
 
 const httpRegex = new RegExp(/http:\/\//)
 
-export function toHttps(url){
+export function toHttps(url) {
   return url.replace(httpRegex, 'https://')
 }
 
@@ -39,13 +39,17 @@ function replaceLegacyFileManagerUrl(imageUrl, width, height) {
 export function changeImageUrlSize(
   imageUrl,
   width = DEFAULT_WIDTH,
-  height = DEFAULT_HEIGHT,
+  height = DEFAULT_HEIGHT
 ) {
   if (!imageUrl) return
   typeof width === 'number' && (width = Math.min(width, MAX_WIDTH))
   typeof height === 'number' && (height = Math.min(height, MAX_HEIGHT))
 
-  const normalizedImageUrl = replaceLegacyFileManagerUrl(imageUrl, width, height)
+  const normalizedImageUrl = replaceLegacyFileManagerUrl(
+    imageUrl,
+    width,
+    height
+  )
   const queryStringSeparator = normalizedImageUrl.includes('?') ? '&' : '?'
 
   return `${normalizedImageUrl}${queryStringSeparator}width=${width}&height=${height}&aspect=true`

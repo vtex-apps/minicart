@@ -9,11 +9,7 @@ import minicart from '../minicart.css'
  */
 export default class Popup extends Component {
   render() {
-    const {
-      children,
-      onOutsideClick,
-      buttonOffsetWidth,
-    } = this.props
+    const { children, onOutsideClick, buttonOffsetWidth } = this.props
 
     const boxPositionStyle = {
       right: buttonOffsetWidth && buttonOffsetWidth - 49,
@@ -26,8 +22,14 @@ export default class Popup extends Component {
           style={boxPositionStyle}
         >
           <div className="shadow-3">
-            <div className={`${minicart.arrowUp} absolute top-0 shadow-3 bg-base h1 w1 pa4 rotate-45`} />
-            <div className="mt3 bg-base relative flex flex-column">{children}</div>
+            <div
+              className={`${
+                minicart.arrowUp
+              } absolute top-0 shadow-3 bg-base h1 w1 pa4 rotate-45`}
+            />
+            <div className="mt3 bg-base relative flex flex-column">
+              {children}
+            </div>
           </div>
         </div>
       </OutsideClickHandler>

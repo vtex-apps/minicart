@@ -10,7 +10,11 @@ import { IconDelete } from 'vtex.dreamstore-icons'
 
 import { MiniCartPropTypes } from '../propTypes'
 import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
-import { groupItemsWithParents, getOptionChoiceType, getOptionComposition } from '../utils/itemsHelper'
+import {
+  groupItemsWithParents,
+  getOptionChoiceType,
+  getOptionComposition,
+} from '../utils/itemsHelper'
 
 import minicart from '../minicart.css'
 import MiniCartFooter from './MiniCartFooter'
@@ -45,7 +49,10 @@ class MiniCartContent extends Component {
   state = { isUpdating: [] }
 
   sumItemsPrice = items => {
-    return items.reduce((sum, { listPrice, quantity }) => sum + listPrice * quantity, 0)
+    return items.reduce(
+      (sum, { listPrice, quantity }) => sum + listPrice * quantity,
+      0
+    )
   }
 
   getGroupedItems = () =>
@@ -116,10 +123,7 @@ class MiniCartContent extends Component {
   onUpdateItems = (id, quantity) => {
     this.updateItemLoad(id, true)
     const {
-      data: {
-        orderForm,
-        updateAndRefetchOrderForm,
-      },
+      data: { orderForm, updateAndRefetchOrderForm },
     } = this.props
 
     const items = this.getGroupedItems()
@@ -127,7 +131,8 @@ class MiniCartContent extends Component {
     const itemsPayload = orderForm.items.filter(item => item.id === id)
     let itemPayload = itemsPayload[0]
     const index = orderForm.items.indexOf(itemsPayload[0])
-    const newQuantity = quantity - (itemPayloadGrouped.quantity - itemPayload.quantity)
+    const newQuantity =
+      quantity - (itemPayloadGrouped.quantity - itemPayload.quantity)
     const updatedItems = [
       {
         id: itemPayload.id,
@@ -139,13 +144,11 @@ class MiniCartContent extends Component {
     if (newQuantity <= 0) {
       updatedItems[0].quantity = 0
       itemPayload = itemsPayload[1]
-      updatedItems.push(
-        {
-          id: itemPayload.id,
-          index: orderForm.items.indexOf(itemPayload),
-          quantity: itemPayload.quantity + newQuantity,
-        }
-      )
+      updatedItems.push({
+        id: itemPayload.id,
+        index: orderForm.items.indexOf(itemPayload),
+        quantity: itemPayload.quantity + newQuantity,
+      })
     }
 
     updateAndRefetchOrderForm({
@@ -159,14 +162,19 @@ class MiniCartContent extends Component {
   }
 
   sumOptionsPrice = (addedOptions = []) => {
-    return addedOptions.reduce((acc, option) => acc + option.sellingPrice * option.quantity, 0)
+    return addedOptions.reduce(
+      (acc, option) => acc + option.sellingPrice * option.quantity,
+      0
+    )
   }
 
-  createProductShapeFromOption = (option) => ({
+  createProductShapeFromOption = option => ({
     ...this.createProductShapeFromItem(option),
     compositionItem: getOptionComposition(option, this.props.data.orderForm),
     choiceType: getOptionChoiceType(option, this.props.data.orderForm),
-    optionType: option.parentAssemblyBinding && last(split('_', option.parentAssemblyBinding)),
+    optionType:
+      option.parentAssemblyBinding &&
+      last(split('_', option.parentAssemblyBinding)),
   })
 
   createProductShapeFromItem = item => ({
@@ -175,7 +183,9 @@ class MiniCartContent extends Component {
     sku: {
       seller: {
         commertialOffer: {
-          Price: item.sellingPrice * item.quantity + this.sumOptionsPrice(item.addedOptions),
+          Price:
+            item.sellingPrice * item.quantity +
+            this.sumOptionsPrice(item.addedOptions),
           ListPrice: item.ListPrice,
         },
         sellerId: item.seller,
@@ -186,7 +196,9 @@ class MiniCartContent extends Component {
         imageUrl: changeImageUrlSize(toHttps(item.imageUrl), 240),
       },
     },
-    addedOptions: (item.addedOptions || []).map(option => this.createProductShapeFromOption(option)),
+    addedOptions: (item.addedOptions || []).map(option =>
+      this.createProductShapeFromOption(option)
+    ),
     quantity: item.quantity,
   })
 
@@ -196,7 +208,11 @@ class MiniCartContent extends Component {
   }
 
   renderWithoutItems = label => (
-    <div className={`${minicart.item} pa9 flex items-center justify-center relative bg-base`}>
+    <div
+      className={`${
+        minicart.item
+      } pa9 flex items-center justify-center relative bg-base`}
+    >
       <span className="t-body">{label}</span>
     </div>
   )
@@ -214,15 +230,12 @@ class MiniCartContent extends Component {
     const items = groupItemsWithParents(orderForm)
     const MIN_ITEMS_TO_SCROLL = 2
 
-    const classes = classNames(
-      `${minicart.content} overflow-x-hidden pa1`,
-      {
-        [`${minicart.contentSmall} bg-base`]: !isSizeLarge,
-        [`${minicart.contentLarge}`]: isSizeLarge,
-        'overflow-y-scroll': items.length > MIN_ITEMS_TO_SCROLL && !isSizeLarge,
-        'overflow-y-hidden': items.length <= MIN_ITEMS_TO_SCROLL && !isSizeLarge,
-      }
-    )
+    const classes = classNames(`${minicart.content} overflow-x-hidden pa1`, {
+      [`${minicart.contentSmall} bg-base`]: !isSizeLarge,
+      [`${minicart.contentLarge}`]: isSizeLarge,
+      'overflow-y-scroll': items.length > MIN_ITEMS_TO_SCROLL && !isSizeLarge,
+      'overflow-y-hidden': items.length <= MIN_ITEMS_TO_SCROLL && !isSizeLarge,
+    })
 
     return (
       <Fragment>
@@ -231,19 +244,22 @@ class MiniCartContent extends Component {
             <Fragment key={item.id}>
               <section className="relative flex">
                 <div className="fr absolute top-0 right-0">
-                  {isUpdating[item.id]
-                    ? (
-                      <div className="ma4">
-                        <Spinner size={18} />
-                      </div>
-                    ) : (
-                      <Button icon variation="tertiary" onClick={() => this.handleItemRemoval(item.id)}>
-                        <IconDelete size={15} activeClassName="c-muted-2" />
-                      </Button>
-                    )
-                  }
+                  {isUpdating[item.id] ? (
+                    <div className="ma4">
+                      <Spinner size={18} />
+                    </div>
+                  ) : (
+                    <Button
+                      icon
+                      variation="tertiary"
+                      onClick={() => this.handleItemRemoval(item.id)}
+                    >
+                      <IconDelete size={15} activeClassName="c-muted-2" />
+                    </Button>
+                  )}
                 </div>
-                <ExtensionPoint id="product-summary"
+                <ExtensionPoint
+                  id="product-summary"
                   showBorders
                   product={this.createProductShapeFromItem(item)}
                   name={item.name}
@@ -273,7 +289,11 @@ class MiniCartContent extends Component {
   }
 
   renderLoading = () => (
-    <div className={`${minicart.item} pa4 flex items-center justify-center relative bg-base`}>
+    <div
+      className={`${
+        minicart.item
+      } pa4 flex items-center justify-center relative bg-base`}
+    >
       <Spinner />
     </div>
   )

@@ -37,7 +37,8 @@ export default class Image extends Component {
         <img
           className={`${minicart.itemImage} w-auto h-100`}
           onLoad={() => this.setState({ isLoaded: true })}
-          src={this.stripImageUrl(url)} alt={alt}
+          src={this.stripImageUrl(url)}
+          alt={alt}
         />
         {!this.state.isLoaded && this.imgLoader()}
       </Fragment>
