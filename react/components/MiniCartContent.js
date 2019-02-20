@@ -14,6 +14,7 @@ import {
   groupItemsWithParents,
   getOptionChoiceType,
   getOptionComposition,
+  getTotalDiscount,
 } from '../utils/itemsHelper'
 
 import minicart from '../minicart.css'
@@ -278,6 +279,7 @@ class MiniCartContent extends Component {
           shippingCost={this.getShippingCost(orderForm)}
           isUpdating={this.isUpdating}
           totalValue={orderForm.value}
+          discount={this.calculateDiscount(orderForm.items, orderForm.value)}
           buttonLabel={label}
           isSizeLarge={isSizeLarge}
           labelDiscount={labelDiscount}
