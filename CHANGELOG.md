@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.11.7] - 2019-02-21
+
 ### Fixed
 
 - Total discount was not showing, even when enabled.
