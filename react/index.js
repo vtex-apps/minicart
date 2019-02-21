@@ -58,14 +58,18 @@ export class MiniCart extends Component {
     this.setState({
       openContent: false,
     })
-    const { runtime: { navigate } } = this.props
+    const {
+      runtime: { navigate },
+    } = this.props
     navigate({
-      to: detailUrl
+      to: detailUrl,
     })
   }
 
   get itemsQuantity() {
-    const { orderFormContext: { orderForm } } = this.props
+    const {
+      orderFormContext: { orderForm },
+    } = this.props
     if (!orderForm || !orderForm.items) return 0
     return orderForm.items.filter(isParentItem).length
   }
@@ -131,14 +135,20 @@ export class MiniCart extends Component {
             <span className={`relative ${iconClasses}`}>
               <IconCart size={iconSize} />
               {quantity > 0 && (
-                <span className={`${minicart.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}>
+                <span
+                  className={`${
+                    minicart.badge
+                  } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
+                >
                   {quantity}
                 </span>
               )}
             </span>
             {iconLabel && (
               <span
-                className={`${minicart.label} dn-m db-l t-action--small pl${quantity > 0 ? '6' : '4'} ${labelClasses}`}
+                className={`${minicart.label} dn-m db-l t-action--small pl${
+                  quantity > 0 ? '6' : '4'
+                } ${labelClasses}`}
               >
                 {iconLabel}
               </span>
@@ -154,15 +164,15 @@ export class MiniCart extends Component {
               {miniCartContent}
             </Sidebar>
           ) : (
-              openContent && (
-                <Popup
-                  onOutsideClick={this.handleUpdateContentVisibility}
-                  buttonOffsetWidth={this.iconRef.offsetWidth}
-                >
-                  {miniCartContent}
-                </Popup>
-              )
-            ))}
+            openContent && (
+              <Popup
+                onOutsideClick={this.handleUpdateContentVisibility}
+                buttonOffsetWidth={this.iconRef.offsetWidth}
+              >
+                {miniCartContent}
+              </Popup>
+            )
+          ))}
       </aside>
     )
   }
@@ -248,4 +258,3 @@ miniHOC.getSchema = props => {
 }
 
 export default withRuntimeContext(miniHOC)
-

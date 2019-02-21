@@ -6,13 +6,16 @@ export const CHOICE_TYPES = {
   TOGGLE: 'TOGGLE',
 }
 
-export const isParentItem = 
-  ({ parentItemIndex, parentAssemblyBinding }) => parentItemIndex == null && parentAssemblyBinding == null
+export const isParentItem = ({ parentItemIndex, parentAssemblyBinding }) =>
+  parentItemIndex == null && parentAssemblyBinding == null
 
-export const groupItemsWithParents = (orderForm) => {
+export const groupItemsWithParents = orderForm => {
   const [parentItems, options] = partition(isParentItem, orderForm.items)
 
-  const parentMap = parentItems.reduce((prev, curr) => ({ ...prev, [curr.id]: { ...curr, addedOptions: [] } }), {})
+  const parentMap = parentItems.reduce(
+    (prev, curr) => ({ ...prev, [curr.id]: { ...curr, addedOptions: [] } }),
+    {}
+  )
   return values(
     options.reduce((prev, currOption) => {
       const { parentItemIndex } = currOption
@@ -29,33 +32,51 @@ export const groupItemsWithParents = (orderForm) => {
 
 const findParentOption = (item, orderForm) => {
   const { parentItemIndex, parentAssemblyBinding } = item
-  if (!orderForm.itemMetadata || isParentItem(item)) { return null }
+  if (!orderForm.itemMetadata || isParentItem(item)) {
+    return null
+  }
   const parentId = orderForm.items[parentItemIndex].id
 
-  const parentMetadata = find(propEq('id', parentId))(orderForm.itemMetadata.items)
-  if (!parentMetadata) { return null }
+  const parentMetadata = find(propEq('id', parentId))(
+    orderForm.itemMetadata.items
+  )
+  if (!parentMetadata) {
+    return null
+  }
 
-  return find(propEq('id', parentAssemblyBinding))(parentMetadata.assemblyOptions)
+  return find(propEq('id', parentAssemblyBinding))(
+    parentMetadata.assemblyOptions
+  )
 }
 
-const isParentOptionSingleChoice = ({composition: { minQuantity, maxQuantity }}) =>
-  minQuantity === 1 && maxQuantity === 1
+const isParentOptionSingleChoice = ({
+  composition: { minQuantity, maxQuantity },
+}) => minQuantity === 1 && maxQuantity === 1
 
-const isParentOptionToggleChoice = ({ composition: { items }}) => all(propEq('maxQuantity', 1))(items)
+const isParentOptionToggleChoice = ({ composition: { items } }) =>
+  all(propEq('maxQuantity', 1))(items)
 
 export const getOptionChoiceType = (item, orderForm) => {
   const parentOption = findParentOption(item, orderForm)
-  if (!parentOption) { return CHOICE_TYPES.MULTIPLE }
+  if (!parentOption) {
+    return CHOICE_TYPES.MULTIPLE
+  }
   const isSingle = isParentOptionSingleChoice(parentOption)
-  if (isSingle) { return CHOICE_TYPES.SINGLE }
+  if (isSingle) {
+    return CHOICE_TYPES.SINGLE
+  }
   const isToggle = isParentOptionToggleChoice(parentOption)
-  if (isToggle) { return CHOICE_TYPES.TOGGLE }
+  if (isToggle) {
+    return CHOICE_TYPES.TOGGLE
+  }
 
   return CHOICE_TYPES.MULTIPLE
 }
 
 export const getOptionComposition = (option, orderForm) => {
   const parentOption = findParentOption(option, orderForm)
-  if (!parentOption) { return {} }
+  if (!parentOption) {
+    return {}
+  }
   return find(propEq('id', option.id))(parentOption.composition.items) || {}
 }

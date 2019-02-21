@@ -1,6 +1,11 @@
 /* eslint-env jest */
 
-import { isParentItem, groupItemsWithParents, getOptionChoiceType, CHOICE_TYPES } from '../itemsHelper'
+import {
+  isParentItem,
+  groupItemsWithParents,
+  getOptionChoiceType,
+  CHOICE_TYPES,
+} from '../itemsHelper'
 import orderForm from '../__mocks__/orderForm.json'
 
 it('should return only items that dont have parent', () => {
@@ -12,8 +17,10 @@ it('should group items and its attachments', () => {
   const items = orderForm.items
   const itemsWithOptions = groupItemsWithParents(orderForm)
   const parentItemsCount = itemsWithOptions.length
-  const addedOptionsCount = 
-    itemsWithOptions.reduce((prev, curr) => prev + curr.addedOptions.length, 0)
+  const addedOptionsCount = itemsWithOptions.reduce(
+    (prev, curr) => prev + curr.addedOptions.length,
+    0
+  )
   expect(parentItemsCount).toBe(1)
   expect(addedOptionsCount).toBe(2)
 
@@ -34,4 +41,3 @@ it('should return pepperoni item as toggle choice', () => {
   const isPepperoniToggle = getOptionChoiceType(pepperoni, orderForm)
   expect(isPepperoniToggle).toBe(CHOICE_TYPES.TOGGLE)
 })
-

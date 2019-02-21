@@ -10,34 +10,34 @@ import minicart from '../minicart.css'
 
 const handleClickButton = () => location.assign('/checkout/#/cart')
 
-const MiniCartFooter =({
-  shippingCost, 
-  isSizeLarge, 
-  isUpdating, 
-  totalValue, 
-  buttonLabel, 
-  showDiscount, 
-  discount, 
+const MiniCartFooter = ({
+  shippingCost,
+  isSizeLarge,
+  isUpdating,
+  totalValue,
+  buttonLabel,
+  showDiscount,
+  discount,
   labelDiscount,
-  showShippingCost
+  showShippingCost,
 }) => {
   const priceAndDiscountClasses = classNames(
     `${minicart.contentDiscount} w-100 flex justify-end items-center mb3`,
     {
-      'pv3': isSizeLarge,
+      pv3: isSizeLarge,
     }
   )
 
-  const checkoutButtonClasses = classNames(
-    {
-      'bb bw4 bw2-m b--transparent': isSizeLarge,
-    }
-  )
+  const checkoutButtonClasses = classNames({
+    'bb bw4 bw2-m b--transparent': isSizeLarge,
+  })
 
   const shouldShowShippingCost = showShippingCost && shippingCost > 0
 
   const footerClasses = classNames(
-    `${minicart.contentFooter} w-100 bg-base pa4 pv5 flex flex-column items-end`,
+    `${
+      minicart.contentFooter
+    } w-100 bg-base pa4 pv5 flex flex-column items-end`,
     {
       'bt b--muted-3': shouldShowShippingCost || isSizeLarge,
     }
@@ -72,32 +72,26 @@ const MiniCartFooter =({
           </div>
         )}
         <div className={`${minicart.contentPrice} mb3`}>
-          {isUpdating
-            ? <Spinner size={18} />
-            : (
-              <ProductPrice
-                sellingPriceClass="t-heading-5-ns c-on-base b ph2 dib"
-                sellingPrice={totalValue}
-                listPrice={totalValue}
-                showLabels={false}
-                showListPrice={false}
-              />
-            )
-          }
+          {isUpdating ? (
+            <Spinner size={18} />
+          ) : (
+            <ProductPrice
+              sellingPriceClass="t-heading-5-ns c-on-base b ph2 dib"
+              sellingPrice={totalValue}
+              listPrice={totalValue}
+              showLabels={false}
+              showListPrice={false}
+            />
+          )}
         </div>
         <div className={checkoutButtonClasses}>
-          <Button
-            variation="primary"
-            size="small"
-            onClick={handleClickButton}
-          >
+          <Button variation="primary" size="small" onClick={handleClickButton}>
             {buttonLabel}
           </Button>
         </div>
       </div>
     </Fragment>
   )
-
 }
 
 MiniCartFooter.propTypes = {
