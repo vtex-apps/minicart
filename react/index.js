@@ -107,12 +107,18 @@ export class MiniCart extends Component {
       />
     )
 
+    const iconLabelClasses = classNames(
+      `${minicart.label} dn-m db-l t-action--small ${labelClasses}`,
+      {
+        'pl6': quantity > 0,
+        'pl4': quantity <= 0
+      }
+    )
+
     return (
       <aside
         className={`${minicart.container} relative fr flex items-center`}
-        ref={e => {
-          this.iconRef = e
-        }}
+        ref={e => this.iconRef = e}
       >
         <Button
           variation="tertiary"
@@ -133,11 +139,7 @@ export class MiniCart extends Component {
               )}
             </span>
             {iconLabel && (
-              <span
-                className={`${minicart.label} dn-m db-l t-action--small pl${
-                  quantity > 0 ? '6' : '4'
-                  } ${labelClasses}`}
-              >
+              <span className={iconLabelClasses}>
                 {iconLabel}
               </span>
             )}
