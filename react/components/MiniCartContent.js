@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { reduceBy, values, clone, last, split, find, propEq } from 'ramda'
+import { reduceBy, values, clone, find, propEq } from 'ramda'
 import classNames from 'classnames'
 
 import { ExtensionPoint } from 'vtex.render-runtime'
@@ -10,11 +10,6 @@ import { IconDelete } from 'vtex.dreamstore-icons'
 
 import { MiniCartPropTypes } from '../propTypes'
 import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
-import {
-  groupItemsWithParents,
-  getOptionChoiceType,
-  getOptionComposition,
-} from '../utils/itemsHelper'
 
 import minicart from '../minicart.css'
 import MiniCartFooter from './MiniCartFooter'
@@ -157,21 +152,12 @@ class MiniCartContent extends Component {
     })
   }
 
-  sumOptionsPrice = (addedOptions = []) => {
-    return addedOptions.reduce(
-      (acc, option) => acc + option.sellingPrice * option.quantity,
+  sumOptionsPrice = ({ added = [] }) => {
+    return added.reduce(
+      (acc, option) => acc + option.item.sellingPrice * option.item.quantity,
       0
     )
   }
-
-  createProductShapeFromOption = option => ({
-    ...this.createProductShapeFromItem(option),
-    compositionItem: getOptionComposition(option, this.props.data.orderForm),
-    choiceType: getOptionChoiceType(option, this.props.data.orderForm),
-    optionType:
-      option.parentAssemblyBinding &&
-      last(split('_', option.parentAssemblyBinding)),
-  })
 
   createProductShapeFromItem = item => ({
     productName: item.name,
@@ -181,7 +167,7 @@ class MiniCartContent extends Component {
         commertialOffer: {
           Price:
             item.sellingPrice * item.quantity +
-            this.sumOptionsPrice(item.addedOptions),
+            this.sumOptionsPrice(item.assemblyOptions),
           ListPrice: item.ListPrice,
         },
         sellerId: item.seller,
@@ -192,9 +178,7 @@ class MiniCartContent extends Component {
         imageUrl: changeImageUrlSize(toHttps(item.imageUrl), 240),
       },
     },
-    addedOptions: (item.addedOptions || []).map(option =>
-      this.createProductShapeFromOption(option)
-    ),
+    assemblyOptions: item.assemblyOptions,
     quantity: item.quantity,
   })
 
@@ -215,6 +199,7 @@ class MiniCartContent extends Component {
 
   renderMiniCartWithItems = (
     orderForm,
+    itemsToShow,
     label,
     labelDiscount,
     showDiscount,
@@ -223,20 +208,19 @@ class MiniCartContent extends Component {
     isSizeLarge,
     showShippingCost
   ) => {
-    const items = groupItemsWithParents(orderForm)
     const MIN_ITEMS_TO_SCROLL = 2
 
     const classes = classNames(`${minicart.content} overflow-x-hidden pa1`, {
       [`${minicart.contentSmall} bg-base`]: !isSizeLarge,
       [`${minicart.contentLarge}`]: isSizeLarge,
-      'overflow-y-scroll': items.length > MIN_ITEMS_TO_SCROLL && !isSizeLarge,
-      'overflow-y-hidden': items.length <= MIN_ITEMS_TO_SCROLL && !isSizeLarge,
+      'overflow-y-scroll': itemsToShow.length > MIN_ITEMS_TO_SCROLL && !isSizeLarge,
+      'overflow-y-hidden': itemsToShow.length <= MIN_ITEMS_TO_SCROLL && !isSizeLarge,
     })
 
     return (
       <Fragment>
         <div className={classes}>
-          {items.map(item => (
+          {itemsToShow.map(item => (
             <Fragment key={item.id}>
               <section className="relative flex">
                 <div className="fr absolute top-0 right-0">
@@ -298,6 +282,7 @@ class MiniCartContent extends Component {
   render() {
     const {
       data,
+      itemsToShow,
       labelMiniCartEmpty,
       labelButton,
       intl,
@@ -312,7 +297,7 @@ class MiniCartContent extends Component {
       return this.renderLoading()
     }
 
-    if (!data.orderForm || !data.orderForm.items.length) {
+    if (!data.orderForm || !itemsToShow.length) {
       const label =
         labelMiniCartEmpty || intl.formatMessage({ id: 'minicart-empty' })
       return this.renderWithoutItems(label)
@@ -326,6 +311,7 @@ class MiniCartContent extends Component {
 
     return this.renderMiniCartWithItems(
       data.orderForm,
+      itemsToShow,
       label,
       labelDiscount,
       showDiscount,
