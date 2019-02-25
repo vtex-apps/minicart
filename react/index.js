@@ -10,6 +10,7 @@ import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
 import { isParentItem } from './utils/itemsHelper'
 import { orderFormConsumer } from 'vtex.store-resources/OrderFormContext'
+import classNames from 'classnames'
 
 import minicart from './minicart.css'
 
