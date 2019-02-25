@@ -14,7 +14,6 @@ import {
   groupItemsWithParents,
   getOptionChoiceType,
   getOptionComposition,
-  getTotalDiscount,
 } from '../utils/itemsHelper'
 
 import minicart from '../minicart.css'
@@ -39,10 +38,6 @@ class MiniCartContent extends Component {
     data: MiniCartPropTypes.orderFormContext,
     labelMiniCartEmpty: MiniCartPropTypes.labelMiniCartEmpty,
     labelButton: MiniCartPropTypes.labelButtonFinishShopping,
-    showRemoveButton: MiniCartPropTypes.showRemoveButton,
-    showSku: MiniCartPropTypes.showSku,
-    enableQuantitySelector: MiniCartPropTypes.enableQuantitySelector,
-    maxQuantity: MiniCartPropTypes.maxQuantity,
     showDiscount: MiniCartPropTypes.showDiscount,
     showShippingCost: MiniCartPropTypes.showShippingCost,
   }

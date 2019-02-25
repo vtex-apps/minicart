@@ -13,9 +13,6 @@ import { orderFormConsumer } from 'vtex.store-resources/OrderFormContext'
 
 import minicart from './minicart.css'
 
-const MINIMUM_MAX_QUANTITY = 1
-const MAXIMUM_MAX_QUANTITY = 10
-const DEFAULT_MAX_QUANTITY = 1
 const DEFAULT_LABEL_CLASSES = ''
 const DEFAULT_ICON_CLASSES = 'gray'
 
@@ -26,7 +23,6 @@ export class MiniCart extends Component {
   static propTypes = MiniCartPropTypes
 
   static defaultProps = {
-    maxQuantity: DEFAULT_MAX_QUANTITY,
     labelClasses: DEFAULT_LABEL_CLASSES,
     iconClasses: DEFAULT_ICON_CLASSES,
   }
@@ -83,11 +79,7 @@ export class MiniCart extends Component {
       iconSize,
       iconLabel,
       labelClasses,
-      showRemoveButton,
       showDiscount,
-      showSku,
-      enableQuantitySelector,
-      maxQuantity,
       orderFormContext,
       type,
       hideContent,
@@ -105,13 +97,9 @@ export class MiniCart extends Component {
       <MiniCartContent
         isSizeLarge={isSizeLarge}
         data={orderFormContext}
-        showRemoveButton={showRemoveButton}
         showDiscount={showDiscount}
-        showSku={showSku}
         labelMiniCartEmpty={labelMiniCartEmpty}
         labelButton={labelButtonFinishShopping}
-        enableQuantitySelector={enableQuantitySelector}
-        maxQuantity={maxQuantity}
         onClickProduct={this.onClickProduct}
         handleUpdateContentVisibility={this.handleUpdateContentVisibility}
         actionOnClick={this.handleUpdateContentVisibility}
@@ -119,12 +107,18 @@ export class MiniCart extends Component {
       />
     )
 
+    const iconLabelClasses = classNames(
+      `${minicart.label} dn-m db-l t-action--small ${labelClasses}`,
+      {
+        'pl6': quantity > 0,
+        'pl4': quantity <= 0
+      }
+    )
+
     return (
       <aside
         className={`${minicart.container} relative fr flex items-center`}
-        ref={e => {
-          this.iconRef = e
-        }}
+        ref={e => this.iconRef = e}
       >
         <Button
           variation="tertiary"
@@ -138,18 +132,14 @@ export class MiniCart extends Component {
                 <span
                   className={`${
                     minicart.badge
-                  } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
+                    } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
                 >
                   {quantity}
                 </span>
               )}
             </span>
             {iconLabel && (
-              <span
-                className={`${minicart.label} dn-m db-l t-action--small pl${
-                  quantity > 0 ? '6' : '4'
-                } ${labelClasses}`}
-              >
+              <span className={iconLabelClasses}>
                 {iconLabel}
               </span>
             )}
@@ -164,15 +154,15 @@ export class MiniCart extends Component {
               {miniCartContent}
             </Sidebar>
           ) : (
-            openContent && (
-              <Popup
-                onOutsideClick={this.handleUpdateContentVisibility}
-                buttonOffsetWidth={this.iconRef.offsetWidth}
-              >
-                {miniCartContent}
-              </Popup>
-            )
-          ))}
+              openContent && (
+                <Popup
+                  onOutsideClick={this.handleUpdateContentVisibility}
+                  buttonOffsetWidth={this.iconRef.offsetWidth}
+                >
+                  {miniCartContent}
+                </Popup>
+              )
+            ))}
       </aside>
     )
   }
@@ -180,81 +170,44 @@ export class MiniCart extends Component {
 
 const miniHOC = orderFormConsumer(MiniCart)
 
-miniHOC.getSchema = props => {
-  const getQuantitySelectorSchema = () => {
-    return {
-      maxQuantity: {
-        title: 'editor.minicart.maxQuantity.title',
-        type: 'number',
-        minimum: MINIMUM_MAX_QUANTITY,
-        maximum: MAXIMUM_MAX_QUANTITY,
-        default: DEFAULT_MAX_QUANTITY,
-        widget: {
-          'ui:widget': 'range',
+miniHOC.schema = {
+  title: 'editor.minicart.title',
+  description: 'editor.minicart.description',
+  type: 'object',
+  properties: {
+    type: {
+      title: 'editor.minicart.type.title',
+      type: 'string',
+      default: 'popup',
+      enum: ['popup', 'sidebar'],
+      enumNames: [
+        'editor.minicart.type.popup',
+        'editor.minicart.type.sidebar',
+      ],
+      widget: {
+        'ui:widget': 'radio',
+        'ui:options': {
+          inline: true,
         },
-        isLayout: true,
       },
-    }
-  }
-
-  const generatedSchema =
-    props && props.enableQuantitySelector && getQuantitySelectorSchema()
-
-  return {
-    title: 'editor.minicart.title',
-    description: 'editor.minicart.description',
-    type: 'object',
-    properties: {
-      type: {
-        title: 'editor.minicart.type.title',
-        type: 'string',
-        default: 'popup',
-        enum: ['popup', 'sidebar'],
-        enumNames: [
-          'editor.minicart.type.popup',
-          'editor.minicart.type.sidebar',
-        ],
-        widget: {
-          'ui:widget': 'radio',
-          'ui:options': {
-            inline: true,
-          },
-        },
-        isLayout: true,
-      },
-      showRemoveButton: {
-        title: 'editor.minicart.showRemoveButton.title',
-        type: 'boolean',
-        isLayout: true,
-      },
-      showDiscount: {
-        title: 'editor.minicart.showDiscount.title',
-        type: 'boolean',
-        isLayout: true,
-      },
-      showSku: {
-        title: 'editor.minicart.showSku.title',
-        type: 'boolean',
-        isLayout: true,
-      },
-      labelMiniCartEmpty: {
-        title: 'editor.minicart.labelMiniCartEmpty.title',
-        type: 'string',
-        isLayout: false,
-      },
-      labelButtonFinishShopping: {
-        title: 'editor.minicart.labelButtonFinishShopping.title',
-        type: 'string',
-        isLayout: false,
-      },
-      enableQuantitySelector: {
-        title: 'editor.minicart.enableQuantitySelector.title',
-        type: 'boolean',
-        isLayout: true,
-      },
-      ...generatedSchema,
+      isLayout: true,
     },
-  }
+    showDiscount: {
+      title: 'editor.minicart.showDiscount.title',
+      type: 'boolean',
+      isLayout: true,
+    },
+    labelMiniCartEmpty: {
+      title: 'editor.minicart.labelMiniCartEmpty.title',
+      type: 'string',
+      isLayout: false,
+    },
+    labelButtonFinishShopping: {
+      title: 'editor.minicart.labelButtonFinishShopping.title',
+      type: 'string',
+      isLayout: false,
+    },
+  },
 }
 
 export default withRuntimeContext(miniHOC)

@@ -47,13 +47,9 @@ Now, you can change the behavior of the minicart block that is in the store head
   ],
   "props": {
     "type": "popup",
-    "showRemoveButton": true,
     "showDiscount": true,
-    "showSku": true,
     "labelMiniCartEmpty": "",
     "labelButtonFinishShopping": "Ir para o checkout",
-    "enableQuantitySelector": true,
-    "maxQuantity": 10
   }
 }
 ```
@@ -77,14 +73,10 @@ Through the Storefront, you can change the minicart's behavior and interface. Ho
 
 | Prop name                   | Type       | Description                                             | Default value |
 | --------------------------- | ---------- | --------------------------------------------------------| ------------- |
-| `type`                      | `String`   | Define Minicart mode. (values: 'popup' or 'sidebar')    | popup
-| `showRemoveButton`          | `Boolean`  | Shows the remove button in each item                    | true
+| `type`                      | `Enum`   | Define Minicart mode. (values: 'popup' or 'sidebar')    | popup
 | `showDiscount`              | `Boolean`  | Shows the total discount of your cart                   | true
-| `showSku`                   | `Boolean`  | Shows the SKU name of the item                          | true
 | `labelMiniCartEmpty`        | `String`   | Text that is displayed when the cart is empty           | `Your cart is empty`
 | `labelButtonFinishShopping` | `String`   | Text displayed in the finish shopping button            | `Go to checkout`
-| `enableQuantitySelector`    | `Boolean`  | Enable the quantity selector component                  | false
-| `maxQuantity`               | `String`   | Define the maximum quantity of an item in cart          | 10
 
 Also, you can configure the product summary that is defined on minicart. See [here](https://github.com/vtex-apps/product-summary/blob/master/README.md#configuration) the Product Summary API. 
 
