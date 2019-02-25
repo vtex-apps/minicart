@@ -6,35 +6,19 @@
     "test": "jest"
   },
   "dependencies": {
-    "classnames": "^2.2.5",
-    "identity-obj-proxy": "^3.0.0",
-    "ramda": "^0.26.1",
-    "react-content-loader": "^3.1.2",
-    "react-device-detect": "^1.5.8",
-    "react-intl": "^2.7.2",
-    "react-outside-click-handler": "^1.2.0"
+    "classnames": "^2.2.5"
   },
   "devDependencies": {
-    "apollo-client-preset": "^1.0.8",
-    "babel": "^6.23.0",
-    "babel-core": "^6.26.0",
-    "babel-jest": "^22.2.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react-app": "^3.1.1",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "enzyme-react-intl": "^1.4.8",
-    "enzyme-to-json": "^3.3.1",
-    "eslint-config-vtex": "^8.0.0",
-    "graphql": "^0.13.0",
-    "graphql-tag": "^2.7.3",
-    "jest": "^22.2.1",
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "babel-jest": "^24.1.0",
+    "babel-preset-react-app": "^7.0.1",
+    "jest": "^24.1.0",
+    "jest-dom": "^3.1.2",
     "jest-transform-graphql": "^2.1.0",
-    "react": "^16.2.0",
-    "react-apollo": "^2.0.4",
-    "react-dom": "^16.2.0",
-    "react-test-renderer": "^16.2.0",
-    "react-testing-library": "^2.1.1"
+    "react-dom": "^16.8.3",
+    "react-testing-library": "^6.0.0",
+    "regenerator-runtime": "^0.13.1"
   },
   "jest": {
     "verbose": true,
