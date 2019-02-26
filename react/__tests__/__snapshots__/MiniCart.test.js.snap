@@ -15,9 +15,11 @@ exports[`<MiniCart /> component should match the snapshot in popup mode 1`] = `
         <span
           class="relative gray"
         >
-          <div>
-             Icon Cart  
-          </div>
+          <svg
+            class="undefined IconCart"
+          >
+            <rect />
+          </svg>
           <span
             class="badge c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid"
           >
@@ -53,9 +55,16 @@ exports[`<MiniCart /> component should match the snapshot in popup mode 1`] = `
                     variation="tertiary"
                   >
                     Button Test
-                    <div>
-                       Icon Delete 
-                    </div>
+                    <svg
+                      class="undefined IconDelete"
+                      height="15"
+                      width="15"
+                    >
+                      <rect
+                        height="15"
+                        width="15"
+                      />
+                    </svg>
                   </button>
                 </div>
                 <div>
@@ -72,9 +81,16 @@ exports[`<MiniCart /> component should match the snapshot in popup mode 1`] = `
                     variation="tertiary"
                   >
                     Button Test
-                    <div>
-                       Icon Delete 
-                    </div>
+                    <svg
+                      class="undefined IconDelete"
+                      height="15"
+                      width="15"
+                    >
+                      <rect
+                        height="15"
+                        width="15"
+                      />
+                    </svg>
                   </button>
                 </div>
                 <div>
@@ -91,9 +107,16 @@ exports[`<MiniCart /> component should match the snapshot in popup mode 1`] = `
                     variation="tertiary"
                   >
                     Button Test
-                    <div>
-                       Icon Delete 
-                    </div>
+                    <svg
+                      class="undefined IconDelete"
+                      height="15"
+                      width="15"
+                    >
+                      <rect
+                        height="15"
+                        width="15"
+                      />
+                    </svg>
                   </button>
                 </div>
                 <div>
@@ -107,7 +130,9 @@ exports[`<MiniCart /> component should match the snapshot in popup mode 1`] = `
               <div
                 class="contentPrice mb3"
               >
-                <div>
+                <div
+                  class="price-mock"
+                >
                   Price
                 </div>
               </div>
@@ -145,10 +170,11 @@ exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = 
           <span
             class="relative gray"
           >
-            <div>
-               Icon Cart 
-               
-            </div>
+            <svg
+              class="undefined IconCart"
+            >
+              <rect />
+            </svg>
             <span
               class="badge c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid"
             >
@@ -163,16 +189,25 @@ exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = 
     <div
       class="sidebarScrim fixed dim bg-base--inverted top-0 left-0 z-9999 w-100 vh-100 o-40 dn"
     />
-    <div>
+    <div
+      class="animation-mock"
+    >
       <div
         class="sidebarHeader pointer flex flex-row items-center pa5 h3 bg-base w-100 z-max bb b--muted-3 bw1"
       >
         <div
           class="c-muted-1 pa4 flex items-center"
         >
-          <div>
-             Icon Caret 
-          </div>
+          <svg
+            class="undefined IconCaret"
+            height="17"
+            width="17"
+          >
+            <rect
+              height="17"
+              width="17"
+            />
+          </svg>
         </div>
         <aside
           class="container relative fr flex items-center"
@@ -187,10 +222,11 @@ exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = 
               <span
                 class="relative c-muted-1"
               >
-                <div>
-                   Icon Cart 
-                   
-                </div>
+                <svg
+                  class="undefined IconCart"
+                >
+                  <rect />
+                </svg>
                 <span
                   class="badge c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid"
                 >
@@ -219,9 +255,16 @@ exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = 
               variation="tertiary"
             >
               Button Test
-              <div>
-                 Icon Delete 
-              </div>
+              <svg
+                class="undefined IconDelete"
+                height="15"
+                width="15"
+              >
+                <rect
+                  height="15"
+                  width="15"
+                />
+              </svg>
             </button>
           </div>
           <div>
@@ -238,9 +281,16 @@ exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = 
               variation="tertiary"
             >
               Button Test
-              <div>
-                 Icon Delete 
-              </div>
+              <svg
+                class="undefined IconDelete"
+                height="15"
+                width="15"
+              >
+                <rect
+                  height="15"
+                  width="15"
+                />
+              </svg>
             </button>
           </div>
           <div>
@@ -257,9 +307,16 @@ exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = 
               variation="tertiary"
             >
               Button Test
-              <div>
-                 Icon Delete 
-              </div>
+              <svg
+                class="undefined IconDelete"
+                height="15"
+                width="15"
+              >
+                <rect
+                  height="15"
+                  width="15"
+                />
+              </svg>
             </button>
           </div>
           <div>
@@ -273,7 +330,9 @@ exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = 
         <div
           class="contentPrice mb3"
         >
-          <div>
+          <div
+            class="price-mock"
+          >
             Price
           </div>
         </div>

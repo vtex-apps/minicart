@@ -1,7 +1,18 @@
 import React from 'react'
 
-export const IconCart = props => <div> Icon Cart {props.children} </div>
+const iconMock = (size, className, name) => {
+  return (
+    <svg className={`${className} ${name}`} width={size} height={size}>
+      <rect width={size} height={size} />
+    </svg>
+  )
+}
 
-export const IconCaret = props => <div> Icon Caret </div>
+export const IconCart = ({ size, className }) =>
+  iconMock(size, className, 'IconCart')
 
-export const IconDelete = props => <div> Icon Delete </div>
+export const IconCaret = ({ size, className }) =>
+  iconMock(size, className, 'IconCaret')
+
+export const IconDelete = ({ size, className }) =>
+  iconMock(size, className, 'IconDelete')
