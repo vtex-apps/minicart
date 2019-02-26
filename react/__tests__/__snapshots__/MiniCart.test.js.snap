@@ -1,0 +1,353 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MiniCart /> component should match the snapshot in popup mode 1`] = `
+<DocumentFragment>
+  <aside
+    class="container relative fr flex items-center"
+  >
+    <button
+      variation="tertiary"
+    >
+      Button Test
+      <span
+        class="flex items-center"
+      >
+        <span
+          class="relative gray"
+        >
+          <svg
+            class="undefined IconCart"
+          >
+            <rect />
+          </svg>
+          <span
+            class="badge c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid"
+          >
+            3
+          </span>
+        </span>
+      </span>
+    </button>
+    <div>
+      <div
+        class="box dn db-ns absolute z-max flex flex-colunm"
+        style="right: 0px;"
+      >
+        <div
+          class="shadow-3"
+        >
+          <div
+            class="arrowUp absolute top-0 shadow-3 bg-base h1 w1 pa4 rotate-45"
+          />
+          <div
+            class="mt3 bg-base relative flex flex-column"
+          >
+            <div
+              class="content overflow-x-hidden pa1 contentSmall bg-base overflow-y-scroll"
+            >
+              <section
+                class="relative flex"
+              >
+                <div
+                  class="fr absolute top-0 right-0"
+                >
+                  <button
+                    variation="tertiary"
+                  >
+                    Button Test
+                    <svg
+                      class="undefined IconDelete"
+                      height="15"
+                      width="15"
+                    >
+                      <rect
+                        height="15"
+                        width="15"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div>
+                   Extension Point 
+                </div>
+              </section>
+              <section
+                class="relative flex"
+              >
+                <div
+                  class="fr absolute top-0 right-0"
+                >
+                  <button
+                    variation="tertiary"
+                  >
+                    Button Test
+                    <svg
+                      class="undefined IconDelete"
+                      height="15"
+                      width="15"
+                    >
+                      <rect
+                        height="15"
+                        width="15"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div>
+                   Extension Point 
+                </div>
+              </section>
+              <section
+                class="relative flex"
+              >
+                <div
+                  class="fr absolute top-0 right-0"
+                >
+                  <button
+                    variation="tertiary"
+                  >
+                    Button Test
+                    <svg
+                      class="undefined IconDelete"
+                      height="15"
+                      width="15"
+                    >
+                      <rect
+                        height="15"
+                        width="15"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div>
+                   Extension Point 
+                </div>
+              </section>
+            </div>
+            <div
+              class="contentFooter w-100 bg-base pa4 pv5 flex flex-column items-end"
+            >
+              <div
+                class="contentPrice mb3"
+              >
+                <div
+                  class="price-mock"
+                >
+                  Price
+                </div>
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  variation="primary"
+                >
+                  Button TestGo to checkout
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+</DocumentFragment>
+`;
+
+exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = `
+<body>
+  <div>
+    <aside
+      class="container relative fr flex items-center"
+    >
+      <button
+        variation="tertiary"
+      >
+        Button Test
+        <span
+          class="flex items-center"
+        >
+          <span
+            class="relative gray"
+          >
+            <svg
+              class="undefined IconCart"
+            >
+              <rect />
+            </svg>
+            <span
+              class="badge c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid"
+            >
+              3
+            </span>
+          </span>
+        </span>
+      </button>
+    </aside>
+  </div>
+  <div>
+    <div
+      class="sidebarScrim fixed dim bg-base--inverted top-0 left-0 z-9999 w-100 vh-100 o-40 dn"
+    />
+    <div
+      class="animation-mock"
+    >
+      <div
+        class="sidebarHeader pointer flex flex-row items-center pa5 h3 bg-base w-100 z-max bb b--muted-3 bw1"
+      >
+        <div
+          class="c-muted-1 pa4 flex items-center"
+        >
+          <svg
+            class="undefined IconCaret"
+            height="17"
+            width="17"
+          >
+            <rect
+              height="17"
+              width="17"
+            />
+          </svg>
+        </div>
+        <aside
+          class="container relative fr flex items-center"
+        >
+          <button
+            variation="tertiary"
+          >
+            Button Test
+            <span
+              class="flex items-center"
+            >
+              <span
+                class="relative c-muted-1"
+              >
+                <svg
+                  class="undefined IconCart"
+                >
+                  <rect />
+                </svg>
+                <span
+                  class="badge c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid"
+                >
+                  3
+                </span>
+              </span>
+              <span
+                class="label dn-m db-l t-action--small c-muted-1 pl6"
+              >
+                My mini cart
+              </span>
+            </span>
+          </button>
+        </aside>
+      </div>
+      <div
+        class="content overflow-x-hidden pa1 contentLarge"
+      >
+        <section
+          class="relative flex"
+        >
+          <div
+            class="fr absolute top-0 right-0"
+          >
+            <button
+              variation="tertiary"
+            >
+              Button Test
+              <svg
+                class="undefined IconDelete"
+                height="15"
+                width="15"
+              >
+                <rect
+                  height="15"
+                  width="15"
+                />
+              </svg>
+            </button>
+          </div>
+          <div>
+             Extension Point 
+          </div>
+        </section>
+        <section
+          class="relative flex"
+        >
+          <div
+            class="fr absolute top-0 right-0"
+          >
+            <button
+              variation="tertiary"
+            >
+              Button Test
+              <svg
+                class="undefined IconDelete"
+                height="15"
+                width="15"
+              >
+                <rect
+                  height="15"
+                  width="15"
+                />
+              </svg>
+            </button>
+          </div>
+          <div>
+             Extension Point 
+          </div>
+        </section>
+        <section
+          class="relative flex"
+        >
+          <div
+            class="fr absolute top-0 right-0"
+          >
+            <button
+              variation="tertiary"
+            >
+              Button Test
+              <svg
+                class="undefined IconDelete"
+                height="15"
+                width="15"
+              >
+                <rect
+                  height="15"
+                  width="15"
+                />
+              </svg>
+            </button>
+          </div>
+          <div>
+             Extension Point 
+          </div>
+        </section>
+      </div>
+      <div
+        class="contentFooter w-100 bg-base pa4 pv5 flex flex-column items-end bt b--muted-3"
+      >
+        <div
+          class="contentPrice mb3"
+        >
+          <div
+            class="price-mock"
+          >
+            Price
+          </div>
+        </div>
+        <div
+          class="bb bw4 bw2-m b--transparent"
+        >
+          <button
+            variation="primary"
+          >
+            Button Test
+            Go to checkout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

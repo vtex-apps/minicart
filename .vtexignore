@@ -1,0 +1,10 @@
+react/**/__tests__/**
+react/**/__mocks__/**
+react/**/*.test.js
+react/testUtils/**/*
+react/.babelrc
+.prettierrc
+.editorconfig
+.eslintrc
+.gitignore
+README.md
