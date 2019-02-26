@@ -1,17 +1,14 @@
 import React from 'react'
 import { render } from 'test-utils'
+import { fireEvent } from 'react-testing-library'
 
-import { MiniCart } from './../index'
+import MiniCart from './../index'
 
 describe('<MiniCart /> component', () => {
   const renderComponent = customProps => {
     const props = {
       type: 'popup',
-      orderFormContext: {
-        orderForm: {
-          items: [],
-        },
-      },
+      hideContent: false,
       ...customProps,
     }
     return render(<MiniCart {...props} />)
@@ -21,7 +18,15 @@ describe('<MiniCart /> component', () => {
     expect(renderComponent().asFragment()).toBeDefined()
   })
 
-  it('should match the snapshot', () => {
-    expect(renderComponent().asFragment()).toMatchSnapshot()
+  it('should match the snapshot in popup mode', () => {
+    const wrapper = renderComponent()
+    const leftClick = { button: 0 }
+    const { getByText } = wrapper
+    fireEvent.click(getByText('Button Test'), leftClick)
+    expect(wrapper.asFragment()).toMatchSnapshot()
+  })
+
+  it('should match the snapshot in sidebar mode', () => {
+    expect(renderComponent({ type: 'sidebar' }).baseElement).toMatchSnapshot()
   })
 })

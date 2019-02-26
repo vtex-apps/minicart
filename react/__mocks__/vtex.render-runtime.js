@@ -4,7 +4,9 @@ export const withRuntimeContext = Comp => {
     runtime = { account: 'Account' }
 
     render() {
-      return <Comp runtime={this.runtime} />
+      return <Comp runtime={this.runtime} {...this.props} />
     }
   }
 }
+
+export const ExtensionPoint = () => <div> Extension Point </div>

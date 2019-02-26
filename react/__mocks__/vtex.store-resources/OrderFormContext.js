@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import OrderForm from 'orderForm'
 
 export const contextPropTypes = PropTypes.shape({
   /* Toast message that will be displayed  */
@@ -55,26 +56,16 @@ export const contextPropTypes = PropTypes.shape({
   }),
 }).isRequired
 
-const { Consumer, Provider } = React.createContext({})
-
 export function orderFormConsumer(WrappedComponent) {
   const props = {
     orderFormContext: {
-      orderForm: {
-        items: [],
-      },
+      orderForm: OrderForm,
+      message: 'some message',
     },
   }
-  return class OrderFormContext extends React.Component {
-    static displayName = `OrderFormContext(${WrappedComponent.displayName ||
-      WrappedComponent.name})`
-
+  return class extends React.Component {
     render() {
-      return (
-        <Consumer>
-          {context => <WrappedComponent {...props} {...context} />}
-        </Consumer>
-      )
+      return <WrappedComponent {...props} {...this.props} />
     }
   }
 }
