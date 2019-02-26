@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "A MiniCart Component.",
   "scripts": {
-    "test": "jest"
+    "pretest": "yarn",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "classnames": "^2.2.5"
@@ -13,24 +15,29 @@
     "@babel/preset-env": "^7.3.4",
     "babel-jest": "^24.1.0",
     "babel-preset-react-app": "^7.0.1",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^24.1.0",
     "jest-dom": "^3.1.2",
     "jest-transform-graphql": "^2.1.0",
+    "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-intl": "^2.8.0",
+    "react-outside-click-handler": "^1.2.2",
     "react-testing-library": "^6.0.0",
     "regenerator-runtime": "^0.13.1"
   },
   "jest": {
     "verbose": true,
+    "setupFilesAfterEnv": [
+      "<rootDir>/testUtils/setupTests.js"
+    ],
     "transform": {
       "\\.(gql|graphql)$": "jest-transform-graphql",
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
     },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
-    ],
-    "setupFiles": [
-      "./tests-setup.js"
+    "moduleDirectories": [
+      "node_modules",
+      "testUtils"
     ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__test__/fileMock.js",

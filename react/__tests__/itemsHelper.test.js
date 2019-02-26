@@ -5,8 +5,8 @@ import {
   groupItemsWithParents,
   getOptionChoiceType,
   CHOICE_TYPES,
-} from '../itemsHelper'
-import orderForm from '../__mocks__/orderForm.json'
+} from '../utils/itemsHelper'
+import orderForm from 'orderForm'
 
 it('should return only items that dont have parent', () => {
   const parentItems = orderForm.items.filter(isParentItem)
