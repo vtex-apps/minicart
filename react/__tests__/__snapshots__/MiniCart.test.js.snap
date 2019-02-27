@@ -20,11 +20,6 @@ exports[`<MiniCart /> component should match the snapshot in popup mode 1`] = `
           >
             <rect />
           </svg>
-          <span
-            class="badge c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid"
-          >
-            3
-          </span>
         </span>
       </span>
     </button>
@@ -43,108 +38,13 @@ exports[`<MiniCart /> component should match the snapshot in popup mode 1`] = `
             class="mt3 bg-base relative flex flex-column"
           >
             <div
-              class="content overflow-x-hidden pa1 contentSmall bg-base overflow-y-scroll"
+              class="item pa9 flex items-center justify-center relative bg-base"
             >
-              <section
-                class="relative flex"
+              <span
+                class="t-body"
               >
-                <div
-                  class="fr absolute top-0 right-0"
-                >
-                  <button
-                    variation="tertiary"
-                  >
-                    Button Test
-                    <svg
-                      class="undefined IconDelete"
-                      height="15"
-                      width="15"
-                    >
-                      <rect
-                        height="15"
-                        width="15"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <div>
-                   Extension Point 
-                </div>
-              </section>
-              <section
-                class="relative flex"
-              >
-                <div
-                  class="fr absolute top-0 right-0"
-                >
-                  <button
-                    variation="tertiary"
-                  >
-                    Button Test
-                    <svg
-                      class="undefined IconDelete"
-                      height="15"
-                      width="15"
-                    >
-                      <rect
-                        height="15"
-                        width="15"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <div>
-                   Extension Point 
-                </div>
-              </section>
-              <section
-                class="relative flex"
-              >
-                <div
-                  class="fr absolute top-0 right-0"
-                >
-                  <button
-                    variation="tertiary"
-                  >
-                    Button Test
-                    <svg
-                      class="undefined IconDelete"
-                      height="15"
-                      width="15"
-                    >
-                      <rect
-                        height="15"
-                        width="15"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <div>
-                   Extension Point 
-                </div>
-              </section>
-            </div>
-            <div
-              class="contentFooter w-100 bg-base pa4 pv5 flex flex-column items-end"
-            >
-              <div
-                class="contentPrice mb3"
-              >
-                <div
-                  class="price-mock"
-                >
-                  Price
-                </div>
-              </div>
-              <div
-                class=""
-              >
-                <button
-                  variation="primary"
-                >
-                  Button TestGo to checkout
-                </button>
-              </div>
+                Your cart is empty!
+              </span>
             </div>
           </div>
         </div>
@@ -175,11 +75,6 @@ exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = 
             >
               <rect />
             </svg>
-            <span
-              class="badge c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid"
-            >
-              3
-            </span>
           </span>
         </span>
       </button>
@@ -243,109 +138,13 @@ exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = 
         </aside>
       </div>
       <div
-        class="content overflow-x-hidden pa1 contentLarge"
+        class="item pa9 flex items-center justify-center relative bg-base"
       >
-        <section
-          class="relative flex"
+        <span
+          class="t-body"
         >
-          <div
-            class="fr absolute top-0 right-0"
-          >
-            <button
-              variation="tertiary"
-            >
-              Button Test
-              <svg
-                class="undefined IconDelete"
-                height="15"
-                width="15"
-              >
-                <rect
-                  height="15"
-                  width="15"
-                />
-              </svg>
-            </button>
-          </div>
-          <div>
-             Extension Point 
-          </div>
-        </section>
-        <section
-          class="relative flex"
-        >
-          <div
-            class="fr absolute top-0 right-0"
-          >
-            <button
-              variation="tertiary"
-            >
-              Button Test
-              <svg
-                class="undefined IconDelete"
-                height="15"
-                width="15"
-              >
-                <rect
-                  height="15"
-                  width="15"
-                />
-              </svg>
-            </button>
-          </div>
-          <div>
-             Extension Point 
-          </div>
-        </section>
-        <section
-          class="relative flex"
-        >
-          <div
-            class="fr absolute top-0 right-0"
-          >
-            <button
-              variation="tertiary"
-            >
-              Button Test
-              <svg
-                class="undefined IconDelete"
-                height="15"
-                width="15"
-              >
-                <rect
-                  height="15"
-                  width="15"
-                />
-              </svg>
-            </button>
-          </div>
-          <div>
-             Extension Point 
-          </div>
-        </section>
-      </div>
-      <div
-        class="contentFooter w-100 bg-base pa4 pv5 flex flex-column items-end bt b--muted-3"
-      >
-        <div
-          class="contentPrice mb3"
-        >
-          <div
-            class="price-mock"
-          >
-            Price
-          </div>
-        </div>
-        <div
-          class="bb bw4 bw2-m b--transparent"
-        >
-          <button
-            variation="primary"
-          >
-            Button Test
-            Go to checkout
-          </button>
-        </div>
+          Your cart is empty!
+        </span>
       </div>
     </div>
   </div>
