@@ -35,6 +35,7 @@ class MiniCartContent extends Component {
     labelButton: MiniCartPropTypes.labelButtonFinishShopping,
     showDiscount: MiniCartPropTypes.showDiscount,
     showShippingCost: MiniCartPropTypes.showShippingCost,
+    itemsToShow: PropTypes.arrayOf(PropTypes.object),
   }
 
   state = { isUpdating: [] }

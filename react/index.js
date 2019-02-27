@@ -63,7 +63,7 @@ export class MiniCart extends Component {
     })
   }
 
-  itemsFiltered = () => {
+  getFilteredItems = () => {
     const {
       orderFormContext: { orderForm },
     } = this.props
@@ -87,7 +87,7 @@ export class MiniCart extends Component {
       showShippingCost,
     } = this.props
 
-    const itemsToShow = this.itemsFiltered()
+    const itemsToShow = this.getFilteredItems()
     const quantity = itemsToShow.length
 
     const isSizeLarge =
