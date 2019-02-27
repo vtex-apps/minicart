@@ -8,7 +8,7 @@ import MiniCartContent from './components/MiniCartContent'
 import { MiniCartPropTypes } from './propTypes'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
-import { isParentItem } from './utils/itemsHelper'
+import { shouldShowItem } from './utils/itemsHelper'
 import { orderFormConsumer } from 'vtex.store-resources/OrderFormContext'
 import classNames from 'classnames'
 
@@ -63,12 +63,12 @@ export class MiniCart extends Component {
     })
   }
 
-  get itemsQuantity() {
+  getFilteredItems = () => {
     const {
       orderFormContext: { orderForm },
     } = this.props
-    if (!orderForm || !orderForm.items) return 0
-    return orderForm.items.filter(isParentItem).length
+    if (!orderForm || !orderForm.items) return []
+    return orderForm.items.filter(shouldShowItem)
   }
 
   render() {
@@ -87,7 +87,8 @@ export class MiniCart extends Component {
       showShippingCost,
     } = this.props
 
-    const quantity = this.itemsQuantity
+    const itemsToShow = this.getFilteredItems()
+    const quantity = itemsToShow.length
 
     const isSizeLarge =
       (type && type === 'sidebar') ||
@@ -97,6 +98,7 @@ export class MiniCart extends Component {
     const miniCartContent = (
       <MiniCartContent
         isSizeLarge={isSizeLarge}
+        itemsToShow={itemsToShow}
         data={orderFormContext}
         showDiscount={showDiscount}
         labelMiniCartEmpty={labelMiniCartEmpty}
