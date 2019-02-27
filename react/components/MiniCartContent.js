@@ -6,7 +6,7 @@ import classNames from 'classnames'
 
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { Button, Spinner } from 'vtex.styleguide'
-import { IconDelete } from 'vtex.dreamstore-icons'
+import { IconDelete } from 'vtex.store-icons'
 
 import { MiniCartPropTypes } from '../propTypes'
 import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
