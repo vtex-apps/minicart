@@ -2,7 +2,7 @@
   "vendor": "vtex",
   "name": "minicart",
   "title": "Mini Cart",
-  "version": "2.11.9",
+  "version": "2.12.0",
   "defaultLocale": "pt-BR",
   "builders": {
     "messages": "1.x",
