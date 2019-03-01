@@ -13,6 +13,9 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "graphql": "^14.1.1",
+    "graphql-tag": "^2.10.1",
+    "prop-types": "^15.7.2",
     "ramda": "^0.26.1",
     "react-device-detect": "^1.6.2",
     "react-intl": "^2.8.0",
