@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { contextPropTypes } from 'vtex.store-resources/OrderFormContext'
 
 export const MiniCartPropTypes = {
   /* Set the minicart type */
@@ -20,8 +19,6 @@ export const MiniCartPropTypes = {
   labelClasses: PropTypes.string,
   /* Set the discount visibility */
   showDiscount: PropTypes.bool,
-  /* Products in the cart */
-  orderFormContext: contextPropTypes,
   /* Set the shipping fee visibility */
   showShippingCost: PropTypes.bool,
 }

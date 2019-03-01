@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import { IconCaret } from 'vtex.store-icons'
+import { IconCaret, IconCart } from 'vtex.store-icons'
 import { injectIntl, intlShape } from 'react-intl'
 import OutsideClickHandler from 'react-outside-click-handler'
 import Animation from 'vtex.store-components/Animation'
 import classNames from 'classnames'
 
-import MiniCart from '../index'
 import minicart from '../minicart.css'
 
 const OPEN_SIDEBAR_CLASS = minicart.sidebarOpen
@@ -35,7 +34,7 @@ class Sidebar extends Component {
   }
 
   render() {
-    const { isOpen, onOutsideClick, intl } = this.props
+    const { isOpen, onOutsideClick, intl, iconSize, quantity } = this.props
 
     if (typeof document === 'undefined') {
       return null
@@ -76,12 +75,25 @@ class Sidebar extends Component {
             >
               <IconCaret orientation="right" size={17} />
             </div>
-            <MiniCart
-              hideContent
-              iconClasses="c-muted-1"
-              labelClasses="c-muted-1"
-              iconLabel={intl.formatMessage({ id: 'sidebar-title' })}
-            />
+            <div className="relative c-muted-1">
+              <IconCart size={iconSize} />
+              {quantity > 0 && (
+                <span
+                  className={`${
+                    minicart.badge
+                  } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
+                >
+                  {quantity}
+                </span>
+              )}
+            </div>
+            <span
+              className={`${minicart.label} dn-m db-l t-action--small pl${
+                quantity > 0 ? '6' : '4'
+              } c-muted-1`}
+            >
+              {intl.formatMessage({ id: 'sidebar-title' })}
+            </span>
           </div>
           {this.props.children}
         </Animation>
@@ -100,6 +112,10 @@ Sidebar.propTypes = {
   children: PropTypes.object.isRequired,
   /* Function to be called when click in the close sidebar button or outside the sidebar */
   onOutsideClick: PropTypes.func,
+  /* Items quantity */
+  quantity: PropTypes.number.isRequired,
+  /* Cart icon size */
+  iconSize: PropTypes.number.isRequired,
 }
 
 export default injectIntl(Sidebar)

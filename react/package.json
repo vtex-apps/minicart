@@ -16,8 +16,6 @@
     "jest": "^24.1.0",
     "jest-dom": "^3.1.2",
     "jest-transform-graphql": "^2.1.0",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-intl": "^2.8.0",
     "react-testing-library": "^6.0.0",
@@ -25,6 +23,9 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "graphql": "^14.1.1",
+    "graphql-tag": "^2.10.1",
+    "prop-types": "^15.7.2",
     "ramda": "^0.26.1",
     "react-device-detect": "^1.6.2",
     "react-outside-click-handler": "^1.2.2"
