@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import { IconCaret } from 'vtex.dreamstore-icons'
+import { IconCaret } from 'vtex.store-icons'
 import { injectIntl, intlShape } from 'react-intl'
 import OutsideClickHandler from 'react-outside-click-handler'
 import Animation from 'vtex.store-components/Animation'

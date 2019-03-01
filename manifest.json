@@ -2,7 +2,7 @@
   "vendor": "vtex",
   "name": "minicart",
   "title": "Mini Cart",
-  "version": "2.12.0",
+  "version": "2.12.1",
   "defaultLocale": "pt-BR",
   "builders": {
     "messages": "1.x",
@@ -22,6 +22,6 @@
     "vtex.store-resources": "0.x",
     "vtex.store-components": "3.x",
     "vtex.styleguide": "9.x",
-    "vtex.dreamstore-icons": "0.x"
+    "vtex.store-icons": "0.x"
   }
 }

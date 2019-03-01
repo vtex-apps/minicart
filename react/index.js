@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Button } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
 import { withRuntimeContext } from 'vtex.render-runtime'
-import { IconCart } from 'vtex.dreamstore-icons'
+import { IconCart } from 'vtex.store-icons'
 
 import MiniCartContent from './components/MiniCartContent'
 import { MiniCartPropTypes } from './propTypes'
