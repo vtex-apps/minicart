@@ -59,7 +59,7 @@ const MiniCartFooter = ({
         </div>
       )}
       <div className={footerClasses}>
-        {showDiscount && discount > 0 && (
+        {!isUpdating && showDiscount && discount > 0 && (
           <div className={priceAndDiscountClasses}>
             <span className="ttl c-action-primary">{labelDiscount}</span>
             <ProductPrice
