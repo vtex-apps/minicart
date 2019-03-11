@@ -63,7 +63,7 @@ export class MiniCart extends Component {
   handleItemsDifference = async clientItems => {
     this.setState({ updatingOrderForm: true })
     try {
-      const items = clientItems.map(pick(['id', 'index', 'quantity', 'seller']))
+      const items = clientItems.map(pick(['id', 'index', 'quantity', 'seller', 'options']))
       const addItemsResponse = await this.addItems(items)
       const updateItemsResponse = await this.updateItems(items)
       const newOrderForm = pathOr(
@@ -88,7 +88,6 @@ export class MiniCart extends Component {
     const prevOrderForm = path(['data', 'orderForm'], prevProps)
     const orderForm = path(['data', 'orderForm'], this.props)
     if (!prevOrderForm && orderForm) {
-      console.log(orderForm)
       await this.props.updateOrderForm(orderForm)
     }
   }

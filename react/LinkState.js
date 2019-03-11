@@ -32,7 +32,10 @@ const resolvers = {
 
       const indexedItems = items.map(item => ({
         index: prevItems.findIndex(({ id }) => id === item.id),
-        item,
+        item: mapToMinicartItem({
+          ...item,
+          upToDate: false,
+        }),
       }))
 
       const newItems = []
@@ -49,12 +52,7 @@ const resolvers = {
         data: {
           minicart: {
             __typename: 'Minicart',
-            items: newItems.concat(prevItems).map(item =>
-              mapToMinicartItem({
-                ...item,
-                upToDate: false,
-              })
-            ),
+            items: newItems.concat(prevItems),
           },
         },
       })
@@ -102,6 +100,7 @@ function updateLinkStateItems(newItems, cache) {
       ...item,
     })
   )
+
   cache.writeData({
     data: {
       minicart: { __typename: 'Minicart', items },
