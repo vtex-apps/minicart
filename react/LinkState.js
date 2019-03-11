@@ -56,7 +56,7 @@ const resolvers = {
           },
         },
       })
-      return newItems
+      return newItems.concat(prevItems)
     },
     updateItems: (_, { items: newItems }, { cache }) => {
       const query = minicartItemsQuery
