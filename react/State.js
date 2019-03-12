@@ -22,7 +22,7 @@ const minicartItemsQuery = gql`
   }
 `
 
-const resolvers = {
+export const resolvers = {
   Mutation: {
     addToCart: (_, { items }, { cache }) => {
       const query = minicartItemsQuery
@@ -181,15 +181,10 @@ const mapToMinicartItem = item => ({
   __typename: 'MinicartItem',
 })
 
-const initialState = {
+export const initialState = {
   minicart: {
     __typename: 'Minicart',
     items: [],
     orderForm: null,
   },
-}
-
-export default function(client) {
-  client.addResolvers(resolvers)
-  client.writeData({ data: initialState })
 }
