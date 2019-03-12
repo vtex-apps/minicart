@@ -15,6 +15,7 @@
     "classnames": "^2.2.6",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
+    "hoist-non-react-statics": "^3.3.0",
     "prop-types": "^15.7.2",
     "ramda": "^0.26.1",
     "react-device-detect": "^1.6.2",

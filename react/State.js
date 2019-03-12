@@ -110,8 +110,8 @@ function updateLinkStateItems(newItems, cache) {
 }
 
 const mapToLinkStateOrderForm = orderForm => ({
-  __typename: 'OrderForm',
   ...orderForm,
+  __typename: 'OrderFormClient',
   items: orderForm.items && orderForm.items.map(mapToOrderFormItem),
   totalizers:
     orderForm.totalizers && orderForm.totalizers.map(mapToOrderFormTotalizer),
@@ -189,4 +189,7 @@ const initialState = {
   },
 }
 
-module.exports = { resolvers, initialState, minicartItemsQuery }
+export default function(client) {
+  client.addResolvers(resolvers)
+  client.writeData({ data: initialState })
+}

@@ -1,6 +1,8 @@
 import classNames from 'classnames'
+import hoistNonReactStatics from 'hoist-non-react-statics'
+import PropTypes from 'prop-types'
 import { path, pathOr, pick } from 'ramda'
-import React, { Component } from 'react'
+import React, { Component, useEffect } from 'react'
 import { Button } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
 import { withRuntimeContext } from 'vtex.render-runtime'
@@ -21,6 +23,8 @@ import {
   updateItemsMutation,
   updateOrderFormMutation,
 } from './linkState/mutations'
+
+import applyLinkState from './State'
 
 import minicart from './minicart.css'
 
@@ -63,7 +67,9 @@ export class MiniCart extends Component {
   handleItemsDifference = async clientItems => {
     this.setState({ updatingOrderForm: true })
     try {
-      const items = clientItems.map(pick(['id', 'index', 'quantity', 'seller', 'options']))
+      const items = clientItems.map(
+        pick(['id', 'index', 'quantity', 'seller', 'options'])
+      )
       const addItemsResponse = await this.addItems(items)
       const updateItemsResponse = await this.updateItems(items)
       const newOrderForm = pathOr(
@@ -293,6 +299,7 @@ MiniCart.schema = {
 }
 
 const withLinkStateMinicartQuery = graphql(fullMinicartQuery, {
+  options: () => ({ ssr: false }),
   props: ({ data: { minicart } }) => ({
     linkState: {
       minicartItems: minicart && minicart.items,
@@ -316,7 +323,25 @@ const withLinkStateUpdateOrderFormMutation = graphql(updateOrderFormMutation, {
   }),
 })
 
+const withLinkState = WrappedComponent => {
+  const Component = ({ client, ...props }) => {
+    useEffect(() => {
+      applyLinkState(client)
+    }, [])
+
+    return <WrappedComponent client={client} {...props} />
+  }
+
+  Component.displayName = `withLinkState(${WrappedComponent.displayName})`
+  Component.propTypes = {
+    client: PropTypes.object.isRequired,
+  }
+  return hoistNonReactStatics(Component, WrappedComponent)
+}
+
 export default compose(
+  withApollo,
+  withLinkState,
   graphql(orderForm, { options: () => ({ ssr: false }) }),
   graphql(addToCart, { name: 'addToCart' }),
   graphql(updateItems, { name: 'updateItems' }),
@@ -324,6 +349,5 @@ export default compose(
   withLinkStateUpdateItemsMutation,
   withLinkStateUpdateOrderFormMutation,
   withRuntimeContext,
-  withApollo,
   Pixel
 )(MiniCart)
