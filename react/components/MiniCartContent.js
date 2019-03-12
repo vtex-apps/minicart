@@ -29,7 +29,8 @@ class MiniCartContent extends Component {
     /** Define a function that is executed when the item is clicked */
     onClickAction: PropTypes.func,
     /* Reused props */
-    data: MiniCartPropTypes.orderFormContext,
+    orderForm: PropTypes.object,
+    loading: PropTypes.bool,
     labelMiniCartEmpty: MiniCartPropTypes.labelMiniCartEmpty,
     labelButton: MiniCartPropTypes.labelButtonFinishShopping,
     showDiscount: MiniCartPropTypes.showDiscount,
@@ -57,7 +58,7 @@ class MiniCartContent extends Component {
           acc ? { ...acc, quantity: acc.quantity + item.quantity } : item,
         undefined,
         item => item.id,
-        this.props.data.orderForm.items
+        this.props.orderForm.items
       )
     )
 
@@ -71,7 +72,7 @@ class MiniCartContent extends Component {
 
   handleItemRemoval = async id => {
     const {
-      data: { orderForm },
+      orderForm,
       updateItems,
     } = this.props
     const itemPayload = orderForm.items.find(item => item.id === id)
@@ -130,9 +131,7 @@ class MiniCartContent extends Component {
   get isUpdating() {
     const { isUpdating } = this.state
     const {
-      data: {
-        orderForm: { items },
-      },
+      orderForm: { items },
       updatingOrderForm,
     } = this.props
     return (
@@ -238,7 +237,6 @@ class MiniCartContent extends Component {
 
   render() {
     const {
-      data,
       itemsToShow,
       labelMiniCartEmpty,
       labelButton,
@@ -247,14 +245,16 @@ class MiniCartContent extends Component {
       onClickAction,
       isSizeLarge,
       showShippingCost,
+      orderForm,
+      loading,
     } = this.props
     const { isUpdating } = this.state
 
-    if (!data || data.loading) {
+    if (loading) {
       return this.renderLoading()
     }
 
-    if (!data.orderForm || !itemsToShow.length) {
+    if (!orderForm || !itemsToShow.length) {
       const label =
         labelMiniCartEmpty || intl.formatMessage({ id: 'minicart-empty' })
       return this.renderWithoutItems(label)
@@ -267,7 +267,7 @@ class MiniCartContent extends Component {
     })
 
     return this.renderMiniCartWithItems(
-      data.orderForm,
+      orderForm,
       itemsToShow,
       label,
       labelDiscount,

@@ -185,13 +185,11 @@ export class MiniCart extends Component {
       <MiniCartContent
         isSizeLarge={isSizeLarge}
         itemsToShow={itemsToShow}
-        data={{
-          ...data,
-          orderForm: {
-            ...orderForm,
-            items,
-          },
+        orderForm={{
+          ...orderForm,
+          items,
         }}
+        loading={data.loading}
         showDiscount={showDiscount}
         labelMiniCartEmpty={labelMiniCartEmpty}
         labelButton={labelButtonFinishShopping}
