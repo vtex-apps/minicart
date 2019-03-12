@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.12.4-hkignore] - 2019-03-12
+
 ## [2.12.3-hkignore] - 2019-03-12
 
 ## [2.12.2-hkignore] - 2019-03-11
