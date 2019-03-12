@@ -24,7 +24,7 @@ import {
   updateOrderFormMutation,
 } from './linkState/mutations'
 
-import applyLinkState from './State'
+import { resolvers, initialState } from './State'
 
 import minicart from './minicart.css'
 
@@ -326,7 +326,13 @@ const withLinkStateUpdateOrderFormMutation = graphql(updateOrderFormMutation, {
 const withLinkState = WrappedComponent => {
   const Component = ({ client, ...props }) => {
     useEffect(() => {
-      applyLinkState(client)
+      client.addResolvers(resolvers)
+      // Add the initial state to if there is not there
+      try {
+        client.readQuery({ query: fullMinicartQuery })
+      } catch (err) {
+        client.writeData({ data: initialState })
+      }
     }, [])
 
     return <WrappedComponent client={client} {...props} />
