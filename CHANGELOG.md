@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+
+- Use the new Apollo Local State API to manage the orderForm and the minicart items to a faster UX.
 
 ## [2.13.1] - 2019-03-14
 
@@ -13,7 +16,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Use most generic languages files.
 
+## [2.13.1] - 2019-03-14
+### Added
+
+- Use the new Apollo Local State API to manage the orderForm and the minicart items to a faster UX.
+
 ## [2.13.0] - 2019-03-13
+
+### Changed
+
+- Use `inlinePrice` product summary type.
+
+## [2.12.1] - 2019-03-01
+
 
 ### Changed
 
