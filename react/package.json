@@ -12,12 +12,15 @@
     "prop-types": "^15.7.2"
   },
   "dependencies": {
+    "apollo-client": "^2.5.1",
     "classnames": "^2.2.6",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
     "hoist-non-react-statics": "^3.3.0",
     "prop-types": "^15.7.2",
     "ramda": "^0.26.1",
+    "react": "^16.8.4",
+    "react-apollo": "^2.5.2",
     "react-device-detect": "^1.6.2",
     "react-intl": "^2.8.0",
     "react-outside-click-handler": "^1.2.2"

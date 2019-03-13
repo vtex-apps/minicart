@@ -1,8 +1,17 @@
 import React from 'react'
 import { render, fireEvent } from '@vtex/test-tools/react'
+import wait from 'waait'
+
 import MiniCart from './../index'
 
 describe('<MiniCart /> component', () => {
+  async function resolveApolloQueries() {
+    // Server queries
+    await wait(0)
+    // Local state queries
+    await wait(0)
+  }
+
   it('should be rendered', () => {
     const { asFragment } = render(<MiniCart type="popup" hideContent={false} />)
     expect(asFragment()).toBeDefined()
@@ -57,21 +66,26 @@ describe('<MiniCart /> component', () => {
     expect(box).toBeNull()
   })
 
-  it('should match the snapshot in popup mode', () => {
+  it('should match the snapshot in popup mode', async () => {
     const leftClick = { button: 0 }
 
     const { getByText, asFragment } = render(
       <MiniCart type="popup" hideContent={false} />
     )
+
+    await resolveApolloQueries()
+
     fireEvent.click(getByText('Button Test'), leftClick)
 
     expect(asFragment()).toMatchSnapshot()
   })
 
-  it('should match the snapshot in sidebar mode', () => {
+  it('should match the snapshot in sidebar mode', async () => {
     const { baseElement } = render(
       <MiniCart type="sidebar" hideContent={false} />
     )
+
+    await resolveApolloQueries()
     expect(baseElement).toMatchSnapshot()
   })
 })

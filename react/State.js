@@ -116,8 +116,8 @@ const mapToLinkStateOrderForm = orderForm => ({
   totalizers:
     orderForm.totalizers && orderForm.totalizers.map(mapToOrderFormTotalizer),
   clientProfileData: orderForm.clientProfileData && {
-    __typename: 'OrderFormClientProfileData',
     ...orderForm.clientProfileData,
+    __typename: 'OrderFormClientProfileData',
   },
   shippingData:
     orderForm.shippingData &&
@@ -129,47 +129,49 @@ const mapToLinkStateOrderForm = orderForm => ({
 
 const mapAssemblyOptions = options =>
   options && {
-    __typename: 'AssemblyOptions',
     ...options,
     added:
       options.added &&
       options.added.map(added => ({
-        __typename: 'AddedAssemblyOptions',
         item: added.item && mapToOrderFormItem(added.item),
         ...added,
+        __typename: 'AddedAssemblyOptions',
       })),
-    removed: options.removed && {
-      __typename: 'RemovedAssemblyOptions',
-      ...options.removed,
-    },
+    removed:
+      options.removed &&
+      options.removed.map(option => ({
+        ...option,
+        __typename: 'RemovedAssemblyOption',
+      })),
+    __typename: 'AssemblyOptions',
   }
 
 const mapToOrderFormItem = item => ({
-  __typename: 'OrderFormItem',
   ...item,
   assemblyOptions: mapAssemblyOptions(item.assemblyOptions),
+  __typename: 'OrderFormItem',
 })
 
 const mapToOrderFormTotalizer = totalizer => ({
-  __typename: 'OrderFormTotalizer',
   ...totalizer,
+  __typename: 'OrderFormTotalizer',
 })
 
 const mapToOrderFormShippingData = ({ address, availableAddresses }) => ({
-  __typename: 'OrderFormShippingData',
   address: address && mapToAddress(address),
   availableAddresses:
     availableAddresses && availableAddresses.map(mapToAddress),
+  __typename: 'OrderFormShippingData',
 })
 
 const mapToAddress = address => ({
-  __typename: 'Address',
   ...address,
+  __typename: 'Address',
 })
 
 const mapToOrderFormStorePreferences = storePreferencesData => ({
-  __typename: 'OrderFormStorePreferencesData',
   ...storePreferencesData,
+  __typename: 'OrderFormStorePreferencesData',
 })
 
 const mapToMinicartItem = item => ({

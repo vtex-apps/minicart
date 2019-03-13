@@ -34,7 +34,7 @@ const DEFAULT_ICON_CLASSES = 'gray'
 /**
  * Minicart component
  */
-export class MiniCart extends Component {
+class MiniCart extends Component {
   static propTypes = MiniCartPropTypes
 
   static defaultProps = {
@@ -344,8 +344,6 @@ const withLinkState = WrappedComponent => {
 }
 
 export default compose(
-  withApollo,
-  withLinkState,
   graphql(orderForm, { options: () => ({ ssr: false }) }),
   graphql(addToCart, { name: 'addToCart' }),
   graphql(updateItems, { name: 'updateItems' }),
@@ -353,5 +351,7 @@ export default compose(
   withLinkStateUpdateItemsMutation,
   withLinkStateUpdateOrderFormMutation,
   withRuntimeContext,
+  withApollo,
+  withLinkState,
   Pixel
 )(MiniCart)
