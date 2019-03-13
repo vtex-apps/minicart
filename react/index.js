@@ -24,7 +24,7 @@ import {
   updateOrderFormMutation,
 } from './linkState/mutations'
 
-import { resolvers, initialState } from './State'
+import { resolvers, initialState } from './localState'
 
 import minicart from './minicart.css'
 

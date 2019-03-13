@@ -1,4 +1,4 @@
-const gql = require('graphql-tag')
+import gql from 'graphql-tag'
 
 const minicartItemsQuery = gql`
   query {
@@ -22,7 +22,7 @@ const minicartItemsQuery = gql`
   }
 `
 
-export const resolvers = {
+const resolvers = {
   Mutation: {
     addToCart: (_, { items }, { cache }) => {
       const query = minicartItemsQuery
@@ -93,7 +93,7 @@ export const resolvers = {
   },
 }
 
-function updateLinkStateItems(newItems, cache) {
+const updateLinkStateItems = (newItems, cache) => {
   const items = newItems.map(item =>
     mapToMinicartItem({
       upToDate: true,
@@ -183,10 +183,12 @@ const mapToMinicartItem = item => ({
   __typename: 'MinicartItem',
 })
 
-export const initialState = {
+const initialState = {
   minicart: {
     __typename: 'Minicart',
     items: [],
     orderForm: null,
   },
 }
+
+export { resolvers, initialState }
