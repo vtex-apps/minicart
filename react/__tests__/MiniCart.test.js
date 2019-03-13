@@ -1,6 +1,5 @@
 import React from 'react'
-import { render } from 'test-utils'
-import { fireEvent } from 'react-testing-library'
+import { render, fireEvent } from '@vtex/test-tools/react'
 import MiniCart from './../index'
 
 describe('<MiniCart /> component', () => {
