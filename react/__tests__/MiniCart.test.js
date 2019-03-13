@@ -6,6 +6,10 @@ import MiniCart from './../index'
 
 describe('<MiniCart /> component', () => {
   async function resolveApolloQueries() {
+    // Waits until the GraphQL queries resolve. The initial data is loading but in the
+    // next cicle, it gets the mocked data
+    // See: https://www.apollographql.com/docs/react/recipes/testing.html
+
     // Server queries
     await wait(0)
     // Local state queries
