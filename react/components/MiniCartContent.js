@@ -214,8 +214,10 @@ class MiniCartContent extends Component {
     const classes = classNames(`${minicart.content} overflow-x-hidden pa1`, {
       [`${minicart.contentSmall} bg-base`]: !isSizeLarge,
       [`${minicart.contentLarge}`]: isSizeLarge,
-      'overflow-y-scroll': itemsToShow.length > MIN_ITEMS_TO_SCROLL && !isSizeLarge,
-      'overflow-y-hidden': itemsToShow.length <= MIN_ITEMS_TO_SCROLL && !isSizeLarge,
+      'overflow-y-scroll':
+        itemsToShow.length > MIN_ITEMS_TO_SCROLL && !isSizeLarge,
+      'overflow-y-hidden':
+        itemsToShow.length <= MIN_ITEMS_TO_SCROLL && !isSizeLarge,
     })
 
     return (
@@ -244,7 +246,7 @@ class MiniCartContent extends Component {
                   showBorders
                   product={this.createProductShapeFromItem(item)}
                   name={item.name}
-                  displayMode="inline"
+                  displayMode="inlinePrice"
                   showListPrice={false}
                   showBadge={false}
                   showInstallments={false}
