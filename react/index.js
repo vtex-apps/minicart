@@ -83,8 +83,11 @@ class MiniCart extends Component {
         items: clientItems,
       })
     } catch (err) {
-      // TODO: Toast error message
+      // TODO: Toast error message into Alert
       console.error(err)
+      // Rollback items and orderForm
+      const orderForm = path(['data', 'orderForm'], this.props)
+      await this.props.updateOrderForm(orderForm)
     } finally {
       this.setState({ updatingOrderForm: false })
     }
