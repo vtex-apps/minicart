@@ -33,7 +33,7 @@ describe('<MiniCart /> component', () => {
     expect(sidebar).toBeNull()
   })
 
-  it('should render sidebar onClick', () => {
+  it('should display sidebar onClick', () => {
     const { getByText, baseElement } = render(
       <MiniCart type="sidebar" hideContent={false} />
     )
