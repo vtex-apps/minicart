@@ -28,6 +28,10 @@ class MiniCartContent extends Component {
     intl: intlShape.isRequired,
     /** Define a function that is executed when the item is clicked */
     onClickAction: PropTypes.func,
+    /* Update Items mutation */
+    updateItems: PropTypes.func.isRequired,
+    /* Determines if the orderform is updating */
+    updatingOrderForm: PropTypes.bool,
     /* Reused props */
     orderForm: PropTypes.object,
     loading: PropTypes.bool,
@@ -36,11 +40,6 @@ class MiniCartContent extends Component {
     showDiscount: MiniCartPropTypes.showDiscount,
     showShippingCost: MiniCartPropTypes.showShippingCost,
     itemsToShow: PropTypes.arrayOf(PropTypes.object),
-
-    /* Update Items mutation */
-    updateItems: PropTypes.func.isRequired,
-    /* Determines if the orderform is updating */
-    updatingOrderForm: PropTypes.bool,
   }
 
   state = { isUpdating: [] }

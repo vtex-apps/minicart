@@ -92,3 +92,81 @@ export const fullMinicartQuery = gql`
     }
   }
 `
+
+export const minicartOrderFormQuery = gql`
+  query orderForm {
+    minicart @client {
+      orderForm {
+        cacheId
+        orderFormId
+        value
+        totalizers {
+          id
+          name
+          value
+        }
+        shippingData {
+          address {
+            id
+            neighborhood
+            complement
+            number
+            street
+            postalCode
+            city
+            reference
+            addressName
+            addressType
+          }
+          availableAddresses {
+            id
+            neighborhood
+            complement
+            number
+            street
+            postalCode
+            city
+            reference
+            addressName
+            addressType
+          }
+        }
+        clientProfileData {
+          email
+          firstName
+        }
+        storePreferencesData {
+          countryCode
+          currencyCode
+          timeZone
+        }
+        itemMetadata {
+          items {
+            id
+            name
+            skuName
+            productId
+            refId
+            ean
+            imageUrl
+            detailUrl
+            assemblyOptions {
+              id
+              name
+              required
+              composition {
+                minQuantity
+                maxQuantity
+                items {
+                  maxQuantity
+                  initialQuantity
+                  id
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
