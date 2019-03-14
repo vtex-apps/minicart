@@ -43,7 +43,7 @@ describe('<MiniCart /> component', () => {
 
     // Expect box be null before and after click
     expect(box).toBeNull()
-    // Sidebar should shold have diplay block class before click
+    // Sidebar should have diplay none class before click
     expect(sidebar).toBeDefined()
     expect(sidebar).not.toBeNull()
 
@@ -52,6 +52,7 @@ describe('<MiniCart /> component', () => {
     box = baseElement.querySelector('.box')
     sidebar = baseElement.querySelector('.sidebarScrim.dn')
 
+    // Expect sidebar dont have display none after click
     expect(sidebar).toBeNull()
     expect(box).toBeNull()
   })
