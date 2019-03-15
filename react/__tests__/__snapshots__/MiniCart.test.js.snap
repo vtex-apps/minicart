@@ -103,7 +103,9 @@ exports[`<MiniCart /> component should match the snapshot in popup mode 1`] = `
 `;
 
 exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = `
-<body>
+<body
+  class=""
+>
   <div>
     <aside
       class="container relative fr flex items-center"
