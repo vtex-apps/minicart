@@ -17,6 +17,30 @@ export const fullMinicartQuery = gql`
         index
         parentItemIndex
         parentAssemblyBinding
+        options {
+          seller
+          assemblyId
+          quantity
+          id
+        }
+        assemblyOptions {
+          parentPrice
+          added {
+            normalizedQuantity
+            choiceType
+            extraQuantity
+            item {
+              name
+              sellingPrice
+              quantity
+            }
+          }
+          removed {
+            removedQuantity
+            initialQuantity
+            name
+          }
+        }
       }
       orderForm {
         cacheId

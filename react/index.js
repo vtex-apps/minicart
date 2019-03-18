@@ -110,7 +110,7 @@ class MiniCart extends Component {
     )
 
     if (itemsToAdd.length) {
-      return this.props.addToCart({ variables: { orderFormId, items } })
+      return this.props.addToCart({ variables: { orderFormId, items: itemsToAdd } })
     }
   }
 
@@ -123,7 +123,7 @@ class MiniCart extends Component {
     )
 
     if (itemsToUpdate.length) {
-      return this.props.updateItems({ variables: { orderFormId, items } })
+      return this.props.updateItems({ variables: { orderFormId, items: itemsToUpdate } })
     }
   }
 
