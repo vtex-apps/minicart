@@ -24,6 +24,30 @@ const minicartItemsQuery = gql`
         index
         parentItemIndex
         parentAssemblyBinding
+        options {
+          seller
+          quantity
+          assemblyId
+          id
+        }
+        assemblyOptions {
+          added {
+            item {
+              name
+              sellingPrice
+              quantity
+            }
+            normalizedQuantity
+            choiceType
+            extraQuantity
+          }
+          removed {
+            removedQuantity
+            initialQuantity
+            name
+          }
+          parentPrice
+        }
       }
     }
   }
@@ -133,8 +157,8 @@ export default function(client) {
   const updateLinkStateItems = (newItems, cache) => {
     const items = newItems.map(item =>
       mapToMinicartItem({
-        upToDate: true,
         ...item,
+        upToDate: true,
       })
     )
 
@@ -168,15 +192,13 @@ export default function(client) {
     options && {
       ...options,
       added:
-        options.added &&
-        options.added.map(added => ({
-          item: added.item && mapToOrderFormItem(added.item),
+        (options.added || []).map(added => ({
           ...added,
+          item: added.item && mapToOrderFormItem(added.item),
           __typename: 'AddedAssemblyOptions',
         })),
       removed:
-        options.removed &&
-        options.removed.map(option => ({
+        (options.removed || []).map(option => ({
           ...option,
           __typename: 'RemovedAssemblyOption',
         })),
@@ -185,7 +207,7 @@ export default function(client) {
 
   const mapToOrderFormItem = item => ({
     ...item,
-    assemblyOptions: mapAssemblyOptions(item.assemblyOptions),
+    assemblyOptions: mapAssemblyOptions(item.assemblyOptions || {}),
     __typename: 'OrderFormItem',
   })
 
@@ -211,12 +233,20 @@ export default function(client) {
     __typename: 'OrderFormStorePreferencesData',
   })
 
+  const mapItemOptions = option => ({
+    ...option,
+    __typename: 'MinicartItemOptions',
+  })
+  
+
   const mapToMinicartItem = item => ({
     seller: null,
     index: null,
     parentItemIndex: null,
     parentAssemblyBinding: null,
     ...item,
+    options: (item.options || []).map(mapItemOptions),
+    assemblyOptions: mapAssemblyOptions(item.assemblyOptions || {}),  
     __typename: 'MinicartItem',
   })
 
