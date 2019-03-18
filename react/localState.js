@@ -235,6 +235,10 @@ export default function(client) {
   })
 
   const mapItemOptions = option => ({
+    seller: null,
+    assemblyId: null,
+    id: null,
+    quantity: null,
     ...option,
     __typename: 'MinicartItemOptions',
   })
