@@ -190,6 +190,7 @@ export default function(client) {
 
   const mapAssemblyOptions = options =>
     options && {
+      parentPrice: null,
       ...options,
       added:
         (options.added || []).map(added => ({
