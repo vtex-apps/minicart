@@ -18,11 +18,11 @@ import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
 import { shouldShowItem } from './utils/itemsHelper'
 
-import { fullMinicartQuery } from './linkState/queries'
+import { fullMinicartQuery } from './localState/queries'
 import {
   updateItemsMutation,
   updateOrderFormMutation,
-} from './linkState/mutations'
+} from './localState/mutations'
 
 import createLocalState from './localState'
 
@@ -48,7 +48,7 @@ class MiniCart extends Component {
   }
 
   async componentDidUpdate(prevProps) {
-    this.handleItemsUpdate()
+    await this.handleItemsUpdate()
     this.handleOrderFormUpdate(prevProps)
   }
 

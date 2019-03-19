@@ -4,8 +4,8 @@ import { mergeDeepRight } from 'ramda'
 import {
   updateOrderFormShipping,
   updateOrderFormCheckin,
-} from 'vtex.store-resources/Queries'
-import { minicartOrderFormQuery } from './linkState/queries'
+} from 'vtex.store-resources/Mutations'
+import { minicartOrderFormQuery } from './queries'
 
 const minicartItemsQuery = gql`
   query {
