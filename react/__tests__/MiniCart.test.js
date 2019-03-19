@@ -1,8 +1,24 @@
 import React from 'react'
+import { MockedProvider } from 'react-apollo/test-utils'
 import { render, fireEvent } from '@vtex/test-tools/react'
+import { orderForm as orderFormQuery } from 'vtex.store-resources/Queries'
 import wait from 'waait'
 
+import orderForm from '../__mocks__/orderForm'
 import MiniCart from './../index'
+
+const mocks = [
+  {
+    request: {
+      query: orderFormQuery,
+    },
+    result: {
+      data: {
+        orderForm,
+      },
+    },
+  },
+]
 
 describe('<MiniCart /> component', () => {
   async function resolveApolloQueries() {
@@ -21,10 +37,12 @@ describe('<MiniCart /> component', () => {
     expect(asFragment()).toBeDefined()
   })
 
-  it('should render popup onClick', () => {
+  it('should render popup onClick', async () => {
     const { getByText, baseElement } = render(
       <MiniCart type="popup" hideContent={false} />
     )
+
+    await resolveApolloQueries()
 
     let box = baseElement.querySelector('.box')
     let sidebar = baseElement.querySelector('.sidebar')
@@ -46,10 +64,12 @@ describe('<MiniCart /> component', () => {
     expect(sidebar).toBeNull()
   })
 
-  it('should display sidebar onClick', () => {
+  it('should display sidebar onClick', async () => {
     const { getByText, baseElement } = render(
       <MiniCart type="sidebar" hideContent={false} />
     )
+
+    await resolveApolloQueries()
 
     let box = baseElement.querySelector('.box')
     let sidebar = baseElement.querySelector('.sidebarScrim.dn')
@@ -74,7 +94,9 @@ describe('<MiniCart /> component', () => {
     const leftClick = { button: 0 }
 
     const { getByText, asFragment } = render(
-      <MiniCart type="popup" hideContent={false} />
+      <MockedProvider mocks={mocks}>
+        <MiniCart type="popup" hideContent={false} />
+      </MockedProvider>
     )
 
     await resolveApolloQueries()
@@ -86,7 +108,9 @@ describe('<MiniCart /> component', () => {
 
   it('should match the snapshot in sidebar mode', async () => {
     const { baseElement } = render(
-      <MiniCart type="sidebar" hideContent={false} />
+      <MockedProvider mocks={mocks}>
+        <MiniCart type="sidebar" hideContent={false} />
+      </MockedProvider>
     )
 
     await resolveApolloQueries()
