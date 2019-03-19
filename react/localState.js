@@ -188,8 +188,7 @@ export default function(client) {
       mapToOrderFormStorePreferences(orderForm.storePreferencesData),
   })
 
-  const mapAssemblyOptions = options =>
-    options && {
+  const mapAssemblyOptions = (options = {}) => ({
       parentPrice: null,
       ...options,
       added:
@@ -204,11 +203,11 @@ export default function(client) {
           __typename: 'RemovedAssemblyOption',
         })),
       __typename: 'AssemblyOptions',
-    }
+    })
 
   const mapToOrderFormItem = item => ({
     ...item,
-    assemblyOptions: mapAssemblyOptions(item.assemblyOptions || {}),
+    assemblyOptions: mapAssemblyOptions(item.assemblyOptions),
     __typename: 'OrderFormItem',
   })
 
@@ -242,7 +241,6 @@ export default function(client) {
     ...option,
     __typename: 'MinicartItemOptions',
   })
-  
 
   const mapToMinicartItem = item => ({
     seller: null,
@@ -250,8 +248,8 @@ export default function(client) {
     parentItemIndex: null,
     parentAssemblyBinding: null,
     ...item,
-    options: (item.options || []).map(mapItemOptions),
-    assemblyOptions: mapAssemblyOptions(item.assemblyOptions || {}),  
+    options: item.options ? item.options.map(mapItemOptions) : null,
+    assemblyOptions: mapAssemblyOptions(item.assemblyOptions),
     __typename: 'MinicartItem',
   })
 

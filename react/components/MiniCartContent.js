@@ -97,7 +97,7 @@ class MiniCartContent extends Component {
     this.setState({ isUpdating })
   }
 
-  sumOptionsSellingPrice = ({ added = [] } = {}) => {
+  sumOptionsSellingPrice = ({ added = [] }) => {
     return added.reduce(
       (acc, option) => acc + option.item.sellingPrice * option.item.quantity,
       0
@@ -112,7 +112,7 @@ class MiniCartContent extends Component {
         commertialOffer: {
           Price:
             item.sellingPrice * item.quantity +
-            this.sumOptionsSellingPrice(item.assemblyOptions),
+            this.sumOptionsSellingPrice(item.assemblyOptions || {}),
           ListPrice: item.listPrice,
         },
         sellerId: item.seller,
