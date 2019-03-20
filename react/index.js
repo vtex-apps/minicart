@@ -351,11 +351,11 @@ export default compose(
   graphql(orderForm, { options: () => ({ ssr: false }) }),
   graphql(addToCart, { name: 'addToCart' }),
   graphql(updateItems, { name: 'updateItems' }),
+  withApollo,
+  withLinkState,
   withLinkStateMinicartQuery,
   withLinkStateUpdateItemsMutation,
   withLinkStateUpdateOrderFormMutation,
   withRuntimeContext,
-  withApollo,
-  withLinkState,
   Pixel
 )(MiniCart)

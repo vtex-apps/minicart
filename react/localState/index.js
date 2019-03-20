@@ -119,12 +119,13 @@ export default function(client) {
           minicart: { items: prevItems },
         } = cache.readQuery({ query })
 
-        const items = prevItems
-          .map(prevItem => {
-            const newItem = newItems.find(({ id }) => id === prevItem.id)
-            return newItem ? { ...newItem, upToDate: false } : prevItem
-          })
-          .map(mapToMinicartItem)
+        const items = prevItems.map((prevItem, index) => {
+          const newItem = newItems.find(({ id }) => id === prevItem.id)
+          const item = newItem
+            ? mergeDeepRight(prevItem, { ...newItem, upToDate: false })
+            : prevItem
+          return mapToMinicartItem(item, index)
+        })
 
         cache.writeData({
           data: {
@@ -189,21 +190,19 @@ export default function(client) {
   })
 
   const mapAssemblyOptions = (options = {}) => ({
-      parentPrice: null,
-      ...options,
-      added:
-        (options.added || []).map(added => ({
-          ...added,
-          item: added.item && mapToOrderFormItem(added.item),
-          __typename: 'AddedAssemblyOptions',
-        })),
-      removed:
-        (options.removed || []).map(option => ({
-          ...option,
-          __typename: 'RemovedAssemblyOption',
-        })),
-      __typename: 'AssemblyOptions',
-    })
+    parentPrice: null,
+    ...options,
+    added: (options.added || []).map(added => ({
+      ...added,
+      item: added.item && mapToOrderFormItem(added.item),
+      __typename: 'AddedAssemblyOptions',
+    })),
+    removed: (options.removed || []).map(option => ({
+      ...option,
+      __typename: 'RemovedAssemblyOption',
+    })),
+    __typename: 'AssemblyOptions',
+  })
 
   const mapToOrderFormItem = item => ({
     ...item,
