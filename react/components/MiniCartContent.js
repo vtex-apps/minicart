@@ -13,6 +13,7 @@ import { IconDelete } from 'vtex.store-icons'
 import { MiniCartPropTypes } from '../propTypes'
 import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
 
+import { updateItemsMutation } from '../localState/mutations'
 import minicart from '../minicart.css'
 import MiniCartFooter from './MiniCartFooter'
 
@@ -70,10 +71,7 @@ class MiniCartContent extends Component {
     this.sumItemsPrice(items) - totalPrice
 
   handleItemRemoval = async id => {
-    const {
-      orderForm,
-      updateItems,
-    } = this.props
+    const { orderForm, updateItems } = this.props
     const itemPayload = orderForm.items.find(item => item.id === id)
     const index = orderForm.items.indexOf(itemPayload)
     const updatedItems = [itemPayload].map(item => ({
@@ -279,19 +277,12 @@ class MiniCartContent extends Component {
   }
 }
 
-const withLinkStateUpdateItemsMutation = graphql(
-  gql`
-    mutation updateItems($items: [MinicartItem]) {
-      updateItems(items: $items) @client
-    }
-  `,
-  {
-    name: 'updateItems',
-    props: ({ updateItems }) => ({
-      updateItems: items => updateItems({ variables: { items } }),
-    }),
-  }
-)
+const withLinkStateUpdateItemsMutation = graphql(updateItemsMutation, {
+  name: 'updateItems',
+  props: ({ updateItems }) => ({
+    updateItems: items => updateItems({ variables: { items } }),
+  }),
+})
 
 export default compose(
   injectIntl,

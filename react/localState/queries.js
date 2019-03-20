@@ -194,3 +194,49 @@ export const minicartOrderFormQuery = gql`
     }
   }
 `
+
+export const minicartItemsQuery = gql`
+  query {
+    minicart @client {
+      items {
+        upToDate
+        id
+        name
+        imageUrl
+        detailUrl
+        skuName
+        quantity
+        sellingPrice
+        listPrice
+        seller
+        index
+        parentItemIndex
+        parentAssemblyBinding
+        options {
+          seller
+          quantity
+          assemblyId
+          id
+        }
+        assemblyOptions {
+          added {
+            item {
+              name
+              sellingPrice
+              quantity
+            }
+            normalizedQuantity
+            choiceType
+            extraQuantity
+          }
+          removed {
+            removedQuantity
+            initialQuantity
+            name
+          }
+          parentPrice
+        }
+      }
+    }
+  }
+`

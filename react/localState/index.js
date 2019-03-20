@@ -5,53 +5,7 @@ import {
   updateOrderFormShipping,
   updateOrderFormCheckin,
 } from 'vtex.store-resources/Mutations'
-import { minicartOrderFormQuery } from './queries'
-
-const minicartItemsQuery = gql`
-  query {
-    minicart @client {
-      items {
-        upToDate
-        id
-        name
-        imageUrl
-        detailUrl
-        skuName
-        quantity
-        sellingPrice
-        listPrice
-        seller
-        index
-        parentItemIndex
-        parentAssemblyBinding
-        options {
-          seller
-          quantity
-          assemblyId
-          id
-        }
-        assemblyOptions {
-          added {
-            item {
-              name
-              sellingPrice
-              quantity
-            }
-            normalizedQuantity
-            choiceType
-            extraQuantity
-          }
-          removed {
-            removedQuantity
-            initialQuantity
-            name
-          }
-          parentPrice
-        }
-      }
-    }
-  }
-`
+import { minicartItemsQuery, minicartOrderFormQuery } from './queries'
 
 export default function(client) {
   const replayOrderFormServerMutation = mutation => async (
