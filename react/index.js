@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import PropTypes from 'prop-types'
-import { path, pathOr, pick } from 'ramda'
+import { identity, path, pathOr, pick } from 'ramda'
 import React, { Component, useEffect } from 'react'
 import { Button } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
@@ -109,7 +109,9 @@ class MiniCart extends Component {
       ({ id }) => !serverItems.find(({ id: serverId }) => serverId === id)
     )
     if (itemsToAdd.length) {
-      return this.props.addToCart({ variables: { orderFormId, items: itemsToAdd } })
+      return this.props.addToCart({
+        variables: { orderFormId, items: itemsToAdd },
+      })
     }
   }
 
@@ -118,18 +120,18 @@ class MiniCart extends Component {
       orderForm: { orderFormId, items: serverItems },
     } = this.props.data
 
-    const itemsToUpdate = []
-    for (let i = 0; i < items.length; i++) {
-      const { id } = items[i]
-      const index = serverItems.findIndex(({ id: serverId }) => id === serverId)
-      if (index >= 0) {
-        itemsToUpdate.push({ ...items[i], index })
-      }
-    }
-
-    console.log(itemsToUpdate)
+    const itemsToUpdate = items
+      .map(item => {
+        const index = serverItems.findIndex(
+          ({ id: serverId }) => item.id === serverId
+        )
+        return index !== -1 ? { ...item, index } : null
+      })
+      .filter(identity)
     if (itemsToUpdate.length) {
-      return this.props.updateItems({ variables: { orderFormId, items: itemsToUpdate } })
+      return this.props.updateItems({
+        variables: { orderFormId, items: itemsToUpdate },
+      })
     }
   }
 
