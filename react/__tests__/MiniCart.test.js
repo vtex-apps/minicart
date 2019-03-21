@@ -1,17 +1,48 @@
 import React from 'react'
+import { MockedProvider } from 'react-apollo/test-utils'
 import { render, fireEvent } from '@vtex/test-tools/react'
+import { orderForm as orderFormQuery } from 'vtex.store-resources/Queries'
+import wait from 'waait'
+
+import orderForm from '../__mocks__/orderForm'
 import MiniCart from './../index'
 
+const mocks = [
+  {
+    request: {
+      query: orderFormQuery,
+    },
+    result: {
+      data: {
+        orderForm,
+      },
+    },
+  },
+]
+
 describe('<MiniCart /> component', () => {
+  async function resolveApolloQueries() {
+    // Waits until the GraphQL queries resolve. The initial data is loading but in the
+    // next cicle, it gets the mocked data
+    // See: https://www.apollographql.com/docs/react/recipes/testing.html
+
+    // Server queries
+    await wait(0)
+    // Local state queries
+    await wait(0)
+  }
+
   it('should be rendered', () => {
     const { asFragment } = render(<MiniCart type="popup" hideContent={false} />)
     expect(asFragment()).toBeDefined()
   })
 
-  it('should render popup onClick', () => {
+  it('should render popup onClick', async () => {
     const { getByText, baseElement } = render(
       <MiniCart type="popup" hideContent={false} />
     )
+
+    await resolveApolloQueries()
 
     let box = baseElement.querySelector('.box')
     let sidebar = baseElement.querySelector('.sidebar')
@@ -33,10 +64,12 @@ describe('<MiniCart /> component', () => {
     expect(sidebar).toBeNull()
   })
 
-  it('should display sidebar onClick', () => {
+  it('should display sidebar onClick', async () => {
     const { getByText, baseElement } = render(
       <MiniCart type="sidebar" hideContent={false} />
     )
+
+    await resolveApolloQueries()
 
     let box = baseElement.querySelector('.box')
     let sidebar = baseElement.querySelector('.sidebarScrim.dn')
@@ -57,21 +90,30 @@ describe('<MiniCart /> component', () => {
     expect(box).toBeNull()
   })
 
-  it('should match the snapshot in popup mode', () => {
+  it('should match the snapshot in popup mode', async () => {
     const leftClick = { button: 0 }
 
     const { getByText, asFragment } = render(
-      <MiniCart type="popup" hideContent={false} />
+      <MockedProvider mocks={mocks}>
+        <MiniCart type="popup" hideContent={false} />
+      </MockedProvider>
     )
+
+    await resolveApolloQueries()
+
     fireEvent.click(getByText('Button Test'), leftClick)
 
     expect(asFragment()).toMatchSnapshot()
   })
 
-  it('should match the snapshot in sidebar mode', () => {
+  it('should match the snapshot in sidebar mode', async () => {
     const { baseElement } = render(
-      <MiniCart type="sidebar" hideContent={false} />
+      <MockedProvider mocks={mocks}>
+        <MiniCart type="sidebar" hideContent={false} />
+      </MockedProvider>
     )
+
+    await resolveApolloQueries()
     expect(baseElement).toMatchSnapshot()
   })
 })

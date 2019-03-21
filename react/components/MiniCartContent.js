@@ -1,5 +1,6 @@
-import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import React, { Component, Fragment } from 'react'
+import { compose, graphql } from 'react-apollo'
 import { injectIntl, intlShape } from 'react-intl'
 import { reduceBy, values, clone, find, propEq } from 'ramda'
 import classNames from 'classnames'
@@ -11,15 +12,13 @@ import { IconDelete } from 'vtex.store-icons'
 import { MiniCartPropTypes } from '../propTypes'
 import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
 
+import { updateItemsMutation } from '../localState/mutations'
 import minicart from '../minicart.css'
 import MiniCartFooter from './MiniCartFooter'
 
 /**
  * Minicart content component
  */
-
-/** Four seconds */
-const TOAST_TIMEOUT = 4000
 
 class MiniCartContent extends Component {
   static propTypes = {
@@ -28,9 +27,14 @@ class MiniCartContent extends Component {
     /* Internationalization */
     intl: intlShape.isRequired,
     /** Define a function that is executed when the item is clicked */
-    actionOnClick: PropTypes.func,
+    onClickAction: PropTypes.func,
+    /* Update Items mutation */
+    updateItems: PropTypes.func.isRequired,
+    /* Determines if the orderform is updating */
+    updatingOrderForm: PropTypes.bool,
     /* Reused props */
-    data: MiniCartPropTypes.orderFormContext,
+    orderForm: PropTypes.object,
+    loading: PropTypes.bool,
     labelMiniCartEmpty: MiniCartPropTypes.labelMiniCartEmpty,
     labelButton: MiniCartPropTypes.labelButtonFinishShopping,
     showDiscount: MiniCartPropTypes.showDiscount,
@@ -40,12 +44,11 @@ class MiniCartContent extends Component {
 
   state = { isUpdating: [] }
 
-  sumItemsPrice = items => {
-    return items.reduce(
+  sumItemsPrice = items =>
+    items.reduce(
       (sum, { listPrice, quantity }) => sum + listPrice * quantity,
       0
     )
-  }
 
   getGroupedItems = () =>
     values(
@@ -54,7 +57,7 @@ class MiniCartContent extends Component {
           acc ? { ...acc, quantity: acc.quantity + item.quantity } : item,
         undefined,
         item => item.id,
-        this.props.data.orderForm.items
+        this.props.orderForm.items
       )
     )
 
@@ -67,43 +70,22 @@ class MiniCartContent extends Component {
     this.sumItemsPrice(items) - totalPrice
 
   handleItemRemoval = async id => {
-    this.updateItemLoad(id, true)
-
-    const {
-      data: orderFormContext,
-      data: { orderForm, updateAndRefetchOrderForm },
-      intl,
-    } = this.props
+    const { orderForm, updateItems } = this.props
     const itemPayload = orderForm.items.find(item => item.id === id)
     const index = orderForm.items.indexOf(itemPayload)
-    const updatedItem = [itemPayload].map(item => {
-      return {
-        id: parseInt(item.id),
-        index: index,
-        quantity: 0,
-        seller: 1,
-      }
-    })
+    const updatedItems = [itemPayload].map(item => ({
+      ...item,
+      index,
+      quantity: 0,
+      seller: 1,
+    }))
 
     try {
-      await updateAndRefetchOrderForm({
-        variables: {
-          orderFormId: orderForm.orderFormId,
-          items: updatedItem,
-        },
-      })
+      await updateItems(updatedItems)
     } catch (error) {
-      // TODO improve the way this error is presented.
-      orderFormContext.updateToastMessage({
-        isSuccess: false,
-        text: intl.formatMessage({ id: 'minicart.error-removal' }),
-      })
-
-      window.setTimeout(() => {
-        orderFormContext.updateToastMessage({ isSuccess: null, text: null })
-      }, TOAST_TIMEOUT)
+      // TODO: Toast error message
+      console.error(error)
     }
-    this.updateItemLoad(id, false)
   }
 
   updateItemLoad = (itemId, newStatus) => {
@@ -112,50 +94,9 @@ class MiniCartContent extends Component {
     this.setState({ isUpdating })
   }
 
-  onUpdateItems = (id, quantity) => {
-    this.updateItemLoad(id, true)
-    const {
-      data: { orderForm, updateAndRefetchOrderForm },
-    } = this.props
-
-    const items = this.getGroupedItems()
-    const itemPayloadGrouped = items.find(item => item.id === id)
-    const itemsPayload = orderForm.items.filter(item => item.id === id)
-    let itemPayload = itemsPayload[0]
-    const index = orderForm.items.indexOf(itemsPayload[0])
-    const newQuantity =
-      quantity - (itemPayloadGrouped.quantity - itemPayload.quantity)
-    const updatedItems = [
-      {
-        id: itemPayload.id,
-        index,
-        quantity: newQuantity,
-      },
-    ]
-
-    if (newQuantity <= 0) {
-      updatedItems[0].quantity = 0
-      itemPayload = itemsPayload[1]
-      updatedItems.push({
-        id: itemPayload.id,
-        index: orderForm.items.indexOf(itemPayload),
-        quantity: itemPayload.quantity + newQuantity,
-      })
-    }
-
-    updateAndRefetchOrderForm({
-      variables: {
-        orderFormId: orderForm.orderFormId,
-        items: updatedItems,
-      },
-    }).then(() => {
-      this.updateItemLoad(id, false)
-    })
-  }
-
-  sumOptionsPrice = ({ added = [] }) => {
+  sumOptionsSellingPrice = ({ added = [] }, parentQuantity) => {
     return added.reduce(
-      (acc, option) => acc + option.item.sellingPrice * option.item.quantity,
+      (acc, option) => acc + option.item.sellingPrice * option.normalizedQuantity * parentQuantity,
       0
     )
   }
@@ -168,8 +109,8 @@ class MiniCartContent extends Component {
         commertialOffer: {
           Price:
             item.sellingPrice * item.quantity +
-            this.sumOptionsPrice(item.assemblyOptions),
-          ListPrice: item.ListPrice,
+            this.sumOptionsSellingPrice(item.assemblyOptions || {}, item.quantity),
+          ListPrice: item.listPrice,
         },
         sellerId: item.seller,
       },
@@ -185,7 +126,15 @@ class MiniCartContent extends Component {
 
   get isUpdating() {
     const { isUpdating } = this.state
-    return isUpdating.some(status => status)
+    const {
+      orderForm: { items },
+      updatingOrderForm,
+    } = this.props
+    return (
+      updatingOrderForm ||
+      items.some(item => item.quantity === 0) ||
+      isUpdating.some(status => status)
+    )
   }
 
   renderWithoutItems = label => (
@@ -204,7 +153,7 @@ class MiniCartContent extends Component {
     label,
     labelDiscount,
     showDiscount,
-    actionOnClick,
+    onClickAction,
     isUpdating,
     isSizeLarge,
     showShippingCost
@@ -251,7 +200,7 @@ class MiniCartContent extends Component {
                   showBadge={false}
                   showInstallments={false}
                   showLabels={false}
-                  actionOnClick={actionOnClick}
+                  actionOnClick={onClickAction}
                 />
               </section>
             </Fragment>
@@ -284,23 +233,24 @@ class MiniCartContent extends Component {
 
   render() {
     const {
-      data,
       itemsToShow,
       labelMiniCartEmpty,
       labelButton,
       intl,
       showDiscount,
-      actionOnClick,
+      onClickAction,
       isSizeLarge,
       showShippingCost,
+      orderForm,
+      loading,
     } = this.props
     const { isUpdating } = this.state
 
-    if (!data || data.loading) {
+    if (loading) {
       return this.renderLoading()
     }
 
-    if (!data.orderForm || !itemsToShow.length) {
+    if (!orderForm || !itemsToShow.length) {
       const label =
         labelMiniCartEmpty || intl.formatMessage({ id: 'minicart-empty' })
       return this.renderWithoutItems(label)
@@ -313,12 +263,12 @@ class MiniCartContent extends Component {
     })
 
     return this.renderMiniCartWithItems(
-      data.orderForm,
+      orderForm,
       itemsToShow,
       label,
       labelDiscount,
       showDiscount,
-      actionOnClick,
+      onClickAction,
       isUpdating,
       isSizeLarge,
       showShippingCost
@@ -326,4 +276,14 @@ class MiniCartContent extends Component {
   }
 }
 
-export default injectIntl(MiniCartContent)
+const withLinkStateUpdateItemsMutation = graphql(updateItemsMutation, {
+  name: 'updateItems',
+  props: ({ updateItems }) => ({
+    updateItems: items => updateItems({ variables: { items } }),
+  }),
+})
+
+export default compose(
+  injectIntl,
+  withLinkStateUpdateItemsMutation
+)(MiniCartContent)

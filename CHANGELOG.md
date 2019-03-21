@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.14.0] - 2019-03-21
+### Added
+
+- Use the new Apollo Local State API to manage the orderForm and the minicart items to a faster UX.
+
 ## [2.13.1] - 2019-03-14
 
 ### Changed

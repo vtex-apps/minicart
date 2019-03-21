@@ -2,111 +2,9 @@
 
 exports[`<MiniCart /> component should match the snapshot in popup mode 1`] = `
 <DocumentFragment>
-  <aside
-    class="container relative fr flex items-center"
+  <div
+    class="pixel-mock"
   >
-    <button
-      variation="tertiary"
-    >
-      Button Test
-      <span
-        class="flex items-center"
-      >
-        <span
-          class="relative gray"
-        >
-          <svg
-            class="undefined IconCart"
-          >
-            <rect />
-          </svg>
-          <span
-            class="badge c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid"
-          >
-            1
-          </span>
-        </span>
-      </span>
-    </button>
-    <div>
-      <div
-        class="box dn db-ns absolute z-max flex flex-colunm"
-        style="right: 0px;"
-      >
-        <div
-          class="shadow-3"
-        >
-          <div
-            class="arrowUp absolute top-0 shadow-3 bg-base h1 w1 pa4 rotate-45"
-          />
-          <div
-            class="mt3 bg-base relative flex flex-column"
-          >
-            <div
-              class="content overflow-x-hidden pa1 contentSmall bg-base overflow-y-hidden"
-            >
-              <section
-                class="relative flex"
-              >
-                <div
-                  class="fr absolute top-0 right-0"
-                >
-                  <button
-                    variation="tertiary"
-                  >
-                    Button Test
-                    <svg
-                      class="undefined IconDelete"
-                      height="15"
-                      width="15"
-                    >
-                      <rect
-                        height="15"
-                        width="15"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <div>
-                   Extension Point 
-                </div>
-              </section>
-            </div>
-            <div
-              class="contentFooter w-100 bg-base pa4 pv5 flex flex-column items-end"
-            >
-              <div
-                class="contentPrice mb3"
-              >
-                <div
-                  class="price-mock"
-                >
-                  Price
-                </div>
-              </div>
-              <div
-                class=""
-              >
-                <button
-                  variation="primary"
-                >
-                  Button TestGo to checkout
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </aside>
-</DocumentFragment>
-`;
-
-exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = `
-<body
-  class=""
->
-  <div>
     <aside
       class="container relative fr flex items-center"
     >
@@ -133,7 +31,117 @@ exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = 
           </span>
         </span>
       </button>
+      <div>
+        <div
+          class="box dn db-ns absolute z-max flex flex-colunm"
+          style="right: 0px;"
+        >
+          <div
+            class="shadow-3"
+          >
+            <div
+              class="arrowUp absolute top-0 shadow-3 bg-base h1 w1 pa4 rotate-45"
+            />
+            <div
+              class="mt3 bg-base relative flex flex-column"
+            >
+              <div
+                class="content overflow-x-hidden pa1 contentSmall bg-base overflow-y-hidden"
+              >
+                <section
+                  class="relative flex"
+                >
+                  <div
+                    class="fr absolute top-0 right-0"
+                  >
+                    <button
+                      variation="tertiary"
+                    >
+                      Button Test
+                      <svg
+                        class="undefined IconDelete"
+                        height="15"
+                        width="15"
+                      >
+                        <rect
+                          height="15"
+                          width="15"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                  <div>
+                     Extension Point 
+                  </div>
+                </section>
+              </div>
+              <div
+                class="contentFooter w-100 bg-base pa4 pv5 flex flex-column items-end"
+              >
+                <div
+                  class="contentPrice mb3"
+                >
+                  <div
+                    class="price-mock"
+                  >
+                    Price
+                  </div>
+                </div>
+                <div
+                  class=""
+                >
+                  <button
+                    variation="primary"
+                  >
+                    Button TestGo to checkout
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </aside>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = `
+<body
+  class=""
+>
+  <div>
+    <div
+      class="pixel-mock"
+    >
+      <aside
+        class="container relative fr flex items-center"
+      >
+        <button
+          variation="tertiary"
+        >
+          Button Test
+          <span
+            class="flex items-center"
+          >
+            <span
+              class="relative gray"
+            >
+              <svg
+                class="undefined IconCart"
+              >
+                <rect />
+              </svg>
+              <span
+                class="badge c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid"
+              >
+                1
+              </span>
+            </span>
+          </span>
+        </button>
+      </aside>
+    </div>
   </div>
   <div>
     <div
@@ -160,38 +168,25 @@ exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = 
             />
           </svg>
         </div>
-        <aside
-          class="container relative fr flex items-center"
+        <div
+          class="relative c-muted-1"
         >
-          <button
-            variation="tertiary"
+          <svg
+            class="undefined IconCart"
           >
-            Button Test
-            <span
-              class="flex items-center"
-            >
-              <span
-                class="relative c-muted-1"
-              >
-                <svg
-                  class="undefined IconCart"
-                >
-                  <rect />
-                </svg>
-                <span
-                  class="badge c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid"
-                >
-                  1
-                </span>
-              </span>
-              <span
-                class="label dn-m db-l t-action--small c-muted-1 pl6"
-              >
-                My mini cart
-              </span>
-            </span>
-          </button>
-        </aside>
+            <rect />
+          </svg>
+          <span
+            class="badge c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid"
+          >
+            1
+          </span>
+        </div>
+        <span
+          class="label dn-m db-l t-action--small pl6 c-muted-1"
+        >
+          My mini cart
+        </span>
       </div>
       <div
         class="content overflow-x-hidden pa1 contentLarge"

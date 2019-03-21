@@ -1,16 +1,30 @@
-import React, { Component } from 'react'
+import classNames from 'classnames'
+import hoistNonReactStatics from 'hoist-non-react-statics'
+import PropTypes from 'prop-types'
+import { identity, path, pathOr, pick } from 'ramda'
+import React, { Component, useEffect } from 'react'
 import { Button } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
 import { withRuntimeContext } from 'vtex.render-runtime'
 import { IconCart } from 'vtex.store-icons'
+import { orderForm } from 'vtex.store-resources/Queries'
+import { addToCart, updateItems } from 'vtex.store-resources/Mutations'
+import { Pixel } from 'vtex.pixel-manager/PixelContext'
+import { compose, graphql, withApollo } from 'react-apollo'
 
 import MiniCartContent from './components/MiniCartContent'
 import { MiniCartPropTypes } from './propTypes'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
 import { shouldShowItem } from './utils/itemsHelper'
-import { orderFormConsumer } from 'vtex.store-resources/OrderFormContext'
-import classNames from 'classnames'
+
+import { fullMinicartQuery } from './localState/queries'
+import {
+  updateItemsMutation,
+  updateOrderFormMutation,
+} from './localState/mutations'
+
+import createLocalState from './localState'
 
 import minicart from './minicart.css'
 
@@ -20,7 +34,7 @@ const DEFAULT_ICON_CLASSES = 'gray'
 /**
  * Minicart component
  */
-export class MiniCart extends Component {
+class MiniCart extends Component {
   static propTypes = MiniCartPropTypes
 
   static defaultProps = {
@@ -30,6 +44,95 @@ export class MiniCart extends Component {
 
   state = {
     openContent: false,
+    updatingOrderForm: false,
+  }
+
+  async componentDidUpdate(prevProps) {
+    await this.handleItemsUpdate()
+    this.handleOrderFormUpdate(prevProps)
+  }
+
+  getClientOnlyItems = () => {
+    const clientItems = pathOr([], ['linkState', 'minicartItems'], this.props)
+    return clientItems.filter(({ upToDate }) => !upToDate)
+  }
+
+  handleItemsUpdate = async () => {
+    const clientOnlyItems = this.getClientOnlyItems()
+    if (clientOnlyItems.length && !this.state.updatingOrderForm) {
+      return this.handleItemsDifference(clientOnlyItems)
+    }
+  }
+
+  handleItemsDifference = async clientItems => {
+    this.setState({ updatingOrderForm: true })
+    try {
+      const items = clientItems.map(
+        pick(['id', 'index', 'quantity', 'seller', 'options'])
+      )
+      const addItemsResponse = await this.addItems(items)
+      const updateItemsResponse = await this.updateItems(items)
+      const newOrderForm = pathOr(
+        path(['data', 'addItem'], addItemsResponse),
+        ['data', 'updateItems'],
+        updateItemsResponse
+      )
+      await this.props.updateOrderForm(newOrderForm)
+      this.props.push({
+        event: 'addToCart',
+        items: clientItems,
+      })
+    } catch (err) {
+      // TODO: Toast error message into Alert
+      console.error(err)
+      // Rollback items and orderForm
+      const orderForm = path(['data', 'orderForm'], this.props)
+      await this.props.updateOrderForm(orderForm)
+    } finally {
+      this.setState({ updatingOrderForm: false })
+    }
+  }
+
+  handleOrderFormUpdate = async prevProps => {
+    const prevOrderForm = path(['data', 'orderForm'], prevProps)
+    const orderForm = path(['data', 'orderForm'], this.props)
+    if (!prevOrderForm && orderForm) {
+      await this.props.updateOrderForm(orderForm)
+    }
+  }
+
+  addItems = items => {
+    const {
+      orderForm: { orderFormId, items: serverItems },
+    } = this.props.data
+    const itemsToAdd = items.filter(
+      ({ id }) => !serverItems.find(({ id: serverId }) => serverId === id)
+    )
+    if (itemsToAdd.length) {
+      return this.props.addToCart({
+        variables: { orderFormId, items: itemsToAdd },
+      })
+    }
+  }
+
+  updateItems = items => {
+    const {
+      orderForm: { orderFormId, items: serverItems },
+    } = this.props.data
+
+    const itemsToUpdate = items
+      .map(item => {
+        const index = serverItems.findIndex(
+          ({ id: serverId }) => item.id === serverId
+        )
+        return index !== -1 ? { ...item, index } : null
+      })
+      .filter(identity)
+    if (itemsToUpdate.length) {
+      return this.props.updateItems({
+        variables: { orderFormId, items: itemsToUpdate },
+      })
+    }
   }
 
   handleClickButton = event => {
@@ -47,11 +150,7 @@ export class MiniCart extends Component {
     })
   }
 
-  handleItemAdd = () => {
-    this.props.orderFormContext.refetch()
-  }
-
-  onClickProduct = detailUrl => {
+  handleClickProduct = detailUrl => {
     this.setState({
       openContent: false,
     })
@@ -64,11 +163,8 @@ export class MiniCart extends Component {
   }
 
   getFilteredItems = () => {
-    const {
-      orderFormContext: { orderForm },
-    } = this.props
-    if (!orderForm || !orderForm.items) return []
-    return orderForm.items.filter(shouldShowItem)
+    const items = pathOr([], ['linkState', 'minicartItems'], this.props)
+    return items.filter(shouldShowItem)
   }
 
   render() {
@@ -81,10 +177,11 @@ export class MiniCart extends Component {
       iconLabel,
       labelClasses,
       showDiscount,
-      orderFormContext,
+      data,
       type,
       hideContent,
       showShippingCost,
+      linkState: { minicartItems: items, orderForm },
     } = this.props
 
     const itemsToShow = this.getFilteredItems()
@@ -99,29 +196,33 @@ export class MiniCart extends Component {
       <MiniCartContent
         isSizeLarge={isSizeLarge}
         itemsToShow={itemsToShow}
-        data={orderFormContext}
+        orderForm={{
+          ...orderForm,
+          items,
+        }}
+        loading={data.loading}
         showDiscount={showDiscount}
         labelMiniCartEmpty={labelMiniCartEmpty}
         labelButton={labelButtonFinishShopping}
-        onClickProduct={this.onClickProduct}
-        handleUpdateContentVisibility={this.handleUpdateContentVisibility}
-        actionOnClick={this.handleUpdateContentVisibility}
+        onClickProduct={this.handleClickProduct}
+        onClickAction={this.handleUpdateContentVisibility}
         showShippingCost={showShippingCost}
+        updatingOrderForm={this.state.updatingOrderForm}
       />
     )
 
     const iconLabelClasses = classNames(
       `${minicart.label} dn-m db-l t-action--small ${labelClasses}`,
       {
-        'pl6': quantity > 0,
-        'pl4': quantity <= 0
+        pl6: quantity > 0,
+        pl4: quantity <= 0,
       }
     )
 
     return (
       <aside
         className={`${minicart.container} relative fr flex items-center`}
-        ref={e => this.iconRef = e}
+        ref={e => (this.iconRef = e)}
       >
         <Button
           variation="tertiary"
@@ -135,45 +236,41 @@ export class MiniCart extends Component {
                 <span
                   className={`${
                     minicart.badge
-                    } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
+                  } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
                 >
                   {quantity}
                 </span>
               )}
             </span>
-            {iconLabel && (
-              <span className={iconLabelClasses}>
-                {iconLabel}
-              </span>
-            )}
+            {iconLabel && <span className={iconLabelClasses}>{iconLabel}</span>}
           </span>
         </Button>
         {!hideContent &&
           (isSizeLarge ? (
             <Sidebar
+              quantity={quantity}
+              iconSize={iconSize}
               onOutsideClick={this.handleUpdateContentVisibility}
               isOpen={openContent}
             >
               {miniCartContent}
             </Sidebar>
           ) : (
-              openContent && (
-                <Popup
-                  onOutsideClick={this.handleUpdateContentVisibility}
-                  buttonOffsetWidth={this.iconRef.offsetWidth}
-                >
-                  {miniCartContent}
-                </Popup>
-              )
-            ))}
+            openContent && (
+              <Popup
+                onOutsideClick={this.handleUpdateContentVisibility}
+                buttonOffsetWidth={this.iconRef.offsetWidth}
+              >
+                {miniCartContent}
+              </Popup>
+            )
+          ))}
       </aside>
     )
   }
 }
 
-const miniHOC = orderFormConsumer(MiniCart)
-
-miniHOC.schema = {
+MiniCart.schema = {
   title: 'editor.minicart.title',
   description: 'editor.minicart.description',
   type: 'object',
@@ -183,10 +280,7 @@ miniHOC.schema = {
       type: 'string',
       default: 'popup',
       enum: ['popup', 'sidebar'],
-      enumNames: [
-        'editor.minicart.type.popup',
-        'editor.minicart.type.sidebar',
-      ],
+      enumNames: ['editor.minicart.type.popup', 'editor.minicart.type.sidebar'],
       widget: {
         'ui:widget': 'radio',
         'ui:options': {
@@ -213,4 +307,63 @@ miniHOC.schema = {
   },
 }
 
-export default withRuntimeContext(miniHOC)
+const withLinkStateMinicartQuery = graphql(fullMinicartQuery, {
+  options: () => ({ ssr: false }),
+  props: ({ data: { minicart } }) => ({
+    linkState: {
+      minicartItems: minicart && minicart.items,
+      orderForm: minicart && minicart.orderForm,
+    },
+  }),
+})
+
+const withLinkStateUpdateItemsMutation = graphql(updateItemsMutation, {
+  name: 'updateLinkStateItems',
+  props: ({ updateLinkStateItems }) => ({
+    updateLinkStateItems: items =>
+      updateLinkStateItems({ variables: { items } }),
+  }),
+})
+
+const withLinkStateUpdateOrderFormMutation = graphql(updateOrderFormMutation, {
+  name: 'updateOrderForm',
+  props: ({ updateOrderForm }) => ({
+    updateOrderForm: orderForm => updateOrderForm({ variables: { orderForm } }),
+  }),
+})
+
+const withLinkState = WrappedComponent => {
+  const Component = ({ client, ...props }) => {
+    useEffect(() => {
+      const { resolvers, initialState } = createLocalState(client)
+      client.addResolvers(resolvers)
+      // Add the initial state to if there is not there
+      try {
+        client.readQuery({ query: fullMinicartQuery })
+      } catch (err) {
+        client.writeData({ data: initialState })
+      }
+    }, [])
+
+    return <WrappedComponent client={client} {...props} />
+  }
+
+  Component.displayName = `withLinkState(${WrappedComponent.displayName})`
+  Component.propTypes = {
+    client: PropTypes.object.isRequired,
+  }
+  return hoistNonReactStatics(Component, WrappedComponent)
+}
+
+export default compose(
+  graphql(orderForm, { options: () => ({ ssr: false }) }),
+  graphql(addToCart, { name: 'addToCart' }),
+  graphql(updateItems, { name: 'updateItems' }),
+  withApollo,
+  withLinkState,
+  withLinkStateMinicartQuery,
+  withLinkStateUpdateItemsMutation,
+  withLinkStateUpdateOrderFormMutation,
+  withRuntimeContext,
+  Pixel
+)(MiniCart)
