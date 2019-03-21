@@ -122,6 +122,7 @@ class MiniCart extends Component {
       serverItems.find(({ id: serverId }) => serverId === id)
     )
 
+    console.log(itemsToUpdate)
     if (itemsToUpdate.length) {
       return this.props.updateItems({ variables: { orderFormId, items: itemsToUpdate } })
     }

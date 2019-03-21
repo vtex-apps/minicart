@@ -78,7 +78,7 @@ export default function(client) {
           const item = newItem
             ? mergeDeepRight(prevItem, { ...newItem, upToDate: false })
             : prevItem
-          return mapToMinicartItem(item, index)
+          return mapToMinicartItem({ ...item, index })
         })
 
         cache.writeData({
