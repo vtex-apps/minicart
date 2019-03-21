@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component, Fragment } from 'react'
 import { compose, graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 import { injectIntl, intlShape } from 'react-intl'
 import { reduceBy, values, clone, find, propEq } from 'ramda'
 import classNames from 'classnames'
@@ -95,9 +94,9 @@ class MiniCartContent extends Component {
     this.setState({ isUpdating })
   }
 
-  sumOptionsSellingPrice = ({ added = [] }) => {
+  sumOptionsSellingPrice = ({ added = [] }, parentQuantity) => {
     return added.reduce(
-      (acc, option) => acc + option.item.sellingPrice * option.item.quantity,
+      (acc, option) => acc + option.item.sellingPrice * option.normalizedQuantity * parentQuantity,
       0
     )
   }
@@ -110,7 +109,7 @@ class MiniCartContent extends Component {
         commertialOffer: {
           Price:
             item.sellingPrice * item.quantity +
-            this.sumOptionsSellingPrice(item.assemblyOptions || {}),
+            this.sumOptionsSellingPrice(item.assemblyOptions || {}, item.quantity),
           ListPrice: item.listPrice,
         },
         sellerId: item.seller,
@@ -133,7 +132,7 @@ class MiniCartContent extends Component {
     } = this.props
     return (
       updatingOrderForm ||
-      items.some(item => !!item.seller || item.quantity === 0) ||
+      items.some(item => item.quantity === 0) ||
       isUpdating.some(status => status)
     )
   }
