@@ -1,4 +1,3 @@
-import gql from 'graphql-tag'
 import { mergeDeepRight } from 'ramda'
 
 import {
@@ -61,7 +60,7 @@ export default function(client) {
           data: {
             minicart: {
               __typename: 'Minicart',
-              items: newItems.concat(prevItems),
+              items: prevItems.concat(newItems),
             },
           },
         })

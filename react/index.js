@@ -108,7 +108,6 @@ class MiniCart extends Component {
     const itemsToAdd = items.filter(
       ({ id }) => !serverItems.find(({ id: serverId }) => serverId === id)
     )
-
     if (itemsToAdd.length) {
       return this.props.addToCart({ variables: { orderFormId, items: itemsToAdd } })
     }
@@ -118,9 +117,15 @@ class MiniCart extends Component {
     const {
       orderForm: { orderFormId, items: serverItems },
     } = this.props.data
-    const itemsToUpdate = items.filter(({ id }) =>
-      serverItems.find(({ id: serverId }) => serverId === id)
-    )
+
+    const itemsToUpdate = []
+    for (let i = 0; i < items.length; i++) {
+      const { id } = items[i]
+      const index = serverItems.findIndex(({ id: serverId }) => id === serverId)
+      if (index >= 0) {
+        itemsToUpdate.push({ ...items[i], index })
+      }
+    }
 
     console.log(itemsToUpdate)
     if (itemsToUpdate.length) {
