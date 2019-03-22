@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.14.1] - 2019-03-22
+### Fixed
+- Add default fields to all items to prevent bugs when adding item to cart with missing field.
+
 ## [2.14.0] - 2019-03-21
 ### Added
 
