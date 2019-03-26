@@ -3,7 +3,7 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
 import PropTypes from 'prop-types'
 import { identity, path, pathOr, pick } from 'ramda'
 import React, { Component, useEffect } from 'react'
-import { Button } from 'vtex.styleguide'
+import { Button, withToast } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
 import { withRuntimeContext } from 'vtex.render-runtime'
 import { IconCart } from 'vtex.store-icons'
@@ -11,6 +11,7 @@ import { orderForm } from 'vtex.store-resources/Queries'
 import { addToCart, updateItems } from 'vtex.store-resources/Mutations'
 import { Pixel } from 'vtex.pixel-manager/PixelContext'
 import { compose, graphql, withApollo } from 'react-apollo'
+import { injectIntl, intlShape } from 'react-intl'
 
 import MiniCartContent from './components/MiniCartContent'
 import { MiniCartPropTypes } from './propTypes'
@@ -35,7 +36,11 @@ const DEFAULT_ICON_CLASSES = 'gray'
  * Minicart component
  */
 class MiniCart extends Component {
-  static propTypes = MiniCartPropTypes
+  static propTypes = { 
+    ...MiniCartPropTypes,
+    intl: intlShape.isRequired,
+    showToast: PropTypes.func.isRequired,
+  }
 
   static defaultProps = {
     labelClasses: DEFAULT_LABEL_CLASSES,
@@ -65,13 +70,14 @@ class MiniCart extends Component {
   }
 
   handleItemsDifference = async clientItems => {
+    const { showToast, intl } = this.props
     this.setState({ updatingOrderForm: true })
     try {
       const items = clientItems.map(
         pick(['id', 'index', 'quantity', 'seller', 'options'])
       )
-      const addItemsResponse = await this.addItems(items)
       const updateItemsResponse = await this.updateItems(items)
+      const addItemsResponse = await this.addItems(items)
       const newOrderForm = pathOr(
         path(['data', 'addItem'], addItemsResponse),
         ['data', 'updateItems'],
@@ -87,6 +93,7 @@ class MiniCart extends Component {
       console.error(err)
       // Rollback items and orderForm
       const orderForm = path(['data', 'orderForm'], this.props)
+      showToast({ message: intl.formatMessage({ id: 'minicart.checkout-failure' }) })
       await this.props.updateOrderForm(orderForm)
     } finally {
       this.setState({ updatingOrderForm: false })
@@ -365,5 +372,7 @@ export default compose(
   withLinkStateUpdateItemsMutation,
   withLinkStateUpdateOrderFormMutation,
   withRuntimeContext,
-  Pixel
+  Pixel,
+  withToast,
+  injectIntl,
 )(MiniCart)

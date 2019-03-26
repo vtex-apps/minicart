@@ -13,5 +13,6 @@
   "sidebar-title": "sidebar-title",
   "minicart-content-footer-discount": "minicart-content-footer-discount",
   "minicart.error-removal": "minicart.error-removal",
-  "minicart.shipping-cost": "minicart.shipping-cost"
+  "minicart.shipping-cost": "minicart.shipping-cost",
+  "minicart.checkout-failure": "Message showed when there is a problem to a request to the server."
 }

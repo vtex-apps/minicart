@@ -13,5 +13,6 @@
     "sidebar-title": "My mini cart",
     "minicart-content-footer-discount": "Save",
     "minicart.error-removal": "Item removal failed, please try again",
-    "minicart.shipping-cost": "Total shipping cost"
+    "minicart.shipping-cost": "Total shipping cost",
+    "minicart.checkout-failure": "Something went wrong. Please, try again."
 }
