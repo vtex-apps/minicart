@@ -13,5 +13,6 @@
     "sidebar-title": "Mi cesta de compras",
     "minicart-content-footer-discount": "Guarde",
     "minicart.error-removal": "Falló la eliminación del artículo, por favor intente de nuevo",
-    "minicart.shipping-cost": "Costo total del envío"
+    "minicart.shipping-cost": "Costo total del envío",
+    "minicart.checkout-failure": "Ha habido un problema con su solicitud. Por favor, inténtelo de nuevo. "
 }
