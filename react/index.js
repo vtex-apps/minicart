@@ -38,7 +38,7 @@ const DEFAULT_ICON_CLASSES = 'gray'
 class MiniCart extends Component {
   static propTypes = { 
     ...MiniCartPropTypes,
-    intl: intlShape,
+    intl: intlShape.isRequired,
     showToast: PropTypes.func.isRequired,
   }
 
