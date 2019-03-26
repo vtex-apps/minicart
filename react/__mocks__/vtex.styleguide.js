@@ -5,3 +5,11 @@ export const Button = props => (
 )
 
 export const Spinner = ({ children }) => <div>{children}</div>
+
+export const withToast = WrappedComponent => props => (
+  <WrappedComponent 
+    showToast={() => {}}
+    hideToast={() => {}}
+    {...props}
+  />
+)

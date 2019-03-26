@@ -14,5 +14,5 @@
     "minicart-content-footer-discount": "Economize",
     "minicart.error-removal": "A remoção do item falhou, por favor tente novamente",
     "minicart.shipping-cost": "Custo de entrega",
-    "minicart.checkout-failure": "Houve um problema com sua requisição. Por favor, tente novamente."
+    "minicart.checkout-failure": "Algo deu errado. Por favor, tente novamente."
 }
