@@ -17,6 +17,7 @@ export const fullMinicartQuery = gql`
         index
         parentItemIndex
         parentAssemblyBinding
+        cartIndex
         options {
           seller
           assemblyId
@@ -86,32 +87,6 @@ export const fullMinicartQuery = gql`
           currencyCode
           timeZone
         }
-        itemMetadata {
-          items {
-            id
-            name
-            skuName
-            productId
-            refId
-            ean
-            imageUrl
-            detailUrl
-            assemblyOptions {
-              id
-              name
-              required
-              composition {
-                minQuantity
-                maxQuantity
-                items {
-                  maxQuantity
-                  initialQuantity
-                  id
-                }
-              }
-            }
-          }
-        }
       }
     }
   }
@@ -164,32 +139,6 @@ export const minicartOrderFormQuery = gql`
           currencyCode
           timeZone
         }
-        itemMetadata {
-          items {
-            id
-            name
-            skuName
-            productId
-            refId
-            ean
-            imageUrl
-            detailUrl
-            assemblyOptions {
-              id
-              name
-              required
-              composition {
-                minQuantity
-                maxQuantity
-                items {
-                  maxQuantity
-                  initialQuantity
-                  id
-                }
-              }
-            }
-          }
-        }
       }
     }
   }
@@ -212,6 +161,7 @@ export const minicartItemsQuery = gql`
         index
         parentItemIndex
         parentAssemblyBinding
+        cartIndex
         options {
           seller
           quantity

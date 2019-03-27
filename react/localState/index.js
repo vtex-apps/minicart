@@ -40,48 +40,82 @@ export default function(client) {
           minicart: { items: prevItems },
         } = cache.readQuery({ query })
 
-        const indexedItems = items.map(item => ({
-          index: prevItems.findIndex(({ id }) => id === item.id),
-          item: mapToMinicartItem({
-            ...item,
-            upToDate: false,
-          }),
-        }))
+        // const indexedItems = items.map(item => ({
+        //   index: prevItems.findIndex(({ id }) => id === item.id),
+        //   item: mapToMinicartItem({
+        //     ...item,
+        //     upToDate: false,
+        //   }),
+        // }))
 
-        const newItems = []
-        for (const indexedItem of indexedItems) {
-          const { index, item } = indexedItem
-          if (index !== -1) {
-            prevItems[index] = item
-          } else {
-            newItems.push(item)
-          }
-        }
+        // const newItems = []
+        // for (const indexedItem of indexedItems) {
+        //   const { index, item } = indexedItem
+        //   if (index !== -1) {
+        //     prevItems[index] = item
+        //   } else {
+        //     newItems.push(item)
+        //   }
+        // }
 
-        cache.writeData({
-          data: {
-            minicart: {
-              __typename: 'Minicart',
-              items: prevItems.concat(newItems),
+        const newItems = items.map(item => mapToMinicartItem({ ...item, upToDate: false }))
+        const writeItems = [...prevItems, ...newItems]
+
+        console.log('teste add to cart writing: ', JSON.stringify(writeItems))
+        try { 
+          cache.writeData({
+            data: {
+              minicart: {
+                __typename: 'Minicart',
+                // items: prevItems,
+                // items: newItems,
+                items: writeItems,
+              },
             },
-          },
-        })
-        return newItems.concat(prevItems)
+          })
+        } catch (err) {
+          console.log('teste ERRO: ', err)
+        }
+        return writeItems
       },
       updateItems: (_, { items: newItems }, { cache }) => {
+        // UPDATE ITEMS MUST PASS INDEX on newItems :)
+        console.log('teste updateItems!!!')
         const query = minicartItemsQuery
         const {
           minicart: { items: prevItems },
         } = cache.readQuery({ query })
+        console.log('teste prevItems: ', prevItems)
+        console.log('teste newItems: ', newItems)
 
-        const items = prevItems.map((prevItem, index) => {
-          const newItem = newItems.find(({ id }) => id === prevItem.id)
-          const item = newItem
-            ? mergeDeepRight(prevItem, { ...newItem, upToDate: false })
-            : prevItem
-          return mapToMinicartItem({ ...item, index })
-        })
+        const cleanNewItems = newItems.filter(({ index }) => index != null)
+        const items = [...prevItems]
 
+        for (let i = 0; i < cleanNewItems.length; i++) {
+          const newItem = cleanNewItems[i]
+          const { index } = newItem
+          const prevItem = prevItems[index]
+          items[index] = mapToMinicartItem(mergeDeepRight(prevItem, { ...newItem, upToDate: false }))
+        }
+
+
+        // const items = prevItems.map((prevItem, index) => {
+        //   const 
+        //   // console.log('teste found newItem: ', newItem)
+        //   const item = newItem
+        //     ? mergeDeepRight(prevItem, { ...newItem, upToDate: false })
+        //     : prevItem
+        //   return mapToMinicartItem(item)
+        // })
+        // const items = prevItems.map((prevItem, index) => {
+        //   const newItem = newItems.find(({ id }) => id === prevItem.id)
+          // const item = newItem
+          //   ? mergeDeepRight(prevItem, { ...newItem, upToDate: false })
+          //   : prevItem
+          // return mapToMinicartItem({ ...item, index })
+        // })
+
+        console.log('teste updateItems writing: ', items)
         cache.writeData({
           data: {
             minicart: { __typename: 'Minicart', items },
@@ -91,6 +125,7 @@ export default function(client) {
       },
       updateOrderForm: (_, { orderForm: newOrderForm }, { cache }) => {
         const orderForm = mapToLinkStateOrderForm(newOrderForm)
+        console.log('teste orderForm: ', orderForm)
         cache.writeData({
           data: {
             minicart: { __typename: 'Minicart', orderForm },
@@ -117,6 +152,7 @@ export default function(client) {
         upToDate: true,
       })
     )
+    console.log('teste updateLinkStateItems writing: ', items)
 
     cache.writeData({
       data: {
@@ -142,6 +178,42 @@ export default function(client) {
     storePreferencesData:
       orderForm.storePreferencesData &&
       mapToOrderFormStorePreferences(orderForm.storePreferencesData),
+    // itemMetadata: orderForm.itemMetadata ? mapToOrderFormStoreItemMetadata(orderForm.itemMetadata) : null,
+  })
+
+  // id
+  //           name
+  //           skuName
+  //           productId
+  //           refId
+  //           ean
+  //           imageUrl
+  //           detailUrl
+
+  const mapToItemMetdataItem = (itemMetdataItem) => ({
+    detailUrl: null,
+    ean: null,
+    id: null,
+    imageUrl: null,
+    skuName: null,
+    name: null,
+    productId: null,
+    refId: null,
+    ...itemMetdataItem,
+    assemblyOptions: (itemMetdataItem.assemblyOptions || []).map(mapToMetadataAssemblyOptionItem),
+    __typename: "OrderFormClientMetadataItem",
+  })
+
+  const mapToMetadataAssemblyOptionItem = MetadataAssemblyOption => ({
+    id: null,
+    name: null,
+    required: null,
+  })
+
+  const mapToOrderFormStoreItemMetadata = itemMetadata => ({
+    ...itemMetadata,
+    __typename: 'OrderFormClientItemMetadata',
+    items: itemMetadata.items.map(mapToItemMetdataItem),
   })
 
   const mapAssemblyOptions = (options = {}) => ({
@@ -209,8 +281,9 @@ export default function(client) {
     quantity: null,
     sellingPrice: null,
     listPrice: null,
+    cartIndex: null,
     ...item,
-    options: item.options ? item.options.map(mapItemOptions) : null,
+    options: item.options ? item.options.map(mapItemOptions) : [],
     assemblyOptions: mapAssemblyOptions(item.assemblyOptions),
     __typename: 'MinicartItem',
   })

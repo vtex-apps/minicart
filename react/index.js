@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import PropTypes from 'prop-types'
-import { identity, path, pathOr, pick } from 'ramda'
+import { identity, map, partition, path, pathOr, pick } from 'ramda'
 import React, { Component, useEffect } from 'react'
 import { Button, withToast } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
@@ -69,15 +69,26 @@ class MiniCart extends Component {
     }
   }
 
+  partitionItemsAddUpdate = clientItems => {
+    const {
+      orderForm: { items: serverItems },
+    } = this.props.data
+    console.log('teste partitionItemsAddUpdate clientItems: ', clientItems)
+    const isNoInInCart = (item) => item.cartIndex == null
+    return partition(isNoInInCart, clientItems)
+  }
+
   handleItemsDifference = async clientItems => {
     const { showToast, intl } = this.props
+    console.log('teste === clientItems: ', clientItems)
     this.setState({ updatingOrderForm: true })
     try {
-      const items = clientItems.map(
-        pick(['id', 'index', 'quantity', 'seller', 'options'])
-      )
-      const updateItemsResponse = await this.updateItems(items)
-      const addItemsResponse = await this.addItems(items)
+      const [itemsToAdd, itemsToUpdate] = this.partitionItemsAddUpdate(clientItems)
+      const pickProps = map(pick(['id', 'index', 'quantity', 'seller', 'options']))
+      console.log('teste itemsToAdd update: ', itemsToAdd, itemsToUpdate)
+      const updateItemsResponse = await this.updateItems(pickProps(itemsToUpdate))
+      const addItemsResponse = await this.addItems(pickProps(itemsToAdd))
+      
       const newOrderForm = pathOr(
         path(['data', 'addItem'], addItemsResponse),
         ['data', 'updateItems'],
@@ -112,12 +123,9 @@ class MiniCart extends Component {
     const {
       orderForm: { orderFormId, items: serverItems },
     } = this.props.data
-    const itemsToAdd = items.filter(
-      ({ id }) => !serverItems.find(({ id: serverId }) => serverId === id)
-    )
-    if (itemsToAdd.length) {
+    if (items.length) {
       return this.props.addToCart({
-        variables: { orderFormId, items: itemsToAdd },
+        variables: { orderFormId, items },
       })
     }
   }
@@ -126,18 +134,10 @@ class MiniCart extends Component {
     const {
       orderForm: { orderFormId, items: serverItems },
     } = this.props.data
-
-    const itemsToUpdate = items
-      .map(item => {
-        const index = serverItems.findIndex(
-          ({ id: serverId }) => item.id === serverId
-        )
-        return index !== -1 ? { ...item, index } : null
-      })
-      .filter(identity)
-    if (itemsToUpdate.length) {
+    console.log('teste ==== updating: ', items)
+    if (items.length) {
       return this.props.updateItems({
-        variables: { orderFormId, items: itemsToUpdate },
+        variables: { orderFormId, items },
       })
     }
   }
@@ -316,12 +316,22 @@ MiniCart.schema = {
 
 const withLinkStateMinicartQuery = graphql(fullMinicartQuery, {
   options: () => ({ ssr: false }),
-  props: ({ data: { minicart } }) => ({
-    linkState: {
-      minicartItems: minicart && minicart.items,
-      orderForm: minicart && minicart.orderForm,
-    },
-  }),
+  props: ({ data: { minicart } }) => {
+    console.log('teste MINICART LINK STATE: ', minicart)
+    return {
+      linkState: {
+        minicartItems: minicart && minicart.items,
+        orderForm: minicart && minicart.orderForm,
+      },
+    }
+    
+  },
+  // props: ({ data: { minicart } }) => ({
+  //   linkState: {
+  //     minicartItems: minicart && minicart.items,
+  //     orderForm: minicart && minicart.orderForm,
+  //   },
+  // }),
 })
 
 const withLinkStateUpdateItemsMutation = graphql(updateItemsMutation, {

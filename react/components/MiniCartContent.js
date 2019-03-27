@@ -69,16 +69,13 @@ class MiniCartContent extends Component {
   calculateDiscount = (items, totalPrice) =>
     this.sumItemsPrice(items) - totalPrice
 
-  handleItemRemoval = async id => {
-    const { orderForm, updateItems } = this.props
-    const itemPayload = orderForm.items.find(item => item.id === id)
-    const index = orderForm.items.indexOf(itemPayload)
-    const updatedItems = [itemPayload].map(item => ({
-      ...item,
-      index,
+  handleItemRemoval = async (id, cartIndex) => {
+    const { updateItems } = this.props
+    const updatedItems = [{
+      id,
+      index: cartIndex,
       quantity: 0,
-      seller: 1,
-    }))
+    }]
 
     try {
       await updateItems(updatedItems)
@@ -122,6 +119,7 @@ class MiniCartContent extends Component {
     },
     assemblyOptions: item.assemblyOptions,
     quantity: item.quantity,
+    cartIndex: item.cartIndex,
   })
 
   get isUpdating() {
@@ -184,7 +182,7 @@ class MiniCartContent extends Component {
                     <Button
                       icon
                       variation="tertiary"
-                      onClick={() => this.handleItemRemoval(item.id)}
+                      onClick={() => this.handleItemRemoval(item.id, item.cartIndex)}
                     >
                       <IconDelete size={15} activeClassName="c-muted-2" />
                     </Button>
