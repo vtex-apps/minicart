@@ -1,4 +1,4 @@
-import { mergeDeepRight } from 'ramda'
+import { head, mergeDeepRight, values } from 'ramda'
 
 import {
   updateOrderFormShipping,
@@ -12,10 +12,12 @@ export default function(client) {
     variables,
     { cache }
   ) => {
-    const updatedOrderForm = await client.mutate({
+    const response = await client.mutate({
       variables,
       mutation,
     })
+
+    const updatedOrderForm = head(values(response.data))
 
     const {
       minicart: { orderForm: outdatedOrderForm },
