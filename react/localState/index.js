@@ -40,33 +40,17 @@ export default function(client) {
           minicart: { items: prevItems },
         } = cache.readQuery({ query })
 
-        const indexedItems = items.map(item => ({
-          index: prevItems.findIndex(({ id }) => id === item.id),
-          item: mapToMinicartItem({
-            ...item,
-            upToDate: false,
-          }),
-        }))
-
-        const newItems = []
-        for (const indexedItem of indexedItems) {
-          const { index, item } = indexedItem
-          if (index !== -1) {
-            prevItems[index] = item
-          } else {
-            newItems.push(item)
-          }
-        }
-
+        const newItems = items.map(item => mapToMinicartItem({ ...item, upToDate: false }))
+        const writeItems = [...prevItems, ...newItems]
         cache.writeData({
           data: {
             minicart: {
               __typename: 'Minicart',
-              items: prevItems.concat(newItems),
+              items: writeItems,
             },
           },
         })
-        return newItems.concat(prevItems)
+        return writeItems
       },
       updateItems: (_, { items: newItems }, { cache }) => {
         const query = minicartItemsQuery
@@ -74,13 +58,15 @@ export default function(client) {
           minicart: { items: prevItems },
         } = cache.readQuery({ query })
 
-        const items = prevItems.map((prevItem, index) => {
-          const newItem = newItems.find(({ id }) => id === prevItem.id)
-          const item = newItem
-            ? mergeDeepRight(prevItem, { ...newItem, upToDate: false })
-            : prevItem
-          return mapToMinicartItem({ ...item, index })
-        })
+        // Items provided to this function MUST have a valid index property
+        const cleanNewItems = newItems.filter(({ index }) => index != null)
+        const items = [...prevItems]
+
+        for (const newItem of cleanNewItems) {
+          const { index } = newItem
+          const prevItem = prevItems[index]
+          items[index] = mapToMinicartItem(mergeDeepRight(prevItem, { ...newItem, upToDate: false }))
+        }
 
         cache.writeData({
           data: {
@@ -209,8 +195,9 @@ export default function(client) {
     quantity: null,
     sellingPrice: null,
     listPrice: null,
+    cartIndex: null,
     ...item,
-    options: item.options ? item.options.map(mapItemOptions) : null,
+    options: item.options ? item.options.map(mapItemOptions) : [],
     assemblyOptions: mapAssemblyOptions(item.assemblyOptions),
     __typename: 'MinicartItem',
   })

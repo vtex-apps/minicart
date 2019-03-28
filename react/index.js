@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import PropTypes from 'prop-types'
-import { identity, path, pathOr, pick } from 'ramda'
+import { identity, map, partition, path, pathOr, pick } from 'ramda'
 import React, { Component, useEffect } from 'react'
 import { Button, withToast } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
@@ -69,15 +69,19 @@ class MiniCart extends Component {
     }
   }
 
+  partitionItemsAddUpdate = clientItems => {
+    const isNoInInCart = (item) => item.cartIndex == null
+    return partition(isNoInInCart, clientItems)
+  }
+
   handleItemsDifference = async clientItems => {
     const { showToast, intl } = this.props
     this.setState({ updatingOrderForm: true })
     try {
-      const items = clientItems.map(
-        pick(['id', 'index', 'quantity', 'seller', 'options'])
-      )
-      const updateItemsResponse = await this.updateItems(items)
-      const addItemsResponse = await this.addItems(items)
+      const [itemsToAdd, itemsToUpdate] = this.partitionItemsAddUpdate(clientItems)
+      const pickProps = map(pick(['id', 'index', 'quantity', 'seller', 'options']))
+      const updateItemsResponse = await this.updateItems(pickProps(itemsToUpdate))
+      const addItemsResponse = await this.addItems(pickProps(itemsToAdd))
       const newOrderForm = pathOr(
         path(['data', 'addItem'], addItemsResponse),
         ['data', 'updateItems'],
@@ -109,35 +113,19 @@ class MiniCart extends Component {
   }
 
   addItems = items => {
-    const {
-      orderForm: { orderFormId, items: serverItems },
-    } = this.props.data
-    const itemsToAdd = items.filter(
-      ({ id }) => !serverItems.find(({ id: serverId }) => serverId === id)
-    )
-    if (itemsToAdd.length) {
+    const { orderForm: { orderFormId } } = this.props.data
+    if (items.length) {
       return this.props.addToCart({
-        variables: { orderFormId, items: itemsToAdd },
+        variables: { orderFormId, items },
       })
     }
   }
 
   updateItems = items => {
-    const {
-      orderForm: { orderFormId, items: serverItems },
-    } = this.props.data
-
-    const itemsToUpdate = items
-      .map(item => {
-        const index = serverItems.findIndex(
-          ({ id: serverId }) => item.id === serverId
-        )
-        return index !== -1 ? { ...item, index } : null
-      })
-      .filter(identity)
-    if (itemsToUpdate.length) {
+    const { orderForm: { orderFormId } } = this.props.data
+    if (items.length) {
       return this.props.updateItems({
-        variables: { orderFormId, items: itemsToUpdate },
+        variables: { orderFormId, items },
       })
     }
   }

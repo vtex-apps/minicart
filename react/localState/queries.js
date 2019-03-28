@@ -17,6 +17,7 @@ export const fullMinicartQuery = gql`
         index
         parentItemIndex
         parentAssemblyBinding
+        cartIndex
         options {
           seller
           assemblyId
@@ -160,6 +161,7 @@ export const minicartItemsQuery = gql`
         index
         parentItemIndex
         parentAssemblyBinding
+        cartIndex
         options {
           seller
           quantity
