@@ -197,7 +197,7 @@ export default function(client) {
     listPrice: null,
     cartIndex: null,
     ...item,
-    options: item.options ? item.options.map(mapItemOptions) : [],
+    options: item.options ? item.options.map(mapItemOptions) : null,
     assemblyOptions: mapAssemblyOptions(item.assemblyOptions),
     __typename: 'MinicartItem',
   })
