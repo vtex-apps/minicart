@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.14.4] - 2019-03-28
+### Changed
+- Remove unused `itemMetadata` fields from orderForm and minicart queries.
+
 ## [2.14.3] - 2019-03-28
 ### Fixed
 - Correctly get orderForm from server mutation on replay mutation method.

@@ -76,32 +76,6 @@ export const orderForm = gql`
         currencyCode
         timeZone
       }
-      itemMetadata {
-        items {
-          id
-          name
-          skuName
-          productId
-          refId
-          ean
-          imageUrl
-          detailUrl
-          assemblyOptions {
-            id
-            name
-            required
-            composition {
-              minQuantity
-              maxQuantity
-              items {
-                maxQuantity
-                initialQuantity
-                id
-              }
-            }
-          }
-        }
-      }
     }
   }
 `
