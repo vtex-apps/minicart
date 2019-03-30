@@ -36,7 +36,7 @@ const DEFAULT_ICON_CLASSES = 'gray'
  * Minicart component
  */
 class MiniCart extends Component {
-  static propTypes = { 
+  static propTypes = {
     ...MiniCartPropTypes,
     intl: intlShape.isRequired,
     showToast: PropTypes.func.isRequired,
@@ -74,7 +74,7 @@ class MiniCart extends Component {
       orderForm: { items: serverItems },
     } = this.props.data
     console.log('teste partitionItemsAddUpdate clientItems: ', clientItems)
-    const isNoInInCart = (item) => item.cartIndex == null
+    const isNoInInCart = item => item.cartIndex == null
     return partition(isNoInInCart, clientItems)
   }
 
@@ -83,12 +83,18 @@ class MiniCart extends Component {
     console.log('teste === clientItems: ', clientItems)
     this.setState({ updatingOrderForm: true })
     try {
-      const [itemsToAdd, itemsToUpdate] = this.partitionItemsAddUpdate(clientItems)
-      const pickProps = map(pick(['id', 'index', 'quantity', 'seller', 'options']))
+      const [itemsToAdd, itemsToUpdate] = this.partitionItemsAddUpdate(
+        clientItems
+      )
+      const pickProps = map(
+        pick(['id', 'index', 'quantity', 'seller', 'options'])
+      )
       console.log('teste itemsToAdd update: ', itemsToAdd, itemsToUpdate)
-      const updateItemsResponse = await this.updateItems(pickProps(itemsToUpdate))
+      const updateItemsResponse = await this.updateItems(
+        pickProps(itemsToUpdate)
+      )
       const addItemsResponse = await this.addItems(pickProps(itemsToAdd))
-      
+
       const newOrderForm = pathOr(
         path(['data', 'addItem'], addItemsResponse),
         ['data', 'updateItems'],
@@ -104,7 +110,9 @@ class MiniCart extends Component {
       console.error(err)
       // Rollback items and orderForm
       const orderForm = path(['data', 'orderForm'], this.props)
-      showToast({ message: intl.formatMessage({ id: 'minicart.checkout-failure' }) })
+      showToast({
+        message: intl.formatMessage({ id: 'minicart.checkout-failure' }),
+      })
       await this.props.updateOrderForm(orderForm)
     } finally {
       this.setState({ updatingOrderForm: false })
@@ -320,11 +328,10 @@ const withLinkStateMinicartQuery = graphql(fullMinicartQuery, {
     console.log('teste MINICART LINK STATE: ', minicart)
     return {
       linkState: {
-        minicartItems: minicart && minicart.items,
-        orderForm: minicart && minicart.orderForm,
+        minicartItems: minicart && JSON.parse(minicart.items),
+        orderForm: minicart && JSON.parse(minicart.orderForm),
       },
     }
-    
   },
   // props: ({ data: { minicart } }) => ({
   //   linkState: {
@@ -384,5 +391,5 @@ export default compose(
   withRuntimeContext,
   Pixel,
   withToast,
-  injectIntl,
+  injectIntl
 )(MiniCart)

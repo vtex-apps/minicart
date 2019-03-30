@@ -23,7 +23,9 @@ export default function(client) {
       minicart: { orderForm: outdatedOrderForm },
     } = cache.readQuery({ query: minicartOrderFormQuery })
 
-    const orderForm = mergeDeepRight(outdatedOrderForm, updatedOrderForm)
+    const orderForm = JSON.stringify(
+      mergeDeepRight(JSON.parse(outdatedOrderForm), updatedOrderForm)
+    )
     cache.writeData({
       data: {
         minicart: { __typename: 'Minicart', orderForm },
@@ -40,36 +42,18 @@ export default function(client) {
           minicart: { items: prevItems },
         } = cache.readQuery({ query })
 
-        // const indexedItems = items.map(item => ({
-        //   index: prevItems.findIndex(({ id }) => id === item.id),
-        //   item: mapToMinicartItem({
-        //     ...item,
-        //     upToDate: false,
-        //   }),
-        // }))
-
-        // const newItems = []
-        // for (const indexedItem of indexedItems) {
-        //   const { index, item } = indexedItem
-        //   if (index !== -1) {
-        //     prevItems[index] = item
-        //   } else {
-        //     newItems.push(item)
-        //   }
-        // }
-
-        const newItems = items.map(item => mapToMinicartItem({ ...item, upToDate: false }))
-        const writeItems = [...prevItems, ...newItems]
+        const newItems = items.map(item =>
+          mapToMinicartItem({ ...item, upToDate: false })
+        )
+        const writeItems = [...JSON.parse(prevItems), ...newItems]
 
         console.log('teste add to cart writing: ', JSON.stringify(writeItems))
-        try { 
+        try {
           cache.writeData({
             data: {
               minicart: {
                 __typename: 'Minicart',
-                // items: prevItems,
-                // items: newItems,
-                items: writeItems,
+                items: JSON.stringify(writeItems),
               },
             },
           })
@@ -85,22 +69,21 @@ export default function(client) {
         const {
           minicart: { items: prevItems },
         } = cache.readQuery({ query })
-        console.log('teste prevItems: ', prevItems)
-        console.log('teste newItems: ', newItems)
 
         const cleanNewItems = newItems.filter(({ index }) => index != null)
-        const items = [...prevItems]
+        const items = [...JSON.parse(prevItems)]
 
         for (let i = 0; i < cleanNewItems.length; i++) {
           const newItem = cleanNewItems[i]
           const { index } = newItem
-          const prevItem = prevItems[index]
-          items[index] = mapToMinicartItem(mergeDeepRight(prevItem, { ...newItem, upToDate: false }))
+          const prevItem = JSON.parse(prevItems)[index]
+          items[index] = mapToMinicartItem(
+            mergeDeepRight(prevItem, { ...newItem, upToDate: false })
+          )
         }
 
-
         // const items = prevItems.map((prevItem, index) => {
-        //   const 
+        //   const
         //   // console.log('teste found newItem: ', newItem)
         //   const item = newItem
         //     ? mergeDeepRight(prevItem, { ...newItem, upToDate: false })
@@ -109,32 +92,35 @@ export default function(client) {
         // })
         // const items = prevItems.map((prevItem, index) => {
         //   const newItem = newItems.find(({ id }) => id === prevItem.id)
-          // const item = newItem
-          //   ? mergeDeepRight(prevItem, { ...newItem, upToDate: false })
-          //   : prevItem
-          // return mapToMinicartItem({ ...item, index })
+        // const item = newItem
+        //   ? mergeDeepRight(prevItem, { ...newItem, upToDate: false })
+        //   : prevItem
+        // return mapToMinicartItem({ ...item, index })
         // })
 
         console.log('teste updateItems writing: ', items)
         cache.writeData({
           data: {
-            minicart: { __typename: 'Minicart', items },
+            minicart: { __typename: 'Minicart', items: JSON.stringify(items) },
           },
         })
-        return items
+        return JSON.stringify(items)
       },
       updateOrderForm: (_, { orderForm: newOrderForm }, { cache }) => {
         const orderForm = mapToLinkStateOrderForm(newOrderForm)
         console.log('teste orderForm: ', orderForm)
         cache.writeData({
           data: {
-            minicart: { __typename: 'Minicart', orderForm },
+            minicart: {
+              __typename: 'Minicart',
+              orderForm: JSON.stringify(orderForm),
+            },
           },
         })
         if (orderForm.items) {
           updateLinkStateItems(orderForm.items, cache)
         }
-        return orderForm
+        return JSON.stringify(orderForm)
       },
       updateOrderFormShipping: replayOrderFormServerMutation(
         updateOrderFormShipping
@@ -156,7 +142,7 @@ export default function(client) {
 
     cache.writeData({
       data: {
-        minicart: { __typename: 'Minicart', items },
+        minicart: { __typename: 'Minicart', items: JSON.stringify(items) },
       },
     })
     return items
@@ -190,7 +176,7 @@ export default function(client) {
   //           imageUrl
   //           detailUrl
 
-  const mapToItemMetdataItem = (itemMetdataItem) => ({
+  const mapToItemMetdataItem = itemMetdataItem => ({
     detailUrl: null,
     ean: null,
     id: null,
@@ -200,8 +186,10 @@ export default function(client) {
     productId: null,
     refId: null,
     ...itemMetdataItem,
-    assemblyOptions: (itemMetdataItem.assemblyOptions || []).map(mapToMetadataAssemblyOptionItem),
-    __typename: "OrderFormClientMetadataItem",
+    assemblyOptions: (itemMetdataItem.assemblyOptions || []).map(
+      mapToMetadataAssemblyOptionItem
+    ),
+    __typename: 'OrderFormClientMetadataItem',
   })
 
   const mapToMetadataAssemblyOptionItem = MetadataAssemblyOption => ({
@@ -291,7 +279,7 @@ export default function(client) {
   const initialState = {
     minicart: {
       __typename: 'Minicart',
-      items: [],
+      items: '[]',
       orderForm: null,
     },
   }
