@@ -70,8 +70,8 @@ class MiniCart extends Component {
   }
 
   partitionItemsAddUpdate = clientItems => {
-    const isNoInInCart = (item) => item.cartIndex == null
-    return partition(isNoInInCart, clientItems)
+    const isNotInCart = item => item.cartIndex == null
+    return partition(isNotInCart, clientItems)
   }
 
   handleItemsDifference = async clientItems => {
@@ -306,8 +306,8 @@ const withLinkStateMinicartQuery = graphql(fullMinicartQuery, {
   options: () => ({ ssr: false }),
   props: ({ data: { minicart } }) => ({
     linkState: {
-      minicartItems: minicart && minicart.items,
-      orderForm: minicart && minicart.orderForm,
+      minicartItems: minicart && JSON.parse(minicart.items),
+      orderForm: minicart && JSON.parse(minicart.orderForm),
     },
   }),
 })

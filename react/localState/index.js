@@ -23,7 +23,9 @@ export default function(client) {
       minicart: { orderForm: outdatedOrderForm },
     } = cache.readQuery({ query: minicartOrderFormQuery })
 
-    const orderForm = mergeDeepRight(outdatedOrderForm, updatedOrderForm)
+    const orderForm = JSON.stringify(
+      mergeDeepRight(JSON.parse(outdatedOrderForm), updatedOrderForm)
+    )
     cache.writeData({
       data: {
         minicart: { __typename: 'Minicart', orderForm },
@@ -41,12 +43,12 @@ export default function(client) {
         } = cache.readQuery({ query })
 
         const newItems = items.map(item => mapToMinicartItem({ ...item, upToDate: false }))
-        const writeItems = [...prevItems, ...newItems]
+        const writeItems = [...JSON.parse(prevItems), ...newItems]
         cache.writeData({
           data: {
             minicart: {
               __typename: 'Minicart',
-              items: writeItems,
+              items: JSON.stringify(writeItems),
             },
           },
         })
@@ -60,17 +62,18 @@ export default function(client) {
 
         // Items provided to this function MUST have a valid index property
         const cleanNewItems = newItems.filter(({ index }) => index != null)
-        const items = [...prevItems]
+        const prevItemsParsed = JSON.parse(prevItems)
+        const items = [...prevItemsParsed]
 
         for (const newItem of cleanNewItems) {
           const { index } = newItem
-          const prevItem = prevItems[index]
+          const prevItem = prevItemsParsed[index]
           items[index] = mapToMinicartItem(mergeDeepRight(prevItem, { ...newItem, upToDate: false }))
         }
 
         cache.writeData({
           data: {
-            minicart: { __typename: 'Minicart', items },
+            minicart: { __typename: 'Minicart', items: JSON.stringify(items) },
           },
         })
         return items
@@ -79,7 +82,10 @@ export default function(client) {
         const orderForm = mapToLinkStateOrderForm(newOrderForm)
         cache.writeData({
           data: {
-            minicart: { __typename: 'Minicart', orderForm },
+            minicart: {
+              __typename: 'Minicart',
+              orderForm: JSON.stringify(orderForm),
+            },
           },
         })
         if (orderForm.items) {
@@ -106,7 +112,7 @@ export default function(client) {
 
     cache.writeData({
       data: {
-        minicart: { __typename: 'Minicart', items },
+        minicart: { __typename: 'Minicart', items: JSON.stringify(items) },
       },
     })
     return items
@@ -205,7 +211,7 @@ export default function(client) {
   const initialState = {
     minicart: {
       __typename: 'Minicart',
-      items: [],
+      items: '[]',
       orderForm: null,
     },
   }
