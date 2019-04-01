@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.14.5] - 2019-04-01
+### Changed
+- Stringify and parse local state order form to prevent bugs in apollo link state.
+
+### Fixed
+- Make items mutations be based on index and nothing related to sku id.
+
 ## [2.14.4] - 2019-03-28
 ### Changed
 - Remove unused `itemMetadata` fields from orderForm and minicart queries.
