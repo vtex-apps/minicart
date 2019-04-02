@@ -23,9 +23,10 @@ import { fullMinicartQuery } from './localState/queries'
 import {
   updateItemsMutation,
   updateOrderFormMutation,
+  updateItemsSentToServerMutation,
 } from './localState/mutations'
 
-import createLocalState from './localState'
+import createLocalState, { ITEMS_STATUS } from './localState'
 
 import minicart from './minicart.css'
 
@@ -57,15 +58,15 @@ class MiniCart extends Component {
     this.handleOrderFormUpdate(prevProps)
   }
 
-  getClientOnlyItems = () => {
+  getModifiedItemsOnly = () => {
     const clientItems = pathOr([], ['linkState', 'minicartItems'], this.props)
-    return clientItems.filter(({ upToDate }) => !upToDate)
+    return clientItems.filter(({ localStatus }) => localStatus === ITEMS_STATUS.MODIFIED)
   }
 
   handleItemsUpdate = async () => {
-    const clientOnlyItems = this.getClientOnlyItems()
-    if (clientOnlyItems.length && !this.state.updatingOrderForm) {
-      return this.handleItemsDifference(clientOnlyItems)
+    const modifiedItems = this.getModifiedItemsOnly()
+    if (modifiedItems.length && !this.state.updatingOrderForm) {
+      return this.handleItemsDifference(modifiedItems)
     }
   }
 
@@ -74,24 +75,34 @@ class MiniCart extends Component {
     return partition(isNotInCart, clientItems)
   }
 
-  handleItemsDifference = async clientItems => {
-    const { showToast, intl } = this.props
-    this.setState({ updatingOrderForm: true })
+  handleItemsDifference = modifiedItems => {
+    this.setState({ updatingOrderForm: true }, () => this.sendModifiedItemsToServer(modifiedItems))
+  }
+
+  sendModifiedItemsToServer = async modifiedItems => {
+    const { showToast, intl, updateItemsSentToServer } = this.props
+    const [itemsToAdd, itemsToUpdate] = this.partitionItemsAddUpdate(modifiedItems)
+    await updateItemsSentToServer()
+    const pickProps = map(pick(['id', 'index', 'quantity', 'seller', 'options']))
     try {
-      const [itemsToAdd, itemsToUpdate] = this.partitionItemsAddUpdate(clientItems)
-      const pickProps = map(pick(['id', 'index', 'quantity', 'seller', 'options']))
       const updateItemsResponse = await this.updateItems(pickProps(itemsToUpdate))
       const addItemsResponse = await this.addItems(pickProps(itemsToAdd))
+      itemsToAdd.length > 0 && this.props.push({
+          event: 'addToCart',
+          items: itemsToAdd,
+        })
+      const modifiedItems = this.getModifiedItemsOnly()
+      if (modifiedItems.length > 0) {
+        // If there are new modified items in cart, recursively call this function to send requests to server
+        return this.sendModifiedItemsToServer(modifiedItems)
+      }
+
       const newOrderForm = pathOr(
         path(['data', 'addItem'], addItemsResponse),
         ['data', 'updateItems'],
         updateItemsResponse
       )
       await this.props.updateOrderForm(newOrderForm)
-      this.props.push({
-        event: 'addToCart',
-        items: clientItems,
-      })
     } catch (err) {
       // TODO: Toast error message into Alert
       console.error(err)
@@ -99,9 +110,8 @@ class MiniCart extends Component {
       const orderForm = path(['data', 'orderForm'], this.props)
       showToast({ message: intl.formatMessage({ id: 'minicart.checkout-failure' }) })
       await this.props.updateOrderForm(orderForm)
-    } finally {
-      this.setState({ updatingOrderForm: false })
     }
+    this.setState({ updatingOrderForm: false })
   }
 
   handleOrderFormUpdate = async prevProps => {
@@ -327,6 +337,13 @@ const withLinkStateUpdateOrderFormMutation = graphql(updateOrderFormMutation, {
   }),
 })
 
+const withLinkStateUpdateItemsSentToServerMutation = graphql(updateItemsSentToServerMutation, {
+  name: 'updateItemsSentToServer',
+  props: ({ updateItemsSentToServer }) => ({
+    updateItemsSentToServer: () => updateItemsSentToServer(),
+  }),
+})
+
 const withLinkState = WrappedComponent => {
   const Component = ({ client, ...props }) => {
     useEffect(() => {
@@ -359,6 +376,7 @@ export default compose(
   withLinkStateMinicartQuery,
   withLinkStateUpdateItemsMutation,
   withLinkStateUpdateOrderFormMutation,
+  withLinkStateUpdateItemsSentToServerMutation,
   withRuntimeContext,
   Pixel,
   withToast,

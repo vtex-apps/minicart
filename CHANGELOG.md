@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Implement multiple status to simulate request queue and be able to continuously sync local state and server.
 
 ## [2.14.5] - 2019-04-01
 ### Changed
