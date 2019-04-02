@@ -117,7 +117,6 @@ export default function(client) {
           }
           return mapToMinicartItem(item)
         })
-        console.log('teste WRITING: ', itemsWithStatus)
         cache.writeData({
           data: {
             minicart: { __typename: 'Minicart', items: JSON.stringify(itemsWithStatus) },
