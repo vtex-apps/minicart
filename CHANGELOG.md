@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.14.6] - 2019-04-04
+### Fixed
+- Implement multiple status to simulate request queue and be able to continuously sync local state and server.
+
 ## [2.14.5] - 2019-04-01
 ### Changed
 - Stringify and parse local state order form to prevent bugs in apollo link state.

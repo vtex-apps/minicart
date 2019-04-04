@@ -6,6 +6,12 @@ import {
 } from 'vtex.store-resources/Mutations'
 import { minicartItemsQuery, minicartOrderFormQuery } from './queries'
 
+export const ITEMS_STATUS = {
+  NONE: 'NONE',
+  MODIFIED: 'MODIFIED',
+  WAITING_SERVER: 'WAITING_SERVER',
+}
+
 export default function(client) {
   const replayOrderFormServerMutation = mutation => async (
     _,
@@ -42,7 +48,7 @@ export default function(client) {
           minicart: { items: prevItems },
         } = cache.readQuery({ query })
 
-        const newItems = items.map(item => mapToMinicartItem({ ...item, upToDate: false }))
+        const newItems = items.map(item => mapToMinicartItem({ ...item, localStatus: ITEMS_STATUS.MODIFIED  }))
         const writeItems = [...JSON.parse(prevItems), ...newItems]
         cache.writeData({
           data: {
@@ -68,7 +74,7 @@ export default function(client) {
         for (const newItem of cleanNewItems) {
           const { index } = newItem
           const prevItem = prevItemsParsed[index]
-          items[index] = mapToMinicartItem(mergeDeepRight(prevItem, { ...newItem, upToDate: false }))
+          items[index] = mapToMinicartItem(mergeDeepRight(prevItem, { ...newItem, localStatus: ITEMS_STATUS.MODIFIED }))
         }
 
         cache.writeData({
@@ -99,6 +105,25 @@ export default function(client) {
       updateOrderFormCheckin: replayOrderFormServerMutation(
         updateOrderFormCheckin
       ),
+      updateItemsSentToServer: (_, __, { cache }) => {
+        const query = minicartItemsQuery
+        const {
+          minicart: { items: prevItems },
+        } = cache.readQuery({ query })
+        const prevItemsParsed = JSON.parse(prevItems)
+        const itemsWithStatus = prevItemsParsed.map(item => {
+          if (item.localStatus === ITEMS_STATUS.MODIFIED) {
+            return mapToMinicartItem({ ...item, localStatus: ITEMS_STATUS.WAITING_SERVER })
+          }
+          return mapToMinicartItem(item)
+        })
+        cache.writeData({
+          data: {
+            minicart: { __typename: 'Minicart', items: JSON.stringify(itemsWithStatus) },
+          },
+        })
+        return itemsWithStatus
+      },
     },
   }
 
@@ -106,7 +131,7 @@ export default function(client) {
     const items = newItems.map(item =>
       mapToMinicartItem({
         ...item,
-        upToDate: true,
+        localStatus: ITEMS_STATUS.NONE,
       })
     )
 

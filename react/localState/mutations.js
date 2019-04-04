@@ -11,3 +11,9 @@ export const updateOrderFormMutation = gql`
     updateOrderForm(orderForm: $orderForm) @client
   }
 `
+
+export const updateItemsSentToServerMutation = gql`
+  mutation updateItemsSentToServer {
+    updateItemsSentToServer @client
+  }
+`
