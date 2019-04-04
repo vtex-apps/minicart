@@ -91,10 +91,10 @@ class MiniCart extends Component {
           event: 'addToCart',
           items: itemsToAdd,
         })
-      const modifiedItems = this.getModifiedItemsOnly()
-      if (modifiedItems.length > 0) {
+      const newModifiedItems = this.getModifiedItemsOnly()
+      if (newModifiedItems.length > 0) {
         // If there are new modified items in cart, recursively call this function to send requests to server
-        return this.sendModifiedItemsToServer(modifiedItems)
+        return this.sendModifiedItemsToServer(newModifiedItems)
       }
 
       const newOrderForm = pathOr(
