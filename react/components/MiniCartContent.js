@@ -114,7 +114,7 @@ class MiniCartContent extends Component {
       name: item.skuName,
       itemId: item.id,
       image: {
-        imageUrl: changeImageUrlSize(toHttps(item.imageUrl), 240),
+        imageUrl: changeImageUrlSize(toHttps(item ? item.imageUrl : ''), 240),
       },
     },
     assemblyOptions: item.assemblyOptions,
