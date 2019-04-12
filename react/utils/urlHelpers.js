@@ -21,6 +21,7 @@ const baseUrlRegex = new RegExp(/.+ids\/(\d+)/)
 const httpRegex = new RegExp(/http:\/\//)
 
 export function toHttps(url) {
+  if (!url) return ''
   return url.replace(httpRegex, 'https://')
 }
 
