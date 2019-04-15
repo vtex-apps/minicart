@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import PropTypes from 'prop-types'
-import { identity, map, partition, path, pathOr, pick } from 'ramda'
+import { map, partition, path, pathOr, pick } from 'ramda'
 import React, { Component, useEffect } from 'react'
 import { Button, withToast } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
@@ -11,7 +11,7 @@ import { orderForm } from 'vtex.store-resources/Queries'
 import { addToCart, updateItems } from 'vtex.store-resources/Mutations'
 import { Pixel } from 'vtex.pixel-manager/PixelContext'
 import { compose, graphql, withApollo } from 'react-apollo'
-import { injectIntl, intlShape } from 'react-intl'
+import { injectIntl, intlShape, defineMessages } from 'react-intl'
 
 import MiniCartContent from './components/MiniCartContent'
 import { MiniCartPropTypes } from './propTypes'
@@ -115,7 +115,7 @@ class MiniCart extends Component {
       console.error(err)
       // Rollback items and orderForm
       const orderForm = path(['data', 'orderForm'], this.props)
-      showToast({ message: intl.formatMessage({ id: 'minicart.checkout-failure' }) })
+      showToast({ message: intl.formatMessage( messages.failure ) })
       await this.props.updateOrderForm(orderForm)
     }
     this.setState({ updatingOrderForm: false })
@@ -282,17 +282,56 @@ class MiniCart extends Component {
   }
 }
 
+const messages = defineMessages({
+  failure: {
+    id: 'admin/minicart.checkout-failure',
+    defaultMessage: 'Something went wrong. Please, try again.',
+  },
+  minicartDescription: {
+    id: 'admin/editor.minicart.description',
+    defaultMessage: 'A simple mini cart that shows all products added to it',
+  },
+  minicartTitle: {
+    id: 'admin/editor.minicart.title',
+    defaultMessage: 'Mini Cart',
+  },
+  minicartTypeTitle: {
+    id: 'admin/editor.minicart.type.title',
+    defaultMessage: 'Mini Cart Type',
+  },
+  minicartTypePopup: {
+    id: 'admin/editor.minicart.type.popup',
+    defaultMessage: 'Pop Up',
+  },
+  minicartTypeSidebar: {
+    id: 'admin/editor.minicart.type.sidebar',
+    defaultMessage: 'Sidebar',
+  },
+  minicartShowdDiscountTitle: {
+    id: 'admin/editor.minicart.showDiscount.title',
+    defaultMessage: 'Mini Cart Type',
+  },
+  minicartLabelMinicartEmptyTitle: {
+    id: 'admin/editor.minicart.labelMiniCartEmpty.title',
+    defaultMessage: 'Text to appear when the mini cart is empty',
+  },
+  minicartLabelButtonFinishShoppingTitle: {
+    id: 'admin/editor.minicart.labelButtonFinishShopping.title',
+    defaultMessage: 'Text to appear in the finish shopping button'
+  }
+})
+
 MiniCart.schema = {
-  title: 'editor.minicart.title',
-  description: 'editor.minicart.description',
+  title: messages.minicartTitle.id,
+  description: messages.minicartDescription.id,
   type: 'object',
   properties: {
     type: {
-      title: 'editor.minicart.type.title',
+      title: messages.minicartTypeTitle.id,
       type: 'string',
       default: 'popup',
       enum: ['popup', 'sidebar'],
-      enumNames: ['editor.minicart.type.popup', 'editor.minicart.type.sidebar'],
+      enumNames: [messages.minicartTypePopup.id, messages.minicartTypeSidebar.id],
       widget: {
         'ui:widget': 'radio',
         'ui:options': {
@@ -302,17 +341,17 @@ MiniCart.schema = {
       isLayout: true,
     },
     showDiscount: {
-      title: 'editor.minicart.showDiscount.title',
+      title: messages.minicartShowdDiscountTitle.id,
       type: 'boolean',
       isLayout: true,
     },
     labelMiniCartEmpty: {
-      title: 'editor.minicart.labelMiniCartEmpty.title',
+      title: messages.minicartLabelMinicartEmptyTitle.id,
       type: 'string',
       isLayout: false,
     },
     labelButtonFinishShopping: {
-      title: 'editor.minicart.labelButtonFinishShopping.title',
+      title: messages.minicartLabelButtonFinishShoppingTitle.id,
       type: 'string',
       isLayout: false,
     },

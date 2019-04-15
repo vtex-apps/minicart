@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import { IconCaret, IconCart } from 'vtex.store-icons'
-import { injectIntl, intlShape } from 'react-intl'
+import { FormattedMessage } from 'react-intl'
 import OutsideClickHandler from 'react-outside-click-handler'
 import Animation from 'vtex.store-components/Animation'
 import classNames from 'classnames'
@@ -34,7 +34,7 @@ class Sidebar extends Component {
   }
 
   render() {
-    const { isOpen, onOutsideClick, intl, iconSize, quantity } = this.props
+    const { isOpen, onOutsideClick, iconSize, quantity } = this.props
 
     if (typeof document === 'undefined') {
       return null
@@ -92,7 +92,7 @@ class Sidebar extends Component {
                 quantity > 0 ? '6' : '4'
               } c-muted-1`}
             >
-              {intl.formatMessage({ id: 'sidebar-title' })}
+              <FormattedMessage id="store/sidebar-title" defaultMessage="My mini cart" />
             </span>
           </div>
           {this.props.children}
@@ -104,8 +104,6 @@ class Sidebar extends Component {
 }
 
 Sidebar.propTypes = {
-  /* Internationalization */
-  intl: intlShape.isRequired,
   /* Set the sideBar visibility */
   isOpen: PropTypes.bool,
   /* Sidebar content */
@@ -118,4 +116,4 @@ Sidebar.propTypes = {
   iconSize: PropTypes.number.isRequired,
 }
 
-export default injectIntl(Sidebar)
+export default Sidebar

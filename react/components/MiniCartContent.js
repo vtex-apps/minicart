@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Component, Fragment } from 'react'
 import { compose, graphql } from 'react-apollo'
-import { injectIntl, intlShape } from 'react-intl'
+import { FormattedMessage } from 'react-intl'
 import { reduceBy, values, clone, find, propEq } from 'ramda'
 import classNames from 'classnames'
 
@@ -24,8 +24,6 @@ class MiniCartContent extends Component {
   static propTypes = {
     /* Set the mini cart content size */
     isSizeLarge: PropTypes.bool,
-    /* Internationalization */
-    intl: intlShape.isRequired,
     /** Define a function that is executed when the item is clicked */
     onClickAction: PropTypes.func,
     /* Update Items mutation */
@@ -141,7 +139,9 @@ class MiniCartContent extends Component {
         minicart.item
       } pa9 flex items-center justify-center relative bg-base`}
     >
-      <span className="t-body">{label}</span>
+      <span className="t-body">
+        {label || <FormattedMessage id="store/minicart-empty" defaultMessage="Your cart is empty!" />}
+      </span>
     </div>
   )
 
@@ -149,7 +149,6 @@ class MiniCartContent extends Component {
     orderForm,
     itemsToShow,
     label,
-    labelDiscount,
     showDiscount,
     onClickAction,
     isUpdating,
@@ -211,7 +210,6 @@ class MiniCartContent extends Component {
           discount={this.calculateDiscount(orderForm.items, orderForm.value)}
           buttonLabel={label}
           isSizeLarge={isSizeLarge}
-          labelDiscount={labelDiscount}
           showDiscount={showDiscount}
           showShippingCost={showShippingCost}
         />
@@ -234,7 +232,6 @@ class MiniCartContent extends Component {
       itemsToShow,
       labelMiniCartEmpty,
       labelButton,
-      intl,
       showDiscount,
       onClickAction,
       isSizeLarge,
@@ -249,22 +246,13 @@ class MiniCartContent extends Component {
     }
 
     if (!orderForm || !itemsToShow.length) {
-      const label =
-        labelMiniCartEmpty || intl.formatMessage({ id: 'minicart-empty' })
-      return this.renderWithoutItems(label)
+      return this.renderWithoutItems(labelMiniCartEmpty)
     }
-
-    const label =
-      labelButton || intl.formatMessage({ id: 'finish-shopping-button-label' })
-    const labelDiscount = intl.formatMessage({
-      id: 'minicart-content-footer-discount',
-    })
 
     return this.renderMiniCartWithItems(
       orderForm,
       itemsToShow,
-      label,
-      labelDiscount,
+      labelButton,
       showDiscount,
       onClickAction,
       isUpdating,
@@ -282,6 +270,5 @@ const withLinkStateUpdateItemsMutation = graphql(updateItemsMutation, {
 })
 
 export default compose(
-  injectIntl,
   withLinkStateUpdateItemsMutation
 )(MiniCartContent)
