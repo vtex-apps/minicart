@@ -86,6 +86,13 @@ class MiniCart extends Component {
     const pickProps = map(pick(['id', 'index', 'quantity', 'seller', 'options']))
     try {
       const updateItemsResponse = await this.updateItems(pickProps(itemsToUpdate))
+      const removedItems = itemsToUpdate.filter(({ quantity }) => quantity === 0)
+      if (removedItems.length) {
+        this.props.push({
+          event: 'removeFromCart',
+          items: removedItems,
+        })
+      }
       const addItemsResponse = await this.addItems(pickProps(itemsToAdd))
       itemsToAdd.length > 0 && this.props.push({
           event: 'addToCart',
