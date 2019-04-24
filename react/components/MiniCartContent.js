@@ -250,14 +250,14 @@ class MiniCartContent extends Component {
 
     if (!orderForm || !itemsToShow.length) {
       const label =
-        labelMiniCartEmpty || intl.formatMessage({ id: 'minicart-empty' })
+        labelMiniCartEmpty || intl.formatMessage({ id: 'store/minicart-empty' })
       return this.renderWithoutItems(label)
     }
 
     const label =
-      labelButton || intl.formatMessage({ id: 'finish-shopping-button-label' })
+      labelButton || intl.formatMessage({ id: 'store/finish-shopping-button-label' })
     const labelDiscount = intl.formatMessage({
-      id: 'minicart-content-footer-discount',
+      id: 'store/minicart-content-footer-discount',
     })
 
     return this.renderMiniCartWithItems(

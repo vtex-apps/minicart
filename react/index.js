@@ -115,7 +115,7 @@ class MiniCart extends Component {
       console.error(err)
       // Rollback items and orderForm
       const orderForm = path(['data', 'orderForm'], this.props)
-      showToast({ message: intl.formatMessage({ id: 'minicart.checkout-failure' }) })
+      showToast({ message: intl.formatMessage({ id: 'store/minicart.checkout-failure' }) })
       await this.props.updateOrderForm(orderForm)
     }
     this.setState({ updatingOrderForm: false })
@@ -283,16 +283,16 @@ class MiniCart extends Component {
 }
 
 MiniCart.schema = {
-  title: 'editor.minicart.title',
-  description: 'editor.minicart.description',
+  title: 'admin/editor.minicart.title',
+  description: 'admin/editor.minicart.description',
   type: 'object',
   properties: {
     type: {
-      title: 'editor.minicart.type.title',
+      title: 'admin/editor.minicart.type.title',
       type: 'string',
       default: 'popup',
       enum: ['popup', 'sidebar'],
-      enumNames: ['editor.minicart.type.popup', 'editor.minicart.type.sidebar'],
+      enumNames: ['admin/editor.minicart.type.popup', 'admin/editor.minicart.type.sidebar'],
       widget: {
         'ui:widget': 'radio',
         'ui:options': {
@@ -302,17 +302,17 @@ MiniCart.schema = {
       isLayout: true,
     },
     showDiscount: {
-      title: 'editor.minicart.showDiscount.title',
+      title: 'admin/editor.minicart.showDiscount.title',
       type: 'boolean',
       isLayout: true,
     },
     labelMiniCartEmpty: {
-      title: 'editor.minicart.labelMiniCartEmpty.title',
+      title: 'admin/editor.minicart.labelMiniCartEmpty.title',
       type: 'string',
       isLayout: false,
     },
     labelButtonFinishShopping: {
-      title: 'editor.minicart.labelButtonFinishShopping.title',
+      title: 'admin/editor.minicart.labelButtonFinishShopping.title',
       type: 'string',
       isLayout: false,
     },
