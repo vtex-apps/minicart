@@ -48,7 +48,7 @@ const MiniCartFooter = ({
       {shouldShowShippingCost && (
         <div className="flex items-center justify-between ma5">
           <div className="t-body c-muted-1">
-            <FormattedMessage id="minicart.shipping-cost" />
+            <FormattedMessage id="store/minicart.shipping-cost" />
           </div>
           <ProductPrice
             sellingPriceClass="t-heading-5-ns b c-on-base ph2 dib"

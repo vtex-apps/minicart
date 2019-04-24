@@ -92,7 +92,7 @@ class Sidebar extends Component {
                 quantity > 0 ? '6' : '4'
               } c-muted-1`}
             >
-              {intl.formatMessage({ id: 'sidebar-title' })}
+              {intl.formatMessage({ id: 'store/sidebar-title' })}
             </span>
           </div>
           {this.props.children}
