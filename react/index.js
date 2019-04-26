@@ -37,7 +37,7 @@ const DEFAULT_ICON_CLASSES = 'gray'
  * Minicart component
  */
 class MiniCart extends Component {
-  static propTypes = { 
+  static propTypes = {
     ...MiniCartPropTypes,
     intl: intlShape.isRequired,
     showToast: PropTypes.func.isRequired,
@@ -94,10 +94,13 @@ class MiniCart extends Component {
         })
       }
       const addItemsResponse = await this.addItems(pickProps(itemsToAdd))
-      itemsToAdd.length > 0 && this.props.push({
+
+      if (itemsToAdd.length > 0) {
+        this.props.push({
           event: 'addToCart',
-          items: itemsToAdd,
+          items: map(this.getAddToCartEventItems, itemsToAdd),
         })
+      }
       const newModifiedItems = this.getModifiedItemsOnly()
       if (newModifiedItems.length > 0) {
         // If there are new modified items in cart, recursively call this function to send requests to server
@@ -179,6 +182,15 @@ class MiniCart extends Component {
     return items.filter(shouldShowItem)
   }
 
+  getAddToCartEventItems = ({ id: skuId, skuName: variant, sellingPrice: price, ...restSkuItem }) => {
+    return {
+      skuId,
+      variant,
+      price,
+      ...pick(['brand', 'name', 'quantity'], restSkuItem)
+    }
+  }
+
   render() {
     const { openContent } = this.state
     const {
@@ -248,7 +260,7 @@ class MiniCart extends Component {
                 <span
                   className={`${
                     minicart.badge
-                  } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
+                    } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
                 >
                   {quantity}
                 </span>
@@ -268,15 +280,15 @@ class MiniCart extends Component {
               {miniCartContent}
             </Sidebar>
           ) : (
-            openContent && (
-              <Popup
-                onOutsideClick={this.handleUpdateContentVisibility}
-                buttonOffsetWidth={this.iconRef.offsetWidth}
-              >
-                {miniCartContent}
-              </Popup>
-            )
-          ))}
+              openContent && (
+                <Popup
+                  onOutsideClick={this.handleUpdateContentVisibility}
+                  buttonOffsetWidth={this.iconRef.offsetWidth}
+                >
+                  {miniCartContent}
+                </Popup>
+              )
+            ))}
       </aside>
     )
   }
