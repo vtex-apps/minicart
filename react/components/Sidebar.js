@@ -6,6 +6,7 @@ import { injectIntl, intlShape } from 'react-intl'
 import OutsideClickHandler from 'react-outside-click-handler'
 import Animation from 'vtex.store-components/Animation'
 import classNames from 'classnames'
+import { Overlay } from 'vtex.react-portal'
 
 import minicart from '../minicart.css'
 
@@ -49,56 +50,57 @@ class Sidebar extends Component {
       }
     )
 
-    return ReactDOM.createPortal(
-      <OutsideClickHandler onOutsideClick={onOutsideClick}>
-        <div
-          style={{ willChange: 'opacity' }}
-          className={scrimClasses}
-          onClick={onOutsideClick}
-        />
-
-        <Animation
-          className={`${
-            minicart.sidebar
-          } w-80 w-auto-ns h-100 fixed top-0 right-0 z-9999 bg-base shadow-2 flex flex-column`}
-          isActive={isOpen}
-          type="drawerLeft"
-        >
+    return (
+      <Overlay fullWidth>
+        <OutsideClickHandler onOutsideClick={onOutsideClick}>
           <div
+            style={{ willChange: 'opacity' }}
+            className={scrimClasses}
+            onClick={onOutsideClick}
+          />
+
+          <Animation
             className={`${
-              minicart.sidebarHeader
-            } pointer flex flex-row items-center pa5 h3 bg-base w-100 z-max bb b--muted-3 bw1`}
+              minicart.sidebar
+            } w-80 w-auto-ns h-100 fixed top-0 right-0 z-9999 bg-base shadow-2 flex flex-column`}
+            isActive={isOpen}
+            type="drawerLeft"
           >
             <div
-              className="c-muted-1 pa4 flex items-center"
-              onClick={onOutsideClick}
+              className={`${
+                minicart.sidebarHeader
+              } pointer flex flex-row items-center pa5 h3 bg-base w-100 z-max bb b--muted-3 bw1`}
             >
-              <IconCaret orientation="right" size={17} />
+              <div
+                className="c-muted-1 pa4 flex items-center"
+                onClick={onOutsideClick}
+              >
+                <IconCaret orientation="right" size={17} />
+              </div>
+              <div className="relative c-muted-1">
+                <IconCart size={iconSize} />
+                {quantity > 0 && (
+                  <span
+                    className={`${
+                      minicart.badge
+                    } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
+                  >
+                    {quantity}
+                  </span>
+                )}
+              </div>
+              <span
+                className={`${minicart.label} dn-m db-l t-action--small pl${
+                  quantity > 0 ? '6' : '4'
+                } c-muted-1`}
+              >
+                {intl.formatMessage({ id: 'store/sidebar-title' })}
+              </span>
             </div>
-            <div className="relative c-muted-1">
-              <IconCart size={iconSize} />
-              {quantity > 0 && (
-                <span
-                  className={`${
-                    minicart.badge
-                  } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
-                >
-                  {quantity}
-                </span>
-              )}
-            </div>
-            <span
-              className={`${minicart.label} dn-m db-l t-action--small pl${
-                quantity > 0 ? '6' : '4'
-              } c-muted-1`}
-            >
-              {intl.formatMessage({ id: 'store/sidebar-title' })}
-            </span>
-          </div>
-          {this.props.children}
-        </Animation>
-      </OutsideClickHandler>,
-      document.body
+            {this.props.children}
+          </Animation>
+        </OutsideClickHandler>
+      </Overlay>
     )
   }
 }

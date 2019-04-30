@@ -248,47 +248,47 @@ class MiniCart extends Component {
         className={`${minicart.container} relative fr flex items-center`}
         ref={e => (this.iconRef = e)}
       >
-        <Button
-          variation="tertiary"
-          icon
-          onClick={event => this.handleClickButton(event)}
-        >
-          <span className="flex items-center">
-            <span className={`relative ${iconClasses}`}>
-              <IconCart size={iconSize} />
-              {quantity > 0 && (
-                <span
-                  className={`${
-                    minicart.badge
-                    } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
-                >
-                  {quantity}
-                </span>
-              )}
+        <div className="flex flex-column">
+          <Button
+            variation="tertiary"
+            icon
+            onClick={event => this.handleClickButton(event)}
+          >
+            <span className="flex items-center">
+              <span className={`relative ${iconClasses}`}>
+                <IconCart size={iconSize} />
+                {quantity > 0 && (
+                  <span
+                    className={`${
+                      minicart.badge
+                      } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
+                  >
+                    {quantity}
+                  </span>
+                )}
+              </span>
+              {iconLabel && <span className={iconLabelClasses}>{iconLabel}</span>}
             </span>
-            {iconLabel && <span className={iconLabelClasses}>{iconLabel}</span>}
-          </span>
-        </Button>
-        {!hideContent &&
-          (isSizeLarge ? (
-            <Sidebar
-              quantity={quantity}
-              iconSize={iconSize}
-              onOutsideClick={this.handleUpdateContentVisibility}
-              isOpen={openContent}
-            >
-              {miniCartContent}
-            </Sidebar>
-          ) : (
+          </Button>
+          {!hideContent &&
+            (isSizeLarge ? (
+              <Sidebar
+                quantity={quantity}
+                iconSize={iconSize}
+                onOutsideClick={this.handleUpdateContentVisibility}
+                isOpen={openContent}
+              >
+                {miniCartContent}
+              </Sidebar>
+            ) : (
               openContent && (
-                <Popup
-                  onOutsideClick={this.handleUpdateContentVisibility}
-                  buttonOffsetWidth={this.iconRef.offsetWidth}
-                >
+                <Popup onOutsideClick={this.handleUpdateContentVisibility}>
                   {miniCartContent}
                 </Popup>
-              )
-            ))}
+                )
+            ))
+          }
+        </div>
       </aside>
     )
   }

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.16.2] - 2019-04-30
+### Changed
+- Use `react-portal` to add Popup and Sidebar on the top level of the body.
+
 ## [2.16.1] - 2019-04-30
 
 ### Fixed
