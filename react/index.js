@@ -248,6 +248,7 @@ class MiniCart extends Component {
         className={`${minicart.container} relative fr flex items-center`}
         ref={e => (this.iconRef = e)}
       >
+        <div className="flex flex-column">
         <Button
           variation="tertiary"
           icon
@@ -286,6 +287,7 @@ class MiniCart extends Component {
               </Popup>
             )
           ))}
+        </div>
       </aside>
     )
   }
