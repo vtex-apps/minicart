@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import OutsideClickHandler from 'react-outside-click-handler'
+import { Overlay } from 'vtex.react-portal'
 
 import minicart from '../minicart.css'
 
@@ -9,14 +10,15 @@ import minicart from '../minicart.css'
  */
 export default class Popup extends Component {
   render() {
-    const { children, onOutsideClick, buttonOffsetWidth } = this.props
+    const { children, onOutsideClick } = this.props
 
     const boxPositionStyle = {
-      right: buttonOffsetWidth && buttonOffsetWidth - 49,
+      right: -40,
     }
 
     return (
       <OutsideClickHandler onOutsideClick={onOutsideClick}>
+        <Overlay>
         <div
           className={`${minicart.box} dn db-ns absolute z-max flex flex-colunm`}
           style={boxPositionStyle}
@@ -32,6 +34,7 @@ export default class Popup extends Component {
             </div>
           </div>
         </div>
+        </Overlay>
       </OutsideClickHandler>
     )
   }

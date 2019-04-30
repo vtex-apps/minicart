@@ -280,15 +280,12 @@ class MiniCart extends Component {
               {miniCartContent}
             </Sidebar>
           ) : (
-              openContent && (
-                <Popup
-                  onOutsideClick={this.handleUpdateContentVisibility}
-                  buttonOffsetWidth={this.iconRef.offsetWidth}
-                >
-                  {miniCartContent}
-                </Popup>
-              )
-            ))}
+            openContent && (
+              <Popup onOutsideClick={this.handleUpdateContentVisibility}>
+                {miniCartContent}
+              </Popup>
+            )
+          ))}
       </aside>
     )
   }
