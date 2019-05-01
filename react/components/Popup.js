@@ -17,8 +17,8 @@ export default class Popup extends Component {
     }
 
     return (
-      <OutsideClickHandler onOutsideClick={onOutsideClick}>
-        <Overlay>
+      <Overlay>
+        <OutsideClickHandler onOutsideClick={onOutsideClick}>
           <div
             className={`${minicart.box} dn db-ns absolute z-max flex flex-colunm`}
             style={boxPositionStyle}
@@ -34,8 +34,8 @@ export default class Popup extends Component {
               </div>
             </div>
           </div>
-        </Overlay>
-      </OutsideClickHandler>
+        </OutsideClickHandler>
+      </Overlay>
     )
   }
 }
