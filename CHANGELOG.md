@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Add offline minicart logic allowing users to add an item to the cart when there is no network connection.
 
 ## [2.16.3] - 2019-05-01
 ### Fixed
@@ -16,7 +18,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Use `react-portal` to add Popup and Sidebar on the top level of the body.
 
 ## [2.16.1] - 2019-04-30
-
 ### Fixed
 - Fix props passed to `addToCart` event. 
 
