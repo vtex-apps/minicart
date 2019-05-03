@@ -1,4 +1,4 @@
-import { head, mergeDeepRight, values } from 'ramda'
+import { identity, head, mergeDeepRight, values } from 'ramda'
 
 import {
   updateOrderFormShipping,
@@ -48,7 +48,9 @@ export default function(client) {
           minicart: { items: prevItems },
         } = cache.readQuery({ query })
 
-        const newItems = items.map(item => mapToMinicartItem({ ...item, localStatus: ITEMS_STATUS.MODIFIED  }))
+        const newItems = items.map(item =>
+          mapToMinicartItem({ ...item, localStatus: ITEMS_STATUS.MODIFIED })
+        )
         const writeItems = [...JSON.parse(prevItems), ...newItems]
         cache.writeData({
           data: {
@@ -74,12 +76,20 @@ export default function(client) {
         for (const newItem of cleanNewItems) {
           const { index } = newItem
           const prevItem = prevItemsParsed[index]
-          items[index] = mapToMinicartItem(mergeDeepRight(prevItem, { ...newItem, localStatus: ITEMS_STATUS.MODIFIED }))
+          items[index] = mapToMinicartItem(
+            mergeDeepRight(prevItem, {
+              ...newItem,
+              localStatus: ITEMS_STATUS.MODIFIED,
+            })
+          )
         }
 
         cache.writeData({
           data: {
-            minicart: { __typename: 'Minicart', items: JSON.stringify(items) },
+            minicart: {
+              __typename: 'Minicart',
+              items: JSON.stringify(items.filter(identity)),
+            },
           },
         })
         return items
@@ -113,13 +123,19 @@ export default function(client) {
         const prevItemsParsed = JSON.parse(prevItems)
         const itemsWithStatus = prevItemsParsed.map(item => {
           if (item.localStatus === ITEMS_STATUS.MODIFIED) {
-            return mapToMinicartItem({ ...item, localStatus: ITEMS_STATUS.WAITING_SERVER })
+            return mapToMinicartItem({
+              ...item,
+              localStatus: ITEMS_STATUS.WAITING_SERVER,
+            })
           }
           return mapToMinicartItem(item)
         })
         cache.writeData({
           data: {
-            minicart: { __typename: 'Minicart', items: JSON.stringify(itemsWithStatus) },
+            minicart: {
+              __typename: 'Minicart',
+              items: JSON.stringify(itemsWithStatus),
+            },
           },
         })
         return itemsWithStatus
