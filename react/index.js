@@ -119,7 +119,8 @@ class MiniCart extends Component {
       await this.handleItemsUpdate()
       this.handleOrderFormUpdate(prevProps)
       if (localStorage) {
-        localStorage.clear()
+        localStorage.removeItem('minicart')
+        localStorage.removeItem('orderForm')
       }
     } else {
       this.saveDataIntoLocalStorage()
