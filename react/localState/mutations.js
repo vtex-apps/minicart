@@ -1,5 +1,11 @@
 import gql from 'graphql-tag'
 
+export const addToCartMutation = gql`
+  mutation addToCart($items: [MinicartItem]) {
+    addToCart(items: $items) @client
+  }
+`
+
 export const updateItemsMutation = gql`
   mutation updateItems($items: [MinicartItem]) {
     updateItems(items: $items) @client
