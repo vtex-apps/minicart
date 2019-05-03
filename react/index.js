@@ -214,7 +214,6 @@ class MiniCart extends Component {
     const prevOrderForm = path(['data', 'orderForm'], prevProps)
     const orderForm = path(['data', 'orderForm'], this.props)
     if (!prevOrderForm && orderForm) {
-      console.log('handleOrderFormUpdate')
       await this.props.updateOrderForm(orderForm)
     }
   }
@@ -357,13 +356,15 @@ class MiniCart extends Component {
                   <span
                     className={`${
                       minicart.badge
-                      } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
+                    } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
                   >
                     {quantity}
                   </span>
                 )}
               </span>
-              {iconLabel && <span className={iconLabelClasses}>{iconLabel}</span>}
+              {iconLabel && (
+                <span className={iconLabelClasses}>{iconLabel}</span>
+              )}
             </span>
           </Button>
           {!hideContent &&
@@ -381,9 +382,8 @@ class MiniCart extends Component {
                 <Popup onOutsideClick={this.handleUpdateContentVisibility}>
                   {miniCartContent}
                 </Popup>
-                )
-            ))
-          }
+              )
+            ))}
         </div>
       </aside>
     )
