@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+- Export MiniCart schema and create test case for it.
+
 ## [2.16.3] - 2019-05-01
 ### Fixed
 - Fix bug on Popup mode where clicks inside the minicart were closing it.
@@ -18,7 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [2.16.1] - 2019-04-30
 
 ### Fixed
-- Fix props passed to `addToCart` event. 
+- Fix props passed to `addToCart` event.
 
 ## [2.16.0] - 2019-04-24
 ### Changed
