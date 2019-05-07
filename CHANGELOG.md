@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.16.4] - 2019-05-07
+
 ### Fixed
 - Export MiniCart schema and create test case for it.
 
