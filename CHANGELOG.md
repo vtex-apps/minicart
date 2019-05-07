@@ -7,12 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-### Fixed
-- Export MiniCart schema and create test case for it.
-
 ## [2.17.0] - 2019-05-08
 ### Added
 - Add offline minicart logic allowing users to add an item to the cart when there is no network connection.
+
+## [2.16.4] - 2019-05-07
+### Fixed
+- Export MiniCart schema and create test case for it.
 
 ## [2.16.3] - 2019-05-01
 ### Fixed
