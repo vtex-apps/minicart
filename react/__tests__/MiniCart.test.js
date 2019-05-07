@@ -116,4 +116,9 @@ describe('<MiniCart /> component', () => {
     await resolveApolloQueries()
     expect(baseElement).toMatchSnapshot()
   })
+
+  it('should be editable in Site Editor', () => {
+    const schema = MiniCart.schema || MiniCart.getSchema({})
+    expect(schema).toEqual(expect.objectContaining({title: expect.any(String)}))
+  })
 })
