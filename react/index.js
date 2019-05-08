@@ -391,46 +391,6 @@ class MiniCart extends Component {
   }
 }
 
-MiniCart.schema = {
-  title: 'admin/editor.minicart.title',
-  description: 'admin/editor.minicart.description',
-  type: 'object',
-  properties: {
-    type: {
-      title: 'admin/editor.minicart.type.title',
-      type: 'string',
-      default: 'popup',
-      enum: ['popup', 'sidebar'],
-      enumNames: [
-        'admin/editor.minicart.type.popup',
-        'admin/editor.minicart.type.sidebar',
-      ],
-      widget: {
-        'ui:widget': 'radio',
-        'ui:options': {
-          inline: true,
-        },
-      },
-      isLayout: true,
-    },
-    showDiscount: {
-      title: 'admin/editor.minicart.showDiscount.title',
-      type: 'boolean',
-      isLayout: true,
-    },
-    labelMiniCartEmpty: {
-      title: 'admin/editor.minicart.labelMiniCartEmpty.title',
-      type: 'string',
-      isLayout: false,
-    },
-    labelButtonFinishShopping: {
-      title: 'admin/editor.minicart.labelButtonFinishShopping.title',
-      type: 'string',
-      isLayout: false,
-    },
-  },
-}
-
 const withLinkStateMinicartQuery = graphql(fullMinicartQuery, {
   options: () => ({ ssr: false }),
   props: ({ data: { minicart } }) => ({
@@ -496,7 +456,7 @@ const withLinkState = WrappedComponent => {
   return hoistNonReactStatics(Component, WrappedComponent)
 }
 
-export default compose(
+const EnhancedMinicart = compose(
   graphql(orderForm, { options: () => ({ ssr: false }) }),
   graphql(addToCart, { name: 'addToCart' }),
   graphql(updateItems, { name: 'updateItems' }),
@@ -512,3 +472,45 @@ export default compose(
   withToast,
   injectIntl
 )(MiniCart)
+
+EnhancedMinicart.schema = {
+  title: 'admin/editor.minicart.title',
+  description: 'admin/editor.minicart.description',
+  type: 'object',
+  properties: {
+    type: {
+      title: 'admin/editor.minicart.type.title',
+      type: 'string',
+      default: 'popup',
+      enum: ['popup', 'sidebar'],
+      enumNames: [
+        'admin/editor.minicart.type.popup',
+        'admin/editor.minicart.type.sidebar',
+      ],
+      widget: {
+        'ui:widget': 'radio',
+        'ui:options': {
+          inline: true,
+        },
+      },
+      isLayout: true,
+    },
+    showDiscount: {
+      title: 'admin/editor.minicart.showDiscount.title',
+      type: 'boolean',
+      isLayout: true,
+    },
+    labelMiniCartEmpty: {
+      title: 'admin/editor.minicart.labelMiniCartEmpty.title',
+      type: 'string',
+      isLayout: false,
+    },
+    labelButtonFinishShopping: {
+      title: 'admin/editor.minicart.labelButtonFinishShopping.title',
+      type: 'string',
+      isLayout: false,
+    },
+  },
+}
+
+export default EnhancedMinicart
