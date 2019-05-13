@@ -4,7 +4,11 @@ import {
   updateOrderFormShipping,
   updateOrderFormCheckin,
 } from 'vtex.store-resources/Mutations'
-import { minicartItemsQuery, minicartOrderFormQuery } from './queries'
+import {
+  minicartItemsQuery,
+  minicartOrderFormQuery,
+  minicartIsOpenQuery,
+} from './queries'
 
 export const ITEMS_STATUS = {
   NONE: 'NONE',
@@ -140,6 +144,17 @@ export default function(client) {
         })
         return itemsWithStatus
       },
+      setIsOpen: (_, { isOpen }, { cache }) => {
+        cache.writeQuery({
+          query: minicartIsOpenQuery,
+          data: {
+            minicart: {
+              isOpen,
+            },
+          },
+        })
+        return true
+      },
     },
   }
 
@@ -254,6 +269,7 @@ export default function(client) {
       __typename: 'Minicart',
       items: '[]',
       orderForm: null,
+      isOpen: false,
     },
   }
 

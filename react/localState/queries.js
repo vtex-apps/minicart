@@ -24,3 +24,11 @@ export const minicartItemsQuery = gql`
     }
   }
 `
+
+export const minicartIsOpenQuery = gql`
+  query {
+    minicart @client {
+      isOpen
+    }
+  }
+`
