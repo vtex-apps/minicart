@@ -149,6 +149,7 @@ export default function(client) {
           query: minicartIsOpenQuery,
           data: {
             minicart: {
+              __typename: 'Minicart',
               isOpen,
             },
           },

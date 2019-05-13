@@ -5,6 +5,7 @@ export const fullMinicartQuery = gql`
     minicart @client {
       items
       orderForm
+      isOpen
     }
   }
 `

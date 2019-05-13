@@ -24,8 +24,8 @@ export const updateItemsSentToServerMutation = gql`
   }
 `
 
-export const setIsOpen = gql`
+export const setIsOpenMutation = gql`
   mutation setIsOpen($isOpen: Boolean!) {
-    setIsOpen @client
+    setIsOpen(isOpen: $isOpen) @client
   }
 `
