@@ -9,12 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Add Lint to repo, fix basic issues.
 
+### Fixed
+- Fixed the case when an item is added offline and the user closes and then accesses the store again still offline.
+
 ## [2.18.0] - 2019-05-14
 ### Changed
 - `isOpen` state is now coming from Apollo Local State.
 
 ## [2.17.1] - 2019-05-08
-
 ### Fixed
 - Export MiniCart schema and create test case for it. (Releasing again.)
 
