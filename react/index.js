@@ -62,14 +62,14 @@ class MiniCart extends Component {
   }
 
   saveDataIntoLocalStorage = () => {
-    if (localStorage) {
-      const clientItems = this.getModifiedItemsOnly()
+    const clientItems = this.getModifiedItemsOnly()
+    const clientOrderForm = pathOr(
+      path(['data', 'orderForm'], this.props),
+      ['linkState', 'orderForm'],
+      this.props
+    )
+    if (localStorage && clientItems.length) {
       localStorage.setItem('minicart', JSON.stringify(clientItems))
-      const clientOrderForm = pathOr(
-        path(['data', 'orderForm'], this.props),
-        ['linkState', 'orderForm'],
-        this.props
-      )
       localStorage.setItem('orderForm', JSON.stringify(clientOrderForm))
     }
   }
@@ -117,7 +117,7 @@ class MiniCart extends Component {
   async componentDidUpdate(prevProps) {
     if (!this.state.offline) {
       await this.handleItemsUpdate()
-      this.handleOrderFormUpdate(prevProps)
+      await this.handleOrderFormUpdate(prevProps)
       if (localStorage) {
         localStorage.removeItem('minicart')
         localStorage.removeItem('orderForm')
