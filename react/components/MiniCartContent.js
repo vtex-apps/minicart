@@ -66,8 +66,9 @@ class MiniCartContent extends Component {
     return totalizer && totalizer.value / 100
   }
 
-  calculateDiscount = (items, totalPrice) =>
-    this.sumItemsPrice(items) - totalPrice
+  calculateDiscount = (items, totalPrice) => 
+    totalPrice == 0 ? totalPrice : this.sumItemsPrice(items) - totalPrice
+    
 
   handleItemRemoval = async ({ id, cartIndex }) => {
     const { updateItems } = this.props
@@ -101,6 +102,9 @@ class MiniCartContent extends Component {
       0
     )
   }
+
+  calculateTotalValue = orderForm =>
+    getShippingCost(orderForm) ? this.sumItemsPrice(orderForm.items) : orderForm.value 
 
   createProductShapeFromItem = item => ({
     productName: item.name,
@@ -214,7 +218,7 @@ class MiniCartContent extends Component {
         <MiniCartFooter
           shippingCost={this.getShippingCost(orderForm)}
           isUpdating={this.isUpdating}
-          totalValue={orderForm.value}
+          totalValue={this.calculateTotalValue(orderForm)}
           discount={this.calculateDiscount(orderForm.items, orderForm.value)}
           buttonLabel={label}
           isSizeLarge={isSizeLarge}
