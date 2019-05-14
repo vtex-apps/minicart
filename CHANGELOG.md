@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.18.0] - 2019-05-14
+### Changed
+- `isOpen` state is now coming from Apollo Local State.
+
 ## [2.17.1] - 2019-05-08
 
 ### Fixed

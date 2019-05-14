@@ -25,6 +25,7 @@ import {
   updateItemsMutation,
   updateOrderFormMutation,
   updateItemsSentToServerMutation,
+  setMinicartOpenMutation,
 } from './localState/mutations'
 
 import createLocalState, { ITEMS_STATUS } from './localState'
@@ -50,7 +51,6 @@ class MiniCart extends Component {
   }
 
   state = {
-    openContent: false,
     updatingOrderForm: false,
     offline: false,
   }
@@ -241,25 +241,22 @@ class MiniCart extends Component {
     }
   }
 
+  setContentOpen = isOpen => this.props.setMinicartOpen(isOpen)
+
   handleClickButton = event => {
-    if (!this.props.hideContent) {
-      this.setState({
-        openContent: !this.state.openContent,
-      })
+    const { hideContent, linkState } = this.props
+    if (!hideContent) {
+      this.setContentOpen(!linkState.isOpen)
     }
     event.persist()
   }
 
   handleUpdateContentVisibility = () => {
-    this.setState({
-      openContent: false,
-    })
+    this.setContentOpen(false)
   }
 
   handleClickProduct = detailUrl => {
-    this.setState({
-      openContent: false,
-    })
+    this.setContentOpen(false)
     const {
       runtime: { navigate },
     } = this.props
@@ -301,7 +298,7 @@ class MiniCart extends Component {
       type,
       hideContent,
       showShippingCost,
-      linkState: { minicartItems: items, orderForm },
+      linkState: { minicartItems: items, orderForm, isOpen },
     } = this.props
 
     const itemsToShow = this.getFilteredItems()
@@ -374,12 +371,12 @@ class MiniCart extends Component {
                 quantity={quantity}
                 iconSize={iconSize}
                 onOutsideClick={this.handleUpdateContentVisibility}
-                isOpen={openContent}
+                isOpen={isOpen}
               >
                 {miniCartContent}
               </Sidebar>
             ) : (
-              openContent && (
+              isOpen && (
                 <Popup onOutsideClick={this.handleUpdateContentVisibility}>
                   {miniCartContent}
                 </Popup>
@@ -394,10 +391,13 @@ class MiniCart extends Component {
 const withLinkStateMinicartQuery = graphql(fullMinicartQuery, {
   options: () => ({ ssr: false }),
   props: ({ data: { minicart } }) => ({
-    linkState: {
-      minicartItems: minicart && JSON.parse(minicart.items),
-      orderForm: minicart && JSON.parse(minicart.orderForm),
-    },
+    linkState: minicart
+      ? {
+          minicartItems: JSON.parse(minicart.items),
+          orderForm: JSON.parse(minicart.orderForm),
+          isOpen: minicart.isOpen,
+        }
+      : {},
   }),
 })
 
@@ -433,6 +433,13 @@ const withLinkStateUpdateItemsSentToServerMutation = graphql(
   }
 )
 
+const withLinkStateSetIsOpenMutation = graphql(setMinicartOpenMutation, {
+  name: 'setMinicartOpen',
+  props: ({ setMinicartOpen }) => ({
+    setMinicartOpen: isOpen => setMinicartOpen({ variables: { isOpen } }),
+  }),
+})
+
 const withLinkState = WrappedComponent => {
   const Component = ({ client, ...props }) => {
     useEffect(() => {
@@ -467,6 +474,7 @@ const EnhancedMinicart = compose(
   withLinkStateAddToCartMutation,
   withLinkStateUpdateOrderFormMutation,
   withLinkStateUpdateItemsSentToServerMutation,
+  withLinkStateSetIsOpenMutation,
   withRuntimeContext,
   Pixel,
   withToast,
