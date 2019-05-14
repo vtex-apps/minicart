@@ -144,7 +144,7 @@ export default function(client) {
         })
         return itemsWithStatus
       },
-      setIsOpen: (_, { isOpen }, { cache }) => {
+      setMinicartOpen: (_, { isOpen }, { cache }) => {
         cache.writeQuery({
           query: minicartIsOpenQuery,
           data: {

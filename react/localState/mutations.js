@@ -24,8 +24,8 @@ export const updateItemsSentToServerMutation = gql`
   }
 `
 
-export const setIsOpenMutation = gql`
-  mutation setIsOpen($isOpen: Boolean!) {
-    setIsOpen(isOpen: $isOpen) @client
+export const setMinicartOpenMutation = gql`
+  mutation setMinicartOpen($isOpen: Boolean!) {
+    setMinicartOpen(isOpen: $isOpen) @client
   }
 `

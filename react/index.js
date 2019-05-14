@@ -25,7 +25,7 @@ import {
   updateItemsMutation,
   updateOrderFormMutation,
   updateItemsSentToServerMutation,
-  setIsOpenMutation,
+  setMinicartOpenMutation,
 } from './localState/mutations'
 
 import createLocalState, { ITEMS_STATUS } from './localState'
@@ -241,7 +241,7 @@ class MiniCart extends Component {
     }
   }
 
-  setContentOpen = isOpen => this.props.setIsOpen(isOpen)
+  setContentOpen = isOpen => this.props.setMinicartOpen(isOpen)
 
   handleClickButton = event => {
     const { hideContent, linkState } = this.props
@@ -433,10 +433,10 @@ const withLinkStateUpdateItemsSentToServerMutation = graphql(
   }
 )
 
-const withLinkStateSetIsOpenMutation = graphql(setIsOpenMutation, {
-  name: 'setIsOpen',
-  props: ({ setIsOpen }) => ({
-    setIsOpen: isOpen => setIsOpen({ variables: { isOpen } }),
+const withLinkStateSetIsOpenMutation = graphql(setMinicartOpenMutation, {
+  name: 'setMinicartOpen',
+  props: ({ setMinicartOpen }) => ({
+    setMinicartOpen: isOpen => setMinicartOpen({ variables: { isOpen } }),
   }),
 })
 
