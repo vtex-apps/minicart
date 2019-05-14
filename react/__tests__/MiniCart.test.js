@@ -54,6 +54,7 @@ describe('<MiniCart /> component', () => {
 
     fireEvent.click(getByText('Button Test'))
 
+    await wait(0)
     box = baseElement.querySelector('.box')
     sidebar = baseElement.querySelector('.sidebar')
 
@@ -82,6 +83,7 @@ describe('<MiniCart /> component', () => {
 
     fireEvent.click(getByText('Button Test'))
 
+    await wait(0)
     box = baseElement.querySelector('.box')
     sidebar = baseElement.querySelector('.sidebarScrim.dn')
 
@@ -119,6 +121,8 @@ describe('<MiniCart /> component', () => {
 
   it('should be editable in Site Editor', () => {
     const schema = MiniCart.schema || MiniCart.getSchema({})
-    expect(schema).toEqual(expect.objectContaining({title: expect.any(String)}))
+    expect(schema).toEqual(
+      expect.objectContaining({ title: expect.any(String) })
+    )
   })
 })
