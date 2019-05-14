@@ -4,11 +4,16 @@
   "description": "A MiniCart Component.",
   "scripts": {
     "pretest": "yarn",
-    "test": "vtex-test-tools test"
+    "test": "vtex-test-tools test",
+    "lint": "eslint --ext js,jsx,ts,tsx ."
   },
   "devDependencies": {
     "@vtex/test-tools": "^0.1.3",
     "apollo-cache-inmemory": "^1.5.1",
+    "eslint": "^5.16.0",
+    "eslint-config-vtex-react": "^4.0.0",
+    "eslint-plugin-import": "2.16.0",
+    "prettier": "^1.16.4",
     "prop-types": "^15.7.2",
     "waait": "^1.0.4"
   },

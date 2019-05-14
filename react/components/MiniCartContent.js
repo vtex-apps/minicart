@@ -71,11 +71,13 @@ class MiniCartContent extends Component {
 
   handleItemRemoval = async ({ id, cartIndex }) => {
     const { updateItems } = this.props
-    const updatedItems = [{
-      id,
-      index: cartIndex,
-      quantity: 0,
-    }]
+    const updatedItems = [
+      {
+        id,
+        index: cartIndex,
+        quantity: 0,
+      },
+    ]
 
     try {
       await updateItems(updatedItems)
@@ -93,7 +95,9 @@ class MiniCartContent extends Component {
 
   sumOptionsSellingPrice = ({ added = [] }, parentQuantity) => {
     return added.reduce(
-      (acc, option) => acc + option.item.sellingPrice * option.normalizedQuantity * parentQuantity,
+      (acc, option) =>
+        acc +
+        option.item.sellingPrice * option.normalizedQuantity * parentQuantity,
       0
     )
   }
@@ -106,7 +110,10 @@ class MiniCartContent extends Component {
         commertialOffer: {
           Price:
             item.sellingPrice * item.quantity +
-            this.sumOptionsSellingPrice(item.assemblyOptions || {}, item.quantity),
+            this.sumOptionsSellingPrice(
+              item.assemblyOptions || {},
+              item.quantity
+            ),
           ListPrice: item.listPrice,
         },
         sellerId: item.seller,
@@ -255,7 +262,8 @@ class MiniCartContent extends Component {
     }
 
     const label =
-      labelButton || intl.formatMessage({ id: 'store/finish-shopping-button-label' })
+      labelButton ||
+      intl.formatMessage({ id: 'store/finish-shopping-button-label' })
     const labelDiscount = intl.formatMessage({
       id: 'store/minicart-content-footer-discount',
     })
