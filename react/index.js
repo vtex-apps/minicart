@@ -61,6 +61,14 @@ class MiniCart extends Component {
     }
   }
 
+  get orderForm() {
+    return pathOr(
+      path(['linkState', 'orderForm'], this.props),
+      ['data', 'orderForm'],
+      this.props
+    )
+  }
+
   saveDataIntoLocalStorage = () => {
     const clientItems = this.getModifiedItemsOnly()
     const clientOrderForm = pathOr(
@@ -139,7 +147,7 @@ class MiniCart extends Component {
     if (
       modifiedItems.length &&
       !this.state.updatingOrderForm &&
-      this.props.data.orderForm
+      this.orderForm
     ) {
       return this.handleItemsDifference(modifiedItems)
     }
@@ -202,7 +210,7 @@ class MiniCart extends Component {
       // TODO: Toast error message into Alert
       console.error(err)
       // Rollback items and orderForm
-      const orderForm = path(['data', 'orderForm'], this.props)
+      const orderForm = this.orderForm
       showToast({
         message: intl.formatMessage({ id: 'store/minicart.checkout-failure' }),
       })
@@ -220,9 +228,7 @@ class MiniCart extends Component {
   }
 
   addItems = items => {
-    const {
-      orderForm: { orderFormId },
-    } = this.props.data
+    const { orderFormId } = this.orderForm
     if (items.length) {
       return this.props.addToCart({
         variables: { orderFormId, items },
@@ -231,9 +237,7 @@ class MiniCart extends Component {
   }
 
   updateItems = items => {
-    const {
-      orderForm: { orderFormId },
-    } = this.props.data
+    const { orderFormId } = this.orderForm
     if (items.length) {
       return this.props.updateItems({
         variables: { orderFormId, items },
