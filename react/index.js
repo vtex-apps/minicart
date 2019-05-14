@@ -1,19 +1,17 @@
 import classNames from 'classnames'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import PropTypes from 'prop-types'
-import { identity, map, partition, path, pathOr, pick } from 'ramda'
+import { path, pathOr } from 'ramda'
 import React, { Component, useEffect } from 'react'
-import { Button, withToast } from 'vtex.styleguide'
+import { Button } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
 import { withRuntimeContext } from 'vtex.render-runtime'
 import { IconCart } from 'vtex.store-icons'
 import { orderForm } from 'vtex.store-resources/Queries'
-import { addToCart, updateItems } from 'vtex.store-resources/Mutations'
-import { Pixel } from 'vtex.pixel-manager/PixelContext'
 import { compose, graphql, withApollo } from 'react-apollo'
-import { injectIntl, intlShape } from 'react-intl'
 
 import MiniCartContent from './components/MiniCartContent'
+import MinicartItemsManager from './components/MinicartItemsManager'
 import { MiniCartPropTypes } from './propTypes'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
@@ -22,9 +20,7 @@ import { shouldShowItem } from './utils/itemsHelper'
 import { fullMinicartQuery } from './localState/queries'
 import {
   addToCartMutation,
-  updateItemsMutation,
   updateOrderFormMutation,
-  updateItemsSentToServerMutation,
   setMinicartOpenMutation,
 } from './localState/mutations'
 
@@ -39,11 +35,7 @@ const DEFAULT_ICON_CLASSES = 'gray'
  * Minicart component
  */
 class MiniCart extends Component {
-  static propTypes = {
-    ...MiniCartPropTypes,
-    intl: intlShape.isRequired,
-    showToast: PropTypes.func.isRequired,
-  }
+  static propTypes = MiniCartPropTypes
 
   static defaultProps = {
     labelClasses: DEFAULT_LABEL_CLASSES,
@@ -116,7 +108,6 @@ class MiniCart extends Component {
 
   async componentDidUpdate(prevProps) {
     if (!this.state.offline) {
-      await this.handleItemsUpdate()
       this.handleOrderFormUpdate(prevProps)
       if (localStorage) {
         localStorage.removeItem('minicart')
@@ -134,110 +125,13 @@ class MiniCart extends Component {
     )
   }
 
-  handleItemsUpdate = async () => {
-    const modifiedItems = this.getModifiedItemsOnly()
-    if (
-      modifiedItems.length &&
-      !this.state.updatingOrderForm &&
-      this.props.data.orderForm
-    ) {
-      return this.handleItemsDifference(modifiedItems)
-    }
-  }
-
-  partitionItemsAddUpdate = clientItems => {
-    const isNotInCart = item => item.cartIndex == null
-    return partition(isNotInCart, clientItems)
-  }
-
-  handleItemsDifference = modifiedItems => {
-    this.setState({ updatingOrderForm: true }, () =>
-      this.sendModifiedItemsToServer(modifiedItems)
-    )
-  }
-
-  sendModifiedItemsToServer = async modifiedItems => {
-    const { showToast, intl, updateItemsSentToServer } = this.props
-    const [itemsToAdd, itemsToUpdate] = this.partitionItemsAddUpdate(
-      modifiedItems
-    )
-    await updateItemsSentToServer()
-    const pickProps = map(
-      pick(['id', 'index', 'quantity', 'seller', 'options'])
-    )
-    try {
-      const updateItemsResponse = await this.updateItems(
-        pickProps(itemsToUpdate)
-      )
-      const removedItems = itemsToUpdate.filter(
-        ({ quantity }) => quantity === 0
-      )
-      if (removedItems.length) {
-        this.props.push({
-          event: 'removeFromCart',
-          items: removedItems,
-        })
-      }
-      const addItemsResponse = await this.addItems(pickProps(itemsToAdd))
-
-      if (itemsToAdd.length > 0) {
-        this.props.push({
-          event: 'addToCart',
-          items: map(this.getAddToCartEventItems, itemsToAdd),
-        })
-      }
-      const newModifiedItems = this.getModifiedItemsOnly()
-      if (newModifiedItems.length > 0) {
-        // If there are new modified items in cart, recursively call this function to send requests to server
-        return this.sendModifiedItemsToServer(newModifiedItems)
-      }
-
-      const newOrderForm = pathOr(
-        path(['data', 'addItem'], addItemsResponse),
-        ['data', 'updateItems'],
-        updateItemsResponse
-      )
-      await this.props.updateOrderForm(newOrderForm)
-    } catch (err) {
-      // TODO: Toast error message into Alert
-      console.error(err)
-      // Rollback items and orderForm
-      const orderForm = path(['data', 'orderForm'], this.props)
-      showToast({
-        message: intl.formatMessage({ id: 'store/minicart.checkout-failure' }),
-      })
-      await this.props.updateOrderForm(orderForm)
-    }
-    this.setState({ updatingOrderForm: false })
-  }
+  setUpdatingOrderForm = value => this.setState({ updatingOrderForm: value })
 
   handleOrderFormUpdate = async prevProps => {
     const prevOrderForm = path(['data', 'orderForm'], prevProps)
     const orderForm = path(['data', 'orderForm'], this.props)
     if (!prevOrderForm && orderForm) {
       await this.props.updateOrderForm(orderForm)
-    }
-  }
-
-  addItems = items => {
-    const {
-      orderForm: { orderFormId },
-    } = this.props.data
-    if (items.length) {
-      return this.props.addToCart({
-        variables: { orderFormId, items },
-      })
-    }
-  }
-
-  updateItems = items => {
-    const {
-      orderForm: { orderFormId },
-    } = this.props.data
-    if (items.length) {
-      return this.props.updateItems({
-        variables: { orderFormId, items },
-      })
     }
   }
 
@@ -268,20 +162,6 @@ class MiniCart extends Component {
   getFilteredItems = () => {
     const items = pathOr([], ['linkState', 'minicartItems'], this.props)
     return items.filter(shouldShowItem)
-  }
-
-  getAddToCartEventItems = ({
-    id: skuId,
-    skuName: variant,
-    sellingPrice: price,
-    ...restSkuItem
-  }) => {
-    return {
-      skuId,
-      variant,
-      price,
-      ...pick(['brand', 'name', 'quantity'], restSkuItem),
-    }
   }
 
   render() {
@@ -337,6 +217,14 @@ class MiniCart extends Component {
     )
 
     return (
+      <MinicartItemsManager
+        items={items}
+        orderForm={orderForm}
+        offline={this.state.offline}
+        setUpdatingOrderForm={this.setUpdatingOrderForm}
+        updatingOrderForm={this.state.updatingOrderForm}
+        serverOrderForm={data && data.orderForm}
+      >
       <aside
         className={`${minicart.container} relative fr flex items-center`}
         ref={e => (this.iconRef = e)}
@@ -384,6 +272,7 @@ class MiniCart extends Component {
             ))}
         </div>
       </aside>
+      </MinicartItemsManager>
     )
   }
 }
@@ -401,14 +290,6 @@ const withLinkStateMinicartQuery = graphql(fullMinicartQuery, {
   }),
 })
 
-const withLinkStateUpdateItemsMutation = graphql(updateItemsMutation, {
-  name: 'updateLinkStateItems',
-  props: ({ updateLinkStateItems }) => ({
-    updateLinkStateItems: items =>
-      updateLinkStateItems({ variables: { items } }),
-  }),
-})
-
 const withLinkStateAddToCartMutation = graphql(addToCartMutation, {
   name: 'addToLinkStateCart',
   props: ({ addToLinkStateCart }) => ({
@@ -422,16 +303,6 @@ const withLinkStateUpdateOrderFormMutation = graphql(updateOrderFormMutation, {
     updateOrderForm: orderForm => updateOrderForm({ variables: { orderForm } }),
   }),
 })
-
-const withLinkStateUpdateItemsSentToServerMutation = graphql(
-  updateItemsSentToServerMutation,
-  {
-    name: 'updateItemsSentToServer',
-    props: ({ updateItemsSentToServer }) => ({
-      updateItemsSentToServer: () => updateItemsSentToServer(),
-    }),
-  }
-)
 
 const withLinkStateSetIsOpenMutation = graphql(setMinicartOpenMutation, {
   name: 'setMinicartOpen',
@@ -465,20 +336,13 @@ const withLinkState = WrappedComponent => {
 
 const EnhancedMinicart = compose(
   graphql(orderForm, { options: () => ({ ssr: false }) }),
-  graphql(addToCart, { name: 'addToCart' }),
-  graphql(updateItems, { name: 'updateItems' }),
   withApollo,
   withLinkState,
   withLinkStateMinicartQuery,
-  withLinkStateUpdateItemsMutation,
   withLinkStateAddToCartMutation,
   withLinkStateUpdateOrderFormMutation,
-  withLinkStateUpdateItemsSentToServerMutation,
   withLinkStateSetIsOpenMutation,
   withRuntimeContext,
-  Pixel,
-  withToast,
-  injectIntl
 )(MiniCart)
 
 EnhancedMinicart.schema = {

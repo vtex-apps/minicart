@@ -62,7 +62,8 @@ class MiniCartContent extends Component {
     )
 
   getShippingCost = orderForm => {
-    const totalizer = find(propEq('id', 'Shipping'))(orderForm.totalizers)
+    const totalizers = orderForm && orderForm.totalizers || []
+    const totalizer = find(propEq('id', 'Shipping'))(totalizers)
     return totalizer && totalizer.value / 100
   }
 
