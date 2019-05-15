@@ -20,5 +20,7 @@ it('should append new items to end of cart', () => {
   expect(writeItems[1].localStatus === ITEMS_STATUS.NONE).toBe(true)
   expect(writeItems[3].localStatus === ITEMS_STATUS.WAITING_SERVER).toBe(true)
   // Testing that there are NO items in MODIFIED status
-  expect(writeItems.every(({ localStatus }) => localStatus !== ITEMS_STATUS.MODIFIED))
+  expect(
+    writeItems.every(({ localStatus }) => localStatus !== ITEMS_STATUS.MODIFIED)
+  )
 })
