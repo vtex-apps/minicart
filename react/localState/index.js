@@ -110,6 +110,7 @@ export const mapToMinicartItem = item => ({
   sellingPrice: null,
   listPrice: null,
   cartIndex: null,
+  optimisticIndex: null,
   ...item,
   options: item.options ? item.options.map(mapItemOptions) : null,
   assemblyOptions: mapAssemblyOptions(item.assemblyOptions),

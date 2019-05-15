@@ -1,4 +1,4 @@
-import { mergeDeepRight } from 'ramda'
+import { mergeDeepRight, prop, propEq } from 'ramda'
 
 import { mapToMinicartItem, ITEMS_STATUS } from '../index'
 
@@ -11,8 +11,8 @@ const updateItems = (cartItems, newItems) => {
   const items = [...cartItems]
 
   const itemsToBeRemoved = cleanNewItems
-    .filter(({ quantity }) => quantity === 0)
-    .map(({ cartIndex }) => cartIndex)
+    .filter(propEq('quantity', 0))
+    .map(prop('index'))
 
   for (const newItem of cleanNewItems) {
     const { index } = newItem
@@ -27,9 +27,10 @@ const updateItems = (cartItems, newItems) => {
 
   let itemsRemoved = 0
   if (itemsToBeRemoved.length > 0) {
-    for (const item of items) {
+    for (let index = 0; index < items.length; index++) {
+      const item = items[index]
       if (shouldBeInCart(item, itemsToBeRemoved)) {
-        item.cartIndex -= itemsRemoved
+        item.optimisticIndex = index - itemsRemoved
       } else {
         itemsRemoved += 1
         // Set quantity to 0 for children of parent assembly options to be removed
@@ -37,8 +38,7 @@ const updateItems = (cartItems, newItems) => {
       }
     }
   }
-
-  return items.filter(Boolean)
+  return items
 }
 
 export default updateItems

@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import PropTypes from 'prop-types'
-import { map, partition, path, pathOr, pick } from 'ramda'
+import { compose as RCompose, map, partition, path, pathOr, pick } from 'ramda'
 import React, { Component, useEffect } from 'react'
 import { Button, withToast } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
@@ -170,9 +170,16 @@ class MiniCart extends Component {
       modifiedItems
     )
     await updateItemsSentToServer()
-    const pickProps = map(
-      pick(['id', 'index', 'quantity', 'seller', 'options'])
+    const checkForOptimisticIndex = item =>
+      item.optimisticIndex != null
+        ? { ...item, index: item.optimisticIndex }
+        : item
+    const pickItems = RCompose(
+      pick(['id', 'index', 'quantity', 'seller', 'options']),
+      checkForOptimisticIndex
     )
+
+    const pickProps = map(pickItems)
     try {
       const updateItemsResponse = await this.updateItems(
         pickProps(itemsToUpdate)

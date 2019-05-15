@@ -29,6 +29,7 @@ export default {
       listPrice: 14.9,
       parentItemIndex: null,
       parentAssemblyBinding: null,
+      cartIndex: 0,
       assemblyOptions: {
         added: [
           {
@@ -105,6 +106,7 @@ export default {
       listPrice: 0,
       parentItemIndex: 0,
       parentAssemblyBinding: 'Pepperoni - Small_Crust',
+      cartIndex: 1,
       assemblyOptions: {
         added: [],
         removed: [],
@@ -124,6 +126,7 @@ export default {
       sellingPrice: 0,
       listPrice: 0,
       parentItemIndex: 0,
+      cartIndex: 2,
       parentAssemblyBinding: 'Pepperoni - Small_Basic Toppings',
       assemblyOptions: {
         added: [],
@@ -144,6 +147,7 @@ export default {
       sellingPrice: 1.5,
       listPrice: 1.5,
       parentItemIndex: 0,
+      cartIndex: 3,
       parentAssemblyBinding: 'Pepperoni - Small_Toppings',
       assemblyOptions: {
         added: [],
@@ -164,6 +168,7 @@ export default {
       sellingPrice: 1,
       listPrice: 1,
       parentItemIndex: 0,
+      cartIndex: 4,
       parentAssemblyBinding: 'Pepperoni - Small_Toppings',
       assemblyOptions: {
         added: [],
