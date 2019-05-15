@@ -1,4 +1,4 @@
-import { identity, head, mergeDeepRight, values } from 'ramda'
+import { head, mergeDeepRight, values } from 'ramda'
 
 import {
   updateOrderFormShipping,
@@ -9,6 +9,10 @@ import {
   minicartOrderFormQuery,
   minicartIsOpenQuery,
 } from './queries'
+
+import updateItems from './resolvers/updateItems'
+import addToCart from './resolvers/addToCart'
+import updateItemsSentToServer from './resolvers/updateItemsSentToServer'
 
 export const ITEMS_STATUS = {
   NONE: 'NONE',
@@ -92,7 +96,7 @@ const mapItemOptions = option => ({
   __typename: 'MinicartItemOptions',
 })
 
-const mapToMinicartItem = item => ({
+export const mapToMinicartItem = item => ({
   seller: null,
   index: null,
   parentItemIndex: null,
@@ -164,10 +168,7 @@ export default function(client) {
           minicart: { items: prevItems },
         } = cache.readQuery({ query })
 
-        const newItems = items.map(item =>
-          mapToMinicartItem({ ...item, localStatus: ITEMS_STATUS.MODIFIED })
-        )
-        const writeItems = [...JSON.parse(prevItems), ...newItems]
+        const writeItems = addToCart(JSON.parse(prevItems), items)
         cache.writeData({
           data: {
             minicart: {
@@ -183,32 +184,16 @@ export default function(client) {
         const {
           minicart: { items: prevItems },
         } = cache.readQuery({ query })
-
-        // Items provided to this function MUST have a valid index property
-        const cleanNewItems = newItems.filter(({ index }) => index != null)
-        const prevItemsParsed = JSON.parse(prevItems)
-        const items = [...prevItemsParsed]
-
-        for (const newItem of cleanNewItems) {
-          const { index } = newItem
-          const prevItem = prevItemsParsed[index]
-          items[index] = mapToMinicartItem(
-            mergeDeepRight(prevItem, {
-              ...newItem,
-              localStatus: ITEMS_STATUS.MODIFIED,
-            })
-          )
-        }
-
+        const newCartItems = updateItems(JSON.parse(prevItems), newItems)
         cache.writeData({
           data: {
             minicart: {
               __typename: 'Minicart',
-              items: JSON.stringify(items.filter(identity)),
+              items: JSON.stringify(newCartItems),
             },
           },
         })
-        return items
+        return newCartItems
       },
       updateOrderForm: (_, { orderForm: newOrderForm }, { cache }) => {
         const orderForm = mapToLinkStateOrderForm(newOrderForm)
@@ -236,16 +221,7 @@ export default function(client) {
         const {
           minicart: { items: prevItems },
         } = cache.readQuery({ query })
-        const prevItemsParsed = JSON.parse(prevItems)
-        const itemsWithStatus = prevItemsParsed.map(item => {
-          if (item.localStatus === ITEMS_STATUS.MODIFIED) {
-            return mapToMinicartItem({
-              ...item,
-              localStatus: ITEMS_STATUS.WAITING_SERVER,
-            })
-          }
-          return mapToMinicartItem(item)
-        })
+        const itemsWithStatus = updateItemsSentToServer(JSON.parse(prevItems))
         cache.writeData({
           data: {
             minicart: {
