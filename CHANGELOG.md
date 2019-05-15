@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.18.2] - 2019-05-15
+
 ## [2.18.1] - 2019-05-15
 ### Changed
 - Separate local state resolvers into separate functions and add tests.
