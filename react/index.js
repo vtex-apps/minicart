@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import PropTypes from 'prop-types'
-import { identity, map, partition, path, pathOr, pick } from 'ramda'
+import { map, partition, path, pathOr, pick } from 'ramda'
 import React, { Component, useEffect } from 'react'
 import { Button, withToast } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
@@ -285,7 +285,6 @@ class MiniCart extends Component {
   }
 
   render() {
-    const { openContent } = this.state
     const {
       labelMiniCartEmpty,
       labelButtonFinishShopping,
@@ -451,7 +450,7 @@ const withLinkState = WrappedComponent => {
       } catch (err) {
         client.writeData({ data: initialState })
       }
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return <WrappedComponent client={client} {...props} />
   }

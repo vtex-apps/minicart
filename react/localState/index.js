@@ -16,6 +16,118 @@ export const ITEMS_STATUS = {
   WAITING_SERVER: 'WAITING_SERVER',
 }
 
+/* eslint-disable no-use-before-define */
+
+// Need this for circular dependency
+
+const mapToOrderFormItem = item => ({
+  ...item,
+  assemblyOptions: mapAssemblyOptions(item.assemblyOptions),
+  __typename: 'OrderFormItem',
+})
+
+const mapAssemblyOptions = (options = {}) => ({
+  parentPrice: null,
+  ...options,
+  added: (options.added || []).map(added => ({
+    ...added,
+    item: added.item && mapToOrderFormItem(added.item),
+    __typename: 'AddedAssemblyOptions',
+  })),
+  removed: (options.removed || []).map(option => ({
+    ...option,
+    __typename: 'RemovedAssemblyOption',
+  })),
+  __typename: 'AssemblyOptions',
+})
+
+/* eslint-enable no-use-before-define */
+
+const mapToAddress = address => ({
+  ...address,
+  __typename: 'Address',
+})
+
+const mapToOrderFormTotalizer = totalizer => ({
+  ...totalizer,
+  __typename: 'OrderFormTotalizer',
+})
+
+const mapToOrderFormShippingData = ({ address, availableAddresses }) => ({
+  address: address && mapToAddress(address),
+  availableAddresses:
+    availableAddresses && availableAddresses.map(mapToAddress),
+  __typename: 'OrderFormShippingData',
+})
+
+const mapToOrderFormStorePreferences = storePreferencesData => ({
+  ...storePreferencesData,
+  __typename: 'OrderFormStorePreferencesData',
+})
+
+const mapToLinkStateOrderForm = orderForm => ({
+  ...orderForm,
+  __typename: 'OrderFormClient',
+  items: orderForm.items && orderForm.items.map(mapToOrderFormItem),
+  totalizers:
+    orderForm.totalizers && orderForm.totalizers.map(mapToOrderFormTotalizer),
+  clientProfileData: orderForm.clientProfileData && {
+    ...orderForm.clientProfileData,
+    __typename: 'OrderFormClientProfileData',
+  },
+  shippingData:
+    orderForm.shippingData &&
+    mapToOrderFormShippingData(orderForm.shippingData),
+  storePreferencesData:
+    orderForm.storePreferencesData &&
+    mapToOrderFormStorePreferences(orderForm.storePreferencesData),
+})
+
+const mapItemOptions = option => ({
+  seller: null,
+  assemblyId: null,
+  id: null,
+  quantity: null,
+  ...option,
+  __typename: 'MinicartItemOptions',
+})
+
+const mapToMinicartItem = item => ({
+  seller: null,
+  index: null,
+  parentItemIndex: null,
+  parentAssemblyBinding: null,
+  imageUrl: null,
+  id: null,
+  name: null,
+  detailUrl: null,
+  skuName: null,
+  quantity: null,
+  sellingPrice: null,
+  listPrice: null,
+  cartIndex: null,
+  ...item,
+  options: item.options ? item.options.map(mapItemOptions) : null,
+  assemblyOptions: mapAssemblyOptions(item.assemblyOptions),
+  __typename: 'MinicartItem',
+})
+
+const updateLinkStateItems = (newItems, cache) => {
+  const items = newItems.map(item =>
+    mapToMinicartItem({
+      ...item,
+      localStatus: ITEMS_STATUS.NONE,
+    })
+  )
+
+  cache.writeData({
+    data: {
+      minicart: { __typename: 'Minicart', items: JSON.stringify(items) },
+    },
+  })
+  return items
+}
+
 export default function(client) {
   const replayOrderFormServerMutation = mutation => async (
     _,
@@ -158,112 +270,6 @@ export default function(client) {
       },
     },
   }
-
-  const updateLinkStateItems = (newItems, cache) => {
-    const items = newItems.map(item =>
-      mapToMinicartItem({
-        ...item,
-        localStatus: ITEMS_STATUS.NONE,
-      })
-    )
-
-    cache.writeData({
-      data: {
-        minicart: { __typename: 'Minicart', items: JSON.stringify(items) },
-      },
-    })
-    return items
-  }
-
-  const mapToLinkStateOrderForm = orderForm => ({
-    ...orderForm,
-    __typename: 'OrderFormClient',
-    items: orderForm.items && orderForm.items.map(mapToOrderFormItem),
-    totalizers:
-      orderForm.totalizers && orderForm.totalizers.map(mapToOrderFormTotalizer),
-    clientProfileData: orderForm.clientProfileData && {
-      ...orderForm.clientProfileData,
-      __typename: 'OrderFormClientProfileData',
-    },
-    shippingData:
-      orderForm.shippingData &&
-      mapToOrderFormShippingData(orderForm.shippingData),
-    storePreferencesData:
-      orderForm.storePreferencesData &&
-      mapToOrderFormStorePreferences(orderForm.storePreferencesData),
-  })
-
-  const mapAssemblyOptions = (options = {}) => ({
-    parentPrice: null,
-    ...options,
-    added: (options.added || []).map(added => ({
-      ...added,
-      item: added.item && mapToOrderFormItem(added.item),
-      __typename: 'AddedAssemblyOptions',
-    })),
-    removed: (options.removed || []).map(option => ({
-      ...option,
-      __typename: 'RemovedAssemblyOption',
-    })),
-    __typename: 'AssemblyOptions',
-  })
-
-  const mapToOrderFormItem = item => ({
-    ...item,
-    assemblyOptions: mapAssemblyOptions(item.assemblyOptions),
-    __typename: 'OrderFormItem',
-  })
-
-  const mapToOrderFormTotalizer = totalizer => ({
-    ...totalizer,
-    __typename: 'OrderFormTotalizer',
-  })
-
-  const mapToOrderFormShippingData = ({ address, availableAddresses }) => ({
-    address: address && mapToAddress(address),
-    availableAddresses:
-      availableAddresses && availableAddresses.map(mapToAddress),
-    __typename: 'OrderFormShippingData',
-  })
-
-  const mapToAddress = address => ({
-    ...address,
-    __typename: 'Address',
-  })
-
-  const mapToOrderFormStorePreferences = storePreferencesData => ({
-    ...storePreferencesData,
-    __typename: 'OrderFormStorePreferencesData',
-  })
-
-  const mapItemOptions = option => ({
-    seller: null,
-    assemblyId: null,
-    id: null,
-    quantity: null,
-    ...option,
-    __typename: 'MinicartItemOptions',
-  })
-
-  const mapToMinicartItem = item => ({
-    seller: null,
-    index: null,
-    parentItemIndex: null,
-    parentAssemblyBinding: null,
-    imageUrl: null,
-    id: null,
-    name: null,
-    detailUrl: null,
-    skuName: null,
-    quantity: null,
-    sellingPrice: null,
-    listPrice: null,
-    cartIndex: null,
-    ...item,
-    options: item.options ? item.options.map(mapItemOptions) : null,
-    assemblyOptions: mapAssemblyOptions(item.assemblyOptions),
-    __typename: 'MinicartItem',
-  })
 
   const initialState = {
     minicart: {

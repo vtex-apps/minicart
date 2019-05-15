@@ -20,7 +20,9 @@ export default class Popup extends Component {
       <Overlay>
         <OutsideClickHandler onOutsideClick={onOutsideClick}>
           <div
-            className={`${minicart.box} dn db-ns absolute z-max flex flex-colunm`}
+            className={`${
+              minicart.box
+            } dn db-ns absolute z-max flex flex-colunm`}
             style={boxPositionStyle}
           >
             <div className="shadow-3">
