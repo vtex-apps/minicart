@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Fixed
-- Fix total purchase value when address is unavailable.
+- Fix total purchase value when the product is unavailable for shipping in the selected address.
 
 ## [2.18.2] - 2019-05-15
 
