@@ -46,7 +46,7 @@ class MiniCartContent extends Component {
 
   sumItemsPrice = items =>
     items.reduce(
-      (sum, { listPrice, quantity }) => sum + listPrice * quantity,
+      (sum, { sellingPrice, quantity }) => sum + sellingPrice * quantity,
       0
     )
 
