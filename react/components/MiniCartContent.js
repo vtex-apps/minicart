@@ -46,7 +46,7 @@ class MiniCartContent extends Component {
 
   sumItemsPrice = items =>
     items.reduce(
-      (sum, { listPrice, quantity }) => sum + listPrice * quantity,
+      (sum, { sellingPrice, quantity }) => sum + sellingPrice * quantity,
       0
     )
 
@@ -66,8 +66,8 @@ class MiniCartContent extends Component {
     return totalizer && totalizer.value / 100
   }
 
-  calculateDiscount = (items, totalPrice) =>
-    this.sumItemsPrice(items) - totalPrice
+  calculateDiscount = (items) =>
+    items.reduce((sum, { listPrice, sellingPrice, quantity }) => sum + (listPrice - sellingPrice) * quantity, 0)
 
   handleItemRemoval = async ({ id, cartIndex }) => {
     const { updateItems } = this.props
@@ -101,6 +101,9 @@ class MiniCartContent extends Component {
       0
     )
   }
+
+  calculateTotalValue = orderForm =>
+    this.getShippingCost(orderForm) ? orderForm.value : this.sumItemsPrice(orderForm.items)
 
   createProductShapeFromItem = item => ({
     productName: item.name,
@@ -214,8 +217,8 @@ class MiniCartContent extends Component {
         <MiniCartFooter
           shippingCost={this.getShippingCost(orderForm)}
           isUpdating={this.isUpdating}
-          totalValue={orderForm.value}
-          discount={this.calculateDiscount(orderForm.items, orderForm.value)}
+          totalValue={this.calculateTotalValue(orderForm)}
+          discount={this.calculateDiscount(orderForm.items)}
           buttonLabel={label}
           isSizeLarge={isSizeLarge}
           labelDiscount={labelDiscount}
