@@ -8,7 +8,32 @@ import PropTypes from 'prop-types'
 import { MiniCartPropTypes } from '../propTypes'
 import minicart from '../minicart.css'
 
-const handleClickButton = () => location.assign('/checkout/#/cart')
+const handleClickButton = () => {
+  try {
+    const segment = JSON.parse(window.atob(__RUNTIME__.segmentToken))
+    const utmParams = [
+      { key: 'utm_campaign', value: segment.utm_campaign },
+      { key: 'utm_source', value: segment.utm_source },
+      { key: 'utmi_campaign', value: segment.utmi_campaign },
+    ]
+
+    const params = utmParams.reduce((acc, param) => {
+      if (param.value) {
+        if (acc === '') {
+          acc = '?'
+        }
+
+        acc +=
+          encodeURIComponent(param.key) + '=' + encodeURIComponent(param.value)
+      }
+      return acc
+    }, '')
+
+    location.assign('/checkout/' + params)
+  } catch (e) {
+    location.assign('/checkout/')
+  }
+}
 
 const MiniCartFooter = ({
   shippingCost,
