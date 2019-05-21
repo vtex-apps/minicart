@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+- Pass UTM Source, UTM Campaign and UTMI Campaign when linking to checkout.
+
 ## [2.18.3] - 2019-05-20
 ### Fixed
 - Fix total purchase value when the product is unavailable for shipping in the selected address.
