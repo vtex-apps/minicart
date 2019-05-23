@@ -1,17 +1,17 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Overlay } from 'vtex.react-portal'
 
 import minicart from '../minicart.css'
 
+const boxPositionStyle = {
+  right: -40,
+}
+
 /**
  * Pop-up component.
  */
 const Popup = ({ children, onOutsideClick }) => {
-  const boxPositionStyle = useMemo(() => ({
-    right: -40,
-  }))
-
   return (
     <Overlay>
       <div
