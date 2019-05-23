@@ -35,6 +35,22 @@ import minicart from './minicart.css'
 const DEFAULT_LABEL_CLASSES = ''
 const DEFAULT_ICON_CLASSES = 'gray'
 
+// Used to control the execution of the open/close function
+const debounce = (func, wait) => {
+  let timeout
+  return function() {
+    const context = this,
+      args = arguments
+    const later = function() {
+      timeout = null
+    }
+    const shoulCall = !timeout
+    clearTimeout(timeout)
+    timeout = setTimeout(later, wait)
+    shoulCall && func.apply(context, args)
+  }
+}
+
 /**
  * Minicart component
  */
@@ -245,7 +261,7 @@ class MiniCart extends Component {
     }
   }
 
-  setContentOpen = isOpen => this.props.setMinicartOpen(isOpen)
+  setContentOpen = debounce(isOpen => this.props.setMinicartOpen(isOpen), 50)
 
   handleClickButton = event => {
     const { hideContent, linkState } = this.props
