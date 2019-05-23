@@ -1,45 +1,40 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import OutsideClickHandler from 'react-outside-click-handler'
 import { Overlay } from 'vtex.react-portal'
 
 import minicart from '../minicart.css'
 
+const boxPositionStyle = {
+  right: -40,
+}
+
 /**
  * Pop-up component.
  */
-export default class Popup extends Component {
-  render() {
-    const { children, onOutsideClick } = this.props
-
-    const boxPositionStyle = {
-      right: -40,
-    }
-
-    return (
-      <Overlay>
-        <OutsideClickHandler onOutsideClick={onOutsideClick}>
+const Popup = ({ children, onOutsideClick }) => {
+  return (
+    <Overlay>
+      <div
+        className="fixed top-0 left-0 w-100 h-100"
+        onClick={onOutsideClick}
+      />
+      <div
+        className={`${minicart.box} dn db-ns absolute z-max flex flex-colunm`}
+        style={boxPositionStyle}
+      >
+        <div className="shadow-3">
           <div
             className={`${
-              minicart.box
-            } dn db-ns absolute z-max flex flex-colunm`}
-            style={boxPositionStyle}
-          >
-            <div className="shadow-3">
-              <div
-                className={`${
-                  minicart.arrowUp
-                } absolute top-0 shadow-3 bg-base h1 w1 pa4 rotate-45`}
-              />
-              <div className="mt3 bg-base relative flex flex-column">
-                {children}
-              </div>
-            </div>
+              minicart.arrowUp
+            } absolute top-0 shadow-3 bg-base h1 w1 pa4 rotate-45`}
+          />
+          <div className="mt3 bg-base relative flex flex-column">
+            {children}
           </div>
-        </OutsideClickHandler>
-      </Overlay>
-    )
-  }
+        </div>
+      </div>
+    </Overlay>
+  )
 }
 
 Popup.propTypes = {
@@ -50,3 +45,5 @@ Popup.propTypes = {
   /* Function to be called when click occurs outside the popup */
   onOutsideClick: PropTypes.func,
 }
+
+export default Popup

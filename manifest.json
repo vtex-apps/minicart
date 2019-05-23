@@ -2,7 +2,7 @@
   "vendor": "vtex",
   "name": "minicart",
   "title": "Mini Cart",
-  "version": "2.18.3",
+  "version": "2.19.0",
   "defaultLocale": "pt-BR",
   "builders": {
     "messages": "1.x",
@@ -25,5 +25,6 @@
     "vtex.store-icons": "0.x",
     "vtex.pixel-manager": "0.x",
     "vtex.react-portal": "0.x"
-  }
+  },
+  "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }
