@@ -25,5 +25,6 @@
     "vtex.store-icons": "0.x",
     "vtex.pixel-manager": "0.x",
     "vtex.react-portal": "0.x"
-  }
+  },
+  "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }
