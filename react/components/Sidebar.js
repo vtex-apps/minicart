@@ -51,7 +51,7 @@ class Sidebar extends Component {
 
     return (
       <Overlay fullWidth>
-        <OutsideClickHandler onOutsideClick={onOutsideClick}>
+        <OutsideClickHandler onOutsideClick={onOutsideClick} disabled={!isOpen}>
           <div
             style={{ willChange: 'opacity' }}
             className={scrimClasses}
