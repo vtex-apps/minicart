@@ -5,7 +5,7 @@ import { Button, Spinner } from 'vtex.styleguide'
 import { FormattedMessage } from 'react-intl'
 import PropTypes from 'prop-types'
 
-import { MiniCartPropTypes } from '../propTypes'
+import { MiniCartPropTypes } from '../utils/propTypes'
 import minicart from '../minicart.css'
 
 const handleClickButton = () => location.assign('/checkout/#/cart')

@@ -9,7 +9,7 @@ import { ExtensionPoint } from 'vtex.render-runtime'
 import { Button, Spinner } from 'vtex.styleguide'
 import { IconDelete } from 'vtex.store-icons'
 
-import { MiniCartPropTypes } from '../propTypes'
+import { MiniCartPropTypes } from '../utils/propTypes'
 import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
 
 import { updateItemsMutation } from '../localState/mutations'

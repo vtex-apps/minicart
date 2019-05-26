@@ -7,7 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Migrate to pixel-manager v1.
+
 ## [2.19.0] - 2019-05-23
+
 ### Changed
 - Use an overlay div instead of `react-outside-click-handler` on Popup.
 
