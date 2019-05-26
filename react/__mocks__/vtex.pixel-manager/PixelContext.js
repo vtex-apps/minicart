@@ -1,7 +1,7 @@
 import React from 'react'
 
-export const Pixel = WrappedComponent => props => (
-  <div className="pixel-mock">
-    <WrappedComponent {...props} />
-  </div>
+const push = () => null
+
+export const withPixel = WrappedComponent => props => (
+  <WrappedComponent {...props} push={push} />
 )
