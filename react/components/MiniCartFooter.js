@@ -4,6 +4,7 @@ import ProductPrice from 'vtex.store-components/ProductPrice'
 import { Button, Spinner } from 'vtex.styleguide'
 import { FormattedMessage } from 'react-intl'
 import PropTypes from 'prop-types'
+import { IOMessage } from 'vtex.native-types'
 
 import { MiniCartPropTypes } from '../utils/propTypes'
 import minicart from '../minicart.css'
@@ -48,7 +49,7 @@ const MiniCartFooter = ({
       {shouldShowShippingCost && (
         <div className="flex items-center justify-between ma5">
           <div className="t-body c-muted-1">
-            <FormattedMessage id="store/minicart.shipping-cost" />
+            <IOMessage id={"store/minicart.shipping-cost"} />
           </div>
           <ProductPrice
             sellingPriceClass="t-heading-5-ns b c-on-base ph2 dib"

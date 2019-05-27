@@ -511,16 +511,6 @@ EnhancedMinicart.schema = {
       type: 'boolean',
       isLayout: true,
     },
-    labelMiniCartEmpty: {
-      title: 'admin/editor.minicart.labelMiniCartEmpty.title',
-      type: 'string',
-      isLayout: false,
-    },
-    labelButtonFinishShopping: {
-      title: 'admin/editor.minicart.labelButtonFinishShopping.title',
-      type: 'string',
-      isLayout: false,
-    },
   },
 }
 
