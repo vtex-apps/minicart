@@ -4,7 +4,7 @@ import { compose, graphql } from 'react-apollo'
 import { injectIntl, intlShape } from 'react-intl'
 import { reduceBy, values, clone, find, propEq } from 'ramda'
 import classNames from 'classnames'
-import { IOMessage } from 'vtex.native-types'
+import { IOMessage, formatIOMessage } from 'vtex.native-types'
 
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { Button, Spinner } from 'vtex.styleguide'
@@ -67,8 +67,12 @@ class MiniCartContent extends Component {
     return totalizer && totalizer.value / 100
   }
 
-  calculateDiscount = (items) =>
-    items.reduce((sum, { listPrice, sellingPrice, quantity }) => sum + (listPrice - sellingPrice) * quantity, 0)
+  calculateDiscount = items =>
+    items.reduce(
+      (sum, { listPrice, sellingPrice, quantity }) =>
+        sum + (listPrice - sellingPrice) * quantity,
+      0
+    )
 
   handleItemRemoval = async ({ id, cartIndex }) => {
     const { updateItems } = this.props
@@ -104,7 +108,9 @@ class MiniCartContent extends Component {
   }
 
   calculateTotalValue = orderForm =>
-    this.getShippingCost(orderForm) ? orderForm.value : this.sumItemsPrice(orderForm.items)
+    this.getShippingCost(orderForm)
+      ? orderForm.value
+      : this.sumItemsPrice(orderForm.items)
 
   createProductShapeFromItem = item => ({
     productName: item.name,
@@ -260,14 +266,14 @@ class MiniCartContent extends Component {
     }
 
     if (!orderForm || !itemsToShow.length) {
-      const label =
-      <IOMessage id={"store/minicart-empty"}/>
+      const label = <IOMessage id={'store/minicart-empty'} />
       return this.renderWithoutItems(label)
     }
 
     const label = <IOMessage id={'store/finish-shopping-button-label'} />
-    const labelDiscount = <IOMessage id={
-      'store/minicart-content-footer-discount'} />
+    const labelDiscount = (
+      <IOMessage id={'store/minicart-content-footer-discount'} />
+    )
 
     return this.renderMiniCartWithItems(
       orderForm,

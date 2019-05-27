@@ -5,8 +5,7 @@
   },
   "content": {
     "properties": {
-      "minicartContent": { "$ref": "#/definitions/MiniCartContent" },
-      "minicartFooter" : { "$ref": "#/definitions/MiniCartFooter" }
+      "minicartContent": { "$ref": "#/definitions/MiniCartContent" }
     }
   }
 }

@@ -13,13 +13,6 @@
           "default": "admin/editor.minicart.labelButtonFinishShopping.title"
         }
       }
-    },
-    "MiniCartFooter": {
-      "properties": {
-        "title": "store/minicart.shipping-cost",
-        "$ref": "app:vtex.native-types#/definitions/text",
-        "default": "store/minicart.shipping-cost"
-      }
     }
   }
 }
