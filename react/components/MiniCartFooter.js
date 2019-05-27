@@ -4,7 +4,6 @@ import ProductPrice from 'vtex.store-components/ProductPrice'
 import { Button, Spinner } from 'vtex.styleguide'
 import { FormattedMessage } from 'react-intl'
 import PropTypes from 'prop-types'
-import { IOMessage } from 'vtex.native-types'
 
 import { MiniCartPropTypes } from '../utils/propTypes'
 import minicart from '../minicart.css'

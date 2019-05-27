@@ -7,7 +7,7 @@
     "component": "MiniCartContent",
     "content": {
       "properties": {
-        "texts": { "$href": "#/definitions/MiniCartContent" }
+        "texts": { "$ref": "#/definitions/MiniCartContent" }
       }
     }
   }

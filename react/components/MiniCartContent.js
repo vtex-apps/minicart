@@ -4,7 +4,7 @@ import { compose, graphql } from 'react-apollo'
 import { injectIntl, intlShape } from 'react-intl'
 import { reduceBy, values, clone, find, propEq } from 'ramda'
 import classNames from 'classnames'
-import { IOMessage, formatIOMessage } from 'vtex.native-types'
+import { formatIOMessage } from 'vtex.native-types'
 
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { Button, Spinner } from 'vtex.styleguide'
@@ -266,14 +266,12 @@ class MiniCartContent extends Component {
     }
 
     if (!orderForm || !itemsToShow.length) {
-      const label = <IOMessage id={labelMiniCartEmpty} />
+      const label = formatIOMessage({ id: labelMiniCartEmpty, intl })
       return this.renderWithoutItems(label)
     }
 
-    const label = <IOMessage id={labelButton} />
-    const labelDiscount = (
-      <IOMessage id={'store/minicart-content-footer-discount'} />
-    )
+    const label = formatIOMessage({ id: labelButton, intl }) 
+    const labelDiscount = formatIOMessage({id: 'store/minicart-content-footer-discount', intl})
 
     return this.renderMiniCartWithItems(
       orderForm,
