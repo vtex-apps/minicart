@@ -266,11 +266,11 @@ class MiniCartContent extends Component {
     }
 
     if (!orderForm || !itemsToShow.length) {
-      const label = <IOMessage id={'store/minicart-empty'} />
+      const label = <IOMessage id={labelMiniCartEmpty} />
       return this.renderWithoutItems(label)
     }
 
-    const label = <IOMessage id={'store/finish-shopping-button-label'} />
+    const label = <IOMessage id={labelButton} />
     const labelDiscount = (
       <IOMessage id={'store/minicart-content-footer-discount'} />
     )

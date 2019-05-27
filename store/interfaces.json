@@ -3,9 +3,12 @@
     "required": ["product-summary"],
     "component": "index"
   },
-  "content": {
-    "properties": {
-      "minicartContent": { "$ref": "#/definitions/MiniCartContent" }
+  "minicart-content": {
+    "component": "MiniCartContent",
+    "content": {
+      "properties": {
+        "texts": { "$href": "#/definitions/MiniCartContent" }
+      }
     }
   }
 }
