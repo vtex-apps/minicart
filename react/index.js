@@ -9,12 +9,12 @@ import { withRuntimeContext } from 'vtex.render-runtime'
 import { IconCart } from 'vtex.store-icons'
 import { orderForm } from 'vtex.store-resources/Queries'
 import { addToCart, updateItems } from 'vtex.store-resources/Mutations'
-import { Pixel } from 'vtex.pixel-manager/PixelContext'
+import { withPixel } from 'vtex.pixel-manager/PixelContext'
 import { compose, graphql, withApollo } from 'react-apollo'
 import { injectIntl, intlShape } from 'react-intl'
 
 import MiniCartContent from './components/MiniCartContent'
-import { MiniCartPropTypes } from './propTypes'
+import { MiniCartPropTypes } from './utils/propTypes'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
 import { shouldShowItem } from './utils/itemsHelper'
@@ -479,7 +479,7 @@ const EnhancedMinicart = compose(
   withLinkStateUpdateItemsSentToServerMutation,
   withLinkStateSetIsOpenMutation,
   withRuntimeContext,
-  Pixel,
+  withPixel,
   withToast,
   injectIntl
 )(MiniCart)

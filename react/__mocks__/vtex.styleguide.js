@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Button = props => (
+export const Button = ({ icon, ...props }) => (
   <button {...props}>Button Test{props.children}</button>
 )
 

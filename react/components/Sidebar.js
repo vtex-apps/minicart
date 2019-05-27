@@ -116,7 +116,7 @@ Sidebar.propTypes = {
   /* Items quantity */
   quantity: PropTypes.number.isRequired,
   /* Cart icon size */
-  iconSize: PropTypes.number.isRequired,
+  iconSize: PropTypes.number,
 }
 
 export default injectIntl(Sidebar)
