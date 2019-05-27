@@ -1,8 +1,12 @@
 {
   "minicart": {
-    "required": [
-      "product-summary"
-    ],
+    "required": ["product-summary"],
     "component": "index"
+  },
+  "content": {
+    "properties": {
+      "minicartContent": { "$ref": "#/definitions/MiniCartContent" },
+      "minicartFooter" : { "$ref": "#/definitions/MiniCartFooter" }
+    }
   }
 }

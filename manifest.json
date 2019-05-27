@@ -18,6 +18,7 @@
     "postreleasy": "vtex publish --verbose"
   },
   "dependencies": {
+    "vtex.native-types": "0.x",
     "vtex.product-summary": "2.x",
     "vtex.store-resources": "0.x",
     "vtex.store-components": "3.x",

@@ -1,0 +1,25 @@
+{
+  "definitions": {
+    "MiniCartContent": {
+      "properties": {
+        "labelMiniCartEmpty": {
+          "title": "admin/editor.minicart.labelMiniCartEmpty.title",
+          "$ref": "app:vtex.native-types#/definitions/text",
+          "default": "store/minicart-empty"
+        },
+        "labelButton": {
+          "title": "admin/editor.minicart.labelButtonFinishShopping.title",
+          "$ref": "app:vtex.native-types#/definitions/text",
+          "default": "admin/editor.minicart.labelButtonFinishShopping.title"
+        }
+      }
+    },
+    "MiniCartFooter": {
+      "properties": {
+        "title": "store/minicart.shipping-cost",
+        "$ref": "app:vtex.native-types#/definitions/text",
+        "default": "store/minicart.shipping-cost"
+      }
+    }
+  }
+}
