@@ -1,14 +1,9 @@
 {
   "minicart": {
     "required": ["product-summary"],
-    "component": "index"
-  },
-  "minicart-content": {
-    "component": "MiniCartContent",
+    "component": "index",
     "content": {
-      "properties": {
-        "$ref": "app:vtex.native-types#/definitions/MiniCartContent"
-      }
+      "$ref": "#/definitions/MiniCart"
     }
   }
 }

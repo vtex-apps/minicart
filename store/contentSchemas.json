@@ -1,6 +1,6 @@
 {
   "definitions": {
-    "MiniCartContent": {
+    "MiniCart": {
       "properties": {
         "labelMiniCartEmpty": {
           "title": "admin/editor.minicart.labelMiniCartEmpty.title",

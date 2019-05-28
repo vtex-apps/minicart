@@ -266,12 +266,18 @@ class MiniCartContent extends Component {
     }
 
     if (!orderForm || !itemsToShow.length) {
-      const label = formatIOMessage({ id: labelMiniCartEmpty, intl })
+      const label = formatIOMessage({
+        id: labelMiniCartEmpty,
+        intl,
+      })
       return this.renderWithoutItems(label)
     }
 
-    const label = formatIOMessage({ id: labelButton, intl }) 
-    const labelDiscount = formatIOMessage({id: 'store/minicart-content-footer-discount', intl})
+    const label = formatIOMessage({ id: labelButton, intl })
+    const labelDiscount = formatIOMessage({
+      id: 'store/minicart-content-footer-discount',
+      intl,
+    })
 
     return this.renderMiniCartWithItems(
       orderForm,
