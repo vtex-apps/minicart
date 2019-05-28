@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Content schema to `MiniCart`s
+- Content schema to `MiniCart`
 
 ## [2.20.0] - 2019-05-27
 
