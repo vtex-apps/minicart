@@ -7,7 +7,7 @@
     "component": "MiniCartContent",
     "content": {
       "properties": {
-        "texts": { "$ref": "#/definitions/MiniCartContent" }
+        "$ref": "app:vtex.native-types#/definitions/MiniCartContent"
       }
     }
   }
