@@ -164,9 +164,12 @@ exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = 
                   <button
                     variation="primary"
                   >
-                    Button Test
-                    Go to checkout
-                  </button>
+                    <button
+                      variation="primary"
+                    >
+                      Button Test
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
