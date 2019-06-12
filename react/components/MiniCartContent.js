@@ -66,8 +66,12 @@ class MiniCartContent extends Component {
     return totalizer && totalizer.value / 100
   }
 
-  calculateDiscount = (items) =>
-    items.reduce((sum, { listPrice, sellingPrice, quantity }) => sum + (listPrice - sellingPrice) * quantity, 0)
+  calculateDiscount = items =>
+    items.reduce(
+      (sum, { listPrice, sellingPrice, quantity }) =>
+        sum + (listPrice - sellingPrice) * quantity,
+      0
+    )
 
   handleItemRemoval = async ({ id, cartIndex }) => {
     const { updateItems } = this.props
@@ -103,7 +107,9 @@ class MiniCartContent extends Component {
   }
 
   calculateTotalValue = orderForm =>
-    this.getShippingCost(orderForm) ? orderForm.value : this.sumItemsPrice(orderForm.items)
+    this.getShippingCost(orderForm)
+      ? orderForm.value
+      : this.sumItemsPrice(orderForm.items)
 
   createProductShapeFromItem = item => ({
     productName: item.name,
@@ -147,9 +153,7 @@ class MiniCartContent extends Component {
 
   renderWithoutItems = label => (
     <div
-      className={`${
-        minicart.item
-      } pa9 flex items-center justify-center relative bg-base`}
+      className={`${minicart.item} pa9 flex items-center justify-center relative bg-base`}
     >
       <span className="t-body">{label}</span>
     </div>
@@ -231,9 +235,7 @@ class MiniCartContent extends Component {
 
   renderLoading = () => (
     <div
-      className={`${
-        minicart.item
-      } pa4 flex items-center justify-center relative bg-base`}
+      className={`${minicart.item} pa4 flex items-center justify-center relative bg-base`}
     >
       <Spinner />
     </div>

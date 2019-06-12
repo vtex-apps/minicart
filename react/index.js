@@ -342,10 +342,7 @@ class MiniCart extends Component {
     )
 
     return (
-      <aside
-        className={`${minicart.container} relative fr flex items-center`}
-        ref={e => (this.iconRef = e)}
-      >
+      <aside className={`${minicart.container} relative fr flex items-center`}>
         <div className="flex flex-column">
           <Button
             variation="tertiary"
@@ -357,9 +354,7 @@ class MiniCart extends Component {
                 <IconCart size={iconSize} />
                 {quantity > 0 && (
                   <span
-                    className={`${
-                      minicart.badge
-                    } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
+                    className={`${minicart.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
                   >
                     {quantity}
                   </span>
