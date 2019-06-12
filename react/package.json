@@ -11,11 +11,13 @@
   "devDependencies": {
     "@vtex/test-tools": "^0.3.1",
     "apollo-cache-inmemory": "^1.5.1",
+    "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
-    "eslint-config-vtex-react": "^4.0.0",
+    "eslint-config-vtex-react": "^4.1.0",
     "eslint-plugin-import": "2.16.0",
-    "prettier": "^1.16.4",
+    "prettier": "^1.18.2",
     "prop-types": "^15.7.2",
+    "typescript": "^3.5.1",
     "waait": "^1.0.4"
   },
   "dependencies": {
