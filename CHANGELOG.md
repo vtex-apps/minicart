@@ -7,7 +7,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Fixed
-
 - Offline Minicart adding repeated items when user navigates.
 
 ## [2.21.2] - 2019-07-01
