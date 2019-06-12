@@ -153,9 +153,7 @@ class MiniCartContent extends Component {
 
   renderWithoutItems = label => (
     <div
-      className={`${
-        minicart.item
-      } pa9 flex items-center justify-center relative bg-base`}
+      className={`${minicart.item} pa9 flex items-center justify-center relative bg-base`}
     >
       <span className="t-body">{label}</span>
     </div>
@@ -237,9 +235,7 @@ class MiniCartContent extends Component {
 
   renderLoading = () => (
     <div
-      className={`${
-        minicart.item
-      } pa4 flex items-center justify-center relative bg-base`}
+      className={`${minicart.item} pa4 flex items-center justify-center relative bg-base`}
     >
       <Spinner />
     </div>
