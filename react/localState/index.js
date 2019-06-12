@@ -20,7 +20,7 @@ export const ITEMS_STATUS = {
   WAITING_SERVER: 'WAITING_SERVER',
 }
 
-/* eslint-disable no-use-before-define */
+/* eslint-disable @typescript-eslint/no-use-before-define */
 
 // Need this for circular dependency
 
@@ -45,7 +45,7 @@ const mapAssemblyOptions = (options = {}) => ({
   __typename: 'AssemblyOptions',
 })
 
-/* eslint-enable no-use-before-define */
+/* eslint-enable @typescript-eslint/no-use-before-define */
 
 const mapToAddress = address => ({
   ...address,
