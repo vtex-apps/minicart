@@ -52,12 +52,13 @@ class MiniCart extends Component {
 
   state = {
     updatingOrderForm: false,
-    offline: false,
+    offline: typeof navigator !== 'undefined' ? !pathOr(true, ['onLine'], navigator) : false,
   }
 
   updateStatus = () => {
     if (navigator) {
-      this.setState({ offline: !pathOr(true, ['onLine'], navigator) })
+      const offline = !pathOr(true, ['onLine'], navigator)
+      this.setState({ offline })
     }
   }
 
