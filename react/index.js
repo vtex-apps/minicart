@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import PropTypes from 'prop-types'
-import { map, partition, path, pathOr, pick } from 'ramda'
+import { map, partition, path, pathOr, pick, isEmpty } from 'ramda'
 import React, { Component, useEffect } from 'react'
 import { Button, withToast } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
@@ -52,12 +52,13 @@ class MiniCart extends Component {
 
   state = {
     updatingOrderForm: false,
-    offline: false,
+    offline: typeof navigator !== 'undefined' ? !pathOr(true, ['onLine'], navigator) : false,
   }
 
   updateStatus = () => {
     if (navigator) {
-      this.setState({ offline: !pathOr(true, ['onLine'], navigator) })
+      const offline = !pathOr(true, ['onLine'], navigator)
+      this.setState({ offline })
     }
   }
 
@@ -108,7 +109,8 @@ class MiniCart extends Component {
         await this.props.updateOrderForm(orderForm)
         localStorage.removeItem('orderForm')
       }
-      if (minicart && minicart.length) {
+      if (minicart && minicart.length && 
+        isEmpty(pathOr([], ['linkState', 'minicartItems'], this.props))) {
         await this.props.addToLinkStateCart(minicart)
         localStorage.removeItem('minicart')
       }
