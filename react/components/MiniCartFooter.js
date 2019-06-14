@@ -4,11 +4,10 @@ import ProductPrice from 'vtex.store-components/ProductPrice'
 import { Button, Spinner } from 'vtex.styleguide'
 import { FormattedMessage } from 'react-intl'
 import PropTypes from 'prop-types'
+import { useRuntime } from 'vtex.render-runtime'
 
 import { MiniCartPropTypes } from '../utils/propTypes'
 import minicart from '../minicart.css'
-
-const handleClickButton = () => location.assign('/checkout/#/cart')
 
 const MiniCartFooter = ({
   shippingCost,
@@ -21,6 +20,9 @@ const MiniCartFooter = ({
   labelDiscount,
   showShippingCost,
 }) => {
+  const { rootPath = '' } = useRuntime()
+  const handleClickButton = () => location.assign(rootPath + '/checkout/#/cart')
+
   const priceAndDiscountClasses = classNames(
     `${minicart.contentDiscount} w-100 flex justify-end items-center mb3`,
     {
