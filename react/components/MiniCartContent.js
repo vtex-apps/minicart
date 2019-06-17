@@ -12,6 +12,7 @@ import { IconDelete } from 'vtex.store-icons'
 import { MiniCartPropTypes } from '../utils/propTypes'
 import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
 
+import { ITEMS_STATUS } from '../localState/index'
 import { updateItemsMutation } from '../localState/mutations'
 import minicart from '../minicart.css'
 import MiniCartFooter from './MiniCartFooter'
@@ -213,6 +214,7 @@ class MiniCartContent extends Component {
                   showInstallments={false}
                   showLabels={false}
                   actionOnClick={onClickAction}
+                  isPartial={item.localState !== ITEMS_STATUS.NONE}
                 />
               </section>
             </Fragment>
