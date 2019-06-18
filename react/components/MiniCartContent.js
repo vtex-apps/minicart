@@ -214,7 +214,7 @@ class MiniCartContent extends Component {
                   showInstallments={false}
                   showLabels={false}
                   actionOnClick={onClickAction}
-                  isPartial={item.localStatus === ITEMS_STATUS.MODIFIED}
+                  muted={item.localStatus === ITEMS_STATUS.MODIFIED}
                 />
               </section>
             </Fragment>
