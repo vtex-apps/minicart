@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - Offline Minicart adding repeated items when user navigates.
 
+### Changed
+- Pass prop `isPartial` to the product summary extension point.
+
 ## [2.21.2] - 2019-07-01
 
 ### Fixed
