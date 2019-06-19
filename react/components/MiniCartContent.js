@@ -74,12 +74,12 @@ class MiniCartContent extends Component {
       0
     )
 
-  handleItemRemoval = async ({ id, cartIndex }) => {
-    const { updateItems } = this.props
+  handleItemRemoval = async ({ id }) => {
+    const { updateItems, itemsToShow } = this.props
     const updatedItems = [
       {
         id,
-        index: cartIndex,
+        index: itemsToShow.findIndex(product => product.id === id),
         quantity: 0,
       },
     ]
@@ -136,7 +136,9 @@ class MiniCartContent extends Component {
     },
     assemblyOptions: item.assemblyOptions,
     quantity: item.quantity,
-    cartIndex: item.cartIndex,
+    cartIndex:
+      item.cartIndex ||
+      this.props.itemsToShow.findIndex(product => product.id === item.id),
   })
 
   get isUpdating() {

@@ -3,11 +3,9 @@ import { mergeDeepRight } from 'ramda'
 import { mapToMinicartItem, ITEMS_STATUS } from '../index'
 
 const updateItems = (cartItems, newItems) => {
-  // Items provided to this function MUST have a valid index property
-  const cleanNewItems = newItems.filter(({ index }) => index != null)
   const items = [...cartItems]
 
-  for (const newItem of cleanNewItems) {
+  for (const newItem of newItems) {
     const { index } = newItem
     const prevItem = cartItems[index]
     items[index] = mapToMinicartItem(
