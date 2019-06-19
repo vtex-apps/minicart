@@ -1,20 +1,22 @@
 import classNames from 'classnames'
-import hoistNonReactStatics from 'hoist-non-react-statics'
-import PropTypes from 'prop-types'
 import { map, partition, path, pathOr, pick, isEmpty } from 'ramda'
-import React, { Component, useEffect } from 'react'
-import { Button, withToast } from 'vtex.styleguide'
-import { isMobile } from 'react-device-detect'
-import { withRuntimeContext } from 'vtex.render-runtime'
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  useContext,
+} from 'react'
+import { Button, ToastContext } from 'vtex.styleguide'
+import { useRuntime } from 'vtex.render-runtime'
 import { IconCart } from 'vtex.store-icons'
 import { orderForm } from 'vtex.store-resources/Queries'
 import { addToCart, updateItems } from 'vtex.store-resources/Mutations'
-import { withPixel } from 'vtex.pixel-manager/PixelContext'
+import { usePixel } from 'vtex.pixel-manager/PixelContext'
 import { compose, graphql, withApollo } from 'react-apollo'
-import { injectIntl, intlShape } from 'react-intl'
+import { injectIntl } from 'react-intl'
 
 import MiniCartContent from './components/MiniCartContent'
-import { MiniCartPropTypes } from './utils/propTypes'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
 import { shouldShowItem } from './utils/itemsHelper'
@@ -35,360 +37,404 @@ import minicart from './minicart.css'
 const DEFAULT_LABEL_CLASSES = ''
 const DEFAULT_ICON_CLASSES = 'gray'
 
+const useOffline = () => {
+  const [isOffline, setOffline] = useState(() =>
+    typeof navigator !== 'undefined'
+      ? !pathOr(true, ['onLine'], navigator)
+      : false
+  )
+
+  useEffect(() => {
+    const updateStatus = () => {
+      if (navigator) {
+        const offline = !pathOr(true, ['onLine'], navigator)
+        setOffline(offline)
+      }
+    }
+
+    window.addEventListener('online', updateStatus)
+    window.addEventListener('offline', updateStatus)
+
+    return () => {
+      window.removeEventListener('online', updateStatus)
+      window.removeEventListener('offline', updateStatus)
+    }
+  }, [])
+
+  return isOffline
+}
+
+const useLinkState = client => {
+  useEffect(() => {
+    const { resolvers, initialState } = createLocalState(client)
+    client.addResolvers(resolvers)
+    // Add the initial state to if there is not there
+    try {
+      client.readQuery({ query: fullMinicartQuery })
+    } catch (err) {
+      client.writeData({ data: initialState })
+    }
+  }, [client])
+}
+
+const getAddToCartEventItems = ({
+  id: skuId,
+  skuName: variant,
+  sellingPrice: price,
+  ...restSkuItem
+}) => {
+  return {
+    skuId,
+    variant,
+    price,
+    ...pick(['brand', 'name', 'quantity'], restSkuItem),
+  }
+}
+
+const partitionItemsAddUpdate = clientItems => {
+  const isNotInCart = item => item.cartIndex == null
+  return partition(isNotInCart, clientItems)
+}
+
 /**
  * Minicart component
  */
-class MiniCart extends Component {
-  static propTypes = {
-    ...MiniCartPropTypes,
-    intl: intlShape.isRequired,
-    showToast: PropTypes.func.isRequired,
-  }
+const MiniCart = ({
+  labelClasses = DEFAULT_LABEL_CLASSES,
+  iconClasses = DEFAULT_ICON_CLASSES,
+  client,
+  setMinicartOpen,
+  labelMiniCartEmpty,
+  labelButtonFinishShopping,
+  iconSize,
+  iconLabel,
+  showTotalItemsQty,
+  showDiscount,
+  data,
+  type,
+  hideContent,
+  showShippingCost,
+  linkState: { minicartItems, isOpen },
+  linkState,
+  updateOrderForm,
+  addToLinkStateCart,
+  intl,
+  updateItemsSentToServer,
+  updateItemsMutation,
+}) => {
+  useLinkState(client)
 
-  static defaultProps = {
-    labelClasses: DEFAULT_LABEL_CLASSES,
-    iconClasses: DEFAULT_ICON_CLASSES,
-  }
+  const [isUpdatingOrderForm, setUpdatingOrderForm] = useState(false)
+  const isOffline = useOffline()
 
-  state = {
-    updatingOrderForm: false,
-    offline: typeof navigator !== 'undefined' ? !pathOr(true, ['onLine'], navigator) : false,
-  }
+  const {
+    hints: { mobile },
+    navigate,
+  } = useRuntime()
+  const { push } = usePixel()
+  const { showToast } = useContext(ToastContext)
 
-  updateStatus = () => {
-    if (navigator) {
-      const offline = !pathOr(true, ['onLine'], navigator)
-      this.setState({ offline })
+  const orderForm = pathOr(path(['orderForm'], linkState), ['orderForm'], data)
+
+  const prevOrderForm = useRef(orderForm)
+
+  useEffect(() => {
+    if (orderForm !== prevOrderForm.current) {
+      prevOrderForm.current = orderForm
     }
-  }
+  }, [orderForm])
 
-  get orderForm() {
-    return pathOr(
-      path(['linkState', 'orderForm'], this.props),
-      ['data', 'orderForm'],
-      this.props
-    )
-  }
-
-  saveDataIntoLocalStorage = () => {
-    const clientItems = this.getModifiedItemsOnly()
-    const clientOrderForm = pathOr(
-      path(['data', 'orderForm'], this.props),
-      ['linkState', 'orderForm'],
-      this.props
-    )
-    if (localStorage && clientItems.length) {
-      localStorage.setItem('minicart', JSON.stringify(clientItems))
-      localStorage.setItem('orderForm', JSON.stringify(clientOrderForm))
-    }
-  }
-
-  getDataFromLocalStorage = () => {
-    try {
-      if (localStorage) {
-        const minicart = JSON.parse(localStorage.getItem('minicart'))
-        const orderForm = JSON.parse(localStorage.getItem('orderForm'))
-        return { minicart, orderForm }
-      }
-      return {}
-    } catch (err) {
-      return {}
-    }
-  }
-
-  async componentDidMount() {
-    if (window) {
-      window.addEventListener('online', this.updateStatus)
-      window.addEventListener('offline', this.updateStatus)
-    }
-    this.updateStatus()
-
-    if (localStorage) {
-      const { minicart, orderForm } = this.getDataFromLocalStorage()
-      if (orderForm && !path(['data', 'orderForm'], this.props)) {
-        await this.props.updateOrderForm(orderForm)
-        localStorage.removeItem('orderForm')
-      }
-      if (minicart && minicart.length && 
-        isEmpty(pathOr([], ['linkState', 'minicartItems'], this.props))) {
-        await this.props.addToLinkStateCart(minicart)
-        localStorage.removeItem('minicart')
-      }
-    }
-  }
-
-  componentWillUnmount() {
-    if (window) {
-      window.removeEventListener('online', this.updateStatus)
-      window.removeEventListener('offline', this.updateStatus)
-    }
-  }
-
-  async componentDidUpdate(prevProps) {
-    if (!this.state.offline) {
-      await this.handleItemsUpdate()
-      await this.handleOrderFormUpdate(prevProps)
-      if (localStorage) {
-        localStorage.removeItem('minicart')
-        localStorage.removeItem('orderForm')
-      }
-    } else {
-      this.saveDataIntoLocalStorage()
-    }
-  }
-
-  getModifiedItemsOnly = () => {
-    const clientItems = pathOr([], ['linkState', 'minicartItems'], this.props)
-    return clientItems.filter(
+  const getModifiedItemsOnly = useCallback(() => {
+    return minicartItems.filter(
       ({ localStatus }) => localStatus === ITEMS_STATUS.MODIFIED
     )
-  }
+  }, [minicartItems])
 
-  handleItemsUpdate = async () => {
-    const modifiedItems = this.getModifiedItemsOnly()
-    if (
-      modifiedItems.length &&
-      !this.state.updatingOrderForm &&
-      this.orderForm
-    ) {
-      return this.handleItemsDifference(modifiedItems)
+  const saveDataIntoLocalStorage = useCallback(() => {
+    const clientItems = getModifiedItemsOnly()
+    if (localStorage && clientItems.length) {
+      localStorage.setItem('minicart', JSON.stringify(clientItems))
+      localStorage.setItem('orderForm', JSON.stringify(orderForm))
     }
-  }
+  }, [getModifiedItemsOnly, orderForm])
 
-  partitionItemsAddUpdate = clientItems => {
-    const isNotInCart = item => item.cartIndex == null
-    return partition(isNotInCart, clientItems)
-  }
+  useEffect(() => {
+    if (!localStorage) {
+      return
+    }
 
-  handleItemsDifference = modifiedItems => {
-    this.setState({ updatingOrderForm: true }, () =>
-      this.sendModifiedItemsToServer(modifiedItems)
-    )
-  }
+    const getDataFromLocalStorage = () => {
+      try {
+        const minicartData = JSON.parse(localStorage.getItem('minicart'))
+        const orderFormData = JSON.parse(localStorage.getItem('orderForm'))
+        return { minicartData, orderFormData }
+      } catch (err) {
+        return {}
+      }
+    }
 
-  sendModifiedItemsToServer = async modifiedItems => {
-    const { showToast, intl, updateItemsSentToServer } = this.props
-    const [itemsToAdd, itemsToUpdate] = this.partitionItemsAddUpdate(
-      modifiedItems
-    )
-    await updateItemsSentToServer()
-    const pickProps = map(
-      pick(['id', 'index', 'quantity', 'seller', 'options'])
-    )
-    try {
-      const updateItemsResponse = await this.updateItems(
-        pickProps(itemsToUpdate)
-      )
-      const removedItems = itemsToUpdate.filter(
-        ({ quantity }) => quantity === 0
-      )
-      if (removedItems.length) {
-        this.props.push({
-          event: 'removeFromCart',
-          items: removedItems,
+    const updateLinkState = async () => {
+      const { minicartData, orderFormData } = getDataFromLocalStorage()
+
+      if (orderFormData && !orderForm) {
+        await updateOrderForm(orderFormData)
+        localStorage.removeItem('orderForm')
+      }
+
+      if (minicartData && minicartData.length && isEmpty(minicartItems)) {
+        await addToLinkStateCart(minicartData)
+        localStorage.removeItem('minicart')
+      }
+    }
+
+    updateLinkState()
+  }, [addToLinkStateCart, minicartItems, orderForm, updateOrderForm])
+
+  const addItems = useCallback(
+    items => {
+      const { orderFormId } = orderForm
+      if (items.length) {
+        return addToCart({
+          variables: { orderFormId, items },
         })
       }
-      const addItemsResponse = await this.addItems(pickProps(itemsToAdd))
+    },
+    [orderForm]
+  )
 
-      if (itemsToAdd.length > 0) {
-        this.props.push({
-          event: 'addToCart',
-          items: map(this.getAddToCartEventItems, itemsToAdd),
+  const mutateUpdateItems = useCallback(
+    items => {
+      const { orderFormId } = orderForm
+      if (items.length) {
+        return updateItemsMutation({
+          variables: { orderFormId, items },
         })
       }
-      const newModifiedItems = this.getModifiedItemsOnly()
-      if (newModifiedItems.length > 0) {
-        // If there are new modified items in cart, recursively call this function to send requests to server
-        return this.sendModifiedItemsToServer(newModifiedItems)
+    },
+    [orderForm, updateItemsMutation]
+  )
+
+  const sendModifiedItemsToServer = useCallback(
+    async modifiedItems => {
+      const [itemsToAdd, itemsToUpdate] = partitionItemsAddUpdate(modifiedItems)
+      await updateItemsSentToServer()
+      const pickProps = map(
+        pick(['id', 'index', 'quantity', 'seller', 'options'])
+      )
+      try {
+        const updateItemsResponse = await mutateUpdateItems(
+          pickProps(itemsToUpdate)
+        )
+        const removedItems = itemsToUpdate.filter(
+          ({ quantity }) => quantity === 0
+        )
+        if (removedItems.length) {
+          push({
+            event: 'removeFromCart',
+            items: removedItems,
+          })
+        }
+        const addItemsResponse = await addItems(pickProps(itemsToAdd))
+
+        if (itemsToAdd.length > 0) {
+          push({
+            event: 'addToCart',
+            items: map(getAddToCartEventItems, itemsToAdd),
+          })
+        }
+        const newModifiedItems = getModifiedItemsOnly()
+        if (newModifiedItems.length > 0) {
+          // If there are new modified items in cart, recursively call this function to send requests to server
+          return sendModifiedItemsToServer(newModifiedItems)
+        }
+
+        const newOrderForm = pathOr(
+          path(['data', 'addItem'], addItemsResponse),
+          ['data', 'updateItems'],
+          updateItemsResponse
+        )
+        await updateOrderForm(newOrderForm)
+      } catch (err) {
+        // TODO: Toast error message into Alert
+        console.error(err)
+        // Rollback items and orderForm
+        showToast({
+          message: intl.formatMessage({
+            id: 'store/minicart.checkout-failure',
+          }),
+        })
+        await updateOrderForm(orderForm)
       }
 
-      const newOrderForm = pathOr(
-        path(['data', 'addItem'], addItemsResponse),
-        ['data', 'updateItems'],
-        updateItemsResponse
-      )
-      await this.props.updateOrderForm(newOrderForm)
-    } catch (err) {
-      // TODO: Toast error message into Alert
-      console.error(err)
-      // Rollback items and orderForm
-      const orderForm = this.orderForm
-      showToast({
-        message: intl.formatMessage({ id: 'store/minicart.checkout-failure' }),
-      })
-      await this.props.updateOrderForm(orderForm)
+      setUpdatingOrderForm(false)
+    },
+    [
+      addItems,
+      getModifiedItemsOnly,
+      intl,
+      mutateUpdateItems,
+      orderForm,
+      push,
+      showToast,
+      updateItemsSentToServer,
+      updateOrderForm,
+    ]
+  )
+
+  const handleItemsDifference = useCallback(
+    modifiedItems => {
+      setUpdatingOrderForm(true)
+      sendModifiedItemsToServer(modifiedItems)
+    },
+    [sendModifiedItemsToServer]
+  )
+
+  const handleItemsUpdate = useCallback(async () => {
+    const modifiedItems = getModifiedItemsOnly()
+    if (modifiedItems.length && !isUpdatingOrderForm && orderForm) {
+      return handleItemsDifference(modifiedItems)
     }
-    this.setState({ updatingOrderForm: false })
-  }
+  }, [
+    getModifiedItemsOnly,
+    handleItemsDifference,
+    isUpdatingOrderForm,
+    orderForm,
+  ])
 
-  handleOrderFormUpdate = async prevProps => {
-    const prevOrderForm = path(['data', 'orderForm'], prevProps)
-    const orderForm = path(['data', 'orderForm'], this.props)
-    if (!prevOrderForm && orderForm) {
-      await this.props.updateOrderForm(orderForm)
+  const handleOrderFormUpdate = useCallback(async () => {
+    if (!prevOrderForm.current && orderForm) {
+      await updateOrderForm(orderForm)
     }
-  }
+  }, [orderForm, updateOrderForm])
 
-  addItems = items => {
-    const { orderFormId } = this.orderForm
-    if (items.length) {
-      return this.props.addToCart({
-        variables: { orderFormId, items },
-      })
+  useEffect(() => {
+    const syncItemsWithServer = async () => {
+      await handleItemsUpdate()
+      await handleOrderFormUpdate()
+      if (localStorage) {
+        localStorage.removeItem('minicart')
+        localStorage.removeItem('orderForm')
+      }
     }
-  }
 
-  updateItems = items => {
-    const { orderFormId } = this.orderForm
-    if (items.length) {
-      return this.props.updateItems({
-        variables: { orderFormId, items },
-      })
+    if (!isOffline) {
+      syncItemsWithServer()
+    } else {
+      saveDataIntoLocalStorage()
     }
-  }
+  }, [
+    handleItemsUpdate,
+    handleOrderFormUpdate,
+    isOffline,
+    saveDataIntoLocalStorage,
+  ])
 
-  setContentOpen = isOpen => this.props.setMinicartOpen(isOpen)
+  const setContentOpen = isOpen => setMinicartOpen(isOpen)
 
-  handleClickButton = event => {
-    const { hideContent, linkState } = this.props
+  const handleClickButton = event => {
     if (!hideContent) {
-      this.setContentOpen(!linkState.isOpen)
+      setContentOpen(!linkState.isOpen)
     }
     event.persist()
   }
 
-  handleUpdateContentVisibility = () => {
-    this.setContentOpen(false)
+  const handleUpdateContentVisibility = () => {
+    setContentOpen(false)
   }
 
-  handleClickProduct = detailUrl => {
-    this.setContentOpen(false)
-    const {
-      runtime: { navigate },
-    } = this.props
+  const handleClickProduct = detailUrl => {
+    setContentOpen(false)
     navigate({
       to: detailUrl,
     })
   }
 
-  getFilteredItems = () => {
-    const items = pathOr([], ['linkState', 'minicartItems'], this.props)
-    return items.filter(shouldShowItem)
+  const getFilteredItems = () => {
+    return minicartItems.filter(shouldShowItem)
   }
 
-  getAddToCartEventItems = ({
-    id: skuId,
-    skuName: variant,
-    sellingPrice: price,
-    ...restSkuItem
-  }) => {
-    return {
-      skuId,
-      variant,
-      price,
-      ...pick(['brand', 'name', 'quantity'], restSkuItem),
+  const itemsToShow = getFilteredItems()
+  const totalItemsSum = arr =>
+    arr.reduce((sum, product) => sum + product.quantity, 0)
+  const quantity = showTotalItemsQty
+    ? totalItemsSum(itemsToShow)
+    : itemsToShow.length
+
+  const isSizeLarge =
+    (type && type === 'sidebar') ||
+    mobile ||
+    (window && window.innerWidth <= 480)
+
+  const miniCartContent = (
+    <MiniCartContent
+      isSizeLarge={isSizeLarge}
+      itemsToShow={itemsToShow}
+      orderForm={{
+        ...orderForm,
+        items: minicartItems,
+      }}
+      loading={data.loading}
+      showDiscount={showDiscount}
+      labelMiniCartEmpty={labelMiniCartEmpty}
+      labelButton={labelButtonFinishShopping}
+      onClickProduct={handleClickProduct}
+      onClickAction={handleUpdateContentVisibility}
+      showShippingCost={showShippingCost}
+      updatingOrderForm={isUpdatingOrderForm}
+    />
+  )
+
+  const iconLabelClasses = classNames(
+    `${minicart.label} dn-m db-l t-action--small ${labelClasses}`,
+    {
+      pl6: quantity > 0,
+      pl4: quantity <= 0,
     }
-  }
+  )
 
-  render() {
-    const {
-      labelMiniCartEmpty,
-      labelButtonFinishShopping,
-      iconClasses,
-      iconSize,
-      iconLabel,
-      labelClasses,
-      showDiscount,
-      data,
-      type,
-      hideContent,
-      showShippingCost,
-      showTotalItemsQty,
-      linkState: { minicartItems: items, orderForm, isOpen },
-    } = this.props
-
-    const itemsToShow = this.getFilteredItems()
-    const totalItemsSum = arr => arr.reduce((sum, product) => sum + product.quantity, 0)
-    const quantity = showTotalItemsQty ? totalItemsSum(itemsToShow) : itemsToShow.length
-
-    const isSizeLarge =
-      (type && type === 'sidebar') ||
-      isMobile ||
-      (window && window.innerWidth <= 480)
-
-    const miniCartContent = (
-      <MiniCartContent
-        isSizeLarge={isSizeLarge}
-        itemsToShow={itemsToShow}
-        orderForm={{
-          ...orderForm,
-          items,
-        }}
-        loading={data.loading}
-        showDiscount={showDiscount}
-        labelMiniCartEmpty={labelMiniCartEmpty}
-        labelButton={labelButtonFinishShopping}
-        onClickProduct={this.handleClickProduct}
-        onClickAction={this.handleUpdateContentVisibility}
-        showShippingCost={showShippingCost}
-        updatingOrderForm={this.state.updatingOrderForm}
-      />
-    )
-
-    const iconLabelClasses = classNames(
-      `${minicart.label} dn-m db-l t-action--small ${labelClasses}`,
-      {
-        pl6: quantity > 0,
-        pl4: quantity <= 0,
-      }
-    )
-
-    return (
-      <aside className={`${minicart.container} relative fr flex items-center`}>
-        <div className="flex flex-column">
-          <Button
-            variation="tertiary"
-            icon
-            onClick={event => this.handleClickButton(event)}
-          >
-            <span className="flex items-center">
-              <span className={`relative ${iconClasses}`}>
-                <IconCart size={iconSize} />
-                {quantity > 0 && (
-                  <span
-                    data-testid="item-qty"
-                    className={`${minicart.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
-                  >
-                    {quantity}
-                  </span>
-                )}
-              </span>
-              {iconLabel && (
-                <span className={iconLabelClasses}>{iconLabel}</span>
+  return (
+    <aside className={`${minicart.container} relative fr flex items-center`}>
+      <div className="flex flex-column">
+        <Button
+          variation="tertiary"
+          icon
+          onClick={event => handleClickButton(event)}
+        >
+          <span className="flex items-center">
+            <span className={`relative ${iconClasses}`}>
+              <IconCart size={iconSize} />
+              {quantity > 0 && (
+                <span
+                  data-testid="item-qty"
+                  className={`${minicart.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
+                >
+                  {quantity}
+                </span>
               )}
             </span>
-          </Button>
-          {!hideContent &&
-            (isSizeLarge ? (
-              <Sidebar
-                quantity={quantity}
-                iconSize={iconSize}
-                onOutsideClick={this.handleUpdateContentVisibility}
-                isOpen={isOpen}
-              >
+            {iconLabel && <span className={iconLabelClasses}>{iconLabel}</span>}
+          </span>
+        </Button>
+        {!hideContent &&
+          (isSizeLarge ? (
+            <Sidebar
+              quantity={quantity}
+              iconSize={iconSize}
+              onOutsideClick={handleUpdateContentVisibility}
+              isOpen={isOpen}
+            >
+              {miniCartContent}
+            </Sidebar>
+          ) : (
+            isOpen && (
+              <Popup onOutsideClick={handleUpdateContentVisibility}>
                 {miniCartContent}
-              </Sidebar>
-            ) : (
-              isOpen && (
-                <Popup onOutsideClick={this.handleUpdateContentVisibility}>
-                  {miniCartContent}
-                </Popup>
-              )
-            ))}
-        </div>
-      </aside>
-    )
-  }
+              </Popup>
+            )
+          ))}
+      </div>
+    </aside>
+  )
 }
 
 const withLinkStateMinicartQuery = graphql(fullMinicartQuery, {
@@ -443,44 +489,17 @@ const withLinkStateSetIsOpenMutation = graphql(setMinicartOpenMutation, {
   }),
 })
 
-const withLinkState = WrappedComponent => {
-  const Component = ({ client, ...props }) => {
-    useEffect(() => {
-      const { resolvers, initialState } = createLocalState(client)
-      client.addResolvers(resolvers)
-      // Add the initial state to if there is not there
-      try {
-        client.readQuery({ query: fullMinicartQuery })
-      } catch (err) {
-        client.writeData({ data: initialState })
-      }
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
-
-    return <WrappedComponent client={client} {...props} />
-  }
-
-  Component.displayName = `withLinkState(${WrappedComponent.displayName})`
-  Component.propTypes = {
-    client: PropTypes.object.isRequired,
-  }
-  return hoistNonReactStatics(Component, WrappedComponent)
-}
-
 const EnhancedMinicart = compose(
   graphql(orderForm, { options: () => ({ ssr: false }) }),
-  graphql(addToCart, { name: 'addToCart' }),
-  graphql(updateItems, { name: 'updateItems' }),
+  graphql(addToCart, { name: 'addToCartMutation' }),
+  graphql(updateItems, { name: 'updateItemsMutation' }),
   withApollo,
-  withLinkState,
   withLinkStateMinicartQuery,
   withLinkStateUpdateItemsMutation,
   withLinkStateAddToCartMutation,
   withLinkStateUpdateOrderFormMutation,
   withLinkStateUpdateItemsSentToServerMutation,
   withLinkStateSetIsOpenMutation,
-  withRuntimeContext,
-  withPixel,
-  withToast,
   injectIntl
 )(MiniCart)
 
