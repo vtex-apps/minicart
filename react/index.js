@@ -32,7 +32,7 @@ import {
 
 import createLocalState, { ITEMS_STATUS } from './localState'
 
-import minicart from './minicart.css'
+import styles from './minicart.css'
 
 const DEFAULT_LABEL_CLASSES = ''
 const DEFAULT_ICON_CLASSES = 'gray'
@@ -216,6 +216,7 @@ const MiniCart = ({
 
   const sendModifiedItemsToServer = useCallback(
     async modifiedItems => {
+      setUpdatingOrderForm(true)
       const [itemsToAdd, itemsToUpdate] = partitionItemsAddUpdate(modifiedItems)
       await updateItemsSentToServer()
       const pickProps = map(
@@ -264,9 +265,9 @@ const MiniCart = ({
           }),
         })
         await updateOrderForm(orderForm)
+      } finally {
+        setUpdatingOrderForm(false)
       }
-
-      setUpdatingOrderForm(false)
     },
     [
       addItems,
@@ -281,24 +282,16 @@ const MiniCart = ({
     ]
   )
 
-  const handleItemsDifference = useCallback(
-    modifiedItems => {
-      setUpdatingOrderForm(true)
-      sendModifiedItemsToServer(modifiedItems)
-    },
-    [sendModifiedItemsToServer]
-  )
-
   const handleItemsUpdate = useCallback(async () => {
     const modifiedItems = getModifiedItemsOnly()
     if (modifiedItems.length && !isUpdatingOrderForm && orderForm) {
-      return handleItemsDifference(modifiedItems)
+      sendModifiedItemsToServer(modifiedItems)
     }
   }, [
     getModifiedItemsOnly,
-    handleItemsDifference,
     isUpdatingOrderForm,
     orderForm,
+    sendModifiedItemsToServer,
   ])
 
   const handleOrderFormUpdate = useCallback(async () => {
@@ -381,7 +374,7 @@ const MiniCart = ({
   )
 
   const iconLabelClasses = classNames(
-    `${minicart.label} dn-m db-l t-action--small ${labelClasses}`,
+    `${styles.label} dn-m db-l t-action--small ${labelClasses}`,
     {
       pl6: quantity > 0,
       pl4: quantity <= 0,
@@ -389,19 +382,15 @@ const MiniCart = ({
   )
 
   return (
-    <aside className={`${minicart.container} relative fr flex items-center`}>
+    <aside className={`${styles.container} relative fr flex items-center`}>
       <div className="flex flex-column">
-        <Button
-          variation="tertiary"
-          icon
-          onClick={event => handleClickButton(event)}
-        >
+        <Button variation="tertiary" icon onClick={handleClickButton}>
           <span className="flex items-center">
             <span className={`relative ${iconClasses}`}>
               <IconCart size={iconSize} />
               {quantity > 0 && (
                 <span
-                  className={`${minicart.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
+                  className={`${styles.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
                 >
                   {quantity}
                 </span>
