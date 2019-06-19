@@ -113,13 +113,14 @@ const MiniCart = ({
   type,
   hideContent,
   showShippingCost,
-  linkState: { minicartItems, isOpen },
+  linkState: { minicartItems = [], isOpen },
   linkState,
   updateOrderForm,
   addToLinkStateCart,
   intl,
   updateItemsSentToServer,
   updateItemsMutation,
+  addToCartMutation,
 }) => {
   useLinkState(client)
 
@@ -193,12 +194,12 @@ const MiniCart = ({
     items => {
       const { orderFormId } = orderForm
       if (items.length) {
-        return addToCart({
+        return addToCartMutation({
           variables: { orderFormId, items },
         })
       }
     },
-    [orderForm]
+    [addToCartMutation, orderForm]
   )
 
   const mutateUpdateItems = useCallback(
