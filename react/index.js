@@ -2,8 +2,8 @@ import classNames from 'classnames'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import PropTypes from 'prop-types'
 import { map, partition, path, pathOr, pick, isEmpty } from 'ramda'
-import React, { Component, useEffect } from 'react'
-import { Button, withToast } from 'vtex.styleguide'
+import React, { Component, useEffect, Fragment } from 'react'
+import { Button, withToast, Alert } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
 import { withRuntimeContext } from 'vtex.render-runtime'
 import { IconCart } from 'vtex.store-icons'
@@ -14,6 +14,7 @@ import { compose, graphql, withApollo } from 'react-apollo'
 import { injectIntl, intlShape } from 'react-intl'
 
 import MiniCartContent from './components/MiniCartContent'
+import AlertMessage from './components/AlertMessage'
 import { MiniCartPropTypes } from './utils/propTypes'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
@@ -53,6 +54,7 @@ class MiniCart extends Component {
   state = {
     updatingOrderForm: false,
     offline: typeof navigator !== 'undefined' ? !pathOr(true, ['onLine'], navigator) : false,
+    alertMessage: null,
   }
 
   updateStatus = () => {
@@ -69,6 +71,8 @@ class MiniCart extends Component {
       this.props
     )
   }
+
+  handleCloseAlert = () => this.setState({ alertMessage: null })
 
   saveDataIntoLocalStorage = () => {
     const clientItems = this.getModifiedItemsOnly()
@@ -213,8 +217,8 @@ class MiniCart extends Component {
       console.error(err)
       // Rollback items and orderForm
       const orderForm = this.orderForm
-      showToast({
-        message: intl.formatMessage({ id: 'store/minicart.checkout-failure' }),
+      this.setState({
+        alertMessage: intl.formatMessage({ id: 'store/minicart.checkout-failure' }),
       })
       await this.props.updateOrderForm(orderForm)
     }
@@ -303,6 +307,7 @@ class MiniCart extends Component {
       type,
       hideContent,
       showShippingCost,
+      alertMessage,
       linkState: { minicartItems: items, orderForm, isOpen },
     } = this.props
 
@@ -342,48 +347,53 @@ class MiniCart extends Component {
     )
 
     return (
-      <aside className={`${minicart.container} relative fr flex items-center`}>
-        <div className="flex flex-column">
-          <Button
-            variation="tertiary"
-            icon
-            onClick={event => this.handleClickButton(event)}
-          >
-            <span className="flex items-center">
-              <span className={`relative ${iconClasses}`}>
-                <IconCart size={iconSize} />
-                {quantity > 0 && (
-                  <span
-                    className={`${minicart.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
-                  >
-                    {quantity}
-                  </span>
+      <Fragment>
+        {alertMessage && 
+          <AlertMessage message={alertMessage} onClose={this.handleCloseAlert}/>
+        }
+        <aside className={`${minicart.container} relative fr flex items-center`}>
+          <div className="flex flex-column">
+            <Button
+              variation="tertiary"
+              icon
+              onClick={event => this.handleClickButton(event)}
+            >
+              <span className="flex items-center">
+                <span className={`relative ${iconClasses}`}>
+                  <IconCart size={iconSize} />
+                  {quantity > 0 && (
+                    <span
+                      className={`${minicart.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
+                    >
+                      {quantity}
+                    </span>
+                  )}
+                </span>
+                {iconLabel && (
+                  <span className={iconLabelClasses}>{iconLabel}</span>
                 )}
               </span>
-              {iconLabel && (
-                <span className={iconLabelClasses}>{iconLabel}</span>
-              )}
-            </span>
-          </Button>
-          {!hideContent &&
-            (isSizeLarge ? (
-              <Sidebar
-                quantity={quantity}
-                iconSize={iconSize}
-                onOutsideClick={this.handleUpdateContentVisibility}
-                isOpen={isOpen}
-              >
-                {miniCartContent}
-              </Sidebar>
-            ) : (
-              isOpen && (
-                <Popup onOutsideClick={this.handleUpdateContentVisibility}>
+            </Button>
+            {!hideContent &&
+              (isSizeLarge ? (
+                <Sidebar
+                  quantity={quantity}
+                  iconSize={iconSize}
+                  onOutsideClick={this.handleUpdateContentVisibility}
+                  isOpen={isOpen}
+                >
                   {miniCartContent}
-                </Popup>
-              )
-            ))}
-        </div>
-      </aside>
+                </Sidebar>
+              ) : (
+                isOpen && (
+                  <Popup onOutsideClick={this.handleUpdateContentVisibility}>
+                    {miniCartContent}
+                  </Popup>
+                )
+              ))}
+          </div>
+        </aside>
+      </Fragment>
     )
   }
 }
