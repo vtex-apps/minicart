@@ -1,5 +1,13 @@
 import classNames from 'classnames'
-import { map, partition, path, pathOr, pick, isEmpty } from 'ramda'
+import {
+  map,
+  partition,
+  path,
+  pathOr,
+  pick,
+  isEmpty,
+  differenceWith,
+} from 'ramda'
 import React, {
   useState,
   useEffect,
@@ -140,9 +148,7 @@ const MiniCart = ({
   const prevOrderForm = useRef(orderForm)
 
   useEffect(() => {
-    if (orderForm !== prevOrderForm.current) {
-      prevOrderForm.current = orderForm
-    }
+    prevOrderForm.current = orderForm
   }, [orderForm])
 
   const getModifiedItemsOnly = useCallback(() => {
@@ -164,32 +170,42 @@ const MiniCart = ({
       return
     }
 
-    const getDataFromLocalStorage = () => {
-      try {
-        const minicartData = JSON.parse(localStorage.getItem('minicart'))
-        const orderFormData = JSON.parse(localStorage.getItem('orderForm'))
-        return { minicartData, orderFormData }
-      } catch (err) {
-        return {}
-      }
-    }
+    const updateLocalOrderForm = async () => {
+      const orderFormData = JSON.parse(localStorage.getItem('orderForm'))
 
-    const updateLinkState = async () => {
-      const { minicartData, orderFormData } = getDataFromLocalStorage()
+      const remoteOrderForm = path(['orderForm'], data)
 
-      if (orderFormData && !orderForm) {
+      if (remoteOrderForm || !orderFormData) {
+        if (!path(['orderForm'], linkState) && remoteOrderForm) {
+          await updateOrderForm(remoteOrderForm)
+        }
+      } else {
         await updateOrderForm(orderFormData)
         localStorage.removeItem('orderForm')
       }
+    }
 
-      if (minicartData && minicartData.length && isEmpty(minicartItems)) {
-        await addToLinkStateCart(minicartData)
-        localStorage.removeItem('minicart')
+    updateLocalOrderForm()
+  }, [data, linkState, updateOrderForm])
+
+  useEffect(() => {
+    if (!localStorage) {
+      return
+    }
+
+    const updateLinkState = async () => {
+      const minicartData = JSON.parse(localStorage.getItem('minicart'))
+
+      if (!isEmpty(minicartItems) || !minicartData || !minicartData.length) {
+        return
       }
+
+      await addToLinkStateCart(minicartData)
+      localStorage.removeItem('minicart')
     }
 
     updateLinkState()
-  }, [addToLinkStateCart, minicartItems, orderForm, updateOrderForm])
+  }, [addToLinkStateCart, minicartItems])
 
   const addItems = useCallback(
     items => {
@@ -215,8 +231,50 @@ const MiniCart = ({
     [orderForm, updateItemsMutation]
   )
 
-  const sendModifiedItemsToServer = useCallback(
-    async modifiedItems => {
+  const prevMinicartItems = useRef(minicartItems)
+
+  useEffect(() => {
+    prevMinicartItems.current = minicartItems
+  }, [minicartItems])
+
+  useEffect(() => {
+    const productDifference = differenceWith((a, b) => a.id === b.id)
+
+    const addedItems = productDifference(
+      minicartItems,
+      prevMinicartItems.current
+    )
+
+    const removedItems = productDifference(
+      prevMinicartItems.current,
+      minicartItems
+    )
+
+    if (removedItems.length) {
+      push({
+        event: 'removeFromCart',
+        items: removedItems,
+      })
+    }
+
+    if (addedItems.length) {
+      push({
+        event: 'addToCart',
+        items: map(getAddToCartEventItems, addedItems),
+      })
+    }
+  }, [minicartItems, push])
+
+  const handleOrderFormUpdate = useCallback(async () => {
+    if (!prevOrderForm.current && orderForm) {
+      await updateOrderForm(orderForm)
+    }
+  }, [orderForm, updateOrderForm])
+
+  useEffect(() => {
+    let isCurrent = true
+
+    const sendModifiedItemsToServer = async modifiedItems => {
       setUpdatingOrderForm(true)
       const [itemsToAdd, itemsToUpdate] = partitionItemsAddUpdate(modifiedItems)
       await updateItemsSentToServer()
@@ -224,37 +282,24 @@ const MiniCart = ({
         pick(['id', 'index', 'quantity', 'seller', 'options'])
       )
       try {
+        if (!isCurrent) {
+          return
+        }
+
         const updateItemsResponse = await mutateUpdateItems(
           pickProps(itemsToUpdate)
         )
-        const removedItems = itemsToUpdate.filter(
-          ({ quantity }) => quantity === 0
-        )
-        if (removedItems.length) {
-          push({
-            event: 'removeFromCart',
-            items: removedItems,
-          })
-        }
         const addItemsResponse = await addItems(pickProps(itemsToAdd))
-
-        if (itemsToAdd.length > 0) {
-          push({
-            event: 'addToCart',
-            items: map(getAddToCartEventItems, itemsToAdd),
-          })
-        }
-        const newModifiedItems = getModifiedItemsOnly()
-        if (newModifiedItems.length > 0) {
-          // If there are new modified items in cart, recursively call this function to send requests to server
-          return sendModifiedItemsToServer(newModifiedItems)
-        }
 
         const newOrderForm = pathOr(
           path(['data', 'addItem'], addItemsResponse),
           ['data', 'updateItems'],
           updateItemsResponse
         )
+        if (!isCurrent) {
+          return
+        }
+
         await updateOrderForm(newOrderForm)
       } catch (err) {
         // TODO: Toast error message into Alert
@@ -265,45 +310,21 @@ const MiniCart = ({
             id: 'store/minicart.checkout-failure',
           }),
         })
-        await updateOrderForm(orderForm)
+
+        if (isCurrent) await updateOrderForm(orderForm)
       } finally {
-        setUpdatingOrderForm(false)
+        if (isCurrent) setUpdatingOrderForm(false)
       }
-    },
-    [
-      addItems,
-      getModifiedItemsOnly,
-      intl,
-      mutateUpdateItems,
-      orderForm,
-      push,
-      showToast,
-      updateItemsSentToServer,
-      updateOrderForm,
-    ]
-  )
-
-  const handleItemsUpdate = useCallback(async () => {
-    const modifiedItems = getModifiedItemsOnly()
-    if (modifiedItems.length && !isUpdatingOrderForm && orderForm) {
-      sendModifiedItemsToServer(modifiedItems)
     }
-  }, [
-    getModifiedItemsOnly,
-    isUpdatingOrderForm,
-    orderForm,
-    sendModifiedItemsToServer,
-  ])
 
-  const handleOrderFormUpdate = useCallback(async () => {
-    if (!prevOrderForm.current && orderForm) {
-      await updateOrderForm(orderForm)
-    }
-  }, [orderForm, updateOrderForm])
-
-  useEffect(() => {
     const syncItemsWithServer = async () => {
-      await handleItemsUpdate()
+      const modifiedItems = getModifiedItemsOnly()
+      if (modifiedItems.length && orderForm) {
+        await sendModifiedItemsToServer(modifiedItems)
+      }
+      if (!isCurrent) {
+        return
+      }
       await handleOrderFormUpdate()
       if (localStorage) {
         localStorage.removeItem('minicart')
@@ -316,11 +337,22 @@ const MiniCart = ({
     } else {
       saveDataIntoLocalStorage()
     }
+
+    return () => {
+      isCurrent = false
+    }
   }, [
-    handleItemsUpdate,
+    addItems,
+    getModifiedItemsOnly,
     handleOrderFormUpdate,
+    intl,
     isOffline,
+    mutateUpdateItems,
+    orderForm,
     saveDataIntoLocalStorage,
+    showToast,
+    updateItemsSentToServer,
+    updateOrderForm,
   ])
 
   const setContentOpen = isOpen => setMinicartOpen(isOpen)
