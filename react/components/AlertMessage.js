@@ -4,15 +4,18 @@ import React, { Fragment } from 'react'
 
 
 const AlertMessage = ({ message, type = "warning", onClose }) => {
+
   const canUsePortal = () => document && document.body
-  
-  return(
+
+  return (
     <Fragment>
-      { message && canUsePortal() &&
+      {message && canUsePortal() &&
         createPortal(
-          <Alert type={type} onClose={ onClose }>
-            { message }
-          </Alert>,
+          <div className="fixed bottom-1 left-1 z-max">
+            <Alert type={type} onClose={onClose}>
+              {message}
+            </Alert>
+          </div>,
           document.body
         )
       }

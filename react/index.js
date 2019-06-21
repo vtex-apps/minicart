@@ -307,7 +307,6 @@ class MiniCart extends Component {
       type,
       hideContent,
       showShippingCost,
-      alertMessage,
       linkState: { minicartItems: items, orderForm, isOpen },
     } = this.props
 
@@ -348,8 +347,8 @@ class MiniCart extends Component {
 
     return (
       <Fragment>
-        {alertMessage && 
-          <AlertMessage message={alertMessage} onClose={this.handleCloseAlert}/>
+        {this.state.alertMessage &&
+          <AlertMessage message={this.state.alertMessage} onClose={this.handleCloseAlert}/>
         }
         <aside className={`${minicart.container} relative fr flex items-center`}>
           <div className="flex flex-column">
