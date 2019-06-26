@@ -157,12 +157,11 @@ const MiniCart = ({
   }, [minicartItems])
 
   const saveDataIntoLocalStorage = useCallback(() => {
-    const clientItems = getModifiedItemsOnly()
-    if (localStorage && clientItems.length) {
-      localStorage.setItem('minicart', JSON.stringify(clientItems))
+    if (localStorage && minicartItems.length) {
+      localStorage.setItem('minicart', JSON.stringify(minicartItems))
       localStorage.setItem('orderForm', JSON.stringify(orderForm))
     }
-  }, [getModifiedItemsOnly, orderForm])
+  }, [minicartItems, orderForm])
 
   useEffect(() => {
     if (!localStorage) {
@@ -199,8 +198,8 @@ const MiniCart = ({
         return
       }
 
-      await addToLinkStateCart(minicartData)
       localStorage.removeItem('minicart')
+      await addToLinkStateCart(minicartData)
     }
 
     updateLinkState()
