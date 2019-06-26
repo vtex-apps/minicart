@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Pass prop `isPartial` to the product summary extension point.
 
+### Fixed
+- Quantity not updating and remove button not working on offline added item.
+
 ## [2.20.1-beta] - 2019-06-12
 ### Fixed
 
