@@ -116,22 +116,6 @@ export const mapToMinicartItem = item => ({
   __typename: 'MinicartItem',
 })
 
-const updateLinkStateItems = (newItems, cache) => {
-  const items = newItems.map(item =>
-    mapToMinicartItem({
-      ...item,
-      localStatus: ITEMS_STATUS.NONE,
-    })
-  )
-
-  cache.writeData({
-    data: {
-      minicart: { __typename: 'Minicart', items: JSON.stringify(items) },
-    },
-  })
-  return items
-}
-
 export default function(client) {
   const replayOrderFormServerMutation = mutation => async (
     _,
@@ -205,9 +189,7 @@ export default function(client) {
             },
           },
         })
-        if (orderForm.items) {
-          updateLinkStateItems(orderForm.items, cache)
-        }
+
         return orderForm
       },
       updateOrderFormShipping: replayOrderFormServerMutation(
