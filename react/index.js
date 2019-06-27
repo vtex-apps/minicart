@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import PropTypes from 'prop-types'
 import { map, partition, path, pathOr, pick, isEmpty } from 'ramda'
-import React, { Component, useEffect, Fragment } from 'react'
+import React, { Component, useEffect, Fragment, createPortal } from 'react'
 import { Button, withToast, Alert } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
 import { withRuntimeContext } from 'vtex.render-runtime'
@@ -42,8 +42,7 @@ const DEFAULT_ICON_CLASSES = 'gray'
 class MiniCart extends Component {
   static propTypes = {
     ...MiniCartPropTypes,
-    intl: intlShape.isRequired,
-    showToast: PropTypes.func.isRequired,
+    intl: intlShape.isRequired
   }
 
   static defaultProps = {
@@ -54,7 +53,10 @@ class MiniCart extends Component {
   state = {
     updatingOrderForm: false,
     offline: typeof navigator !== 'undefined' ? !pathOr(true, ['onLine'], navigator) : false,
-    alertMessage: null,
+    alert: {
+      message: null,
+      type: null
+    },
   }
 
   updateStatus = () => {
@@ -72,7 +74,7 @@ class MiniCart extends Component {
     )
   }
 
-  handleCloseAlert = () => this.setState({ alertMessage: null })
+  handleCloseAlert = () => this.setState({ alert: {message: null, type: null} })
 
   saveDataIntoLocalStorage = () => {
     const clientItems = this.getModifiedItemsOnly()
@@ -84,6 +86,12 @@ class MiniCart extends Component {
     if (localStorage && clientItems.length) {
       localStorage.setItem('minicart', JSON.stringify(clientItems))
       localStorage.setItem('orderForm', JSON.stringify(clientOrderForm))
+      this.showAlert(
+        this.props.intl.formatMessage(
+          { id: 'store/minicart.item-added-offline' }
+        ),
+        'success'
+      )
     }
   }
 
@@ -106,7 +114,6 @@ class MiniCart extends Component {
       window.addEventListener('offline', this.updateStatus)
     }
     this.updateStatus()
-
     if (localStorage) {
       const { minicart, orderForm } = this.getDataFromLocalStorage()
       if (orderForm && !path(['data', 'orderForm'], this.props)) {
@@ -133,6 +140,12 @@ class MiniCart extends Component {
       await this.handleItemsUpdate()
       await this.handleOrderFormUpdate(prevProps)
       if (localStorage) {
+        this.showAlert(
+          this.props.intl.formatMessage(
+            { id: 'store/minicart.offline-items-sycronized' }
+          ),
+          'success'
+        )
         localStorage.removeItem('minicart')
         localStorage.removeItem('orderForm')
       }
@@ -171,7 +184,7 @@ class MiniCart extends Component {
   }
 
   sendModifiedItemsToServer = async modifiedItems => {
-    const { showToast, intl, updateItemsSentToServer } = this.props
+    const { intl, updateItemsSentToServer } = this.props
     const [itemsToAdd, itemsToUpdate] = this.partitionItemsAddUpdate(
       modifiedItems
     )
@@ -212,14 +225,19 @@ class MiniCart extends Component {
         updateItemsResponse
       )
       await this.props.updateOrderForm(newOrderForm)
+      
     } catch (err) {
       // TODO: Toast error message into Alert
       console.error(err)
       // Rollback items and orderForm
       const orderForm = this.orderForm
-      this.setState({
-        alertMessage: intl.formatMessage({ id: 'store/minicart.checkout-failure' }),
-      })
+      this.showAlert(
+        intl.formatMessage(
+          { id: 'store/minicart.error-syncronizing-offline-items' }
+        ),
+        'error'
+      )
+     
       await this.props.updateOrderForm(orderForm)
     }
     this.setState({ updatingOrderForm: false })
@@ -249,6 +267,12 @@ class MiniCart extends Component {
         variables: { orderFormId, items },
       })
     }
+  }
+
+  showAlert = (message, type = null) => {
+    this.setState({ 
+      alert: { message, type }
+    })
   }
 
   setContentOpen = isOpen => this.props.setMinicartOpen(isOpen)
@@ -310,6 +334,10 @@ class MiniCart extends Component {
       linkState: { minicartItems: items, orderForm, isOpen },
     } = this.props
 
+    const {
+      alert
+    } = this.state
+
     const itemsToShow = this.getFilteredItems()
     const quantity = itemsToShow.length
 
@@ -347,8 +375,8 @@ class MiniCart extends Component {
 
     return (
       <Fragment>
-        {this.state.alertMessage &&
-          <AlertMessage message={this.state.alertMessage} onClose={this.handleCloseAlert}/>
+        {alert.message &&
+          <AlertMessage message={alert.message} type={alert.type} onClose={this.handleCloseAlert}/>
         }
         <aside className={`${minicart.container} relative fr flex items-center`}>
           <div className="flex flex-column">

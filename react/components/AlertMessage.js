@@ -12,7 +12,7 @@ const AlertMessage = ({ message, type = "warning", onClose }) => {
       {message && canUsePortal() &&
         createPortal(
           <div className="fixed bottom-1 left-1 z-max">
-            <Alert type={type} onClose={onClose}>
+            <Alert type={type} onClose={onClose} autoClose={5000}>
               {message}
             </Alert>
           </div>,

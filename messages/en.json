@@ -15,7 +15,7 @@
     "store/minicart.error-removal": "Item removal failed, please try again",
     "store/minicart.shipping-cost": "Total shipping cost",
     "store/minicart.checkout-failure": "Something went wrong. Please, try again.",
-    "store/minicart.alert-item-added-offline": "Item added offline and will be synchronized when connection returns.",
-    "store/minicart.alert-item-added-online": "Items successfully synchronized.",
-    "store/minicart.alert-error-item-offline": "Couldn't syncronize your items."
+    "store/minicart.item-added-offline": "Item added offline. Will be syncronized when connection is established.",
+    "store/minicart.offline-items-sycronized": "Offline items syncronized successfully.",
+    "store/minicart.error-syncronizing-offline-items": "Something went wrong when syncronizing offline items."
 }

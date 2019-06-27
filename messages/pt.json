@@ -14,5 +14,8 @@
     "store/minicart-content-footer-discount": "Economize",
     "store/minicart.error-removal": "A remoção do item falhou, por favor tente novamente",
     "store/minicart.shipping-cost": "Custo de entrega",
-    "store/minicart.checkout-failure": "Algo deu errado. Por favor, tente novamente."
+    "store/minicart.checkout-failure": "Algo deu errado. Por favor, tente novamente.",
+    "store/minicart.item-added-offline": "Item adicionado offline e será sincronizado assim que estabelecer conexão.",
+    "store/minicart.offline-items-sycronized": "Itens offiline foram sincronizados.",
+    "store/minicart.error-syncronizing-offline-items": "Algo deu errado ao sincronizar os itens offline."
 }
