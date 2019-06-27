@@ -6,11 +6,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Error and warning alerts in offline minicart implementation.
+
 ### Fixed
 - Offline Minicart adding repeated items when user navigates.
 
 ### Changed
 - Pass prop `isPartial` to the product summary extension point.
+- Toast to Styleguide Alert in error messages.
 
 ## [2.21.2] - 2019-07-01
 

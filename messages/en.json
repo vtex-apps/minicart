@@ -16,6 +16,6 @@
     "store/minicart.shipping-cost": "Total shipping cost",
     "store/minicart.checkout-failure": "Something went wrong. Please, try again.",
     "store/minicart.item-added-offline": "Item added offline. Will be syncronized when connection is established.",
-    "store/minicart.offline-items-sycronized": "Offline items syncronized successfully.",
-    "store/minicart.error-syncronizing-offline-items": "Something went wrong when syncronizing offline items."
+    "store/minicart.offline-items-synchronized": "Offline items synchronized successfully.",
+    "store/minicart.error-synchronizing-offline-items": "Something went wrong when synchroning offline items."
 }

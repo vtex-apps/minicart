@@ -16,6 +16,6 @@
   "store/minicart.shipping-cost": "store/minicart.shipping-cost",
   "store/minicart.checkout-failure": "Message showed when there is a problem to a request to the server.",
   "store/minicart.item-added-offline": "Message showed when an item is added offline.",
-  "store/minicart.offline-items-sycronized": "Message showed when an offline item is successfully syncronized online.",
-  "store/minicart.error-syncronizing-offline-items": "Message showed when an offline item couldn't be syncronized online."
+  "store/minicart.offline-items-synchronized": "Message showed when an offline item is successfully synchronized online.",
+  "store/minicart.error-synchronizing-offline-items": "Message showed when an offline item couldn't be synchronized online."
 }

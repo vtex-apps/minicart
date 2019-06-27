@@ -2,8 +2,8 @@ import classNames from 'classnames'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import PropTypes from 'prop-types'
 import { map, partition, path, pathOr, pick, isEmpty } from 'ramda'
-import React, { Component, useEffect, Fragment, createPortal } from 'react'
-import { Button, withToast, Alert } from 'vtex.styleguide'
+import React, { Component, useEffect, Fragment } from 'react'
+import { Button, withToast } from 'vtex.styleguide'
 import { isMobile } from 'react-device-detect'
 import { withRuntimeContext } from 'vtex.render-runtime'
 import { IconCart } from 'vtex.store-icons'
@@ -83,15 +83,10 @@ class MiniCart extends Component {
       ['linkState', 'orderForm'],
       this.props
     )
+    
     if (localStorage && clientItems.length) {
       localStorage.setItem('minicart', JSON.stringify(clientItems))
       localStorage.setItem('orderForm', JSON.stringify(clientOrderForm))
-      this.showAlert(
-        this.props.intl.formatMessage(
-          { id: 'store/minicart.item-added-offline' }
-        ),
-        'success'
-      )
     }
   }
 
@@ -139,18 +134,19 @@ class MiniCart extends Component {
     if (!this.state.offline) {
       await this.handleItemsUpdate()
       await this.handleOrderFormUpdate(prevProps)
-      if (localStorage) {
-        this.showAlert(
-          this.props.intl.formatMessage(
-            { id: 'store/minicart.offline-items-sycronized' }
-          ),
-          'success'
-        )
+      if (localStorage) {        
+        if(localStorage.getItem('minicart') != null) 
+          this.showAlert(
+            this.props.intl.formatMessage({id: 'store/minicart.offline-items-synchronized'}),
+            'success'
+          )
         localStorage.removeItem('minicart')
         localStorage.removeItem('orderForm')
       }
     } else {
       this.saveDataIntoLocalStorage()
+      if (prevProps.linkState.minicartItems.length != this.props.linkState.minicartItems.length)
+        this.showAlert(this.props.intl.formatMessage({ id: 'store/minicart.item-added-offline' }))
     }
   }
 
@@ -233,7 +229,7 @@ class MiniCart extends Component {
       const orderForm = this.orderForm
       this.showAlert(
         intl.formatMessage(
-          { id: 'store/minicart.error-syncronizing-offline-items' }
+          { id: 'store/minicart.checkout-failure' }
         ),
         'error'
       )
@@ -375,7 +371,7 @@ class MiniCart extends Component {
 
     return (
       <Fragment>
-        {alert.message &&
+        {alert && alert.message &&
           <AlertMessage message={alert.message} type={alert.type} onClose={this.handleCloseAlert}/>
         }
         <aside className={`${minicart.container} relative fr flex items-center`}>
