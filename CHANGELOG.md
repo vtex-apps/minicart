@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.21.2] - 2019-07-01
+
 ### Fixed
 
 - Protect against undefined totalizers case.
