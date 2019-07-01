@@ -62,12 +62,16 @@ class MiniCartContent extends Component {
     )
 
   getShippingCost = orderForm => {
-    const totalizer = find(propEq('id', 'Shipping'))(orderForm.totalizers)
-    return totalizer && totalizer.value / 100
+    const totalizer = find(propEq('id', 'Shipping'))(orderForm.totalizers || [])
+    return (totalizer && totalizer.value / 100) || 0
   }
 
-  calculateDiscount = (items) =>
-    items.reduce((sum, { listPrice, sellingPrice, quantity }) => sum + (listPrice - sellingPrice) * quantity, 0)
+  calculateDiscount = items =>
+    items.reduce(
+      (sum, { listPrice, sellingPrice, quantity }) =>
+        sum + (listPrice - sellingPrice) * quantity,
+      0
+    )
 
   handleItemRemoval = async ({ id, cartIndex }) => {
     const { updateItems } = this.props
@@ -103,7 +107,9 @@ class MiniCartContent extends Component {
   }
 
   calculateTotalValue = orderForm =>
-    this.getShippingCost(orderForm) ? orderForm.value : this.sumItemsPrice(orderForm.items)
+    this.getShippingCost(orderForm)
+      ? orderForm.value
+      : this.sumItemsPrice(orderForm.items)
 
   createProductShapeFromItem = item => ({
     productName: item.name,
