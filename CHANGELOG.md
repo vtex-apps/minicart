@@ -7,13 +7,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [2.21.1] - 2019-06-27
 ### Fixed
+
+- Protect against undefined totalizers case.
+
+## [2.21.1] - 2019-06-27
+
+### Fixed
+
 - Build assets with new builder hub.
 
 ## [2.21.0] - 2019-06-14
 
 ### Changed
+
 - Add rootPath prefix to checkout redirect.
 
 ## [2.20.0] - 2019-05-27
@@ -25,90 +32,130 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [2.19.0] - 2019-05-23
 
 ### Changed
+
 - Use an overlay div instead of `react-outside-click-handler` on Popup.
 
 ## [2.18.3] - 2019-05-20
+
 ### Fixed
+
 - Fix total purchase value when the product is unavailable for shipping in the selected address.
 
 ## [2.18.2] - 2019-05-15
 
 ## [2.18.1] - 2019-05-15
+
 ### Changed
+
 - Separate local state resolvers into separate functions and add tests.
 - Add Lint to repo, fix basic issues.
 
 ### Fixed
+
 - Fixed the case when an item is added offline and the user closes and then accesses the store again still offline.
 
 ## [2.18.0] - 2019-05-14
+
 ### Changed
+
 - `isOpen` state is now coming from Apollo Local State.
 
 ## [2.17.1] - 2019-05-08
+
 ### Fixed
+
 - Export MiniCart schema and create test case for it. (Releasing again.)
 
 ## [2.17.0] - 2019-05-08
+
 ### Added
+
 - Add offline minicart logic allowing users to add an item to the cart when there is no network connection.
 
 ## [2.16.4] - 2019-05-07
+
 ### Fixed
+
 - Export MiniCart schema and create test case for it.
 
 ## [2.16.3] - 2019-05-01
+
 ### Fixed
+
 - Fix bug on Popup mode where clicks inside the minicart were closing it.
 
 ## [2.16.2] - 2019-04-30
+
 ### Changed
+
 - Use `react-portal` to add Popup and Sidebar on the top level of the body.
 
 ## [2.16.1] - 2019-04-30
+
 ### Fixed
+
 - Fix props passed to `addToCart` event.
 
 ## [2.16.0] - 2019-04-24
+
 ### Changed
+
 - Scope messages by domain
 
 ## [2.15.0] - 2019-04-17
+
 ### Added
+
 - Add the `removeFromCart` event.
 
 ## [2.14.7] - 2019-04-12
+
 ### Fixed
+
 - Fixes `Cannot read property 'replace' of null` bug on `toHttps`.
 
 ## [2.14.6] - 2019-04-04
+
 ### Fixed
+
 - Implement multiple status to simulate request queue and be able to continuously sync local state and server.
 
 ## [2.14.5] - 2019-04-01
+
 ### Changed
+
 - Stringify and parse local state order form to prevent bugs in apollo link state.
 
 ### Fixed
+
 - Make items mutations be based on index and nothing related to sku id.
 
 ## [2.14.4] - 2019-03-28
+
 ### Changed
+
 - Remove unused `itemMetadata` fields from orderForm and minicart queries.
 
 ## [2.14.3] - 2019-03-28
+
 ### Fixed
+
 - Correctly get orderForm from server mutation on replay mutation method.
 
 ## [2.14.2] - 2019-03-26
+
 ### Fixed
+
 - Add toast when request to checkout fails.
 
 ## [2.14.1] - 2019-03-22
+
 ### Fixed
+
 - Add default fields to all items to prevent bugs when adding item to cart with missing field.
 
 ## [2.14.0] - 2019-03-21
+
 ### Added
 
 - Use the new Apollo Local State API to manage the orderForm and the minicart items to a faster UX.
