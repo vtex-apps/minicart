@@ -74,7 +74,7 @@ class MiniCartContent extends Component {
       0
     )
 
-  handleItemRemoval = async ({ id, cartIndex }) => {
+  handleItemRemoval = async ({ id, cartIndex }, index) => {
     const { updateItems } = this.props
     const updatedItems = [
       {
@@ -185,7 +185,7 @@ class MiniCartContent extends Component {
     return (
       <Fragment>
         <div className={classes}>
-          {itemsToShow.map(item => (
+          {itemsToShow.map((item, index) => (
             <Fragment key={item.id}>
               <section className="relative flex">
                 <div className="fr absolute top-0 right-0">
@@ -197,7 +197,7 @@ class MiniCartContent extends Component {
                     <Button
                       icon
                       variation="tertiary"
-                      onClick={() => this.handleItemRemoval(item)}
+                      onClick={() => this.handleItemRemoval(item, index)}
                     >
                       <IconDelete size={15} activeClassName="c-muted-2" />
                     </Button>
