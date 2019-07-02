@@ -11,7 +11,7 @@ exports[`<MiniCart /> component should match the snapshot in popup mode 1`] = `
       <button
         variation="tertiary"
       >
-        Button Test
+        Button test
         <span
           class="flex items-center"
         >
@@ -51,7 +51,7 @@ exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = 
         <button
           variation="tertiary"
         >
-          Button Test
+          Button test
           <span
             class="flex items-center"
           >
@@ -130,7 +130,7 @@ exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = 
                     <button
                       variation="tertiary"
                     >
-                      Button Test
+                      Button test
                       <svg
                         class="undefined IconDelete"
                         height="15"
@@ -166,7 +166,7 @@ exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = 
                   <button
                     variation="primary"
                   >
-                    Button Test
+                    Button test
                     Go to checkout
                   </button>
                 </div>
