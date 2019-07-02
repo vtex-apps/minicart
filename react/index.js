@@ -30,7 +30,7 @@ import {
   setMinicartOpenMutation,
 } from './localState/mutations'
 
-import createLocalState, { ITEMS_STATUS, mapToMinicartItem } from './localState'
+import createLocalState, { ITEMS_STATUS } from './localState'
 
 import styles from './minicart.css'
 
@@ -78,13 +78,11 @@ const useLinkState = client => {
     const minicartData = JSON.parse(localStorage.getItem('minicart'))
 
     if (minicartData) {
-      const writeData = map(mapToMinicartItem, minicartData)
-
       client.writeData({
         data: {
           minicart: {
             __typename: 'Minicart',
-            items: JSON.stringify(writeData),
+            items: JSON.stringify(minicartData),
           },
         },
       })
@@ -168,7 +166,7 @@ const MiniCart = ({
     const updateLocalOrderForm = async () => {
       const orderFormData = JSON.parse(localStorage.getItem('orderForm'))
 
-      const remoteOrderForm = path(['orderForm'], data)
+      const remoteOrderForm = data.orderForm
 
       if (remoteOrderForm || !orderFormData) {
         if (!path(['orderForm'], linkState) && remoteOrderForm) {
