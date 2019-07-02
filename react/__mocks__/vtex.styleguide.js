@@ -1,11 +1,18 @@
 import React from 'react'
 
 export const Button = ({ icon, ...props }) => (
-  <button {...props}>Button Test{props.children}</button>
+  <button {...props}>Button test{props.children}</button>
 )
 
 export const Spinner = ({ children }) => <div>{children}</div>
 
-export const withToast = WrappedComponent => props => (
-  <WrappedComponent showToast={() => {}} hideToast={() => {}} {...props} />
-)
+export const ToastContext = React.createContext({
+  showToast: jest.fn(),
+})
+
+export const withToast = WrappedComponent => {
+  const withToast = props => (
+    <WrappedComponent showToast={() => {}} hideToast={() => {}} {...props} />
+  )
+  return withToast
+}

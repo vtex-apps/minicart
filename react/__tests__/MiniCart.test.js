@@ -52,7 +52,7 @@ describe('<MiniCart /> component', () => {
     // Sidebar should not exist before and after click
     expect(sidebar).toBeNull()
 
-    fireEvent.click(getByText('Button Test'))
+    fireEvent.click(getByText(/button test/i))
 
     await wait(0)
     box = baseElement.querySelector('.box')
@@ -81,7 +81,7 @@ describe('<MiniCart /> component', () => {
     expect(sidebar).toBeDefined()
     expect(sidebar).not.toBeNull()
 
-    fireEvent.click(getByText('Button Test'))
+    fireEvent.click(getByText(/button test/i))
 
     await wait(0)
     box = baseElement.querySelector('.box')
@@ -103,7 +103,7 @@ describe('<MiniCart /> component', () => {
 
     await resolveApolloQueries()
 
-    fireEvent.click(getByText('Button Test'), leftClick)
+    fireEvent.click(getByText(/button test/i), leftClick)
 
     expect(asFragment()).toMatchSnapshot()
   })
