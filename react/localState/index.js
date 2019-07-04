@@ -12,12 +12,10 @@ import {
 
 import updateItems from './resolvers/updateItems'
 import addToCart from './resolvers/addToCart'
-import updateItemsSentToServer from './resolvers/updateItemsSentToServer'
 
 export const ITEMS_STATUS = {
   NONE: 'NONE',
   MODIFIED: 'MODIFIED',
-  WAITING_SERVER: 'WAITING_SERVER',
 }
 
 export default function(client) {
@@ -99,10 +97,7 @@ export default function(client) {
           prevItems
             .map(item => ({
               ...item,
-              localStatus:
-                item.localStatus === ITEMS_STATUS.WAITING_SERVER
-                  ? ITEMS_STATUS.NONE
-                  : item.localStatus,
+              localStatus: ITEMS_STATUS.NONE,
             }))
             .filter(({ localStatus }) => localStatus !== ITEMS_STATUS.NONE)
         )
@@ -125,22 +120,6 @@ export default function(client) {
       updateOrderFormCheckin: replayOrderFormServerMutation(
         updateOrderFormCheckin
       ),
-      updateItemsSentToServer: (_, __, { cache }) => {
-        const query = minicartItemsQuery
-        const {
-          minicart: { items: prevItems },
-        } = cache.readQuery({ query })
-        const itemsWithStatus = updateItemsSentToServer(JSON.parse(prevItems))
-        cache.writeData({
-          data: {
-            minicart: {
-              __typename: 'Minicart',
-              items: JSON.stringify(itemsWithStatus),
-            },
-          },
-        })
-        return itemsWithStatus
-      },
       setMinicartOpen: (_, { isOpen }, { cache }) => {
         cache.writeQuery({
           query: minicartIsOpenQuery,
