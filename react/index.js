@@ -154,13 +154,13 @@ const MiniCart = ({
       ({ localStatus }) => localStatus === ITEMS_STATUS.MODIFIED
     )
   }, [minicartItems])
-  
+
   useEffect(() => {
     const updateLocalOrderForm = async () => {
       const orderFormData = JSON.parse(localStorage.getItem('orderForm'))
-      
+
       const remoteOrderForm = data.orderForm
-      
+
       if (remoteOrderForm || !orderFormData) {
         if (!path(['orderForm'], linkState) && remoteOrderForm) {
           await updateOrderForm(remoteOrderForm)
@@ -177,7 +177,7 @@ const MiniCart = ({
     localStorage.setItem('minicart', JSON.stringify(minicartItems))
     localStorage.setItem('orderForm', JSON.stringify(orderForm))
   }, [minicartItems, orderForm])
-  
+
   const addItems = useCallback(
     items => {
       if (items.length && orderFormId) {
