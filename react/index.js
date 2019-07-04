@@ -174,8 +174,10 @@ const MiniCart = ({
   }, [data, linkState, updateOrderForm])
 
   useEffect(() => {
-    localStorage.setItem('minicart', JSON.stringify(minicartItems))
-    localStorage.setItem('orderForm', JSON.stringify(orderForm))
+    if (orderForm) {
+      localStorage.setItem('minicart', JSON.stringify(minicartItems))
+      localStorage.setItem('orderForm', JSON.stringify(orderForm))
+    }
   }, [minicartItems, orderForm])
 
   const addItems = useCallback(
