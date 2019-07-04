@@ -16,6 +16,7 @@ import addToCart from './resolvers/addToCart'
 export const ITEMS_STATUS = {
   NONE: 'NONE',
   MODIFIED: 'MODIFIED',
+  LOCAL_ITEM: 'LOCAL_ITEM',
 }
 
 export default function(client) {
@@ -97,7 +98,10 @@ export default function(client) {
           prevItems
             .map(item => ({
               ...item,
-              localStatus: ITEMS_STATUS.NONE,
+              localStatus:
+                item.localStatus === ITEMS_STATUS.MODIFIED
+                  ? ITEMS_STATUS.NONE
+                  : item.localStatus,
             }))
             .filter(({ localStatus }) => localStatus !== ITEMS_STATUS.NONE)
         )
@@ -113,6 +117,33 @@ export default function(client) {
         })
 
         return orderForm
+      },
+      updateLocalItemStatus: (_, __, { cache }) => {
+        const query = minicartItemsQuery
+        const {
+          minicart: { items: itemsString },
+        } = cache.readQuery({ query })
+
+        const prevItems = JSON.parse(itemsString)
+
+        const updatedItems = prevItems.map(item => ({
+          ...item,
+          localStatus:
+            item.localStatus === ITEMS_STATUS.LOCAL_ITEM
+              ? ITEMS_STATUS.MODIFIED
+              : item.localStatus,
+        }))
+
+        cache.writeData({
+          data: {
+            minicart: {
+              __typename: 'Minicart',
+              items: JSON.stringify(updatedItems),
+            },
+          },
+        })
+
+        return true
       },
       updateOrderFormShipping: replayOrderFormServerMutation(
         updateOrderFormShipping

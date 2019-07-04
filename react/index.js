@@ -35,6 +35,7 @@ import { fullMinicartQuery } from './localState/queries'
 import {
   updateItemsMutation,
   updateOrderFormMutation,
+  updateLocalItemStatusMutation,
   setMinicartOpenMutation,
 } from './localState/mutations'
 
@@ -145,6 +146,7 @@ const MiniCart = ({
   intl,
   updateItemsMutation,
   addToCartMutation,
+  updateLocalItemStatus,
 }) => {
   useLinkState(client)
 
@@ -261,6 +263,16 @@ const MiniCart = ({
   useEffect(() => {
     orderFormRef.current = orderForm
   }, [orderForm])
+
+  useEffect(
+    () => {
+      if (!isOffline) {
+        updateLocalItemStatus()
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isOffline]
+  )
 
   const requestLockRef = useRef(false)
 
@@ -469,6 +481,13 @@ const withLinkStateUpdateOrderFormMutation = graphql(updateOrderFormMutation, {
   }),
 })
 
+const withLinkStateUpdateLocalItemStatusMutation = graphql(
+  updateLocalItemStatusMutation,
+  {
+    name: 'updateLocalItemStatus',
+  }
+)
+
 const withLinkStateSetIsOpenMutation = graphql(setMinicartOpenMutation, {
   name: 'setMinicartOpen',
   props: ({ setMinicartOpen }) => ({
@@ -484,6 +503,7 @@ const EnhancedMinicart = compose(
   withLinkStateMinicartQuery,
   withLinkStateUpdateItemsMutation,
   withLinkStateUpdateOrderFormMutation,
+  withLinkStateUpdateLocalItemStatusMutation,
   withLinkStateSetIsOpenMutation,
   injectIntl
 )(MiniCart)
