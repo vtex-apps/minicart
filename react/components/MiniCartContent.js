@@ -214,7 +214,7 @@ class MiniCartContent extends Component {
                   showInstallments={false}
                   showLabels={false}
                   actionOnClick={onClickAction}
-                  muted={item.localStatus === ITEMS_STATUS.MODIFIED}
+                  muted={item.localStatus !== ITEMS_STATUS.NONE}
                 />
               </section>
             </Fragment>
