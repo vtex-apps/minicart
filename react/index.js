@@ -1,5 +1,14 @@
 import classNames from 'classnames'
-import { map, partition, path, pathOr, pick, differenceWith } from 'ramda'
+import {
+  map,
+  partition,
+  path,
+  pathOr,
+  pick,
+  differenceWith,
+  isNil,
+  prop,
+} from 'ramda'
 import React, {
   useState,
   useEffect,
@@ -105,8 +114,13 @@ const getAddToCartEventItems = ({
 }
 
 const partitionItemsAddUpdate = clientItems => {
-  const isNotInCart = item => item.cartIndex === null
-  return partition(isNotInCart, clientItems)
+  return partition(
+    compose(
+      isNil,
+      prop('cartIndex')
+    ),
+    clientItems
+  )
 }
 
 /**
