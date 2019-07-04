@@ -105,7 +105,7 @@ const getAddToCartEventItems = ({
 }
 
 const partitionItemsAddUpdate = clientItems => {
-  const isNotInCart = item => item.cartIndex == null
+  const isNotInCart = item => item.cartIndex === null
   return partition(isNotInCart, clientItems)
 }
 
@@ -236,6 +236,12 @@ const MiniCart = ({
     }
   }, [minicartItems, push])
 
+  const prevOrderForm = useRef(orderForm)
+
+  useEffect(() => {
+    prevOrderForm.current = orderForm
+  }, [orderForm])
+
   useEffect(() => {
     let isCurrent = true
 
@@ -268,6 +274,7 @@ const MiniCart = ({
         // TODO: Toast error message into Alert
         console.error(err)
         // Rollback items and orderForm
+        await updateOrderForm(prevOrderForm.current)
         showToast({
           message: intl.formatMessage({
             id: 'store/minicart.checkout-failure',
