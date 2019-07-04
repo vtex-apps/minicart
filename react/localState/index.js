@@ -90,21 +90,22 @@ export default function(client) {
         } = cache.readQuery({ query })
 
         const prevItems = JSON.parse(itemsString)
-        const items = (orderForm.items || []).map(item => ({
+        const orderFormItems = (orderForm.items || []).map(item => ({
           ...item,
           localStatus: ITEMS_STATUS.NONE,
         }))
 
-        const allItems = prevItems
-          .map(item => ({
-            ...item,
-            localStatus:
-              item.localStatus === ITEMS_STATUS.WAITING_SERVER
-                ? ITEMS_STATUS.NONE
-                : item.localStatus,
-          }))
-          .filter(({ localStatus }) => localStatus !== ITEMS_STATUS.NONE)
-          .concat(items)
+        const allItems = orderFormItems.concat(
+          prevItems
+            .map(item => ({
+              ...item,
+              localStatus:
+                item.localStatus === ITEMS_STATUS.WAITING_SERVER
+                  ? ITEMS_STATUS.NONE
+                  : item.localStatus,
+            }))
+            .filter(({ localStatus }) => localStatus !== ITEMS_STATUS.NONE)
+        )
 
         cache.writeData({
           data: {
