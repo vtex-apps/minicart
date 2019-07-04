@@ -165,7 +165,7 @@ const MiniCart = ({
         if (!path(['orderForm'], linkState) && remoteOrderForm) {
           await updateOrderForm(remoteOrderForm)
         }
-      } else {
+      } else if (!path(['orderForm'], linkState)) {
         await updateOrderForm(orderFormData)
       }
     }
