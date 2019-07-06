@@ -4,11 +4,7 @@ import {
   updateOrderFormShipping,
   updateOrderFormCheckin,
 } from 'vtex.store-resources/Mutations'
-import {
-  minicartItemsQuery,
-  minicartOrderFormQuery,
-  minicartIsOpenQuery,
-} from './queries'
+import { fullMinicartQuery } from './queries'
 
 import updateItems from './resolvers/updateItems'
 import addToCart from './resolvers/addToCart'
@@ -32,16 +28,19 @@ export default function(client) {
 
     const updatedOrderForm = head(values(response.data))
 
-    const {
-      minicart: { orderForm: outdatedOrderForm },
-    } = cache.readQuery({ query: minicartOrderFormQuery })
+    const data = cache.readQuery({ query: fullMinicartQuery })
 
     const orderForm = JSON.stringify(
-      mergeDeepRight(JSON.parse(outdatedOrderForm), updatedOrderForm)
+      mergeDeepRight(JSON.parse(data.minicart.orderForm), updatedOrderForm)
     )
-    cache.writeData({
+    cache.writeQuery({
+      query: fullMinicartQuery,
       data: {
-        minicart: { __typename: 'Minicart', orderForm },
+        ...data,
+        minicart: {
+          ...data.minicart,
+          orderForm,
+        },
       },
     })
     return orderForm
@@ -50,16 +49,15 @@ export default function(client) {
   const resolvers = {
     Mutation: {
       addToCart: (_, { items }, { cache }) => {
-        const query = minicartItemsQuery
-        const {
-          minicart: { items: prevItems },
-        } = cache.readQuery({ query })
+        const data = cache.readQuery({ query: fullMinicartQuery })
 
-        const writeItems = addToCart(JSON.parse(prevItems), items)
-        cache.writeData({
+        const writeItems = addToCart(JSON.parse(data.minicart.items), items)
+        cache.writeQuery({
+          query: fullMinicartQuery,
           data: {
+            ...data,
             minicart: {
-              __typename: 'Minicart',
+              ...data.minicart,
               items: JSON.stringify(writeItems),
             },
           },
@@ -67,15 +65,18 @@ export default function(client) {
         return writeItems
       },
       updateItems: (_, { items: newItems }, { cache }) => {
-        const query = minicartItemsQuery
-        const {
-          minicart: { items: prevItems },
-        } = cache.readQuery({ query })
-        const newCartItems = updateItems(JSON.parse(prevItems), newItems)
-        cache.writeData({
+        const data = cache.readQuery({ query: fullMinicartQuery })
+        const newCartItems = updateItems(
+          JSON.parse(data.minicart.items),
+          newItems
+        )
+
+        cache.writeQuery({
+          query: fullMinicartQuery,
           data: {
+            ...data,
             minicart: {
-              __typename: 'Minicart',
+              ...data.minicart,
               items: JSON.stringify(newCartItems),
             },
           },
@@ -83,12 +84,9 @@ export default function(client) {
         return newCartItems
       },
       updateOrderForm: (_, { orderForm }, { cache }) => {
-        const query = minicartItemsQuery
-        const {
-          minicart: { items: itemsString },
-        } = cache.readQuery({ query })
+        const data = cache.readQuery({ query: fullMinicartQuery })
 
-        const prevItems = JSON.parse(itemsString)
+        const prevItems = JSON.parse(data.minicart.items)
         const orderFormItems = (orderForm.items || []).map(item => ({
           ...item,
           localStatus: ITEMS_STATUS.NONE,
@@ -106,10 +104,12 @@ export default function(client) {
             .filter(({ localStatus }) => localStatus !== ITEMS_STATUS.NONE)
         )
 
-        cache.writeData({
+        cache.writeQuery({
+          query: fullMinicartQuery,
           data: {
+            ...data,
             minicart: {
-              __typename: 'Minicart',
+              ...data.minicart,
               orderForm: JSON.stringify(orderForm),
               items: JSON.stringify(allItems),
             },
@@ -119,12 +119,8 @@ export default function(client) {
         return orderForm
       },
       updateLocalItemStatus: (_, __, { cache }) => {
-        const query = minicartItemsQuery
-        const {
-          minicart: { items: itemsString },
-        } = cache.readQuery({ query })
-
-        const prevItems = JSON.parse(itemsString)
+        const data = cache.readQuery({ query: fullMinicartQuery })
+        const prevItems = JSON.parse(data.minicart.items)
 
         const updatedItems = prevItems.map(item => ({
           ...item,
@@ -134,10 +130,12 @@ export default function(client) {
               : item.localStatus,
         }))
 
-        cache.writeData({
+        cache.writeQuery({
+          query: fullMinicartQuery,
           data: {
+            ...data,
             minicart: {
-              __typename: 'Minicart',
+              ...data.minicart,
               items: JSON.stringify(updatedItems),
             },
           },
@@ -152,11 +150,13 @@ export default function(client) {
         updateOrderFormCheckin
       ),
       setMinicartOpen: (_, { isOpen }, { cache }) => {
+        const data = cache.readQuery({ query: fullMinicartQuery })
         cache.writeQuery({
-          query: minicartIsOpenQuery,
+          query: fullMinicartQuery,
           data: {
+            ...data,
             minicart: {
-              __typename: 'Minicart',
+              ...data.minicart,
               isOpen,
             },
           },
