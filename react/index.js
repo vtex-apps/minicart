@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import gql from 'graphql-tag'
 import {
   map,
   partition,
@@ -17,14 +18,13 @@ import React, {
   useContext,
   useMemo,
 } from 'react'
+import { compose, graphql, withApollo } from 'react-apollo'
+import { injectIntl } from 'react-intl'
 import { Button, ToastContext } from 'vtex.styleguide'
 import { useRuntime } from 'vtex.render-runtime'
 import { IconCart } from 'vtex.store-icons'
-import { orderForm } from 'vtex.store-resources/Queries'
 import { addToCart, updateItems } from 'vtex.store-resources/Mutations'
 import { usePixel } from 'vtex.pixel-manager/PixelContext'
-import { compose, graphql, withApollo } from 'react-apollo'
-import { injectIntl } from 'react-intl'
 
 import MiniCartContent from './components/MiniCartContent'
 import Sidebar from './components/Sidebar'
@@ -42,6 +42,103 @@ import {
 import createLocalState, { ITEMS_STATUS } from './localState'
 
 import styles from './minicart.css'
+
+const MINICART_QUERY = gql`
+  query MinicartQuery {
+    orderForm @context(provider: "vtex.store-graphql") {
+      cacheId
+      orderFormId
+      value
+      totalizers {
+        id
+        name
+        value
+      }
+      items {
+        id
+        name
+        imageUrl
+        detailUrl
+        skuName
+        quantity
+        sellingPrice
+        listPrice
+        parentItemIndex
+        parentAssemblyBinding
+        cartIndex
+        assemblyOptions {
+          added {
+            item {
+              name
+              sellingPrice
+              quantity
+            }
+            normalizedQuantity
+            choiceType
+            extraQuantity
+          }
+          removed {
+            removedQuantity
+            initialQuantity
+            name
+          }
+          parentPrice
+        }
+        seller
+      }
+      shippingData {
+        address {
+          id
+          neighborhood
+          complement
+          number
+          street
+          postalCode
+          city
+          reference
+          addressName
+          addressType
+          geoCoordinates
+          state
+          receiverName
+          country
+        }
+        availableAddresses {
+          id
+          neighborhood
+          complement
+          number
+          street
+          postalCode
+          city
+          reference
+          addressName
+          addressType
+          geoCoordinates
+          state
+          receiverName
+          country
+        }
+      }
+      clientProfileData {
+        email
+        firstName
+      }
+      storePreferencesData {
+        countryCode
+        currencyCode
+        timeZone
+      }
+      checkedInPickupPointId
+      isCheckedIn
+    }
+    minicart @client {
+      items
+      orderForm
+      isOpen
+    }
+  }
+`
 
 const DEFAULT_LABEL_CLASSES = ''
 const DEFAULT_ICON_CLASSES = 'gray'
@@ -288,7 +385,6 @@ const MiniCart = ({
 
   useEffect(
     () => {
-      console.log('sync effect', modifiedItems)
       let isCurrent = true
 
       const syncItemsWithServer = async () => {
@@ -308,14 +404,10 @@ const MiniCart = ({
             pick(['id', 'index', 'quantity', 'seller', 'options'])
           )
 
-          console.log('before update', itemsToUpdate)
-
           // server mutation
           const updateItemsResponse = await mutateUpdateItems(
             pickProps(itemsToUpdate)
           )
-
-          console.log('before add', itemsToAdd)
 
           // server mutation
           const addItemsResponse = await addItems(pickProps(itemsToAdd))
@@ -324,15 +416,11 @@ const MiniCart = ({
             return
           }
 
-          console.log('responses', updateItemsResponse, addItemsResponse)
-
           const newOrderForm = pathOr(
             path(['data', 'addItem'], addItemsResponse),
             ['data', 'updateItems'],
             updateItemsResponse
           )
-
-          console.log('before update order form', newOrderForm)
 
           setUpdatingOrderForm(false)
           await updateOrderForm(newOrderForm)
@@ -363,7 +451,6 @@ const MiniCart = ({
       syncItemsWithServer()
 
       return () => {
-        console.log('cancelled')
         isCurrent = false
       }
     },
@@ -472,10 +559,6 @@ const MiniCart = ({
   )
 }
 
-const withLinkStateMinicartQuery = graphql(fullMinicartQuery, {
-  options: () => ({ ssr: false }),
-})
-
 const withLinkStateUpdateItemsMutation = graphql(updateItemsMutation, {
   name: 'updateLinkStateItems',
   props: ({ updateLinkStateItems }) => ({
@@ -506,11 +589,10 @@ const withLinkStateSetIsOpenMutation = graphql(setMinicartOpenMutation, {
 })
 
 const EnhancedMinicart = compose(
-  graphql(orderForm, { options: () => ({ ssr: false }) }),
+  graphql(MINICART_QUERY, { options: { ssr: false } }),
   graphql(addToCart, { name: 'addToCartMutation' }),
   graphql(updateItems, { name: 'updateItemsMutation' }),
   withApollo,
-  withLinkStateMinicartQuery,
   withLinkStateUpdateItemsMutation,
   withLinkStateUpdateOrderFormMutation,
   withLinkStateUpdateLocalItemStatusMutation,
