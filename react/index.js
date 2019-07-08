@@ -314,22 +314,26 @@ const MiniCart = ({
 
   const addItems = useCallback(
     items => {
-      if (items.length && orderFormId) {
-        return addToCartMutation({
-          variables: { orderFormId, items },
-        })
+      if (!items.length || !orderFormId) {
+        return null
       }
+
+      return addToCartMutation({
+        variables: { orderFormId, items },
+      })
     },
     [orderFormId, addToCartMutation]
   )
 
   const mutateUpdateItems = useCallback(
     items => {
-      if (items.length && orderFormId) {
-        return updateItemsMutation({
-          variables: { orderFormId, items },
-        })
+      if (!items.length || !orderFormId) {
+        return null
       }
+
+      return updateItemsMutation({
+        variables: { orderFormId, items },
+      })
     },
     [orderFormId, updateItemsMutation]
   )
