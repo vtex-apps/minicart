@@ -1,10 +1,10 @@
 import { head, mergeDeepRight, values } from 'ramda'
-
 import {
   updateOrderFormShipping,
   updateOrderFormCheckin,
 } from 'vtex.store-resources/Mutations'
-import { fullMinicartQuery } from './queries'
+
+import fullMinicartQuery from './graphql/fullMinicartQuery.gql'
 
 import updateItems from './resolvers/updateItems'
 import addToCart from './resolvers/addToCart'

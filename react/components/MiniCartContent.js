@@ -13,8 +13,8 @@ import { MiniCartPropTypes } from '../utils/propTypes'
 import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
 
 import { ITEMS_STATUS } from '../localState/index'
-import { updateItemsMutation } from '../localState/mutations'
-import minicart from '../minicart.css'
+import updateItemsMutation from '../localState/graphql/updateItemsMutation.gql'
+import styles from '../minicart.css'
 import MiniCartFooter from './MiniCartFooter'
 
 /**
@@ -154,7 +154,7 @@ class MiniCartContent extends Component {
 
   renderWithoutItems = label => (
     <div
-      className={`${minicart.item} pa9 flex items-center justify-center relative bg-base`}
+      className={`${styles.item} pa9 flex items-center justify-center relative bg-base`}
     >
       <span className="t-body">{label}</span>
     </div>
@@ -173,9 +173,9 @@ class MiniCartContent extends Component {
   ) => {
     const MIN_ITEMS_TO_SCROLL = 2
 
-    const classes = classNames(`${minicart.content} overflow-x-hidden pa1`, {
-      [`${minicart.contentSmall} bg-base`]: !isSizeLarge,
-      [`${minicart.contentLarge}`]: isSizeLarge,
+    const classes = classNames(`${styles.content} overflow-x-hidden pa1`, {
+      [`${styles.contentSmall} bg-base`]: !isSizeLarge,
+      [`${styles.contentLarge}`]: isSizeLarge,
       'overflow-y-scroll':
         itemsToShow.length > MIN_ITEMS_TO_SCROLL && !isSizeLarge,
       'overflow-y-hidden':
@@ -237,7 +237,7 @@ class MiniCartContent extends Component {
 
   renderLoading = () => (
     <div
-      className={`${minicart.item} pa4 flex items-center justify-center relative bg-base`}
+      className={`${styles.item} pa4 flex items-center justify-center relative bg-base`}
     >
       <Spinner />
     </div>
