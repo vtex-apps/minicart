@@ -500,7 +500,9 @@ const withLinkStateSetIsOpenMutation = graphql(setMinicartOpenMutation, {
 })
 
 const EnhancedMinicart = compose(
-  graphql(orderFormQuery, { options: { ssr: false } }),
+  graphql(orderFormQuery, {
+    options: { ssr: false, errorPolicy: 'all', returnPartialData: true },
+  }),
   graphql(addToCart, { name: 'addToCartMutation' }),
   graphql(updateItems, { name: 'updateItemsMutation' }),
   withApollo,
