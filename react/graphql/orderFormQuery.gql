@@ -1,4 +1,9 @@
 query MinicartQuery {
+  minicart @client {
+    items
+    orderForm
+    isOpen
+  }
   orderForm {
     cacheId
     orderFormId
@@ -85,10 +90,5 @@ query MinicartQuery {
     }
     checkedInPickupPointId
     isCheckedIn
-  }
-  minicart @client {
-    items
-    orderForm
-    isOpen
   }
 }
