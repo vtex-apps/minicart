@@ -418,9 +418,9 @@ const MiniCart = ({
           }
 
           const newOrderForm = pathOr(
-            path(['data', 'addItem'], addItemsResponse),
-            ['data', 'updateItems'],
-            updateItemsResponse
+            path(['data', 'updateItems'], updateItemsResponse),
+            ['data', 'addItem'],
+            addItemsResponse
           )
 
           setUpdatingOrderForm(false)
