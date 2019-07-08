@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import gql from 'graphql-tag'
 import {
   map,
   partition,
@@ -26,119 +25,21 @@ import { IconCart } from 'vtex.store-icons'
 import { addToCart, updateItems } from 'vtex.store-resources/Mutations'
 import { usePixel } from 'vtex.pixel-manager/PixelContext'
 
+import orderFormQuery from './graphql/orderFormQuery.gql'
 import MiniCartContent from './components/MiniCartContent'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
 import { shouldShowItem } from './utils/itemsHelper'
 
-import { fullMinicartQuery } from './localState/queries'
-import {
-  updateItemsMutation,
-  updateOrderFormMutation,
-  updateLocalItemStatusMutation,
-  setMinicartOpenMutation,
-} from './localState/mutations'
+import fullMinicartQuery from './localState/graphql/fullMinicartQuery.gql'
+import updateItemsMutation from './localState/graphql/updateItemsMutation.gql'
+import updateOrderFormMutation from './localState/graphql/updateOrderFormMutation.gql'
+import updateLocalItemStatusMutation from './localState/graphql/updateLocalItemStatusMutation.gql'
+import setMinicartOpenMutation from './localState/graphql/setMinicartOpenMutation.gql'
 
 import createLocalState, { ITEMS_STATUS } from './localState'
 
 import styles from './minicart.css'
-
-const MINICART_QUERY = gql`
-  query MinicartQuery {
-    orderForm @context(provider: "vtex.store-graphql") {
-      cacheId
-      orderFormId
-      value
-      totalizers {
-        id
-        name
-        value
-      }
-      items {
-        id
-        name
-        imageUrl
-        detailUrl
-        skuName
-        quantity
-        sellingPrice
-        listPrice
-        parentItemIndex
-        parentAssemblyBinding
-        cartIndex
-        assemblyOptions {
-          added {
-            item {
-              name
-              sellingPrice
-              quantity
-            }
-            normalizedQuantity
-            choiceType
-            extraQuantity
-          }
-          removed {
-            removedQuantity
-            initialQuantity
-            name
-          }
-          parentPrice
-        }
-        seller
-      }
-      shippingData {
-        address {
-          id
-          neighborhood
-          complement
-          number
-          street
-          postalCode
-          city
-          reference
-          addressName
-          addressType
-          geoCoordinates
-          state
-          receiverName
-          country
-        }
-        availableAddresses {
-          id
-          neighborhood
-          complement
-          number
-          street
-          postalCode
-          city
-          reference
-          addressName
-          addressType
-          geoCoordinates
-          state
-          receiverName
-          country
-        }
-      }
-      clientProfileData {
-        email
-        firstName
-      }
-      storePreferencesData {
-        countryCode
-        currencyCode
-        timeZone
-      }
-      checkedInPickupPointId
-      isCheckedIn
-    }
-    minicart @client {
-      items
-      orderForm
-      isOpen
-    }
-  }
-`
 
 const DEFAULT_LABEL_CLASSES = ''
 const DEFAULT_ICON_CLASSES = 'gray'
@@ -593,7 +494,7 @@ const withLinkStateSetIsOpenMutation = graphql(setMinicartOpenMutation, {
 })
 
 const EnhancedMinicart = compose(
-  graphql(MINICART_QUERY, { options: { ssr: false } }),
+  graphql(orderFormQuery, { options: { ssr: false } }),
   graphql(addToCart, { name: 'addToCartMutation' }),
   graphql(updateItems, { name: 'updateItemsMutation' }),
   withApollo,

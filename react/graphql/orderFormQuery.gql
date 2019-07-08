@@ -1,0 +1,94 @@
+query MinicartQuery {
+  orderForm {
+    cacheId
+    orderFormId
+    value
+    totalizers {
+      id
+      name
+      value
+    }
+    items {
+      id
+      name
+      imageUrl
+      detailUrl
+      skuName
+      quantity
+      sellingPrice
+      listPrice
+      parentItemIndex
+      parentAssemblyBinding
+      cartIndex
+      assemblyOptions {
+        added {
+          item {
+            name
+            sellingPrice
+            quantity
+          }
+          normalizedQuantity
+          choiceType
+          extraQuantity
+        }
+        removed {
+          removedQuantity
+          initialQuantity
+          name
+        }
+        parentPrice
+      }
+      seller
+    }
+    shippingData {
+      address {
+        id
+        neighborhood
+        complement
+        number
+        street
+        postalCode
+        city
+        reference
+        addressName
+        addressType
+        geoCoordinates
+        state
+        receiverName
+        country
+      }
+      availableAddresses {
+        id
+        neighborhood
+        complement
+        number
+        street
+        postalCode
+        city
+        reference
+        addressName
+        addressType
+        geoCoordinates
+        state
+        receiverName
+        country
+      }
+    }
+    clientProfileData {
+      email
+      firstName
+    }
+    storePreferencesData {
+      countryCode
+      currencyCode
+      timeZone
+    }
+    checkedInPickupPointId
+    isCheckedIn
+  }
+  minicart @client {
+    items
+    orderForm
+    isOpen
+  }
+}
