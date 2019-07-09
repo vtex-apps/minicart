@@ -22,10 +22,10 @@ import { injectIntl } from 'react-intl'
 import { Button, ToastContext } from 'vtex.styleguide'
 import { useRuntime } from 'vtex.render-runtime'
 import { IconCart } from 'vtex.store-icons'
+import { orderForm as orderFormQuery } from 'vtex.store-resources/Queries'
 import { addToCart, updateItems } from 'vtex.store-resources/Mutations'
 import { usePixel } from 'vtex.pixel-manager/PixelContext'
 
-import orderFormQuery from './graphql/orderFormQuery.gql'
 import MiniCartContent from './components/MiniCartContent'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
@@ -135,6 +135,7 @@ const MiniCart = ({
   iconLabel,
   showDiscount,
   data,
+  linkState,
   type,
   hideContent,
   showShippingCost,
@@ -156,7 +157,7 @@ const MiniCart = ({
   const { push } = usePixel()
   const { showToast } = useContext(ToastContext)
 
-  const minicartState = data.minicart || {}
+  const minicartState = linkState.minicart || {}
 
   const localOrderForm = useMemo(() => {
     try {
@@ -496,9 +497,8 @@ const withLinkStateSetIsOpenMutation = graphql(setMinicartOpenMutation, {
 })
 
 const EnhancedMinicart = compose(
-  graphql(orderFormQuery, {
-    options: { ssr: false, errorPolicy: 'all', returnPartialData: true },
-  }),
+  graphql(orderFormQuery, { options: { ssr: false } }),
+  graphql(fullMinicartQuery, { name: 'linkState', ssr: false }),
   graphql(addToCart, { name: 'addToCartMutation' }),
   graphql(updateItems, { name: 'updateItemsMutation' }),
   withApollo,
