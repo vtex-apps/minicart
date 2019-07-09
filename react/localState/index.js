@@ -83,7 +83,11 @@ export default function(client) {
         })
         return newCartItems
       },
-      updateOrderForm: (_, { orderForm }, { cache }) => {
+      updateOrderForm: (
+        _,
+        { orderForm, forceUpdateItems = false },
+        { cache }
+      ) => {
         const data = cache.readQuery({ query: fullMinicartQuery })
 
         const prevItems = JSON.parse(data.minicart.items)
@@ -92,17 +96,22 @@ export default function(client) {
           localStatus: ITEMS_STATUS.NONE,
         }))
 
-        const allItems = orderFormItems.concat(
-          prevItems
-            .map(item => ({
+        const currentItems = forceUpdateItems
+          ? prevItems.map(item => ({
               ...item,
               localStatus:
                 item.localStatus === ITEMS_STATUS.MODIFIED
                   ? ITEMS_STATUS.NONE
                   : item.localStatus,
             }))
-            .filter(({ localStatus }) => localStatus !== ITEMS_STATUS.NONE)
-        )
+          : prevItems
+
+        const updatedItems = [
+          ...orderFormItems,
+          ...currentItems.filter(
+            ({ localStatus }) => localStatus !== ITEMS_STATUS.NONE
+          ),
+        ]
 
         cache.writeQuery({
           query: fullMinicartQuery,
@@ -111,7 +120,7 @@ export default function(client) {
             minicart: {
               ...data.minicart,
               orderForm: JSON.stringify(orderForm),
-              items: JSON.stringify(allItems),
+              items: JSON.stringify(updatedItems),
             },
           },
         })
