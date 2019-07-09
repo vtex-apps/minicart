@@ -333,7 +333,7 @@ const MiniCart = ({
           )
 
           setUpdatingOrderForm(false)
-          await updateOrderForm(newOrderForm)
+          await updateOrderForm(newOrderForm, true)
         } catch (err) {
           // TODO: Toast error message into Alert
           console.error(err)
@@ -344,7 +344,7 @@ const MiniCart = ({
 
           // Rollback items and orderForm
           setUpdatingOrderForm(false)
-          await updateOrderForm(prevOrderForm)
+          await updateOrderForm(prevOrderForm, true)
 
           showToast({
             message: intl.formatMessage({
@@ -478,7 +478,8 @@ const withLinkStateUpdateItemsMutation = graphql(updateItemsMutation, {
 const withLinkStateUpdateOrderFormMutation = graphql(updateOrderFormMutation, {
   name: 'updateOrderForm',
   props: ({ updateOrderForm }) => ({
-    updateOrderForm: orderForm => updateOrderForm({ variables: { orderForm } }),
+    updateOrderForm: (orderForm, forceUpdateItems = false) =>
+      updateOrderForm({ variables: { orderForm, forceUpdateItems } }),
   }),
 })
 

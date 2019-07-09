@@ -1,3 +1,7 @@
-mutation updateOrderForm($orderForm: [OrderForm]) {
-  updateOrderForm(orderForm: $orderForm) @client
+mutation updateOrderForm(
+  $orderForm: [OrderForm]
+  $forceUpdateItems: Boolean = false
+) {
+  updateOrderForm(orderForm: $orderForm, forceUpdateItems: $forceUpdateItems)
+    @client
 }
