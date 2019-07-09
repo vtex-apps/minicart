@@ -156,14 +156,18 @@ const MiniCart = ({
   const { push } = usePixel()
   const { showToast } = useContext(ToastContext)
 
-  const orderForm = pathOr(
-    path(['minicart', 'orderForm'], data),
-    ['orderForm'],
-    data
-  )
-  const orderFormId = orderForm && orderForm.orderFormId
-
   const minicartState = data.minicart || {}
+
+  const localOrderForm = useMemo(() => {
+    try {
+      return JSON.parse(minicartState.orderForm)
+    } catch (e) {
+      return undefined
+    }
+  }, [minicartState.orderForm])
+
+  const orderForm = pathOr(localOrderForm, ['orderForm'], data)
+  const orderFormId = orderForm && orderForm.orderFormId
 
   const minicartItems = useMemo(() => {
     try {
@@ -363,21 +367,19 @@ const MiniCart = ({
     [intl, isOffline, showToast, addItems, mutateUpdateItems, modifiedItems]
   )
 
-  const setContentOpen = isOpen => setMinicartOpen(isOpen)
-
   const handleClickButton = event => {
     if (!hideContent) {
-      setContentOpen(!minicartState.isOpen)
+      setMinicartOpen(!minicartState.isOpen)
     }
     event.persist()
   }
 
   const handleUpdateContentVisibility = () => {
-    setContentOpen(false)
+    setMinicartOpen(false)
   }
 
   const handleClickProduct = detailUrl => {
-    setContentOpen(false)
+    setMinicartOpen(false)
     navigate({
       to: detailUrl,
     })
