@@ -10,3 +10,9 @@ export const withRuntimeContext = Comp => {
 }
 
 export const ExtensionPoint = () => <div> Extension Point </div>
+
+export const useRuntime = () => {
+  return {
+    rootPath: '',
+  }
+}
