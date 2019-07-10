@@ -185,6 +185,7 @@ export default function(client) {
           data: {
             ...data,
             minicart: {
+              __typename: 'Minicart',
               ...data.minicart,
               items: JSON.stringify(updatedItems),
             },
@@ -206,6 +207,7 @@ export default function(client) {
           data: {
             ...data,
             minicart: {
+              __typename: 'Minicart',
               ...data.minicart,
               isOpen,
             },
