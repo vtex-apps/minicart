@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
+import { reduceBy, values, clone, find, propEq, isNil } from 'ramda'
 import React, { Component, Fragment } from 'react'
 import { compose, graphql } from 'react-apollo'
 import { injectIntl, intlShape } from 'react-intl'
-import { reduceBy, values, clone, find, propEq } from 'ramda'
 import classNames from 'classnames'
 
 import { ExtensionPoint } from 'vtex.render-runtime'
@@ -14,6 +14,7 @@ import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
 
 import { ITEMS_STATUS } from '../localState/index'
 import updateItemsMutation from '../localState/graphql/updateItemsMutation.gql'
+import updateLocalItemsMutation from '../localState/graphql/updateLocalItemsMutation.gql'
 import styles from '../minicart.css'
 import MiniCartFooter from './MiniCartFooter'
 
@@ -31,6 +32,7 @@ class MiniCartContent extends Component {
     onClickAction: PropTypes.func,
     /* Update Items mutation */
     updateItems: PropTypes.func.isRequired,
+    updateLocalItems: PropTypes.func.isRequired,
     /* Determines if the orderform is updating */
     updatingOrderForm: PropTypes.bool,
     /* Reused props */
@@ -75,17 +77,23 @@ class MiniCartContent extends Component {
     )
 
   handleItemRemoval = async ({ id, cartIndex }, index) => {
-    const { updateItems } = this.props
+    const { updateItems, updateLocalItems } = this.props
     const updatedItems = [
       {
         id,
-        index: cartIndex,
+        // the use of `!=` here is on purpose so we check for both
+        // null and undefined
+        index: cartIndex != null ? cartIndex : index,
         quantity: 0,
       },
     ]
 
     try {
-      await updateItems(updatedItems)
+      if (cartIndex != null) {
+        await updateItems(updatedItems)
+      } else {
+        await updateLocalItems(updatedItems)
+      }
     } catch (error) {
       // TODO: Toast error message
       console.error(error)
@@ -215,6 +223,7 @@ class MiniCartContent extends Component {
                   showLabels={false}
                   actionOnClick={onClickAction}
                   muted={item.localStatus !== ITEMS_STATUS.NONE}
+                  index={index}
                 />
               </section>
             </Fragment>
@@ -289,14 +298,22 @@ class MiniCartContent extends Component {
   }
 }
 
-const withLinkStateUpdateItemsMutation = graphql(updateItemsMutation, {
+const withUpdateItemsMutation = graphql(updateItemsMutation, {
   name: 'updateItems',
   props: ({ updateItems }) => ({
     updateItems: items => updateItems({ variables: { items } }),
   }),
 })
 
+const withUpdateLocalItemsMutation = graphql(updateLocalItemsMutation, {
+  name: 'updateLocalItems',
+  props: ({ updateLocalItems }) => ({
+    updateLocalItems: items => updateLocalItems({ variables: { items } }),
+  }),
+})
+
 export default compose(
   injectIntl,
-  withLinkStateUpdateItemsMutation
+  withUpdateItemsMutation,
+  withUpdateLocalItemsMutation
 )(MiniCartContent)

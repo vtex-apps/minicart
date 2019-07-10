@@ -83,6 +83,47 @@ export default function(client) {
         })
         return newCartItems
       },
+      updateLocalItems: (_, { items }, { cache }) => {
+        const data = cache.readQuery({ query: fullMinicartQuery })
+
+        const itemsToRemove = items.filter(({ quantity }) => quantity === 0)
+        const itemsToUpdate = items.filter(({ quantity }) => quantity > 0)
+
+        const updatedItems = JSON.parse(data.minicart.items)
+          .map((item, index) => {
+            const updateItem = itemsToUpdate.find(
+              updateItem => updateItem.index === index
+            )
+
+            if (updateItem) {
+              return {
+                ...item,
+                ...updateItem,
+              }
+            }
+
+            return item
+          })
+          .filter(
+            (_, index) =>
+              itemsToRemove.findIndex(
+                removedItem => removedItem.index === index
+              ) === -1
+          )
+
+        cache.writeQuery({
+          query: fullMinicartQuery,
+          data: {
+            ...data,
+            minicart: {
+              ...data.minicart,
+              items: JSON.stringify(updatedItems),
+            },
+          },
+        })
+
+        return updatedItems
+      },
       updateOrderForm: (
         _,
         { orderForm, forceUpdateItems = false },
