@@ -355,6 +355,7 @@ const MiniCart = ({
       }
 
       if (isOffline) {
+        setUpdatingOrderForm(updating => (updating ? false : updating))
         return
       }
 
