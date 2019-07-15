@@ -30,6 +30,9 @@ exports[`<MiniCart /> should match the snapshot in popup mode 1`] = `
               1
             </span>
           </span>
+          <span
+            class="flex flex-column items-start"
+          />
         </span>
       </button>
       <div>
@@ -143,6 +146,9 @@ exports[`<MiniCart /> should match the snapshot in sidebar mode 1`] = `
                 1
               </span>
             </span>
+            <span
+              class="flex flex-column items-start"
+            />
           </span>
         </button>
         <div>

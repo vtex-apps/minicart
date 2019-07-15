@@ -132,8 +132,8 @@ describe('<MiniCart />', () => {
   })
 
   it('should not show item quantity if there are no items in cart', () => {
-    const { queryByTestId } = render(
-      <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={false} />
+    const {queryByTestId} = render(
+      <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={false}/>
     )
     expect(queryByTestId('item-qty')).toBeNull()
   })
@@ -161,4 +161,59 @@ describe('<MiniCart />', () => {
 
     expect(getByTestId('item-qty').textContent).toBe('2')
   })
+
+  it('should not show price if showPrice is false', async () => {
+    const {queryByTestId} = render(
+      <MockedProvider mocks={mocks}>
+        <MiniCart type="sidebar" hideContent={false} showPrice={false}/>
+      </MockedProvider>
+    )
+    await resolveApolloQueries()
+    expect(queryByTestId('total-price')).toBeNull()
+  })
+
+  it('should not show price if there are no items in the cart', () => {
+    const {queryByTestId} = render(
+      <MiniCart type="sidebar" hideContent={false} showPrice={true}/>
+    )
+    expect(queryByTestId('total-price')).toBeNull()
+  })
+
+  it('should show price if there are items in the cart', async () => {
+    const {getByTestId} = render(
+      <MockedProvider mocks={mocks}>
+        <MiniCart type="sidebar" hideContent={false} showPrice={true}/>
+      </MockedProvider>
+    )
+    await resolveApolloQueries()
+    expect(getByTestId('total-price')).toBeInTheDocument()
+  })
+
+  it('should not show price if showPrice is false', async () => {
+    const {queryByTestId} = render(
+      <MockedProvider mocks={mocks}>
+        <MiniCart type="sidebar" hideContent={false} showPrice={false}/>
+      </MockedProvider>
+    )
+    await resolveApolloQueries()
+    expect(queryByTestId('total-price')).toBeNull()
+  })
+
+  it('should not show price if there are no items in the cart', () => {
+    const {queryByTestId} = render(
+      <MiniCart type="sidebar" hideContent={false} showPrice={true}/>
+    )
+    expect(queryByTestId('total-price')).toBeNull()
+  })
+
+  it('should show price if there are items in the cart', async () => {
+    const {getByTestId} = render(
+      <MockedProvider mocks={mocks}>
+        <MiniCart type="sidebar" hideContent={false} showPrice={true}/>
+      </MockedProvider>
+    )
+    await resolveApolloQueries()
+    expect(getByTestId('total-price')).toBeInTheDocument()
+  })
+
 })
