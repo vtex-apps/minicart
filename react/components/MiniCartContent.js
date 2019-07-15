@@ -81,8 +81,6 @@ class MiniCartContent extends Component {
     const updatedItems = [
       {
         id,
-        // the use of `!=` here is on purpose so we check for both
-        // null and undefined
         index: cartIndex != null ? cartIndex : index,
         quantity: 0,
       },
