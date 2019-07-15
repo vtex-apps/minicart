@@ -340,6 +340,7 @@ class MiniCart extends Component {
         pl4: quantity <= 0,
       }
     )
+    
     return (
       <aside
         className={`${minicart.container} relative fr flex items-center`}
