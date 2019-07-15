@@ -24,7 +24,7 @@ export default {
         'http://delivery.vteximg.com.br/arquivos/ids/155439-55-55/pepperoni-feast.0e1c4c9e7b8900d08cc51ff285fd9ae3.1.jpg?v=636770441237070000',
       detailUrl: '/pizza-pepperoni/p',
       skuName: 'Small',
-      quantity: 1,
+      quantity: 2,
       sellingPrice: 14.9,
       listPrice: 14.9,
       parentItemIndex: null,

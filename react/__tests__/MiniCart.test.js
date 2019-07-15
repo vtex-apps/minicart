@@ -125,4 +125,34 @@ describe('<MiniCart /> component', () => {
       expect.objectContaining({ title: expect.any(String) })
     )
   })
+
+  it('should not show item quantity if there are no items in cart', () => {
+    const {queryByTitle} = render(
+      <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={false}/>
+    )
+    expect(queryByTitle('item-qnt')).toBeNull()
+  })
+
+  it('should show the quantity of different items in cart', async () => {
+    const {getByTitle} = render(
+      <MockedProvider mocks={mocks}>
+        <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={false}/>
+      </MockedProvider>
+    )
+    await resolveApolloQueries()
+    expect(getByTitle('item-qty').textContent).toBe('1')
+    
+  })
+
+  it('should show the quantity of different items in cart', async () => {
+    const {getByTitle} = render(
+      <MockedProvider mocks={mocks}>
+        <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={true}/>
+      </MockedProvider>
+    )
+    await resolveApolloQueries()
+    expect(getByTitle('item-qty').textContent).toBe('2')
+    
+  })
+
 })
