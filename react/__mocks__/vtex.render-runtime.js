@@ -18,12 +18,7 @@ export const useRuntime = () => ({
   hints: {
     mobile: false,
   },
+  rootPath: '',
 })
 
 export const ExtensionPoint = () => <div> Extension Point </div>
-
-export const useRuntime = () => {
-  return {
-    rootPath: '',
-  }
-}
