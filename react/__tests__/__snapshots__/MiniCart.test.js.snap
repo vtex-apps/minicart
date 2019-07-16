@@ -25,7 +25,7 @@ exports[`<MiniCart /> component should match the snapshot in popup mode 1`] = `
             </svg>
             <span
               class="badge c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid"
-              title="item-qty"
+              data-testid="item-qty"
             >
               1
             </span>
@@ -65,7 +65,7 @@ exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = 
               </svg>
               <span
                 class="badge c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid"
-                title="item-qty"
+                data-testid="item-qty"
               >
                 1
               </span>

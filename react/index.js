@@ -340,7 +340,7 @@ class MiniCart extends Component {
         pl4: quantity <= 0,
       }
     )
-    
+
     return (
       <aside
         className={`${minicart.container} relative fr flex items-center`}
@@ -357,7 +357,7 @@ class MiniCart extends Component {
                 <IconCart size={iconSize} />
                 {quantity > 0 && (
                   <span
-                    title="item-qty"
+                    data-testid="item-qty"
                     className={`${
                       minicart.badge
                     } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
