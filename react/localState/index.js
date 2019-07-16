@@ -35,6 +35,7 @@ export default function(client) {
       data: {
         ...data,
         minicart: {
+          __typename: 'Minicart',
           ...data.minicart,
           orderForm,
         },
@@ -64,6 +65,7 @@ export default function(client) {
           data: {
             ...data,
             minicart: {
+              __typename: 'Minicart',
               ...data.minicart,
               items: JSON.stringify(writeItems),
             },
@@ -96,6 +98,7 @@ export default function(client) {
           data: {
             ...data,
             minicart: {
+              __typename: 'Minicart',
               ...data.minicart,
               items: JSON.stringify(newCartItems),
             },
@@ -136,6 +139,7 @@ export default function(client) {
           data: {
             ...data,
             minicart: {
+              __typename: 'Minicart',
               ...data.minicart,
               items: JSON.stringify(updatedItems),
             },
@@ -179,6 +183,7 @@ export default function(client) {
           data: {
             ...data,
             minicart: {
+              __typename: 'Minicart',
               ...data.minicart,
               orderForm: JSON.stringify(orderForm),
               items: JSON.stringify(updatedItems),
