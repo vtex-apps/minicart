@@ -301,11 +301,13 @@ class MiniCart extends Component {
       type,
       hideContent,
       showShippingCost,
+      showTotalItemsQty,
       linkState: { minicartItems: items, orderForm, isOpen },
     } = this.props
 
     const itemsToShow = this.getFilteredItems()
-    const quantity = itemsToShow.length
+    const totalItemsSum = arr => arr.reduce((sum, product) => sum + product.quantity, 0)
+    const quantity = showTotalItemsQty ? totalItemsSum(itemsToShow) : itemsToShow.length
 
     const isSizeLarge =
       (type && type === 'sidebar') ||
@@ -355,6 +357,7 @@ class MiniCart extends Component {
                 <IconCart size={iconSize} />
                 {quantity > 0 && (
                   <span
+                    data-testid="item-qty"
                     className={`${
                       minicart.badge
                     } c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}

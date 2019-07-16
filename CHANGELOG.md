@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Add a new prop that controls if the minicart should show the total quantity of items or just the quantity of different items.
+
 ## [2.21.2] - 2019-07-01
 
 ### Fixed
