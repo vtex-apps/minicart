@@ -6,9 +6,6 @@ import {
 
 import fullMinicartQuery from './graphql/fullMinicartQuery.gql'
 
-import updateItems from './resolvers/updateItems'
-import addToCart from './resolvers/addToCart'
-
 export const ITEMS_STATUS = {
   NONE: 'NONE',
   MODIFIED: 'MODIFIED',
@@ -51,7 +48,17 @@ export default function(client) {
       addToCart: (_, { items }, { cache }) => {
         const data = cache.readQuery({ query: fullMinicartQuery })
 
-        const writeItems = addToCart(JSON.parse(data.minicart.items), items)
+        const cartItems = JSON.parse(data.minicart.items)
+
+        const writeItems = cartItems.concat(
+          items.map(item => ({
+            ...item,
+            localStatus: navigator.onLine
+              ? ITEMS_STATUS.MODIFIED
+              : ITEMS_STATUS.LOCAL_ITEM,
+          }))
+        )
+
         cache.writeQuery({
           query: fullMinicartQuery,
           data: {
@@ -66,10 +73,23 @@ export default function(client) {
       },
       updateItems: (_, { items: newItems }, { cache }) => {
         const data = cache.readQuery({ query: fullMinicartQuery })
-        const newCartItems = updateItems(
-          JSON.parse(data.minicart.items),
-          newItems
-        )
+
+        const cartItems = JSON.parse(data.minicart.items)
+
+        // Items provided to this function MUST have a valid index property
+        const cleanNewItems = newItems.filter(({ index }) => index != null)
+        const items = [...cartItems]
+
+        for (const newItem of cleanNewItems) {
+          const { index } = newItem
+          const prevItem = cartItems[index]
+          items[index] = mergeDeepRight(prevItem, {
+            ...newItem,
+            localStatus: ITEMS_STATUS.MODIFIED,
+          })
+        }
+
+        const newCartItems = items.filter(Boolean)
 
         cache.writeQuery({
           query: fullMinicartQuery,
