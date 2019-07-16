@@ -4,5 +4,6 @@
     "browser": true,
     "es6": true,
     "jest": true
-  }
+  },
+  "root": true
 }
