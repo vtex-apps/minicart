@@ -81,9 +81,15 @@ Through the Storefront, you can change the minicart's behavior and interface. Ho
 | Prop name                   | Type      | Description                                          | Default value        |
 | --------------------------- | --------- | ---------------------------------------------------- | -------------------- |
 | `type`                      | `Enum`    | Define Minicart mode. (values: 'popup' or 'sidebar') | popup                |
-| `showDiscount`              | `Boolean` | Shows the total discount of your cart                | true                 |
+| `showDiscount`              | `Boolean` | Shows the total discount of your cart                | false                 |
 | `labelMiniCartEmpty`        | `String`  | Text that is displayed when the cart is empty        | `Your cart is empty` |
 | `labelButtonFinishShopping` | `String`  | Text displayed in the finish shopping button         | `Go to checkout`     |
+| `iconClasses`                   | `String`      | The minicart's icon classes                                         | `''`         |
+| `iconLabel`                |   `String`    | The minicart's icon label                                        |  undefined       | 
+| `labelClasses`                   | `String`      | The minicart's label classes                                          | `gray`        |
+| `hideContent`                   | `Boolean`      |      If the minicart should not show its contents once its icon is clicked                                     | false       |
+| `showShippingCost`                   | `Boolean`     | If the shipping cost show be displayed on cart                                          | false        |
+| `showTotalItemsQty`                   | `Boolean`      | If the cart should show the total quantity of items or just the quantity of different items in the cart                                          | false       |
 
 Also, you can configure the product summary that is defined on minicart. See [here](https://github.com/vtex-apps/product-summary/blob/master/README.md#configuration) the Product Summary API.
 
