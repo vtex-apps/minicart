@@ -32,6 +32,79 @@ exports[`<MiniCart /> should match the snapshot in popup mode 1`] = `
           </span>
         </span>
       </button>
+      <div>
+        <div
+          class="fixed top-0 left-0 w-100 h-100"
+        />
+        <div
+          class="box dn db-ns absolute z-max flex flex-colunm"
+          style="right: -40px;"
+        >
+          <div
+            class="shadow-3"
+          >
+            <div
+              class="arrowUp absolute top-0 shadow-3 bg-base h1 w1 pa4 rotate-45"
+            />
+            <div
+              class="mt3 bg-base relative flex flex-column"
+            >
+              <div
+                class="content overflow-x-hidden pa1 contentSmall bg-base overflow-y-hidden"
+              >
+                <section
+                  class="relative flex"
+                >
+                  <div
+                    class="fr absolute top-0 right-0"
+                  >
+                    <button
+                      variation="tertiary"
+                    >
+                      Button test
+                      <svg
+                        class="undefined IconDelete"
+                        height="15"
+                        width="15"
+                      >
+                        <rect
+                          height="15"
+                          width="15"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                  <div>
+                     Extension Point 
+                  </div>
+                </section>
+              </div>
+              <div
+                class="contentFooter w-100 bg-base pa4 pv5 flex flex-column items-end"
+              >
+                <div
+                  class="contentPrice mb3"
+                >
+                  <div
+                    class="price-mock"
+                  >
+                    Price
+                  </div>
+                </div>
+                <div
+                  class=""
+                >
+                  <button
+                    variation="primary"
+                  >
+                    Button testGo to checkout
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </aside>
 </DocumentFragment>

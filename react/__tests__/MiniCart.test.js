@@ -1,8 +1,6 @@
 import React from 'react'
-import { MockedProvider } from 'react-apollo/test-utils'
 import { render, fireEvent } from '@vtex/test-tools/react'
 import { orderForm as orderFormQuery } from 'vtex.store-resources/Queries'
-import wait from 'waait'
 
 import orderForm from '../__mocks__/orderForm'
 import MiniCart from './../index'
@@ -21,16 +19,13 @@ const mocks = [
 ]
 
 describe('<MiniCart />', () => {
-  async function resolveApolloQueries() {
-    // Waits until the GraphQL queries resolve. The initial data is loading but in the
-    // next cicle, it gets the mocked data
-    // See: https://www.apollographql.com/docs/react/recipes/testing.html
-
-    // Server queries
-    await wait(0)
-    // Local state queries
-    await wait(0)
+  function flushPromises() {
+    return new Promise(resolve => setImmediate(resolve))
   }
+
+  beforeEach(() => {
+    jest.useFakeTimers()
+  })
 
   it('should be rendered', () => {
     const { asFragment } = render(<MiniCart type="popup" hideContent={false} />)
@@ -42,7 +37,8 @@ describe('<MiniCart />', () => {
       <MiniCart type="popup" hideContent={false} />
     )
 
-    await resolveApolloQueries()
+    await flushPromises()
+    jest.runAllTimers()
 
     let box = baseElement.querySelector('.box')
     let sidebar = baseElement.querySelector('.sidebar')
@@ -54,7 +50,9 @@ describe('<MiniCart />', () => {
 
     fireEvent.click(getByText(/button test/i))
 
-    await wait(0)
+    await flushPromises()
+    jest.runAllTimers()
+
     box = baseElement.querySelector('.box')
     sidebar = baseElement.querySelector('.sidebar')
 
@@ -70,7 +68,8 @@ describe('<MiniCart />', () => {
       <MiniCart type="sidebar" hideContent={false} />
     )
 
-    await resolveApolloQueries()
+    await flushPromises()
+    jest.runAllTimers()
 
     let box = baseElement.querySelector('.box')
     let sidebar = baseElement.querySelector('.sidebarScrim.dn')
@@ -83,7 +82,9 @@ describe('<MiniCart />', () => {
 
     fireEvent.click(getByText(/button test/i))
 
-    await wait(0)
+    await flushPromises()
+    jest.runAllTimers()
+
     box = baseElement.querySelector('.box')
     sidebar = baseElement.querySelector('.sidebarScrim.dn')
 
@@ -96,26 +97,30 @@ describe('<MiniCart />', () => {
     const leftClick = { button: 0 }
 
     const { getByText, asFragment } = render(
-      <MockedProvider mocks={mocks}>
-        <MiniCart type="popup" hideContent={false} />
-      </MockedProvider>
+      <MiniCart type="popup" hideContent={false} />,
+      { graphql: { mocks } }
     )
 
-    await resolveApolloQueries()
+    await flushPromises()
+    jest.runAllTimers()
 
     fireEvent.click(getByText(/button test/i), leftClick)
+
+    await flushPromises()
+    jest.runAllTimers()
 
     expect(asFragment()).toMatchSnapshot()
   })
 
   it('should match the snapshot in sidebar mode', async () => {
     const { baseElement } = render(
-      <MockedProvider mocks={mocks}>
-        <MiniCart type="sidebar" hideContent={false} />
-      </MockedProvider>
+      <MiniCart type="sidebar" hideContent={false} />,
+      { graphql: { mocks } }
     )
 
-    await resolveApolloQueries()
+    await flushPromises()
+    jest.runAllTimers()
+
     expect(baseElement).toMatchSnapshot()
   })
 
@@ -127,30 +132,33 @@ describe('<MiniCart />', () => {
   })
 
   it('should not show item quantity if there are no items in cart', () => {
-    const {queryByTestId} = render(
-      <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={false}/>
+    const { queryByTestId } = render(
+      <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={false} />
     )
     expect(queryByTestId('item-qty')).toBeNull()
   })
 
   it('should show the quantity of different items in cart', async () => {
-    const {getByTestId} = render(
-      <MockedProvider mocks={mocks}>
-        <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={false}/>
-      </MockedProvider>
+    const { getByTestId } = render(
+      <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={false} />,
+      { graphql: { mocks } }
     )
-    await resolveApolloQueries()
+
+    await flushPromises()
+    jest.runAllTimers()
+
     expect(getByTestId('item-qty').textContent).toBe('1')
   })
 
   it('should show the quantity of different items in cart', async () => {
-    const {getByTestId} = render(
-      <MockedProvider mocks={mocks}>
-        <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={true}/>
-      </MockedProvider>
+    const { getByTestId } = render(
+      <MiniCart type="sidebar" hideContent={false} showTotalItemsQty />,
+      { graphql: { mocks } }
     )
-    await resolveApolloQueries()
+
+    await flushPromises()
+    jest.runAllTimers()
+
     expect(getByTestId('item-qty').textContent).toBe('2')
   })
-
 })
