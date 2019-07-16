@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<MiniCart /> component should match the snapshot in popup mode 1`] = `
+exports[`<MiniCart /> should match the snapshot in popup mode 1`] = `
 <DocumentFragment>
   <aside
     class="container relative fr flex items-center"
@@ -37,7 +37,7 @@ exports[`<MiniCart /> component should match the snapshot in popup mode 1`] = `
 </DocumentFragment>
 `;
 
-exports[`<MiniCart /> component should match the snapshot in sidebar mode 1`] = `
+exports[`<MiniCart /> should match the snapshot in sidebar mode 1`] = `
 <body
   class=""
 >
