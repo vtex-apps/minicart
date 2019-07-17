@@ -25,9 +25,6 @@ import { IconCart } from 'vtex.store-icons'
 import { orderForm as orderFormQuery } from 'vtex.store-resources/Queries'
 import { addToCart, updateItems } from 'vtex.store-resources/Mutations'
 import { usePixel } from 'vtex.pixel-manager/PixelContext'
-import { withPixel } from 'vtex.pixel-manager/PixelContext'
-import { compose, graphql, withApollo } from 'react-apollo'
-import { injectIntl, intlShape } from 'react-intl'
 import ProductPrice from 'vtex.store-components/ProductPrice'
 
 import MiniCartContent from './components/MiniCartContent'
@@ -436,9 +433,9 @@ const MiniCart = ({
       0
     )
 
-  const totalPrice = this.sumItemsPrice(itemsToShow)
+  const totalPrice = sumItemsPrice(itemsToShow)
   const priceClasses = classNames(
-    `${minicart.label} dn-m db-l t-action--small ${labelClasses}`,
+    `${styles.label} dn-m db-l t-action--small ${labelClasses}`,
     {
       pl6: quantity > 0,
       pl4: quantity <= 0,
@@ -446,13 +443,13 @@ const MiniCart = ({
   )
 
   const iconLabelClasses = classNames(
-    `${minicart.label} dn-m db-l ${ showPrice && totalPrice > 0 ? 't-mini' : 't-action--small'} ${labelClasses}`,
+    `${styles.label} dn-m db-l ${ showPrice && totalPrice > 0 ? 't-mini' : 't-action--small'} ${labelClasses}`,
     {
       pl6: quantity > 0,
       pl4: quantity <= 0,
     }
   )
-  
+
   return (
     <aside className={`${styles.container} relative fr flex items-center`}>
       <div className="flex flex-column">
