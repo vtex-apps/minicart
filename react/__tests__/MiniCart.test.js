@@ -150,9 +150,9 @@ describe('<MiniCart />', () => {
     expect(getByTestId('item-qty').textContent).toBe('1')
   })
 
-  it('should show the quantity of different items in cart', async () => {
+  it('should show the total quantity of items in cart', async () => {
     const { getByTestId } = render(
-      <MiniCart type="sidebar" hideContent={false} showTotalItemsQty />,
+      <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={true} />,
       { graphql: { mocks } }
     )
 
@@ -164,11 +164,11 @@ describe('<MiniCart />', () => {
 
   it('should not show price if showPrice is false', async () => {
     const {queryByTestId} = render(
-      <MockedProvider mocks={mocks}>
-        <MiniCart type="sidebar" hideContent={false} showPrice={false}/>
-      </MockedProvider>
+      <MiniCart type="sidebar" hideContent={false} showPrice={false}/>,
+      { graphql: { mocks } }
     )
-    await resolveApolloQueries()
+    await flushPromises()
+    jest.runAllTimers()
     expect(queryByTestId('total-price')).toBeNull()
   })
 
@@ -181,21 +181,21 @@ describe('<MiniCart />', () => {
 
   it('should show price if there are items in the cart', async () => {
     const {getByTestId} = render(
-      <MockedProvider mocks={mocks}>
-        <MiniCart type="sidebar" hideContent={false} showPrice={true}/>
-      </MockedProvider>
+      <MiniCart type="sidebar" hideContent={false} showPrice={true}/>,
+      { graphql: { mocks } }
     )
-    await resolveApolloQueries()
+    await flushPromises()
+    jest.runAllTimers()
     expect(getByTestId('total-price')).toBeInTheDocument()
   })
 
   it('should not show price if showPrice is false', async () => {
     const {queryByTestId} = render(
-      <MockedProvider mocks={mocks}>
-        <MiniCart type="sidebar" hideContent={false} showPrice={false}/>
-      </MockedProvider>
+      <MiniCart type="sidebar" hideContent={false} showPrice={false}/>,
+      { graphql: { mocks } }
     )
-    await resolveApolloQueries()
+    await flushPromises()
+    jest.runAllTimers()
     expect(queryByTestId('total-price')).toBeNull()
   })
 
@@ -208,11 +208,11 @@ describe('<MiniCart />', () => {
 
   it('should show price if there are items in the cart', async () => {
     const {getByTestId} = render(
-      <MockedProvider mocks={mocks}>
-        <MiniCart type="sidebar" hideContent={false} showPrice={true}/>
-      </MockedProvider>
+      <MiniCart type="sidebar" hideContent={false} showPrice={true}/>,
+      { graphql: { mocks } }
     )
-    await resolveApolloQueries()
+    await flushPromises()
+    jest.runAllTimers()
     expect(getByTestId('total-price')).toBeInTheDocument()
   })
 

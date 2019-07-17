@@ -426,14 +426,7 @@ const MiniCart = ({
       updatingOrderForm={isUpdatingOrderForm}
     />
   )
-
-  const sumItemsPrice = items =>
-    items.reduce(
-      (sum, { sellingPrice, quantity }) => sum + sellingPrice * quantity,
-      0
-    )
-
-  const totalPrice = sumItemsPrice(itemsToShow)
+  
   const priceClasses = classNames(
     `${styles.label} dn-m db-l t-action--small ${labelClasses}`,
     {
@@ -442,8 +435,9 @@ const MiniCart = ({
     }
   )
 
+  const isPriceVisible = showPrice && orderForm && orderForm.value > 0
   const iconLabelClasses = classNames(
-    `${styles.label} dn-m db-l ${ showPrice && totalPrice > 0 ? 't-mini' : 't-action--small'} ${labelClasses}`,
+    `${styles.label} dn-m db-l ${ isPriceVisible ? 't-mini' : 't-action--small'} ${labelClasses}`,
     {
       pl6: quantity > 0,
       pl4: quantity <= 0,
@@ -466,19 +460,21 @@ const MiniCart = ({
                 </span>
               )}                  
             </span>
-            <span className="flex flex-column items-start">
-              {iconLabel && <span className={iconLabelClasses}>{iconLabel}</span>}
-              {showPrice && totalPrice > 0 && (
-                <span data-testid="total-price" className={priceClasses}>
-                  <div>
-                    <ProductPrice 
-                    showLabels={false} 
-                    showListPrice={false} 
-                    sellingPrice={totalPrice} />
-                  </div>
-                </span>
-              )}
-            </span>
+            {(iconLabel || isPriceVisible) &&
+              <span className="flex flex-column items-start">
+                {iconLabel && <span className={iconLabelClasses}>{iconLabel}</span>}
+                {isPriceVisible && (
+                  <span data-testid="total-price" className={priceClasses}>
+                    <div>
+                      <ProductPrice 
+                      showLabels={false} 
+                      showListPrice={false} 
+                      sellingPrice={orderForm.value} />
+                    </div>
+                  </span>
+                )}
+              </span>
+            }
           </span>
         </Button>
         {!hideContent &&
