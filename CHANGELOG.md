@@ -9,13 +9,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [2.23.0] - 2019-07-18
 
+### Changed
+
+- Add a new prop that controls if the minicart should show the total price of the items in the cart if the price is bigger than 0.
+
 ## [2.22.1] - 2019-07-17
+
 ### Fixed
+
 - Offline Minicart adding repeated items when user navigates.
 - Some synchronization issues on offline scenarios.
 - Local items being deleted even when the server returned an error.
 
 ### Changed
+
 - Pass prop `isPartial` to the product summary extension point.
 
 ## [2.22.0] - 2019-07-16
