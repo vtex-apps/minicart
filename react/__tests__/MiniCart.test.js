@@ -132,8 +132,8 @@ describe('<MiniCart />', () => {
   })
 
   it('should not show item quantity if there are no items in cart', () => {
-    const {queryByTestId} = render(
-      <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={false}/>
+    const { queryByTestId } = render(
+      <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={false} />
     )
     expect(queryByTestId('item-qty')).toBeNull()
   })
@@ -215,5 +215,4 @@ describe('<MiniCart />', () => {
     jest.runAllTimers()
     expect(getByTestId('total-price')).toBeInTheDocument()
   })
-
 })

@@ -458,7 +458,7 @@ const MiniCart = ({
                 >
                   {quantity}
                 </span>
-              )}                  
+              )}
             </span>
             {(iconLabel || isPriceVisible) &&
               <span className="flex flex-column items-start">
