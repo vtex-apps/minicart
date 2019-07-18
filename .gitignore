@@ -40,3 +40,4 @@ lib
 *.orig
 react/package-lock.json
 package-lock.json
+.vscode

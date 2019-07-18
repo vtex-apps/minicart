@@ -25,6 +25,7 @@ import { IconCart } from 'vtex.store-icons'
 import { orderForm as orderFormQuery } from 'vtex.store-resources/Queries'
 import { addToCart, updateItems } from 'vtex.store-resources/Mutations'
 import { usePixel } from 'vtex.pixel-manager/PixelContext'
+import ProductPrice from 'vtex.store-components/ProductPrice'
 
 import MiniCartContent from './components/MiniCartContent'
 import Sidebar from './components/Sidebar'
@@ -134,6 +135,7 @@ const MiniCart = ({
   iconSize,
   iconLabel,
   showTotalItemsQty,
+  showPrice,
   showDiscount,
   data,
   linkState,
@@ -424,9 +426,18 @@ const MiniCart = ({
       updatingOrderForm={isUpdatingOrderForm}
     />
   )
-
-  const iconLabelClasses = classNames(
+  
+  const priceClasses = classNames(
     `${styles.label} dn-m db-l t-action--small ${labelClasses}`,
+    {
+      pl6: quantity > 0,
+      pl4: quantity <= 0,
+    }
+  )
+
+  const isPriceVisible = showPrice && orderForm && orderForm.value > 0
+  const iconLabelClasses = classNames(
+    `${styles.label} dn-m db-l ${ isPriceVisible ? 't-mini' : 't-action--small'} ${labelClasses}`,
     {
       pl6: quantity > 0,
       pl4: quantity <= 0,
@@ -449,7 +460,21 @@ const MiniCart = ({
                 </span>
               )}
             </span>
-            {iconLabel && <span className={iconLabelClasses}>{iconLabel}</span>}
+            {(iconLabel || isPriceVisible) &&
+              <span className="flex flex-column items-start">
+                {iconLabel && <span className={iconLabelClasses}>{iconLabel}</span>}
+                {isPriceVisible && (
+                  <span data-testid="total-price" className={priceClasses}>
+                    <div>
+                      <ProductPrice 
+                      showLabels={false} 
+                      showListPrice={false} 
+                      sellingPrice={orderForm.value} />
+                    </div>
+                  </span>
+                )}
+              </span>
+            }
           </span>
         </Button>
         {!hideContent &&

@@ -150,9 +150,9 @@ describe('<MiniCart />', () => {
     expect(getByTestId('item-qty').textContent).toBe('1')
   })
 
-  it('should show the quantity of different items in cart', async () => {
+  it('should show the total quantity of items in cart', async () => {
     const { getByTestId } = render(
-      <MiniCart type="sidebar" hideContent={false} showTotalItemsQty />,
+      <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={true} />,
       { graphql: { mocks } }
     )
 
@@ -160,5 +160,59 @@ describe('<MiniCart />', () => {
     jest.runAllTimers()
 
     expect(getByTestId('item-qty').textContent).toBe('2')
+  })
+
+  it('should not show price if showPrice is false', async () => {
+    const {queryByTestId} = render(
+      <MiniCart type="sidebar" hideContent={false} showPrice={false}/>,
+      { graphql: { mocks } }
+    )
+    await flushPromises()
+    jest.runAllTimers()
+    expect(queryByTestId('total-price')).toBeNull()
+  })
+
+  it('should not show price if there are no items in the cart', () => {
+    const {queryByTestId} = render(
+      <MiniCart type="sidebar" hideContent={false} showPrice={true}/>
+    )
+    expect(queryByTestId('total-price')).toBeNull()
+  })
+
+  it('should show price if there are items in the cart', async () => {
+    const {getByTestId} = render(
+      <MiniCart type="sidebar" hideContent={false} showPrice={true}/>,
+      { graphql: { mocks } }
+    )
+    await flushPromises()
+    jest.runAllTimers()
+    expect(getByTestId('total-price')).toBeInTheDocument()
+  })
+
+  it('should not show price if showPrice is false', async () => {
+    const {queryByTestId} = render(
+      <MiniCart type="sidebar" hideContent={false} showPrice={false}/>,
+      { graphql: { mocks } }
+    )
+    await flushPromises()
+    jest.runAllTimers()
+    expect(queryByTestId('total-price')).toBeNull()
+  })
+
+  it('should not show price if there are no items in the cart', () => {
+    const {queryByTestId} = render(
+      <MiniCart type="sidebar" hideContent={false} showPrice={true}/>
+    )
+    expect(queryByTestId('total-price')).toBeNull()
+  })
+
+  it('should show price if there are items in the cart', async () => {
+    const {getByTestId} = render(
+      <MiniCart type="sidebar" hideContent={false} showPrice={true}/>,
+      { graphql: { mocks } }
+    )
+    await flushPromises()
+    jest.runAllTimers()
+    expect(getByTestId('total-price')).toBeInTheDocument()
   })
 })
