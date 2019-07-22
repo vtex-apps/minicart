@@ -25,6 +25,12 @@ export default {
       detailUrl: '/pizza-pepperoni/p',
       skuName: 'Small',
       quantity: 2,
+      productRefId: 'PSMALL',
+      additionalInfo: {
+        brandName: 'PizzaHut'
+      },
+      productCategoryIds: '/1/',
+      productCategories: { 1: 'Pizza' },
       sellingPrice: 14.9,
       listPrice: 14.9,
       parentItemIndex: null,
@@ -101,6 +107,12 @@ export default {
       detailUrl: '/classic-crust/p',
       skuName: 'Classic Crust',
       quantity: 1,
+      productRefId: 'CLASSICCRUST',
+      additionalInfo: {
+        brandName: 'PizzaHut'
+      },
+      productCategoryIds: '/1/',
+      productCategories: { 1: 'Pizza' },
       sellingPrice: 0,
       listPrice: 0,
       parentItemIndex: 0,
@@ -121,6 +133,12 @@ export default {
       detailUrl: '/pepperoni/p',
       skuName: 'Pepperoni',
       quantity: 1,
+      productRefId: 'PEPPERONI',
+      additionalInfo: {
+        brandName: 'PizzaHut'
+      },
+      productCategoryIds: '/1/',
+      productCategories: { 1: 'Pizza' },
       sellingPrice: 0,
       listPrice: 0,
       parentItemIndex: 0,
@@ -141,6 +159,12 @@ export default {
       detailUrl: '/ham/p',
       skuName: 'Ham',
       quantity: 3,
+      productRefId: 'HAM',
+      additionalInfo: {
+        brandName: 'PizzaHut'
+      },
+      productCategoryIds: '/1/',
+      productCategories: { 1: 'Pizza' },
       sellingPrice: 1.5,
       listPrice: 1.5,
       parentItemIndex: 0,
@@ -161,6 +185,12 @@ export default {
       detailUrl: '/pineapple/p',
       skuName: 'Pineapple',
       quantity: 3,
+      productRefId: 'PINEAPPLE',
+      additionalInfo: {
+        brandName: 'PizzaHut'
+      },
+      productCategoryIds: '/1/',
+      productCategories: { 1: 'Pizza' },
       sellingPrice: 1,
       listPrice: 1,
       parentItemIndex: 0,
@@ -464,6 +494,12 @@ export const fullItems = {
       detailUrl: '/pizza-pepperoni/p',
       skuName: 'Small',
       quantity: 1,
+      productRefId: 'PSMALL',
+      additionalInfo: {
+        brandName: 'PizzaHut'
+      },
+      productCategoryIds: '/1/',
+      productCategories: { 1: 'Pizza' },
       sellingPrice: 14.9,
       listPrice: 14.9,
       parentItemIndex: null,
@@ -540,6 +576,12 @@ export const fullItems = {
       detailUrl: '/classic-crust/p',
       skuName: 'Classic Crust',
       quantity: 1,
+      productRefId: 'CLASSICCRUST',
+      additionalInfo: {
+        brandName: 'PizzaHut'
+      },
+      productCategoryIds: '/1/',
+      productCategories: { 1: 'Pizza' },
       sellingPrice: 0,
       listPrice: 0,
       parentItemIndex: null,
@@ -560,6 +602,12 @@ export const fullItems = {
       detailUrl: '/pepperoni/p',
       skuName: 'Pepperoni',
       quantity: 1,
+      productRefId: 'PEPPERONI',
+      additionalInfo: {
+        brandName: 'PizzaHut'
+      },
+      productCategoryIds: '/1/',
+      productCategories: { 1: 'Pizza' },
       sellingPrice: 0,
       listPrice: 0,
       parentItemIndex: null,
@@ -580,6 +628,12 @@ export const fullItems = {
       detailUrl: '/ham/p',
       skuName: 'Ham',
       quantity: 3,
+      productRefId: 'HAM',
+      additionalInfo: {
+        brandName: 'PizzaHut'
+      },
+      productCategoryIds: '/1/',
+      productCategories: { 1: 'Pizza' },
       sellingPrice: 1.5,
       listPrice: 1.5,
       parentItemIndex: null,
@@ -600,6 +654,12 @@ export const fullItems = {
       detailUrl: '/pineapple/p',
       skuName: 'Pineapple',
       quantity: 3,
+      productRefId: 'PINEAPPLE',
+      additionalInfo: {
+        brandName: 'PizzaHut'
+      },
+      productCategoryIds: '/1/',
+      productCategories: { 1: 'Pizza' },
       sellingPrice: 1,
       listPrice: 1,
       parentItemIndex: null,

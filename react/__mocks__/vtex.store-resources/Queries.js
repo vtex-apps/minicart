@@ -16,6 +16,12 @@ export const orderForm = gql`
         name
         imageUrl
         detailUrl
+        productRefId
+        additionalInfo {
+          brandName
+        }
+        productCategoryIds
+        productCategories
         skuName
         quantity
         sellingPrice
