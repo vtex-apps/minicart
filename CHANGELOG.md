@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.23.1] - 2019-07-22
+
 ### Fixed
 
 - Pixel events of `addToCart` and `removeFromCart`.
