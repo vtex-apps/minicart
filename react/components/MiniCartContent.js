@@ -5,12 +5,14 @@ import { compose, graphql } from 'react-apollo'
 import { injectIntl, intlShape } from 'react-intl'
 import classNames from 'classnames'
 
+import { withPixel } from 'vtex.pixel-manager/PixelContext'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { Button, Spinner } from 'vtex.styleguide'
 import { IconDelete } from 'vtex.store-icons'
 
 import { MiniCartPropTypes } from '../utils/propTypes'
 import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
+import { mapCartItemToPixel } from '../utils/pixelHelper'
 
 import { ITEMS_STATUS } from '../localState/index'
 import updateItemsMutation from '../localState/graphql/updateItemsMutation.gql'
@@ -43,6 +45,8 @@ class MiniCartContent extends Component {
     showDiscount: MiniCartPropTypes.showDiscount,
     showShippingCost: MiniCartPropTypes.showShippingCost,
     itemsToShow: PropTypes.arrayOf(PropTypes.object),
+    /* Pixel push */
+    push: PropTypes.func.isRequired,
   }
 
   state = { isUpdating: [] }
@@ -76,22 +80,27 @@ class MiniCartContent extends Component {
       0
     )
 
-  handleItemRemoval = async ({ id, cartIndex }, index) => {
+  handleItemRemoval = async (item, index) => {
     const { updateItems, updateLocalItems } = this.props
     const updatedItems = [
       {
-        id,
-        index: cartIndex != null ? cartIndex : index,
+        id: item.id,
+        index: item.cartIndex != null ? item.cartIndex : index,
         quantity: 0,
       },
     ]
 
     try {
-      if (cartIndex != null) {
+      if (item.cartIndex != null) {
         await updateItems(updatedItems)
       } else {
         await updateLocalItems(updatedItems)
       }
+
+      this.props.push({
+        event: 'removeFromCart',
+        items: [mapCartItemToPixel(item)],
+      })
     } catch (error) {
       // TODO: Toast error message
       console.error(error)
@@ -313,5 +322,6 @@ const withUpdateLocalItemsMutation = graphql(updateLocalItemsMutation, {
 export default compose(
   injectIntl,
   withUpdateItemsMutation,
-  withUpdateLocalItemsMutation
+  withUpdateLocalItemsMutation,
+  withPixel,
 )(MiniCartContent)

@@ -31,6 +31,7 @@ import MiniCartContent from './components/MiniCartContent'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
 import { shouldShowItem } from './utils/itemsHelper'
+import { mapBuyButtonItemToPixel } from './utils/pixelHelper'
 
 import fullMinicartQuery from './localState/graphql/fullMinicartQuery.gql'
 import updateItemsMutation from './localState/graphql/updateItemsMutation.gql'
@@ -98,20 +99,6 @@ const useLinkState = client => {
   }, [client])
 }
 
-const getAddToCartEventItems = ({
-  id: skuId,
-  skuName: variant,
-  sellingPrice: price,
-  ...restSkuItem
-}) => {
-  return {
-    skuId,
-    variant,
-    price,
-    ...pick(['brand', 'name', 'quantity'], restSkuItem),
-  }
-}
-
 const partitionItemsAddUpdate = clientItems => {
   return partition(
     compose(
@@ -157,7 +144,6 @@ const MiniCart = ({
     hints: { mobile },
     navigate,
   } = useRuntime()
-  const { push } = usePixel()
   const { showToast } = useContext(ToastContext)
 
   const minicartState = linkState.minicart || {}
@@ -246,39 +232,7 @@ const MiniCart = ({
     [orderFormId, updateItemsMutation]
   )
 
-  const prevMinicartItems = useRef(minicartItems)
-
-  useEffect(() => {
-    prevMinicartItems.current = minicartItems
-  }, [minicartItems])
-
-  useEffect(() => {
-    const productDifference = differenceWith((a, b) => a.id === b.id)
-
-    const addedItems = productDifference(
-      minicartItems,
-      prevMinicartItems.current
-    )
-
-    const removedItems = productDifference(
-      prevMinicartItems.current,
-      minicartItems
-    )
-
-    if (removedItems.length) {
-      push({
-        event: 'removeFromCart',
-        items: removedItems,
-      })
-    }
-
-    if (addedItems.length) {
-      push({
-        event: 'addToCart',
-        items: map(getAddToCartEventItems, addedItems),
-      })
-    }
-  }, [minicartItems, push])
+  const { push } = usePixel()
 
   const orderFormRef = useRef(orderForm)
 
@@ -325,6 +279,13 @@ const MiniCart = ({
           // server mutation
           const addItemsResponse = await addItems(pickProps(itemsToAdd))
 
+          if (itemsToAdd.length > 0) {
+            push({
+              event: 'addToCart',
+              items: itemsToAdd.map(mapBuyButtonItemToPixel)
+            })
+          }
+
           if (!isCurrent) {
             return
           }
@@ -369,7 +330,7 @@ const MiniCart = ({
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [intl, isOffline, showToast, addItems, mutateUpdateItems, modifiedItems]
+    [intl, isOffline, showToast, addItems, mutateUpdateItems, modifiedItems, push]
   )
 
   const handleClickButton = event => {
