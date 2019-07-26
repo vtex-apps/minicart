@@ -180,8 +180,6 @@ class MiniCartContent extends Component {
       [`${styles.contentLarge}`]: isSizeLarge,
       'overflow-y-scroll':
         itemsToShow.length > MIN_ITEMS_TO_SCROLL && !isSizeLarge,
-      'overflow-y-hidden':
-        itemsToShow.length <= MIN_ITEMS_TO_SCROLL && !isSizeLarge,
     })
 
     return (
