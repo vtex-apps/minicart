@@ -539,12 +539,12 @@ EnhancedMinicart.schema = {
     },
     linkButtonFinishShopping: {
       title: 'admin/editor.minicart.linkButtonFinishShopping.title',
+      default: '/checkout/#/cart',
       type: 'string',
       isLayout: false,
     },
     labelButtonFinishShopping: {
       title: 'admin/editor.minicart.labelButtonFinishShopping.title',
-      default: '/checkout/#/cart',
       type: 'string',
       isLayout: false,
     },
