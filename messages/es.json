@@ -3,6 +3,7 @@
     "admin/editor.minicart.description": "Una cesta de compras simple que muestra todos los productos agregados",
     "admin/editor.minicart.showDiscount.title": "Mostrar la cantidad de dinero ahorrado",
     "admin/editor.minicart.labelMiniCartEmpty.title": "Texto que aparecerá cuando el carrito esté vacío",
+    "admin/editor.minicart.linkButtonFinishShopping.title": "Enlace para redireccionar al clicar en el botón de pago",
     "admin/editor.minicart.labelButtonFinishShopping.title": "Texto para que aparezca en el botón de finalizar compra",
     "admin/editor.minicart.showShippingCost.title": "Mostrar el costo total del envío",
     "admin/editor.minicart.type.title": "Tipo de Cesta de Compras",

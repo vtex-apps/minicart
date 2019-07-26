@@ -41,6 +41,7 @@ class MiniCartContent extends Component {
     orderForm: PropTypes.object,
     loading: PropTypes.bool,
     labelMiniCartEmpty: MiniCartPropTypes.labelMiniCartEmpty,
+    linkButton: MiniCartPropTypes.linkButtonFinishShopping,
     labelButton: MiniCartPropTypes.labelButtonFinishShopping,
     showDiscount: MiniCartPropTypes.showDiscount,
     showShippingCost: MiniCartPropTypes.showShippingCost,
@@ -227,6 +228,7 @@ class MiniCartContent extends Component {
           isUpdating={this.isUpdating}
           totalValue={this.calculateTotalValue(orderForm)}
           discount={this.calculateDiscount(orderForm.items)}
+          buttonLink={this.props.linkButton}
           buttonLabel={label}
           isSizeLarge={isSizeLarge}
           labelDiscount={labelDiscount}
