@@ -113,15 +113,6 @@ class MiniCartContent extends Component {
     this.setState({ isUpdating })
   }
 
-  sumOptionsSellingPrice = ({ added = [] }, parentQuantity) => {
-    return added.reduce(
-      (acc, option) =>
-        acc +
-        option.item.sellingPrice * option.normalizedQuantity * parentQuantity,
-      0
-    )
-  }
-
   calculateTotalValue = orderForm =>
     this.getShippingCost(orderForm)
       ? orderForm.value
@@ -133,12 +124,7 @@ class MiniCartContent extends Component {
     sku: {
       seller: {
         commertialOffer: {
-          Price:
-            item.sellingPrice * item.quantity +
-            this.sumOptionsSellingPrice(
-              item.assemblyOptions || {},
-              item.quantity
-            ),
+          Price: item.sellingPriceWithAssemblies * item.quantity,
           ListPrice: item.listPrice,
         },
         sellerId: item.seller,
