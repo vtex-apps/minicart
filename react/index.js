@@ -118,6 +118,7 @@ const MiniCart = ({
   client,
   setMinicartOpen,
   labelMiniCartEmpty,
+  linkButtonFinishShopping,
   labelButtonFinishShopping,
   iconSize,
   iconLabel,
@@ -380,6 +381,7 @@ const MiniCart = ({
       loading={data.loading}
       showDiscount={showDiscount}
       labelMiniCartEmpty={labelMiniCartEmpty}
+      linkButton={linkButtonFinishShopping}
       labelButton={labelButtonFinishShopping}
       onClickProduct={handleClickProduct}
       onClickAction={handleUpdateContentVisibility}
@@ -532,6 +534,12 @@ EnhancedMinicart.schema = {
     },
     labelMiniCartEmpty: {
       title: 'admin/editor.minicart.labelMiniCartEmpty.title',
+      type: 'string',
+      isLayout: false,
+    },
+    linkButtonFinishShopping: {
+      title: 'admin/editor.minicart.linkButtonFinishShopping.title',
+      default: '/checkout/#/cart',
       type: 'string',
       isLayout: false,
     },

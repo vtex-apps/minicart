@@ -3,6 +3,7 @@
     "admin/editor.minicart.description": "Um simples carrinho de compras que mostra todos os produtos adicionados a ele",
     "admin/editor.minicart.showDiscount.title": "Mostrar a quantidade de dinheiro economizado",
     "admin/editor.minicart.labelMiniCartEmpty.title": "Texto que irá aparecer quando o carrinho estiver vazio",
+    "admin/editor.minicart.linkButtonFinishShopping.title": "Link para redirecionar ao clicar no botão de finalizar compra",
     "admin/editor.minicart.labelButtonFinishShopping.title": "Texto que irá aparecer no botão de finalizar compra",
     "admin/editor.minicart.showShippingCost.title": "Mostrar o custo de entrega",
     "admin/editor.minicart.type.title": "Tipo de Carrinho de Compras",

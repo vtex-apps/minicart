@@ -15,13 +15,14 @@ const MiniCartFooter = ({
   isUpdating,
   totalValue,
   buttonLabel,
+  buttonLink,
   showDiscount,
   discount,
   labelDiscount,
   showShippingCost,
 }) => {
   const { rootPath = '' } = useRuntime()
-  const handleClickButton = () => location.assign(rootPath + '/checkout/#/cart')
+  const handleClickButton = () => location.assign(rootPath + (buttonLink || '/checkout/#/cart'))
 
   const priceAndDiscountClasses = classNames(
     `${minicart.contentDiscount} w-100 flex justify-end items-center mb3`,
@@ -99,6 +100,7 @@ MiniCartFooter.propTypes = {
   isSizeLarge: PropTypes.bool,
   isUpdating: PropTypes.bool,
   totalValue: PropTypes.number.isRequired,
+  buttonLink: PropTypes.string,
   buttonLabel: PropTypes.string.isRequired,
   showDiscount: MiniCartPropTypes.showDiscount,
   discount: PropTypes.number,

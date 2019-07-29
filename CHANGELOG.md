@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- Added `linkButton` field for the finish shopping button
+
 ## [2.23.2] - 2019-07-26
 ### Changed
 - Use `sellingPriceWithAssemblies` field to display item price.
