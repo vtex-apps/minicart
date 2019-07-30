@@ -15,5 +15,8 @@
     "store/minicart-content-footer-discount": "Guarde",
     "store/minicart.error-removal": "Falló la eliminación del artículo, por favor intente de nuevo",
     "store/minicart.shipping-cost": "Costo total del envío",
-    "store/minicart.checkout-failure": "Algo salió mal. Por favor, inténtelo de nuevo. "
+    "store/minicart.checkout-failure": "Algo salió mal. Por favor, inténtelo de nuevo.",
+    "store/minicart.item-added-offline": "Artículo añadido sin conexión. Se sincronizará cuando se establezca la conexión.",
+    "store/minicart.offline-items-synchronized": "Artículos sincronizados.",
+    "store/minicart.error-synchronizing-offline-items": "Algo salió mal durante la sincronización artículos."
 }

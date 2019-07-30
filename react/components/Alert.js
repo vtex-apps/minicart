@@ -2,7 +2,7 @@ import { Alert } from 'vtex.styleguide'
 import { createPortal } from 'react-dom'
 import React from 'react'
 
-const Alert = ({ children, type = "warning", onClose, action }) => {
+const AlertMessage = ({ children, type = "warning", onClose, action }) => {
   const canUsePortal = () => document && document.body
   return (
     <>
@@ -20,4 +20,4 @@ const Alert = ({ children, type = "warning", onClose, action }) => {
   )
 }
 
- export default Alert
+ export default AlertMessage

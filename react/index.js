@@ -178,6 +178,34 @@ const MiniCart = ({
     [minicartItems]
   )
 
+  const localItems = useMemo(
+    () =>  minicartItems.filter(
+      ({ localStatus }) => localStatus === ITEMS_STATUS.LOCAL_ITEM
+    ),
+  [minicartItems]
+  )
+
+  const serverItems = useMemo(
+    () =>  minicartItems.filter(
+      ({ localStatus }) => localStatus === ITEMS_STATUS.NONE
+    ),
+  [minicartItems]
+  )
+
+  useEffect(() => {
+    if(isOffline)
+      setAlert({
+        message: intl.formatMessage({
+          id: 'store/minicart.item-added-offline',
+        }),
+      })
+  }, [localItems])
+
+  useEffect(() => {
+    if(!isOffline)
+      console.log('sincronizou --')
+  }, [serverItems, isOffline, localItems])
+
   // update local state order form
   useEffect(
     () => {
@@ -214,7 +242,6 @@ const MiniCart = ({
       if (!items.length || !orderFormId) {
         return null
       }
-
       return addToCartMutation({
         variables: { orderFormId, items },
       })
@@ -313,7 +340,7 @@ const MiniCart = ({
           setUpdatingOrderForm(false)
           await updateOrderForm(prevOrderForm, true)
 
-          showToast({
+          setAlert({
             message: intl.formatMessage({
               id: 'store/minicart.checkout-failure',
             }),
