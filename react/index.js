@@ -5,7 +5,6 @@ import {
   path,
   pathOr,
   pick,
-  differenceWith,
   isNil,
   prop,
 } from 'ramda'
@@ -30,6 +29,7 @@ import ProductPrice from 'vtex.store-components/ProductPrice'
 import MiniCartContent from './components/MiniCartContent'
 import Sidebar from './components/Sidebar'
 import Popup from './components/Popup'
+import Alert from './components/Alert'
 import { shouldShowItem } from './utils/itemsHelper'
 import { mapBuyButtonItemToPixel } from './utils/pixelHelper'
 
@@ -139,6 +139,8 @@ const MiniCart = ({
   useLinkState(client)
 
   const [isUpdatingOrderForm, setUpdatingOrderForm] = useState(false)
+  const [alert, setAlert] = useState({ message: null, type: null })
+  const handleCloseAlert = () => {setAlert({ message: null, type: null })}
   const isOffline = useOffline()
 
   const {
@@ -408,57 +410,64 @@ const MiniCart = ({
   )
 
   return (
-    <aside className={`${styles.container} relative fr flex items-center`}>
-      <div className="flex flex-column">
-        <Button variation="tertiary" icon onClick={handleClickButton}>
-          <span className="flex items-center">
-            <span className={`relative ${iconClasses}`}>
-              <IconCart size={iconSize} />
-              {quantity > 0 && (
-                <span
-                  data-testid="item-qty"
-                  className={`${styles.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
-                >
-                  {quantity}
-                </span>
-              )}
-            </span>
-            {(iconLabel || isPriceVisible) &&
-              <span className="flex flex-column items-start">
-                {iconLabel && <span className={iconLabelClasses}>{iconLabel}</span>}
-                {isPriceVisible && (
-                  <span data-testid="total-price" className={priceClasses}>
-                    <div>
-                      <ProductPrice 
-                      showLabels={false} 
-                      showListPrice={false} 
-                      sellingPrice={orderForm.value} />
-                    </div>
+    <>
+      {alert && alert.message &&
+        <Alert type={alert.type} onClose={handleCloseAlert}>
+          {alert.message}
+        </Alert>
+      }
+      <aside className={`${styles.container} relative fr flex items-center`}>
+        <div className="flex flex-column">
+          <Button variation="tertiary" icon onClick={handleClickButton}>
+            <span className="flex items-center">
+              <span className={`relative ${iconClasses}`}>
+                <IconCart size={iconSize} />
+                {quantity > 0 && (
+                  <span
+                    data-testid="item-qty"
+                    className={`${styles.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
+                  >
+                    {quantity}
                   </span>
                 )}
               </span>
-            }
-          </span>
-        </Button>
-        {!hideContent &&
-          (isSizeLarge ? (
-            <Sidebar
-              quantity={quantity}
-              iconSize={iconSize}
-              onOutsideClick={handleUpdateContentVisibility}
-              isOpen={isOpen}
-            >
-              {miniCartContent}
-            </Sidebar>
-          ) : (
-            isOpen && (
-              <Popup onOutsideClick={handleUpdateContentVisibility}>
+              {(iconLabel || isPriceVisible) &&
+                <span className="flex flex-column items-start">
+                  {iconLabel && <span className={iconLabelClasses}>{iconLabel}</span>}
+                  {isPriceVisible && (
+                    <span data-testid="total-price" className={priceClasses}>
+                      <div>
+                        <ProductPrice 
+                        showLabels={false} 
+                        showListPrice={false} 
+                        sellingPrice={orderForm.value} />
+                      </div>
+                    </span>
+                  )}
+                </span>
+              }
+            </span>
+          </Button>
+          {!hideContent &&
+            (isSizeLarge ? (
+              <Sidebar
+                quantity={quantity}
+                iconSize={iconSize}
+                onOutsideClick={handleUpdateContentVisibility}
+                isOpen={isOpen}
+              >
                 {miniCartContent}
-              </Popup>
-            )
-          ))}
-      </div>
-    </aside>
+              </Sidebar>
+            ) : (
+              isOpen && (
+                <Popup onOutsideClick={handleUpdateContentVisibility}>
+                  {miniCartContent}
+                </Popup>
+              )
+            ))}
+        </div>
+      </aside>
+    </>
   )
 }
 
