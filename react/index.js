@@ -109,7 +109,8 @@ const useUpdateOrderFormOnState = (data, minicartState, updateOrderForm) => {
         const remoteOrderForm = data.orderForm
 
         if (remoteOrderForm || !orderFormData) {
-          if (!hasSavedRemoteOrderFormRef.current || (!path(['orderForm'], minicartState) && remoteOrderForm)) {
+          const forceRemoteOrderform = !hasSavedRemoteOrderFormRef.current && remoteOrderForm
+          if (forceRemoteOrderform || (!path(['orderForm'], minicartState) && remoteOrderForm)) {
             hasSavedRemoteOrderFormRef.current = true
             await updateOrderForm(remoteOrderForm)
           }
