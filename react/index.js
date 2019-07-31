@@ -99,7 +99,7 @@ const useLinkState = client => {
 }
 
 const useUpdateOrderFormOnState = (data, minicartState, updateOrderForm) => {
-  // This ref guarantees that the first remove order form after mount will be saved on state, regardless of minicart state
+  // This ref guarantees that the first remote order form after mount will be saved on state, regardless of minicart state
   const hasSavedRemoteOrderFormRef = useRef(false)
   useEffect(
     () => {
@@ -201,7 +201,7 @@ const MiniCart = ({
       ),
     [minicartItems]
   )
-  
+
   useUpdateOrderFormOnState(data, minicartState, updateOrderForm)
 
   // synchronize values with local storage
