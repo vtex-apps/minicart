@@ -5,7 +5,6 @@ import {
   path,
   pathOr,
   pick,
-  differenceWith,
   isNil,
   prop,
 } from 'ramda'
@@ -99,6 +98,33 @@ const useLinkState = client => {
   }, [client])
 }
 
+const useUpdateOrderFormOnState = (data, minicartState, updateOrderForm) => {
+  // This ref guarantees that the first remove order form after mount will be saved on state, regardless of minicart state
+  const hasSavedRemoteOrderFormRef = useRef(false)
+  useEffect(
+    () => {
+      const updateLocalOrderForm = async () => {
+        const orderFormData = JSON.parse(localStorage.getItem('orderForm'))
+
+        const remoteOrderForm = data.orderForm
+
+        if (remoteOrderForm || !orderFormData) {
+          if (!hasSavedRemoteOrderFormRef.current || (!path(['orderForm'], minicartState) && remoteOrderForm)) {
+            hasSavedRemoteOrderFormRef.current = true
+            await updateOrderForm(remoteOrderForm)
+          }
+        } else if (!path(['orderForm'], minicartState)) {
+          await updateOrderForm(orderFormData)
+        }
+      }
+
+      updateLocalOrderForm()
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [data, minicartState]
+  )
+}
+
 const partitionItemsAddUpdate = clientItems => {
   return partition(
     compose(
@@ -175,29 +201,8 @@ const MiniCart = ({
       ),
     [minicartItems]
   )
-
-  // update local state order form
-  useEffect(
-    () => {
-      const updateLocalOrderForm = async () => {
-        const orderFormData = JSON.parse(localStorage.getItem('orderForm'))
-
-        const remoteOrderForm = data.orderForm
-
-        if (remoteOrderForm || !orderFormData) {
-          if (!path(['orderForm'], minicartState) && remoteOrderForm) {
-            await updateOrderForm(remoteOrderForm)
-          }
-        } else if (!path(['orderForm'], minicartState)) {
-          await updateOrderForm(orderFormData)
-        }
-      }
-
-      updateLocalOrderForm()
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [data, minicartState]
-  )
+  
+  useUpdateOrderFormOnState(data, minicartState, updateOrderForm)
 
   // synchronize values with local storage
   useEffect(() => {
