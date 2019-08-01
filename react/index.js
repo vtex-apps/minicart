@@ -1,13 +1,5 @@
 import classNames from 'classnames'
-import {
-  map,
-  partition,
-  path,
-  pathOr,
-  pick,
-  isNil,
-  prop,
-} from 'ramda'
+import { map, partition, path, pathOr, pick, isNil, prop } from 'ramda'
 import React, {
   useState,
   useEffect,
@@ -140,8 +132,11 @@ const MiniCart = ({
 
   const [isUpdatingOrderForm, setUpdatingOrderForm] = useState(false)
   const [alert, setAlert] = useState({ message: null, type: null })
-  const handleCloseAlert = () => {setAlert({ message: null, type: null })}
   const isOffline = useOffline()
+
+  const handleCloseAlert = () => {
+    setAlert({ message: null, type: null })
+  }
 
   const {
     hints: { mobile },
@@ -177,34 +172,6 @@ const MiniCart = ({
       ),
     [minicartItems]
   )
-
-  const localItems = useMemo(
-    () =>  minicartItems.filter(
-      ({ localStatus }) => localStatus === ITEMS_STATUS.LOCAL_ITEM
-    ),
-  [minicartItems]
-  )
-
-  const serverItems = useMemo(
-    () =>  minicartItems.filter(
-      ({ localStatus }) => localStatus === ITEMS_STATUS.NONE
-    ),
-  [minicartItems]
-  )
-
-  useEffect(() => {
-    if(isOffline)
-      setAlert({
-        message: intl.formatMessage({
-          id: 'store/minicart.item-added-offline',
-        }),
-      })
-  }, [localItems])
-
-  useEffect(() => {
-    if(!isOffline)
-      console.log('sincronizou --')
-  }, [serverItems, isOffline, localItems])
 
   // update local state order form
   useEffect(
@@ -312,7 +279,7 @@ const MiniCart = ({
           if (itemsToAdd.length > 0) {
             push({
               event: 'addToCart',
-              items: itemsToAdd.map(mapBuyButtonItemToPixel)
+              items: itemsToAdd.map(mapBuyButtonItemToPixel),
             })
           }
 
@@ -360,7 +327,15 @@ const MiniCart = ({
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [intl, isOffline, showToast, addItems, mutateUpdateItems, modifiedItems, push]
+    [
+      intl,
+      isOffline,
+      showToast,
+      addItems,
+      mutateUpdateItems,
+      modifiedItems,
+      push,
+    ]
   )
 
   const handleClickButton = event => {
@@ -418,7 +393,7 @@ const MiniCart = ({
       updatingOrderForm={isUpdatingOrderForm}
     />
   )
-  
+
   const priceClasses = classNames(
     `${styles.label} dn-m db-l t-action--small ${labelClasses}`,
     {
@@ -429,7 +404,9 @@ const MiniCart = ({
 
   const isPriceVisible = showPrice && orderForm && orderForm.value > 0
   const iconLabelClasses = classNames(
-    `${styles.label} dn-m db-l ${ isPriceVisible ? 't-mini' : 't-action--small'} ${labelClasses}`,
+    `${styles.label} dn-m db-l ${
+      isPriceVisible ? 't-mini' : 't-action--small'
+    } ${labelClasses}`,
     {
       pl6: quantity > 0,
       pl4: quantity <= 0,
@@ -438,11 +415,11 @@ const MiniCart = ({
 
   return (
     <>
-      {alert && alert.message &&
+      {alert && alert.message && (
         <Alert type={alert.type} onClose={handleCloseAlert}>
           {alert.message}
         </Alert>
-      }
+      )}
       <aside className={`${styles.container} relative fr flex items-center`}>
         <div className="flex flex-column">
           <Button variation="tertiary" icon onClick={handleClickButton}>
@@ -458,21 +435,24 @@ const MiniCart = ({
                   </span>
                 )}
               </span>
-              {(iconLabel || isPriceVisible) &&
+              {(iconLabel || isPriceVisible) && (
                 <span className="flex flex-column items-start">
-                  {iconLabel && <span className={iconLabelClasses}>{iconLabel}</span>}
+                  {iconLabel && (
+                    <span className={iconLabelClasses}>{iconLabel}</span>
+                  )}
                   {isPriceVisible && (
                     <span data-testid="total-price" className={priceClasses}>
                       <div>
-                        <ProductPrice 
-                        showLabels={false} 
-                        showListPrice={false} 
-                        sellingPrice={orderForm.value} />
+                        <ProductPrice
+                          showLabels={false}
+                          showListPrice={false}
+                          sellingPrice={orderForm.value}
+                        />
                       </div>
                     </span>
                   )}
                 </span>
-              }
+              )}
             </span>
           </Button>
           {!hideContent &&

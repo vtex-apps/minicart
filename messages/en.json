@@ -16,7 +16,5 @@
     "store/minicart.error-removal": "Item removal failed, please try again",
     "store/minicart.shipping-cost": "Total shipping cost",
     "store/minicart.checkout-failure": "Something went wrong. Please, try again.",
-    "store/minicart.item-added-offline": "Item added offline. Will be synchronized when connection is established.",
-    "store/minicart.offline-items-synchronized": "Offline items synchronized successfully.",
-    "store/minicart.error-synchronizing-offline-items": "Something went wrong when synchroning offline items."
+    "store/minicart.offline-items-synchronized": "Offline items synchronized successfully."
 }

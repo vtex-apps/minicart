@@ -311,5 +311,5 @@ export default compose(
   injectIntl,
   withUpdateItemsMutation,
   withUpdateLocalItemsMutation,
-  withPixel,
+  withPixel
 )(MiniCartContent)
