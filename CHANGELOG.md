@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.24.2-beta] - 2019-08-04
+
 ## [2.24.1] - 2019-07-31
 ### Fixed
 - Problem when modifying cart in checkout screen and item still being displayed on minicart after coming back to store screen.
