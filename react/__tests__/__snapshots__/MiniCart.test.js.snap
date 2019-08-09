@@ -50,7 +50,7 @@ exports[`<MiniCart /> should match the snapshot in popup mode 1`] = `
               class="mt3 bg-base relative flex flex-column"
             >
               <div
-                class="content overflow-x-hidden pa1 contentSmall bg-base overflow-y-hidden"
+                class="content overflow-x-hidden pa1 contentSmall bg-base"
               >
                 <section
                   class="relative flex"
