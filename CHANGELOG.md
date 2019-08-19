@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- `addToCart` mutation would add items to the minicart even though they were already there.
+
 ## [2.24.2] - 2019-08-09
 ### Fixed
 - Removed overflow-hidden token inserted when only one item on minicart.
