@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.24.3] - 2019-08-19
+
 ### Fixed
 
 - `addToCart` mutation would add items to the minicart even though they were already there.
