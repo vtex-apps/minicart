@@ -10,11 +10,6 @@
     "react": "3.x",
     "docs": "0.x"
   },
-  "mustUpdateAt": "2019-04-20",
-  "categories": [],
-  "registries": [
-    "smartcheckout"
-  ],
   "scripts": {
     "postreleasy": "vtex publish --verbose"
   },
