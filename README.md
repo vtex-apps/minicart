@@ -68,6 +68,9 @@ When implementing this app as a block, various inner blocks may be available. Th
     "required": [
       "product-summary"
     ],
+    "allowed": [
+      "sandbox"
+    ],
     "component": "index"
   }
 }
@@ -95,6 +98,8 @@ Through the Storefront, you can change the minicart's behavior and interface. Ho
 | `showPrice`                   | `Boolean`      | If the total price of the items in the cart should be displayed at its side                                          | false       |
 
 Also, you can configure the product summary that is defined on minicart. See [here](https://github.com/vtex-apps/product-summary/blob/master/README.md#configuration) the Product Summary API.
+
+Additionally, you may add a [`sandbox`](https://github.com/vtex-apps/sandbox) block on the footer of the minicart, for additional custom information.
 
 ### Styles API
 
