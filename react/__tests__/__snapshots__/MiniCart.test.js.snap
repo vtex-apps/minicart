@@ -81,12 +81,13 @@ exports[`<MiniCart /> should match the snapshot in popup mode 1`] = `
               </div>
               <div
                 class="footerSpacer"
+                style="margin-top: auto;"
               />
               <div>
                  Extension Point 
               </div>
               <div
-                class="w-100 bg-base pa4 pv5 flex flex-column items-end"
+                class="contentFooter w-100 bg-base pa4 pv5 flex flex-column items-end"
               >
                 <div
                   class="contentPrice mb3"
@@ -229,12 +230,13 @@ exports[`<MiniCart /> should match the snapshot in sidebar mode 1`] = `
               </div>
               <div
                 class="footerSpacer"
+                style="margin-top: auto;"
               />
               <div>
                  Extension Point 
               </div>
               <div
-                class="w-100 bg-base pa4 pv5 flex flex-column items-end bt b--muted-3"
+                class="contentFooter w-100 bg-base pa4 pv5 flex flex-column items-end bt b--muted-3"
               >
                 <div
                   class="contentPrice mb3"
