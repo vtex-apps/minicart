@@ -39,7 +39,9 @@ const MiniCartFooter = ({
   const shouldShowShippingCost = showShippingCost && shippingCost > 0
 
   const footerClasses = classNames(
-    'w-100 bg-base pa4 pv5 flex flex-column items-end',
+    `${
+      minicart.contentFooter
+    } w-100 bg-base pa4 pv5 flex flex-column items-end`,
     {
       'bt b--muted-3': shouldShowShippingCost || isSizeLarge,
     }
@@ -60,7 +62,12 @@ const MiniCartFooter = ({
           />
         </div>
       )}
-      <div className={minicart.footerSpacer} />
+      <div
+        className={minicart.footerSpacer}
+        style={{
+          marginTop: 'auto',
+        }}
+      />
       <ExtensionPoint id="sandbox" />
       <div className={footerClasses}>
         {!isUpdating && showDiscount && discount > 0 && (
