@@ -40,9 +40,9 @@
   height: 100%;
 }
 
-.contentFooter {
-  margin-top: auto;
-}
+.contentFooter { }
+
+.footerSpacer { }
 
 @media only screen and (max-width: 40rem) {
   body.sidebarOpen {

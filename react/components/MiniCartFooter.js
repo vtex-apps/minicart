@@ -4,7 +4,7 @@ import ProductPrice from 'vtex.store-components/ProductPrice'
 import { Button, Spinner } from 'vtex.styleguide'
 import { FormattedMessage } from 'react-intl'
 import PropTypes from 'prop-types'
-import { useRuntime } from 'vtex.render-runtime'
+import { useRuntime, ExtensionPoint } from 'vtex.render-runtime'
 
 import { MiniCartPropTypes } from '../utils/propTypes'
 import minicart from '../minicart.css'
@@ -22,7 +22,8 @@ const MiniCartFooter = ({
   showShippingCost,
 }) => {
   const { rootPath = '' } = useRuntime()
-  const handleClickButton = () => location.assign(rootPath + (buttonLink || '/checkout/#/cart'))
+  const handleClickButton = () =>
+    location.assign(rootPath + (buttonLink || '/checkout/#/cart'))
 
   const priceAndDiscountClasses = classNames(
     `${minicart.contentDiscount} w-100 flex justify-end items-center mb3`,
@@ -38,7 +39,9 @@ const MiniCartFooter = ({
   const shouldShowShippingCost = showShippingCost && shippingCost > 0
 
   const footerClasses = classNames(
-    `${minicart.contentFooter} w-100 bg-base pa4 pv5 flex flex-column items-end`,
+    `${
+      minicart.contentFooter
+    } w-100 bg-base pa4 pv5 flex flex-column items-end`,
     {
       'bt b--muted-3': shouldShowShippingCost || isSizeLarge,
     }
@@ -59,6 +62,13 @@ const MiniCartFooter = ({
           />
         </div>
       )}
+      <div
+        className={minicart.footerSpacer}
+        style={{
+          marginTop: 'auto',
+        }}
+      />
+      <ExtensionPoint id="sandbox" />
       <div className={footerClasses}>
         {!isUpdating && showDiscount && discount > 0 && (
           <div className={priceAndDiscountClasses}>

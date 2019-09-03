@@ -3,7 +3,9 @@
     "required": [
       "product-summary"
     ],
-    "component": "index",
-    "render": "lazy"
+    "allowed": [
+      "sandbox"
+    ],
+    "component": "index"
   }
 }

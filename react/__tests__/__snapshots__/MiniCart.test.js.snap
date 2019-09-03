@@ -80,6 +80,13 @@ exports[`<MiniCart /> should match the snapshot in popup mode 1`] = `
                 </section>
               </div>
               <div
+                class="footerSpacer"
+                style="margin-top: auto;"
+              />
+              <div>
+                 Extension Point 
+              </div>
+              <div
                 class="contentFooter w-100 bg-base pa4 pv5 flex flex-column items-end"
               >
                 <div
@@ -220,6 +227,13 @@ exports[`<MiniCart /> should match the snapshot in sidebar mode 1`] = `
                      Extension Point 
                   </div>
                 </section>
+              </div>
+              <div
+                class="footerSpacer"
+                style="margin-top: auto;"
+              />
+              <div>
+                 Extension Point 
               </div>
               <div
                 class="contentFooter w-100 bg-base pa4 pv5 flex flex-column items-end bt b--muted-3"
