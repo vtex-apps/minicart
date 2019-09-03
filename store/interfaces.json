@@ -3,7 +3,6 @@
     "required": [
       "product-summary"
     ],
-    "component": "index",
-    "render": "lazy"
+    "component": "index"
   }
 }
