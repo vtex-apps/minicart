@@ -4,7 +4,7 @@ import ProductPrice from 'vtex.store-components/ProductPrice'
 import { Button, Spinner } from 'vtex.styleguide'
 import { FormattedMessage } from 'react-intl'
 import PropTypes from 'prop-types'
-import { useRuntime } from 'vtex.render-runtime'
+import { useRuntime, ExtensionPoint } from 'vtex.render-runtime'
 
 import { MiniCartPropTypes } from '../utils/propTypes'
 import minicart from '../minicart.css'
@@ -38,7 +38,7 @@ const MiniCartFooter = ({
   const shouldShowShippingCost = showShippingCost && shippingCost > 0
 
   const footerClasses = classNames(
-    `${minicart.contentFooter} w-100 bg-base pa4 pv5 flex flex-column items-end`,
+    'w-100 bg-base pa4 pv5 flex flex-column items-end',
     {
       'bt b--muted-3': shouldShowShippingCost || isSizeLarge,
     }
@@ -59,6 +59,8 @@ const MiniCartFooter = ({
           />
         </div>
       )}
+      <div className={minicart.footerSpacer} />
+      <ExtensionPoint id="sandbox" />
       <div className={footerClasses}>
         {!isUpdating && showDiscount && discount > 0 && (
           <div className={priceAndDiscountClasses}>
