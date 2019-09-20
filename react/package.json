@@ -29,7 +29,6 @@
     "ramda": "^0.26.1",
     "react": "^16.8.4",
     "react-apollo": "^2.5.2",
-    "react-device-detect": "^1.6.2",
     "react-intl": "^2.8.0",
     "react-outside-click-handler": "^1.2.2"
   }
