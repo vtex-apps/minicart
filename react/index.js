@@ -18,7 +18,7 @@ import React, {
 } from 'react'
 import { compose, graphql, withApollo } from 'react-apollo'
 import { injectIntl } from 'react-intl'
-import { Button, ToastContext } from 'vtex.styleguide'
+import { ButtonWithIcon, ToastContext } from 'vtex.styleguide'
 import { useRuntime } from 'vtex.render-runtime'
 import { IconCart } from 'vtex.store-icons'
 import { orderForm as orderFormQuery } from 'vtex.store-resources/Queries'
@@ -416,7 +416,7 @@ const MiniCart = ({
   return (
     <aside className={`${styles.container} relative fr flex items-center`}>
       <div className="flex flex-column">
-        <Button variation="tertiary" icon onClick={handleClickButton}>
+        <ButtonWithIcon variation="tertiary" onClick={handleClickButton}>
           <span className="flex items-center">
             <span className={`relative ${iconClasses}`}>
               <IconCart size={iconSize} />
@@ -445,7 +445,7 @@ const MiniCart = ({
               </span>
             }
           </span>
-        </Button>
+        </ButtonWithIcon>
         {!hideContent &&
           (isSizeLarge ? (
             <Sidebar
