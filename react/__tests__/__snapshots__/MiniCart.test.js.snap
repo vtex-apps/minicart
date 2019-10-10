@@ -13,24 +13,21 @@ exports[`<MiniCart /> should match the snapshot in popup mode 1`] = `
       >
         Button test
         <span
-          class="flex items-center"
+          class="relative gray"
         >
-          <span
-            class="relative gray"
+          <svg
+            class="undefined IconCart"
           >
-            <svg
-              class="undefined IconCart"
-            >
-              <rect />
-            </svg>
-            <span
-              class="badge c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid"
-              data-testid="item-qty"
-            >
-              1
-            </span>
+            <rect />
+          </svg>
+          <span
+            class="badge c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid"
+            data-testid="item-qty"
+          >
+            1
           </span>
         </span>
+         
       </button>
       <div>
         <div
@@ -72,6 +69,7 @@ exports[`<MiniCart /> should match the snapshot in popup mode 1`] = `
                           width="15"
                         />
                       </svg>
+                       
                     </button>
                   </div>
                   <div>
@@ -133,24 +131,21 @@ exports[`<MiniCart /> should match the snapshot in sidebar mode 1`] = `
         >
           Button test
           <span
-            class="flex items-center"
+            class="relative gray"
           >
-            <span
-              class="relative gray"
+            <svg
+              class="undefined IconCart"
             >
-              <svg
-                class="undefined IconCart"
-              >
-                <rect />
-              </svg>
-              <span
-                class="badge c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid"
-                data-testid="item-qty"
-              >
-                1
-              </span>
+              <rect />
+            </svg>
+            <span
+              class="badge c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid"
+              data-testid="item-qty"
+            >
+              1
             </span>
           </span>
+           
         </button>
         <div>
           <div>
@@ -221,6 +216,7 @@ exports[`<MiniCart /> should match the snapshot in sidebar mode 1`] = `
                           width="15"
                         />
                       </svg>
+                       
                     </button>
                   </div>
                   <div>
