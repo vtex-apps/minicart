@@ -196,12 +196,10 @@ class MiniCartContent extends Component {
                       <Spinner size={18} />
                     </div>
                   ) : (
-                    <ButtonWithIcon
+                    <ButtonWithIcon icon={<IconDelete size={15} activeClassName="c-muted-2" />}
                       variation="tertiary"
                       onClick={() => this.handleItemRemoval(item, index)}
-                    >
-                      <IconDelete size={15} activeClassName="c-muted-2" />
-                    </ButtonWithIcon>
+                    />
                   )}
                 </div>
                 <ExtensionPoint

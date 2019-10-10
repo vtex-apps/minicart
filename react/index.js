@@ -416,8 +416,8 @@ const MiniCart = ({
   return (
     <aside className={`${styles.container} relative fr flex items-center`}>
       <div className="flex flex-column">
-        <ButtonWithIcon variation="tertiary" onClick={handleClickButton}>
-          <span className="flex items-center">
+        <ButtonWithIcon
+          icon={
             <span className={`relative ${iconClasses}`}>
               <IconCart size={iconSize} />
               {quantity > 0 && (
@@ -429,22 +429,26 @@ const MiniCart = ({
                 </span>
               )}
             </span>
-            {(iconLabel || isPriceVisible) &&
-              <span className="flex flex-column items-start">
-                {iconLabel && <span className={iconLabelClasses}>{iconLabel}</span>}
-                {isPriceVisible && (
-                  <span data-testid="total-price" className={priceClasses}>
-                    <div>
-                      <ProductPrice 
-                      showLabels={false} 
-                      showListPrice={false} 
-                      sellingPrice={orderForm.value} />
-                    </div>
-                  </span>
-                )}
-              </span>
-            }
-          </span>
+          }
+          variation="tertiary"
+          onClick={handleClickButton}>
+          {(iconLabel || isPriceVisible) && (
+            <span className="flex items-center">
+                <span className="flex flex-column items-start">
+                  {iconLabel && <span className={iconLabelClasses}>{iconLabel}</span>}
+                  {isPriceVisible && (
+                    <span data-testid="total-price" className={priceClasses}>
+                      <div>
+                        <ProductPrice 
+                        showLabels={false} 
+                        showListPrice={false} 
+                        sellingPrice={orderForm.value} />
+                      </div>
+                    </span>
+                  )}
+                </span>
+            </span>
+          )}
         </ButtonWithIcon>
         {!hideContent &&
           (isSizeLarge ? (
