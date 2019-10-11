@@ -143,6 +143,17 @@ Below, we describe the namespaces that are defined in the minicart.
 | `contentDiscount` | The total discount on the minicart footer                    | [MinicartFooter](/react/components/MinicartFooter.js)   |
 | `contentPrice`    | Total price of the products on the minicart footer           | [MinicartFooter](/react/components/MinicartFooter.js)   |
 | `contentFooter`   | The minicart footer main container                           | [MinicartFooter](/react/components/MinicartFooter.js)   |
+| `itemContainer`   | The container of a single item in the minicart                           | [MinicartContent](/react/components/MinicartContent.js)   |
+| `itemDeleteIcon`   | The container of the delete item icon next to each item in the minicart                           | [MinicartContent](/react/components/MinicartContent.js)   |
+| `itemDeleteIconLoader`   | The loading state for the delete item icon next to each item in the minicart                           | [MinicartContent](/react/components/MinicartContent.js)   |
+| `popupContentContainer`   | The main container for content inside the popup variant of the minicart                           | [Popup](/react/components/Popup.js)   |
+| `popupChildrenContainer`   | The main container for children content inside the popup variant on the minicart                           | [Popup](/react/components/Popup.js)   |
+| `footerShippingPriceContainer`   | The shipping price main container                           | [MinicartFooter](/react/components/MinicartFooter.js)   |
+| `footerShippingPriceLabelContainer`   | The shipping price label container                           | [MinicartFooter](/react/components/MinicartFooter.js)   |
+| `footerShippingPriceLabelContainer`   | The shipping price label container                           | [MinicartFooter](/react/components/MinicartFooter.js)   |
+| `sidebarRightCaretContainer`   | The caret icon container in the sidebar variant of the minicart                          | [Sidebar](/react/components/Sidebar.js)   |
+| `sidebarItemQuantityContainer`   | The item quantity container in the sidebar variant of the minicart                          | [Sidebar](/react/components/Sidebar.js)   |
+
 
 ## Troubleshooting
 
