@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- New CSS handles to `MinicartFooter` component.
+- New CSS handles to all components.
 
 ## [2.26.1] - 2019-09-20
 ### Fixed
