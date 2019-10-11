@@ -39,9 +39,7 @@ const MiniCartFooter = ({
   const shouldShowShippingCost = showShippingCost && shippingCost > 0
 
   const footerClasses = classNames(
-    `${
-      minicart.contentFooter
-    } w-100 bg-base pa4 pv5 flex flex-column items-end`,
+    `${minicart.contentFooter} w-100 bg-base pa4 pv5 flex flex-column items-end`,
     {
       'bt b--muted-3': shouldShowShippingCost || isSizeLarge,
     }
@@ -50,8 +48,12 @@ const MiniCartFooter = ({
   return (
     <Fragment>
       {shouldShowShippingCost && (
-        <div className="flex items-center justify-between ma5">
-          <div className="t-body c-muted-1">
+        <div
+          className={`${minicart.footerShippingPriceContainer} flex items-center justify-between ma5`}
+        >
+          <div
+            className={`${minicart.footerShippingPriceLabelContainer} t-body c-muted-1`}
+          >
             <FormattedMessage id="store/minicart.shipping-cost" />
           </div>
           <ProductPrice
