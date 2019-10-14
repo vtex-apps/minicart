@@ -7,7 +7,7 @@ import classNames from 'classnames'
 
 import { withPixel } from 'vtex.pixel-manager/PixelContext'
 import { ExtensionPoint } from 'vtex.render-runtime'
-import { Button, Spinner } from 'vtex.styleguide'
+import { ButtonWithIcon, Spinner } from 'vtex.styleguide'
 import { IconDelete } from 'vtex.store-icons'
 
 import { MiniCartPropTypes } from '../utils/propTypes'
@@ -196,13 +196,10 @@ class MiniCartContent extends Component {
                       <Spinner size={18} />
                     </div>
                   ) : (
-                    <Button
-                      icon
+                    <ButtonWithIcon icon={<IconDelete size={15} activeClassName="c-muted-2" />}
                       variation="tertiary"
                       onClick={() => this.handleItemRemoval(item, index)}
-                    >
-                      <IconDelete size={15} activeClassName="c-muted-2" />
-                    </Button>
+                    />
                   )}
                 </div>
                 <ExtensionPoint
