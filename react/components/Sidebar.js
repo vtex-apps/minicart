@@ -65,12 +65,14 @@ class Sidebar extends Component {
               className={`${minicart.sidebarHeader} pointer flex flex-row items-center pa5 h3 bg-base w-100 z-max bb b--muted-3 bw1`}
             >
               <div
-                className="c-muted-1 pa4 flex items-center"
+                className={`${minicart.sidebarRightCaretContainer} c-muted-1 pa4 flex items-center`}
                 onClick={onOutsideClick}
               >
                 <IconCaret orientation="right" size={17} />
               </div>
-              <div className="relative c-muted-1">
+              <div
+                className={`${minicart.sidebarItemQuantityContainer} relative c-muted-1`}
+              >
                 <IconCart size={iconSize} />
                 {quantity > 0 && (
                   <span

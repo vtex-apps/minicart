@@ -22,11 +22,13 @@ const Popup = ({ children, onOutsideClick }) => {
         className={`${minicart.box} dn db-ns absolute z-max flex flex-colunm`}
         style={boxPositionStyle}
       >
-        <div className="shadow-3">
+        <div className={`${minicart.popupContentContainer} shadow-3`}>
           <div
             className={`${minicart.arrowUp} absolute top-0 shadow-3 bg-base h1 w1 pa4 rotate-45`}
           />
-          <div className="mt3 bg-base relative flex flex-column">
+          <div
+            className={`${minicart.popupChildrenContainer} mt3 bg-base relative flex flex-column`}
+          >
             {children}
           </div>
         </div>

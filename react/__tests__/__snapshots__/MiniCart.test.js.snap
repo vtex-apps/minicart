@@ -41,22 +41,22 @@ exports[`<MiniCart /> should match the snapshot in popup mode 1`] = `
           style="right: -40px;"
         >
           <div
-            class="shadow-3"
+            class="popupContentContainer shadow-3"
           >
             <div
               class="arrowUp absolute top-0 shadow-3 bg-base h1 w1 pa4 rotate-45"
             />
             <div
-              class="mt3 bg-base relative flex flex-column"
+              class="popupChildrenContainer mt3 bg-base relative flex flex-column"
             >
               <div
                 class="content overflow-x-hidden pa1 contentSmall bg-base"
               >
                 <section
-                  class="relative flex"
+                  class="itemContainer relative flex"
                 >
                   <div
-                    class="fr absolute top-0 right-0"
+                    class="itemDeleteIcon fr absolute top-0 right-0"
                   >
                     <button
                       variation="tertiary"
@@ -165,7 +165,7 @@ exports[`<MiniCart /> should match the snapshot in sidebar mode 1`] = `
                 class="sidebarHeader pointer flex flex-row items-center pa5 h3 bg-base w-100 z-max bb b--muted-3 bw1"
               >
                 <div
-                  class="c-muted-1 pa4 flex items-center"
+                  class="sidebarRightCaretContainer c-muted-1 pa4 flex items-center"
                 >
                   <svg
                     class="undefined IconCaret"
@@ -179,7 +179,7 @@ exports[`<MiniCart /> should match the snapshot in sidebar mode 1`] = `
                   </svg>
                 </div>
                 <div
-                  class="relative c-muted-1"
+                  class="sidebarItemQuantityContainer relative c-muted-1"
                 >
                   <svg
                     class="undefined IconCart"
@@ -202,10 +202,10 @@ exports[`<MiniCart /> should match the snapshot in sidebar mode 1`] = `
                 class="content overflow-x-hidden pa1 contentLarge"
               >
                 <section
-                  class="relative flex"
+                  class="itemContainer relative flex"
                 >
                   <div
-                    class="fr absolute top-0 right-0"
+                    class="itemDeleteIcon fr absolute top-0 right-0"
                   >
                     <button
                       variation="tertiary"

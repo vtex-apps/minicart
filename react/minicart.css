@@ -1,17 +1,39 @@
-.container {}
-.label {}
-.itemImage {}
-.item {}
-.content {}
-.contentDiscount {}
-.contentPrice {}
-.itemName {}
-.itemNameLarge {}
-.itemFooter {}
-.imgContainer {}
-.itemRemoveBtn {}
-.sidebarScrim {}
-.sidebarHeader {}
+.container {
+}
+.label {
+}
+.itemImage {
+}
+.item {
+}
+.itemContainer {
+}
+.itemDeleteIcon {
+}
+.itemDeleteIcon {
+}
+.itemDeleteIconLoader {
+}
+.content {
+}
+.contentDiscount {
+}
+.contentPrice {
+}
+.itemName {
+}
+.itemNameLarge {
+}
+.itemFooter {
+}
+.imgContainer {
+}
+.itemRemoveBtn {
+}
+.sidebarScrim {
+}
+.sidebarHeader {
+}
 
 .contentSmall {
   max-height: 383px;
@@ -40,9 +62,29 @@
   height: 100%;
 }
 
-.contentFooter { }
+.contentFooter {
+}
 
-.footerSpacer { }
+.footerSpacer {
+}
+
+.footerShippingPriceContainer {
+}
+
+.footerShippingPriceLabelContainer {
+}
+
+.popupContentContainer {
+}
+
+.popupChildrenContainer {
+}
+
+.sidebarRightCaretContainer {
+}
+
+.sidebarItemQuantityContainer {
+}
 
 @media only screen and (max-width: 40rem) {
   body.sidebarOpen {

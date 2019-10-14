@@ -187,10 +187,12 @@ class MiniCartContent extends Component {
         <div className={classes}>
           {itemsToShow.map((item, index) => (
             <Fragment key={item.id}>
-              <section className="relative flex">
-                <div className="fr absolute top-0 right-0">
+              <section className={`${styles.itemContainer} relative flex`}>
+                <div
+                  className={`${styles.itemDeleteIcon} fr absolute top-0 right-0`}
+                >
                   {isUpdating[item.id] ? (
-                    <div className="ma4">
+                    <div className={`${styles.itemDeleteIconLoader} ma4`}>
                       <Spinner size={18} />
                     </div>
                   ) : (
@@ -309,5 +311,5 @@ export default compose(
   injectIntl,
   withUpdateItemsMutation,
   withUpdateLocalItemsMutation,
-  withPixel,
+  withPixel
 )(MiniCartContent)
