@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
-import { reduceBy, values, clone, find, propEq, isNil } from 'ramda'
+import { reduceBy, values, clone, find, propEq, compose } from 'ramda'
 import React, { Component, Fragment } from 'react'
-import { compose, graphql } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import { injectIntl, intlShape } from 'react-intl'
 import classNames from 'classnames'
 

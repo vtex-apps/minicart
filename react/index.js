@@ -7,6 +7,7 @@ import {
   pick,
   isNil,
   prop,
+  compose,
 } from 'ramda'
 import React, {
   useState,
@@ -16,7 +17,7 @@ import React, {
   useContext,
   useMemo,
 } from 'react'
-import { compose, graphql, withApollo } from 'react-apollo'
+import { useQuery, useApolloClient, useMutation } from 'react-apollo'
 import { injectIntl } from 'react-intl'
 import { Button, ToastContext } from 'vtex.styleguide'
 import { useRuntime } from 'vtex.render-runtime'
@@ -33,7 +34,6 @@ import { shouldShowItem } from './utils/itemsHelper'
 import { mapBuyButtonItemToPixel } from './utils/pixelHelper'
 
 import fullMinicartQuery from './localState/graphql/fullMinicartQuery.gql'
-import updateItemsMutation from './localState/graphql/updateItemsMutation.gql'
 import updateOrderFormMutation from './localState/graphql/updateOrderFormMutation.gql'
 import updateLocalItemStatusMutation from './localState/graphql/updateLocalItemStatusMutation.gql'
 import setMinicartOpenMutation from './localState/graphql/setMinicartOpenMutation.gql'
@@ -136,14 +136,22 @@ const partitionItemsAddUpdate = clientItems => {
   )
 }
 
+const useLinkStateUpdateOrderFormMutation = () => {
+  const [updateOrderForm] = useMutation(updateOrderFormMutation)
+  return useCallback((orderForm, forceUpdateItems = false) => updateOrderForm({ variables: { orderForm, forceUpdateItems } }), [updateOrderForm])
+}
+
+const useLinkStateSetIsOpenMutation = () => {
+  const [setMinicartOpen] = useMutation(setMinicartOpenMutation)
+  return useCallback(isOpen => setMinicartOpen({ variables: { isOpen } }), [setMinicartOpen])
+}
+
 /**
  * Minicart component
  */
 const MiniCart = ({
   labelClasses = DEFAULT_LABEL_CLASSES,
   iconClasses = DEFAULT_ICON_CLASSES,
-  client,
-  setMinicartOpen,
   labelMiniCartEmpty,
   linkButtonFinishShopping,
   labelButtonFinishShopping,
@@ -152,18 +160,21 @@ const MiniCart = ({
   showTotalItemsQty,
   showPrice,
   showDiscount,
-  data,
-  linkState,
   type,
   hideContent,
   showShippingCost,
-  updateOrderForm,
   intl,
-  updateItemsMutation,
-  addToCartMutation,
-  updateLocalItemStatus,
 }) => {
+  const client = useApolloClient()
   useLinkState(client)
+
+  const { loading, data={}} = useQuery(orderFormQuery, {ssr:false})
+  const { data: linkState={}} = useQuery(fullMinicartQuery, {ssr:false})
+  const [addToCartMutation] = useMutation(addToCart)
+  const [updateItemsMutation] = useMutation(updateItems)
+  const [updateLocalItemStatus] = useMutation(updateLocalItemStatusMutation) 
+  const updateOrderForm = useLinkStateUpdateOrderFormMutation()
+  const setMinicartOpen = useLinkStateSetIsOpenMutation()
 
   const [isUpdatingOrderForm, setUpdatingOrderForm] = useState(false)
   const isOffline = useOffline()
@@ -384,7 +395,7 @@ const MiniCart = ({
         ...orderForm,
         items: minicartItems,
       }}
-      loading={data.loading}
+      loading={loading}
       showDiscount={showDiscount}
       labelMiniCartEmpty={labelMiniCartEmpty}
       linkButton={linkButtonFinishShopping}
@@ -468,48 +479,7 @@ const MiniCart = ({
   )
 }
 
-const withLinkStateUpdateItemsMutation = graphql(updateItemsMutation, {
-  name: 'updateLinkStateItems',
-  props: ({ updateLinkStateItems }) => ({
-    updateLinkStateItems: items =>
-      updateLinkStateItems({ variables: { items } }),
-  }),
-})
-
-const withLinkStateUpdateOrderFormMutation = graphql(updateOrderFormMutation, {
-  name: 'updateOrderForm',
-  props: ({ updateOrderForm }) => ({
-    updateOrderForm: (orderForm, forceUpdateItems = false) =>
-      updateOrderForm({ variables: { orderForm, forceUpdateItems } }),
-  }),
-})
-
-const withLinkStateUpdateLocalItemStatusMutation = graphql(
-  updateLocalItemStatusMutation,
-  {
-    name: 'updateLocalItemStatus',
-  }
-)
-
-const withLinkStateSetIsOpenMutation = graphql(setMinicartOpenMutation, {
-  name: 'setMinicartOpen',
-  props: ({ setMinicartOpen }) => ({
-    setMinicartOpen: isOpen => setMinicartOpen({ variables: { isOpen } }),
-  }),
-})
-
-const EnhancedMinicart = compose(
-  graphql(orderFormQuery, { options: { ssr: false } }),
-  graphql(fullMinicartQuery, { name: 'linkState', ssr: false }),
-  graphql(addToCart, { name: 'addToCartMutation' }),
-  graphql(updateItems, { name: 'updateItemsMutation' }),
-  withApollo,
-  withLinkStateUpdateItemsMutation,
-  withLinkStateUpdateOrderFormMutation,
-  withLinkStateUpdateLocalItemStatusMutation,
-  withLinkStateSetIsOpenMutation,
-  injectIntl
-)(MiniCart)
+const EnhancedMinicart = injectIntl(MiniCart)
 
 EnhancedMinicart.schema = {
   title: 'admin/editor.minicart.title',
