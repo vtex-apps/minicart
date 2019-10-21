@@ -119,27 +119,45 @@ class MiniCartContent extends Component {
       ? orderForm.value
       : this.sumItemsPrice(orderForm.items)
 
-  createProductShapeFromItem = item => ({
-    productName: item.name,
-    linkText: item.detailUrl.replace(/^\//, '').replace(/\/p$/, ''),
-    sku: {
-      seller: {
-        commertialOffer: {
-          Price: item.sellingPriceWithAssemblies * item.quantity,
-          ListPrice: item.listPrice,
+
+  getItemCategory = (item) => {
+    if (!item.productCategoryIds || !item.productCategories) {
+      return ''
+    }
+
+    return item.productCategoryIds
+      .split('/')
+      .reduce((acc, id) => acc.concat(item.productCategories[id]), [])
+      .join('/')
+      .slice(1, -1)
+  }
+
+  createProductShapeFromItem = item => {
+    return ({
+      productName: item.name,
+      brand: item.additionalInfo ? item.additionalInfo.brandName : undefined,
+      category: this.getItemCategory(item),
+      productRefId: item.productRefId,
+      linkText: item.detailUrl.replace(/^\//, '').replace(/\/p$/, ''),
+      sku: {
+        seller: {
+          commertialOffer: {
+            Price: item.sellingPriceWithAssemblies * item.quantity,
+            ListPrice: item.listPrice,
+          },
+          sellerId: item.seller,
         },
-        sellerId: item.seller,
+        name: item.skuName,
+        itemId: item.id,
+        image: {
+          imageUrl: changeImageUrlSize(toHttps(item ? item.imageUrl : ''), 240),
+        },
       },
-      name: item.skuName,
-      itemId: item.id,
-      image: {
-        imageUrl: changeImageUrlSize(toHttps(item ? item.imageUrl : ''), 240),
-      },
-    },
-    assemblyOptions: item.assemblyOptions,
-    quantity: item.quantity,
-    cartIndex: item.cartIndex,
-  })
+      assemblyOptions: item.assemblyOptions,
+      quantity: item.quantity,
+      cartIndex: item.cartIndex,
+    })
+  }
 
   get isUpdating() {
     const { isUpdating } = this.state
