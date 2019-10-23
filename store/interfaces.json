@@ -1,11 +1,15 @@
 {
   "minicart": {
-    "required": [
-      "product-summary"
-    ],
-    "allowed": [
-      "sandbox"
-    ],
-    "component": "index"
+    "required": ["product-summary"],
+    "allowed": ["sandbox"],
+    "component": "MinicartLegacy"
+  },
+  "minicartv2": {
+    "component": "Minicart",
+    "allowed": ["minicart-product-list-wrapper"]
+  },
+  "minicart-product-list-wrapper": {
+    "component": "ProductListWrapper",
+    "allowed": ["product-list"]
   }
 }
