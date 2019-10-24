@@ -50,7 +50,9 @@ export default function(client) {
         const data = cache.readQuery({ query: fullMinicartQuery })
 
         const cartItems = JSON.parse(data.minicart.items)
-        const newItems = items.filter(item => !cartItems.find(((cartItem) => cartItem.id === item.id)))
+        const newItems = items.filter(
+          item => !cartItems.find(cartItem => cartItem.id === item.id)
+        )
 
         const writeItems = cartItems.concat(
           newItems.map(item => ({

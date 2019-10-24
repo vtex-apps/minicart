@@ -1,14 +1,5 @@
 import classNames from 'classnames'
-import {
-  map,
-  partition,
-  path,
-  pathOr,
-  pick,
-  isNil,
-  prop,
-  compose,
-} from 'ramda'
+import { map, partition, path, pathOr, pick, isNil, prop, compose } from 'ramda'
 import React, {
   useState,
   useEffect,
@@ -72,7 +63,8 @@ const useOffline = () => {
   return isOffline
 }
 
-const useLinkState = client => {
+const useLinkState = () => {
+  const client = useApolloClient()
   useEffect(() => {
     const { resolvers, initialState } = createLocalState(client)
     client.addResolvers(resolvers)
@@ -109,8 +101,12 @@ const useUpdateOrderFormOnState = (data, minicartState, updateOrderForm) => {
         const remoteOrderForm = data.orderForm
 
         if (remoteOrderForm || !orderFormData) {
-          const forceRemoteOrderform = !hasSavedRemoteOrderFormRef.current && remoteOrderForm
-          if (forceRemoteOrderform || (!path(['orderForm'], minicartState) && remoteOrderForm)) {
+          const forceRemoteOrderform =
+            !hasSavedRemoteOrderFormRef.current && remoteOrderForm
+          if (
+            forceRemoteOrderform ||
+            (!path(['orderForm'], minicartState) && remoteOrderForm)
+          ) {
             hasSavedRemoteOrderFormRef.current = true
             await updateOrderForm(remoteOrderForm)
           }
@@ -138,12 +134,18 @@ const partitionItemsAddUpdate = clientItems => {
 
 const useLinkStateUpdateOrderFormMutation = () => {
   const [updateOrderForm] = useMutation(updateOrderFormMutation)
-  return useCallback((orderForm, forceUpdateItems = false) => updateOrderForm({ variables: { orderForm, forceUpdateItems } }), [updateOrderForm])
+  return useCallback(
+    (orderForm, forceUpdateItems = false) =>
+      updateOrderForm({ variables: { orderForm, forceUpdateItems } }),
+    [updateOrderForm]
+  )
 }
 
 const useLinkStateSetIsOpenMutation = () => {
   const [setMinicartOpen] = useMutation(setMinicartOpenMutation)
-  return useCallback(isOpen => setMinicartOpen({ variables: { isOpen } }), [setMinicartOpen])
+  return useCallback(isOpen => setMinicartOpen({ variables: { isOpen } }), [
+    setMinicartOpen,
+  ])
 }
 
 /**
@@ -165,14 +167,13 @@ const MiniCart = ({
   showShippingCost,
   intl,
 }) => {
-  const client = useApolloClient()
-  useLinkState(client)
+  useLinkState()
 
-  const { loading, data={}} = useQuery(orderFormQuery, {ssr:false})
-  const { data: linkState={}} = useQuery(fullMinicartQuery, {ssr:false})
+  const { loading, data = {} } = useQuery(orderFormQuery, { ssr: false })
+  const { data: linkState = {} } = useQuery(fullMinicartQuery, { ssr: false })
   const [addToCartMutation] = useMutation(addToCart)
   const [updateItemsMutation] = useMutation(updateItems)
-  const [updateLocalItemStatus] = useMutation(updateLocalItemStatusMutation) 
+  const [updateLocalItemStatus] = useMutation(updateLocalItemStatusMutation)
   const updateOrderForm = useLinkStateUpdateOrderFormMutation()
   const setMinicartOpen = useLinkStateSetIsOpenMutation()
 
@@ -300,7 +301,7 @@ const MiniCart = ({
           if (itemsToAdd.length > 0) {
             push({
               event: 'addToCart',
-              items: itemsToAdd.map(mapBuyButtonItemToPixel)
+              items: itemsToAdd.map(mapBuyButtonItemToPixel),
             })
           }
 
@@ -348,7 +349,15 @@ const MiniCart = ({
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [intl, isOffline, showToast, addItems, mutateUpdateItems, modifiedItems, push]
+    [
+      intl,
+      isOffline,
+      showToast,
+      addItems,
+      mutateUpdateItems,
+      modifiedItems,
+      push,
+    ]
   )
 
   const handleClickButton = event => {
@@ -406,7 +415,7 @@ const MiniCart = ({
       updatingOrderForm={isUpdatingOrderForm}
     />
   )
-  
+
   const priceClasses = classNames(
     `${styles.label} dn-m db-l t-action--small ${labelClasses}`,
     {
@@ -417,7 +426,9 @@ const MiniCart = ({
 
   const isPriceVisible = showPrice && orderForm && orderForm.value > 0
   const iconLabelClasses = classNames(
-    `${styles.label} dn-m db-l ${ isPriceVisible ? 't-mini' : 't-action--small'} ${labelClasses}`,
+    `${styles.label} dn-m db-l ${
+      isPriceVisible ? 't-mini' : 't-action--small'
+    } ${labelClasses}`,
     {
       pl6: quantity > 0,
       pl4: quantity <= 0,
@@ -440,21 +451,24 @@ const MiniCart = ({
                 </span>
               )}
             </span>
-            {(iconLabel || isPriceVisible) &&
+            {(iconLabel || isPriceVisible) && (
               <span className="flex flex-column items-start">
-                {iconLabel && <span className={iconLabelClasses}>{iconLabel}</span>}
+                {iconLabel && (
+                  <span className={iconLabelClasses}>{iconLabel}</span>
+                )}
                 {isPriceVisible && (
                   <span data-testid="total-price" className={priceClasses}>
                     <div>
-                      <ProductPrice 
-                      showLabels={false} 
-                      showListPrice={false} 
-                      sellingPrice={orderForm.value} />
+                      <ProductPrice
+                        showLabels={false}
+                        showListPrice={false}
+                        sellingPrice={orderForm.value}
+                      />
                     </div>
                   </span>
                 )}
               </span>
-            }
+            )}
           </span>
         </Button>
         {!hideContent &&

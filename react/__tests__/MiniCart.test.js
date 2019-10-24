@@ -152,7 +152,7 @@ describe('<MiniCart />', () => {
 
   it('should show the total quantity of items in cart', async () => {
     const { getByTestId } = render(
-      <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={true} />,
+      <MiniCart type="sidebar" hideContent={false} showTotalItemsQty />,
       { graphql: { mocks } }
     )
 
@@ -163,8 +163,8 @@ describe('<MiniCart />', () => {
   })
 
   it('should not show price if showPrice is false', async () => {
-    const {queryByTestId} = render(
-      <MiniCart type="sidebar" hideContent={false} showPrice={false}/>,
+    const { queryByTestId } = render(
+      <MiniCart type="sidebar" hideContent={false} showPrice={false} />,
       { graphql: { mocks } }
     )
     await flushPromises()
@@ -173,15 +173,15 @@ describe('<MiniCart />', () => {
   })
 
   it('should not show price if there are no items in the cart', () => {
-    const {queryByTestId} = render(
-      <MiniCart type="sidebar" hideContent={false} showPrice={true}/>
+    const { queryByTestId } = render(
+      <MiniCart type="sidebar" hideContent={false} showPrice />
     )
     expect(queryByTestId('total-price')).toBeNull()
   })
 
   it('should show price if there are items in the cart', async () => {
-    const {getByTestId} = render(
-      <MiniCart type="sidebar" hideContent={false} showPrice={true}/>,
+    const { getByTestId } = render(
+      <MiniCart type="sidebar" hideContent={false} showPrice />,
       { graphql: { mocks } }
     )
     await flushPromises()
@@ -190,8 +190,8 @@ describe('<MiniCart />', () => {
   })
 
   it('should not show price if showPrice is false', async () => {
-    const {queryByTestId} = render(
-      <MiniCart type="sidebar" hideContent={false} showPrice={false}/>,
+    const { queryByTestId } = render(
+      <MiniCart type="sidebar" hideContent={false} showPrice={false} />,
       { graphql: { mocks } }
     )
     await flushPromises()
@@ -200,15 +200,15 @@ describe('<MiniCart />', () => {
   })
 
   it('should not show price if there are no items in the cart', () => {
-    const {queryByTestId} = render(
-      <MiniCart type="sidebar" hideContent={false} showPrice={true}/>
+    const { queryByTestId } = render(
+      <MiniCart type="sidebar" hideContent={false} showPrice />
     )
     expect(queryByTestId('total-price')).toBeNull()
   })
 
   it('should show price if there are items in the cart', async () => {
-    const {getByTestId} = render(
-      <MiniCart type="sidebar" hideContent={false} showPrice={true}/>,
+    const { getByTestId } = render(
+      <MiniCart type="sidebar" hideContent={false} showPrice />,
       { graphql: { mocks } }
     )
     await flushPromises()

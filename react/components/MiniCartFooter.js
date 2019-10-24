@@ -18,7 +18,6 @@ const MiniCartFooter = ({
   buttonLink,
   showDiscount,
   discount,
-  labelDiscount,
   showShippingCost,
 }) => {
   const { rootPath = '' } = useRuntime()
@@ -39,9 +38,7 @@ const MiniCartFooter = ({
   const shouldShowShippingCost = showShippingCost && shippingCost > 0
 
   const footerClasses = classNames(
-    `${
-      minicart.contentFooter
-    } w-100 bg-base pa4 pv5 flex flex-column items-end`,
+    `${minicart.contentFooter} w-100 bg-base pa4 pv5 flex flex-column items-end`,
     {
       'bt b--muted-3': shouldShowShippingCost || isSizeLarge,
     }
@@ -72,7 +69,9 @@ const MiniCartFooter = ({
       <div className={footerClasses}>
         {!isUpdating && showDiscount && discount > 0 && (
           <div className={priceAndDiscountClasses}>
-            <span className="ttl c-action-primary">{labelDiscount}</span>
+            <span className="ttl c-action-primary">
+              <FormattedMessage id="store/minicart-content-footer-discount" />
+            </span>
             <ProductPrice
               sellingPriceClass="c-action-primary t-body ph2 dib"
               sellingPrice={discount}
@@ -97,7 +96,9 @@ const MiniCartFooter = ({
         </div>
         <div className={checkoutButtonClasses}>
           <Button variation="primary" size="small" onClick={handleClickButton}>
-            {buttonLabel}
+            {buttonLabel || (
+              <FormattedMessage id="store/finish-shopping-button-label" />
+            )}
           </Button>
         </div>
       </div>
