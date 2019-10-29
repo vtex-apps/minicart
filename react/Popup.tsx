@@ -4,6 +4,8 @@ import { useCssHandles } from 'vtex.css-handles'
 
 const boxPositionStyle = {
   right: -40,
+  width: 364,
+  top: '100%',
 }
 
 const CSS_HANDLES = [
@@ -27,15 +29,16 @@ const Popup: FC<Props> = ({ children, onOutsideClick }) => {
         onClick={onOutsideClick}
       />
       <div
-        className={`${handles.box} dn db-ns absolute z-max flex flex-colunm`}
+        className={`${handles.popupWrapper} dn db-ns absolute z-max flex flex-colunm`}
         style={boxPositionStyle}
       >
         <div className={`${handles.popupContentContainer} shadow-3`}>
           <div
             className={`${handles.arrowUp} absolute top-0 shadow-3 bg-base h1 w1 pa4 rotate-45`}
+            style={{ right: 7 }}
           />
           <div
-            className={`${handles.popupChildrenContainer} mt3 bg-base relative flex flex-column`}
+            className={`${handles.popupChildrenContainer} mt3 bg-base relative flex flex-column ph5 pv3`}
           >
             {children}
           </div>
