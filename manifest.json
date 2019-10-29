@@ -25,7 +25,9 @@
     "vtex.css-handles": "0.x",
     "vtex.order-manager": "0.x",
     "vtex.order-items": "0.x",
-    "vtex.product-list": "0.x"
+    "vtex.product-list": "0.x",
+    "vtex.device-detector": "0.x",
+    "vtex.store-drawer": "0.x"
   },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }
