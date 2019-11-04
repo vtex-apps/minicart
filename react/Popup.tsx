@@ -32,7 +32,7 @@ const Popup: FC<Props> = ({ children, onOutsideClick }) => {
         className={`${handles.popupWrapper} absolute z-max flex flex-colunm`}
         style={boxPositionStyle}
       >
-        <div className={`${handles.popupContentContainer} shadow-3`}>
+        <div className={`${handles.popupContentContainer} shadow-3 bg-base`}>
           <div
             className={`${handles.arrowUp} absolute top-0 shadow-3 bg-base h1 w1 pa4 rotate-45`}
             style={{ right: 7 }}
