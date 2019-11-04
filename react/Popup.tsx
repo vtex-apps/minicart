@@ -29,7 +29,7 @@ const Popup: FC<Props> = ({ children, onOutsideClick }) => {
         onClick={onOutsideClick}
       />
       <div
-        className={`${handles.popupWrapper} dn db-ns absolute z-max flex flex-colunm`}
+        className={`${handles.popupWrapper} absolute z-max flex flex-colunm`}
         style={boxPositionStyle}
       >
         <div className={`${handles.popupContentContainer} shadow-3`}>
@@ -38,7 +38,8 @@ const Popup: FC<Props> = ({ children, onOutsideClick }) => {
             style={{ right: 7 }}
           />
           <div
-            className={`${handles.popupChildrenContainer} mt3 bg-base relative flex flex-column ph5 pv3`}
+            className={`${handles.popupChildrenContainer} overflow-y-scroll mt3 bg-base relative flex flex-column ph5 pv3`}
+            style={{ maxHeight: 470 }}
           >
             {children}
           </div>

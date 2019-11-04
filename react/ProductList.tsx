@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { OrderItemsProvider, useOrderItems } from 'vtex.order-items/OrderItems'
 import { ExtensionPoint } from 'vtex.render-runtime'
 
-const ProductList: FunctionComponent = () => {
+const ProductList: FC = () => {
   const {
     orderForm: { items },
   } = useOrderForm()

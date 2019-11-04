@@ -1,138 +1,106 @@
-import React, { useState } from 'react'
-import { ButtonWithIcon, Button } from 'vtex.styleguide'
+import React, { useState, Fragment, FC } from 'react'
+import { ButtonWithIcon } from 'vtex.styleguide'
 import { IconCart } from 'vtex.store-icons'
-import { ExtensionPoint } from 'vtex.render-runtime'
-import { OrderQueueProvider } from 'vtex.order-manager/OrderQueue'
-import { OrderFormProvider, useOrderForm } from 'vtex.order-manager/OrderForm'
+import { useOrderForm } from 'vtex.order-manager/OrderForm'
+import { useDevice } from 'vtex.device-detector'
+import { useCssHandles } from 'vtex.css-handles'
+import { Drawer } from 'vtex.store-drawer'
 
 import Popup from './Popup'
+import Content from './Content'
 
-const Minicart = () => {
-  const { loading, orderForm } = useOrderForm()
+const CSS_HANDLES = [
+  'minicartWrapperContainer',
+  'minicartContent',
+  'minicartSideBarContentWrapper',
+  'minicartContainer',
+  'minicartIconContainer',
+  'minicartQuantityBadge',
+  'minicartFooter',
+  'minicartEmptyStateText',
+  'minicartEmptyStateContainer',
+] as const
+
+interface Props {
+  type: 'popup' | 'sidebar'
+  maxSidebarWidth: number | string
+}
+
+const Minicart: FC<Props> = ({ type, maxSidebarWidth = 340 }) => {
+  const {
+    orderForm,
+    loading,
+  }: { loading: boolean; orderForm: OrderForm } = useOrderForm()
   const [isOpen, setIsOpen] = useState(false)
-
-  console.log(orderForm)
+  const handles = useCssHandles(CSS_HANDLES)
+  const { isMobile } = useDevice()
 
   if (loading) {
-    return <span>Loading...</span>
+    return null
   }
 
-  // const getFilteredItems = () => {
-  //   return orderForm.items.filter(shouldShowItem)
-  // }
+  const itemQuantity = orderForm.items.length
 
-  // const itemsToShow = getFilteredItems()
-  // const totalItemsSum = arr =>
-  //   arr.reduce((sum, product) => sum + product.quantity, 0)
-  // const quantity = showTotalItemsQty
-  //   ? totalItemsSum(itemsToShow)
-  //   : itemsToShow.length
+  const isSideBarMode =
+    (type && type === 'sidebar') ||
+    isMobile ||
+    (window && window.innerWidth <= 480)
 
-  // const priceClasses = classNames(
-  //   `${styles.label} dn-m db-l t-action--small ${labelClasses}`,
-  //   {
-  //     pl6: quantity > 0,
-  //     pl4: quantity <= 0,
-  //   }
-  // )
-
-  // const isPriceVisible = false
-  // const iconLabelClasses = classNames(
-  //   `${styles.label} dn-m db-l ${
-  //     isPriceVisible ? 't-mini' : 't-action--small'
-  //   } ${labelClasses}`,
-  //   {
-  //     pl6: quantity > 0,
-  //     pl4: quantity <= 0,
-  //   }
-  // )
+  const MinicartIconButton = (
+    <ButtonWithIcon
+      icon={
+        <span className={`${handles.minicartIconContainer} relative`}>
+          <IconCart />
+          {itemQuantity > 0 && (
+            <span
+              data-testid="item-qty"
+              style={{
+                top: '-0.7rem',
+                right: '-0.8rem',
+              }}
+              className={`${handles.minicartQuantityBadge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
+            >
+              {itemQuantity}
+            </span>
+          )}
+        </span>
+      }
+      variation="tertiary"
+      onClick={() => setIsOpen(!isOpen)}
+    />
+  )
 
   return (
-    <aside className={`relative fr flex items-center`}>
-      <div className="flex flex-column">
-        <ButtonWithIcon
-          icon={
-            <span className={`relative`}>
-              <IconCart />
-              {/* {quantity > 0 && (
-                <span
-                  data-testid="item-qty"
-                  className={`${styles.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
-                >
-                  {quantity}
-                </span>
-              )} */}
-            </span>
-          }
-          variation="tertiary"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {/* {(iconLabel || isPriceVisible) && (
-            <span className="flex items-center">
-              <span className="flex flex-column items-start">
-                {iconLabel && (
-                  <span className={iconLabelClasses}>{iconLabel}</span>
-                )}
-                {isPriceVisible && (
-                  <span data-testid="total-price" className={priceClasses}>
-                    <div>
-                      <ProductPrice
-                        showLabels={false}
-                        showListPrice={false}
-                        sellingPrice={orderForm.value}
-                      />
-                    </div>
-                  </span>
-                )}
-              </span>
-            </span>
-          )} */}
-        </ButtonWithIcon>
-        {isOpen && (
-          <Popup onOutsideClick={() => setIsOpen(!isOpen)}>
-            <ExtensionPoint id="minicart-product-list-wrapper" />
-            <div className="pv3">
-              <Button
-                id="proceed-to-checkout"
-                href="/checkout/#payment"
-                variation="primary"
-                size="large"
-                block
-              >
-                {/* <FormattedMessage id="store/cart.checkout" /> */}
-                Go to checkout
-              </Button>
-            </div>
-          </Popup>
-        )}
-        {/* {!hideContent &&
-          (isSizeLarge ? (
-            <Sidebar
-              quantity={quantity}
-              iconSize={iconSize}
-              onOutsideClick={handleUpdateContentVisibility}
-              isOpen={isOpen}
+    <aside
+      className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
+    >
+      <div className={`${handles.minicartContainer} flex flex-column`}>
+        {isSideBarMode ? (
+          <Drawer
+            maxWidth={maxSidebarWidth}
+            slideDirection="rightToLeft"
+            customIcon={MinicartIconButton}
+          >
+            <div
+              className={`${handles.minicartSideBarContentWrapper} ph4`}
+              style={{ maxHeight: '100vh' }}
             >
-              {miniCartContent}
-            </Sidebar>
-          ) : (
-            isOpen && (
-              <Popup onOutsideClick={handleUpdateContentVisibility}>
-                {miniCartContent}
+              <Content />
+            </div>
+          </Drawer>
+        ) : (
+          <Fragment>
+            {MinicartIconButton}
+            {isOpen && (
+              <Popup onOutsideClick={() => setIsOpen(!isOpen)}>
+                <Content />
               </Popup>
-            )
-          ))} */}
+            )}
+          </Fragment>
+        )}
       </div>
     </aside>
   )
 }
 
-const EnhancedMinicart = () => (
-  <OrderQueueProvider>
-    <OrderFormProvider>
-      <Minicart />
-    </OrderFormProvider>
-  </OrderQueueProvider>
-)
-
-export default EnhancedMinicart
+export default Minicart

@@ -1,15 +1,14 @@
 {
   "minicart": {
-    "required": ["product-summary"],
-    "allowed": ["sandbox"],
-    "component": "MinicartLegacy"
-  },
-  "minicartv2": {
     "component": "Minicart",
-    "allowed": ["minicart-product-list-wrapper"]
+    "allowed": ["minicart-product-list", "minicart-summary"]
   },
-  "minicart-product-list-wrapper": {
-    "component": "ProductListWrapper",
+  "minicart-product-list": {
+    "component": "ProductList",
     "allowed": ["product-list"]
+  },
+  "minicart-summary": {
+    "component": "Summary",
+    "allowed": ["checkout-summary"]
   }
 }
