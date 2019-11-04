@@ -17,5 +17,6 @@
   "store/minicart.error-removal": "A remoção do item falhou, por favor tente novamente",
   "store/minicart.shipping-cost": "Custo de entrega",
   "store/minicart.checkout-failure": "Algo deu errado. Por favor, tente novamente.",
-  "store/minicart.go-to-checkout": "Ir para o checkout"
+  "store/minicart.go-to-checkout": "Ir para o checkout",
+  "store/minicart.empty-state": "Seu carrinho está vazio."
 }

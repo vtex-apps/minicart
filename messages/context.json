@@ -17,5 +17,6 @@
   "store/minicart.error-removal": "store/minicart.error-removal",
   "store/minicart.shipping-cost": "store/minicart.shipping-cost",
   "store/minicart.checkout-failure": "Message showed when there is a problem to a request to the server.",
-  "store/minicart.go-to-checkout": "Go to checkout"
+  "store/minicart.go-to-checkout": "Go to checkout",
+  "store/minicart.empty-state": "store/cart.empty-state"
 }
