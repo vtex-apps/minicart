@@ -23,7 +23,8 @@ const Content: FC = () => {
 
   return !loading && orderForm.items.length === 0 ? (
     <div
-      className={`${handles.minicartEmptyStateContainer} pa9 flex items-center justify-center relative bg-base`}
+      className={`${handles.minicartEmptyStateContainer} pa9 flex justify-center`}
+      style={{ width: 340 }}
     >
       <span className={`${handles.minicartEmptyStateText} t-body`}>
         <FormattedMessage id="store/minicart.empty-state" />
