@@ -10,6 +10,10 @@ interface OrderFormContext {
   loading: boolean
 }
 
+interface Props {
+  sideBarMode: boolean
+}
+
 const CSS_HANDLES = [
   'minicartContent',
   'minicartFooter',
@@ -17,9 +21,17 @@ const CSS_HANDLES = [
   'minicartEmptyStateContainer',
 ] as const
 
-const Content: FC = () => {
+const Content: FC<Props> = ({ sideBarMode }) => {
   const { orderForm, loading }: OrderFormContext = useOrderForm()
   const handles = useCssHandles(CSS_HANDLES)
+
+  const sideBarStyles = {
+    height: '100vh',
+  }
+
+  const popupStyles = {
+    maxHeight: 500,
+  }
 
   return !loading && orderForm.items.length === 0 ? (
     <div
@@ -31,7 +43,10 @@ const Content: FC = () => {
       </span>
     </div>
   ) : (
-    <div className={`${handles.minicartContent} flex flex-column`}>
+    <div
+      className={`${handles.minicartContent} flex flex-column`}
+      style={sideBarMode ? sideBarStyles : popupStyles}
+    >
       <h3 className="t-heading-3 mv2 c-on-base center">Cart</h3>
       <ExtensionPoint id="minicart-product-list" />
       <div className={`${handles.minicartFooter} pv3 sticky`}>

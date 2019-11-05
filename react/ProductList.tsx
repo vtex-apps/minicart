@@ -14,12 +14,14 @@ const ProductList: FC = () => {
   const handleRemove = (uniqueId: string) => removeItem({ uniqueId })
 
   return (
-    <ExtensionPoint
-      id="product-list"
-      items={items}
-      onQuantityChange={handleQuantityChange}
-      onRemove={handleRemove}
-    />
+    <div className="overflow-y-scroll">
+      <ExtensionPoint
+        id="product-list"
+        items={items}
+        onQuantityChange={handleQuantityChange}
+        onRemove={handleRemove}
+      />
+    </div>
   )
 }
 

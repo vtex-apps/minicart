@@ -85,7 +85,7 @@ const Minicart: FC<Props> = ({ type, maxSidebarWidth = 340 }) => {
               className={`${handles.minicartSideBarContentWrapper} ph4`}
               style={{ maxHeight: '100vh' }}
             >
-              <Content />
+              <Content sideBarMode={isSideBarMode} />
             </div>
           </Drawer>
         ) : (
@@ -93,7 +93,7 @@ const Minicart: FC<Props> = ({ type, maxSidebarWidth = 340 }) => {
             {MinicartIconButton}
             {isOpen && (
               <Popup onOutsideClick={() => setIsOpen(!isOpen)}>
-                <Content />
+                <Content sideBarMode={isSideBarMode} />
               </Popup>
             )}
           </Fragment>

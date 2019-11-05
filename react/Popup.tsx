@@ -24,6 +24,8 @@ const Popup: FC<Props> = ({ children, onOutsideClick }) => {
 
   return (
     <Overlay>
+      {/* eslint-disable jsx-a11y/click-events-have-key-events */
+      /* eslint-disable jsx-a11y/no-static-element-interactions */}
       <div
         className="fixed top-0 left-0 w-100 h-100"
         onClick={onOutsideClick}
@@ -32,14 +34,15 @@ const Popup: FC<Props> = ({ children, onOutsideClick }) => {
         className={`${handles.popupWrapper} absolute z-max flex flex-colunm`}
         style={boxPositionStyle}
       >
-        <div className={`${handles.popupContentContainer} shadow-3 bg-base`}>
+        <div
+          className={`${handles.popupContentContainer} w-100 shadow-3 bg-base`}
+        >
           <div
-            className={`${handles.arrowUp} absolute top-0 shadow-3 bg-base h1 w1 pa4 rotate-45`}
+            className={`${handles.arrowUp} absolute top-0 bg-base h1 w1 pa4 rotate-45`}
             style={{ right: 7 }}
           />
           <div
-            className={`${handles.popupChildrenContainer} overflow-y-scroll mt3 bg-base relative flex flex-column ph5 pv3`}
-            style={{ maxHeight: 470 }}
+            className={`${handles.popupChildrenContainer} mt3 bg-base relative flex flex-column ph5 pv3`}
           >
             {children}
           </div>
