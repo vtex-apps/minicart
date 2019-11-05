@@ -49,7 +49,7 @@ const Minicart: FC<Props> = ({ type, maxSidebarWidth = 340 }) => {
   const MinicartIconButton = (
     <ButtonWithIcon
       icon={
-        <span className={`${handles.minicartIconContainer} relative`}>
+        <span className={`${handles.minicartIconContainer} gray relative`}>
           <IconCart />
           {itemQuantity > 0 && (
             <span
