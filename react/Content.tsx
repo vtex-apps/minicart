@@ -32,6 +32,7 @@ const Content: FC = () => {
     </div>
   ) : (
     <div className={`${handles.minicartContent} flex flex-column`}>
+      <h3 className="t-heading-3 mv2 c-on-base center">Cart</h3>
       <ExtensionPoint id="minicart-product-list" />
       <div className={`${handles.minicartFooter} pv3 sticky`}>
         <ExtensionPoint id="minicart-summary" />
@@ -39,7 +40,6 @@ const Content: FC = () => {
           id="proceed-to-checkout"
           href="/checkout/#/cart"
           variation="primary"
-          size="large"
           block
         >
           <FormattedMessage id="store/minicart.go-to-checkout" />
