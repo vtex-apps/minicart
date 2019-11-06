@@ -1,0 +1,23 @@
+// This is the default blocks implementation for the minicart
+{
+  "minicart": {
+    "blocks": ["minicart-product-list", "minicart-summary"]
+  },
+
+  "minicart-product-list": {
+    "blocks": ["product-list"]
+  },
+  "minicart-summary": {
+    "blocks": ["checkout-summary.compact"]
+  },
+
+  "checkout-summary.compact": {
+    "children": ["summary-totalizers#minicart"]
+  },
+  "summary-totalizers#minicart": {
+    "props": {
+      "showTotal": false,
+      "showDeliveryTotal": false
+    }
+  }
+}
