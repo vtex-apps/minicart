@@ -44,11 +44,13 @@ const Content: FC<Props> = ({ sideBarMode }) => {
     </div>
   ) : (
     <div
-      className={`${handles.minicartContent} flex flex-column`}
+      className={`${handles.minicartContent} flex flex-column justify-between`}
       style={sideBarMode ? sideBarStyles : popupStyles}
     >
-      <h3 className="t-heading-3 mv2 c-on-base">Cart</h3>
-      <ExtensionPoint id="minicart-product-list" />
+      <div className="w-100 overflow-y-scroll">
+        <h3 className="t-heading-3 mv2 c-on-base">Cart</h3>
+        <ExtensionPoint id="minicart-product-list" />
+      </div>
       <div
         className={`${handles.minicartFooter} ${
           sideBarMode ? 'pa4' : 'pv3'
