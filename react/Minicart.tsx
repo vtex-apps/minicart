@@ -26,7 +26,9 @@ interface Props {
   maxSidebarWidth: number | string
 }
 
-const Minicart: FC<Props> = ({ type, maxSidebarWidth = 340 }) => {
+const DRAWER_CLOSE_ICON_HEIGHT = 57
+
+const Minicart: FC<Props> = ({ type = 'sidebar', maxSidebarWidth = 400 }) => {
   const {
     orderForm,
     loading,
@@ -42,9 +44,7 @@ const Minicart: FC<Props> = ({ type, maxSidebarWidth = 340 }) => {
   const itemQuantity = orderForm.items.length
 
   const isSideBarMode =
-    (type && type === 'sidebar') ||
-    isMobile ||
-    (window && window.innerWidth <= 480)
+    type === 'sidebar' || isMobile || (window && window.innerWidth <= 480)
 
   const MinicartIconButton = (
     <ButtonWithIcon
@@ -82,8 +82,8 @@ const Minicart: FC<Props> = ({ type, maxSidebarWidth = 340 }) => {
             customIcon={MinicartIconButton}
           >
             <div
-              className={`${handles.minicartSideBarContentWrapper} ph4`}
-              style={{ maxHeight: '100vh' }}
+              className={`${handles.minicartSideBarContentWrapper} w-100 h-100 ph4`}
+              style={{ height: window.innerHeight - DRAWER_CLOSE_ICON_HEIGHT }}
             >
               <Content sideBarMode={isSideBarMode} />
             </div>

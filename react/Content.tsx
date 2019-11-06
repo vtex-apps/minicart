@@ -26,7 +26,7 @@ const Content: FC<Props> = ({ sideBarMode }) => {
   const handles = useCssHandles(CSS_HANDLES)
 
   const sideBarStyles = {
-    height: '100vh',
+    height: '100%',
   }
 
   const popupStyles = {
@@ -47,9 +47,13 @@ const Content: FC<Props> = ({ sideBarMode }) => {
       className={`${handles.minicartContent} flex flex-column`}
       style={sideBarMode ? sideBarStyles : popupStyles}
     >
-      <h3 className="t-heading-3 mv2 c-on-base center">Cart</h3>
+      <h3 className="t-heading-3 mv2 c-on-base">Cart</h3>
       <ExtensionPoint id="minicart-product-list" />
-      <div className={`${handles.minicartFooter} pv3 sticky`}>
+      <div
+        className={`${handles.minicartFooter} ${
+          sideBarMode ? 'pa4' : 'pv3'
+        } sticky`}
+      >
         <ExtensionPoint id="minicart-summary" />
         <Button
           id="proceed-to-checkout"
