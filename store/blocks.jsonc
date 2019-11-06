@@ -1,9 +1,14 @@
 // This is the default blocks implementation for the minicart
 {
   "minicart": {
-    "blocks": ["minicart-product-list", "minicart-summary"]
+    "children": ["minicart-base-content"]
   },
-
+  "minicart-base-content": {
+    "blocks": ["minicart-product-list", "minicart-summary"],
+    "props": {
+      "finishShoppingButtonLink": "/checkout/#/cart"
+    }
+  },
   "minicart-product-list": {
     "blocks": ["product-list"]
   },

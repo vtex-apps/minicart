@@ -1,4 +1,4 @@
-import React, { useState, Fragment, FC } from 'react'
+import React, { useState, Fragment, FC, createContext } from 'react'
 import { ButtonWithIcon } from 'vtex.styleguide'
 import { IconCart } from 'vtex.store-icons'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
@@ -7,7 +7,6 @@ import { useCssHandles } from 'vtex.css-handles'
 import { Drawer } from 'vtex.store-drawer'
 
 import Popup from './Popup'
-import Content from './Content'
 
 const CSS_HANDLES = [
   'minicartWrapperContainer',
@@ -28,7 +27,15 @@ interface Props {
 
 const DRAWER_CLOSE_ICON_HEIGHT = 57
 
-const Minicart: FC<Props> = ({ type = 'sidebar', maxSidebarWidth = 400 }) => {
+export const MinicartTypeContext = createContext<
+  { isSideBar: boolean } | undefined
+>(undefined)
+
+const Minicart: FC<Props> = ({
+  type = 'sidebar',
+  maxSidebarWidth = 400,
+  children,
+}) => {
   const {
     orderForm,
     loading,
@@ -43,8 +50,9 @@ const Minicart: FC<Props> = ({ type = 'sidebar', maxSidebarWidth = 400 }) => {
 
   const itemQuantity = orderForm.items.length
 
-  const isSideBarMode =
+  const isSideBarMode = Boolean(
     type === 'sidebar' || isMobile || (window && window.innerWidth <= 480)
+  )
 
   const MinicartIconButton = (
     <ButtonWithIcon
@@ -71,35 +79,39 @@ const Minicart: FC<Props> = ({ type = 'sidebar', maxSidebarWidth = 400 }) => {
   )
 
   return (
-    <aside
-      className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
-    >
-      <div className={`${handles.minicartContainer} flex flex-column`}>
-        {isSideBarMode ? (
-          <Drawer
-            maxWidth={maxSidebarWidth}
-            slideDirection="rightToLeft"
-            customIcon={MinicartIconButton}
-          >
-            <div
-              className={`${handles.minicartSideBarContentWrapper} w-100 h-100 ph4`}
-              style={{ height: window.innerHeight - DRAWER_CLOSE_ICON_HEIGHT }}
+    <MinicartTypeContext.Provider value={{ isSideBar: isSideBarMode }}>
+      <aside
+        className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
+      >
+        <div className={`${handles.minicartContainer} flex flex-column`}>
+          {isSideBarMode ? (
+            <Drawer
+              maxWidth={maxSidebarWidth}
+              slideDirection="rightToLeft"
+              customIcon={MinicartIconButton}
             >
-              <Content sideBarMode={isSideBarMode} />
-            </div>
-          </Drawer>
-        ) : (
-          <Fragment>
-            {MinicartIconButton}
-            {isOpen && (
-              <Popup onOutsideClick={() => setIsOpen(!isOpen)}>
-                <Content sideBarMode={isSideBarMode} />
-              </Popup>
-            )}
-          </Fragment>
-        )}
-      </div>
-    </aside>
+              <div
+                className={`${handles.minicartSideBarContentWrapper} w-100 h-100 ph4`}
+                style={{
+                  height: window.innerHeight - DRAWER_CLOSE_ICON_HEIGHT,
+                }}
+              >
+                {children}
+              </div>
+            </Drawer>
+          ) : (
+            <Fragment>
+              {MinicartIconButton}
+              {isOpen && (
+                <Popup onOutsideClick={() => setIsOpen(!isOpen)}>
+                  {children}
+                </Popup>
+              )}
+            </Fragment>
+          )}
+        </div>
+      </aside>
+    </MinicartTypeContext.Provider>
   )
 }
 

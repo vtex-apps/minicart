@@ -1,9 +1,11 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { useCssHandles } from 'vtex.css-handles'
 import { Button } from 'vtex.styleguide'
+
+import { MinicartTypeContext } from './Minicart'
 
 interface OrderFormContext {
   orderForm: OrderForm
@@ -12,6 +14,7 @@ interface OrderFormContext {
 
 interface Props {
   sideBarMode: boolean
+  finishShoppingButtonLink: string
 }
 
 const CSS_HANDLES = [
@@ -21,9 +24,10 @@ const CSS_HANDLES = [
   'minicartEmptyStateContainer',
 ] as const
 
-const Content: FC<Props> = ({ sideBarMode }) => {
+const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
   const { orderForm, loading }: OrderFormContext = useOrderForm()
   const handles = useCssHandles(CSS_HANDLES)
+  const { isSideBar } = useContext(MinicartTypeContext) || { isSideBar: false }
 
   const sideBarStyles = {
     height: '100%',
@@ -45,7 +49,7 @@ const Content: FC<Props> = ({ sideBarMode }) => {
   ) : (
     <div
       className={`${handles.minicartContent} flex flex-column justify-between`}
-      style={sideBarMode ? sideBarStyles : popupStyles}
+      style={isSideBar ? sideBarStyles : popupStyles}
     >
       <div className="w-100 overflow-y-scroll">
         <h3 className="t-heading-3 mv2 c-on-base">Cart</h3>
@@ -53,13 +57,13 @@ const Content: FC<Props> = ({ sideBarMode }) => {
       </div>
       <div
         className={`${handles.minicartFooter} ${
-          sideBarMode ? 'pa4' : 'pv3'
+          isSideBar ? 'pa4' : 'pv3'
         } sticky`}
       >
         <ExtensionPoint id="minicart-summary" />
         <Button
           id="proceed-to-checkout"
-          href="/checkout/#/cart"
+          href={finishShoppingButtonLink}
           variation="primary"
           block
         >
