@@ -1,5 +1,5 @@
 import React, { useState, Fragment, FC, createContext } from 'react'
-import { ButtonWithIcon } from 'vtex.styleguide'
+import { ButtonWithIcon, Spinner } from 'vtex.styleguide'
 import { IconCart } from 'vtex.store-icons'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { useDevice } from 'vtex.device-detector'
@@ -21,8 +21,14 @@ const CSS_HANDLES = [
 ] as const
 
 interface Props {
-  type: 'popup' | 'sidebar'
-  maxSidebarWidth: number | string
+  variation: 'popup' | 'drawer' | 'link'
+  linkUrl: string
+  maxDrawerWidth: number | string
+  drawerSlideDirection:
+    | 'horizontal'
+    | 'vertical'
+    | 'rightToLeft'
+    | 'leftToRight'
 }
 
 const DRAWER_CLOSE_ICON_HEIGHT = 57
@@ -32,8 +38,10 @@ export const MinicartTypeContext = createContext<
 >(undefined)
 
 const Minicart: FC<Props> = ({
-  type = 'sidebar',
-  maxSidebarWidth = 400,
+  variation = 'drawer',
+  maxDrawerWidth = 400,
+  drawerSlideDirection = 'rightToLeft',
+  linkUrl = '/checkout/#/cart',
   children,
 }) => {
   const {
@@ -44,15 +52,16 @@ const Minicart: FC<Props> = ({
   const handles = useCssHandles(CSS_HANDLES)
   const { isMobile } = useDevice()
 
-  if (loading) {
-    return null
+  if (loading || !orderForm) {
+    return <Spinner />
   }
 
   const itemQuantity = orderForm.items.length
 
-  const isSideBarMode = Boolean(
-    type === 'sidebar' || isMobile || (window && window.innerWidth <= 480)
+  const isDrawerMode = Boolean(
+    variation === 'drawer' || isMobile || (window && window.innerWidth <= 480)
   )
+  const isLinkMode = variation === 'link'
 
   const MinicartIconButton = (
     <ButtonWithIcon
@@ -78,37 +87,43 @@ const Minicart: FC<Props> = ({
     />
   )
 
+  const DrawerMode = (
+    <Drawer
+      maxWidth={maxDrawerWidth}
+      slideDirection={drawerSlideDirection}
+      customIcon={MinicartIconButton}
+    >
+      <div
+        className={`${handles.minicartSideBarContentWrapper} w-100 h-100 ph4`}
+        style={{
+          height: window.innerHeight - DRAWER_CLOSE_ICON_HEIGHT,
+        }}
+      >
+        {children}
+      </div>
+    </Drawer>
+  )
+
+  const PopupMode = (
+    <Fragment>
+      {MinicartIconButton}
+      {isOpen && (
+        <Popup onOutsideClick={() => setIsOpen(!isOpen)}>{children}</Popup>
+      )}
+    </Fragment>
+  )
+
+  const LinkMode = <a href={linkUrl}>{MinicartIconButton}</a>
+
+  // REMEMBER TO PUSH EVENT TO PIXEL SERVER
+
   return (
-    <MinicartTypeContext.Provider value={{ isSideBar: isSideBarMode }}>
+    <MinicartTypeContext.Provider value={{ isSideBar: isDrawerMode }}>
       <aside
         className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
       >
         <div className={`${handles.minicartContainer} flex flex-column`}>
-          {isSideBarMode ? (
-            <Drawer
-              maxWidth={maxSidebarWidth}
-              slideDirection="rightToLeft"
-              customIcon={MinicartIconButton}
-            >
-              <div
-                className={`${handles.minicartSideBarContentWrapper} w-100 h-100 ph4`}
-                style={{
-                  height: window.innerHeight - DRAWER_CLOSE_ICON_HEIGHT,
-                }}
-              >
-                {children}
-              </div>
-            </Drawer>
-          ) : (
-            <Fragment>
-              {MinicartIconButton}
-              {isOpen && (
-                <Popup onOutsideClick={() => setIsOpen(!isOpen)}>
-                  {children}
-                </Popup>
-              )}
-            </Fragment>
-          )}
+          {isLinkMode ? LinkMode : isDrawerMode ? DrawerMode : PopupMode}
         </div>
       </aside>
     </MinicartTypeContext.Provider>
