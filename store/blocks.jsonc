@@ -17,11 +17,14 @@
   },
 
   "checkout-summary.compact": {
-    "children": ["summary-totalizers#minicart"]
+    "children": ["summary-totalizers#minicart"],
+    "props": {
+      "totalizersToShow": ["Items", "Discounts"]
+    }
   },
   "summary-totalizers#minicart": {
     "props": {
-      "showTotal": false,
+      "showTotal": true,
       "showDeliveryTotal": false
     }
   }
