@@ -34,7 +34,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
   }
 
   const popupStyles = {
-    maxHeight: 500,
+    maxHeight: 600,
   }
 
   return !loading && orderForm.items.length === 0 ? (
