@@ -537,6 +537,11 @@ EnhancedMinicart.schema = {
       },
       isLayout: true,
     },
+    iconLabel: {
+      title: 'admin/editor.minicart.iconLabel.title',
+      type: 'string',
+      isLayout: false,
+    },
     showDiscount: {
       title: 'admin/editor.minicart.showDiscount.title',
       type: 'boolean',
