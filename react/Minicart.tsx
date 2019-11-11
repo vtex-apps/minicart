@@ -115,8 +115,6 @@ const Minicart: FC<Props> = ({
 
   const LinkMode = <a href={linkUrl}>{MinicartIconButton}</a>
 
-  // REMEMBER TO PUSH EVENT TO PIXEL SERVER
-
   return (
     <MinicartTypeContext.Provider value={{ isSideBar: isDrawerMode }}>
       <aside
