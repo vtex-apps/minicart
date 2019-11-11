@@ -1,5 +1,5 @@
 import React, { useState, Fragment, FC, createContext } from 'react'
-import { ButtonWithIcon, Spinner } from 'vtex.styleguide'
+import { ButtonWithIcon } from 'vtex.styleguide'
 import { IconCart } from 'vtex.store-icons'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { useDevice } from 'vtex.device-detector'
@@ -53,7 +53,7 @@ const Minicart: FC<Props> = ({
   const { isMobile } = useDevice()
 
   if (loading || !orderForm) {
-    return <Spinner />
+    return null
   }
 
   const itemQuantity = orderForm.items.length
