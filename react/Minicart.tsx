@@ -52,11 +52,11 @@ const Minicart: FC<Props> = ({
   const handles = useCssHandles(CSS_HANDLES)
   const { isMobile } = useDevice()
 
-  if (loading || !orderForm) {
+  if (!orderForm) {
     return null
   }
 
-  const itemQuantity = orderForm.items.length
+  const itemQuantity = loading ? 0 : orderForm.items.length
 
   const isDrawerMode = Boolean(
     variation === 'drawer' || isMobile || (window && window.innerWidth <= 480)
