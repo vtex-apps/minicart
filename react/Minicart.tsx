@@ -1,4 +1,4 @@
-import React, { useState, Fragment, FC, createContext } from 'react'
+import React, { useState, Fragment, FC, createContext, useRef } from 'react'
 import { ButtonWithIcon } from 'vtex.styleguide'
 import { IconCart } from 'vtex.store-icons'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
@@ -7,6 +7,7 @@ import { useCssHandles } from 'vtex.css-handles'
 import { Drawer } from 'vtex.store-drawer'
 
 import Popup from './Popup'
+import useHovering from './hooks/useHover'
 
 const CSS_HANDLES = [
   'minicartWrapperContainer',
@@ -38,7 +39,7 @@ export const MinicartTypeContext = createContext<
 >(undefined)
 
 const Minicart: FC<Props> = ({
-  variation = 'drawer',
+  variation = 'popup',
   maxDrawerWidth = 400,
   drawerSlideDirection = 'rightToLeft',
   linkUrl = '/checkout/#/cart',
@@ -51,6 +52,9 @@ const Minicart: FC<Props> = ({
   const [isOpen, setIsOpen] = useState(false)
   const handles = useCssHandles(CSS_HANDLES)
   const { isMobile } = useDevice()
+  const minicartIconRef = useRef<HTMLDivElement>(null)
+
+  const { isHovering } = useHovering(minicartIconRef)
 
   if (!orderForm) {
     return null
@@ -66,7 +70,10 @@ const Minicart: FC<Props> = ({
   const MinicartIconButton = (
     <ButtonWithIcon
       icon={
-        <span className={`${handles.minicartIconContainer} gray relative`}>
+        <span
+          ref={minicartIconRef}
+          className={`${handles.minicartIconContainer} gray relative`}
+        >
           <IconCart />
           {itemQuantity > 0 && (
             <span
@@ -107,7 +114,7 @@ const Minicart: FC<Props> = ({
   const PopupMode = (
     <Fragment>
       {MinicartIconButton}
-      {isOpen && (
+      {(isOpen || isHovering) && (
         <Popup onOutsideClick={() => setIsOpen(!isOpen)}>{children}</Popup>
       )}
     </Fragment>

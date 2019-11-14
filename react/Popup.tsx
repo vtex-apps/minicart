@@ -19,17 +19,17 @@ interface Props {
   onOutsideClick: () => void
 }
 
-const Popup: FC<Props> = ({ children, onOutsideClick }) => {
+const Popup: FC<Props> = ({ children }) => {
   const handles = useCssHandles(CSS_HANDLES)
 
   return (
     <Overlay>
       {/* eslint-disable jsx-a11y/click-events-have-key-events */
       /* eslint-disable jsx-a11y/no-static-element-interactions */}
-      <div
+      {/* <div
         className="fixed top-0 left-0 w-100 h-100"
         onClick={onOutsideClick}
-      />
+      /> */}
       <div
         className={`${handles.popupWrapper} absolute z-max flex flex-colunm`}
         style={boxPositionStyle}
