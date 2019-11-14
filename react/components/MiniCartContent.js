@@ -222,9 +222,9 @@ class MiniCartContent extends Component {
                     <ButtonWithIcon
                       icon={
                         <IconDelete
-                          {...iconsProps}
                           size={15}
                           activeClassName="c-muted-2"
+                          {...iconsProps}
                         />
                       }
                       variation="tertiary"
@@ -286,6 +286,7 @@ class MiniCartContent extends Component {
       showShippingCost,
       orderForm,
       loading,
+      iconsProps,
     } = this.props
     const { isUpdating } = this.state
 
@@ -315,7 +316,8 @@ class MiniCartContent extends Component {
       onClickAction,
       isUpdating,
       isSizeLarge,
-      showShippingCost
+      showShippingCost,
+      iconsProps
     )
   }
 }

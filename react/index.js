@@ -427,7 +427,7 @@ const MiniCart = ({
         <ButtonWithIcon
           icon={
             <span className={`relative ${iconClasses}`}>
-              <IconCart {...iconsProps} size={iconSize} />
+              <IconCart size={iconSize} {...iconsProps} />
               {quantity > 0 && (
                 <span
                   data-testid="item-qty"
