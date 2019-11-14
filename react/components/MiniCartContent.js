@@ -48,6 +48,11 @@ class MiniCartContent extends Component {
     itemsToShow: PropTypes.arrayOf(PropTypes.object),
     /* Pixel push */
     push: PropTypes.func.isRequired,
+    /** Props to passed to icons from store-icons */
+    iconsProps: PropTypes.shape({
+      viewBox: PropTypes.string,
+      size: PropTypes.number,
+    }),
   }
 
   state = { isUpdating: [] }
@@ -119,8 +124,7 @@ class MiniCartContent extends Component {
       ? orderForm.value
       : this.sumItemsPrice(orderForm.items)
 
-
-  getItemCategory = (item) => {
+  getItemCategory = item => {
     if (!item.productCategoryIds || !item.productCategories) {
       return ''
     }
@@ -133,7 +137,7 @@ class MiniCartContent extends Component {
   }
 
   createProductShapeFromItem = item => {
-    return ({
+    return {
       productName: item.name,
       brand: item.additionalInfo ? item.additionalInfo.brandName : undefined,
       category: this.getItemCategory(item),
@@ -156,7 +160,7 @@ class MiniCartContent extends Component {
       assemblyOptions: item.assemblyOptions,
       quantity: item.quantity,
       cartIndex: item.cartIndex,
-    })
+    }
   }
 
   get isUpdating() {
@@ -189,7 +193,8 @@ class MiniCartContent extends Component {
     onClickAction,
     isUpdating,
     isSizeLarge,
-    showShippingCost
+    showShippingCost,
+    iconsProps
   ) => {
     const MIN_ITEMS_TO_SCROLL = 2
 
@@ -214,7 +219,14 @@ class MiniCartContent extends Component {
                       <Spinner size={18} />
                     </div>
                   ) : (
-                    <ButtonWithIcon icon={<IconDelete size={15} activeClassName="c-muted-2" />}
+                    <ButtonWithIcon
+                      icon={
+                        <IconDelete
+                          {...iconsProps}
+                          size={15}
+                          activeClassName="c-muted-2"
+                        />
+                      }
                       variation="tertiary"
                       onClick={() => this.handleItemRemoval(item, index)}
                     />
