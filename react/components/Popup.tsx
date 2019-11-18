@@ -21,7 +21,7 @@ const CSS_HANDLES = [
 ]
 
 const PopupMode: FC = ({ children }) => {
-  const { isOpen } = useMinicartState()
+  const { isOpen, openOnHover } = useMinicartState()
   const dispatch = useMinicartDispatch()
   const handles = useCssHandles(CSS_HANDLES)
 
@@ -35,6 +35,11 @@ const PopupMode: FC = ({ children }) => {
             onClick={() => dispatch({ type: 'CLOSE_MINICART' })}
           />
           <div
+            onMouseLeave={
+              openOnHover
+                ? () => dispatch({ type: 'CLOSE_MINICART' })
+                : undefined
+            }
             className={`${handles.popupWrapper} absolute z-max flex flex-colunm`}
             style={boxPositionStyle}
           >

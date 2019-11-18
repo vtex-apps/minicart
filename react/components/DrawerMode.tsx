@@ -27,7 +27,7 @@ const DrawerMode: FC<Props> = ({
     <Drawer
       maxWidth={maxDrawerWidth}
       slideDirection={drawerSlideDirection}
-      customIcon={MinicartIconButton}
+      customIcon={<MinicartIconButton />}
     >
       <div
         className={`${handles.minicartSideBarContentWrapper} w-100 h-100 ph4`}

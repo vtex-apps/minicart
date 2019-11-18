@@ -43,17 +43,18 @@ function minicartContextReducer(state: State, action: Action): State {
 }
 
 const MinicartContextProvider: FC<Props> = ({
-  variation,
-  openOnHover,
+  variation = 'drawer',
+  openOnHover = false,
   children,
 }) => {
   const { isMobile } = useDevice()
+  const resolvedVariation =
+    isMobile || (window && window.innerWidth <= 480) ? 'drawer' : variation
 
   const [state, dispatch] = useReducer(minicartContextReducer, {
-    variation:
-      isMobile || (window && window.innerWidth <= 480) ? 'drawer' : variation,
+    variation: resolvedVariation,
     isOpen: false,
-    openOnHover,
+    openOnHover: resolvedVariation !== 'popup' ? false : openOnHover,
   })
 
   return (

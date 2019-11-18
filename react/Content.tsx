@@ -1,11 +1,11 @@
-import React, { FC, useContext } from 'react'
+import React, { FC } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { useCssHandles } from 'vtex.css-handles'
 import { Button } from 'vtex.styleguide'
 
-import { MinicartTypeContext } from './Minicart'
+import { useMinicartState } from './MinicartContext'
 
 interface OrderFormContext {
   orderForm: OrderForm
@@ -27,7 +27,7 @@ const CSS_HANDLES = [
 const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
   const { orderForm, loading }: OrderFormContext = useOrderForm()
   const handles = useCssHandles(CSS_HANDLES)
-  const { isSideBar } = useContext(MinicartTypeContext) || { isSideBar: false }
+  const { variation } = useMinicartState()
 
   const sideBarStyles = {
     height: '100%',
@@ -49,7 +49,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
   ) : (
     <div
       className={`${handles.minicartContent} flex flex-column justify-between`}
-      style={isSideBar ? sideBarStyles : popupStyles}
+      style={variation === 'drawer' ? sideBarStyles : popupStyles}
     >
       <div className="w-100 overflow-y-scroll">
         <h3 className="t-heading-3 mv2 c-on-base">Cart</h3>
@@ -57,7 +57,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
       </div>
       <div
         className={`${handles.minicartFooter} ${
-          isSideBar ? 'pa4' : 'pv3'
+          variation === 'drawer' ? 'pa4' : 'pv3'
         } sticky`}
       >
         <ExtensionPoint id="minicart-summary" />
