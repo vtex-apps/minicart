@@ -2,7 +2,8 @@
   "minicart": {
     "component": "Minicart",
     "composition": "children",
-    "allowed": "*"
+    "allowed": "*",
+    "render": "client"
   },
   "minicart-base-content": {
     "component": "Content",
