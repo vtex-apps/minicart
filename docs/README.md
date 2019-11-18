@@ -98,6 +98,7 @@ Through the Storefront, you can change the minicart's behavior and interface. Ho
 | `showTotalItemsQty`         | `Boolean`                               | If the cart should show the total quantity of items or just the quantity of different items in the cart | false                |
 | `showPrice`                 | `Boolean`                               | If the total price of the items in the cart should be displayed at its side                             | false                |
 | `iconsProps`                | `{ "viewBox": String, "size": Number }` | Props to be passed down to the icons from `store-icons`.                                                | -                    |
+| `openOnHover`               | `Boolean`                               | Whether the popup minicart should open when the user hovers over it.                                    | false                |
 
 Also, you can configure the product summary that is defined on minicart. See [here](https://github.com/vtex-apps/product-summary/blob/master/README.md#configuration) the Product Summary API.
 
