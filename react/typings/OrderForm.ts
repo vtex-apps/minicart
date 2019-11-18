@@ -27,7 +27,6 @@ interface SKUSpecification {
 
 interface OrderForm {
   items: OrderFormItem[]
-  shipping: Shipping
   marketingData: MarketingData
   totalizers: Totalizer[]
   value: number
