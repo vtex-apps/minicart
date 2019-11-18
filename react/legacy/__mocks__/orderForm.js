@@ -27,7 +27,7 @@ export default {
       quantity: 2,
       productRefId: 'PSMALL',
       additionalInfo: {
-        brandName: 'PizzaHut'
+        brandName: 'PizzaHut',
       },
       productCategoryIds: '/1/',
       productCategories: { 1: 'Pizza' },
@@ -109,7 +109,7 @@ export default {
       quantity: 1,
       productRefId: 'CLASSICCRUST',
       additionalInfo: {
-        brandName: 'PizzaHut'
+        brandName: 'PizzaHut',
       },
       productCategoryIds: '/1/',
       productCategories: { 1: 'Pizza' },
@@ -135,7 +135,7 @@ export default {
       quantity: 1,
       productRefId: 'PEPPERONI',
       additionalInfo: {
-        brandName: 'PizzaHut'
+        brandName: 'PizzaHut',
       },
       productCategoryIds: '/1/',
       productCategories: { 1: 'Pizza' },
@@ -161,7 +161,7 @@ export default {
       quantity: 3,
       productRefId: 'HAM',
       additionalInfo: {
-        brandName: 'PizzaHut'
+        brandName: 'PizzaHut',
       },
       productCategoryIds: '/1/',
       productCategories: { 1: 'Pizza' },
@@ -187,7 +187,7 @@ export default {
       quantity: 3,
       productRefId: 'PINEAPPLE',
       additionalInfo: {
-        brandName: 'PizzaHut'
+        brandName: 'PizzaHut',
       },
       productCategoryIds: '/1/',
       productCategories: { 1: 'Pizza' },
@@ -496,7 +496,7 @@ export const fullItems = {
       quantity: 1,
       productRefId: 'PSMALL',
       additionalInfo: {
-        brandName: 'PizzaHut'
+        brandName: 'PizzaHut',
       },
       productCategoryIds: '/1/',
       productCategories: { 1: 'Pizza' },
@@ -578,7 +578,7 @@ export const fullItems = {
       quantity: 1,
       productRefId: 'CLASSICCRUST',
       additionalInfo: {
-        brandName: 'PizzaHut'
+        brandName: 'PizzaHut',
       },
       productCategoryIds: '/1/',
       productCategories: { 1: 'Pizza' },
@@ -604,7 +604,7 @@ export const fullItems = {
       quantity: 1,
       productRefId: 'PEPPERONI',
       additionalInfo: {
-        brandName: 'PizzaHut'
+        brandName: 'PizzaHut',
       },
       productCategoryIds: '/1/',
       productCategories: { 1: 'Pizza' },
@@ -630,7 +630,7 @@ export const fullItems = {
       quantity: 3,
       productRefId: 'HAM',
       additionalInfo: {
-        brandName: 'PizzaHut'
+        brandName: 'PizzaHut',
       },
       productCategoryIds: '/1/',
       productCategories: { 1: 'Pizza' },
@@ -656,7 +656,7 @@ export const fullItems = {
       quantity: 3,
       productRefId: 'PINEAPPLE',
       additionalInfo: {
-        brandName: 'PizzaHut'
+        brandName: 'PizzaHut',
       },
       productCategoryIds: '/1/',
       productCategories: { 1: 'Pizza' },
