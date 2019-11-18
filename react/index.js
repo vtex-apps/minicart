@@ -422,6 +422,7 @@ const MiniCart = ({
     }
   )
 
+  // This feature should only work for the popup minicart
   const shouldOpenOnHover = openOnHover && !isSizeLarge
 
   return (
