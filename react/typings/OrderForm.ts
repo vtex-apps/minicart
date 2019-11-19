@@ -14,6 +14,9 @@ interface OrderFormItem {
   skuName: string
   skuSpecifications: SKUSpecification[]
   uniqueId: string
+  productCategories: Record<string, string>
+  productCategoryIds: string
+  productRefId: string
 }
 
 interface ItemAdditionalInfo {
