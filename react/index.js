@@ -1,13 +1,5 @@
 import classNames from 'classnames'
-import {
-  map,
-  partition,
-  path,
-  pathOr,
-  pick,
-  isNil,
-  prop,
-} from 'ramda'
+import { map, partition, path, pathOr, pick, isNil, prop } from 'ramda'
 import React, {
   useState,
   useEffect,
@@ -109,8 +101,12 @@ const useUpdateOrderFormOnState = (data, minicartState, updateOrderForm) => {
         const remoteOrderForm = data.orderForm
 
         if (remoteOrderForm || !orderFormData) {
-          const forceRemoteOrderform = !hasSavedRemoteOrderFormRef.current && remoteOrderForm
-          if (forceRemoteOrderform || (!path(['orderForm'], minicartState) && remoteOrderForm)) {
+          const forceRemoteOrderform =
+            !hasSavedRemoteOrderFormRef.current && remoteOrderForm
+          if (
+            forceRemoteOrderform ||
+            (!path(['orderForm'], minicartState) && remoteOrderForm)
+          ) {
             hasSavedRemoteOrderFormRef.current = true
             await updateOrderForm(remoteOrderForm)
           }
@@ -162,6 +158,7 @@ const MiniCart = ({
   updateItemsMutation,
   addToCartMutation,
   updateLocalItemStatus,
+  iconsProps,
 }) => {
   useLinkState(client)
 
@@ -289,7 +286,7 @@ const MiniCart = ({
           if (itemsToAdd.length > 0) {
             push({
               event: 'addToCart',
-              items: itemsToAdd.map(mapBuyButtonItemToPixel)
+              items: itemsToAdd.map(mapBuyButtonItemToPixel),
             })
           }
 
@@ -337,7 +334,15 @@ const MiniCart = ({
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [intl, isOffline, showToast, addItems, mutateUpdateItems, modifiedItems, push]
+    [
+      intl,
+      isOffline,
+      showToast,
+      addItems,
+      mutateUpdateItems,
+      modifiedItems,
+      push,
+    ]
   )
 
   const handleClickButton = event => {
@@ -393,9 +398,10 @@ const MiniCart = ({
       onClickAction={handleUpdateContentVisibility}
       showShippingCost={showShippingCost}
       updatingOrderForm={isUpdatingOrderForm}
+      iconsProps={iconsProps}
     />
   )
-  
+
   const priceClasses = classNames(
     `${styles.label} dn-m db-l t-action--small ${labelClasses}`,
     {
@@ -406,7 +412,9 @@ const MiniCart = ({
 
   const isPriceVisible = showPrice && orderForm && orderForm.value > 0
   const iconLabelClasses = classNames(
-    `${styles.label} dn-m db-l ${ isPriceVisible ? 't-mini' : 't-action--small'} ${labelClasses}`,
+    `${styles.label} dn-m db-l ${
+      isPriceVisible ? 't-mini' : 't-action--small'
+    } ${labelClasses}`,
     {
       pl6: quantity > 0,
       pl4: quantity <= 0,
@@ -419,7 +427,7 @@ const MiniCart = ({
         <ButtonWithIcon
           icon={
             <span className={`relative ${iconClasses}`}>
-              <IconCart size={iconSize} />
+              <IconCart size={iconSize} {...iconsProps} />
               {quantity > 0 && (
                 <span
                   data-testid="item-qty"
@@ -431,22 +439,26 @@ const MiniCart = ({
             </span>
           }
           variation="tertiary"
-          onClick={handleClickButton}>
+          onClick={handleClickButton}
+        >
           {(iconLabel || isPriceVisible) && (
             <span className="flex items-center">
-                <span className="flex flex-column items-start">
-                  {iconLabel && <span className={iconLabelClasses}>{iconLabel}</span>}
-                  {isPriceVisible && (
-                    <span data-testid="total-price" className={priceClasses}>
-                      <div>
-                        <ProductPrice 
-                        showLabels={false} 
-                        showListPrice={false} 
-                        sellingPrice={orderForm.value} />
-                      </div>
-                    </span>
-                  )}
-                </span>
+              <span className="flex flex-column items-start">
+                {iconLabel && (
+                  <span className={iconLabelClasses}>{iconLabel}</span>
+                )}
+                {isPriceVisible && (
+                  <span data-testid="total-price" className={priceClasses}>
+                    <div>
+                      <ProductPrice
+                        showLabels={false}
+                        showListPrice={false}
+                        sellingPrice={orderForm.value}
+                      />
+                    </div>
+                  </span>
+                )}
+              </span>
             </span>
           )}
         </ButtonWithIcon>
@@ -457,6 +469,7 @@ const MiniCart = ({
               iconSize={iconSize}
               onOutsideClick={handleUpdateContentVisibility}
               isOpen={isOpen}
+              iconsProps={iconsProps}
             >
               {miniCartContent}
             </Sidebar>

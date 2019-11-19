@@ -34,7 +34,14 @@ class Sidebar extends Component {
   }
 
   render() {
-    const { isOpen, onOutsideClick, intl, iconSize, quantity } = this.props
+    const {
+      isOpen,
+      onOutsideClick,
+      intl,
+      iconSize,
+      quantity,
+      iconsProps,
+    } = this.props
 
     if (typeof document === 'undefined') {
       return null
@@ -68,12 +75,12 @@ class Sidebar extends Component {
                 className={`${minicart.sidebarRightCaretContainer} c-muted-1 pa4 flex items-center`}
                 onClick={onOutsideClick}
               >
-                <IconCaret orientation="right" size={17} />
+                <IconCaret orientation="right" size={17} {...iconsProps} />
               </div>
               <div
                 className={`${minicart.sidebarItemQuantityContainer} relative c-muted-1`}
               >
-                <IconCart size={iconSize} />
+                <IconCart size={iconSize} {...iconsProps} />
                 {quantity > 0 && (
                   <span
                     className={`${minicart.badge} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
@@ -111,6 +118,11 @@ Sidebar.propTypes = {
   quantity: PropTypes.number.isRequired,
   /* Cart icon size */
   iconSize: PropTypes.number,
+  /** Props to passed to icons from store-icons */
+  iconsProps: PropTypes.shape({
+    viewBox: PropTypes.string,
+    size: PropTypes.number,
+  }),
 }
 
 export default injectIntl(Sidebar)

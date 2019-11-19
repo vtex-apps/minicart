@@ -1,4 +1,5 @@
 # VTEX Minicart
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
 ## Description
@@ -82,20 +83,21 @@ The minicart has as a required block the `product-summary`. So, any minicart blo
 
 Through the Storefront, you can change the minicart's behavior and interface. However, you also can make in your theme app, as Store theme does.
 
-| Prop name                   | Type      | Description                                          | Default value        |
-| --------------------------- | --------- | ---------------------------------------------------- | -------------------- |
-| `type`                      | `Enum`    | Define Minicart mode. (values: 'popup' or 'sidebar') | popup                |
-| `showDiscount`              | `Boolean` | Shows the total discount of your cart                | false                 |
-| `labelMiniCartEmpty`        | `String`  | Text that is displayed when the cart is empty        | `Your cart is empty` |
-| `linkButtonFinishShopping` | `String`  | Link to redirect after clicking in the finishe shopping button         | `/checkout/#/cart`     |
-| `labelButtonFinishShopping` | `String`  | Text displayed in the finish shopping button         | `Go to checkout`     |
-| `iconClasses`                   | `String`      | The minicart's icon classes                                         | `''`         |
-| `iconLabel`                |   `String`    | The minicart's icon label                                        |  undefined       | 
-| `labelClasses`                   | `String`      | The minicart's label classes                                          | `gray`        |
-| `hideContent`                   | `Boolean`      |      If the minicart should not show its contents once its icon is clicked                                     | false       |
-| `showShippingCost`                   | `Boolean`     | If the shipping cost show be displayed on cart                                          | false        |
-| `showTotalItemsQty`                   | `Boolean`      | If the cart should show the total quantity of items or just the quantity of different items in the cart                                          | false       |
-| `showPrice`                   | `Boolean`      | If the total price of the items in the cart should be displayed at its side                                          | false       |
+| Prop name                   | Type                                    | Description                                                                                             | Default value        |
+| --------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------- | -------------------- |
+| `type`                      | `Enum`                                  | Define Minicart mode. (values: 'popup' or 'sidebar')                                                    | popup                |
+| `showDiscount`              | `Boolean`                               | Shows the total discount of your cart                                                                   | false                |
+| `labelMiniCartEmpty`        | `String`                                | Text that is displayed when the cart is empty                                                           | `Your cart is empty` |
+| `linkButtonFinishShopping`  | `String`                                | Link to redirect after clicking in the finishe shopping button                                          | `/checkout/#/cart`   |
+| `labelButtonFinishShopping` | `String`                                | Text displayed in the finish shopping button                                                            | `Go to checkout`     |
+| `iconClasses`               | `String`                                | The minicart's icon classes                                                                             | `''`                 |
+| `iconLabel`                 | `String`                                | The minicart's icon label                                                                               | undefined            |
+| `labelClasses`              | `String`                                | The minicart's label classes                                                                            | `gray`               |
+| `hideContent`               | `Boolean`                               | If the minicart should not show its contents once its icon is clicked                                   | false                |
+| `showShippingCost`          | `Boolean`                               | If the shipping cost show be displayed on cart                                                          | false                |
+| `showTotalItemsQty`         | `Boolean`                               | If the cart should show the total quantity of items or just the quantity of different items in the cart | false                |
+| `showPrice`                 | `Boolean`                               | If the total price of the items in the cart should be displayed at its side                             | false                |
+| `iconsProps`                | `{ "viewBox": String, "size": Number }` | Props to be passed down to the icons from `store-icons`.                                                | -                    |
 
 Also, you can configure the product summary that is defined on minicart. See [here](https://github.com/vtex-apps/product-summary/blob/master/README.md#configuration) the Product Summary API.
 
@@ -127,33 +129,32 @@ To use this CSS API, you must add the `styles` builder and create an app styling
 
 Below, we describe the namespaces that are defined in the minicart.
 
-| Class name        | Description                                                  | Component Source                                        |
-| ----------------- | ------------------------------------------------------------ | ------------------------------------------------------- |
-| `container`       | The main container of minicart                               | [index](/react/index.js)                                |
-| `label`           | Minicart icon label                                          | [index](/react/index.js)                                |
-| `badge`           | Minicart badge with the product quantity on it               | [index](/react/index.js)                                |
-| `arrowUp`         | Popup box arrow                                              | [Popup](/react/components/Popup.js)                     |
-| `box`             | The main container of the popup                              | [Popup](/react/components/Popup.js)                     |
-| `sidebarHeader`   | Minicart sidebar header container                            | [Sidebar](/react/components/Sidebar.js)                 |
-| `sidebar`         | Minicart sidebar main container                              | [Sidebar](/react/components/Sidebar.js)                 |
-| `sidebarOpen`     | Active when the sidebar is opened                            | [Sidebar](/react/components/Sidebar.js)                 |
-| `content`         | The container for the Minicart contents                      | [MinicartContent](/react/components/MinicartContent.js) |
-| `contentSmall`    | The container for the minicart contents when on desktop size | [MinicartContent](/react/components/MinicartContent.js) |
-| `contentLarge`    | The container for the minicart contents when on mobile size  | [MinicartContent](/react/components/MinicartContent.js) |
-| `contentDiscount` | The total discount on the minicart footer                    | [MinicartFooter](/react/components/MinicartFooter.js)   |
-| `contentPrice`    | Total price of the products on the minicart footer           | [MinicartFooter](/react/components/MinicartFooter.js)   |
-| `contentFooter`   | The minicart footer main container                           | [MinicartFooter](/react/components/MinicartFooter.js)   |
-| `itemContainer`   | The container of a single item in the minicart                           | [MinicartContent](/react/components/MinicartContent.js)   |
-| `itemDeleteIcon`   | The container of the delete item icon next to each item in the minicart                           | [MinicartContent](/react/components/MinicartContent.js)   |
-| `itemDeleteIconLoader`   | The loading state for the delete item icon next to each item in the minicart                           | [MinicartContent](/react/components/MinicartContent.js)   |
-| `popupContentContainer`   | The main container for content inside the popup variant of the minicart                           | [Popup](/react/components/Popup.js)   |
-| `popupChildrenContainer`   | The main container for children content inside the popup variant on the minicart                           | [Popup](/react/components/Popup.js)   |
-| `footerShippingPriceContainer`   | The shipping price main container                           | [MinicartFooter](/react/components/MinicartFooter.js)   |
-| `footerShippingPriceLabelContainer`   | The shipping price label container                           | [MinicartFooter](/react/components/MinicartFooter.js)   |
-| `footerShippingPriceLabelContainer`   | The shipping price label container                           | [MinicartFooter](/react/components/MinicartFooter.js)   |
-| `sidebarRightCaretContainer`   | The caret icon container in the sidebar variant of the minicart                          | [Sidebar](/react/components/Sidebar.js)   |
-| `sidebarItemQuantityContainer`   | The item quantity container in the sidebar variant of the minicart                          | [Sidebar](/react/components/Sidebar.js)   |
-
+| Class name                          | Description                                                                      | Component Source                                        |
+| ----------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| `container`                         | The main container of minicart                                                   | [index](/react/index.js)                                |
+| `label`                             | Minicart icon label                                                              | [index](/react/index.js)                                |
+| `badge`                             | Minicart badge with the product quantity on it                                   | [index](/react/index.js)                                |
+| `arrowUp`                           | Popup box arrow                                                                  | [Popup](/react/components/Popup.js)                     |
+| `box`                               | The main container of the popup                                                  | [Popup](/react/components/Popup.js)                     |
+| `sidebarHeader`                     | Minicart sidebar header container                                                | [Sidebar](/react/components/Sidebar.js)                 |
+| `sidebar`                           | Minicart sidebar main container                                                  | [Sidebar](/react/components/Sidebar.js)                 |
+| `sidebarOpen`                       | Active when the sidebar is opened                                                | [Sidebar](/react/components/Sidebar.js)                 |
+| `content`                           | The container for the Minicart contents                                          | [MinicartContent](/react/components/MinicartContent.js) |
+| `contentSmall`                      | The container for the minicart contents when on desktop size                     | [MinicartContent](/react/components/MinicartContent.js) |
+| `contentLarge`                      | The container for the minicart contents when on mobile size                      | [MinicartContent](/react/components/MinicartContent.js) |
+| `contentDiscount`                   | The total discount on the minicart footer                                        | [MinicartFooter](/react/components/MinicartFooter.js)   |
+| `contentPrice`                      | Total price of the products on the minicart footer                               | [MinicartFooter](/react/components/MinicartFooter.js)   |
+| `contentFooter`                     | The minicart footer main container                                               | [MinicartFooter](/react/components/MinicartFooter.js)   |
+| `itemContainer`                     | The container of a single item in the minicart                                   | [MinicartContent](/react/components/MinicartContent.js) |
+| `itemDeleteIcon`                    | The container of the delete item icon next to each item in the minicart          | [MinicartContent](/react/components/MinicartContent.js) |
+| `itemDeleteIconLoader`              | The loading state for the delete item icon next to each item in the minicart     | [MinicartContent](/react/components/MinicartContent.js) |
+| `popupContentContainer`             | The main container for content inside the popup variant of the minicart          | [Popup](/react/components/Popup.js)                     |
+| `popupChildrenContainer`            | The main container for children content inside the popup variant on the minicart | [Popup](/react/components/Popup.js)                     |
+| `footerShippingPriceContainer`      | The shipping price main container                                                | [MinicartFooter](/react/components/MinicartFooter.js)   |
+| `footerShippingPriceLabelContainer` | The shipping price label container                                               | [MinicartFooter](/react/components/MinicartFooter.js)   |
+| `footerShippingPriceLabelContainer` | The shipping price label container                                               | [MinicartFooter](/react/components/MinicartFooter.js)   |
+| `sidebarRightCaretContainer`        | The caret icon container in the sidebar variant of the minicart                  | [Sidebar](/react/components/Sidebar.js)                 |
+| `sidebarItemQuantityContainer`      | The item quantity container in the sidebar variant of the minicart               | [Sidebar](/react/components/Sidebar.js)                 |
 
 ## Troubleshooting
 
@@ -161,7 +162,7 @@ You can check if others are passing through similar issues [here](https://github
 
 ## Contributing
 
-Check it out [how to contribute](https://github.com/vtex-apps/awesome-io#contributing) with this project. 
+Check it out [how to contribute](https://github.com/vtex-apps/awesome-io#contributing) with this project.
 
 ## Tests
 
