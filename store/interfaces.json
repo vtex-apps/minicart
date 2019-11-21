@@ -1,12 +1,17 @@
 {
   "minicart": {
+    "required": ["product-summary"],
+    "allowed": ["sandbox"],
+    "component": "MinicartLegacy"
+  },
+  "minicart.v2": {
     "component": "Minicart",
     "composition": "children",
     "allowed": "*",
     "render": "client"
   },
   "minicart-base-content": {
-    "component": "Content",
+    "component": "BaseContent",
     "allowed": ["minicart-product-list", "minicart-summary"]
   },
   "minicart-product-list": {
