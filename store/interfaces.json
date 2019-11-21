@@ -1,10 +1,9 @@
 {
   "minicart": {
-    "required": ["product-summary"],
-    "allowed": ["sandbox"],
+    "allowed": ["sandbox", "product-summary"],
     "component": "MinicartLegacy"
   },
-  "minicart-layout": {
+  "minicart.v2": {
     "component": "Minicart",
     "composition": "children",
     "allowed": "*",
