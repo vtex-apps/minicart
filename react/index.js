@@ -138,6 +138,7 @@ const partitionItemsAddUpdate = clientItems => {
 const MiniCart = ({
   labelClasses = DEFAULT_LABEL_CLASSES,
   iconClasses = DEFAULT_ICON_CLASSES,
+  openOnHover = false,
   client,
   setMinicartOpen,
   labelMiniCartEmpty,
@@ -421,9 +422,17 @@ const MiniCart = ({
     }
   )
 
+  // This feature should only work for the popup minicart
+  const shouldOpenOnHover = openOnHover && !isSizeLarge
+
   return (
     <aside className={`${styles.container} relative fr flex items-center`}>
-      <div className="flex flex-column">
+      <div
+        onMouseEnter={
+          shouldOpenOnHover ? () => setMinicartOpen(true) : undefined
+        }
+        className="flex flex-column"
+      >
         <ButtonWithIcon
           icon={
             <span className={`relative ${iconClasses}`}>
