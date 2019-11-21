@@ -1,6 +1,6 @@
-// This is the default blocks implementation for the minicart
+// This is the default blocks implementation for the minicart-layout
 {
-  "minicart": {
+  "minicart-layout": {
     "children": ["minicart-base-content"]
   },
   "minicart-base-content": {
