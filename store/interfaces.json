@@ -4,7 +4,7 @@
     "allowed": ["sandbox"],
     "component": "MinicartLegacy"
   },
-  "minicart.v2": {
+  "minicart-layout": {
     "component": "Minicart",
     "composition": "children",
     "allowed": "*",
