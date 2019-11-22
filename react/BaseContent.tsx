@@ -26,6 +26,10 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
 
+  const minicartContentClasses = `${handles.minicartContent} ${
+    variation === 'drawer' ? styles.drawerStyles : styles.popupStyles
+  } flex flex-column justify-between`
+
   return !loading && orderForm.items.length === 0 ? (
     <div
       className={`${handles.minicartEmptyStateContainer} ${styles.minicartEmptyStateContainerDefault} pa9 flex justify-center`}
@@ -35,13 +39,11 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
       </span>
     </div>
   ) : (
-    <div
-      className={`${handles.minicartContent} ${
-        variation === 'drawer' ? styles.drawerStyles : styles.popupStyles
-      } flex flex-column justify-between`}
-    >
+    <div className={minicartContentClasses}>
       <div className="w-100 overflow-y-auto">
-        <h3 className="t-heading-3 mv2 c-on-base">Cart</h3>
+        <h3 className="t-heading-3 mv2 c-on-base">
+          <FormattedMessage id="store/minicart.title" />
+        </h3>
         <ExtensionPoint id="minicart-product-list" />
       </div>
       <div
