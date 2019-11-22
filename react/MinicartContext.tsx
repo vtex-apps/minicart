@@ -9,14 +9,14 @@ interface CloseMinicartAction {
 }
 
 interface State {
-  variation: 'popup' | 'drawer' | 'link'
+  variation: minicartVariation
   isOpen: boolean
   openOnHover: boolean
 }
 
 interface Props {
   openOnHover: boolean
-  variation: 'popup' | 'drawer' | 'link'
+  variation: minicartVariation
 }
 
 type Action = OpenMinicartAction | CloseMinicartAction

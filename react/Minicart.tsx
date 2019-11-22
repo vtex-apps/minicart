@@ -8,21 +8,9 @@ import DrawerMode from './components/DrawerMode'
 import { MinicartContextProvider, useMinicartState } from './MinicartContext'
 import PopupMode from './components/Popup'
 
-interface Props {
-  variation: 'popup' | 'drawer' | 'link'
-  openOnHover: boolean
-  linkVariationUrl: string
-  maxDrawerWidth: number | string
-  drawerSlideDirection:
-    | 'horizontal'
-    | 'vertical'
-    | 'rightToLeft'
-    | 'leftToRight'
-}
-
 const CSS_HANDLES = ['minicartWrapperContainer', 'minicartContainer'] as const
 
-const Minicart: FC<Props> = ({
+const Minicart: FC<MinicartProps> = ({
   maxDrawerWidth = 400,
   drawerSlideDirection = 'rightToLeft',
   linkVariationUrl = '/checkout/#/cart',
