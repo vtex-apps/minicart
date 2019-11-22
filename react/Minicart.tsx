@@ -56,7 +56,7 @@ const Minicart: FC<MinicartProps> = ({
   )
 }
 
-const EnhancedMinicart = (props: Props) => (
+const EnhancedMinicart = (props: MinicartProps) => (
   <MinicartContextProvider
     variation={props.variation}
     openOnHover={props.openOnHover}
