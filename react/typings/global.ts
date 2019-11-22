@@ -1,10 +1,14 @@
 interface MinicartProps {
-  variation: minicartVariation
+  variation: MinicartVariationType
   openOnHover: boolean
   linkVariationUrl: string
   maxDrawerWidth: number | string
-  drawerSlideDirection: slideDirection
+  drawerSlideDirection: SlideDirectionType
 }
 
-type slideDirection = 'horizontal' | 'vertical' | 'rightToLeft' | 'leftToRight'
-type minicartVariation = 'popup' | 'drawer' | 'link'
+type SlideDirectionType =
+  | 'horizontal'
+  | 'vertical'
+  | 'rightToLeft'
+  | 'leftToRight'
+type MinicartVariationType = 'popup' | 'drawer' | 'link'

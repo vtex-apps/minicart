@@ -9,7 +9,7 @@ const CSS_HANLDES = ['minicartSideBarContentWrapper']
 
 interface Props {
   maxDrawerWidth: number | string
-  drawerSlideDirection: slideDirection
+  drawerSlideDirection: SlideDirectionType
 }
 
 const DrawerMode: FC<Props> = ({
