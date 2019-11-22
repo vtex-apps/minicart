@@ -28,9 +28,7 @@ const Minicart: FC<Props> = ({
   linkVariationUrl = '/checkout/#/cart',
   children,
 }) => {
-  const {
-    orderForm,
-  }: { loading: boolean; orderForm: OrderForm } = useOrderForm()
+  const { orderForm }: OrderFormContext = useOrderForm()
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
 
@@ -70,7 +68,7 @@ const Minicart: FC<Props> = ({
   )
 }
 
-const EnhanedMinicart = (props: Props) => (
+const EnhancedMinicart = (props: Props) => (
   <MinicartContextProvider
     variation={props.variation}
     openOnHover={props.openOnHover}
@@ -79,4 +77,4 @@ const EnhanedMinicart = (props: Props) => (
   </MinicartContextProvider>
 )
 
-export default EnhanedMinicart
+export default EnhancedMinicart

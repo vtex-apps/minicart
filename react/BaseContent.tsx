@@ -7,10 +7,7 @@ import { Button } from 'vtex.styleguide'
 
 import { useMinicartState } from './MinicartContext'
 
-interface OrderFormContext {
-  orderForm: OrderForm
-  loading: boolean
-}
+import styles from './styles.css'
 
 interface Props {
   sideBarMode: boolean
@@ -29,18 +26,9 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
 
-  const sideBarStyles = {
-    height: '100%',
-  }
-
-  const popupStyles = {
-    maxHeight: 600,
-  }
-
   return !loading && orderForm.items.length === 0 ? (
     <div
-      className={`${handles.minicartEmptyStateContainer} pa9 flex justify-center`}
-      style={{ width: 340 }}
+      className={`${handles.minicartEmptyStateContainer} ${styles.minicartEmptyStateContainerDefault} pa9 flex justify-center`}
     >
       <span className={`${handles.minicartEmptyStateText} t-body`}>
         <FormattedMessage id="store/minicart.empty-state" />
@@ -48,10 +36,11 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
     </div>
   ) : (
     <div
-      className={`${handles.minicartContent} flex flex-column justify-between`}
-      style={variation === 'drawer' ? sideBarStyles : popupStyles}
+      className={`${handles.minicartContent} ${
+        variation === 'drawer' ? styles.drawerStyles : styles.popupStyles
+      } flex flex-column justify-between`}
     >
-      <div className="w-100 overflow-y-scroll">
+      <div className="w-100 overflow-y-auto">
         <h3 className="t-heading-3 mv2 c-on-base">Cart</h3>
         <ExtensionPoint id="minicart-product-list" />
       </div>

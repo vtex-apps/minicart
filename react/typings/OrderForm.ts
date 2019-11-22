@@ -1,3 +1,8 @@
+interface OrderFormContext {
+  orderForm: OrderForm
+  loading: boolean
+}
+
 interface OrderFormItem {
   additionalInfo: ItemAdditionalInfo
   availability: string

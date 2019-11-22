@@ -6,12 +6,7 @@ import { useCssHandles } from 'vtex.css-handles'
 
 import { useMinicartState, useMinicartDispatch } from '../MinicartContext'
 import MinicartIconButton from './MinicartIconButton'
-
-const boxPositionStyle = {
-  right: -40,
-  width: 364,
-  top: '100%',
-}
+import styles from '../styles.css'
 
 const CSS_HANDLES = [
   'popupWrapper',
@@ -40,15 +35,13 @@ const PopupMode: FC = ({ children }) => {
                 ? () => dispatch({ type: 'CLOSE_MINICART' })
                 : undefined
             }
-            className={`${handles.popupWrapper} absolute z-max flex flex-colunm`}
-            style={boxPositionStyle}
+            className={`${handles.popupWrapper} ${styles.popupBoxPosition} absolute z-max flex flex-colunm`}
           >
             <div
               className={`${handles.popupContentContainer} w-100 shadow-3 bg-base`}
             >
               <div
-                className={`${handles.arrowUp} absolute top-0 bg-base h1 w1 pa4 rotate-45`}
-                style={{ right: 7 }}
+                className={`${handles.arrowUp} ${styles.popupArrowUp} absolute top-0 bg-base h1 w1 pa4 rotate-45`}
               />
               <div
                 className={`${handles.popupChildrenContainer} mt3 bg-base relative flex flex-column ph5 pv3`}

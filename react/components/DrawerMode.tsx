@@ -4,7 +4,7 @@ import { Drawer } from 'vtex.store-drawer'
 
 import MinicartIconButton from './MinicartIconButton'
 
-const DRAWER_CLOSE_ICON_HEIGHT = 57
+const DRAWER_CLOSE_ICON_HEIGHT = 58
 const CSS_HANLDES = ['minicartSideBarContentWrapper']
 
 interface Props {

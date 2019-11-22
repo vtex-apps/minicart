@@ -55,7 +55,7 @@ const ProductList: FC = () => {
   }
 
   return (
-    <div className="overflow-y-scroll">
+    <div className="overflow-y-auto">
       <ExtensionPoint
         id="product-list"
         items={items}
