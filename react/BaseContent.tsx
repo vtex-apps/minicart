@@ -30,10 +30,14 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
     variation === 'drawer' ? styles.drawerStyles : styles.popupStyles
   } flex flex-column justify-between`
 
+  const minicartFooterClasses = `${handles.minicartFooter} ${
+    variation === 'drawer' ? 'pa4' : 'pv3'
+  } sticky`
+
+  const emptyStateClasses = `${handles.minicartEmptyStateContainer} ${styles.minicartEmptyStateContainerDefault} pa9 flex justify-center`
+
   return !loading && orderForm.items.length === 0 ? (
-    <div
-      className={`${handles.minicartEmptyStateContainer} ${styles.minicartEmptyStateContainerDefault} pa9 flex justify-center`}
-    >
+    <div className={emptyStateClasses}>
       <span className={`${handles.minicartEmptyStateText} t-body`}>
         <FormattedMessage id="store/minicart.empty-state" />
       </span>
@@ -46,11 +50,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
         </h3>
         <ExtensionPoint id="minicart-product-list" />
       </div>
-      <div
-        className={`${handles.minicartFooter} ${
-          variation === 'drawer' ? 'pa4' : 'pv3'
-        } sticky`}
-      >
+      <div className={minicartFooterClasses}>
         <ExtensionPoint id="minicart-summary" />
         <Button
           id="proceed-to-checkout"
