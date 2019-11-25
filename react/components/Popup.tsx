@@ -16,14 +16,14 @@ const CSS_HANDLES = [
 ]
 
 const PopupMode: FC = ({ children }) => {
-  const { isOpen, openOnHover } = useMinicartState()
+  const { open, openOnHover } = useMinicartState()
   const dispatch = useMinicartDispatch()
   const handles = useCssHandles(CSS_HANDLES)
 
   return (
     <Fragment>
       <MinicartIconButton />
-      {isOpen && (
+      {open && (
         <Overlay>
           <div
             className="fixed top-0 left-0 w-100 h-100"

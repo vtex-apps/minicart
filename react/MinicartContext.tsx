@@ -10,7 +10,7 @@ interface CloseMinicartAction {
 
 interface State {
   variation: MinicartVariationType
-  isOpen: boolean
+  open: boolean
   openOnHover: boolean
 }
 
@@ -30,12 +30,12 @@ function minicartContextReducer(state: State, action: Action): State {
     case 'OPEN_MINICART':
       return {
         ...state,
-        isOpen: true,
+        open: true,
       }
     case 'CLOSE_MINICART':
       return {
         ...state,
-        isOpen: false,
+        open: false,
       }
     default:
       return state
@@ -53,7 +53,7 @@ const MinicartContextProvider: FC<Props> = ({
 
   const [state, dispatch] = useReducer(minicartContextReducer, {
     variation: resolvedVariation,
-    isOpen: false,
+    open: false,
     openOnHover: resolvedVariation !== 'popup' ? false : openOnHover,
   })
 

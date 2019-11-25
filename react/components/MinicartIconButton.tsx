@@ -12,7 +12,7 @@ const CSS_HANDLES = ['minicartIconContainer', 'minicartQuantityBadge'] as const
 const MinicartIconButton = () => {
   const { orderForm, loading }: OrderFormContext = useOrderForm()
   const handles = useCssHandles(CSS_HANDLES)
-  const { isOpen, openOnHover } = useMinicartState()
+  const { open, openOnHover } = useMinicartState()
   const dispatch = useMinicartDispatch()
 
   const itemQuantity = loading ? 0 : orderForm.items.length
@@ -39,7 +39,7 @@ const MinicartIconButton = () => {
       }
       variation="tertiary"
       onClick={() =>
-        dispatch({ type: isOpen ? 'CLOSE_MINICART' : 'OPEN_MINICART' })
+        dispatch({ type: open ? 'CLOSE_MINICART' : 'OPEN_MINICART' })
       }
     />
   )
