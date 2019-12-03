@@ -5,7 +5,9 @@ export const Button = ({ icon, ...props }) => (
 )
 
 export const ButtonWithIcon = ({ icon, ...props }) => (
-  <button {...props}>Button test{icon} {props.children}</button>
+  <button {...props}>
+    Button test{icon} {props.children}
+  </button>
 )
 
 export const Spinner = ({ children }) => <div>{children}</div>

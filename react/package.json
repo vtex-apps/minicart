@@ -5,8 +5,8 @@
   "scripts": {
     "pretest": "yarn",
     "test": "vtex-test-tools test",
-    "lint": "eslint --ext js,jsx,ts,tsx .",
-    "lint:fix": "eslint --ext js,jsx,ts,tsx . --fix"
+    "lint": "eslint --ext ts,tsx .",
+    "lint:fix": "eslint --ext ts,tsx . --fix"
   },
   "devDependencies": {
     "@vtex/test-tools": "^1.0.0",

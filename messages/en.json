@@ -16,5 +16,8 @@
   "store/minicart-content-footer-discount": "Save",
   "store/minicart.error-removal": "Item removal failed, please try again",
   "store/minicart.shipping-cost": "Total shipping cost",
-  "store/minicart.checkout-failure": "Something went wrong. Please, try again."
+  "store/minicart.checkout-failure": "Something went wrong. Please, try again.",
+  "store/minicart.go-to-checkout": "Go to checkout",
+  "store/minicart.empty-state": "Your cart is empty.",
+  "store/minicart.title": "Cart"
 }

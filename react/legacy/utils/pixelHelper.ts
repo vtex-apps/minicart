@@ -14,9 +14,7 @@ export function mapCartItemToPixel(item: CartItem): PixelCartItem {
 export function mapBuyButtonItemToPixel(item: BuyButtonItem): PixelCartItem {
   // Change this `/Apparel & Accessories/Clothing/Tops/`
   // to this `Apparel & Accessories/Clothing/Tops`
-  const category = item.category
-    ? item.category.slice(1, -1)
-    : ''
+  const category = item.category ? item.category.slice(1, -1) : ''
 
   return {
     skuId: item.id,
