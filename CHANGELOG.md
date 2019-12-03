@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- New `minicart-layout`, `minicart-base-content`, `minicart-product-list` and `minicart-summary` interfaces.
+- New `minicart.v2`, `minicart-base-content`, `minicart-product-list` and `minicart-summary` interfaces.
 - Support for a flexible minicart implementation using these new blocks.
 
 ## [2.30.0] - 2019-11-21
