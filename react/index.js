@@ -34,6 +34,7 @@ import setMinicartOpenMutation from './legacy/localState/graphql/setMinicartOpen
 import createLocalState, { ITEMS_STATUS } from './legacy/localState'
 
 import styles from './legacy/minicart.css'
+import useMarketingSessionParams from './legacy/hooks/useMarketingSessionParams'
 
 const DEFAULT_LABEL_CLASSES = ''
 const DEFAULT_ICON_CLASSES = 'gray'
@@ -206,6 +207,8 @@ const MiniCart = ({
     }
   }, [minicartItems, orderForm])
 
+  const { utmParams, utmiParams } = useMarketingSessionParams()
+
   const addItems = useCallback(
     items => {
       if (!items.length || !orderFormId) {
@@ -213,10 +216,15 @@ const MiniCart = ({
       }
 
       return addToCartMutation({
-        variables: { orderFormId, items },
+        variables: {
+          orderFormId,
+          items,
+          ...(utmParams ? {utmParams} : {}),
+          ...(utmiParams ? {utmiParams} : {}),
+        },
       })
     },
-    [orderFormId, addToCartMutation]
+    [orderFormId, addToCartMutation, utmParams, utmiParams]
   )
 
   const mutateUpdateItems = useCallback(
