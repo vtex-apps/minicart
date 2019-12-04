@@ -1,6 +1,7 @@
 import React from 'react'
-import { render, fireEvent } from '@vtex/test-tools/react'
+import { render, fireEvent, act } from '@vtex/test-tools/react'
 import { orderForm as orderFormQuery } from 'vtex.store-resources/Queries'
+import { MockedProvider } from "@apollo/react-testing"
 
 import orderForm from '../__mocks__/orderForm'
 import MiniCart from '../../index'
@@ -28,17 +29,20 @@ describe('<MiniCart />', () => {
   })
 
   it('should be rendered', () => {
-    const { asFragment } = render(<MiniCart type="popup" hideContent={false} />)
+    const { asFragment } = render(<MiniCart type="popup" hideContent={false} />, { MockedProvider })
     expect(asFragment()).toBeDefined()
   })
 
   it('should render popup onClick', async () => {
     const { getByText, baseElement } = render(
-      <MiniCart type="popup" hideContent={false} />
+      <MiniCart type="popup" hideContent={false} />,
+      { MockedProvider }
     )
 
-    await flushPromises()
-    jest.runAllTimers()
+    await act(async () => {
+      await flushPromises()
+      jest.runAllTimers()
+    })
 
     let box = baseElement.querySelector('.box')
     let sidebar = baseElement.querySelector('.sidebar')
@@ -50,8 +54,10 @@ describe('<MiniCart />', () => {
 
     fireEvent.click(getByText(/button test/i))
 
-    await flushPromises()
-    jest.runAllTimers()
+    await act(async () => {
+      await flushPromises()
+      jest.runAllTimers()
+    })
 
     box = baseElement.querySelector('.box')
     sidebar = baseElement.querySelector('.sidebar')
@@ -65,11 +71,14 @@ describe('<MiniCart />', () => {
 
   it('should display sidebar onClick', async () => {
     const { getByText, baseElement } = render(
-      <MiniCart type="sidebar" hideContent={false} />
+      <MiniCart type="sidebar" hideContent={false} />,
+      { MockedProvider }
     )
 
-    await flushPromises()
-    jest.runAllTimers()
+    await act(async () => {
+      await flushPromises()
+      jest.runAllTimers()
+    })
 
     let box = baseElement.querySelector('.box')
     let sidebar = baseElement.querySelector('.sidebarScrim.dn')
@@ -82,8 +91,10 @@ describe('<MiniCart />', () => {
 
     fireEvent.click(getByText(/button test/i))
 
-    await flushPromises()
-    jest.runAllTimers()
+    await act(async () => {
+      await flushPromises()
+      jest.runAllTimers()
+    })
 
     box = baseElement.querySelector('.box')
     sidebar = baseElement.querySelector('.sidebarScrim.dn')
@@ -98,16 +109,20 @@ describe('<MiniCart />', () => {
 
     const { getByText, asFragment } = render(
       <MiniCart type="popup" hideContent={false} />,
-      { graphql: { mocks } }
+      { graphql: { mocks }, MockedProvider }
     )
 
-    await flushPromises()
-    jest.runAllTimers()
+    await act(async () => {
+      await flushPromises()
+      jest.runAllTimers()
+    })
 
     fireEvent.click(getByText(/button test/i), leftClick)
 
-    await flushPromises()
-    jest.runAllTimers()
+    await act(async () => {
+      await flushPromises()
+      jest.runAllTimers()
+    })
 
     expect(asFragment()).toMatchSnapshot()
   })
@@ -115,11 +130,13 @@ describe('<MiniCart />', () => {
   it('should match the snapshot in sidebar mode', async () => {
     const { baseElement } = render(
       <MiniCart type="sidebar" hideContent={false} />,
-      { graphql: { mocks } }
+      { graphql: { mocks }, MockedProvider }
     )
 
-    await flushPromises()
-    jest.runAllTimers()
+    await act(async () => {
+      await flushPromises()
+      jest.runAllTimers()
+    })
 
     expect(baseElement).toMatchSnapshot()
   })
@@ -133,7 +150,8 @@ describe('<MiniCart />', () => {
 
   it('should not show item quantity if there are no items in cart', () => {
     const { queryByTestId } = render(
-      <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={false} />
+      <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={false} />,
+      { MockedProvider }
     )
     expect(queryByTestId('item-qty')).toBeNull()
   })
@@ -141,11 +159,13 @@ describe('<MiniCart />', () => {
   it('should show the quantity of different items in cart', async () => {
     const { getByTestId } = render(
       <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={false} />,
-      { graphql: { mocks } }
+      { graphql: { mocks }, MockedProvider }
     )
 
-    await flushPromises()
-    jest.runAllTimers()
+    await act(async () => {
+      await flushPromises()
+      jest.runAllTimers()
+    })
 
     expect(getByTestId('item-qty').textContent).toBe('1')
   })
@@ -153,11 +173,13 @@ describe('<MiniCart />', () => {
   it('should show the total quantity of items in cart', async () => {
     const { getByTestId } = render(
       <MiniCart type="sidebar" hideContent={false} showTotalItemsQty />,
-      { graphql: { mocks } }
+      { graphql: { mocks }, MockedProvider }
     )
 
-    await flushPromises()
-    jest.runAllTimers()
+    await act(async () => {
+      await flushPromises()
+      jest.runAllTimers()
+    })
 
     expect(getByTestId('item-qty').textContent).toBe('2')
   })
@@ -165,16 +187,19 @@ describe('<MiniCart />', () => {
   it('should not show price if showPrice is false', async () => {
     const { queryByTestId } = render(
       <MiniCart type="sidebar" hideContent={false} showPrice={false} />,
-      { graphql: { mocks } }
+      { graphql: { mocks }, MockedProvider }
     )
-    await flushPromises()
-    jest.runAllTimers()
+    await act(async () => {
+      await flushPromises()
+      jest.runAllTimers()
+    })
     expect(queryByTestId('total-price')).toBeNull()
   })
 
   it('should not show price if there are no items in the cart', () => {
     const { queryByTestId } = render(
-      <MiniCart type="sidebar" hideContent={false} showPrice />
+      <MiniCart type="sidebar" hideContent={false} showPrice />,
+      { MockedProvider }
     )
     expect(queryByTestId('total-price')).toBeNull()
   })
@@ -182,37 +207,38 @@ describe('<MiniCart />', () => {
   it('should show price if there are items in the cart', async () => {
     const { getByTestId } = render(
       <MiniCart type="sidebar" hideContent={false} showPrice />,
-      { graphql: { mocks } }
+      { graphql: { mocks }, MockedProvider }
     )
-    await flushPromises()
-    jest.runAllTimers()
+    await act(async () => {
+      await flushPromises()
+      jest.runAllTimers()
+    })
     expect(getByTestId('total-price')).toBeInTheDocument()
   })
 
   it('should not show price if showPrice is false', async () => {
     const { queryByTestId } = render(
       <MiniCart type="sidebar" hideContent={false} showPrice={false} />,
-      { graphql: { mocks } }
+      { graphql: { mocks }, MockedProvider }
     )
-    await flushPromises()
-    jest.runAllTimers()
-    expect(queryByTestId('total-price')).toBeNull()
-  })
-
-  it('should not show price if there are no items in the cart', () => {
-    const { queryByTestId } = render(
-      <MiniCart type="sidebar" hideContent={false} showPrice />
-    )
+    await act(async () => {
+      await flushPromises()
+      jest.runAllTimers()
+    })
     expect(queryByTestId('total-price')).toBeNull()
   })
 
   it('should show price if there are items in the cart', async () => {
     const { getByTestId } = render(
       <MiniCart type="sidebar" hideContent={false} showPrice />,
-      { graphql: { mocks } }
+      { graphql: { mocks }, MockedProvider }
     )
-    await flushPromises()
-    jest.runAllTimers()
+
+    await act(async () => {
+      await flushPromises()
+      jest.runAllTimers()
+    })
+    
     expect(getByTestId('total-price')).toBeInTheDocument()
   })
 })

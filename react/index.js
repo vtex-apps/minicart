@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { map, partition, path, pathOr, pick, isNil, prop } from 'ramda'
+import { compose, map, partition, path, pathOr, pick, isNil, prop } from 'ramda'
 import React, {
   useState,
   useEffect,
@@ -8,7 +8,7 @@ import React, {
   useContext,
   useMemo,
 } from 'react'
-import { compose, graphql, withApollo } from 'react-apollo'
+import { graphql, withApollo } from 'react-apollo'
 import { injectIntl } from 'react-intl'
 import { ButtonWithIcon, ToastContext } from 'vtex.styleguide'
 import { useRuntime } from 'vtex.render-runtime'
