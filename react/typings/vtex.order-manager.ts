@@ -1,9 +1,7 @@
 declare module 'vtex.order-manager/OrderForm' {
   import { OrderForm } from 'vtex.order-manager'
 
-  const useOrderForm = OrderForm.useOrderForm
+  export const useOrderForm: typeof OrderForm.useOrderForm
 
-  const OrderFormProvider = OrderForm.OrderFormProvider
-
-  export { useOrderForm, OrderFormProvider }
+  export const OrderFormProvider: typeof OrderForm.OrderFormProvider
 }

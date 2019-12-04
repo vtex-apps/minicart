@@ -4,7 +4,7 @@ import { useOrderForm } from 'vtex.order-manager/OrderForm'
 
 const Summary: FC = () => {
   const {
-    orderForm: { totalizers, value },
+    orderForm: { totalizers = [], value = 0 } = {},
   } = useOrderForm()
 
   return (

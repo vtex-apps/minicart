@@ -10,12 +10,12 @@ import styles from '../styles.css'
 const CSS_HANDLES = ['minicartIconContainer', 'minicartQuantityBadge'] as const
 
 const MinicartIconButton = () => {
-  const { orderForm, loading }: OrderFormContext = useOrderForm()
+  const { orderForm, loading } = useOrderForm()
   const handles = useCssHandles(CSS_HANDLES)
   const { open, openOnHover } = useMinicartState()
   const dispatch = useMinicartDispatch()
 
-  const itemQuantity = loading ? 0 : orderForm.items.length
+  const itemQuantity = loading || !orderForm ? 0 : orderForm.items.length
 
   return (
     <ButtonWithIcon

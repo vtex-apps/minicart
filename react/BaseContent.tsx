@@ -6,7 +6,6 @@ import { useCssHandles } from 'vtex.css-handles'
 import { Button } from 'vtex.styleguide'
 
 import { useMinicartState } from './MinicartContext'
-
 import styles from './styles.css'
 
 interface Props {
@@ -22,7 +21,7 @@ const CSS_HANDLES = [
 ] as const
 
 const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
-  const { orderForm, loading }: OrderFormContext = useOrderForm()
+  const { orderForm, loading } = useOrderForm()
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
 
@@ -36,7 +35,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
 
   const emptyStateClasses = `${handles.minicartEmptyStateContainer} ${styles.minicartEmptyStateContainerDefault} pa9 flex justify-center`
 
-  return !loading && orderForm.items.length === 0 ? (
+  return !loading && orderForm && orderForm.items.length === 0 ? (
     <div className={emptyStateClasses}>
       <span className={`${handles.minicartEmptyStateText} t-body`}>
         <FormattedMessage id="store/minicart.empty-state" />
