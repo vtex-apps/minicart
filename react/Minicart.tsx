@@ -4,7 +4,6 @@ import { useCssHandles } from 'vtex.css-handles'
 
 import MinicartIconButton from './components/MinicartIconButton'
 import DrawerMode from './components/DrawerMode'
-
 import { MinicartContextProvider, useMinicartState } from './MinicartContext'
 import PopupMode from './components/Popup'
 
@@ -16,7 +15,7 @@ const Minicart: FC<MinicartProps> = ({
   linkVariationUrl = '/checkout/#/cart',
   children,
 }) => {
-  const { orderForm }: OrderFormContext = useOrderForm()
+  const { orderForm } = useOrderForm()
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
 
