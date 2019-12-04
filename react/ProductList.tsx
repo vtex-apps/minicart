@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
-import { OrderItemsProvider, useOrderItems } from 'vtex.order-items/OrderItems'
+import { useOrderItems } from 'vtex.order-items/OrderItems'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { usePixel } from 'vtex.pixel-manager/PixelContext'
 
@@ -27,11 +27,11 @@ const adjustSkuItemForPixelEvent = (
 }
 
 const ProductList: FC = () => {
-  const {
-    orderForm: { items },
-  } = useOrderForm()
+  const { orderForm } = useOrderForm()
   const { updateQuantity, removeItem } = useOrderItems()
   const { push } = usePixel()
+
+  const items = (orderForm && orderForm.items) || []
 
   const handleQuantityChange = (
     uniqueId: string,
@@ -66,10 +66,4 @@ const ProductList: FC = () => {
   )
 }
 
-const EnhancedProductList = () => (
-  <OrderItemsProvider>
-    <ProductList />
-  </OrderItemsProvider>
-)
-
-export default EnhancedProductList
+export default ProductList
