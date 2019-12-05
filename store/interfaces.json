@@ -1,7 +1,7 @@
 {
   "minicart": {
     "allowed": ["sandbox", "product-summary"],
-    "component": "MinicartLegacy"
+    "component": "index"
   },
   "minicart.v2": {
     "component": "Minicart",

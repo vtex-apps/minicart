@@ -3,7 +3,7 @@ import { render, fireEvent } from '@vtex/test-tools/react'
 import { orderForm as orderFormQuery } from 'vtex.store-resources/Queries'
 
 import orderForm from '../__mocks__/orderForm'
-import MiniCart from '../../MinicartLegacy'
+import MiniCart from '../../index'
 
 const mocks = [
   {
