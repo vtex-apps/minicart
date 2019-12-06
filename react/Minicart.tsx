@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { useCssHandles } from 'vtex.css-handles'
+import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 
 import MinicartIconButton from './components/MinicartIconButton'
 import DrawerMode from './components/DrawerMode'
@@ -13,12 +14,13 @@ const CSS_HANDLES = ['minicartWrapperContainer', 'minicartContainer'] as const
 const Minicart: FC<MinicartProps> = ({
   maxDrawerWidth = 400,
   drawerSlideDirection = 'rightToLeft',
-  linkVariationUrl = '/checkout/#/cart',
+  linkVariationUrl,
   children,
 }) => {
   const { orderForm }: OrderFormContext = useOrderForm()
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
+  const { url: checkoutUrl } = useCheckoutURL()
 
   if (!orderForm) {
     return null
@@ -30,7 +32,7 @@ const Minicart: FC<MinicartProps> = ({
         className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
       >
         <div className={`${handles.minicartContainer} flex flex-column`}>
-          <a href={linkVariationUrl}>{MinicartIconButton}</a>
+          <a href={linkVariationUrl || checkoutUrl}>{MinicartIconButton}</a>
         </div>
       </aside>
     )

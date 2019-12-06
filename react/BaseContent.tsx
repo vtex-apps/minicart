@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
+import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 import { useCssHandles } from 'vtex.css-handles'
 import { Button } from 'vtex.styleguide'
 
@@ -25,6 +26,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
   const { orderForm, loading }: OrderFormContext = useOrderForm()
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
+  const { url: checkoutUrl } = useCheckoutURL()
 
   const minicartContentClasses = `${handles.minicartContent} ${
     variation === 'drawer' ? styles.drawerStyles : styles.popupStyles
@@ -54,7 +56,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
         <ExtensionPoint id="minicart-summary" />
         <Button
           id="proceed-to-checkout"
-          href={finishShoppingButtonLink}
+          href={finishShoppingButtonLink || checkoutUrl}
           variation="primary"
           block
         >
