@@ -4,10 +4,7 @@
     "children": ["minicart-base-content"]
   },
   "minicart-base-content": {
-    "blocks": ["minicart-product-list", "minicart-summary"],
-    "props": {
-      "finishShoppingButtonLink": "/checkout/#/cart"
-    }
+    "blocks": ["minicart-product-list", "minicart-summary"]
   },
   "minicart-product-list": {
     "blocks": ["product-list"]

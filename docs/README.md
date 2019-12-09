@@ -88,7 +88,7 @@ Through the Storefront, you can change the minicart's behavior and interface. Ho
 | `type`                      | `Enum`                                  | Define Minicart mode. (values: 'popup' or 'sidebar')                                                    | popup                |
 | `showDiscount`              | `Boolean`                               | Shows the total discount of your cart                                                                   | false                |
 | `labelMiniCartEmpty`        | `String`                                | Text that is displayed when the cart is empty                                                           | `Your cart is empty` |
-| `linkButtonFinishShopping`  | `String`                                | Link to redirect after clicking in the finishe shopping button                                          | `/checkout/#/cart`   |
+| `linkButtonFinishShopping`  | `String`                                | Link to redirect after clicking on the finished shopping button                                         | undefined            |
 | `labelButtonFinishShopping` | `String`                                | Text displayed in the finish shopping button                                                            | `Go to checkout`     |
 | `iconClasses`               | `String`                                | The minicart's icon classes                                                                             | `''`                 |
 | `iconLabel`                 | `String`                                | The minicart's icon label                                                                               | undefined            |

@@ -17,6 +17,7 @@ import { orderForm as orderFormQuery } from 'vtex.store-resources/Queries'
 import { addToCart, updateItems } from 'vtex.store-resources/Mutations'
 import { usePixel } from 'vtex.pixel-manager/PixelContext'
 import ProductPrice from 'vtex.store-components/ProductPrice'
+import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 
 import MiniCartContent from './legacy/components/MiniCartContent'
 import Sidebar from './legacy/components/Sidebar'
@@ -123,13 +124,7 @@ const useUpdateOrderFormOnState = (data, minicartState, updateOrderForm) => {
 }
 
 const partitionItemsAddUpdate = clientItems => {
-  return partition(
-    compose(
-      isNil,
-      prop('cartIndex')
-    ),
-    clientItems
-  )
+  return partition(compose(isNil, prop('cartIndex')), clientItems)
 }
 
 /**
@@ -240,6 +235,8 @@ const MiniCart = ({
   const { push } = usePixel()
 
   const orderFormRef = useRef(orderForm)
+
+  const { url: checkoutUrl } = useCheckoutURL()
 
   useEffect(() => {
     orderFormRef.current = orderForm
@@ -393,7 +390,7 @@ const MiniCart = ({
       loading={data.loading}
       showDiscount={showDiscount}
       labelMiniCartEmpty={labelMiniCartEmpty}
-      linkButton={linkButtonFinishShopping}
+      linkButton={linkButtonFinishShopping || checkoutUrl}
       labelButton={labelButtonFinishShopping}
       onClickProduct={handleClickProduct}
       onClickAction={handleUpdateContentVisibility}
@@ -576,7 +573,6 @@ EnhancedMinicart.schema = {
     },
     linkButtonFinishShopping: {
       title: 'admin/editor.minicart.linkButtonFinishShopping.title',
-      default: '/checkout/#/cart',
       type: 'string',
       isLayout: false,
     },

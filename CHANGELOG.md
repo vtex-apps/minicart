@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Link to Cart now varies depending on the version of `vtex.checkout` installed in the account.
 
 ## [2.31.1] - 2019-12-05
 ### Changed
