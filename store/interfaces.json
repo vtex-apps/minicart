@@ -8,7 +8,8 @@
     "component": "Minicart",
     "composition": "children",
     "allowed": "*",
-    "render": "client"
+    "render": "client",
+    "hydration": "on-view"
   },
   "minicart-base-content": {
     "component": "BaseContent",
