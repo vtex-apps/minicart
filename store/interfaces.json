@@ -1,7 +1,8 @@
 {
   "minicart": {
     "allowed": ["sandbox", "product-summary"],
-    "component": "index"
+    "component": "index",
+    "hydration": "on-view"
   },
   "minicart.v2": {
     "component": "Minicart",
