@@ -98,7 +98,7 @@ Through the Storefront, you can change the minicart's behavior and interface. Ho
 | `showTotalItemsQty`         | `Boolean`                               | If the cart should show the total quantity of items or just the quantity of different items in the cart | false                |
 | `showPrice`                 | `Boolean`                               | If the total price of the items in the cart should be displayed at its side                             | false                |
 | `iconsProps`                | `{ "viewBox": String, "size": Number }` | Props to be passed down to the icons from `store-icons`.                                                | -                    |
-| `openOnHover`               | `Boolean`                               | Whether the popup minicart should open when the user hovers over it.                                    | false                |
+| `openOnHover`               | `Boolean`                               | Whether the popup minicart should open when the user hovers over it. This prop only works properly on desktop mode. For mobile devices the behavior will always be the default.                                   | false                |
 
 Also, you can configure the product summary that is defined on minicart. See [here](https://github.com/vtex-apps/product-summary/blob/master/README.md#configuration) the Product Summary API.
 
@@ -181,7 +181,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/lucasayb"><img src="https://avatars2.githubusercontent.com/u/17356081?v=4" width="100px;" alt="Lucas Antônio Yamamoto Borges"/><br /><sub><b>Lucas Antônio Yamamoto Borges</b></sub></a><br /><a href="https://github.com/vtex-apps/minicart/commits?author=lucasayb" title="Code">=»</a></td>
+    <td align="center"><a href="https://github.com/lucasayb"><img src="https://avatars2.githubusercontent.com/u/17356081?v=4" width="100px;" alt="Lucas AntÃ´nio Yamamoto Borges"/><br /><sub><b>Lucas AntÃ´nio Yamamoto Borges</b></sub></a><br /><a href="https://github.com/vtex-apps/minicart/commits?author=lucasayb" title="Code">=Â»</a></td>
   </tr>
 </table>
 
@@ -192,4 +192,4 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 **Upcoming documentation:**
 
- - [New Minicart <‰<‰<‰](https://github.com/vtex-apps/minicart/pull/184)
+ - [New Minicart <Â‰<Â‰<Â‰](https://github.com/vtex-apps/minicart/pull/184)
