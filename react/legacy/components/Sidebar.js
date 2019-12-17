@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { IconCaret, IconCart } from 'vtex.store-icons'
-import { injectIntl, intlShape } from 'react-intl'
+import { injectIntl } from 'react-intl'
 import OutsideClickHandler from 'react-outside-click-handler'
 import Animation from 'vtex.store-components/Animation'
 import classNames from 'classnames'
@@ -106,8 +106,6 @@ class Sidebar extends Component {
 }
 
 Sidebar.propTypes = {
-  /* Internationalization */
-  intl: intlShape.isRequired,
   /* Set the sideBar visibility */
   isOpen: PropTypes.bool,
   /* Sidebar content */
