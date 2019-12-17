@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { reduceBy, values, clone, find, propEq, compose } from 'ramda'
 import React, { Component, Fragment } from 'react'
 import { graphql } from 'react-apollo'
-import { injectIntl, intlShape } from 'react-intl'
+import { injectIntl } from 'react-intl'
 import classNames from 'classnames'
 
 import { withPixel } from 'vtex.pixel-manager/PixelContext'
@@ -28,8 +28,6 @@ class MiniCartContent extends Component {
   static propTypes = {
     /* Set the mini cart content size */
     isSizeLarge: PropTypes.bool,
-    /* Internationalization */
-    intl: intlShape.isRequired,
     /** Define a function that is executed when the item is clicked */
     onClickAction: PropTypes.func,
     /* Update Items mutation */
