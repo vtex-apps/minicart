@@ -15,12 +15,7 @@ interface Props {
   finishShoppingButtonLink: string
 }
 
-const CSS_HANDLES = [
-  'minicartContent',
-  'minicartFooter',
-  'minicartEmptyStateText',
-  'minicartEmptyStateContainer',
-] as const
+const CSS_HANDLES = ['minicartContent', 'minicartFooter'] as const
 
 const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
   const { orderForm, loading }: OrderFormContext = useOrderForm()
@@ -36,33 +31,33 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
     variation === 'drawer' ? 'pa4' : 'pv3'
   } sticky`
 
-  const emptyStateClasses = `${handles.minicartEmptyStateContainer} ${styles.minicartEmptyStateContainerDefault} pa9 flex justify-center`
+  const isEmptyCart = !loading && orderForm.items.length === 0
 
-  return !loading && orderForm.items.length === 0 ? (
-    <div className={emptyStateClasses}>
-      <span className={`${handles.minicartEmptyStateText} t-body`}>
-        <FormattedMessage id="store/minicart.empty-state" />
-      </span>
-    </div>
-  ) : (
+  return (
     <div className={minicartContentClasses}>
       <div className="w-100 overflow-y-auto">
         <h3 className="t-heading-3 mv2 c-on-base">
           <FormattedMessage id="store/minicart.title" />
         </h3>
-        <ExtensionPoint id="minicart-product-list" />
+        {isEmptyCart ? (
+          <ExtensionPoint id="minicart-empty-state" />
+        ) : (
+          <ExtensionPoint id="minicart-product-list" />
+        )}
       </div>
-      <div className={minicartFooterClasses}>
-        <ExtensionPoint id="minicart-summary" />
-        <Button
-          id="proceed-to-checkout"
-          href={finishShoppingButtonLink || checkoutUrl}
-          variation="primary"
-          block
-        >
-          <FormattedMessage id="store/minicart.go-to-checkout" />
-        </Button>
-      </div>
+      {!isEmptyCart && (
+        <div className={minicartFooterClasses}>
+          <ExtensionPoint id="minicart-summary" />
+          <Button
+            id="proceed-to-checkout"
+            href={finishShoppingButtonLink || checkoutUrl}
+            variation="primary"
+            block
+          >
+            <FormattedMessage id="store/minicart.go-to-checkout" />
+          </Button>
+        </div>
+      )}
     </div>
   )
 }
