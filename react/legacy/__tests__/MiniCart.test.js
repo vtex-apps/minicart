@@ -1,7 +1,6 @@
 import React from 'react'
 import { render, fireEvent, wait } from '@vtex/test-tools/react'
 import { orderForm as orderFormQuery } from 'vtex.store-resources/Queries'
-import { MockedProvider } from "@apollo/react-testing"
 
 import orderForm from '../__mocks__/orderForm'
 import emptyOrderForm from '../__mocks__/emptyOrderForm'
@@ -40,8 +39,7 @@ describe('<MiniCart />', () => {
 
   it('should render popup onClick', async () => {
     const { getByText, baseElement } = render(
-      <MiniCart type="popup" hideContent={false} />,
-      { MockedProvider }
+      <MiniCart type="popup" hideContent={false} />
     )
 
     await wait(() => {
@@ -76,8 +74,7 @@ describe('<MiniCart />', () => {
 
   it('should display sidebar onClick', async () => {
     const { getByText, baseElement } = render(
-      <MiniCart type="sidebar" hideContent={false} />,
-      { MockedProvider }
+      <MiniCart type="sidebar" hideContent={false} />
     )
 
     await wait(() => {
@@ -114,7 +111,7 @@ describe('<MiniCart />', () => {
 
     const { getByText, asFragment } = render(
       <MiniCart type="popup" hideContent={false} />,
-      { graphql: { mocks }, MockedProvider }
+      { graphql: { mocks } }
     )
 
     await wait(() => {
@@ -135,7 +132,7 @@ describe('<MiniCart />', () => {
   it('should match the snapshot in sidebar mode', async () => {
     const { baseElement } = render(
       <MiniCart type="sidebar" hideContent={false} />,
-      { graphql: { mocks }, MockedProvider }
+      { graphql: { mocks } }
     )
 
     await wait(async () => {
@@ -155,7 +152,7 @@ describe('<MiniCart />', () => {
   it('should not show item quantity if there are no items in cart', async () => {
     const { queryByTestId } = render(
       <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={false} />,
-      { graphql: { mocks: emptyMock }, MockedProvider }
+      { graphql: { mocks: emptyMock } }
     )
 
     await wait(() => {
@@ -168,7 +165,7 @@ describe('<MiniCart />', () => {
   it('should show the quantity of different items in cart', async () => {
     const { getByTestId } = render(
       <MiniCart type="sidebar" hideContent={false} showTotalItemsQty={false} />,
-      { graphql: { mocks }, MockedProvider }
+      { graphql: { mocks } }
     )
 
     await wait(() => {
@@ -181,7 +178,7 @@ describe('<MiniCart />', () => {
   it('should show the total quantity of items in cart', async () => {
     const { getByTestId } = render(
       <MiniCart type="sidebar" hideContent={false} showTotalItemsQty />,
-      { graphql: { mocks }, MockedProvider }
+      { graphql: { mocks } }
     )
 
     await wait(() => {
@@ -194,7 +191,7 @@ describe('<MiniCart />', () => {
   it('should not show price if showPrice is false', async () => {
     const { queryByTestId } = render(
       <MiniCart type="sidebar" hideContent={false} showPrice={false} />,
-      { graphql: { mocks }, MockedProvider }
+      { graphql: { mocks } }
     )
     await wait(() => {
       jest.runAllTimers()
@@ -205,7 +202,7 @@ describe('<MiniCart />', () => {
   it('should not show price if there are no items in the cart', async () => {
     const { queryByTestId } = render(
       <MiniCart type="sidebar" hideContent={false} showPrice />,
-      { graphql: { mocks: emptyMock }, MockedProvider }
+      { graphql: { mocks: emptyMock } }
     )
     await wait(() => {
       jest.runAllTimers()
@@ -217,7 +214,7 @@ describe('<MiniCart />', () => {
   it('should show price if there are items in the cart', async () => {
     const { getByTestId } = render(
       <MiniCart type="sidebar" hideContent={false} showPrice />,
-      { graphql: { mocks }, MockedProvider }
+      { graphql: { mocks } }
     )
     await wait(() => {
       jest.runAllTimers()
@@ -228,7 +225,7 @@ describe('<MiniCart />', () => {
   it('should not show price if showPrice is false', async () => {
     const { queryByTestId } = render(
       <MiniCart type="sidebar" hideContent={false} showPrice={false} />,
-      { graphql: { mocks }, MockedProvider }
+      { graphql: { mocks } }
     )
     await wait(() => {
       jest.runAllTimers()
@@ -239,7 +236,7 @@ describe('<MiniCart />', () => {
   it('should show price if there are items in the cart', async () => {
     const { getByTestId } = render(
       <MiniCart type="sidebar" hideContent={false} showPrice />,
-      { graphql: { mocks }, MockedProvider }
+      { graphql: { mocks } }
     )
 
     await wait(() => {
