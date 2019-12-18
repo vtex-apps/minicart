@@ -31,7 +31,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
     variation === 'drawer' ? 'pa4' : 'pv3'
   } sticky`
 
-  const isEmptyCart = !loading && orderForm.items.length === 0
+  const isCartEmpty = !loading && orderForm.items.length === 0
 
   return (
     <div className={minicartContentClasses}>
@@ -39,13 +39,13 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
         <h3 className="t-heading-3 mv2 c-on-base">
           <FormattedMessage id="store/minicart.title" />
         </h3>
-        {isEmptyCart ? (
+        {isCartEmpty ? (
           <ExtensionPoint id="minicart-empty-state" />
         ) : (
           <ExtensionPoint id="minicart-product-list" />
         )}
       </div>
-      {!isEmptyCart && (
+      {!isCartEmpty && (
         <div className={minicartFooterClasses}>
           <ExtensionPoint id="minicart-summary" />
           <Button
