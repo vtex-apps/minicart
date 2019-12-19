@@ -4,7 +4,7 @@
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
-The VTEX minicart app is a store component that shows a list of all items that a customer added in our _Checkout OrderForm API_, and this app is used by store theme.
+The VTEX Minicart app is a block that displays a list of all items added by customers in their minicart. Its data is fetched from the Checkout OrderForm API.
 
 ![Screen Shot 2019-12-18 at 14 06 37](https://user-images.githubusercontent.com/27777263/71111391-19d78b00-21a8-11ea-8e8a-bc6da29aecd6.png)
 
@@ -46,6 +46,8 @@ The VTEX minicart app is a store component that shows a list of all items that a
 
 ## Customization
 
+In order to apply CSS customizations in this and other blocks, follow the instructions given in the recipe on [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).
+
 | CSS Handles                     |
 | ------------------------------- |
 | `minicartWrapperContainer`      |
@@ -62,8 +64,7 @@ The VTEX minicart app is a store component that shows a list of all items that a
 
 ## Deprecation notice
 
-The `minicart` interface has been deprecated in favor of this new `minicart.v2`, which is flexible.
-If you're still using the original `minicart`, its documentation can be found here: [Minicart v1 docs](https://github.com/vtex-apps/minicart/blob/383d7bbd3295f06d1b5854a0add561a872e1515c/docs/README.md)
+Minicart block has been deprecated in favor of Minicart v2 which can be customized using the blocks defined by [Product List](https://vtex.io/docs/app/vtex.product-list) and [Checkout Summary](https://vtex.io/docs/app/vtex.checkout-summary). If you’re still using the former version, you can find its documentation here: [Minicart v1 documentation](https://github.com/vtex-apps/minicart/blob/383d7bbd3295f06d1b5854a0add561a872e1515c/docs/README.md)
 
 ## Contributors (
 
