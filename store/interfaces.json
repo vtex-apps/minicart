@@ -11,7 +11,11 @@
   },
   "minicart-base-content": {
     "component": "BaseContent",
-    "allowed": ["minicart-product-list", "minicart-summary"]
+    "allowed": [
+      "minicart-product-list",
+      "minicart-summary",
+      "minicart-empty-state"
+    ]
   },
   "minicart-product-list": {
     "component": "ProductList",
@@ -20,5 +24,10 @@
   "minicart-summary": {
     "component": "Summary",
     "allowed": ["checkout-summary"]
+  },
+  "minicart-empty-state": {
+    "component": "EmptyState",
+    "composition": "children",
+    "allowed": "*"
   }
 }
