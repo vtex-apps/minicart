@@ -64,7 +64,7 @@ In order to apply CSS customizations in this and other blocks, follow the instru
 | `arrowUp`                       |
 | `popupChildrenContainer`        |
 
-## Contributors (
+## Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
