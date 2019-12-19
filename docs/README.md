@@ -4,6 +4,8 @@
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
+:warning: Minicart block has been deprecated in favor of Minicart v2 which can be customized using the blocks defined by [Product List](https://vtex.io/docs/app/vtex.product-list) and [Checkout Summary](https://vtex.io/docs/app/vtex.checkout-summary). If you’re still using the former version, you can find its documentation here: [Minicart v1 documentation](https://github.com/vtex-apps/minicart/blob/383d7bbd3295f06d1b5854a0add561a872e1515c/docs/README.md)
+
 The VTEX Minicart app is a block that displays a list of all items added by customers in their minicart. Its data is fetched from the Checkout OrderForm API.
 
 ![Screen Shot 2019-12-18 at 14 06 37](https://user-images.githubusercontent.com/27777263/71111391-19d78b00-21a8-11ea-8e8a-bc6da29aecd6.png)
@@ -61,10 +63,6 @@ In order to apply CSS customizations in this and other blocks, follow the instru
 | `popupContentContainer`         |
 | `arrowUp`                       |
 | `popupChildrenContainer`        |
-
-## Deprecation notice
-
-Minicart block has been deprecated in favor of Minicart v2 which can be customized using the blocks defined by [Product List](https://vtex.io/docs/app/vtex.product-list) and [Checkout Summary](https://vtex.io/docs/app/vtex.checkout-summary). If you’re still using the former version, you can find its documentation here: [Minicart v1 documentation](https://github.com/vtex-apps/minicart/blob/383d7bbd3295f06d1b5854a0add561a872e1515c/docs/README.md)
 
 ## Contributors (
 
