@@ -3,6 +3,9 @@ import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { OrderItemsProvider, useOrderItems } from 'vtex.order-items/OrderItems'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { usePixel } from 'vtex.pixel-manager/PixelContext'
+import { useCssHandles } from 'vtex.css-handles'
+
+const CSS_HANDLES = ['minicartProductListContainer'] as const
 
 const adjustSkuItemForPixelEvent = (
   skuItem: OrderFormItem,
@@ -32,6 +35,7 @@ const ProductList: FC = () => {
   } = useOrderForm()
   const { updateQuantity, removeItem } = useOrderItems()
   const { push } = usePixel()
+  const handles = useCssHandles(CSS_HANDLES)
 
   const handleQuantityChange = (
     uniqueId: string,
@@ -55,7 +59,7 @@ const ProductList: FC = () => {
   }
 
   return (
-    <div className="overflow-y-auto">
+    <div className={`${handles.minicartProductListContainer} overflow-y-auto`}>
       <ExtensionPoint
         id="product-list"
         items={items}
