@@ -15,7 +15,12 @@ interface Props {
   finishShoppingButtonLink: string
 }
 
-const CSS_HANDLES = ['minicartContent', 'minicartFooter'] as const
+const CSS_HANDLES = [
+  'minicartContentContainer',
+  'minicartProductListContainer',
+  'minicartTitle',
+  'minicartFooter',
+] as const
 
 const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
   const { orderForm, loading }: OrderFormContext = useOrderForm()
@@ -23,7 +28,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
   const { variation } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
 
-  const minicartContentClasses = `${handles.minicartContent} ${
+  const minicartContentClasses = `${handles.minicartContentContainer} ${
     variation === 'drawer' ? styles.drawerStyles : styles.popupStyles
   } flex flex-column justify-between`
 
@@ -35,8 +40,10 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
 
   return (
     <div className={minicartContentClasses}>
-      <div className="w-100 overflow-y-auto">
-        <h3 className="t-heading-3 mv2 c-on-base">
+      <div
+        className={`w-100 overflow-y-auto ${handles.minicartProductListContainer}`}
+      >
+        <h3 className={`${handles.minicartTitle} t-heading-3 mv2 c-on-base`}>
           <FormattedMessage id="store/minicart.title" />
         </h3>
         {isCartEmpty ? (

@@ -54,7 +54,9 @@ In order to apply CSS customizations in this and other blocks, follow the instru
 | ------------------------------- |
 | `minicartWrapperContainer`      |
 | `minicartContainer`             |
-| `minicartContent`               |
+| `minicartContentContainer`      |
+| `minicartProductListContainer`  |
+| `minicartTitle`                 |
 | `minicartFooter`                |
 | `minicartSideBarContentWrapper` |
 | `minicartIconContainer`         |
