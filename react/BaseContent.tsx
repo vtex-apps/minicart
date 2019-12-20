@@ -7,7 +7,6 @@ import { useCssHandles } from 'vtex.css-handles'
 import { Button } from 'vtex.styleguide'
 
 import { useMinicartState } from './MinicartContext'
-
 import styles from './styles.css'
 
 interface Props {
