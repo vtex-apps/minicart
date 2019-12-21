@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { useCssHandles } from 'vtex.css-handles'
 import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 
