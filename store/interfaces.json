@@ -14,15 +14,18 @@
       "minicart-product-list",
       "minicart-summary",
       "minicart-empty-state"
-    ]
+    ],
+    "render": "lazy"
   },
   "minicart-product-list": {
     "component": "ProductList",
-    "allowed": ["product-list"]
+    "allowed": ["product-list"],
+    "render": "lazy"
   },
   "minicart-summary": {
     "component": "Summary",
-    "allowed": ["checkout-summary"]
+    "allowed": ["checkout-summary"],
+    "render": "lazy"
   },
   "minicart-empty-state": {
     "component": "EmptyState",
