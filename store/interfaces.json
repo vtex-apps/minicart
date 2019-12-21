@@ -6,8 +6,7 @@
   "minicart.v2": {
     "component": "Minicart",
     "composition": "children",
-    "allowed": "*",
-    "render": "client"
+    "allowed": "*"
   },
   "minicart-base-content": {
     "component": "BaseContent",

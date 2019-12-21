@@ -17,14 +17,9 @@ const Minicart: FC<MinicartProps> = ({
   linkVariationUrl,
   children,
 }) => {
-  const { orderForm }: OrderFormContext = useOrderForm()
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
-
-  if (!orderForm) {
-    return null
-  }
 
   if (variation === 'link') {
     return (
