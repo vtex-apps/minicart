@@ -30,6 +30,7 @@
   "minicart-empty-state": {
     "component": "EmptyState",
     "composition": "children",
-    "allowed": "*"
+    "allowed": "*",
+    "render": "lazy"
   }
 }
