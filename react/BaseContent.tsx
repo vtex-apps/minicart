@@ -7,7 +7,7 @@ import React, {
   memo,
 } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { ExtensionPoint } from 'vtex.render-runtime'
+import { ExtensionPoint, useRuntime } from 'vtex.render-runtime'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 import { useCssHandles } from 'vtex.css-handles'
@@ -44,6 +44,11 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
+  const { navigate } = useRuntime()
+
+  const goToCheckout = (url: string) => {
+    navigate({ to: url })
+  }
 
   useEffect(() => {
     if (loading) {
