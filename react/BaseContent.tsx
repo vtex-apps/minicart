@@ -43,11 +43,15 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   const push = useDebouncedPush()
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
-  const { url: checkoutUrl } = useCheckoutURL()
+  const { url: checkoutUrl, major } = useCheckoutURL()
   const { navigate } = useRuntime()
 
   const goToCheckout = (url: string) => {
-    navigate({ to: url })
+    if (major) {
+      navigate({ to: url })
+    } else {
+      window.location.href = url
+    }
   }
 
   useEffect(() => {
