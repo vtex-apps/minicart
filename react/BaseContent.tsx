@@ -47,7 +47,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   const { navigate } = useRuntime()
 
   const goToCheckout = (url: string) => {
-    if (major) {
+    if (major && url === checkoutUrl) {
       navigate({ to: url })
     } else {
       window.location.href = url
