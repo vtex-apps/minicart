@@ -16,7 +16,7 @@ const CSS_HANDLES = [
 ]
 
 const PopupMode: FC = ({ children }) => {
-  const { open, openOnHover } = useMinicartState()
+  const { open, hasBeenOpened, openOnHover } = useMinicartState()
   const dispatch = useMinicartDispatch()
   const handles = useCssHandles(CSS_HANDLES)
 
@@ -46,7 +46,7 @@ const PopupMode: FC = ({ children }) => {
               <div
                 className={`${handles.popupChildrenContainer} mt3 bg-base relative flex flex-column ph5 pv3`}
               >
-                {children}
+                {hasBeenOpened && children}
               </div>
             </div>
           </div>

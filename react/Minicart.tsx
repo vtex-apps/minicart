@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { useCssHandles } from 'vtex.css-handles'
 import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 
@@ -17,14 +16,9 @@ const Minicart: FC<MinicartProps> = ({
   linkVariationUrl,
   children,
 }) => {
-  const { orderForm }: OrderFormContext = useOrderForm()
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
-
-  if (!orderForm) {
-    return null
-  }
 
   if (variation === 'link') {
     return (
