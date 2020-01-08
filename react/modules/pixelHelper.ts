@@ -3,7 +3,7 @@ export function mapCartItemToPixel(item: CartItem): PixelCartItem {
     skuId: item.id,
     variant: item.skuName,
     price: item.sellingPrice,
-    name: item.name,
+    name: getNameWithoutVariant(item),
     quantity: item.quantity,
     productRefId: item.productRefId,
     brand: item.additionalInfo ? item.additionalInfo.brandName : '',
@@ -26,6 +26,21 @@ export function mapBuyButtonItemToPixel(item: BuyButtonItem): PixelCartItem {
     brand: item.brand,
     category,
   }
+}
+
+/**
+ * Remove the variant from the end of the name.
+ * Ex: from "Classic Shoes Pink" to "Classic Shoes"
+ */
+function getNameWithoutVariant(item: CartItem) {
+  if (!item.name.includes(item.skuName)) {
+    return item.name
+  }
+
+  const leadingSpace = 1
+  const variantLength = leadingSpace + item.skuName.length
+
+  return item.name.slice(0, item.name.length - variantLength)
 }
 
 function productCategory(item: CartItem) {

@@ -12,7 +12,7 @@ import { IconDelete } from 'vtex.store-icons'
 
 import { MiniCartPropTypes } from '../utils/propTypes'
 import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
-import { mapCartItemToPixel } from '../utils/pixelHelper'
+import { mapCartItemToPixel } from '../../modules/pixelHelper'
 
 import { ITEMS_STATUS } from '../localState/index'
 import updateItemsMutation from '../localState/graphql/updateItemsMutation.gql'
