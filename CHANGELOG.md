@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- New pixel event `cartChanged` when an item is removed or added
+- New pixel event `cartChanged` when an item is removed or added.
 
 ### Fixed
 - Remove variant name from product name in `removeFromCart` event. Making the name consistent across events.
