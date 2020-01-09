@@ -121,6 +121,7 @@ Sidebar.propTypes = {
     viewBox: PropTypes.string,
     size: PropTypes.number,
   }),
+  intl: PropTypes.any,
 }
 
 export default injectIntl(Sidebar)

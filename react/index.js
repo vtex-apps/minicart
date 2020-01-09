@@ -24,15 +24,12 @@ import Sidebar from './legacy/components/Sidebar'
 import Popup from './legacy/components/Popup'
 import { shouldShowItem } from './legacy/utils/itemsHelper'
 import { mapBuyButtonItemToPixel } from './legacy/utils/pixelHelper'
-
 import fullMinicartQuery from './legacy/localState/graphql/fullMinicartQuery.gql'
 import updateItemsMutation from './legacy/localState/graphql/updateItemsMutation.gql'
 import updateOrderFormMutation from './legacy/localState/graphql/updateOrderFormMutation.gql'
 import updateLocalItemStatusMutation from './legacy/localState/graphql/updateLocalItemStatusMutation.gql'
 import setMinicartOpenMutation from './legacy/localState/graphql/setMinicartOpenMutation.gql'
-
 import createLocalState, { ITEMS_STATUS } from './legacy/localState'
-
 import styles from './legacy/minicart.css'
 import useMarketingSessionParams from './legacy/hooks/useMarketingSessionParams'
 
@@ -219,8 +216,8 @@ const MiniCart = ({
         variables: {
           orderFormId,
           items,
-          ...(utmParams ? {utmParams} : {}),
-          ...(utmiParams ? {utmiParams} : {}),
+          ...(utmParams ? { utmParams } : {}),
+          ...(utmiParams ? { utmiParams } : {}),
         },
       })
     },

@@ -1,4 +1,5 @@
 import { renderHook, wait } from '@vtex/test-tools/react'
+
 import useMarketingSessionParams from '../../hooks/useMarketingSessionParams'
 
 const fakeSessionWithData = {
@@ -6,41 +7,43 @@ const fakeSessionWithData = {
     namespaces: {
       public: {
         ['utm_source']: {
-          value: 'utmSource'
+          value: 'utmSource',
         },
         ['utm_medium']: {
-          value: 'utmMedium'
+          value: 'utmMedium',
         },
         ['utm_campaign']: {
-          value: 'utmCampaign'
+          value: 'utmCampaign',
         },
         ['utmi_cp']: {
-          value: 'utmiCampaign'
+          value: 'utmiCampaign',
         },
         ['utmi_p']: {
-          value: 'utmiPage'
+          value: 'utmiPage',
         },
         ['utmi_pc']: {
-          value: 'utmiPart'
+          value: 'utmiPart',
         },
-      }
-    }
-  }
+      },
+    },
+  },
 }
 
 const fakeSessionNoData = {
   response: {
     namespaces: {
-      public: {}
-    }
-  }
+      public: {},
+    },
+  },
 }
 
 it('if session has correct data, get and format input correctly', async () => {
   window.__RENDER_8_SESSION__ = {}
-  window.__RENDER_8_SESSION__.sessionPromise = new Promise(resolve => resolve(fakeSessionWithData))
+  window.__RENDER_8_SESSION__.sessionPromise = new Promise(resolve =>
+    resolve(fakeSessionWithData)
+  )
   const { result } = renderHook(() => useMarketingSessionParams())
-  
+
   await wait()
 
   const { utmParams, utmiParams } = result.current
@@ -58,7 +61,9 @@ it('if session has correct data, get and format input correctly', async () => {
 
 it('if session does not have data, leave object as undefined', async () => {
   window.__RENDER_8_SESSION__ = {}
-  window.__RENDER_8_SESSION__.sessionPromise = new Promise(resolve => resolve(fakeSessionNoData))
+  window.__RENDER_8_SESSION__.sessionPromise = new Promise(resolve =>
+    resolve(fakeSessionNoData)
+  )
   const { result } = renderHook(() => useMarketingSessionParams())
 
   await wait()
@@ -70,7 +75,9 @@ it('if session does not have data, leave object as undefined', async () => {
 
 it('if session promise rejects, everything still works, response is undefined', async () => {
   window.__RENDER_8_SESSION__ = {}
-  window.__RENDER_8_SESSION__.sessionPromise = new Promise((_, reject) => reject())
+  window.__RENDER_8_SESSION__.sessionPromise = new Promise((_, reject) =>
+    reject()
+  )
   const { result } = renderHook(() => useMarketingSessionParams())
 
   await wait()

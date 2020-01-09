@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 export function mapCartItemToPixel(item: CartItem): PixelCartItem {
   return {
     skuId: item.id,

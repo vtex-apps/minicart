@@ -16,9 +16,12 @@ export const ToastContext = React.createContext({
   showToast: jest.fn(),
 })
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+const noop = () => {}
+
 export const withToast = WrappedComponent => {
   const withToast = props => (
-    <WrappedComponent showToast={() => {}} hideToast={() => {}} {...props} />
+    <WrappedComponent showToast={noop} hideToast={noop} {...props} />
   )
   return withToast
 }

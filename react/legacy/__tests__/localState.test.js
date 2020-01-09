@@ -3,10 +3,9 @@ import { ApolloClient } from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
 import gql from 'graphql-tag'
 
-import createLocalState from '../localState/index'
+import createLocalState, { ITEMS_STATUS } from '../localState/index'
 import addToCartMutation from '../localState/graphql/addToCartMutation.gql'
 import updateItemsMutation from '../localState/graphql/updateItemsMutation.gql'
-import { ITEMS_STATUS } from '../localState'
 
 describe('Local State', () => {
   let cache, client

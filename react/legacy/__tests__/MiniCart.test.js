@@ -138,7 +138,7 @@ describe('<MiniCart />', () => {
     await wait(async () => {
       jest.runAllTimers()
     })
-    
+
     expect(baseElement).toMatchSnapshot()
   })
 
@@ -242,7 +242,7 @@ describe('<MiniCart />', () => {
     await wait(() => {
       jest.runAllTimers()
     })
-    
+
     expect(getByTestId('total-price')).toBeInTheDocument()
   })
 })
