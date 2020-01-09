@@ -4,30 +4,9 @@ import { OrderItemsProvider, useOrderItems } from 'vtex.order-items/OrderItems'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { usePixel } from 'vtex.pixel-manager/PixelContext'
 import { useCssHandles } from 'vtex.css-handles'
+import { mapCartItemToPixel } from './modules/pixelHelper'
 
 const CSS_HANDLES = ['minicartProductListContainer'] as const
-
-const adjustSkuItemForPixelEvent = (
-  skuItem: OrderFormItem,
-  quantity?: number
-) => {
-  const categoryIds = skuItem.productCategoryIds.split('/')
-  const itemCategory = categoryIds
-    .map(categoryId => skuItem.productCategories[categoryId])
-    .join('/')
-    .slice(1, -1)
-
-  return {
-    skuId: skuItem.id,
-    variant: skuItem.skuName,
-    price: skuItem.price,
-    name: skuItem.name,
-    quantity: quantity || skuItem.quantity,
-    productRefId: skuItem.productRefId,
-    brand: skuItem.additionalInfo.brandName,
-    category: itemCategory,
-  }
-}
 
 const ProductList: FC = () => {
   const {
@@ -42,7 +21,11 @@ const ProductList: FC = () => {
     quantity: number,
     item: OrderFormItem
   ) => {
-    const adjustedItem = adjustSkuItemForPixelEvent(item, quantity)
+    const adjustedItem = {
+      ...mapCartItemToPixel(item),
+      quantity,
+    }
+
     push({
       event: 'addToCart',
       items: [adjustedItem],
@@ -50,7 +33,7 @@ const ProductList: FC = () => {
     updateQuantity({ uniqueId, quantity })
   }
   const handleRemove = (uniqueId: string, item: OrderFormItem) => {
-    const adjustedItem = adjustSkuItemForPixelEvent(item)
+    const adjustedItem = mapCartItemToPixel(item)
     push({
       event: 'removeFromCart',
       items: [adjustedItem],

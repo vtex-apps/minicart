@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- New pixel event `cartChanged` when an item is removed or added.
+
+### Fixed
+- Remove variant name from product name in `removeFromCart` event. Making the name consistent across events.
 
 ## [2.36.0] - 2020-01-06
 ### Changed

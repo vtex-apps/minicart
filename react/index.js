@@ -23,7 +23,7 @@ import MiniCartContent from './legacy/components/MiniCartContent'
 import Sidebar from './legacy/components/Sidebar'
 import Popup from './legacy/components/Popup'
 import { shouldShowItem } from './legacy/utils/itemsHelper'
-import { mapBuyButtonItemToPixel } from './legacy/utils/pixelHelper'
+import { mapBuyButtonItemToPixel, mapCartItemToPixel } from './modules/pixelHelper'
 
 import fullMinicartQuery from './legacy/localState/graphql/fullMinicartQuery.gql'
 import updateItemsMutation from './legacy/localState/graphql/updateItemsMutation.gql'
@@ -305,6 +305,13 @@ const MiniCart = ({
             ['data', 'addItem'],
             addItemsResponse
           )
+
+          push({
+            event: 'cartChanged',
+            items: newOrderForm && newOrderForm.items
+              ? newOrderForm.items.map(mapCartItemToPixel)
+              : []
+          })
 
           setUpdatingOrderForm(false)
           await updateOrderForm(newOrderForm, true)
