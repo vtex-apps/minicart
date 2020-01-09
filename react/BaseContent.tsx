@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
@@ -7,8 +7,9 @@ import { useCssHandles } from 'vtex.css-handles'
 import { Button } from 'vtex.styleguide'
 
 import { useMinicartState } from './MinicartContext'
-
 import styles from './styles.css'
+import { mapCartItemToPixel } from './modules/pixelHelper'
+import useDebouncedPush from './modules/debouncedPixelHook'
 
 interface Props {
   sideBarMode: boolean
@@ -24,9 +25,21 @@ const CSS_HANDLES = [
 
 const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
   const { orderForm, loading }: OrderFormContext = useOrderForm()
+  const push = useDebouncedPush()
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
+
+  useEffect(() => {
+    if (loading) {
+      return
+    }
+
+    push({
+      event: 'cartChanged',
+      items: orderForm.items.map(mapCartItemToPixel),
+    })
+  }, [push, loading, orderForm.items])
 
   const minicartContentClasses = `${handles.minicartContentContainer} ${
     variation === 'drawer' ? styles.drawerStyles : styles.popupStyles

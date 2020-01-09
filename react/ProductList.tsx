@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { OrderItemsProvider, useOrderItems } from 'vtex.order-items/OrderItems'
 import { ExtensionPoint } from 'vtex.render-runtime'
@@ -15,13 +15,6 @@ const ProductList: FC = () => {
   const { updateQuantity, removeItem } = useOrderItems()
   const { push } = usePixel()
   const handles = useCssHandles(CSS_HANDLES)
-
-  useEffect(() => {
-    push({
-      event: 'cartChanged',
-      items: items.map(mapCartItemToPixel)
-    })
-  }, [items])
 
   const handleQuantityChange = (
     uniqueId: string,
