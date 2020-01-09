@@ -54,7 +54,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
   return (
     <div className={minicartContentClasses}>
       <div
-        className={`w-100 overflow-y-auto ${handles.minicartProductListContainer}`}
+        className={`w-100 h-100 overflow-y-auto ${handles.minicartProductListContainer}`}
       >
         <h3 className={`${handles.minicartTitle} t-heading-3 mv2 c-on-base`}>
           <FormattedMessage id="store/minicart.title" />
