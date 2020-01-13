@@ -8,6 +8,8 @@ export function mapCartItemToPixel(item: CartItem): PixelCartItem {
     productRefId: item.productRefId,
     brand: item.additionalInfo ? item.additionalInfo.brandName : '',
     category: productCategory(item),
+    detailUrl: item.detailUrl,
+    imageUrl: item.imageUrls ? item.imageUrls.at3x : item.imageUrl || '',
   }
 }
 
@@ -25,6 +27,8 @@ export function mapBuyButtonItemToPixel(item: BuyButtonItem): PixelCartItem {
     productRefId: item.productRefId,
     brand: item.brand,
     category,
+    detailUrl: item.detailUrl,
+    imageUrl: item.imageUrl,
   }
 }
 
@@ -63,6 +67,8 @@ interface PixelCartItem {
   productRefId: string
   brand: string
   category: string
+  detailUrl: string
+  imageUrl: string
 }
 
 interface BuyButtonItem {
@@ -74,6 +80,8 @@ interface BuyButtonItem {
   productRefId: string
   brand: string
   category: string
+  detailUrl: string
+  imageUrl: string
 }
 
 interface CartItem {
@@ -88,4 +96,13 @@ interface CartItem {
   }
   productCategoryIds: string
   productCategories: Record<string, string>
+  detailUrl: string
+  // Field from the usual orderForm API
+  imageUrl?: string
+  // Field from the order-manager orderForm API
+  imageUrls?: {
+    at1x: string
+    at2x: string
+    at3x: string
+  }
 }
