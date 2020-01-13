@@ -9,7 +9,9 @@ export function mapCartItemToPixel(item: CartItem): PixelCartItem {
     brand: item.additionalInfo ? item.additionalInfo.brandName : '',
     category: productCategory(item),
     detailUrl: item.detailUrl,
-    imageUrl: item.imageUrls ? item.imageUrls.at3x : item.imageUrl || '',
+    imageUrl: item.imageUrls
+      ? fixUrlProtocol(item.imageUrls.at3x)
+      : item.imageUrl || '',
   }
 }
 
@@ -30,6 +32,18 @@ export function mapBuyButtonItemToPixel(item: BuyButtonItem): PixelCartItem {
     detailUrl: item.detailUrl,
     imageUrl: item.imageUrl,
   }
+}
+
+/**
+ * URL comes like "//storecomponents.vteximg.com.br/arquivos/ids/155491"
+ * this function guarantees it comes with protocol in it.
+ */
+function fixUrlProtocol(url: string) {
+  if (!url || url.indexOf('http') === 0) {
+    return url
+  }
+
+  return 'https:' + url
 }
 
 /**
