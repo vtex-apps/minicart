@@ -73,7 +73,11 @@ const MiniCartFooter = ({
       <div className={footerClasses}>
         {!isUpdating && showDiscount && discount > 0 && (
           <div className={priceAndDiscountClasses}>
-            <span className="ttl c-action-primary">{labelDiscount}</span>
+            <span
+              className={`${minicart.labelDiscountText} ttl c-action-primary`}
+            >
+              {labelDiscount}
+            </span>
             <ProductPrice
               sellingPriceClass="c-action-primary t-body ph2 dib"
               sellingPrice={discount}
