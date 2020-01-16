@@ -1,10 +1,8 @@
 import React, { FC, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { ExtensionPoint } from 'vtex.render-runtime'
+import { ExtensionPoint, useChildBlock } from 'vtex.render-runtime'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
-import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 import { useCssHandles } from 'vtex.css-handles'
-import { Button } from 'vtex.styleguide'
 
 import { useMinicartState } from './MinicartContext'
 import styles from './styles.css'
@@ -12,7 +10,6 @@ import { mapCartItemToPixel } from './modules/pixelHelper'
 import useDebouncedPush from './modules/debouncedPixelHook'
 
 interface Props {
-  sideBarMode: boolean
   finishShoppingButtonLink: string
 }
 
@@ -28,7 +25,6 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
   const push = useDebouncedPush()
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
-  const { url: checkoutUrl } = useCheckoutURL()
 
   useEffect(() => {
     if (loading) {
@@ -45,11 +41,26 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
     variation === 'drawer' ? styles.drawerStyles : styles.popupStyles
   } flex flex-column justify-between`
 
-  const minicartFooterClasses = `${handles.minicartFooter} ${
-    variation === 'drawer' ? 'pa4' : 'pv3'
-  } sticky`
-
   const isCartEmpty = !loading && orderForm.items.length === 0
+
+  const hasMinicartContentBlock = useChildBlock({ id: 'minicart-content' })
+
+  if (hasMinicartContentBlock) {
+    return (
+      <div className={minicartContentClasses}>
+        <div className={`w-100 ${handles.minicartProductListContainer}`}>
+          <h3 className={`${handles.minicartTitle} t-heading-3 mv2 c-on-base`}>
+            <FormattedMessage id="store/minicart.title" />
+          </h3>
+          {isCartEmpty ? (
+            <ExtensionPoint id="minicart-empty-state" />
+          ) : (
+            <ExtensionPoint id="minicart-content" />
+          )}
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className={minicartContentClasses}>
@@ -66,17 +77,10 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
         )}
       </div>
       {!isCartEmpty && (
-        <div className={minicartFooterClasses}>
-          <ExtensionPoint id="minicart-summary" />
-          <Button
-            id="proceed-to-checkout"
-            href={finishShoppingButtonLink || checkoutUrl}
-            variation="primary"
-            block
-          >
-            <FormattedMessage id="store/minicart.go-to-checkout" />
-          </Button>
-        </div>
+        <ExtensionPoint
+          id="minicart-summary"
+          finishShoppingButtonLink={finishShoppingButtonLink}
+        />
       )}
     </div>
   )
