@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - New `minicart-content` block with composition children.
 
+## [2.38.0] - 2020-01-13
+### Added
+- New fields `detailUrl` and `imageUrl` to items in `addToCart`, `removeFromCart` and `cartChanged` events.
+
 ## [2.37.1] - 2020-01-09
 ### Fixed
 - Missing `h-100` token on `minicart-base-content`.
