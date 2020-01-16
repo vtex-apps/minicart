@@ -8,12 +8,18 @@
     "composition": "children",
     "allowed": "*"
   },
+  "minicart-content": {
+    "component": "Content",
+    "composition": "children",
+    "allowed": "*"
+  },
   "minicart-base-content": {
     "component": "BaseContent",
     "allowed": [
       "minicart-product-list",
       "minicart-summary",
-      "minicart-empty-state"
+      "minicart-empty-state",
+      "minicart-content"
     ],
     "render": "lazy"
   },
