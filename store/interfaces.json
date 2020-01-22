@@ -4,9 +4,7 @@
     "component": "index"
   },
   "minicart.v2": {
-    "component": "Minicart",
-    "composition": "children",
-    "allowed": "*"
+    "component": "Minicart"
   },
   "minicart-base-content": {
     "component": "BaseContent",
@@ -29,8 +27,6 @@
   },
   "minicart-empty-state": {
     "component": "EmptyState",
-    "composition": "children",
-    "allowed": "*",
     "render": "lazy"
   }
 }
