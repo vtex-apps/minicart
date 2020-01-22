@@ -23,7 +23,7 @@ const CSS_HANDLES = [
   'minicartFooter',
 ] as const
 
-const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
+const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   const { orderForm, loading }: OrderFormContext = useOrderForm()
   const push = useDebouncedPush()
   const handles = useCssHandles(CSS_HANDLES)
@@ -67,6 +67,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink }) => {
       </div>
       {!isCartEmpty && (
         <div className={minicartFooterClasses}>
+          {children}
           <ExtensionPoint id="minicart-summary" />
           <Button
             id="proceed-to-checkout"
