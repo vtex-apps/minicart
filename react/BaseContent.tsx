@@ -1,6 +1,6 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, Children } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { ExtensionPoint } from 'vtex.render-runtime'
+import { ExtensionPoint, useChildBlock } from 'vtex.render-runtime'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 import { useCssHandles } from 'vtex.css-handles'
@@ -29,6 +29,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
+  const hasMinicartFooter = useChildBlock({ id: 'minicart-footer' })
 
   useEffect(() => {
     if (loading) {
@@ -50,6 +51,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   } sticky`
 
   const isCartEmpty = !loading && orderForm.items.length === 0
+  const hasChildren = Children.toArray(children).some(Boolean)
 
   return (
     <div className={minicartContentClasses}>
@@ -61,13 +63,16 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
         </h3>
         {isCartEmpty ? (
           <ExtensionPoint id="minicart-empty-state" />
+        ) : hasChildren ? (
+          children
         ) : (
           <ExtensionPoint id="minicart-product-list" />
         )}
       </div>
-      {!isCartEmpty && (
+      {!isCartEmpty && hasMinicartFooter ? (
+        <ExtensionPoint id="minicart-footer" />
+      ) : (
         <div className={minicartFooterClasses}>
-          {children}
           <ExtensionPoint id="minicart-summary" />
           <Button
             id="proceed-to-checkout"
