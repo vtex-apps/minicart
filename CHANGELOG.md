@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - `BaseContent` can now render any `children` blocks passed to it.
+- `minicart-footer` interface, with composition children.
+- `minicart-checkout-button` interface.
 
 ## [2.39.0] - 2020-01-22
 ### Added
