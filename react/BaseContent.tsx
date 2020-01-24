@@ -29,7 +29,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
-  const hasMinicartFooter = useChildBlock({ id: 'minicart-footer' })
+  const hasMinicartFooter = useChildBlock({ id: 'sticky-layout' })
 
   useEffect(() => {
     if (loading) {
@@ -69,21 +69,22 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
           <ExtensionPoint id="minicart-product-list" />
         )}
       </div>
-      {!isCartEmpty && hasMinicartFooter ? (
-        <ExtensionPoint id="minicart-footer" />
-      ) : (
-        <div className={minicartFooterClasses}>
-          <ExtensionPoint id="minicart-summary" />
-          <Button
-            id="proceed-to-checkout"
-            href={finishShoppingButtonLink || checkoutUrl}
-            variation="primary"
-            block
-          >
-            <FormattedMessage id="store/minicart.go-to-checkout" />
-          </Button>
-        </div>
-      )}
+      {!isCartEmpty &&
+        (hasMinicartFooter ? (
+          <ExtensionPoint id="sticky-layout" />
+        ) : (
+          <div className={minicartFooterClasses}>
+            <ExtensionPoint id="minicart-summary" />
+            <Button
+              id="proceed-to-checkout"
+              href={finishShoppingButtonLink || checkoutUrl}
+              variation="primary"
+              block
+            >
+              <FormattedMessage id="store/minicart.go-to-checkout" />
+            </Button>
+          </div>
+        ))}
     </div>
   )
 }
