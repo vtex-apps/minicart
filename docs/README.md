@@ -67,6 +67,65 @@ In order to apply CSS customizations in this and other blocks, follow the instru
 | `popupContentContainer`         |
 | `popupWrapper`                  |
 
+## Advanced Configuration
+
+The `minicart.v2` block is highly customizable because it has `compostion: 'children'` and is composed of other blocks. Currently its default implementation is the following:
+
+```json
+// This is the default blocks implementation for the minicart-layout
+{
+  "minicart.v2": {
+    "children": ["minicart-base-content"]
+  },
+  "minicart-base-content": {
+    "blocks": [
+      "minicart-product-list",
+      "minicart-summary",
+      "minicart-empty-state"
+    ]
+  },
+  // The product-list comes from vtex.product-list app
+  "minicart-product-list": {
+    "blocks": ["product-list"]
+  },
+  // checkout-summary.compact comes from vtex.checkout-summary app
+  "minicart-summary": {
+    "blocks": ["checkout-summary.compact"]
+  },
+  // summary-totalizers comes from vtex.checkout-summary app
+  "checkout-summary.compact": {
+    "children": ["summary-totalizers#minicart"],
+    "props": {
+      "totalizersToShow": ["Items", "Discounts"]
+    }
+  },
+  "summary-totalizers#minicart": {
+    "props": {
+      "showTotal": true,
+      "showDeliveryTotal": false
+    }
+  },
+  "minicart-empty-state": {
+    "children": ["flex-layout.row#empty-state"]
+  },
+  "flex-layout.row#empty-state": {
+    "children": ["flex-layout.col#empty-state"]
+  },
+  "flex-layout.col#empty-state": {
+    "children": ["rich-text#empty-state"]
+  },
+  "rich-text#empty-state": {
+    "props": {
+      "text": "Your cart is empty!"
+    }
+  }
+}
+```
+
+This means that, when you use `minicart.v2` in your store, you're actually using this default implementation. So, to customize the blocks being used in your own implementation, you could get this default and change it as you like by adding this blocks to your theme and changing their configuration.
+
+For further information on how to configure each of the blocks used to compose `minicar.v2`, check [VTEX Checkout Summary](https://vtex.io/docs/app/checkout-summary) and [VTEX Product List](https://vtex.io/docs/product-list).
+
 ## Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
