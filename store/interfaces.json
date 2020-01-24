@@ -13,19 +13,17 @@
       "minicart-product-list",
       "minicart-summary",
       "minicart-empty-state",
-      "minicart-footer"
+      "sticky-layout"
     ],
     "composition": "children",
     "render": "lazy"
   },
   "minicart-product-list": {
     "component": "ProductList",
-    "allowed": ["product-list"],
-    "render": "lazy"
+    "allowed": ["product-list"]
   },
-  "minicart-footer": {
-    "component": "StickyFooter",
-    "composition": "children"
+  "product-list": {
+    "blocks": ["product-list-content-mobile"]
   },
   "minicart-checkout-button": {
     "component": "CheckoutButton"
