@@ -71,7 +71,7 @@ In order to apply CSS customizations in this and other blocks, follow the instru
 
 The `minicart.v2` block is highly customizable because it has `compostion: 'children'` and is composed of other blocks. Currently its default implementation is the following:
 
-```json
+```jsonc
 // This is the default blocks implementation for the minicart-layout
 {
   "minicart.v2": {
