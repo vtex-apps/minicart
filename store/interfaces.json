@@ -21,9 +21,6 @@
     "component": "ProductList",
     "allowed": ["product-list"]
   },
-  "product-list": {
-    "blocks": ["product-list-content-mobile"]
-  },
   "minicart-checkout-button": {
     "component": "CheckoutButton"
   },
