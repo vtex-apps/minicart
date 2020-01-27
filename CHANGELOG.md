@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - `BaseContent` can now render any `children` blocks passed to it.
 - `minicart-checkout-button` interface.
+- New `minicartCheckoutButton` CSS handle.
+
+### Changed
+- Default blocks implementation to use these new features.
 
 ## [2.39.0] - 2020-01-22
 ### Added
