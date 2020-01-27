@@ -45,23 +45,12 @@ const ProductList: FC<Props> = ({ renderAsChildren }) => {
     removeItem({ uniqueId })
   }
 
-  if (renderAsChildren) {
-    return (
-      <div
-        className={`w-100 h-100 overflow-y-auto ${handles.minicartProductListContainer}`}
-      >
-        <ExtensionPoint
-          id="product-list"
-          items={items}
-          onQuantityChange={handleQuantityChange}
-          onRemove={handleRemove}
-        />
-      </div>
-    )
-  }
-
   return (
-    <div className={`${handles.minicartProductListContainer} overflow-y-auto`}>
+    <div
+      className={`${handles.minicartProductListContainer} ${
+        renderAsChildren ? 'w-100 h-100' : ''
+      } overflow-y-auto`}
+    >
       <ExtensionPoint
         id="product-list"
         items={items}
