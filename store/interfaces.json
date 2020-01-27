@@ -12,8 +12,7 @@
     "allowed": [
       "minicart-product-list",
       "minicart-summary",
-      "minicart-empty-state",
-      "sticky-layout"
+      "minicart-empty-state"
     ],
     "composition": "children",
     "render": "lazy"
