@@ -1,4 +1,11 @@
-import React, { FC, useEffect, Children, ReactElement, Fragment } from 'react'
+import React, {
+  FC,
+  useEffect,
+  Children,
+  ReactElement,
+  Fragment,
+  memo,
+} from 'react'
 import { FormattedMessage } from 'react-intl'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
@@ -22,6 +29,14 @@ const CSS_HANDLES = [
   'minicartTitle',
   'minicartFooter',
 ] as const
+
+const MinicartHeader: FC<{ minicarTitleHandle: string }> = memo(
+  ({ minicarTitleHandle }) => (
+    <h3 className={`${minicarTitleHandle} t-heading-3 mv2 c-on-base`}>
+      <FormattedMessage id="store/minicart.title" />
+    </h3>
+  )
+)
 
 const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   const { orderForm, loading }: OrderFormContext = useOrderForm()
@@ -55,9 +70,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   if (isCartEmpty) {
     return (
       <Fragment>
-        <h3 className={`${handles.minicartTitle} t-heading-3 mv2 c-on-base`}>
-          <FormattedMessage id="store/minicart.title" />
-        </h3>
+        <MinicartHeader minicarTitleHandle={handles.minicartTitle} />
         <ExtensionPoint id="minicart-empty-state" />
       </Fragment>
     )
@@ -66,9 +79,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   if (hasChildren) {
     return (
       <div className={minicartContentClasses}>
-        <h3 className={`${handles.minicartTitle} t-heading-3 mv2 c-on-base`}>
-          <FormattedMessage id="store/minicart.title" />
-        </h3>
+        <MinicartHeader minicarTitleHandle={handles.minicartTitle} />
         {Children.map(children, child =>
           React.cloneElement(child as ReactElement, { renderAsChildren: true })
         )}
@@ -81,9 +92,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
       <div
         className={`w-100 h-100 overflow-y-auto ${handles.minicartProductListContainer}`}
       >
-        <h3 className={`${handles.minicartTitle} t-heading-3 mv2 c-on-base`}>
-          <FormattedMessage id="store/minicart.title" />
-        </h3>
+        <MinicartHeader minicarTitleHandle={handles.minicartTitle} />
         <ExtensionPoint id="minicart-product-list" />
       </div>
       <div className={minicartFooterClasses}>
