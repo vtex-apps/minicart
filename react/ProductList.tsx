@@ -6,9 +6,13 @@ import { usePixel } from 'vtex.pixel-manager/PixelContext'
 import { useCssHandles } from 'vtex.css-handles'
 import { mapCartItemToPixel } from './modules/pixelHelper'
 
+interface Props {
+  renderAsChildren: boolean
+}
+
 const CSS_HANDLES = ['minicartProductListContainer'] as const
 
-const ProductList: FC = () => {
+const ProductList: FC<Props> = ({ renderAsChildren }) => {
   const {
     orderForm: { items },
   } = useOrderForm()
@@ -41,6 +45,21 @@ const ProductList: FC = () => {
     removeItem({ uniqueId })
   }
 
+  if (renderAsChildren) {
+    return (
+      <div
+        className={`w-100 h-100 overflow-y-auto ${handles.minicartProductListContainer}`}
+      >
+        <ExtensionPoint
+          id="product-list"
+          items={items}
+          onQuantityChange={handleQuantityChange}
+          onRemove={handleRemove}
+        />
+      </div>
+    )
+  }
+
   return (
     <div className={`${handles.minicartProductListContainer} overflow-y-auto`}>
       <ExtensionPoint
@@ -53,9 +72,9 @@ const ProductList: FC = () => {
   )
 }
 
-const EnhancedProductList = () => (
+const EnhancedProductList: FC<Props> = ({ renderAsChildren }) => (
   <OrderItemsProvider>
-    <ProductList />
+    <ProductList renderAsChildren={renderAsChildren} />
   </OrderItemsProvider>
 )
 
