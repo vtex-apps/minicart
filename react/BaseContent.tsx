@@ -1,6 +1,6 @@
-import React, { FC, useEffect, Children } from 'react'
+import React, { FC, useEffect, Children, ReactElement, Fragment } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { ExtensionPoint, useChildBlock } from 'vtex.render-runtime'
+import { ExtensionPoint } from 'vtex.render-runtime'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 import { useCssHandles } from 'vtex.css-handles'
@@ -29,7 +29,6 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
-  const hasMinicartFooter = useChildBlock({ id: 'sticky-layout' })
 
   useEffect(() => {
     if (loading) {
@@ -53,6 +52,30 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   const isCartEmpty = !loading && orderForm.items.length === 0
   const hasChildren = Children.toArray(children).some(Boolean)
 
+  if (isCartEmpty) {
+    return (
+      <Fragment>
+        <h3 className={`${handles.minicartTitle} t-heading-3 mv2 c-on-base`}>
+          <FormattedMessage id="store/minicart.title" />
+        </h3>
+        <ExtensionPoint id="minicart-empty-state" />
+      </Fragment>
+    )
+  }
+
+  if (hasChildren) {
+    return (
+      <div className={minicartContentClasses}>
+        <h3 className={`${handles.minicartTitle} t-heading-3 mv2 c-on-base`}>
+          <FormattedMessage id="store/minicart.title" />
+        </h3>
+        {Children.map(children, child =>
+          React.cloneElement(child as ReactElement, { renderAsChildren: true })
+        )}
+      </div>
+    )
+  }
+
   return (
     <div className={minicartContentClasses}>
       <div
@@ -61,30 +84,19 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
         <h3 className={`${handles.minicartTitle} t-heading-3 mv2 c-on-base`}>
           <FormattedMessage id="store/minicart.title" />
         </h3>
-        {isCartEmpty ? (
-          <ExtensionPoint id="minicart-empty-state" />
-        ) : hasChildren ? (
-          children
-        ) : (
-          <ExtensionPoint id="minicart-product-list" />
-        )}
+        <ExtensionPoint id="minicart-product-list" />
       </div>
-      {!isCartEmpty &&
-        (hasMinicartFooter ? (
-          <ExtensionPoint id="sticky-layout" />
-        ) : (
-          <div className={minicartFooterClasses}>
-            <ExtensionPoint id="minicart-summary" />
-            <Button
-              id="proceed-to-checkout"
-              href={finishShoppingButtonLink || checkoutUrl}
-              variation="primary"
-              block
-            >
-              <FormattedMessage id="store/minicart.go-to-checkout" />
-            </Button>
-          </div>
-        ))}
+      <div className={minicartFooterClasses}>
+        <ExtensionPoint id="minicart-summary" />
+        <Button
+          id="proceed-to-checkout"
+          href={finishShoppingButtonLink || checkoutUrl}
+          variation="primary"
+          block
+        >
+          <FormattedMessage id="store/minicart.go-to-checkout" />
+        </Button>
+      </div>
     </div>
   )
 }
