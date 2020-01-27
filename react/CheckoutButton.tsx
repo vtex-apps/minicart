@@ -11,14 +11,16 @@ const CheckoutButton: FC<Props> = ({ finishShoppingButtonLink }) => {
   const { url: checkoutUrl } = useCheckoutURL()
 
   return (
-    <Button
-      id="proceed-to-checkout"
-      href={finishShoppingButtonLink || checkoutUrl}
-      variation="primary"
-      block
-    >
-      <FormattedMessage id="store/minicart.go-to-checkout" />
-    </Button>
+    <div className="mv3">
+      <Button
+        id="proceed-to-checkout"
+        href={finishShoppingButtonLink || checkoutUrl}
+        variation="primary"
+        block
+      >
+        <FormattedMessage id="store/minicart.go-to-checkout" />
+      </Button>
+    </div>
   )
 }
 
