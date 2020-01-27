@@ -40,11 +40,11 @@ The VTEX Minicart app is a block that displays a list of all items added by cust
 
 | Prop name              | Type      | Description                                                                                              | Default value |
 | ---------------------- | --------- | -------------------------------------------------------------------------------------------------------- | ------------- |
-| `variation`            | `Enum`    | Define Minicart variation. (values: `'popup'`, `'drawer'` or `'link'`)                                   | `'sidebar'`   |
-| `openOnHover`          | `Boolean` | Whether the popup minicart should open when the user hovers over it.                                     | false         |
-| `linkVariationUrl`     | `String`  | The link associated to the `'link'` variation of the Minicart.                                           | false         |
 | `drawerSlideDirection` | `Enum`    | Controls the slide direction for the `'sidebar'` variation. (values: `'rightToLeft'` or `'leftToRight'`) | `rightToLeft` |
+| `linkVariationUrl`     | `String`  | The link associated to the `'link'` variation of the Minicart.                                           | false         |
 | `maxDrawerWidth`       | `Number`  | The maximum width in pixels for the open sidebar Minicart.                                               | `440`         |
+| `openOnHover`          | `Boolean` | Whether the popup minicart should open when the user hovers over it.                                     | false         |
+| `variation`            | `Enum`    | Define Minicart variation. (values: `'popup'`, `'drawer'` or `'link'`)                                   | `'sidebar'`   |
 
 ## Customization
 
@@ -52,19 +52,20 @@ In order to apply CSS customizations in this and other blocks, follow the instru
 
 | CSS Handles                     |
 | ------------------------------- |
-| `minicartWrapperContainer`      |
+| `arrowUp`                       |
+| `minicartCheckoutButton`        |
 | `minicartContainer`             |
 | `minicartContentContainer`      |
-| `minicartProductListContainer`  |
-| `minicartTitle`                 |
 | `minicartFooter`                |
-| `minicartSideBarContentWrapper` |
 | `minicartIconContainer`         |
+| `minicartProductListContainer`  |
 | `minicartQuantityBadge`         |
-| `popupWrapper`                  |
-| `popupContentContainer`         |
-| `arrowUp`                       |
+| `minicartSideBarContentWrapper` |
+| `minicartTitle`                 |
+| `minicartWrapperContainer`      |
 | `popupChildrenContainer`        |
+| `popupContentContainer`         |
+| `popupWrapper`                  |
 
 ## Contributors
 
