@@ -16,42 +16,53 @@ const CSS_HANDLES = [
 ]
 
 const PopupMode: FC = ({ children }) => {
-  const { open, hasBeenOpened, openOnHover } = useMinicartState()
+  const {
+    open,
+    hasBeenOpened,
+    openOnHoverBehavior,
+    openOnHoverProp,
+  } = useMinicartState()
   const dispatch = useMinicartDispatch()
   const handles = useCssHandles(CSS_HANDLES)
 
   return (
     <Fragment>
-      <MinicartIconButton />
-      {open && (
-        <Overlay>
-          <div
-            className="fixed top-0 left-0 w-100 h-100"
-            onClick={() => dispatch({ type: 'CLOSE_MINICART' })}
-          />
-          <div
-            onMouseLeave={
-              openOnHover
-                ? () => dispatch({ type: 'CLOSE_MINICART' })
-                : undefined
-            }
-            className={`${handles.popupWrapper} ${styles.popupBoxPosition} absolute z-max flex flex-colunm`}
-          >
+      <div
+        onMouseLeave={
+          openOnHoverBehavior
+            ? () => dispatch({ type: 'CLOSE_MINICART' })
+            : undefined
+        }
+      >
+        <MinicartIconButton />
+        {open && (
+          <Overlay>
+            {!openOnHoverProp && (
+              <div
+                className="fixed top-0 left-0 w-100 h-100"
+                onClick={() => dispatch({ type: 'CLOSE_MINICART' })}
+              />
+            )}
             <div
-              className={`${handles.popupContentContainer} w-100 shadow-3 bg-base`}
+              className={`${handles.popupWrapper} ${styles.popupBoxPosition} absolute z-max flex flex-colunm`}
             >
               <div
-                className={`${handles.arrowUp} ${styles.popupArrowUp} absolute top-0 bg-base h1 w1 pa4 rotate-45`}
-              />
-              <div
-                className={`${handles.popupChildrenContainer} mt3 bg-base relative flex flex-column ph5 pv3`}
+                className={`${handles.popupContentContainer} w-100 shadow-3 bg-base`}
               >
-                {hasBeenOpened && children}
+                <div
+                  className={`${handles.arrowUp} ${styles.popupArrowUp} absolute top-0 bg-base h1 w1 pa4 rotate-45`}
+                />
+                <div
+                  onMouseLeave={e => e.stopPropagation()}
+                  className={`${handles.popupChildrenContainer} mt3 bg-base relative flex flex-column ph5 pv3`}
+                >
+                  {hasBeenOpened && children}
+                </div>
               </div>
             </div>
-          </div>
-        </Overlay>
-      )}
+          </Overlay>
+        )}
+      </div>
     </Fragment>
   )
 }

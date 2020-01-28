@@ -7,12 +7,17 @@ interface OpenMinicartAction {
 interface CloseMinicartAction {
   type: 'CLOSE_MINICART'
 }
+interface SetOpenOnHoverBehaviorAction {
+  type: 'SET_OPEN_ON_HOVER_BEHAVIOR'
+  value: boolean
+}
 
 interface State {
   variation: MinicartVariationType
   open: boolean
   hasBeenOpened: boolean
-  openOnHover: boolean
+  openOnHoverBehavior: boolean
+  openOnHoverProp: boolean
 }
 
 interface Props {
@@ -20,7 +25,10 @@ interface Props {
   variation: MinicartVariationType
 }
 
-type Action = OpenMinicartAction | CloseMinicartAction
+type Action =
+  | OpenMinicartAction
+  | CloseMinicartAction
+  | SetOpenOnHoverBehaviorAction
 type Dispatch = (action: Action) => void
 
 const MinicartStateContext = createContext<State | undefined>(undefined)
@@ -38,6 +46,11 @@ function minicartContextReducer(state: State, action: Action): State {
       return {
         ...state,
         open: false,
+      }
+    case 'SET_OPEN_ON_HOVER_BEHAVIOR':
+      return {
+        ...state,
+        openOnHoverBehavior: action.value,
       }
     default:
       return state
@@ -57,7 +70,9 @@ const MinicartContextProvider: FC<Props> = ({
     variation: resolvedVariation,
     open: false,
     hasBeenOpened: false,
-    openOnHover: resolvedVariation !== 'popup' ? false : openOnHover,
+    openOnHoverProp: openOnHover,
+    openOnHoverBehavior:
+      resolvedVariation === 'popup' && !isMobile ? openOnHover : false,
   })
 
   return (
