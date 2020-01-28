@@ -1,9 +1,10 @@
 import React, { FC } from 'react'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
-import { OrderItemsProvider, useOrderItems } from 'vtex.order-items/OrderItems'
+import { useOrderItems } from 'vtex.order-items/OrderItems'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { usePixel } from 'vtex.pixel-manager/PixelContext'
 import { useCssHandles } from 'vtex.css-handles'
+
 import { mapCartItemToPixel } from './modules/pixelHelper'
 
 interface Props {
@@ -68,10 +69,4 @@ const ProductList: FC<Props> = ({ renderAsChildren }) => {
   )
 }
 
-const EnhancedProductList: FC<Props> = ({ renderAsChildren }) => (
-  <OrderItemsProvider>
-    <ProductList renderAsChildren={renderAsChildren} />
-  </OrderItemsProvider>
-)
-
-export default EnhancedProductList
+export default ProductList
