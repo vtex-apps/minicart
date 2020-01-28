@@ -7,7 +7,7 @@ import React, {
   memo,
 } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { ExtensionPoint, useRuntime } from 'vtex.render-runtime'
+import { ExtensionPoint } from 'vtex.render-runtime'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 import { useCssHandles } from 'vtex.css-handles'
@@ -17,6 +17,7 @@ import { useMinicartState } from './MinicartContext'
 import styles from './styles.css'
 import { mapCartItemToPixel } from './modules/pixelHelper'
 import useDebouncedPush from './modules/debouncedPixelHook'
+import useCheckout from './modules/checkoutHook'
 
 interface Props {
   sideBarMode: boolean
@@ -43,16 +44,8 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   const push = useDebouncedPush()
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
-  const { url: checkoutUrl, major } = useCheckoutURL()
-  const { navigate } = useRuntime()
-
-  const goToCheckout = (url: string) => {
-    if (major > 0 && url === checkoutUrl) {
-      navigate({ to: url })
-    } else {
-      window.location.href = url
-    }
-  }
+  const { url: checkoutUrl } = useCheckoutURL()
+  const goToCheckout = useCheckout()
 
   useEffect(() => {
     if (loading) {
@@ -108,7 +101,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
         <ExtensionPoint id="minicart-summary" />
         <Button
           id="proceed-to-checkout"
-          href={finishShoppingButtonLink || checkoutUrl}
+          onClick={() => goToCheckout(finishShoppingButtonLink || checkoutUrl)}
           variation="primary"
           block
         >
