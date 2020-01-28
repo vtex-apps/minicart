@@ -69,7 +69,7 @@ In order to apply CSS customizations in this and other blocks, follow the instru
 
 ## Advanced Configuration
 
-The `minicart.v2` block is highly customizable because it has `compostion: 'children'` and is composed of other blocks. Currently its default implementation is the following:
+The `minicart.v2` block is highly customizable because it has `composition: 'children'` and is composed of other blocks. Currently its default implementation is the following:
 
 ```jsonc
 // This is the default blocks implementation for the minicart-layout
@@ -78,22 +78,23 @@ The `minicart.v2` block is highly customizable because it has `compostion: 'chil
     "children": ["minicart-base-content"]
   },
   "minicart-base-content": {
-    "blocks": [
-      "minicart-product-list",
-      "minicart-summary",
-      "minicart-empty-state"
-    ]
+    "blocks": ["minicart-empty-state"],
+    "children": ["minicart-product-list", "sticky-layout#minicart-footer"]
   },
-  // The product-list comes from vtex.product-list app
+  "sticky-layout#minicart-footer": {
+    "children": ["minicart-summary", "minicart-checkout-button"]
+  },
   "minicart-product-list": {
-    "blocks": ["product-list"]
+    "blocks": ["product-list#minicart"]
   },
-  // checkout-summary.compact comes from vtex.checkout-summary app
+  "product-list#minicart": {
+    "blocks": ["product-list-content-mobile"]
+  },
   "minicart-summary": {
-    "blocks": ["checkout-summary.compact"]
+    "blocks": ["checkout-summary.compact#minicart"]
   },
-  // summary-totalizers comes from vtex.checkout-summary app
-  "checkout-summary.compact": {
+
+  "checkout-summary.compact#minicart": {
     "children": ["summary-totalizers#minicart"],
     "props": {
       "totalizersToShow": ["Items", "Discounts"]
@@ -124,7 +125,7 @@ The `minicart.v2` block is highly customizable because it has `compostion: 'chil
 
 This means that, when you use `minicart.v2` in your store, you're actually using this default implementation. So, to customize the blocks being used in your own implementation, you could get this default and change it as you like by adding this blocks to your theme and changing their configuration.
 
-For further information on how to configure each of the blocks used to compose `minicar.v2`, check [VTEX Checkout Summary](https://vtex.io/docs/app/checkout-summary) and [VTEX Product List](https://vtex.io/docs/product-list).
+For further information on how to configure each of the blocks used to compose `minicart.v2`, check [VTEX Checkout Summary](https://vtex.io/docs/app/checkout-summary) and [VTEX Product List](https://vtex.io/docs/product-list).
 
 ## Contributors
 
