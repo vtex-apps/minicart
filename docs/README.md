@@ -46,30 +46,9 @@ The VTEX Minicart app is a block that displays a list of all items added by cust
 | `openOnHover`          | `Boolean` | Whether the popup minicart should open when the user hovers over it.                                     | false         |
 | `variation`            | `Enum`    | Define Minicart variation. (values: `'popup'`, `'drawer'` or `'link'`)                                   | `'sidebar'`   |
 
-## Customization
+### Advanced Configuration
 
-In order to apply CSS customizations in this and other blocks, follow the instructions given in the recipe on [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).
-
-| CSS Handles                     |
-| ------------------------------- |
-| `arrowUp`                       |
-| `minicartCheckoutButton`        |
-| `minicartContainer`             |
-| `minicartContentContainer`      |
-| `minicartFooter`                |
-| `minicartIconContainer`         |
-| `minicartProductListContainer`  |
-| `minicartQuantityBadge`         |
-| `minicartSideBarContentWrapper` |
-| `minicartTitle`                 |
-| `minicartWrapperContainer`      |
-| `popupChildrenContainer`        |
-| `popupContentContainer`         |
-| `popupWrapper`                  |
-
-## Advanced Configuration
-
-The `minicart.v2` block is highly customizable because it has `composition: 'children'` and is composed of other blocks. Currently its default implementation is the following:
+The `minicart.v2` block is highly customizable because it was built with the `composition: 'children'`. This means that according to its composition, it can be made up of other blocks. Currently, its default implementation is as follows:
 
 ```jsonc
 // This is the default blocks implementation for the minicart-layout
@@ -123,9 +102,32 @@ The `minicart.v2` block is highly customizable because it has `composition: 'chi
 }
 ```
 
-This means that, when you use `minicart.v2` in your store, you're actually using this default implementation. So, to customize the blocks being used in your own implementation, you could get this default and change it as you like by adding this blocks to your theme and changing their configuration.
+By default implementation we mean that whenever you use `minicart.v2` in your store you're actually using the `json` above behind the scenes.
 
-For further information on how to configure each of the blocks used to compose `minicart.v2`, check [VTEX Checkout Summary](https://vtex.io/docs/app/checkout-summary) and [VTEX Product List](https://vtex.io/docs/product-list).
+Therefore, in order to customize the Minicart configuration, you can simply use the default implementation in your code and change it as you wish.
+
+For further information on how to configure each of the blocks used to compose `minicart.v2`, check out [VTEX Checkout Summary](https://vtex.io/docs/app/checkout-summary) and [VTEX Product List](https://vtex.io/docs/product-list).
+
+## Customization
+
+In order to apply CSS customizations in this and other blocks, follow the instructions given in the recipe on [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).
+
+| CSS Handles                     |
+| ------------------------------- |
+| `arrowUp`                       |
+| `minicartCheckoutButton`        |
+| `minicartContainer`             |
+| `minicartContentContainer`      |
+| `minicartFooter`                |
+| `minicartIconContainer`         |
+| `minicartProductListContainer`  |
+| `minicartQuantityBadge`         |
+| `minicartSideBarContentWrapper` |
+| `minicartTitle`                 |
+| `minicartWrapperContainer`      |
+| `popupChildrenContainer`        |
+| `popupContentContainer`         |
+| `popupWrapper`                  |
 
 ## Contributors
 
