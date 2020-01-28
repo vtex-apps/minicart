@@ -5127,13 +5127,13 @@ verror@1.10.0:
   version "0.14.0"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.flex-layout@0.14.0/public/@types/vtex.flex-layout#6ad6fc3e73ae5b5869247dd5f446df7115c7133a"
 
-"vtex.order-items@https://lucas--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.order-items@0.5.1+build1580237521/public/@types/vtex.order-items":
+"vtex.order-items@https://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-items@0.5.1/public/@types/vtex.order-items":
   version "0.5.1"
-  resolved "https://lucas--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.order-items@0.5.1+build1580237521/public/@types/vtex.order-items#c35413807a07c52524343f39fe50dd5275357505"
+  resolved "https://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-items@0.5.1/public/@types/vtex.order-items#6a372580e5f23a32fc1b7ea7ec7fb7c0282f8bfb"
 
-"vtex.order-manager@https://lucas--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.order-manager@0.6.9+build1579176442/public/@types/vtex.order-manager":
+"vtex.order-manager@https://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-manager@0.6.9/public/@types/vtex.order-manager":
   version "0.6.9"
-  resolved "https://lucas--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.order-manager@0.6.9+build1579176442/public/@types/vtex.order-manager#2a128d730f1216e38a353d904567e25052006e27"
+  resolved "https://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-manager@0.6.9/public/@types/vtex.order-manager#1347d65b9e85e20240dfe1230cf0728e2a729e02"
 
 "vtex.pixel-manager@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pixel-manager@1.1.4/public/@types/vtex.pixel-manager":
   version "1.1.4"
@@ -5187,9 +5187,9 @@ verror@1.10.0:
   version "0.0.0"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-resources@0.43.0/public/_types/react#fa7a0347e046eab3dd768998fc9252b2c0dd5aef"
 
-"vtex.styleguide@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.106.3/public/@types/vtex.styleguide":
-  version "9.106.3"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.106.3/public/@types/vtex.styleguide#30f49e5df255018e14ecf73a94b019986524afc1"
+"vtex.styleguide@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.107.0/public/@types/vtex.styleguide":
+  version "9.107.0"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.107.0/public/@types/vtex.styleguide#e4d1f092a1a75db070f3526cedd8ee6a5a16da8c"
 
 w3c-hr-time@^1.0.1:
   version "1.0.1"
