@@ -25,13 +25,13 @@ const PopupMode: FC = ({ children }) => {
   const dispatch = useMinicartDispatch()
   const handles = useCssHandles(CSS_HANDLES)
 
-  const clickHandler = () => {
+  const handleClick = () => {
     if (openOnHoverProp) {
       dispatch({ type: 'SET_OPEN_ON_HOVER_BEHAVIOR', value: true })
     }
     dispatch({ type: 'CLOSE_MINICART' })
   }
-  const mouseLeaveHandler = () => {
+  const handleMouseLeave = () => {
     if (!openOnHoverBehavior) {
       return
     }
@@ -39,18 +39,18 @@ const PopupMode: FC = ({ children }) => {
   }
 
   return (
-    <div onMouseLeave={mouseLeaveHandler}>
+    <div onMouseLeave={handleMouseLeave}>
       <MinicartIconButton />
       {open && (
         <Overlay>
           {!openOnHoverBehavior && (
             <div
               className="fixed top-0 left-0 w-100 h-100"
-              onClick={clickHandler}
+              onClick={handleClick}
             />
           )}
           <div
-            className={`${handles.popupWrapper} ${styles.popupBoxPosition} absolute z-max flex flex-colunm`}
+            className={`${handles.popupWrapper} ${styles.popupBoxPosition} absolute z-max flex flex-column`}
           >
             <div
               className={`${handles.popupContentContainer} w-100 shadow-3 bg-base`}

@@ -14,8 +14,26 @@ const MinicartIconButton = () => {
   const handles = useCssHandles(CSS_HANDLES)
   const { open, openOnHoverBehavior, openOnHoverProp } = useMinicartState()
   const dispatch = useMinicartDispatch()
-
   const itemQuantity = loading ? 0 : orderForm.items.length
+
+  const handleClick = () => {
+    if (!openOnHoverProp) {
+      dispatch({ type: open ? 'CLOSE_MINICART' : 'OPEN_MINICART' })
+      return
+    }
+    if (openOnHoverBehavior) {
+      dispatch({
+        type: 'SET_OPEN_ON_HOVER_BEHAVIOR',
+        value: false,
+      })
+      return
+    }
+    dispatch({ type: 'CLOSE_MINICART' })
+    dispatch({
+      type: 'SET_OPEN_ON_HOVER_BEHAVIOR',
+      value: true,
+    })
+  }
 
   return (
     <ButtonWithIcon
@@ -38,24 +56,7 @@ const MinicartIconButton = () => {
           ? () => dispatch({ type: 'OPEN_MINICART' })
           : undefined
       }
-      onClick={() => {
-        if (!openOnHoverProp) {
-          dispatch({ type: open ? 'CLOSE_MINICART' : 'OPEN_MINICART' })
-          return
-        }
-        if (openOnHoverBehavior) {
-          dispatch({
-            type: 'SET_OPEN_ON_HOVER_BEHAVIOR',
-            value: false,
-          })
-          return
-        }
-        dispatch({ type: 'CLOSE_MINICART' })
-        dispatch({
-          type: 'SET_OPEN_ON_HOVER_BEHAVIOR',
-          value: true,
-        })
-      }}
+      onClick={handleClick}
     />
   )
 }
