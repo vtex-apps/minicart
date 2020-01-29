@@ -20,14 +20,7 @@ const MinicartIconButton = () => {
   return (
     <ButtonWithIcon
       icon={
-        <span
-          onMouseEnter={
-            openOnHoverBehavior
-              ? () => dispatch({ type: 'OPEN_MINICART' })
-              : undefined
-          }
-          className={`${handles.minicartIconContainer} gray relative`}
-        >
+        <span className={`${handles.minicartIconContainer} gray relative`}>
           <IconCart />
           {itemQuantity > 0 && (
             <span
@@ -39,6 +32,11 @@ const MinicartIconButton = () => {
         </span>
       }
       variation="tertiary"
+      onMouseEnter={
+        openOnHoverBehavior
+          ? () => dispatch({ type: 'OPEN_MINICART' })
+          : undefined
+      }
       onClick={() => {
         if (!openOnHoverProp) {
           dispatch({ type: open ? 'CLOSE_MINICART' : 'OPEN_MINICART' })
@@ -51,15 +49,11 @@ const MinicartIconButton = () => {
           })
           return
         }
-        if (open) {
-          dispatch({ type: 'CLOSE_MINICART' })
-          dispatch({
-            type: 'SET_OPEN_ON_HOVER_BEHAVIOR',
-            value: true,
-          })
-          return
-        }
-        dispatch({ type: 'OPEN_MINICART' })
+        dispatch({ type: 'CLOSE_MINICART' })
+        dispatch({
+          type: 'SET_OPEN_ON_HOVER_BEHAVIOR',
+          value: true,
+        })
       }}
     />
   )
