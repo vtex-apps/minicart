@@ -63,7 +63,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   } flex flex-column justify-between`
 
   const minicartFooterClasses = `${handles.minicartFooter} ${
-    variation === 'drawer' ? 'pa4' : 'pv3'
+    variation === 'drawer' ? '' : 'pv3'
   } sticky`
 
   const isCartEmpty = !loading && orderForm.items.length === 0
