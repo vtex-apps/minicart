@@ -16,7 +16,9 @@ interface State {
   variation: MinicartVariationType
   open: boolean
   hasBeenOpened: boolean
+  /** Whether or not the expected openOnHover behavior is active */
   openOnHoverBehavior: boolean
+  /** Value provided by the user to openOnHover prop */
   openOnHoverProp: boolean
 }
 
@@ -59,10 +61,12 @@ function minicartContextReducer(state: State, action: Action): State {
 
 const MinicartContextProvider: FC<Props> = ({
   variation = 'drawer',
-  openOnHover = false,
+  openOnHover: openOnHoverProp = false,
   children,
 }) => {
   const { isMobile } = useDevice()
+
+  // This prevents a popup minicart from being used on a mobile device
   const resolvedVariation =
     isMobile || (window && window.innerWidth <= 480) ? 'drawer' : variation
 
@@ -70,9 +74,9 @@ const MinicartContextProvider: FC<Props> = ({
     variation: resolvedVariation,
     open: false,
     hasBeenOpened: false,
-    openOnHoverProp: openOnHover,
+    openOnHoverProp,
     openOnHoverBehavior:
-      resolvedVariation === 'popup' && !isMobile ? openOnHover : false,
+      resolvedVariation === 'popup' ? openOnHoverProp : false,
   })
 
   return (

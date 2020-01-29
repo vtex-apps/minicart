@@ -39,7 +39,7 @@ const PopupMode: FC = ({ children }) => {
   }
 
   return (
-    <div onMouseLeave={handleMouseLeave}>
+    <div onMouseLeave={openOnHoverProp ? handleMouseLeave : undefined}>
       <MinicartIconButton />
       {open && (
         <Overlay>

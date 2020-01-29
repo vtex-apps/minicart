@@ -17,22 +17,22 @@ const MinicartIconButton = () => {
   const itemQuantity = loading ? 0 : orderForm.items.length
 
   const handleClick = () => {
-    if (!openOnHoverProp) {
-      dispatch({ type: open ? 'CLOSE_MINICART' : 'OPEN_MINICART' })
-      return
-    }
-    if (openOnHoverBehavior) {
+    if (openOnHoverProp) {
+      if (openOnHoverBehavior) {
+        dispatch({
+          type: 'SET_OPEN_ON_HOVER_BEHAVIOR',
+          value: false,
+        })
+        return
+      }
+      dispatch({ type: 'CLOSE_MINICART' })
       dispatch({
         type: 'SET_OPEN_ON_HOVER_BEHAVIOR',
-        value: false,
+        value: true,
       })
       return
     }
-    dispatch({ type: 'CLOSE_MINICART' })
-    dispatch({
-      type: 'SET_OPEN_ON_HOVER_BEHAVIOR',
-      value: true,
-    })
+    dispatch({ type: open ? 'CLOSE_MINICART' : 'OPEN_MINICART' })
   }
 
   return (
