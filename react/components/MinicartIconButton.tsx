@@ -24,6 +24,7 @@ const MinicartIconButton = () => {
           <IconCart />
           {itemQuantity > 0 && (
             <span
+              style={{ userSelect: 'none' }}
               className={`${handles.minicartQuantityBadge} ${styles.minicartQuantityBadgeDefault} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
             >
               {itemQuantity}
