@@ -17,6 +17,7 @@ import { useMinicartState } from './MinicartContext'
 import styles from './styles.css'
 import { mapCartItemToPixel } from './modules/pixelHelper'
 import useDebouncedPush from './modules/debouncedPixelHook'
+import useCheckout from './modules/checkoutHook'
 
 interface Props {
   sideBarMode: boolean
@@ -44,6 +45,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
+  const goToCheckout = useCheckout()
 
   useEffect(() => {
     if (loading) {
@@ -99,7 +101,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
         <ExtensionPoint id="minicart-summary" />
         <Button
           id="proceed-to-checkout"
-          href={finishShoppingButtonLink || checkoutUrl}
+          onClick={() => goToCheckout(finishShoppingButtonLink || checkoutUrl)}
           variation="primary"
           block
         >
