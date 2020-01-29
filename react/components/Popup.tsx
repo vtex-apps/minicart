@@ -53,7 +53,6 @@ const PopupMode: FC = ({ children }) => {
                   className={`${handles.arrowUp} ${styles.popupArrowUp} absolute top-0 bg-base h1 w1 pa4 rotate-45`}
                 />
                 <div
-                  onMouseLeave={e => e.stopPropagation()}
                   className={`${handles.popupChildrenContainer} mt3 bg-base relative flex flex-column ph5 pv3`}
                 >
                   {hasBeenOpened && children}

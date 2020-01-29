@@ -47,6 +47,7 @@ const ProductList: FC<Props> = ({ renderAsChildren }) => {
 
   return (
     <div
+      onMouseLeave={e => e.stopPropagation()}
       className={`${handles.minicartProductListContainer} ${
         renderAsChildren ? 'w-100 h-100' : ''
       } overflow-y-auto`}
