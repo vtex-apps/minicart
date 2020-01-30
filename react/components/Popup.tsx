@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { FC, Fragment } from 'react'
+import React, { FC } from 'react'
 import { Overlay } from 'vtex.react-portal'
 import { useCssHandles } from 'vtex.css-handles'
 
@@ -16,26 +16,38 @@ const CSS_HANDLES = [
 ]
 
 const PopupMode: FC = ({ children }) => {
-  const { open, hasBeenOpened, openOnHover } = useMinicartState()
+  const {
+    open,
+    hasBeenOpened,
+    openBehavior,
+    openOnHoverProp,
+  } = useMinicartState()
   const dispatch = useMinicartDispatch()
   const handles = useCssHandles(CSS_HANDLES)
 
+  const handleClick = () => {
+    if (openOnHoverProp) {
+      dispatch({ type: 'SET_OPEN_BEHAVIOR', value: 'hover' })
+    }
+    dispatch({ type: 'CLOSE_MINICART' })
+  }
+  const handleMouseLeave = () => {
+    dispatch({ type: 'CLOSE_MINICART' })
+  }
+
   return (
-    <Fragment>
+    <div onMouseLeave={openBehavior === 'hover' ? handleMouseLeave : undefined}>
       <MinicartIconButton />
       {open && (
         <Overlay>
+          {openBehavior === 'click' && (
+            <div
+              className="fixed top-0 left-0 w-100 h-100"
+              onClick={handleClick}
+            />
+          )}
           <div
-            className="fixed top-0 left-0 w-100 h-100"
-            onClick={() => dispatch({ type: 'CLOSE_MINICART' })}
-          />
-          <div
-            onMouseLeave={
-              openOnHover
-                ? () => dispatch({ type: 'CLOSE_MINICART' })
-                : undefined
-            }
-            className={`${handles.popupWrapper} ${styles.popupBoxPosition} absolute z-max flex flex-colunm`}
+            className={`${handles.popupWrapper} ${styles.popupBoxPosition} absolute z-max flex flex-column`}
           >
             <div
               className={`${handles.popupContentContainer} w-100 shadow-3 bg-base`}
@@ -52,7 +64,7 @@ const PopupMode: FC = ({ children }) => {
           </div>
         </Overlay>
       )}
-    </Fragment>
+    </div>
   )
 }
 

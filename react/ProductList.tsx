@@ -47,6 +47,13 @@ const ProductList: FC<Props> = ({ renderAsChildren }) => {
 
   return (
     <div
+      /* 
+        This prevents an interaction with the quantity selector
+        inside of a product in the ProductList to bubble up a
+        mouseleave event to the Popup component, which would result
+        in the minicart being closed (when openOnHover = true). 
+      */
+      onMouseLeave={e => e.stopPropagation()}
       className={`${handles.minicartProductListContainer} ${
         renderAsChildren ? 'w-100 h-100' : ''
       } overflow-y-auto`}
