@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.41.2] - 2020-01-30
+
 ## [2.41.1] - 2020-01-30
 ### Fixed
 - Popup minicart behavior when `openOnHover` is set to `true`.
