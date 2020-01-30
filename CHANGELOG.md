@@ -6,12 +6,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Duplicated components being rendered due to a faulty verification at BaseContent component.
 
 ## [2.42.0] - 2020-01-30
 ### Added
 - `Advanced configuration` section in the documentation.
 
 ## [2.41.2] - 2020-01-30
+### Fixed
+- Design improvements.
 
 ## [2.41.1] - 2020-01-30
 ### Fixed
