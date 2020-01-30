@@ -17,7 +17,7 @@ const CheckoutButton: FC<Props> = ({ finishShoppingButtonLink }) => {
   const goToCheckout = useCheckout()
 
   return (
-    <div className={`${handles.minicartCheckoutButton} mv3`}>
+    <div className={`${handles.minicartCheckoutButton} mv3 ph4 ph6-l`}>
       <Button
         id="proceed-to-checkout"
         onClick={() => goToCheckout(finishShoppingButtonLink || checkoutUrl)}

@@ -56,7 +56,7 @@ const ProductList: FC<Props> = ({ renderAsChildren }) => {
       onMouseLeave={e => e.stopPropagation()}
       className={`${handles.minicartProductListContainer} ${
         renderAsChildren ? 'w-100 h-100' : ''
-      } overflow-y-auto`}
+      } overflow-y-auto ph4 ph6-l`}
     >
       <ExtensionPoint
         id="product-list"

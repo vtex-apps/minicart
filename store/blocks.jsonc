@@ -8,6 +8,10 @@
     "children": ["minicart-product-list", "sticky-layout#minicart-footer"]
   },
   "sticky-layout#minicart-footer": {
+    "props": {
+      "position": "bottom",
+      "blockClass": "minicart-default"
+    },
     "children": ["minicart-summary", "minicart-checkout-button"]
   },
   "minicart-product-list": {

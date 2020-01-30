@@ -33,7 +33,7 @@ const CSS_HANDLES = [
 
 const MinicartHeader: FC<{ minicarTitleHandle: string }> = memo(
   ({ minicarTitleHandle }) => (
-    <h3 className={`${minicarTitleHandle} t-heading-3 mv2 c-on-base`}>
+    <h3 className={`${minicarTitleHandle} t-heading-3 mv2 ph4 ph6-l c-on-base`}>
       <FormattedMessage id="store/minicart.title" />
     </h3>
   )
@@ -63,7 +63,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   } flex flex-column justify-between`
 
   const minicartFooterClasses = `${handles.minicartFooter} ${
-    variation === 'drawer' ? 'pa4' : 'pv3'
+    variation === 'drawer' ? '' : 'pv3'
   } sticky`
 
   const isCartEmpty = !loading && orderForm.items.length === 0
