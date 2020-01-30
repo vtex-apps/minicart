@@ -24,15 +24,3 @@
 .popupArrowUp {
   right: 7px;
 }
-
-.minicartProductListOverflowEffect {
-  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgb(242, 239, 239) 100%);
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  background-size: 200% 10px;
-  bottom: 218px;
-  height: 10px;
-  left: 0;
-  position: fixed;
-  width: 100%;
-}

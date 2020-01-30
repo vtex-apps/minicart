@@ -6,8 +6,6 @@ import { usePixel } from 'vtex.pixel-manager/PixelContext'
 import { useCssHandles } from 'vtex.css-handles'
 import { mapCartItemToPixel } from './modules/pixelHelper'
 
-import styles from './styles.css'
-
 interface Props {
   renderAsChildren: boolean
 }
@@ -58,7 +56,7 @@ const ProductList: FC<Props> = ({ renderAsChildren }) => {
       onMouseLeave={e => e.stopPropagation()}
       className={`${handles.minicartProductListContainer} ${
         renderAsChildren ? 'w-100 h-100' : ''
-      } overflow-y-auto`}
+      } overflow-y-auto ph4 ph6-l`}
     >
       <ExtensionPoint
         id="product-list"
@@ -66,7 +64,6 @@ const ProductList: FC<Props> = ({ renderAsChildren }) => {
         onQuantityChange={handleQuantityChange}
         onRemove={handleRemove}
       />
-      <div className={styles.minicartProductListOverflowEffect} />
     </div>
   )
 }
