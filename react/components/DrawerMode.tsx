@@ -26,7 +26,7 @@ const DrawerMode: FC<Props> = ({
       customIcon={<MinicartIconButton />}
     >
       <div
-        className={`${handles.minicartSideBarContentWrapper} w-100 h-100 ph4 ph6-l`}
+        className={`${handles.minicartSideBarContentWrapper} w-100 h-100`}
         style={{
           height: window.innerHeight - DRAWER_CLOSE_ICON_HEIGHT,
         }}

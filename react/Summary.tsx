@@ -8,7 +8,7 @@ const Summary: FC = () => {
   } = useOrderForm()
 
   return (
-    <div>
+    <div className="ph4 ph6-l pt5">
       <ExtensionPoint
         id="checkout-summary"
         totalizers={totalizers}

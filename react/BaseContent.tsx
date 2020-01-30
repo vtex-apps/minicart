@@ -33,7 +33,7 @@ const CSS_HANDLES = [
 
 const MinicartHeader: FC<{ minicarTitleHandle: string }> = memo(
   ({ minicarTitleHandle }) => (
-    <h3 className={`${minicarTitleHandle} t-heading-3 mv2 c-on-base`}>
+    <h3 className={`${minicarTitleHandle} t-heading-3 mv2 ph4 ph6-l c-on-base`}>
       <FormattedMessage id="store/minicart.title" />
     </h3>
   )
