@@ -8,7 +8,7 @@ interface CloseMinicartAction {
   type: 'CLOSE_MINICART'
 }
 interface SetOpenOnHoverBehaviorAction {
-  type: 'SET_OPEN_ON_HOVER_BEHAVIOR'
+  type: 'SET_OPEN_BEHAVIOR'
   value: 'click' | 'hover'
 }
 
@@ -49,7 +49,7 @@ function minicartContextReducer(state: State, action: Action): State {
         ...state,
         open: false,
       }
-    case 'SET_OPEN_ON_HOVER_BEHAVIOR':
+    case 'SET_OPEN_BEHAVIOR':
       return {
         ...state,
         openBehavior: action.value,

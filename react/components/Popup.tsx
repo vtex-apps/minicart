@@ -27,7 +27,7 @@ const PopupMode: FC = ({ children }) => {
 
   const handleClick = () => {
     if (openOnHoverProp) {
-      dispatch({ type: 'SET_OPEN_ON_HOVER_BEHAVIOR', value: 'hover' })
+      dispatch({ type: 'SET_OPEN_BEHAVIOR', value: 'hover' })
     }
     dispatch({ type: 'CLOSE_MINICART' })
   }

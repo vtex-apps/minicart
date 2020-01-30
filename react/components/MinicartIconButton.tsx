@@ -20,14 +20,14 @@ const MinicartIconButton = () => {
     if (openOnHoverProp) {
       if (openBehavior === 'hover') {
         dispatch({
-          type: 'SET_OPEN_ON_HOVER_BEHAVIOR',
+          type: 'SET_OPEN_BEHAVIOR',
           value: 'click',
         })
         return
       }
       dispatch({ type: 'CLOSE_MINICART' })
       dispatch({
-        type: 'SET_OPEN_ON_HOVER_BEHAVIOR',
+        type: 'SET_OPEN_BEHAVIOR',
         value: 'hover',
       })
       return
