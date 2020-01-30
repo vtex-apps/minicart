@@ -8,11 +8,13 @@ const Summary: FC = () => {
   } = useOrderForm()
 
   return (
-    <ExtensionPoint
-      id="checkout-summary"
-      totalizers={totalizers}
-      total={value}
-    />
+    <div>
+      <ExtensionPoint
+        id="checkout-summary"
+        totalizers={totalizers}
+        total={value}
+      />
+    </div>
   )
 }
 
