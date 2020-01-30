@@ -19,7 +19,7 @@ const PopupMode: FC = ({ children }) => {
   const {
     open,
     hasBeenOpened,
-    openOnHoverBehavior,
+    openBehavior,
     openOnHoverProp,
   } = useMinicartState()
   const dispatch = useMinicartDispatch()
@@ -27,23 +27,20 @@ const PopupMode: FC = ({ children }) => {
 
   const handleClick = () => {
     if (openOnHoverProp) {
-      dispatch({ type: 'SET_OPEN_ON_HOVER_BEHAVIOR', value: true })
+      dispatch({ type: 'SET_OPEN_ON_HOVER_BEHAVIOR', value: 'hover' })
     }
     dispatch({ type: 'CLOSE_MINICART' })
   }
   const handleMouseLeave = () => {
-    if (!openOnHoverBehavior) {
-      return
-    }
     dispatch({ type: 'CLOSE_MINICART' })
   }
 
   return (
-    <div onMouseLeave={openOnHoverProp ? handleMouseLeave : undefined}>
+    <div onMouseLeave={openBehavior === 'hover' ? handleMouseLeave : undefined}>
       <MinicartIconButton />
       {open && (
         <Overlay>
-          {!openOnHoverBehavior && (
+          {openBehavior === 'click' && (
             <div
               className="fixed top-0 left-0 w-100 h-100"
               onClick={handleClick}

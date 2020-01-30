@@ -9,7 +9,7 @@ interface CloseMinicartAction {
 }
 interface SetOpenOnHoverBehaviorAction {
   type: 'SET_OPEN_ON_HOVER_BEHAVIOR'
-  value: boolean
+  value: 'click' | 'hover'
 }
 
 interface State {
@@ -17,7 +17,7 @@ interface State {
   open: boolean
   hasBeenOpened: boolean
   /** Whether or not the expected openOnHover behavior is active */
-  openOnHoverBehavior: boolean
+  openBehavior: 'click' | 'hover'
   /** Value provided by the user to openOnHover prop */
   openOnHoverProp: boolean
 }
@@ -52,7 +52,7 @@ function minicartContextReducer(state: State, action: Action): State {
     case 'SET_OPEN_ON_HOVER_BEHAVIOR':
       return {
         ...state,
-        openOnHoverBehavior: action.value,
+        openBehavior: action.value,
       }
     default:
       return state
@@ -75,8 +75,8 @@ const MinicartContextProvider: FC<Props> = ({
     open: false,
     hasBeenOpened: false,
     openOnHoverProp,
-    openOnHoverBehavior:
-      resolvedVariation === 'popup' ? openOnHoverProp : false,
+    openBehavior:
+      resolvedVariation === 'popup' && openOnHoverProp ? 'hover' : 'click',
   })
 
   return (
