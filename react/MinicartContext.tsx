@@ -16,7 +16,7 @@ interface State {
   variation: MinicartVariationType
   open: boolean
   hasBeenOpened: boolean
-  /** Whether or not the expected openOnHover behavior is active */
+  /** Controls the minicart opening behavior */
   openBehavior: 'click' | 'hover'
   /** Value provided by the user to openOnHover prop */
   openOnHoverProp: boolean
