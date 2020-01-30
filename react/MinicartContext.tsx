@@ -7,7 +7,7 @@ interface OpenMinicartAction {
 interface CloseMinicartAction {
   type: 'CLOSE_MINICART'
 }
-interface SetOpenOnHoverBehaviorAction {
+interface SetOpenBehaviorAction {
   type: 'SET_OPEN_BEHAVIOR'
   value: 'click' | 'hover'
 }
@@ -27,10 +27,7 @@ interface Props {
   variation: MinicartVariationType
 }
 
-type Action =
-  | OpenMinicartAction
-  | CloseMinicartAction
-  | SetOpenOnHoverBehaviorAction
+type Action = OpenMinicartAction | CloseMinicartAction | SetOpenBehaviorAction
 type Dispatch = (action: Action) => void
 
 const MinicartStateContext = createContext<State | undefined>(undefined)
