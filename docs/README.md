@@ -4,15 +4,15 @@
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
-:warning: Minicart block has been deprecated in favor of Minicart v2 which can be customized using the blocks defined by [Product List](https://vtex.io/docs/app/vtex.product-list) and [Checkout Summary](https://vtex.io/docs/app/vtex.checkout-summary). If you’re still using the former version, you can find its documentation here: [Minicart v1 documentation](https://github.com/vtex-apps/minicart/blob/383d7bbd3295f06d1b5854a0add561a872e1515c/docs/README.md)
+:information_source: **Minicart v1 block has been deprecated in favor of Minicart v2** which can be customized using the blocks defined by [Product List](https://vtex.io/docs/app/vtex.product-list) and [Checkout Summary](https://vtex.io/docs/app/vtex.checkout-summary). If you’re still using the former version, you can find its documentation here: [Minicart v1 documentation](https://github.com/vtex-apps/minicart/blob/383d7bbd3295f06d1b5854a0add561a872e1515c/docs/README.md)
 
-The VTEX Minicart app is a block that displays a list of all items added by customers in their minicart. Its data is fetched from the Checkout OrderForm API.
+The VTEX Minicart is a block that displays a summary list of all items added by customers in their shopping cart. Its data is fetched from the Checkout OrderForm API.
 
-![Screen Shot 2019-12-18 at 14 06 37](https://user-images.githubusercontent.com/27777263/71111391-19d78b00-21a8-11ea-8e8a-bc6da29aecd6.png)
+![minicart-v2-gif](https://user-images.githubusercontent.com/52087100/73321194-7f477e80-4220-11ea-844b-f24d1c10363c.gif)
 
 ## Configuration
 
-1. Import the minicart's app to your theme's dependencies in the `manifest.json`, for example:
+1. Import the Minicart app to your theme's dependencies in the `manifest.json` as shown below:
 
 ```json
 "dependencies": {
@@ -38,13 +38,77 @@ The VTEX Minicart app is a block that displays a list of all items added by cust
  },
 ```
 
+:warning: **The Minicart v2 will only effectively function if the store uses the** [**Add To Cart Button**](https://vtex.io/docs/components/all/vtex.add-to-cart-button/add-to-cart-button) **instead of the** [**Buy Button**](https://vtex.io/docs/components/all/vtex.store-components/buy-button) in blocks such as the Shelf and the Product Details Page. This is because Minicart v2 was built based on an indirect dependency with the Add To Cart button. That means that any other shopping buttons, as the Buy Button, are unable to render Minicart v2, even if it was correctly configured in the code. `
+
 | Prop name              | Type      | Description                                                                                              | Default value |
 | ---------------------- | --------- | -------------------------------------------------------------------------------------------------------- | ------------- |
-| `drawerSlideDirection` | `Enum`    | Controls the slide direction for the `'sidebar'` variation. (values: `'rightToLeft'` or `'leftToRight'`) | `rightToLeft` |
-| `linkVariationUrl`     | `String`  | The link associated to the `'link'` variation of the Minicart.                                           | false         |
-| `maxDrawerWidth`       | `Number`  | The maximum width in pixels for the open sidebar Minicart.                                               | `440`         |
-| `openOnHover`          | `Boolean` | Whether the popup minicart should open when the user hovers over it.                                     | false         |
-| `variation`            | `Enum`    | Define Minicart variation. (values: `'popup'`, `'drawer'` or `'link'`)                                   | `'sidebar'`   |
+| `variation`            | `Enum`    | Minicart behavior when rendered. The possible values are: `'popup'` (it pops up on the Homepage in a minitab window) , `'drawer'` (it is rendered through a side bar) or `'link'` (when clicked on, it redirects the user to the Checkout page)                                   | `'drawer'`   |
+| `drawerSlideDirection` | `Enum`    |  Slide direction for the `'drawer'` Minicart opening. (values: `'rightToLeft'` or `'leftToRight'`) | `rightToLeft` |
+| `linkVariationUrl`     | `String`  |  Link associated to the `'link'` Minicart.                                           |        |
+| `maxDrawerWidth`       | `Number`  | Maximum width (in pixels) for the `'sidebar'` Minicart when opened.                                               | `440`         |
+| `openOnHover`          | `Boolean` | Whether the `'popup'` minicart should open when the user hovers over it                                    | false         |
+
+### Advanced Configuration
+
+According to the `minicart.v2` composition, it can be highly customizable using other blocks. Currently, its default implementation is as follows:
+
+```jsonc
+// This is the default blocks implementation for the minicart-layout
+{
+  "minicart.v2": {
+    "children": ["minicart-base-content"]
+  },
+  "minicart-base-content": {
+    "blocks": ["minicart-empty-state"],
+    "children": ["minicart-product-list", "sticky-layout#minicart-footer"]
+  },
+  "sticky-layout#minicart-footer": {
+    "children": ["minicart-summary", "minicart-checkout-button"]
+  },
+  "minicart-product-list": {
+    "blocks": ["product-list#minicart"]
+  },
+  "product-list#minicart": {
+    "blocks": ["product-list-content-mobile"]
+  },
+  "minicart-summary": {
+    "blocks": ["checkout-summary.compact#minicart"]
+  },
+
+  "checkout-summary.compact#minicart": {
+    "children": ["summary-totalizers#minicart"],
+    "props": {
+      "totalizersToShow": ["Items", "Discounts"]
+    }
+  },
+  "summary-totalizers#minicart": {
+    "props": {
+      "showTotal": true,
+      "showDeliveryTotal": false
+    }
+  },
+  "minicart-empty-state": {
+    "children": ["flex-layout.row#empty-state"]
+  },
+  "flex-layout.row#empty-state": {
+    "children": ["flex-layout.col#empty-state"]
+  },
+  "flex-layout.col#empty-state": {
+    "children": ["rich-text#empty-state"]
+  },
+  "rich-text#empty-state": {
+    "props": {
+      "text": "Your cart is empty!"
+    }
+  }
+}
+```
+
+By default implementation we mean that whenever you use `minicart.v2` in your store you're actually using the `json` above behind the scenes.
+
+Therefore, in order to customize the Minicart configuration, you can simply use the default implementation in your code and change it as you wish.
+
+For further information on how to configure each of the blocks used to compose `minicart.v2`, check out [VTEX Checkout Summary](https://vtex.io/docs/app/checkout-summary) and [VTEX Product List](https://vtex.io/docs/product-list).
 
 ## Customization
 
