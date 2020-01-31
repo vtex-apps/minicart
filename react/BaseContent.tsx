@@ -7,17 +7,15 @@ import React, {
   memo,
 } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { ExtensionPoint } from 'vtex.render-runtime'
+import { ExtensionPoint, useChildBlock } from 'vtex.render-runtime'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
-import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 import { useCssHandles } from 'vtex.css-handles'
-import { Button } from 'vtex.styleguide'
 
 import { useMinicartState } from './MinicartContext'
 import styles from './styles.css'
 import { mapCartItemToPixel } from './modules/pixelHelper'
 import useDebouncedPush from './modules/debouncedPixelHook'
-import useCheckout from './modules/checkoutHook'
+import CheckoutButton from './CheckoutButton'
 
 interface Props {
   sideBarMode: boolean
@@ -31,9 +29,11 @@ const CSS_HANDLES = [
   'minicartFooter',
 ] as const
 
-const MinicartHeader: FC<{ minicarTitleHandle: string }> = memo(
-  ({ minicarTitleHandle }) => (
-    <h3 className={`${minicarTitleHandle} t-heading-3 mv2 ph4 ph6-l c-on-base`}>
+const MinicartHeader: FC<{ minicartTitleHandle: string }> = memo(
+  ({ minicartTitleHandle }) => (
+    <h3
+      className={`${minicartTitleHandle} t-heading-3 mv2 ph4 ph6-l c-on-base`}
+    >
       <FormattedMessage id="store/minicart.title" />
     </h3>
   )
@@ -44,8 +44,6 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   const push = useDebouncedPush()
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
-  const { url: checkoutUrl } = useCheckoutURL()
-  const goToCheckout = useCheckout()
 
   useEffect(() => {
     if (loading) {
@@ -67,47 +65,41 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   } sticky`
 
   const isCartEmpty = !loading && orderForm.items.length === 0
-  const hasChildren = Children.toArray(children).some(Boolean)
+  const hasProductListBlock = useChildBlock({ id: 'minicart-product-list' })
+  const hasMinicartSummaryBlock = useChildBlock({ id: 'minicart-summary' })
 
   if (isCartEmpty) {
     return (
       <Fragment>
-        <MinicartHeader minicarTitleHandle={handles.minicartTitle} />
+        <MinicartHeader minicartTitleHandle={handles.minicartTitle} />
         <ExtensionPoint id="minicart-empty-state" />
       </Fragment>
     )
   }
 
-  if (hasChildren) {
+  if (hasProductListBlock && hasMinicartSummaryBlock) {
     return (
       <div className={minicartContentClasses}>
-        <MinicartHeader minicarTitleHandle={handles.minicartTitle} />
-        {Children.map(children, child =>
-          React.cloneElement(child as ReactElement, { renderAsChildren: true })
-        )}
+        <div
+          className={`w-100 h-100 overflow-y-auto ${handles.minicartProductListContainer}`}
+        >
+          <MinicartHeader minicartTitleHandle={handles.minicartTitle} />
+          <ExtensionPoint id="minicart-product-list" />
+        </div>
+        <div className={minicartFooterClasses}>
+          <ExtensionPoint id="minicart-summary" />
+          <CheckoutButton finishShoppingButtonLink={finishShoppingButtonLink} />
+        </div>
       </div>
     )
   }
 
   return (
     <div className={minicartContentClasses}>
-      <div
-        className={`w-100 h-100 overflow-y-auto ${handles.minicartProductListContainer}`}
-      >
-        <MinicartHeader minicarTitleHandle={handles.minicartTitle} />
-        <ExtensionPoint id="minicart-product-list" />
-      </div>
-      <div className={minicartFooterClasses}>
-        <ExtensionPoint id="minicart-summary" />
-        <Button
-          id="proceed-to-checkout"
-          onClick={() => goToCheckout(finishShoppingButtonLink || checkoutUrl)}
-          variation="primary"
-          block
-        >
-          <FormattedMessage id="store/minicart.go-to-checkout" />
-        </Button>
-      </div>
+      <MinicartHeader minicartTitleHandle={handles.minicartTitle} />
+      {Children.map(children, child =>
+        React.cloneElement(child as ReactElement, { renderAsChildren: true })
+      )}
     </div>
   )
 }
