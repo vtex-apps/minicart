@@ -7,7 +7,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-
 - `cartId` pixel event.
 
 ## [2.42.1] - 2020-01-31
