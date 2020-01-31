@@ -29,9 +29,11 @@ const CSS_HANDLES = [
   'minicartFooter',
 ] as const
 
-const MinicartHeader: FC<{ minicarTitleHandle: string }> = memo(
-  ({ minicarTitleHandle }) => (
-    <h3 className={`${minicarTitleHandle} t-heading-3 mv2 ph4 ph6-l c-on-base`}>
+const MinicartHeader: FC<{ minicartTitleHandle: string }> = memo(
+  ({ minicartTitleHandle }) => (
+    <h3
+      className={`${minicartTitleHandle} t-heading-3 mv2 ph4 ph6-l c-on-base`}
+    >
       <FormattedMessage id="store/minicart.title" />
     </h3>
   )
@@ -69,7 +71,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   if (isCartEmpty) {
     return (
       <Fragment>
-        <MinicartHeader minicarTitleHandle={handles.minicartTitle} />
+        <MinicartHeader minicartTitleHandle={handles.minicartTitle} />
         <ExtensionPoint id="minicart-empty-state" />
       </Fragment>
     )
@@ -81,7 +83,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
         <div
           className={`w-100 h-100 overflow-y-auto ${handles.minicartProductListContainer}`}
         >
-          <MinicartHeader minicarTitleHandle={handles.minicartTitle} />
+          <MinicartHeader minicartTitleHandle={handles.minicartTitle} />
           <ExtensionPoint id="minicart-product-list" />
         </div>
         <div className={minicartFooterClasses}>
@@ -94,7 +96,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
 
   return (
     <div className={minicartContentClasses}>
-      <MinicartHeader minicarTitleHandle={handles.minicartTitle} />
+      <MinicartHeader minicartTitleHandle={handles.minicartTitle} />
       {Children.map(children, child =>
         React.cloneElement(child as ReactElement, { renderAsChildren: true })
       )}
