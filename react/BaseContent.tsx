@@ -29,6 +29,7 @@ const CSS_HANDLES = [
   'minicartFooter',
 ] as const
 
+// eslint-disable-next-line react/display-name
 const MinicartHeader: FC<{ minicartTitleHandle: string }> = memo(
   ({ minicartTitleHandle }) => (
     <h3
