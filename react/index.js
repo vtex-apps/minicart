@@ -23,7 +23,10 @@ import MiniCartContent from './legacy/components/MiniCartContent'
 import Sidebar from './legacy/components/Sidebar'
 import Popup from './legacy/components/Popup'
 import { shouldShowItem } from './legacy/utils/itemsHelper'
-import { mapBuyButtonItemToPixel, mapCartItemToPixel } from './modules/pixelHelper'
+import {
+  mapBuyButtonItemToPixel,
+  mapCartItemToPixel,
+} from './modules/pixelHelper'
 
 import fullMinicartQuery from './legacy/localState/graphql/fullMinicartQuery.gql'
 import updateItemsMutation from './legacy/localState/graphql/updateItemsMutation.gql'
@@ -35,6 +38,7 @@ import createLocalState, { ITEMS_STATUS } from './legacy/localState'
 
 import styles from './legacy/minicart.css'
 import useMarketingSessionParams from './legacy/hooks/useMarketingSessionParams'
+import useCardIdPixel from './modules/useCartIdPixel'
 
 const DEFAULT_LABEL_CLASSES = ''
 const DEFAULT_ICON_CLASSES = 'gray'
@@ -179,7 +183,10 @@ const MiniCart = ({
   }, [minicartState.orderForm])
 
   const orderForm = pathOr(localOrderForm, ['orderForm'], data)
-  const orderFormId = orderForm && orderForm.orderFormId
+  const orderFormId =
+    orderForm && orderForm.orderFormId ? orderForm.orderFormId : undefined
+
+  useCardIdPixel(orderFormId)
 
   const minicartItems = useMemo(() => {
     try {

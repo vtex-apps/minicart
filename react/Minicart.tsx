@@ -1,12 +1,14 @@
 import React, { FC } from 'react'
 import { useCssHandles } from 'vtex.css-handles'
 import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
+import { useOrderForm } from 'vtex.order-manager/OrderForm'
 
 import MinicartIconButton from './components/MinicartIconButton'
 import DrawerMode from './components/DrawerMode'
 
 import { MinicartContextProvider, useMinicartState } from './MinicartContext'
 import PopupMode from './components/Popup'
+import useCartIdPixel from './modules/useCartIdPixel'
 
 const CSS_HANDLES = ['minicartWrapperContainer', 'minicartContainer'] as const
 
@@ -52,11 +54,21 @@ const Minicart: FC<MinicartProps> = ({
   )
 }
 
+const CartIdPixel = () => {
+  const { orderForm, loading }: OrderFormContext = useOrderForm()
+
+  const orderFormId = !loading && orderForm ? orderForm.id : undefined
+  useCartIdPixel(orderFormId)
+
+  return null
+}
+
 const EnhancedMinicart = (props: MinicartProps) => (
   <MinicartContextProvider
     variation={props.variation}
     openOnHover={props.openOnHover}
   >
+    <CartIdPixel />
     <Minicart {...props} />
   </MinicartContextProvider>
 )

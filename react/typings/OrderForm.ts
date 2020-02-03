@@ -34,6 +34,7 @@ interface SKUSpecification {
 }
 
 interface OrderForm {
+  id: string
   items: OrderFormItem[]
   marketingData: MarketingData
   totalizers: Totalizer[]
