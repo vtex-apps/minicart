@@ -5,7 +5,6 @@ import { useOrderForm } from 'vtex.order-manager/OrderForm'
 
 import MinicartIconButton from './components/MinicartIconButton'
 import DrawerMode from './components/DrawerMode'
-
 import { MinicartContextProvider, useMinicartState } from './MinicartContext'
 import PopupMode from './components/Popup'
 import useCartIdPixel from './modules/useCartIdPixel'

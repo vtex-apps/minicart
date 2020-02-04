@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import { Button } from 'vtex.styleguide'
 import { useCssHandles } from 'vtex.css-handles'
 import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
+
 import useCheckout from './modules/checkoutHook'
 
 interface Props {
