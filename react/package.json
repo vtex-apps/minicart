@@ -21,8 +21,6 @@
     "vtex.css-handles": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@0.4.1/public/@types/vtex.css-handles",
     "vtex.device-detector": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.device-detector@0.2.4/public/@types/vtex.device-detector",
     "vtex.flex-layout": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.flex-layout@0.14.0/public/@types/vtex.flex-layout",
-    "vtex.order-items": "https://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-items@0.5.1/public/@types/vtex.order-items",
-    "vtex.order-manager": "https://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-manager@0.6.9/public/@types/vtex.order-manager",
     "vtex.pixel-manager": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pixel-manager@1.1.4/public/@types/vtex.pixel-manager",
     "vtex.product-list": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-list@0.16.0/public/@types/vtex.product-list",
     "vtex.product-summary": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-summary@2.50.1/public/_types/react",

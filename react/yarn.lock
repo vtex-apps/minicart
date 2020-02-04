@@ -5127,14 +5127,6 @@ verror@1.10.0:
   version "0.14.0"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.flex-layout@0.14.0/public/@types/vtex.flex-layout#6ad6fc3e73ae5b5869247dd5f446df7115c7133a"
 
-"vtex.order-items@https://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-items@0.5.1/public/@types/vtex.order-items":
-  version "0.5.1"
-  resolved "https://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-items@0.5.1/public/@types/vtex.order-items#6a372580e5f23a32fc1b7ea7ec7fb7c0282f8bfb"
-
-"vtex.order-manager@https://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-manager@0.6.9/public/@types/vtex.order-manager":
-  version "0.6.9"
-  resolved "https://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-manager@0.6.9/public/@types/vtex.order-manager#1347d65b9e85e20240dfe1230cf0728e2a729e02"
-
 "vtex.pixel-manager@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pixel-manager@1.1.4/public/@types/vtex.pixel-manager":
   version "1.1.4"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pixel-manager@1.1.4/public/@types/vtex.pixel-manager#96907e17f4e5c584162a47dc425cb5afb2267d00"
