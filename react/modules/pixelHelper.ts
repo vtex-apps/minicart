@@ -11,7 +11,7 @@ export function mapCartItemToPixel(item: CartItem): PixelCartItem {
     detailUrl: item.detailUrl,
     imageUrl: item.imageUrls
       ? fixUrlProtocol(item.imageUrls.at3x)
-      : item.imageUrl || '',
+      : item.imageUrl ?? '',
   }
 }
 
@@ -43,7 +43,7 @@ function fixUrlProtocol(url: string) {
     return url
   }
 
-  return 'https:' + url
+  return `https:${url}`
 }
 
 /**
