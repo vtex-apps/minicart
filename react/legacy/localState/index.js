@@ -54,7 +54,7 @@ export default function(client) {
           item =>
             !cartItems.find(
               cartItem =>
-                cartItem.id === item.id && cartItem.seller === item.seller && !cartItem.hasAttachment
+                cartItem.id === item.id && cartItem.seller === item.seller && !cartItem.canHaveAttachment
             )
         )
 
