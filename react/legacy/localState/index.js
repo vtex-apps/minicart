@@ -50,6 +50,7 @@ export default function(client) {
         const data = cache.readQuery({ query: fullMinicartQuery })
 
         const cartItems = JSON.parse(data.minicart.items)
+        // We will only add items that are not already in cart or might have attachment.
         const newItems = items.filter(
           item =>
             !cartItems.find(
