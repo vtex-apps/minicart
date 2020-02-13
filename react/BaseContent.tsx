@@ -84,11 +84,10 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
    */
   const blocksFromUserImplementation = extensions[treePath].blocks
   const minicartBlocksFromUserImplementation = blocksFromUserImplementation.filter(
-    (block: BlocksFromExtension) => {
+    (block: BlocksFromExtension) =>
       !block.children &&
-        (block.extensionPointId === 'minicart-product-list' ||
-          block.extensionPointId === 'minicart-summary')
-    }
+      (block.extensionPointId === 'minicart-product-list' ||
+        block.extensionPointId === 'minicart-summary')
   )
   const shouldRenderUsingBlocks =
     minicartBlocksFromUserImplementation.length === 2
