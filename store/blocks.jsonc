@@ -16,13 +16,6 @@
   "flex-layout.col#minicart-footer": {
     "children": ["minicart-summary", "minicart-checkout-button"]
   },
-  // "sticky-layout#minicart-footer": {
-  //   "props": {
-  //     "position": "bottom",
-  //     "blockClass": "minicart-default"
-  //   },
-  //   "children": ["minicart-summary", "minicart-checkout-button"]
-  // },
   "minicart-product-list": {
     "blocks": ["product-list#minicart"]
   },
