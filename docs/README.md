@@ -60,9 +60,15 @@ According to the `minicart.v2` composition, it can be highly customizable using 
   },
   "minicart-base-content": {
     "blocks": ["minicart-empty-state"],
-    "children": ["minicart-product-list", "sticky-layout#minicart-footer"]
+    "children": ["minicart-product-list", "flex-layout.row#minicart-footer"]
   },
-  "sticky-layout#minicart-footer": {
+  "flex-layout.row#minicart-footer": {
+    "props": {
+      "blockClass": "minicart-footer"
+    },
+    "children": ["flex-layout.col#minicart-footer"]
+  },
+  "flex-layout.col#minicart-footer": {
     "children": ["minicart-summary", "minicart-checkout-button"]
   },
   "minicart-product-list": {

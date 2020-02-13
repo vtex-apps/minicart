@@ -6,10 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Transparency effect in 'drawer' variant.
 
 ## [2.43.2] - 2020-02-12
 ### Fixed
-- Correctly add SKUs that might have attachments.
+- [Legacy] Correctly add SKUs that might have attachments.
 
 ## [2.43.1] - 2020-02-05
 ### Removed
