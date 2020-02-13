@@ -5,15 +5,24 @@
   },
   "minicart-base-content": {
     "blocks": ["minicart-empty-state"],
-    "children": ["minicart-product-list", "sticky-layout#minicart-footer"]
+    "children": ["minicart-product-list", "flex-layout.row#minicart-footer"]
   },
-  "sticky-layout#minicart-footer": {
+  "flex-layout.row#minicart-footer": {
     "props": {
-      "position": "bottom",
-      "blockClass": "minicart-default"
+      "blockClass": "minicart-footer"
     },
+    "children": ["flex-layout.col#minicart-footer"]
+  },
+  "flex-layout.col#minicart-footer": {
     "children": ["minicart-summary", "minicart-checkout-button"]
   },
+  // "sticky-layout#minicart-footer": {
+  //   "props": {
+  //     "position": "bottom",
+  //     "blockClass": "minicart-default"
+  //   },
+  //   "children": ["minicart-summary", "minicart-checkout-button"]
+  // },
   "minicart-product-list": {
     "blocks": ["product-list#minicart"]
   },
