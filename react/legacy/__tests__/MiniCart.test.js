@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent, wait } from '@vtex/test-tools/react'
-import { orderForm as orderFormQuery } from 'vtex.store-resources/Queries'
+import orderFormQuery from 'vtex.store-resources/QueryOrderForm'
 
 import orderForm from '../__mocks__/orderForm'
 import emptyOrderForm from '../__mocks__/emptyOrderForm'
