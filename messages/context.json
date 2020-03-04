@@ -10,6 +10,7 @@
   "admin/editor.minicart.type.title": "admin/editor.minicart.type.title",
   "admin/editor.minicart.type.popup": "admin/editor.minicart.type.popup",
   "admin/editor.minicart.type.sidebar": "admin/editor.minicart.type.sidebar",
+  "admin/editor.minicart.alwaysShowQuantityBadge": "admin/editor.minicart.alwaysShowQuantityBadge",
   "store/finish-shopping-button-label": "store/finish-shopping-button-label",
   "store/minicart-empty": "store/minicart-empty",
   "store/sidebar-title": "store/sidebar-title",
