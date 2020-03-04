@@ -76,6 +76,10 @@ const EnhancedMinicart = (props: MinicartProps) => (
     )
 
 
+EnhancedMinicart.defaultProps = {
+  alwaysShowQuantityBadge: false
+}
+
 EnhancedMinicart.schema = {
   title: 'admin/editor.minicart.title',
   description: 'admin/editor.minicart.description',
