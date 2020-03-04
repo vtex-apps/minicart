@@ -16,6 +16,7 @@ const Minicart: FC<MinicartProps> = ({
   drawerSlideDirection = 'rightToLeft',
   linkVariationUrl,
   children,
+  alwaysShowQuantityBadge
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
@@ -27,7 +28,7 @@ const Minicart: FC<MinicartProps> = ({
         className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
       >
         <div className={`${handles.minicartContainer} flex flex-column`}>
-          <a href={linkVariationUrl || checkoutUrl}>{MinicartIconButton}</a>
+          <a href={linkVariationUrl || checkoutUrl}><MinicartIconButton alwaysShowQuantityBadge={alwaysShowQuantityBadge}/></a>
         </div>
       </aside>
     )
@@ -42,11 +43,13 @@ const Minicart: FC<MinicartProps> = ({
           <DrawerMode
             maxDrawerWidth={maxDrawerWidth}
             drawerSlideDirection={drawerSlideDirection}
+            alwaysShowQuantityBadge={alwaysShowQuantityBadge}
           >
             {children}
           </DrawerMode>
         ) : (
-          <PopupMode>{children}</PopupMode>
+          <PopupMode 
+            alwaysShowQuantityBadge={alwaysShowQuantityBadge}>{children}</PopupMode>
         )}
       </div>
     </aside>
@@ -63,13 +66,27 @@ const CartIdPixel = () => {
 }
 
 const EnhancedMinicart = (props: MinicartProps) => (
-  <MinicartContextProvider
+    <MinicartContextProvider
     variation={props.variation}
     openOnHover={props.openOnHover}
-  >
+    >
     <CartIdPixel />
     <Minicart {...props} />
   </MinicartContextProvider>
-)
+    )
+
+
+EnhancedMinicart.schema = {
+  title: 'admin/editor.minicart.title',
+  description: 'admin/editor.minicart.description',
+  type: 'object',
+  properties: {
+    alwaysShowQuantityBadge: {
+      title: 'admin/editor.minicart.alwaysShowQuantityBadge',
+      type: 'boolean',
+      default: true
+    }
+  },
+}
 
 export default EnhancedMinicart

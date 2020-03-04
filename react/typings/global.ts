@@ -4,6 +4,11 @@ interface MinicartProps {
   linkVariationUrl: string
   maxDrawerWidth: number | string
   drawerSlideDirection: SlideDirectionType
+  alwaysShowQuantityBadge: boolean
+}
+
+interface MinicartIconButtonProps {
+  alwaysShowQuantityBadge: boolean
 }
 
 type SlideDirectionType =
@@ -12,3 +17,4 @@ type SlideDirectionType =
   | 'rightToLeft'
   | 'leftToRight'
 type MinicartVariationType = 'popup' | 'drawer' | 'link'
+
