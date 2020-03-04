@@ -40,7 +40,7 @@ const MinicartIconButton:FC<MinicartIconButtonProps> = ({alwaysShowQuantityBadge
       icon={
         <span className={`${handles.minicartIconContainer} gray relative`}>
           <IconCart />
-          {itemQuantity > 0 || alwaysShowQuantityBadge && (
+          {(itemQuantity > 0 || alwaysShowQuantityBadge) && (
             <span
               style={{ userSelect: 'none' }}
               className={`${handles.minicartQuantityBadge} ${styles.minicartQuantityBadgeDefault} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
