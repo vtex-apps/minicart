@@ -17,14 +17,16 @@ const DrawerMode: FC<Props> = ({
   maxDrawerWidth,
   drawerSlideDirection,
   children,
-  alwaysShowQuantityBadge
+  alwaysShowQuantityBadge,
 }) => {
   const handles = useCssHandles(CSS_HANLDES)
   return (
     <Drawer
       maxWidth={maxDrawerWidth}
       slideDirection={drawerSlideDirection}
-      customIcon={<MinicartIconButton alwaysShowQuantityBadge={alwaysShowQuantityBadge}/>}
+      customIcon={
+        <MinicartIconButton alwaysShowQuantityBadge={alwaysShowQuantityBadge} />
+      }
     >
       <div
         className={`${handles.minicartSideBarContentWrapper} w-100 h-100`}

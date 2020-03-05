@@ -9,7 +9,9 @@ import styles from '../styles.css'
 
 const CSS_HANDLES = ['minicartIconContainer', 'minicartQuantityBadge'] as const
 
-const MinicartIconButton:FC<MinicartIconButtonProps> = ({alwaysShowQuantityBadge}) => {
+const MinicartIconButton: FC<MinicartIconButtonProps> = ({
+  alwaysShowQuantityBadge,
+}) => {
   const { orderForm, loading }: OrderFormContext = useOrderForm()
   const handles = useCssHandles(CSS_HANDLES)
   const { open, openBehavior, openOnHoverProp } = useMinicartState()

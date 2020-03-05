@@ -24,7 +24,7 @@ const PopupMode: FC<Props> = ({ children, alwaysShowQuantityBadge }) => {
     open,
     hasBeenOpened,
     openBehavior,
-    openOnHoverProp
+    openOnHoverProp,
   } = useMinicartState()
   const dispatch = useMinicartDispatch()
   const handles = useCssHandles(CSS_HANDLES)
@@ -41,7 +41,7 @@ const PopupMode: FC<Props> = ({ children, alwaysShowQuantityBadge }) => {
 
   return (
     <div onMouseLeave={openBehavior === 'hover' ? handleMouseLeave : undefined}>
-      <MinicartIconButton alwaysShowQuantityBadge={alwaysShowQuantityBadge}/>
+      <MinicartIconButton alwaysShowQuantityBadge={alwaysShowQuantityBadge} />
       {open && (
         <Overlay>
           {openBehavior === 'click' && (
