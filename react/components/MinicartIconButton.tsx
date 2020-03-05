@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { useMemo, FC } from 'react'
 import { ButtonWithIcon } from 'vtex.styleguide'
 import { IconCart } from 'vtex.store-icons'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
@@ -9,8 +9,12 @@ import styles from '../styles.css'
 
 const CSS_HANDLES = ['minicartIconContainer', 'minicartQuantityBadge'] as const
 
+interface MinicartIconButtonProps {
+  quantityDisplay: MinicartIconButtonType
+}
+
 const MinicartIconButton: FC<MinicartIconButtonProps> = ({
-  alwaysShowQuantityBadge,
+  quantityDisplay,
 }) => {
   const { orderForm, loading }: OrderFormContext = useOrderForm()
   const handles = useCssHandles(CSS_HANDLES)
@@ -37,12 +41,25 @@ const MinicartIconButton: FC<MinicartIconButtonProps> = ({
     dispatch({ type: open ? 'CLOSE_MINICART' : 'OPEN_MINICART' })
   }
 
+  const DISPLAY_TYPES = {
+    always: 'always',
+    notEmpty: 'not-empty',
+    never: 'never',
+  }
+
+  const showQuantityBadge = useMemo(
+    () =>
+      (itemQuantity > 0 && quantityDisplay === DISPLAY_TYPES.notEmpty) ||
+      quantityDisplay === DISPLAY_TYPES.always,
+    [quantityDisplay, itemQuantity]
+  )
+
   return (
     <ButtonWithIcon
       icon={
         <span className={`${handles.minicartIconContainer} gray relative`}>
           <IconCart />
-          {(itemQuantity > 0 || alwaysShowQuantityBadge) && (
+          {showQuantityBadge && (
             <span
               style={{ userSelect: 'none' }}
               className={`${handles.minicartQuantityBadge} ${styles.minicartQuantityBadgeDefault} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}

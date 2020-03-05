@@ -10,23 +10,21 @@ const CSS_HANLDES = ['minicartSideBarContentWrapper']
 interface Props {
   maxDrawerWidth: number | string
   drawerSlideDirection: SlideDirectionType
-  alwaysShowQuantityBadge: boolean
+  quantityDisplay: 'always' | 'never' | 'not-empty'
 }
 
 const DrawerMode: FC<Props> = ({
   maxDrawerWidth,
   drawerSlideDirection,
   children,
-  alwaysShowQuantityBadge,
+  quantityDisplay,
 }) => {
   const handles = useCssHandles(CSS_HANLDES)
   return (
     <Drawer
       maxWidth={maxDrawerWidth}
       slideDirection={drawerSlideDirection}
-      customIcon={
-        <MinicartIconButton alwaysShowQuantityBadge={alwaysShowQuantityBadge} />
-      }
+      customIcon={<MinicartIconButton quantityDisplay={quantityDisplay} />}
     >
       <div
         className={`${handles.minicartSideBarContentWrapper} w-100 h-100`}
