@@ -10,7 +10,6 @@
   "admin/editor.minicart.type.title": "Tipo de Carrinho de Compras",
   "admin/editor.minicart.type.popup": "Pop Up",
   "admin/editor.minicart.type.sidebar": "Sidebar",
-  "admin/editor.minicart.alwaysShowQuantityBadge": "Sempre mostrar a badge de quantidade",
   "store/finish-shopping-button-label": "Finalizar compra",
   "store/minicart-empty": "Seu carrinho está vazio!",
   "store/sidebar-title": "Meu carrinho",

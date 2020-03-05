@@ -10,7 +10,6 @@
   "admin/editor.minicart.type.title": "Mini Cart Type",
   "admin/editor.minicart.type.popup": "Pop Up",
   "admin/editor.minicart.type.sidebar": "Sidebar",
-  "admin/editor.minicart.alwaysShowQuantityBadge": "Always show quantity badge",
   "store/finish-shopping-button-label": "Go to checkout",
   "store/minicart-empty": "Your cart is empty!",
   "store/sidebar-title": "My mini cart",

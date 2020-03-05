@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Updated `CODEOWNERS` file with responsible teams for each directory.
 - Updated `.all-contributorsrc`.
 
+### Added
+- Add `alwaysShowQuantityBadge` prop.
+
 ## [2.43.5] - 2020-02-18
 ### Changed
 - Import queries and mutation directly.

@@ -80,17 +80,5 @@ EnhancedMinicart.defaultProps = {
   alwaysShowQuantityBadge: false
 }
 
-EnhancedMinicart.schema = {
-  title: 'admin/editor.minicart.title',
-  description: 'admin/editor.minicart.description',
-  type: 'object',
-  properties: {
-    alwaysShowQuantityBadge: {
-      title: 'admin/editor.minicart.alwaysShowQuantityBadge',
-      type: 'boolean',
-      default: true
-    }
-  },
-}
 
 export default EnhancedMinicart

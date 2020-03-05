@@ -10,7 +10,6 @@
   "admin/editor.minicart.type.title": "Tipo de Cesta de Compras",
   "admin/editor.minicart.type.popup": "Pop Up",
   "admin/editor.minicart.type.sidebar": "Sidebar",
-  "admin/editor.minicart.alwaysShowQuantityBadge": "Mostrar siempre la insignia de cantidad",
   "store/finish-shopping-button-label": "Cerrar pedido",
   "store/minicart-empty": "Su cesta está vacía!",
   "store/sidebar-title": "Mi cesta de compras",
