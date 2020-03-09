@@ -16,7 +16,7 @@ const Minicart: FC<MinicartProps> = ({
   drawerSlideDirection = 'rightToLeft',
   linkVariationUrl,
   children,
-  quantityDisplay,
+  quantityDisplay = 'not-empty',
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
@@ -75,9 +75,5 @@ const EnhancedMinicart = (props: MinicartProps) => (
     <Minicart {...props} />
   </MinicartContextProvider>
 )
-
-EnhancedMinicart.defaultProps = {
-  quantityDisplay: 'not-empty',
-}
 
 export default EnhancedMinicart
