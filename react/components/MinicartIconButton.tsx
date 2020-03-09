@@ -1,4 +1,4 @@
-import React, { useMemo, FC } from 'react'
+import React, { FC } from 'react'
 import { ButtonWithIcon } from 'vtex.styleguide'
 import { IconCart } from 'vtex.store-icons'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
@@ -41,18 +41,9 @@ const MinicartIconButton: FC<MinicartIconButtonProps> = ({
     dispatch({ type: open ? 'CLOSE_MINICART' : 'OPEN_MINICART' })
   }
 
-  const DISPLAY_TYPES = {
-    always: 'always',
-    notEmpty: 'not-empty',
-    never: 'never',
-  }
-
-  const showQuantityBadge = useMemo(
-    () =>
-      (itemQuantity > 0 && quantityDisplay === DISPLAY_TYPES.notEmpty) ||
-      quantityDisplay === DISPLAY_TYPES.always,
-    [quantityDisplay, itemQuantity]
-  )
+  const showQuantityBadge =
+    (itemQuantity > 0 && quantityDisplay === 'not-empty') ||
+    quantityDisplay === 'always'
 
   return (
     <ButtonWithIcon
