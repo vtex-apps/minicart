@@ -15,7 +15,7 @@
     "apollo-cache-inmemory": "^1.5.1",
     "prettier": "^1.19.1",
     "prop-types": "^15.7.2",
-    "typescript": "3.7.3",
+    "typescript": "3.8.3",
     "vtex.checkout-resources": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-resources@0.15.0/public/@types/vtex.checkout-resources",
     "vtex.checkout-summary": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-summary@0.14.1/public/@types/vtex.checkout-summary",
     "vtex.css-handles": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@0.4.1/public/@types/vtex.css-handles",
