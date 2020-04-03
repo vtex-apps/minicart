@@ -50,6 +50,7 @@ The VTEX Minicart is a block that displays a summary list of all items added by 
 | `maxDrawerWidth`       | `Number`  | Maximum width (in pixels) for the `'sidebar'` Minicart when opened.                                                                                                                                                                             | `440`         |
 | `openOnHover`          | `Boolean` | Whether the `'popup'` minicart should open when the user hovers over it                                                                                                                                                                         | false         |
 | `quantityDisplay`      | `Enum`    | Shows the quantity badge even when the amount of products in the cart is zero  (values: `'always'` or `'not-empty'` or ` 'never'`)                                                                                                              | `'not-empty'` |
+| `initialOpen`          | `Boolean`  | Minicart starts open.                                                                                   | `false`         |
 
 ### Advanced Configuration
 

@@ -11,6 +11,7 @@ interface Props {
   maxDrawerWidth: number | string
   drawerSlideDirection: SlideDirectionType
   quantityDisplay: 'always' | 'never' | 'not-empty'
+  initialOpen: boolean
 }
 
 const DrawerMode: FC<Props> = ({
@@ -18,6 +19,7 @@ const DrawerMode: FC<Props> = ({
   drawerSlideDirection,
   children,
   quantityDisplay,
+  initialOpen = false,
 }) => {
   const handles = useCssHandles(CSS_HANLDES)
   return (
@@ -25,6 +27,7 @@ const DrawerMode: FC<Props> = ({
       maxWidth={maxDrawerWidth}
       slideDirection={drawerSlideDirection}
       customIcon={<MinicartIconButton quantityDisplay={quantityDisplay} />}
+      initialOpen={initialOpen}
     >
       <div
         className={`${handles.minicartSideBarContentWrapper} w-100 h-100`}

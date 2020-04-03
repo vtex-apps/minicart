@@ -1,6 +1,7 @@
 interface MinicartProps {
   variation: MinicartVariationType
   openOnHover: boolean
+  initialOpen: boolean
   linkVariationUrl: string
   maxDrawerWidth: number | string
   drawerSlideDirection: SlideDirectionType

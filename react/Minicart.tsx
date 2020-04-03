@@ -17,6 +17,7 @@ const Minicart: FC<MinicartProps> = ({
   linkVariationUrl,
   children,
   quantityDisplay = 'not-empty',
+  initialOpen = false,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
@@ -46,6 +47,7 @@ const Minicart: FC<MinicartProps> = ({
             maxDrawerWidth={maxDrawerWidth}
             drawerSlideDirection={drawerSlideDirection}
             quantityDisplay={quantityDisplay}
+            initialOpen={initialOpen}
           >
             {children}
           </DrawerMode>
