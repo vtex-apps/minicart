@@ -17,8 +17,8 @@ export const ToastContext = React.createContext({
 })
 
 export const withToast = WrappedComponent => {
-  const withToast = props => (
+  const WithToast = props => (
     <WrappedComponent showToast={() => {}} hideToast={() => {}} {...props} />
   )
-  return withToast
+  return WithToast
 }

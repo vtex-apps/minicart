@@ -1,3 +1,5 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-restricted-imports */
 import classNames from 'classnames'
 import { compose, map, partition, path, pathOr, pick, isNil, prop } from 'ramda'
 import React, {
@@ -28,15 +30,12 @@ import {
   mapBuyButtonItemToPixel,
   mapCartItemToPixel,
 } from './modules/pixelHelper'
-
 import fullMinicartQuery from './legacy/localState/graphql/fullMinicartQuery.gql'
 import updateItemsMutation from './legacy/localState/graphql/updateItemsMutation.gql'
 import updateOrderFormMutation from './legacy/localState/graphql/updateOrderFormMutation.gql'
 import updateLocalItemStatusMutation from './legacy/localState/graphql/updateLocalItemStatusMutation.gql'
 import setMinicartOpenMutation from './legacy/localState/graphql/setMinicartOpenMutation.gql'
-
 import createLocalState, { ITEMS_STATUS } from './legacy/localState'
-
 import styles from './legacy/minicart.css'
 import useMarketingSessionParams from './legacy/hooks/useMarketingSessionParams'
 import useCardIdPixel from './modules/useCartIdPixel'
@@ -227,8 +226,8 @@ const MiniCart = ({
         variables: {
           orderFormId,
           items,
-          ...(utmParams ? {utmParams} : {}),
-          ...(utmiParams ? {utmiParams} : {}),
+          ...(utmParams ? { utmParams } : {}),
+          ...(utmiParams ? { utmiParams } : {}),
         },
       })
     },
@@ -316,9 +315,10 @@ const MiniCart = ({
 
           push({
             event: 'cartChanged',
-            items: newOrderForm && newOrderForm.items
-              ? newOrderForm.items.map(mapCartItemToPixel)
-              : []
+            items:
+              newOrderForm && newOrderForm.items
+                ? newOrderForm.items.map(mapCartItemToPixel)
+                : [],
           })
 
           setUpdatingOrderForm(false)

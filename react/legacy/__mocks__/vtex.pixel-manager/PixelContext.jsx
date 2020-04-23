@@ -3,8 +3,8 @@ import React from 'react'
 const push = () => null
 
 export const withPixel = WrappedComponent => {
-  const withPixel = props => <WrappedComponent {...props} push={push} />
-  return withPixel
+  const WithPixel = props => <WrappedComponent {...props} push={push} />
+  return WithPixel
 }
 
 export const usePixel = () => ({

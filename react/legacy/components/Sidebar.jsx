@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { IconCaret, IconCart } from 'vtex.store-icons'
@@ -121,6 +123,7 @@ Sidebar.propTypes = {
     viewBox: PropTypes.string,
     size: PropTypes.number,
   }),
+  intl: PropTypes.any,
 }
 
 export default injectIntl(Sidebar)
