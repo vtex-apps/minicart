@@ -3,6 +3,7 @@
   "compilerOptions": {
     "noEmitOnError": false,
     "typeRoots": ["node_modules/@types"],
+    "lib": ["dom"],
     "types": ["node", "jest", "graphql"],
     "module": "esnext",
     "moduleResolution": "node",
