@@ -22,6 +22,7 @@ interface OrderFormItem {
   productCategories: Record<string, string>
   productCategoryIds: string
   productRefId: string
+  refId: string
 }
 
 interface ItemAdditionalInfo {

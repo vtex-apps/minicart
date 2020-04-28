@@ -1,5 +1,5 @@
+// eslint-disable-next-line no-restricted-imports
 import { head, mergeDeepRight, values } from 'ramda'
-
 import updateOrderFormShipping from 'vtex.store-resources/MutationUpdateOrderFormShipping'
 import updateOrderFormCheckin from 'vtex.store-resources/MutationUpdateOrderFormCheckin'
 
@@ -11,7 +11,7 @@ export const ITEMS_STATUS = {
   LOCAL_ITEM: 'LOCAL_ITEM',
 }
 
-export default function(client) {
+export default function (client) {
   const replayOrderFormServerMutation = mutation => async (
     _,
     variables,
@@ -54,10 +54,11 @@ export default function(client) {
           item =>
             !cartItems.find(
               cartItem =>
-                cartItem.id === item.id && cartItem.seller === item.seller && !cartItem.canHaveAttachment
+                cartItem.id === item.id &&
+                cartItem.seller === item.seller &&
+                !cartItem.canHaveAttachment
             )
         )
-
 
         const writeItems = cartItems.concat(
           newItems.map(item => ({
@@ -124,7 +125,7 @@ export default function(client) {
         const updatedItems = JSON.parse(data.minicart.items)
           .map((item, index) => {
             const updateItem = itemsToUpdate.find(
-              updateItem => updateItem.index === index
+              currentItem => currentItem.index === index
             )
 
             if (updateItem) {
@@ -137,7 +138,7 @@ export default function(client) {
             return item
           })
           .filter(
-            (_, index) =>
+            (_item, index) =>
               itemsToRemove.findIndex(
                 removedItem => removedItem.index === index
               ) === -1
