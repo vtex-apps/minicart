@@ -1,9 +1,14 @@
 {
+  "projectName": "minicart",
+  "projectOwner": "vtex-apps",
+  "repoType": "github",
+  "repoHost": "https://github.com",
   "files": [
-    "README.md"
+    "docs/README.md"
   ],
   "imageSize": 100,
   "commit": false,
+  "commitConvention": "none",
   "contributors": [
     {
       "login": "lucasayb",
@@ -13,11 +18,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "lucaspacheco-acct",
+      "name": "lucaspacheco-acct",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/59736416?v=4",
+      "profile": "https://github.com/lucaspacheco-acct",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "projectName": "minicart",
-  "projectOwner": "vtex-apps",
-  "repoType": "github",
-  "repoHost": "https://github.com"
+  "skipCi": true
 }

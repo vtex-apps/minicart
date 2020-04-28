@@ -2,7 +2,9 @@
 
 # Minicart
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 :information_source: **Minicart v1 block has been deprecated in favor of Minicart v2** which can be customized using the blocks defined by [Product List](https://vtex.io/docs/app/vtex.product-list) and [Checkout Summary](https://vtex.io/docs/app/vtex.checkout-summary). If you’re still using the former version, you can find its documentation here: [Minicart v1 documentation](https://github.com/vtex-apps/minicart/blob/383d7bbd3295f06d1b5854a0add561a872e1515c/docs/README.md)
 
@@ -40,13 +42,14 @@ The VTEX Minicart is a block that displays a summary list of all items added by 
 
 :warning: **The Minicart v2 will only effectively function if the store uses the** [**Add To Cart Button**](https://vtex.io/docs/components/all/vtex.add-to-cart-button/add-to-cart-button) **instead of the** [**Buy Button**](https://vtex.io/docs/components/all/vtex.store-components/buy-button) in blocks such as the Shelf and the Product Details Page. This is because Minicart v2 was built based on an indirect dependency with the Add To Cart button. That means that any other shopping buttons, as the Buy Button, are unable to render Minicart v2, even if it was correctly configured in the code. `
 
-| Prop name              | Type      | Description                                                                                              | Default value |
-| ---------------------- | --------- | -------------------------------------------------------------------------------------------------------- | ------------- |
-| `variation`            | `Enum`    | Minicart behavior when rendered. The possible values are: `'popup'` (it pops up on the Homepage in a minitab window) , `'drawer'` (it is rendered through a side bar) or `'link'` (when clicked on, it redirects the user to the Checkout page)                                   | `'drawer'`   |
-| `drawerSlideDirection` | `Enum`    |  Slide direction for the `'drawer'` Minicart opening. (values: `'rightToLeft'` or `'leftToRight'`) | `rightToLeft` |
-| `linkVariationUrl`     | `String`  |  Link associated to the `'link'` Minicart.                                           |        |
-| `maxDrawerWidth`       | `Number`  | Maximum width (in pixels) for the `'sidebar'` Minicart when opened.                                               | `440`         |
-| `openOnHover`          | `Boolean` | Whether the `'popup'` minicart should open when the user hovers over it                                    | false         |
+| Prop name              | Type      | Description                                                                                                                                                                                                                                     | Default value |
+| ---------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `variation`            | `Enum`    | Minicart behavior when rendered. The possible values are: `'popup'` (it pops up on the Homepage in a minitab window) , `'drawer'` (it is rendered through a side bar) or `'link'` (when clicked on, it redirects the user to the Checkout page) | `'drawer'`    |
+| `drawerSlideDirection` | `Enum`    | Slide direction for the `'drawer'` Minicart opening. (values: `'rightToLeft'` or `'leftToRight'`)                                                                                                                                               | `rightToLeft` |
+| `linkVariationUrl`     | `String`  | Link associated to the `'link'` Minicart.                                                                                                                                                                                                       |               |
+| `maxDrawerWidth`       | `Number`  | Maximum width (in pixels) for the `'sidebar'` Minicart when opened.                                                                                                                                                                             | `440`         |
+| `openOnHover`          | `Boolean` | Whether the `'popup'` minicart should open when the user hovers over it                                                                                                                                                                         | false         |
+| `quantityDisplay`      | `Enum`    | Shows the quantity badge even when the amount of products in the cart is zero  (values: `'always'` or `'not-empty'` or ` 'never'`)                                                                                                              | `'not-empty'` |
 
 ### Advanced Configuration
 
@@ -60,9 +63,15 @@ According to the `minicart.v2` composition, it can be highly customizable using 
   },
   "minicart-base-content": {
     "blocks": ["minicart-empty-state"],
-    "children": ["minicart-product-list", "sticky-layout#minicart-footer"]
+    "children": ["minicart-product-list", "flex-layout.row#minicart-footer"]
   },
-  "sticky-layout#minicart-footer": {
+  "flex-layout.row#minicart-footer": {
+    "props": {
+      "blockClass": "minicart-footer"
+    },
+    "children": ["flex-layout.col#minicart-footer"]
+  },
+  "flex-layout.col#minicart-footer": {
     "children": ["minicart-summary", "minicart-checkout-button"]
   },
   "minicart-product-list": {
@@ -106,7 +115,7 @@ According to the `minicart.v2` composition, it can be highly customizable using 
 
 By default implementation we mean that whenever you use `minicart.v2` in your store you're actually using the `json` above behind the scenes.
 
-Therefore, in order to customize the Minicart configuration, you can simply use the default implementation in your code and change it as you wish.
+Therefore, in order to customize the Minicart configuration, you can simply copy the code above and change it as you wish.
 
 For further information on how to configure each of the blocks used to compose `minicart.v2`, check out [Product List](https://vtex.io/docs/app/vtex.product-list) and [Checkout Summary](https://vtex.io/docs/app/vtex.checkout-summary).
 
@@ -136,13 +145,17 @@ In order to apply CSS customizations in this and other blocks, follow the instru
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/lucasayb"><img src="https://avatars2.githubusercontent.com/u/17356081?v=4" width="100px;" alt="Lucas Antônio Yamamoto Borges"/><br /><sub><b>Lucas Antônio Yamamoto Borges</b></sub></a><br /><a href="https://github.com/vtex-apps/minicart/commits?author=lucasayb" title="Code">=»</a></td>
+    <td align="center"><a href="https://github.com/lucasayb"><img src="https://avatars2.githubusercontent.com/u/17356081?v=4" width="100px;" alt=""/><br /><sub><b>Lucas Antônio Yamamoto Borges</b></sub></a><br /><a href="https://github.com/vtex-apps/minicart/commits?author=lucasayb" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/lucaspacheco-acct"><img src="https://avatars0.githubusercontent.com/u/59736416?v=4" width="100px;" alt=""/><br /><sub><b>lucaspacheco-acct</b></sub></a><br /><a href="https://github.com/vtex-apps/minicart/commits?author=lucaspacheco-acct" title="Code">💻</a></td>
   </tr>
 </table>
 
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

@@ -1,9 +1,9 @@
 import React from 'react'
 import { render, fireEvent, wait } from '@vtex/test-tools/react'
-import { orderForm as orderFormQuery } from 'vtex.store-resources/Queries'
+import orderFormQuery from 'vtex.store-resources/QueryOrderForm'
 
-import orderForm from '../__mocks__/orderForm'
-import emptyOrderForm from '../__mocks__/emptyOrderForm'
+import orderForm from '../__fixtures__/orderForm'
+import emptyOrderForm from '../__fixtures__/emptyOrderForm'
 import MiniCart from '../../index'
 
 const mocks = [
@@ -138,7 +138,7 @@ describe('<MiniCart />', () => {
     await wait(async () => {
       jest.runAllTimers()
     })
-    
+
     expect(baseElement).toMatchSnapshot()
   })
 
@@ -219,30 +219,6 @@ describe('<MiniCart />', () => {
     await wait(() => {
       jest.runAllTimers()
     })
-    expect(getByTestId('total-price')).toBeInTheDocument()
-  })
-
-  it('should not show price if showPrice is false', async () => {
-    const { queryByTestId } = render(
-      <MiniCart type="sidebar" hideContent={false} showPrice={false} />,
-      { graphql: { mocks } }
-    )
-    await wait(() => {
-      jest.runAllTimers()
-    })
-    expect(queryByTestId('total-price')).toBeNull()
-  })
-
-  it('should show price if there are items in the cart', async () => {
-    const { getByTestId } = render(
-      <MiniCart type="sidebar" hideContent={false} showPrice />,
-      { graphql: { mocks } }
-    )
-
-    await wait(() => {
-      jest.runAllTimers()
-    })
-    
     expect(getByTestId('total-price')).toBeInTheDocument()
   })
 })

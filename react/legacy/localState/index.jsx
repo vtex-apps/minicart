@@ -1,8 +1,7 @@
+// eslint-disable-next-line no-restricted-imports
 import { head, mergeDeepRight, values } from 'ramda'
-import {
-  updateOrderFormShipping,
-  updateOrderFormCheckin,
-} from 'vtex.store-resources/Mutations'
+import updateOrderFormShipping from 'vtex.store-resources/MutationUpdateOrderFormShipping'
+import updateOrderFormCheckin from 'vtex.store-resources/MutationUpdateOrderFormCheckin'
 
 import fullMinicartQuery from './graphql/fullMinicartQuery.gql'
 
@@ -12,7 +11,7 @@ export const ITEMS_STATUS = {
   LOCAL_ITEM: 'LOCAL_ITEM',
 }
 
-export default function(client) {
+export default function (client) {
   const replayOrderFormServerMutation = mutation => async (
     _,
     variables,
@@ -50,11 +49,14 @@ export default function(client) {
         const data = cache.readQuery({ query: fullMinicartQuery })
 
         const cartItems = JSON.parse(data.minicart.items)
+        // We will only add items that are not already in cart or might have attachment.
         const newItems = items.filter(
           item =>
             !cartItems.find(
               cartItem =>
-                cartItem.id === item.id && cartItem.seller === item.seller
+                cartItem.id === item.id &&
+                cartItem.seller === item.seller &&
+                !cartItem.canHaveAttachment
             )
         )
 
@@ -123,7 +125,7 @@ export default function(client) {
         const updatedItems = JSON.parse(data.minicart.items)
           .map((item, index) => {
             const updateItem = itemsToUpdate.find(
-              updateItem => updateItem.index === index
+              currentItem => currentItem.index === index
             )
 
             if (updateItem) {
@@ -136,7 +138,7 @@ export default function(client) {
             return item
           })
           .filter(
-            (_, index) =>
+            (_item, index) =>
               itemsToRemove.findIndex(
                 removedItem => removedItem.index === index
               ) === -1

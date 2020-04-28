@@ -7,7 +7,7 @@ import React, {
   memo,
 } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { ExtensionPoint, useChildBlock } from 'vtex.render-runtime'
+import { ExtensionPoint, useTreePath, useRuntime } from 'vtex.render-runtime'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { useCssHandles } from 'vtex.css-handles'
 
@@ -20,6 +20,12 @@ import CheckoutButton from './CheckoutButton'
 interface Props {
   sideBarMode: boolean
   finishShoppingButtonLink: string
+}
+
+interface BlocksFromExtension {
+  blockId: string
+  extensionPointId: string
+  children: boolean
 }
 
 const CSS_HANDLES = [
@@ -45,6 +51,8 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   const push = useDebouncedPush()
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
+  const { extensions } = useRuntime()
+  const { treePath } = useTreePath()
 
   useEffect(() => {
     if (loading) {
@@ -66,8 +74,23 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
   } sticky`
 
   const isCartEmpty = !loading && orderForm.items.length === 0
-  const hasProductListBlock = useChildBlock({ id: 'minicart-product-list' })
-  const hasMinicartSummaryBlock = useChildBlock({ id: 'minicart-summary' })
+
+  /**
+   * The logic below is to check if the user provided the blocks
+   * 'minicart-product-list' and 'minicart-summary' via 'blocks'
+   * instead of 'children' in their implementation of 'minicart-base-content'.
+   * The blocksFromUserImplementation variable represents the result of concatenating
+   * the 'blocks' and the 'children' arrays from blocks.json.
+   */
+  const blocksFromUserImplementation = extensions[treePath].blocks
+  const minicartBlocksFromUserImplementation = blocksFromUserImplementation.filter(
+    (block: BlocksFromExtension) =>
+      !block.children &&
+      (block.extensionPointId === 'minicart-product-list' ||
+        block.extensionPointId === 'minicart-summary')
+  )
+  const shouldRenderUsingBlocks =
+    minicartBlocksFromUserImplementation.length === 2
 
   if (isCartEmpty) {
     return (
@@ -78,7 +101,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
     )
   }
 
-  if (hasProductListBlock && hasMinicartSummaryBlock) {
+  if (shouldRenderUsingBlocks) {
     return (
       <div className={minicartContentClasses}>
         <div
