@@ -3,13 +3,13 @@ import { ApolloClient } from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
 import gql from 'graphql-tag'
 
-import createLocalState from '../localState/index'
+import createLocalState, { ITEMS_STATUS } from '../localState/index'
 import addToCartMutation from '../localState/graphql/addToCartMutation.gql'
 import updateItemsMutation from '../localState/graphql/updateItemsMutation.gql'
-import { ITEMS_STATUS } from '../localState'
 
 describe('Local State', () => {
-  let cache, client
+  let cache
+  let client
 
   beforeEach(() => {
     cache = new InMemoryCache()
@@ -135,9 +135,9 @@ describe('Local State', () => {
 
     expect(cacheItems).toEqual(
       expect.arrayContaining(
-        updateItemsPayload.map(item =>
+        updateItemsPayload.map(currentItem =>
           expect.objectContaining({
-            id: item.id,
+            id: currentItem.id,
             localStatus: ITEMS_STATUS.MODIFIED,
           })
         )
@@ -146,8 +146,11 @@ describe('Local State', () => {
 
     expect(cacheItems).toEqual(
       expect.arrayContaining(
-        updateItemsPayload.map(item =>
-          expect.objectContaining({ id: item.id, quantity: item.quantity })
+        updateItemsPayload.map(currentItem =>
+          expect.objectContaining({
+            id: currentItem.id,
+            quantity: currentItem.quantity,
+          })
         )
       )
     )

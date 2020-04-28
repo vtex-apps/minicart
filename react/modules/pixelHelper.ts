@@ -12,6 +12,7 @@ export function mapCartItemToPixel(item: CartItem): PixelCartItem {
     imageUrl: item.imageUrls
       ? fixUrlProtocol(item.imageUrls.at3x)
       : item.imageUrl ?? '',
+    referenceId: item.refId,
   }
 }
 
@@ -31,6 +32,7 @@ export function mapBuyButtonItemToPixel(item: BuyButtonItem): PixelCartItem {
     category,
     detailUrl: item.detailUrl,
     imageUrl: item.imageUrl,
+    referenceId: item.refId,
   }
 }
 
@@ -83,6 +85,7 @@ interface PixelCartItem {
   category: string
   detailUrl: string
   imageUrl: string
+  referenceId: string
 }
 
 interface BuyButtonItem {
@@ -96,6 +99,7 @@ interface BuyButtonItem {
   category: string
   detailUrl: string
   imageUrl: string
+  refId: string
 }
 
 interface CartItem {
@@ -119,4 +123,5 @@ interface CartItem {
     at2x: string
     at3x: string
   }
+  refId: string
 }

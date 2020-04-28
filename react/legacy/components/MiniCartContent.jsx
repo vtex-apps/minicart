@@ -1,10 +1,11 @@
+/* eslint-disable react/no-access-state-in-setstate */
 import PropTypes from 'prop-types'
+// eslint-disable-next-line no-restricted-imports
 import { reduceBy, values, clone, find, propEq, compose } from 'ramda'
 import React, { Component, Fragment } from 'react'
 import { graphql } from 'react-apollo'
 import { injectIntl } from 'react-intl'
 import classNames from 'classnames'
-
 import { withPixel } from 'vtex.pixel-manager/PixelContext'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { ButtonWithIcon, Spinner } from 'vtex.styleguide'
@@ -13,7 +14,6 @@ import { IconDelete } from 'vtex.store-icons'
 import { MiniCartPropTypes } from '../utils/propTypes'
 import { toHttps, changeImageUrlSize } from '../utils/urlHelpers'
 import { mapCartItemToPixel } from '../../modules/pixelHelper'
-
 import { ITEMS_STATUS } from '../localState/index'
 import updateItemsMutation from '../localState/graphql/updateItemsMutation.gql'
 import updateLocalItemsMutation from '../localState/graphql/updateLocalItemsMutation.gql'
@@ -51,6 +51,7 @@ class MiniCartContent extends Component {
       viewBox: PropTypes.string,
       size: PropTypes.number,
     }),
+    intl: PropTypes.any,
   }
 
   state = { isUpdating: [] }

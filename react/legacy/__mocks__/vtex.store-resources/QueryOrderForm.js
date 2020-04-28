@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-export const orderForm = gql`
+const orderForm = gql`
   query {
     orderForm {
       cacheId
@@ -85,3 +85,5 @@ export const orderForm = gql`
     }
   }
 `
+
+export default orderForm

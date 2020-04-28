@@ -22,7 +22,7 @@ const MiniCartFooter = ({
   showShippingCost,
 }) => {
   const { rootPath = '' } = useRuntime()
-  const handleClickButton = () => location.assign(rootPath + buttonLink)
+  const handleClickButton = () => window.location.assign(rootPath + buttonLink)
 
   const priceAndDiscountClasses = classNames(
     `${minicart.contentDiscount} w-100 flex justify-end items-center mb3`,

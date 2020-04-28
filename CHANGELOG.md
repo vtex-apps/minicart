@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.45.0] - 2020-03-25
+### Added
+- `referenceId` to `addToCart` and `cartChanged` pixel event payloads.
+
+## [2.44.0] - 2020-03-11
+### Added
+- Updated `CODEOWNERS` file with responsible teams for each directory.
+- Updated `.all-contributorsrc`.
+- Add `quantityDisplay` prop in `minicart.v2`.
+
+## [2.43.5] - 2020-02-18
+### Changed
+- Import queries and mutation directly.
+
+## [2.43.4] - 2020-02-13
+### Fixed
+- Faulty verification at BaseContent component.
+
+## [2.43.3] - 2020-02-13
+### Fixed
+- Transparency effect in 'drawer' variant.
+
+## [2.43.2] - 2020-02-12
+### Fixed
+- [Legacy] Correctly add SKUs that might have attachments.
+
 ## [2.43.1] - 2020-02-05
 ### Removed
 - `OrderItemsProvider` inside `ProductList`.

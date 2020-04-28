@@ -16,6 +16,7 @@ const Minicart: FC<MinicartProps> = ({
   drawerSlideDirection = 'rightToLeft',
   linkVariationUrl,
   children,
+  quantityDisplay = 'not-empty',
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
@@ -27,7 +28,9 @@ const Minicart: FC<MinicartProps> = ({
         className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
       >
         <div className={`${handles.minicartContainer} flex flex-column`}>
-          <a href={linkVariationUrl || checkoutUrl}>{MinicartIconButton}</a>
+          <a href={linkVariationUrl || checkoutUrl}>
+            <MinicartIconButton quantityDisplay={quantityDisplay} />
+          </a>
         </div>
       </aside>
     )
@@ -42,11 +45,12 @@ const Minicart: FC<MinicartProps> = ({
           <DrawerMode
             maxDrawerWidth={maxDrawerWidth}
             drawerSlideDirection={drawerSlideDirection}
+            quantityDisplay={quantityDisplay}
           >
             {children}
           </DrawerMode>
         ) : (
-          <PopupMode>{children}</PopupMode>
+          <PopupMode quantityDisplay={quantityDisplay}>{children}</PopupMode>
         )}
       </div>
     </aside>
