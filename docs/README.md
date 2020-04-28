@@ -117,7 +117,7 @@ By default implementation we mean that whenever you use `minicart.v2` in your st
 
 Therefore, in order to customize the Minicart configuration, you can simply copy the code above and change it as you wish.
 
-For further information on how to configure each of the blocks used to compose `minicart.v2`, check out [VTEX Checkout Summary](https://vtex.io/docs/app/checkout-summary) and [VTEX Product List](https://vtex.io/docs/product-list).
+For further information on how to configure each of the blocks used to compose `minicart.v2`, check out [Product List](https://vtex.io/docs/app/vtex.product-list) and [Checkout Summary](https://vtex.io/docs/app/vtex.checkout-summary).
 
 ## Customization
 
