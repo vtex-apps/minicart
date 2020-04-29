@@ -1,12 +1,3 @@
-interface MinicartProps {
-  variation: MinicartVariationType
-  openOnHover: boolean
-  linkVariationUrl: string
-  maxDrawerWidth: number | string
-  drawerSlideDirection: SlideDirectionType
-  quantityDisplay: MinicartIconButtonType
-}
-
 type MinicartIconButtonType = 'always' | 'never' | 'not-empty'
 
 type SlideDirectionType =

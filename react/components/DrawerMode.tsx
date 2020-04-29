@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { useCssHandles } from 'vtex.css-handles'
-import { Drawer } from 'vtex.store-drawer'
+import { Drawer, BackdropMode } from 'vtex.store-drawer'
+import { MaybeResponsiveValue } from 'vtex.responsive-values'
 
 import MinicartIconButton from './MinicartIconButton'
 
@@ -11,18 +12,21 @@ interface Props {
   maxDrawerWidth: number | string
   drawerSlideDirection: SlideDirectionType
   quantityDisplay: 'always' | 'never' | 'not-empty'
+  backdropMode?: MaybeResponsiveValue<BackdropMode>
 }
 
 const DrawerMode: FC<Props> = ({
-  maxDrawerWidth,
-  drawerSlideDirection,
   children,
+  maxDrawerWidth,
   quantityDisplay,
+  drawerSlideDirection,
+  backdropMode = 'visible',
 }) => {
   const handles = useCssHandles(CSS_HANLDES)
   return (
     <Drawer
       maxWidth={maxDrawerWidth}
+      backdropMode={backdropMode}
       slideDirection={drawerSlideDirection}
       customIcon={<MinicartIconButton quantityDisplay={quantityDisplay} />}
     >

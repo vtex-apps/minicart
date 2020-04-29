@@ -1,7 +1,9 @@
 import React, { FC } from 'react'
 import { useCssHandles } from 'vtex.css-handles'
-import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
+import { BackdropMode } from 'vtex.store-drawer'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
+import { MaybeResponsiveValue } from 'vtex.responsive-values'
+import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 
 import MinicartIconButton from './components/MinicartIconButton'
 import DrawerMode from './components/DrawerMode'
@@ -11,12 +13,23 @@ import useCartIdPixel from './modules/useCartIdPixel'
 
 const CSS_HANDLES = ['minicartWrapperContainer', 'minicartContainer'] as const
 
+interface MinicartProps {
+  variation: MinicartVariationType
+  openOnHover: boolean
+  linkVariationUrl: string
+  maxDrawerWidth: number | string
+  drawerSlideDirection: SlideDirectionType
+  quantityDisplay: MinicartIconButtonType
+  backdropMode?: MaybeResponsiveValue<BackdropMode>
+}
+
 const Minicart: FC<MinicartProps> = ({
-  maxDrawerWidth = 400,
-  drawerSlideDirection = 'rightToLeft',
-  linkVariationUrl,
   children,
+  backdropMode,
+  linkVariationUrl,
+  maxDrawerWidth = 400,
   quantityDisplay = 'not-empty',
+  drawerSlideDirection = 'rightToLeft',
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
@@ -43,6 +56,7 @@ const Minicart: FC<MinicartProps> = ({
       <div className={`${handles.minicartContainer} flex flex-column`}>
         {variation === 'drawer' ? (
           <DrawerMode
+            backdropMode={backdropMode}
             maxDrawerWidth={maxDrawerWidth}
             drawerSlideDirection={drawerSlideDirection}
             quantityDisplay={quantityDisplay}
