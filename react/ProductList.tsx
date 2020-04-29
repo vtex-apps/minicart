@@ -9,11 +9,15 @@ import { mapCartItemToPixel } from './modules/pixelHelper'
 
 interface Props {
   renderAsChildren: boolean
+  ProductList: any
 }
 
 const CSS_HANDLES = ['minicartProductListContainer'] as const
 
-const ProductList: FC<Props> = ({ renderAsChildren }) => {
+const ProductList: FC<Props> = ({
+  renderAsChildren,
+  ProductList: ProductListSlot,
+}) => {
   const {
     orderForm: { items },
   } = useOrderForm()
@@ -59,12 +63,20 @@ const ProductList: FC<Props> = ({ renderAsChildren }) => {
         renderAsChildren ? 'w-100 h-100' : ''
       } overflow-y-auto ph4 ph6-l`}
     >
-      <ExtensionPoint
-        id="product-list"
-        items={items}
-        onQuantityChange={handleQuantityChange}
-        onRemove={handleRemove}
-      />
+      {ProductListSlot ? (
+        <ProductListSlot
+          items={items}
+          onQuantityChange={handleQuantityChange}
+          onRemove={handleRemove}
+        />
+      ) : (
+        <ExtensionPoint
+          id="product-list"
+          items={items}
+          onQuantityChange={handleQuantityChange}
+          onRemove={handleRemove}
+        />
+      )}
     </div>
   )
 }

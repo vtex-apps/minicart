@@ -9,24 +9,18 @@
   },
   "minicart-base-content": {
     "component": "BaseContent",
-    "allowed": [
-      "minicart-product-list",
-      "minicart-summary",
-      "minicart-empty-state"
-    ],
+    "allowed": ["minicart-product-list", "minicart-summary"],
     "composition": "children",
     "render": "lazy"
   },
   "minicart-product-list": {
-    "component": "ProductList",
-    "allowed": ["product-list"]
+    "component": "ProductList"
   },
   "minicart-checkout-button": {
     "component": "CheckoutButton"
   },
   "minicart-summary": {
     "component": "Summary",
-    "allowed": ["checkout-summary"],
     "render": "lazy"
   },
   "minicart-empty-state": {

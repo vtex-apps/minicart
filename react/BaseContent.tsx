@@ -20,6 +20,7 @@ import CheckoutButton from './CheckoutButton'
 interface Props {
   sideBarMode: boolean
   finishShoppingButtonLink: string
+  EmptyState: any
 }
 
 interface BlocksFromExtension {
@@ -46,7 +47,11 @@ const MinicartHeader: FC<{ minicartTitleHandle: string }> = memo(
   )
 )
 
-const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
+const Content: FC<Props> = ({
+  finishShoppingButtonLink,
+  children,
+  EmptyState,
+}) => {
   const { orderForm, loading }: OrderFormContext = useOrderForm()
   const push = useDebouncedPush()
   const handles = useCssHandles(CSS_HANDLES)
@@ -96,7 +101,11 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
     return (
       <Fragment>
         <MinicartHeader minicartTitleHandle={handles.minicartTitle} />
-        <ExtensionPoint id="minicart-empty-state" />
+        {EmptyState ? (
+          <EmptyState />
+        ) : (
+          <ExtensionPoint id="minicart-empty-state" />
+        )}
       </Fragment>
     )
   }
