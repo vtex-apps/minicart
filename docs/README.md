@@ -42,15 +42,15 @@ The VTEX Minicart is a block that displays a summary list of all items added by 
 
 :warning: **The Minicart v2 will only effectively function if the store uses the** [**Add To Cart Button**](https://vtex.io/docs/components/all/vtex.add-to-cart-button/add-to-cart-button) **instead of the** [**Buy Button**](https://vtex.io/docs/components/all/vtex.store-components/buy-button) in blocks such as the Shelf and the Product Details Page. This is because Minicart v2 was built based on an indirect dependency with the Add To Cart button. That means that any other shopping buttons, as the Buy Button, are unable to render Minicart v2, even if it was correctly configured in the code. `
 
-| Prop name              | Type      | Description                                                                                                                                                                                                                                     | Default value |
-| ---------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `variation`            | `Enum`    | Minicart behavior when rendered. The possible values are: `'popup'` (it pops up on the Homepage in a minitab window) , `'drawer'` (it is rendered through a side bar) or `'link'` (when clicked on, it redirects the user to the Checkout page) | `'drawer'`    |
-| `drawerSlideDirection` | `Enum`    | Slide direction for the `'drawer'` Minicart opening. (values: `'rightToLeft'` or `'leftToRight'`)                                                                                                                                               | `rightToLeft` |
-| `linkVariationUrl`     | `String`  | Link associated to the `'link'` Minicart.                                                                                                                                                                                                       |               |
-| `maxDrawerWidth`       | `Number`  | Maximum width (in pixels) for the `'sidebar'` Minicart when opened.                                                                                                                                                                             | `440`         |
-| `openOnHover`          | `Boolean` | Whether the `'popup'` minicart should open when the user hovers over it                                                                                                                                                                         | false         |
-| `quantityDisplay`      | `Enum`    | Shows the quantity badge even when the amount of products in the cart is zero  (values: `'always'` or `'not-empty'` or ` 'never'`)                                                                                                              | `'not-empty'` |
-| `backdropMode` | `'default'`&#124;`'none'` | Controls if it should display the backdrop when the Minicart is open (only works if `variation = 'drawer'`) |
+| Prop name              | Type                      | Description                                                                                                                                                                                                                                     | Default value |
+| ---------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `variation`            | `Enum`                    | Minicart behavior when rendered. The possible values are: `'popup'` (it pops up on the Homepage in a minitab window) , `'drawer'` (it is rendered through a side bar) or `'link'` (when clicked on, it redirects the user to the Checkout page) | `'drawer'`    |
+| `drawerSlideDirection` | `Enum`                    | Slide direction for the `'drawer'` Minicart opening. (values: `'rightToLeft'` or `'leftToRight'`)                                                                                                                                               | `rightToLeft` |
+| `linkVariationUrl`     | `String`                  | Link associated to the `'link'` Minicart.                                                                                                                                                                                                       |               |
+| `maxDrawerWidth`       | `Number`                  | Maximum width (in pixels) for the `'sidebar'` Minicart when opened.                                                                                                                                                                             | `440`         |
+| `openOnHover`          | `Boolean`                 | Whether the `'popup'` minicart should open when the user hovers over it                                                                                                                                                                         | false         |
+| `quantityDisplay`      | `Enum`                    | Shows the quantity badge even when the amount of products in the cart is zero (values: `'always'` or `'not-empty'` or `'never'`)                                                                                                                | `'not-empty'` |
+| `backdropMode`         | `'default'`&#124;`'none'` | Controls if it should display the backdrop when the Minicart is open (only works if `variation = 'drawer'`)                                                                                                                                     |
 
 ### Advanced Configuration
 
@@ -104,12 +104,7 @@ According to the `minicart.v2` composition, it can be highly customizable using 
     "children": ["flex-layout.col#empty-state"]
   },
   "flex-layout.col#empty-state": {
-    "children": ["rich-text#empty-state"]
-  },
-  "rich-text#empty-state": {
-    "props": {
-      "text": "Your cart is empty!"
-    }
+    "children": ["minicart-empty-state-message"]
   }
 }
 ```
@@ -140,6 +135,8 @@ In order to apply CSS customizations in this and other blocks, follow the instru
 | `popupChildrenContainer`        |
 | `popupContentContainer`         |
 | `popupWrapper`                  |
+| `emptyStateIconWrapper`         |
+| `emptyStateMessage`             |
 
 ## Contributors
 
@@ -157,6 +154,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
