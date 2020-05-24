@@ -45,11 +45,6 @@
     "children": ["flex-layout.col#empty-state"]
   },
   "flex-layout.col#empty-state": {
-    "children": ["rich-text#empty-state"]
-  },
-  "rich-text#empty-state": {
-    "props": {
-      "text": "Your cart is empty!"
-    }
+    "children": ["minicart-empty-state-message"]
   }
 }
