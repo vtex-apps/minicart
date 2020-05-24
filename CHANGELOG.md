@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- `minicart-empty-state-message` block to serve as the default `minicart.v2` empty-state.
+- `emptyStateIconWrapper` and `emptyStateMessage` CSS handles.
 
 ## [2.47.0] - 2020-06-02
 ### Added
