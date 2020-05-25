@@ -52,7 +52,7 @@
     "props": {
       "horizontalAlign": "center",
       "verticalAlign": "middle",
-      "rowGap": 7
+      "rowGap": 5
     }
   },
   "icon-cart#minicart-empty-state": {
