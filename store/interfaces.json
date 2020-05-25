@@ -33,8 +33,5 @@
     "component": "EmptyState",
     "composition": "children",
     "render": "lazy"
-  },
-  "minicart-empty-state-message": {
-    "component": "EmptyStateMessage"
   }
 }
