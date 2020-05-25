@@ -104,7 +104,26 @@ According to the `minicart.v2` composition, it can be highly customizable using 
     "children": ["flex-layout.col#empty-state"]
   },
   "flex-layout.col#empty-state": {
-    "children": ["minicart-empty-state-message"]
+    "children": [
+      "icon-cart#minicart-empty-state",
+      "rich-text#minicart-default-empty-state"
+    ],
+    "props": {
+      "horizontalAlign": "center",
+      "verticalAlign": "middle",
+      "rowGap": 5
+    }
+  },
+  "icon-cart#minicart-empty-state": {
+    "props": {
+      "size": 64,
+      "blockClass": "minicart-empty-state"
+    }
+  },
+  "rich-text#minicart-default-empty-state": {
+    "props": {
+      "text": "Your cart is empty."
+    }
   }
 }
 ```
@@ -135,8 +154,6 @@ In order to apply CSS customizations in this and other blocks, follow the instru
 | `popupChildrenContainer`        |
 | `popupContentContainer`         |
 | `popupWrapper`                  |
-| `emptyStateIconWrapper`         |
-| `emptyStateMessage`             |
 
 ## Contributors
 
