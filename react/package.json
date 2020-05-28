@@ -1,6 +1,6 @@
 {
   "name": "vtex.minicart",
-  "version": "2.46.1",
+  "version": "2.46.2",
   "description": "A MiniCart Component.",
   "scripts": {
     "pretest": "yarn",
