@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- Missing `rootPath` in `goToCheckout` function.
+
 ## [2.46.1] - 2020-05-04
 ### Fixed
 - Build failing to find entry point for `minicart` block.
