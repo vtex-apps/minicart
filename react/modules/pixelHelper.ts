@@ -5,6 +5,7 @@ export function mapCartItemToPixel(item: CartItem): PixelCartItem {
     price: item.sellingPrice,
     name: getNameWithoutVariant(item),
     quantity: item.quantity,
+    productId: item.productId,
     productRefId: item.productRefId,
     brand: item.additionalInfo ? item.additionalInfo.brandName : '',
     category: productCategory(item),
@@ -27,6 +28,7 @@ export function mapBuyButtonItemToPixel(item: BuyButtonItem): PixelCartItem {
     price: item.sellingPrice,
     name: item.name,
     quantity: item.quantity,
+    productId: item.productId,
     productRefId: item.productRefId,
     brand: item.brand,
     category,
@@ -80,6 +82,7 @@ interface PixelCartItem {
   price: number
   name: string
   quantity: number
+  productId: string
   productRefId: string
   brand: string
   category: string
@@ -94,6 +97,7 @@ interface BuyButtonItem {
   sellingPrice: number
   name: string
   quantity: number
+  productId: string
   productRefId: string
   brand: string
   category: string
@@ -108,6 +112,7 @@ interface CartItem {
   sellingPrice: number
   name: string
   quantity: number
+  productId: string
   productRefId: string
   additionalInfo: {
     brandName: string
