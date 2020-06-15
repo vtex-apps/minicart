@@ -51,6 +51,7 @@ The VTEX Minicart is a block that displays a summary list of all items added by 
 | `openOnHover`          | `boolean`                 | Whether the `popup` minicart should open when the user hovers over it.                                                                                                                                                                       | `false`         |
 | `quantityDisplay`      | `enum`                    | Shows the quantity badge even when the amount of products in the cart is zero. Possible values are: `always` or `not-empty` or `never`).                                                                                                                | `not-empty` |
 | `backdropMode`         | `enum` | Controls whether the backdrop should be displayed when the `drawer` Minicart is opened or not. Possible values are: `visible` (rendering the backdrop) or `none` (rendering the `drawer` without backdrop).  | `none` |                                    
+| `showTotalItemsQty`         | `boolean` | If this prop is true the total quantity of items will be displayed, while if the prop is false the quantity of different items will be displayed.  | `false` |                                    
 
 ### Advanced Configuration
 
