@@ -11,7 +11,7 @@ const CSS_HANDLES = ['minicartIconContainer', 'minicartQuantityBadge'] as const
 
 interface MinicartIconButtonProps {
   quantityDisplay: MinicartIconButtonType
-  showTotalItemsQty: boolean
+  showTotalItemsQty: MinicartTotalItemsType
 }
 
 const MinicartIconButton: FC<MinicartIconButtonProps> = ({
@@ -26,7 +26,7 @@ const MinicartIconButton: FC<MinicartIconButtonProps> = ({
   const totalItemsSum = (arr: Array<any>) =>
     arr.reduce((sum: number, product: any) => sum + product.quantity, 0)
   
-  const quantity = showTotalItemsQty ? totalItemsSum(orderForm.items) : orderForm.items.length
+  const quantity = showTotalItemsQty === 'total' ? totalItemsSum(orderForm.items) : orderForm.items.length
   const itemQuantity = loading ? 0 : quantity
 
   const handleClick = () => {

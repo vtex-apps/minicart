@@ -11,8 +11,8 @@ const CSS_HANLDES = ['minicartSideBarContentWrapper']
 interface Props {
   maxDrawerWidth: number | string
   drawerSlideDirection: SlideDirectionType
-  quantityDisplay: 'always' | 'never' | 'not-empty'
-  showTotalItemsQty: boolean
+  quantityDisplay: MinicartIconButtonType
+  showTotalItemsQty: MinicartTotalItemsType
   backdropMode?: MaybeResponsiveValue<BackdropMode>
 }
 

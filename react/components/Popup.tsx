@@ -16,8 +16,8 @@ const CSS_HANDLES = [
 ]
 
 interface Props {
-  quantityDisplay: 'always' | 'never' | 'not-empty'
-  showTotalItemsQty: boolean
+  quantityDisplay: MinicartIconButtonType
+  showTotalItemsQty: MinicartTotalItemsType
 }
 
 const PopupMode: FC<Props> = ({ children, quantityDisplay, showTotalItemsQty }) => {
