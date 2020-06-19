@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- Added `showTotalItemsQty` prop in `minicart.v2`.
+- Added `itemCountMode` prop in `minicart.v2`.
 
 ## [2.48.0] - 2020-06-03
 ### Changed

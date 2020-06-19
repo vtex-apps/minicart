@@ -3,7 +3,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "lint": "eslint --ext js,jsx,ts,tsx .",
+    "lint": "eslint --ext ts,tsx .",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json}\""
   },
   "husky": {
