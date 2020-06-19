@@ -14,6 +14,9 @@ interface MinicartIconButtonProps {
   itemCountMode: MinicartTotalItemsType
 }
 
+const totalItemsSum = (arr: OrderFormItem[]) =>
+  arr.reduce((sum: number, product: OrderFormItem) => sum + product.quantity, 0)
+
 const MinicartIconButton: FC<MinicartIconButtonProps> = ({
   quantityDisplay,
   itemCountMode,
@@ -22,9 +25,6 @@ const MinicartIconButton: FC<MinicartIconButtonProps> = ({
   const handles = useCssHandles(CSS_HANDLES)
   const { open, openBehavior, openOnHoverProp } = useMinicartState()
   const dispatch = useMinicartDispatch()
-  const totalItemsSum = (arr: OrderFormItem[]) =>
-    arr.reduce((sum, product) => sum + product.quantity, 0)
-
   const quantity =
     itemCountMode === 'total'
       ? totalItemsSum(orderForm.items)
