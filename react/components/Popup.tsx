@@ -16,10 +16,11 @@ const CSS_HANDLES = [
 ]
 
 interface Props {
-  quantityDisplay: 'always' | 'never' | 'not-empty'
+  quantityDisplay: MinicartIconButtonType
+  itemCountMode: MinicartTotalItemsType
 }
 
-const PopupMode: FC<Props> = ({ children, quantityDisplay }) => {
+const PopupMode: FC<Props> = ({ children, quantityDisplay, itemCountMode }) => {
   const {
     open,
     hasBeenOpened,
@@ -41,7 +42,10 @@ const PopupMode: FC<Props> = ({ children, quantityDisplay }) => {
 
   return (
     <div onMouseLeave={openBehavior === 'hover' ? handleMouseLeave : undefined}>
-      <MinicartIconButton quantityDisplay={quantityDisplay} />
+      <MinicartIconButton
+        quantityDisplay={quantityDisplay}
+        itemCountMode={itemCountMode}
+      />
       {open && (
         <Overlay>
           {openBehavior === 'click' && (

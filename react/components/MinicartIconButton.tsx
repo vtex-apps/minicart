@@ -11,16 +11,25 @@ const CSS_HANDLES = ['minicartIconContainer', 'minicartQuantityBadge'] as const
 
 interface MinicartIconButtonProps {
   quantityDisplay: MinicartIconButtonType
+  itemCountMode: MinicartTotalItemsType
 }
+
+const totalItemsSum = (arr: OrderFormItem[]) =>
+  arr.reduce((sum: number, product: OrderFormItem) => sum + product.quantity, 0)
 
 const MinicartIconButton: FC<MinicartIconButtonProps> = ({
   quantityDisplay,
+  itemCountMode,
 }) => {
   const { orderForm, loading }: OrderFormContext = useOrderForm()
   const handles = useCssHandles(CSS_HANDLES)
   const { open, openBehavior, openOnHoverProp } = useMinicartState()
   const dispatch = useMinicartDispatch()
-  const itemQuantity = loading ? 0 : orderForm.items.length
+  const quantity =
+    itemCountMode === 'total'
+      ? totalItemsSum(orderForm.items)
+      : orderForm.items.length
+  const itemQuantity = loading ? 0 : quantity
 
   const handleClick = () => {
     if (openOnHoverProp) {
