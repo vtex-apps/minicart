@@ -9,6 +9,7 @@ const DRAWER_CLOSE_ICON_HEIGHT = 58
 const CSS_HANLDES = ['minicartSideBarContentWrapper']
 
 interface Props {
+  Icon: React.ComponentType
   maxDrawerWidth: number | string
   drawerSlideDirection: SlideDirectionType
   quantityDisplay: MinicartIconButtonType
@@ -17,6 +18,7 @@ interface Props {
 }
 
 const DrawerMode: FC<Props> = ({
+  Icon,
   children,
   maxDrawerWidth,
   quantityDisplay,
@@ -32,8 +34,9 @@ const DrawerMode: FC<Props> = ({
       slideDirection={drawerSlideDirection}
       customIcon={
         <MinicartIconButton
-          quantityDisplay={quantityDisplay}
+          Icon={Icon}
           itemCountMode={itemCountMode}
+          quantityDisplay={quantityDisplay}
         />
       }
     >

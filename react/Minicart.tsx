@@ -3,6 +3,7 @@ import { useCssHandles } from 'vtex.css-handles'
 import { BackdropMode } from 'vtex.store-drawer'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { MaybeResponsiveValue } from 'vtex.responsive-values'
+import { IconCart } from 'vtex.store-icons'
 import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 
 import MinicartIconButton from './components/MinicartIconButton'
@@ -18,6 +19,7 @@ interface MinicartProps {
   openOnHover: boolean
   linkVariationUrl: string
   maxDrawerWidth: number | string
+  MinicartIcon: React.ComponentType
   drawerSlideDirection: SlideDirectionType
   quantityDisplay: MinicartIconButtonType
   itemCountMode: MinicartTotalItemsType
@@ -29,6 +31,7 @@ const Minicart: FC<MinicartProps> = ({
   backdropMode,
   linkVariationUrl,
   maxDrawerWidth = 400,
+  MinicartIcon = IconCart,
   quantityDisplay = 'not-empty',
   itemCountMode = 'distinct',
   drawerSlideDirection = 'rightToLeft',
@@ -45,8 +48,9 @@ const Minicart: FC<MinicartProps> = ({
         <div className={`${handles.minicartContainer} flex flex-column`}>
           <a href={linkVariationUrl || checkoutUrl}>
             <MinicartIconButton
-              quantityDisplay={quantityDisplay}
+              Icon={MinicartIcon}
               itemCountMode={itemCountMode}
+              quantityDisplay={quantityDisplay}
             />
           </a>
         </div>
@@ -61,18 +65,20 @@ const Minicart: FC<MinicartProps> = ({
       <div className={`${handles.minicartContainer} flex flex-column`}>
         {variation === 'drawer' ? (
           <DrawerMode
+            Icon={MinicartIcon}
             backdropMode={backdropMode}
-            maxDrawerWidth={maxDrawerWidth}
-            drawerSlideDirection={drawerSlideDirection}
-            quantityDisplay={quantityDisplay}
             itemCountMode={itemCountMode}
+            maxDrawerWidth={maxDrawerWidth}
+            quantityDisplay={quantityDisplay}
+            drawerSlideDirection={drawerSlideDirection}
           >
             {children}
           </DrawerMode>
         ) : (
           <PopupMode
-            quantityDisplay={quantityDisplay}
+            Icon={MinicartIcon}
             itemCountMode={itemCountMode}
+            quantityDisplay={quantityDisplay}
           >
             {children}
           </PopupMode>
