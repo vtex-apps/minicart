@@ -15,7 +15,7 @@ const CSS_HANDLES = [
 
 interface Props {
   Icon: React.ComponentType
-  quantityDisplay: MinicartIconButtonType
+  quantityDisplay: QuantityDisplayType
   itemCountMode: MinicartTotalItemsType
 }
 const PopupMode: FC<Props> = props => {

@@ -10,7 +10,7 @@ const CSS_HANDLES = ['minicartIconContainer', 'minicartQuantityBadge'] as const
 
 interface Props {
   Icon: React.ComponentType
-  quantityDisplay: MinicartIconButtonType
+  quantityDisplay: QuantityDisplayType
   itemCountMode: MinicartTotalItemsType
 }
 

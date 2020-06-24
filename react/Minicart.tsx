@@ -21,7 +21,7 @@ interface MinicartProps {
   maxDrawerWidth: number | string
   MinicartIcon: React.ComponentType
   drawerSlideDirection: SlideDirectionType
-  quantityDisplay: MinicartIconButtonType
+  quantityDisplay: QuantityDisplayType
   itemCountMode: MinicartTotalItemsType
   backdropMode?: MaybeResponsiveValue<BackdropMode>
 }

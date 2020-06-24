@@ -12,7 +12,7 @@ interface Props {
   Icon: React.ComponentType
   maxDrawerWidth: number | string
   drawerSlideDirection: SlideDirectionType
-  quantityDisplay: MinicartIconButtonType
+  quantityDisplay: QuantityDisplayType
   itemCountMode: MinicartTotalItemsType
   backdropMode?: MaybeResponsiveValue<BackdropMode>
 }
