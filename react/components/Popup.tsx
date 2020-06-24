@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { FC } from 'react'
 import { Overlay } from 'vtex.react-portal'
 import { useCssHandles } from 'vtex.css-handles'
@@ -16,15 +14,16 @@ const CSS_HANDLES = [
 ]
 
 interface Props {
-  quantityDisplay: MinicartIconButtonType
+  Icon: React.ComponentType
+  quantityDisplay: QuantityDisplayType
   itemCountMode: MinicartTotalItemsType
 }
-
-const PopupMode: FC<Props> = ({ children, quantityDisplay, itemCountMode }) => {
+const PopupMode: FC<Props> = props => {
+  const { children, quantityDisplay, Icon, itemCountMode } = props
   const {
     open,
-    hasBeenOpened,
     openBehavior,
+    hasBeenOpened,
     openOnHoverProp,
   } = useMinicartState()
   const dispatch = useMinicartDispatch()
@@ -43,12 +42,14 @@ const PopupMode: FC<Props> = ({ children, quantityDisplay, itemCountMode }) => {
   return (
     <div onMouseLeave={openBehavior === 'hover' ? handleMouseLeave : undefined}>
       <MinicartIconButton
-        quantityDisplay={quantityDisplay}
+        Icon={Icon}
         itemCountMode={itemCountMode}
+        quantityDisplay={quantityDisplay}
       />
       {open && (
         <Overlay>
           {openBehavior === 'click' && (
+            // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
             <div
               className="fixed top-0 left-0 w-100 h-100"
               onClick={handleClick}

@@ -1,6 +1,5 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { ButtonWithIcon } from 'vtex.styleguide'
-import { IconCart } from 'vtex.store-icons'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { useCssHandles } from 'vtex.css-handles'
 
@@ -9,18 +8,17 @@ import styles from '../styles.css'
 
 const CSS_HANDLES = ['minicartIconContainer', 'minicartQuantityBadge'] as const
 
-interface MinicartIconButtonProps {
-  quantityDisplay: MinicartIconButtonType
+interface Props {
+  Icon: React.ComponentType
+  quantityDisplay: QuantityDisplayType
   itemCountMode: MinicartTotalItemsType
 }
 
 const totalItemsSum = (arr: OrderFormItem[]) =>
   arr.reduce((sum: number, product: OrderFormItem) => sum + product.quantity, 0)
 
-const MinicartIconButton: FC<MinicartIconButtonProps> = ({
-  quantityDisplay,
-  itemCountMode,
-}) => {
+const MinicartIconButton: React.FC<Props> = props => {
+  const { Icon, itemCountMode, quantityDisplay } = props
   const { orderForm, loading }: OrderFormContext = useOrderForm()
   const handles = useCssHandles(CSS_HANDLES)
   const { open, openBehavior, openOnHoverProp } = useMinicartState()
@@ -58,7 +56,7 @@ const MinicartIconButton: FC<MinicartIconButtonProps> = ({
     <ButtonWithIcon
       icon={
         <span className={`${handles.minicartIconContainer} gray relative`}>
-          <IconCart />
+          <Icon />
           {showQuantityBadge && (
             <span
               style={{ userSelect: 'none' }}

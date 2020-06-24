@@ -1,4 +1,4 @@
-type MinicartIconButtonType = 'always' | 'never' | 'not-empty'
+type QuantityDisplayType = 'always' | 'never' | 'not-empty'
 
 type MinicartTotalItemsType = 'total' | 'distinct'
 
