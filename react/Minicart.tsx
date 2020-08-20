@@ -15,14 +15,14 @@ import useCartIdPixel from './modules/useCartIdPixel'
 const CSS_HANDLES = ['minicartWrapperContainer', 'minicartContainer'] as const
 
 interface MinicartProps {
-  variation: MinicartVariationType
-  openOnHover: boolean
-  linkVariationUrl: string
-  maxDrawerWidth: number | string
-  MinicartIcon: React.ComponentType
-  drawerSlideDirection: SlideDirectionType
-  quantityDisplay: QuantityDisplayType
-  itemCountMode: MinicartTotalItemsType
+  variation?: MinicartVariationType
+  openOnHover?: boolean
+  linkVariationUrl?: string
+  maxDrawerWidth?: number | string
+  MinicartIcon?: React.ComponentType
+  drawerSlideDirection?: SlideDirectionType
+  quantityDisplay?: QuantityDisplayType
+  itemCountMode?: MinicartTotalItemsType
   backdropMode?: MaybeResponsiveValue<BackdropMode>
 }
 
@@ -46,7 +46,7 @@ const Minicart: FC<MinicartProps> = ({
         className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
       >
         <div className={`${handles.minicartContainer} flex flex-column`}>
-          <a href={linkVariationUrl || checkoutUrl}>
+          <a href={linkVariationUrl ?? checkoutUrl}>
             <MinicartIconButton
               Icon={MinicartIcon}
               itemCountMode={itemCountMode}

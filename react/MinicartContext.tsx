@@ -23,8 +23,8 @@ interface State {
 }
 
 interface Props {
-  openOnHover: boolean
-  variation: MinicartVariationType
+  openOnHover?: boolean
+  variation?: MinicartVariationType
 }
 
 type Action = OpenMinicartAction | CloseMinicartAction | SetOpenBehaviorAction
