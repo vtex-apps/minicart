@@ -27,6 +27,7 @@ const DrawerMode: FC<Props> = ({
   backdropMode = 'visible',
 }) => {
   const handles = useCssHandles(CSS_HANLDES)
+
   return (
     <Drawer
       maxWidth={maxDrawerWidth}

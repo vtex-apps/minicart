@@ -4,7 +4,9 @@ import debounce from 'debounce'
 
 export default function useDebouncedPush() {
   const { push } = usePixel()
-  const debouncedPush = useRef<(param: object) => void>(debounce(push, 600))
+  const debouncedPush = useRef<(param: Record<string, unknown>) => void>(
+    debounce(push, 600)
+  )
 
   return debouncedPush.current
 }

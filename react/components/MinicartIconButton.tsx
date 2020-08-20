@@ -27,6 +27,7 @@ const MinicartIconButton: React.FC<Props> = props => {
     itemCountMode === 'total'
       ? totalItemsSum(orderForm.items)
       : orderForm.items.length
+
   const itemQuantity = loading ? 0 : quantity
 
   const handleClick = () => {
@@ -36,15 +37,19 @@ const MinicartIconButton: React.FC<Props> = props => {
           type: 'SET_OPEN_BEHAVIOR',
           value: 'click',
         })
+
         return
       }
+
       dispatch({ type: 'CLOSE_MINICART' })
       dispatch({
         type: 'SET_OPEN_BEHAVIOR',
         value: 'hover',
       })
+
       return
     }
+
     dispatch({ type: open ? 'CLOSE_MINICART' : 'OPEN_MINICART' })
   }
 

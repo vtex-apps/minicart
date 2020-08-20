@@ -17,6 +17,7 @@ const ProductList: FC<Props> = ({ renderAsChildren }) => {
   const {
     orderForm: { items },
   } = useOrderForm()
+
   const { updateQuantity, removeItem } = useOrderItems()
   const { push } = usePixel()
   const handles = useCssHandles(CSS_HANDLES)
@@ -37,8 +38,10 @@ const ProductList: FC<Props> = ({ renderAsChildren }) => {
     })
     updateQuantity({ uniqueId, quantity })
   }
+
   const handleRemove = (uniqueId: string, item: OrderFormItem) => {
     const adjustedItem = mapCartItemToPixel(item)
+
     push({
       event: 'removeFromCart',
       items: [adjustedItem],

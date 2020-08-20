@@ -41,16 +41,19 @@ function minicartContextReducer(state: State, action: Action): State {
         open: true,
         hasBeenOpened: true,
       }
+
     case 'CLOSE_MINICART':
       return {
         ...state,
         open: false,
       }
+
     case 'SET_OPEN_BEHAVIOR':
       return {
         ...state,
         openBehavior: action.value,
       }
+
     default:
       return state
   }
@@ -87,11 +90,13 @@ const MinicartContextProvider: FC<Props> = ({
 
 function useMinicartState() {
   const context = useContext(MinicartStateContext)
+
   if (context === undefined) {
     throw new Error(
       'useMinicartState must be used within a MinicartContextProvider'
     )
   }
+
   return context
 }
 
@@ -103,6 +108,7 @@ function useMinicartDispatch() {
       'useMinicartDispatch must be used within a MinicartContextProvider'
     )
   }
+
   return context
 }
 

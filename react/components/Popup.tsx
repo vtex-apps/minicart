@@ -26,6 +26,7 @@ const PopupMode: FC<Props> = props => {
     hasBeenOpened,
     openOnHoverProp,
   } = useMinicartState()
+
   const dispatch = useMinicartDispatch()
   const handles = useCssHandles(CSS_HANDLES)
 
@@ -33,8 +34,10 @@ const PopupMode: FC<Props> = props => {
     if (openOnHoverProp) {
       dispatch({ type: 'SET_OPEN_BEHAVIOR', value: 'hover' })
     }
+
     dispatch({ type: 'CLOSE_MINICART' })
   }
+
   const handleMouseLeave = () => {
     dispatch({ type: 'CLOSE_MINICART' })
   }

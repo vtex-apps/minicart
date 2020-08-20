@@ -92,6 +92,7 @@ const CartIdPixel = () => {
   const { orderForm, loading }: OrderFormContext = useOrderForm()
 
   const orderFormId = !loading && orderForm ? orderForm.id : undefined
+
   useCartIdPixel(orderFormId)
 
   return null

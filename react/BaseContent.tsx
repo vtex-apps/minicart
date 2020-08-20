@@ -89,6 +89,7 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
       (block.extensionPointId === 'minicart-product-list' ||
         block.extensionPointId === 'minicart-summary')
   )
+
   const shouldRenderUsingBlocks =
     minicartBlocksFromUserImplementation.length === 2
 
