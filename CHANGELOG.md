@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - Exported types for TypeScript.
 
+### Security
+- Bump dependency versions.
+
 ## [2.50.0] - 2020-06-24
 ### Added
 - `MinicartIcon` prop to `minicart.v2`.
