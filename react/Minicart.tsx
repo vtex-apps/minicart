@@ -15,18 +15,18 @@ import useCartIdPixel from './modules/useCartIdPixel'
 const CSS_HANDLES = ['minicartWrapperContainer', 'minicartContainer'] as const
 
 interface MinicartProps {
-  variation?: MinicartVariationType
-  openOnHover?: boolean
-  linkVariationUrl?: string
-  maxDrawerWidth?: number | string
-  MinicartIcon?: React.ComponentType
-  drawerSlideDirection?: SlideDirectionType
-  quantityDisplay?: QuantityDisplayType
-  itemCountMode?: MinicartTotalItemsType
-  backdropMode?: MaybeResponsiveValue<BackdropMode>
+  variation: MinicartVariationType
+  openOnHover: boolean
+  linkVariationUrl: string
+  maxDrawerWidth: number | string
+  MinicartIcon: React.ComponentType
+  drawerSlideDirection: SlideDirectionType
+  quantityDisplay: QuantityDisplayType
+  itemCountMode: MinicartTotalItemsType
+  backdropMode: MaybeResponsiveValue<BackdropMode>
 }
 
-const Minicart: FC<MinicartProps> = ({
+const Minicart: FC<Partial<MinicartProps>> = ({
   children,
   backdropMode,
   linkVariationUrl,
@@ -98,7 +98,7 @@ const CartIdPixel = () => {
   return null
 }
 
-const EnhancedMinicart = (props: MinicartProps) => (
+const EnhancedMinicart = (props: Partial<MinicartProps>) => (
   <MinicartContextProvider
     variation={props.variation}
     openOnHover={props.openOnHover}
