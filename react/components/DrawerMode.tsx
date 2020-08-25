@@ -6,7 +6,7 @@ import { MaybeResponsiveValue } from 'vtex.responsive-values'
 import MinicartIconButton from './MinicartIconButton'
 
 const DRAWER_CLOSE_ICON_HEIGHT = 58
-const CSS_HANLDES = ['minicartSideBarContentWrapper']
+const CSS_HANDLES = ['minicartSideBarContentWrapper']
 
 interface Props {
   Icon: React.ComponentType
@@ -15,6 +15,7 @@ interface Props {
   quantityDisplay: QuantityDisplayType
   itemCountMode: MinicartTotalItemsType
   backdropMode?: MaybeResponsiveValue<BackdropMode>
+  customEventId?: string
 }
 
 const DrawerMode: FC<Props> = ({
@@ -25,13 +26,16 @@ const DrawerMode: FC<Props> = ({
   itemCountMode,
   drawerSlideDirection,
   backdropMode = 'visible',
+  customEventId,
 }) => {
-  const handles = useCssHandles(CSS_HANLDES)
+  const handles = useCssHandles(CSS_HANDLES)
+
   return (
     <Drawer
       maxWidth={maxDrawerWidth}
       backdropMode={backdropMode}
       slideDirection={drawerSlideDirection}
+      customEventId={customEventId}
       customIcon={
         <MinicartIconButton
           Icon={Icon}

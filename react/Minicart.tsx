@@ -23,10 +23,11 @@ interface MinicartProps {
   drawerSlideDirection: SlideDirectionType
   quantityDisplay: QuantityDisplayType
   itemCountMode: MinicartTotalItemsType
-  backdropMode?: MaybeResponsiveValue<BackdropMode>
+  backdropMode: MaybeResponsiveValue<BackdropMode>
+  customEventId: string
 }
 
-const Minicart: FC<MinicartProps> = ({
+const Minicart: FC<Partial<MinicartProps>> = ({
   children,
   backdropMode,
   linkVariationUrl,
@@ -35,6 +36,7 @@ const Minicart: FC<MinicartProps> = ({
   quantityDisplay = 'not-empty',
   itemCountMode = 'distinct',
   drawerSlideDirection = 'rightToLeft',
+  customEventId,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
@@ -46,7 +48,7 @@ const Minicart: FC<MinicartProps> = ({
         className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
       >
         <div className={`${handles.minicartContainer} flex flex-column`}>
-          <a href={linkVariationUrl || checkoutUrl}>
+          <a href={linkVariationUrl ?? checkoutUrl}>
             <MinicartIconButton
               Icon={MinicartIcon}
               itemCountMode={itemCountMode}
@@ -71,6 +73,7 @@ const Minicart: FC<MinicartProps> = ({
             maxDrawerWidth={maxDrawerWidth}
             quantityDisplay={quantityDisplay}
             drawerSlideDirection={drawerSlideDirection}
+            customEventId={customEventId}
           >
             {children}
           </DrawerMode>
@@ -92,6 +95,7 @@ const CartIdPixel = () => {
   const { orderForm, loading }: OrderFormContext = useOrderForm()
 
   const orderFormId = !loading && orderForm ? orderForm.id : undefined
+
   useCartIdPixel(orderFormId)
 
   return null
