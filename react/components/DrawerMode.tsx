@@ -15,7 +15,7 @@ interface Props {
   quantityDisplay: QuantityDisplayType
   itemCountMode: MinicartTotalItemsType
   backdropMode?: MaybeResponsiveValue<BackdropMode>
-  customEventId?: string
+  customPixelEventId?: string
 }
 
 const DrawerMode: FC<Props> = ({
@@ -26,7 +26,7 @@ const DrawerMode: FC<Props> = ({
   itemCountMode,
   drawerSlideDirection,
   backdropMode = 'visible',
-  customEventId,
+  customPixelEventId,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
 
@@ -35,7 +35,7 @@ const DrawerMode: FC<Props> = ({
       maxWidth={maxDrawerWidth}
       backdropMode={backdropMode}
       slideDirection={drawerSlideDirection}
-      customEventId={customEventId}
+      customPixelEventId={customPixelEventId}
       customIcon={
         <MinicartIconButton
           Icon={Icon}

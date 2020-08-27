@@ -24,7 +24,7 @@ interface MinicartProps {
   quantityDisplay: QuantityDisplayType
   itemCountMode: MinicartTotalItemsType
   backdropMode: MaybeResponsiveValue<BackdropMode>
-  customEventId: string
+  customPixelEventId: string
 }
 
 const Minicart: FC<Partial<MinicartProps>> = ({
@@ -36,7 +36,7 @@ const Minicart: FC<Partial<MinicartProps>> = ({
   quantityDisplay = 'not-empty',
   itemCountMode = 'distinct',
   drawerSlideDirection = 'rightToLeft',
-  customEventId,
+  customPixelEventId,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
@@ -73,7 +73,7 @@ const Minicart: FC<Partial<MinicartProps>> = ({
             maxDrawerWidth={maxDrawerWidth}
             quantityDisplay={quantityDisplay}
             drawerSlideDirection={drawerSlideDirection}
-            customEventId={customEventId}
+            customPixelEventId={customPixelEventId}
           >
             {children}
           </DrawerMode>
