@@ -53,7 +53,7 @@ The VTEX Minicart is a block that displays a summary list of all items added by 
 | `itemCountMode` | `enum` | Quantity badge behavior when displaying the number of total items added in Minicart. Possible values are: `total`  (quantity badge displays the number of items added to the cart) or `distinct` (quantity badge only displays the number of different products added to the cart). | `distinct` |
 | `backdropMode`         | `enum` | Controls whether the backdrop should be displayed when the `drawer` Minicart is opened or not. Possible values are: `visible` (rendering the backdrop) or `none` (rendering the `drawer` without backdrop).  | `none` |
 | `MinicartIcon` | `block` | Icon displayed in the Minicart button. This prop's value must match the name of the block responsible for rendering the desired icon. | `icon-cart` (from [Store Icons](https://vtex.io/docs/components/all/vtex.store-icons/) app) |
-| `customPixelEventId` | `string`                                                                   | Define the `id` of the event that will be listened to by the `minicart.v2` to open itself. | `undefined`    |
+| `customPixelEventId` | `string`   | Store event ID responsible for triggering the `minicart.v2` to automatically open itself on the interface. | `undefined`    |
 
 ### Advanced Configuration
 
