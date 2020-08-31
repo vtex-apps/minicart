@@ -82,6 +82,7 @@ const Minicart: FC<Partial<MinicartProps>> = ({
             Icon={MinicartIcon}
             itemCountMode={itemCountMode}
             quantityDisplay={quantityDisplay}
+            customPixelEventId={customPixelEventId}
           >
             {children}
           </PopupMode>
