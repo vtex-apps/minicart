@@ -5,6 +5,7 @@ import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { MaybeResponsiveValue } from 'vtex.responsive-values'
 import { IconCart } from 'vtex.store-icons'
 import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
+import { PixelData } from 'vtex.pixel-manager/react/PixelContext'
 
 import MinicartIconButton from './components/MinicartIconButton'
 import DrawerMode from './components/DrawerMode'
@@ -25,6 +26,7 @@ interface MinicartProps {
   itemCountMode: MinicartTotalItemsType
   backdropMode: MaybeResponsiveValue<BackdropMode>
   customPixelEventId: string
+  customPixelEventName: PixelData['event']
 }
 
 const Minicart: FC<Partial<MinicartProps>> = ({
@@ -37,6 +39,7 @@ const Minicart: FC<Partial<MinicartProps>> = ({
   itemCountMode = 'distinct',
   drawerSlideDirection = 'rightToLeft',
   customPixelEventId,
+  customPixelEventName,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
@@ -74,6 +77,7 @@ const Minicart: FC<Partial<MinicartProps>> = ({
             quantityDisplay={quantityDisplay}
             drawerSlideDirection={drawerSlideDirection}
             customPixelEventId={customPixelEventId}
+            customPixelEventName={customPixelEventName}
           >
             {children}
           </DrawerMode>
@@ -83,6 +87,7 @@ const Minicart: FC<Partial<MinicartProps>> = ({
             itemCountMode={itemCountMode}
             quantityDisplay={quantityDisplay}
             customPixelEventId={customPixelEventId}
+            customPixelEventName={customPixelEventName}
           >
             {children}
           </PopupMode>

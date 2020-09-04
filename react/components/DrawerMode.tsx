@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { useCssHandles } from 'vtex.css-handles'
 import { Drawer, BackdropMode } from 'vtex.store-drawer'
 import { MaybeResponsiveValue } from 'vtex.responsive-values'
+import { PixelData } from 'vtex.pixel-manager/react/PixelContext'
 
 import MinicartIconButton from './MinicartIconButton'
 
@@ -16,6 +17,7 @@ interface Props {
   itemCountMode: MinicartTotalItemsType
   backdropMode?: MaybeResponsiveValue<BackdropMode>
   customPixelEventId?: string
+  customPixelEventName?: PixelData['event']
 }
 
 const DrawerMode: FC<Props> = ({
@@ -27,6 +29,7 @@ const DrawerMode: FC<Props> = ({
   drawerSlideDirection,
   backdropMode = 'visible',
   customPixelEventId,
+  customPixelEventName,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
 
@@ -36,6 +39,7 @@ const DrawerMode: FC<Props> = ({
       backdropMode={backdropMode}
       slideDirection={drawerSlideDirection}
       customPixelEventId={customPixelEventId}
+      customPixelEventName={customPixelEventName}
       customIcon={
         <MinicartIconButton
           Icon={Icon}
