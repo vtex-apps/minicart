@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Memoize change and remove callbacks to avoid re-rendering product list items
+  unnecessarily.
 
 ## [2.51.0] - 2020-09-08
 ### Added

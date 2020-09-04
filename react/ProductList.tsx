@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { useOrderItems } from 'vtex.order-items/OrderItems'
 import { ExtensionPoint } from 'vtex.render-runtime'
@@ -21,30 +21,33 @@ const ProductList: FC<Props> = ({ renderAsChildren }) => {
   const { push } = usePixel()
   const handles = useCssHandles(CSS_HANDLES)
 
-  const handleQuantityChange = (
-    uniqueId: string,
-    quantity: number,
-    item: OrderFormItem
-  ) => {
-    const adjustedItem = {
-      ...mapCartItemToPixel(item),
-      quantity,
-    }
+  const handleQuantityChange = useCallback(
+    (uniqueId: string, quantity: number, item: OrderFormItem) => {
+      const adjustedItem = {
+        ...mapCartItemToPixel(item),
+        quantity,
+      }
 
-    push({
-      event: 'addToCart',
-      items: [adjustedItem],
-    })
-    updateQuantity({ uniqueId, quantity })
-  }
-  const handleRemove = (uniqueId: string, item: OrderFormItem) => {
-    const adjustedItem = mapCartItemToPixel(item)
-    push({
-      event: 'removeFromCart',
-      items: [adjustedItem],
-    })
-    removeItem({ uniqueId })
-  }
+      push({
+        event: 'addToCart',
+        items: [adjustedItem],
+      })
+      updateQuantity({ uniqueId, quantity })
+    },
+    [push, updateQuantity]
+  )
+
+  const handleRemove = useCallback(
+    (uniqueId: string, item: OrderFormItem) => {
+      const adjustedItem = mapCartItemToPixel(item)
+      push({
+        event: 'removeFromCart',
+        items: [adjustedItem],
+      })
+      removeItem({ uniqueId })
+    },
+    [push, removeItem]
+  )
 
   return (
     <div
