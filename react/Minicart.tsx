@@ -5,6 +5,7 @@ import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { MaybeResponsiveValue } from 'vtex.responsive-values'
 import { IconCart } from 'vtex.store-icons'
 import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
+import { PixelData } from 'vtex.pixel-manager/react/PixelContext'
 
 import MinicartIconButton from './components/MinicartIconButton'
 import DrawerMode from './components/DrawerMode'
@@ -23,10 +24,12 @@ interface MinicartProps {
   drawerSlideDirection: SlideDirectionType
   quantityDisplay: QuantityDisplayType
   itemCountMode: MinicartTotalItemsType
-  backdropMode?: MaybeResponsiveValue<BackdropMode>
+  backdropMode: MaybeResponsiveValue<BackdropMode>
+  customPixelEventId: string
+  customPixelEventName: PixelData['event']
 }
 
-const Minicart: FC<MinicartProps> = ({
+const Minicart: FC<Partial<MinicartProps>> = ({
   children,
   backdropMode,
   linkVariationUrl,
@@ -35,6 +38,8 @@ const Minicart: FC<MinicartProps> = ({
   quantityDisplay = 'not-empty',
   itemCountMode = 'distinct',
   drawerSlideDirection = 'rightToLeft',
+  customPixelEventId,
+  customPixelEventName,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const { variation } = useMinicartState()
@@ -46,7 +51,7 @@ const Minicart: FC<MinicartProps> = ({
         className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
       >
         <div className={`${handles.minicartContainer} flex flex-column`}>
-          <a href={linkVariationUrl || checkoutUrl}>
+          <a href={linkVariationUrl ?? checkoutUrl}>
             <MinicartIconButton
               Icon={MinicartIcon}
               itemCountMode={itemCountMode}
@@ -71,6 +76,8 @@ const Minicart: FC<MinicartProps> = ({
             maxDrawerWidth={maxDrawerWidth}
             quantityDisplay={quantityDisplay}
             drawerSlideDirection={drawerSlideDirection}
+            customPixelEventId={customPixelEventId}
+            customPixelEventName={customPixelEventName}
           >
             {children}
           </DrawerMode>
@@ -79,6 +86,8 @@ const Minicart: FC<MinicartProps> = ({
             Icon={MinicartIcon}
             itemCountMode={itemCountMode}
             quantityDisplay={quantityDisplay}
+            customPixelEventId={customPixelEventId}
+            customPixelEventName={customPixelEventName}
           >
             {children}
           </PopupMode>
@@ -92,6 +101,7 @@ const CartIdPixel = () => {
   const { orderForm, loading }: OrderFormContext = useOrderForm()
 
   const orderFormId = !loading && orderForm ? orderForm.id : undefined
+
   useCartIdPixel(orderFormId)
 
   return null

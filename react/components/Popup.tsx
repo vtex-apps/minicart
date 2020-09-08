@@ -1,6 +1,8 @@
 import React, { FC } from 'react'
 import { Overlay } from 'vtex.react-portal'
 import { useCssHandles } from 'vtex.css-handles'
+import { usePixelEventCallback } from 'vtex.pixel-manager'
+import { PixelData } from 'vtex.pixel-manager/react/PixelContext'
 
 import { useMinicartState, useMinicartDispatch } from '../MinicartContext'
 import MinicartIconButton from './MinicartIconButton'
@@ -17,24 +19,46 @@ interface Props {
   Icon: React.ComponentType
   quantityDisplay: QuantityDisplayType
   itemCountMode: MinicartTotalItemsType
+  customPixelEventId?: string
+  customPixelEventName?: PixelData['event']
 }
+
 const PopupMode: FC<Props> = props => {
-  const { children, quantityDisplay, Icon, itemCountMode } = props
+  const {
+    children,
+    quantityDisplay,
+    Icon,
+    itemCountMode,
+    customPixelEventId,
+    customPixelEventName,
+  } = props
+
   const {
     open,
     openBehavior,
     hasBeenOpened,
     openOnHoverProp,
   } = useMinicartState()
+
   const dispatch = useMinicartDispatch()
   const handles = useCssHandles(CSS_HANDLES)
+
+  usePixelEventCallback({
+    eventId: customPixelEventId,
+    eventName: customPixelEventName,
+    handler: () => {
+      dispatch({ type: 'OPEN_MINICART' })
+    },
+  })
 
   const handleClick = () => {
     if (openOnHoverProp) {
       dispatch({ type: 'SET_OPEN_BEHAVIOR', value: 'hover' })
     }
+
     dispatch({ type: 'CLOSE_MINICART' })
   }
+
   const handleMouseLeave = () => {
     dispatch({ type: 'CLOSE_MINICART' })
   }
