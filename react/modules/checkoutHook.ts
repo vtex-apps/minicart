@@ -3,7 +3,7 @@ import { useRuntime } from 'vtex.render-runtime'
 
 export default function useCheckout() {
   const { url: checkoutUrl, major } = useCheckoutURL()
-  const { navigate  } = useRuntime()
+  const { navigate } = useRuntime()
 
   const goToCheckout = (url: string) => {
     if (major > 0 && url === checkoutUrl) {
