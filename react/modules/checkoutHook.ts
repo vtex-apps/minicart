@@ -7,7 +7,7 @@ export default function useCheckout() {
 
   const goToCheckout = (url: string) => {
     if (major > 0 && url === checkoutUrl) {
-      navigate({ to: url })
+      navigate({ to: url, fallbackToWindowLocation: false })
     } else {
       navigate({ to: url, fallbackToWindowLocation: true })
     }
