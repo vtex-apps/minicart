@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "Miniostoskori",
+  "admin/editor.minicart.description": "Yksinkertainen miniostoskori, joka näyttää kaikki siihen lisätyt tuotteet",
+  "admin/editor.minicart.showDiscount.title": "Näytä säästetyn rahan määrä",
+  "admin/editor.minicart.iconLabel.title": "Kuvakkeen vieressä näkyvä teksti",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "Teksti, joka näkyy miniostoskorin ollessa tyhjä",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "Linkki, joka uudelleenohjaa, kun Siirry maksamaan -painiketta napsautetaan",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "Valmis-painikkeessa näkyvä teksti",
+  "admin/editor.minicart.showShippingCost.title": "Näytä toimituskulu alatunnisteen yläpuolella",
+  "admin/editor.minicart.type.title": "Miniostoskorin tyyppi",
+  "admin/editor.minicart.type.popup": "Ponnahdusikkuna",
+  "admin/editor.minicart.type.sidebar": "Sivupalkki",
+  "store/finish-shopping-button-label": "Siirry kassalle",
+  "store/minicart-empty": "Ostoskorisi on tyhjä!",
+  "store/sidebar-title": "Oma miniostoskorini",
+  "store/minicart-content-footer-discount": "Tallenna",
+  "store/minicart.error-removal": "Tuotteen poistaminen epäonnistui, yritä uudelleen",
+  "store/minicart.shipping-cost": "Toimituskulu yhteensä",
+  "store/minicart.checkout-failure": "Jotain meni vikaan. Yritä uudelleen.",
+  "store/minicart.go-to-checkout": "Siirry kassalle",
+  "store/minicart.empty-state": "Ostoskorisi on tyhjä.",
+  "store/minicart.title": "Ostoskori"
+}

@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "Мини количка",
+  "admin/editor.minicart.description": "Проста мини количка, която показва всички добавени в нея продукти",
+  "admin/editor.minicart.showDiscount.title": "Показва сумата спестени пари",
+  "admin/editor.minicart.iconLabel.title": "Текст, който се появява до иконата",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "Текст, който се появява ако мини количката е празна",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "Линк за пренасочване при натискане на бутона Преминаване към финализиране",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "Текст, който се появява в бутона за завършване на покупката",
+  "admin/editor.minicart.showShippingCost.title": "Показване на цената за доставка над долния колонтитул",
+  "admin/editor.minicart.type.title": "Вид на мини количката",
+  "admin/editor.minicart.type.popup": "Изскачащ",
+  "admin/editor.minicart.type.sidebar": "Странична лента",
+  "store/finish-shopping-button-label": "Преминаване към финализиране",
+  "store/minicart-empty": "Вашата количка е празна!",
+  "store/sidebar-title": "Моята мини количка",
+  "store/minicart-content-footer-discount": "Запазване",
+  "store/minicart.error-removal": "Неуспешно отстраняване на елемента. Моля, опитайте отново",
+  "store/minicart.shipping-cost": "Обща стойност на доставката",
+  "store/minicart.checkout-failure": "Нещо се обърка, моля, опитайте отново.",
+  "store/minicart.go-to-checkout": "Преминаване към финализиране",
+  "store/minicart.empty-state": "Вашата количка е празна.",
+  "store/minicart.title": "Количка"
+}

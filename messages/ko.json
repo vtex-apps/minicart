@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "미니 카트",
+  "admin/editor.minicart.description": "추가된 모든 제품을 보여주는 간단한 미니 카트",
+  "admin/editor.minicart.showDiscount.title": "저축 금액 표시",
+  "admin/editor.minicart.iconLabel.title": "아이콘 옆에 표시할 텍스트",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "미니 카트가 비어있을 때 표시되는 텍스트",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "결제 화면으로 가기 버튼을 클릭한 후 리디렉션할 링크",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "쇼핑 완료 버튼에 표시할 텍스트",
+  "admin/editor.minicart.showShippingCost.title": "푸터 위에 배송비 표시",
+  "admin/editor.minicart.type.title": "미니 카트 유형",
+  "admin/editor.minicart.type.popup": "팝업",
+  "admin/editor.minicart.type.sidebar": "사이드바",
+  "store/finish-shopping-button-label": "결제 화면으로 가기",
+  "store/minicart-empty": "장바구니가 비어 있습니다!",
+  "store/sidebar-title": "내 미니 카트",
+  "store/minicart-content-footer-discount": "저장",
+  "store/minicart.error-removal": "항목을 제거하지 못했습니다, 다시 시도하십시오",
+  "store/minicart.shipping-cost": "총 배송비",
+  "store/minicart.checkout-failure": "문제가 발생했습니다. 나중에 다시 시도하십시오.",
+  "store/minicart.go-to-checkout": "결제 화면으로 가기",
+  "store/minicart.empty-state": "장바구니가 비어 있습니다.",
+  "store/minicart.title": "장바구니"
+}
