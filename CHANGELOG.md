@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- Italian translation.
+- Translations for `bg`, `ca`, `da`, `de`, `el`, `fi`, `fr`, `it`, `ko`, `nl`, `pl`, `ru`, `sk`, `sl`, `sv`, and `uk`.
 
 ## [2.51.2] - 2020-10-01
 ### Fixed
