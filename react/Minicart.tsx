@@ -45,12 +45,10 @@ const Minicart: FC<Partial<MinicartProps>> = ({
   const { variation } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
 
-  if (variation === 'link') {
-    return (
-      <aside
-        className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
-      >
-        <div className={`${handles.minicartContainer} flex flex-column`}>
+  const getMinicartVariation = () => {
+    switch (variation) {
+      case 'link':
+        return (
           <a href={linkVariationUrl ?? checkoutUrl}>
             <MinicartIconButton
               Icon={MinicartIcon}
@@ -58,17 +56,10 @@ const Minicart: FC<Partial<MinicartProps>> = ({
               quantityDisplay={quantityDisplay}
             />
           </a>
-        </div>
-      </aside>
-    )
-  }
+        )
 
-  return (
-    <aside
-      className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
-    >
-      <div className={`${handles.minicartContainer} flex flex-column`}>
-        {variation === 'drawer' ? (
+      case 'drawer':
+        return (
           <DrawerMode
             Icon={MinicartIcon}
             backdropMode={backdropMode}
@@ -81,7 +72,13 @@ const Minicart: FC<Partial<MinicartProps>> = ({
           >
             {children}
           </DrawerMode>
-        ) : (
+        )
+
+      case 'alwaysOpen':
+        return children
+
+      default:
+        return (
           <PopupMode
             Icon={MinicartIcon}
             itemCountMode={itemCountMode}
@@ -91,7 +88,16 @@ const Minicart: FC<Partial<MinicartProps>> = ({
           >
             {children}
           </PopupMode>
-        )}
+        )
+    }
+  }
+
+  return (
+    <aside
+      className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
+    >
+      <div className={`${handles.minicartContainer} flex flex-column`}>
+        {getMinicartVariation()}
       </div>
     </aside>
   )
