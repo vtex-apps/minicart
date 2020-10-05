@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "Мини-корзина",
+  "admin/editor.minicart.description": "Простая мини-корзина, в которой показаны все товары",
+  "admin/editor.minicart.showDiscount.title": "Показать количество сэкономленных денег",
+  "admin/editor.minicart.iconLabel.title": "Текст, который появляется рядом со значком",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "Текст, который появляется, когда мини-корзина пуста",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "Ссылка для переадресации после нажатия кнопки Перейти к оформлению заказа",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "Текст, который будет отображаться на кнопке завершения покупки",
+  "admin/editor.minicart.showShippingCost.title": "Показать стоимость доставки выше нижнего колонтитула",
+  "admin/editor.minicart.type.title": "Тип мини-корзины",
+  "admin/editor.minicart.type.popup": "Всплывающее окно",
+  "admin/editor.minicart.type.sidebar": "Боковая панель",
+  "store/finish-shopping-button-label": "Перейти к оформлению заказа",
+  "store/minicart-empty": "Ваша корзина пуста!",
+  "store/sidebar-title": "Моя мини-корзина",
+  "store/minicart-content-footer-discount": "Сохранить",
+  "store/minicart.error-removal": "Не удалось удалить товар. Повторите попытку",
+  "store/minicart.shipping-cost": "Общая стоимость доставки",
+  "store/minicart.checkout-failure": "Что-то пошло не так. Пожалуйста, попробуйте еще раз.",
+  "store/minicart.go-to-checkout": "Перейти к оформлению заказа",
+  "store/minicart.empty-state": "Ваша корзина пуста.",
+  "store/minicart.title": "Корзина"
+}

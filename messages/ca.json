@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "Minicarretó",
+  "admin/editor.minicart.description": "Un minicarretó senzill en què es mostren tots els productes que hi heu afegit",
+  "admin/editor.minicart.showDiscount.title": "Mostra la quantitat de diners estalviats",
+  "admin/editor.minicart.iconLabel.title": "Text que es mostra al costat de la icona",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "Text que es mostra quan el minicarretó està buit",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "Enllaç de redirecció després de fer clic al botó Ves a la caixa",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "Text que es mostra al botó per finalitzar la compra",
+  "admin/editor.minicart.showShippingCost.title": "Mostra el cost de l'enviament sobre el peu de pàgina",
+  "admin/editor.minicart.type.title": "Tipus de minicarretó",
+  "admin/editor.minicart.type.popup": "Emergent",
+  "admin/editor.minicart.type.sidebar": "Barra lateral",
+  "store/finish-shopping-button-label": "Ves a la caixa",
+  "store/minicart-empty": "El carretó és buit",
+  "store/sidebar-title": "El meu minicarretó",
+  "store/minicart-content-footer-discount": "Desa",
+  "store/minicart.error-removal": "No s'ha pogut suprimir l'element. Torneu-ho a provar.",
+  "store/minicart.shipping-cost": "Cost de l'enviament total",
+  "store/minicart.checkout-failure": "Alguna cosa no ha anat bé. Torneu-ho a provar.",
+  "store/minicart.go-to-checkout": "Ves a la caixa",
+  "store/minicart.empty-state": "El carretó és buit.",
+  "store/minicart.title": "Carretó"
+}

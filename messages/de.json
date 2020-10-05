@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "Mini-Wagen",
+  "admin/editor.minicart.description": "Ein einfacher Mini-Wagen, der alle hinzugefügten Produkte anzeigt",
+  "admin/editor.minicart.showDiscount.title": "Zeigen Sie die Menge des gesparten Geldes an",
+  "admin/editor.minicart.iconLabel.title": "Text, der neben dem Symbol erscheint",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "Text, der erscheint, wenn der Mini-Wagen leer ist",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "Link zur Weiterleitung nach Klicken auf die Schaltfläche Zur Kasse gehen",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "Text, der in der Schaltfläche Einkauf beenden erscheint",
+  "admin/editor.minicart.showShippingCost.title": "Die Versandkosten über der Fußzeile anzeigen",
+  "admin/editor.minicart.type.title": "Mini-Wagentyp",
+  "admin/editor.minicart.type.popup": "Pop Up",
+  "admin/editor.minicart.type.sidebar": "Seitenleiste",
+  "store/finish-shopping-button-label": "Zur Kasse gehen",
+  "store/minicart-empty": "Ihr Einkaufswagen ist leer!",
+  "store/sidebar-title": "Mein Mini-Wagen",
+  "store/minicart-content-footer-discount": "Speichern",
+  "store/minicart.error-removal": "Das Entfernen des Artikels ist fehlgeschlagen, bitte versuchen Sie es erneut",
+  "store/minicart.shipping-cost": "Gesamte Versandkosten",
+  "store/minicart.checkout-failure": "Etwas ist schief gelaufen, bitte versuchen Sie es später noch einmal.",
+  "store/minicart.go-to-checkout": "Zur Kasse gehen",
+  "store/minicart.empty-state": "Ihr Einkaufswagen ist leer.",
+  "store/minicart.title": "Einkaufswagen"
+}

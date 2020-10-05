@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "Μίνι Καλάθι",
+  "admin/editor.minicart.description": "Απλό μίνι καλάθι που δείχνει όλα τα προϊόντα που προστίθενται σε αυτό",
+  "admin/editor.minicart.showDiscount.title": "Προβολή της ποσότητας αποταμιευμένων χρημάτων",
+  "admin/editor.minicart.iconLabel.title": "Κείμενο που εμφανίζεται δίπλα στο εικονίδιο",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "Κείμενο που εμφανίζεται όταν το μίνι καλάθι είναι άδειο",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "Σύνδεσμος για ανακατεύθυνση αφού γίνει κλικ στο πλήκτρο Μετάβαση στην Ολοκλήρωση Αγοράς",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "Κείμενο που εμφανίζεται στο πλήκτρο ολοκλήρωσης των αγορών",
+  "admin/editor.minicart.showShippingCost.title": "Προβολή του κόστους αγορών πάνω από το υποσέλιδο",
+  "admin/editor.minicart.type.title": "Τύπος Μίνι Καλαθιού",
+  "admin/editor.minicart.type.popup": "Αναδυόμενο",
+  "admin/editor.minicart.type.sidebar": "Πλευρική γραμμή",
+  "store/finish-shopping-button-label": "Μεταβείτε στην ολοκλήρωση αγοράς",
+  "store/minicart-empty": "Το καλάθι σας είναι άδειο!",
+  "store/sidebar-title": "Το δικό μου μίνι καλάθι",
+  "store/minicart-content-footer-discount": "Αποθήκευση",
+  "store/minicart.error-removal": "Η αφαίρεση προϊόντος απέτυχε, δοκιμάστε ξανά",
+  "store/minicart.shipping-cost": "Συνολικό κόστος αποστολής",
+  "store/minicart.checkout-failure": "Κάτι πήγε στραβά. Δοκιμάστε ξανά.",
+  "store/minicart.go-to-checkout": "Μεταβείτε στην ολοκλήρωση αγοράς",
+  "store/minicart.empty-state": "Το καλάθι σας είναι άδειο.",
+  "store/minicart.title": "Καλάθι"
+}

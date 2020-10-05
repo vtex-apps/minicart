@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "Mini panier",
+  "admin/editor.minicart.description": "Un simple mini panier qui montre tous les produits qui y sont ajoutés",
+  "admin/editor.minicart.showDiscount.title": "Afficher le montant économisé",
+  "admin/editor.minicart.iconLabel.title": "Texte affiché à côté de l’icône",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "Texte affiché lorsque le mini chariot est vide",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "Lien de redirection après avoir cliqué sur le bouton Paiement",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "Texte affiché avec le bouton Terminer les achats",
+  "admin/editor.minicart.showShippingCost.title": "Afficher les frais d’expédition en bas de page",
+  "admin/editor.minicart.type.title": "Type Mini panier",
+  "admin/editor.minicart.type.popup": "Pop up",
+  "admin/editor.minicart.type.sidebar": "Barre latérale",
+  "store/finish-shopping-button-label": "Payer",
+  "store/minicart-empty": "Votre panier est vide !",
+  "store/sidebar-title": "Mon mini panier",
+  "store/minicart-content-footer-discount": "Enregistrer",
+  "store/minicart.error-removal": "Le retrait de l’article a échoué, veuillez réessayer",
+  "store/minicart.shipping-cost": "Total des frais de port",
+  "store/minicart.checkout-failure": "Tentative échouée. Veuillez réessayez.",
+  "store/minicart.go-to-checkout": "Payer",
+  "store/minicart.empty-state": "Votre panier est vide.",
+  "store/minicart.title": "Panier"
+}
