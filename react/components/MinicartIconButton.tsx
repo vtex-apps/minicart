@@ -43,7 +43,7 @@ const countModeHandle = (
   return options[countMode] ?? options.distinct
 }
 
-const MinicartIconButton: React.FC = (props: Props) => {
+const MinicartIconButton: React.FC<Props> = props => {
   const { Icon, itemCountMode, quantityDisplay } = props
   const { orderForm, loading }: OrderFormContext = useOrderForm()
   const handles = useCssHandles(CSS_HANDLES)
