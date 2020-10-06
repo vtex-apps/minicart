@@ -45,9 +45,7 @@ const Minicart: FC<Partial<MinicartProps>> = ({
   const { variation } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
 
-  console.log(variation);
-
-  if (variation === 'link') {    
+  if (variation === 'link') {
     return (
       <aside
         className={`${handles.minicartWrapperContainer} relative fr flex items-center`}

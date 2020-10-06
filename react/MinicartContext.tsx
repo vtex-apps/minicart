@@ -65,7 +65,8 @@ const MinicartContextProvider: FC<Props> = ({
 
   // This prevents a popup minicart from being used on a mobile device
   const resolvedVariation =
-    variation === 'popup' && (isMobile || (window && window.innerWidth <= 480)) ? 'drawer' : variation
+    variation === 'popup' && (isMobile || (window && window.innerWidth <= 480)) 
+      ? 'drawer' : variation
 
   const [state, dispatch] = useReducer(minicartContextReducer, {
     variation: resolvedVariation,
