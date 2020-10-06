@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.53.0] - 2020-10-06
+
 ### Fix
 - Mini cart not rendering variation link when in mobile version.
 
