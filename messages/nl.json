@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "Mini winkelwagen",
+  "admin/editor.minicart.description": "Een eenvoudige mini winkelwagen die alle producten laat zien die eraan zijn toegevoegd",
+  "admin/editor.minicart.showDiscount.title": "Toon de hoeveelheid gespaard geld",
+  "admin/editor.minicart.iconLabel.title": "Tekst die naast het pictogram moet verschijnen",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "Tekst die moet verschijnen als de mini cart leeg is",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "Link naar omleiding nadat u op de knop ga naar afrekenen hebt geklikt",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "Tekst die moet verschijnen in de knop winkelen voltooien",
+  "admin/editor.minicart.showShippingCost.title": "Toon de verzendkosten boven de voettekst",
+  "admin/editor.minicart.type.title": "Type mini winkelwagen",
+  "admin/editor.minicart.type.popup": "Popup",
+  "admin/editor.minicart.type.sidebar": "Sidebar",
+  "store/finish-shopping-button-label": "Ga naar de kassa",
+  "store/minicart-empty": "Uw winkelwagen is leeg!",
+  "store/sidebar-title": "Mijn mini winkelwagen",
+  "store/minicart-content-footer-discount": "Opslaan",
+  "store/minicart.error-removal": "Itemverwijdering is mislukt, probeer het opnieuw",
+  "store/minicart.shipping-cost": "Totale verzendkosten",
+  "store/minicart.checkout-failure": "Er is iets misgegaan. Probeer het nog eens.",
+  "store/minicart.go-to-checkout": "Ga naar de kassa",
+  "store/minicart.empty-state": "Uw winkelwagen is leeg.",
+  "store/minicart.title": "Winkelwagen"
+}

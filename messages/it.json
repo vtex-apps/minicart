@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "Mini Carrello",
+  "admin/editor.minicart.description": "Un semplice mini carrello che mostra tutti i prodotti aggiunti",
+  "admin/editor.minicart.showDiscount.title": "Mostra l'ammontare del denaro risparmiato",
+  "admin/editor.minicart.iconLabel.title": "Testo che appare accanto all'icona",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "Testo che appare quando il mini carrello è vuoto",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "Link per il reindirizzamento dopo aver cliccato il tasto Vai al Checkout",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "Testo da visualizzare sul tasto Termina l'acquisto",
+  "admin/editor.minicart.showShippingCost.title": "Mostra i costi di spedizione sopra al piè di pagina",
+  "admin/editor.minicart.type.title": "Tipo di Mini Carrello",
+  "admin/editor.minicart.type.popup": "Pop Up",
+  "admin/editor.minicart.type.sidebar": "Barra laterale",
+  "store/finish-shopping-button-label": "Vai alla cassa",
+  "store/minicart-empty": "Il tuo carrello è vuoto!",
+  "store/sidebar-title": "Il mio mini carrello",
+  "store/minicart-content-footer-discount": "Salvare",
+  "store/minicart.error-removal": "Rimozione dell'articolo non riuscita, si prega di riprovare",
+  "store/minicart.shipping-cost": "Costo totale della spedizione",
+  "store/minicart.checkout-failure": "Qualcosa è andato storto, si prega di riprovare.",
+  "store/minicart.go-to-checkout": "Vai alla cassa",
+  "store/minicart.empty-state": "Il tuo carrello è vuoto.",
+  "store/minicart.title": "Carrello"
+}

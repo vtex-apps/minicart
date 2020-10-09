@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.53.0] - 2020-10-06
+
+### Fix
+- Mini cart not rendering variation link when in mobile version.
+
+## [2.52.0] - 2020-10-05
+### Added
+- Translations for `bg`, `ca`, `da`, `de`, `el`, `fi`, `fr`, `it`, `ko`, `nl`, `pl`, `ru`, `sk`, `sl`, `sv`, and `uk`.
+
 ## [2.51.2] - 2020-10-01
 ### Fixed
 - Fix broken links in the app documentation

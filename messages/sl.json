@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "Mini košarica",
+  "admin/editor.minicart.description": "Enostavna mini košarica, ki kaže vse izdelke, ki ste jih dodali notri",
+  "admin/editor.minicart.showDiscount.title": "Kaže količino prihranjenega denarja",
+  "admin/editor.minicart.iconLabel.title": "Besedilo, ki se pokaže zraven ikone",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "Besedilo, ki se prikaže, ko je mini košarica prazna",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "Povezava za preusmeritev, ko kliknete na gumb Pojdi na plačilo",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "Besedilo, ki se prikaže v gumbu zaključi nakupovanje",
+  "admin/editor.minicart.showShippingCost.title": "Kaže stroške odpošiljanja nad nogo",
+  "admin/editor.minicart.type.title": "Vrsta mini košarice",
+  "admin/editor.minicart.type.popup": "Pojavno",
+  "admin/editor.minicart.type.sidebar": "Stranska vrstica",
+  "store/finish-shopping-button-label": "Pojdite na plačilo",
+  "store/minicart-empty": "Vaša košarica je prazna!",
+  "store/sidebar-title": "Moja mini košarica",
+  "store/minicart-content-footer-discount": "Shrani",
+  "store/minicart.error-removal": "Odstranjevanje izdelka ni uspelo, poskusite znova",
+  "store/minicart.shipping-cost": "Skupni stroški odpošiljanja",
+  "store/minicart.checkout-failure": "Nekaj je šlo narobe. Poskusite znova.",
+  "store/minicart.go-to-checkout": "Pojdite na plačilo",
+  "store/minicart.empty-state": "Vaša košarica je prazna.",
+  "store/minicart.title": "Košarica"
+}

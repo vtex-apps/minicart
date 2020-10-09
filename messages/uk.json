@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "Міні-кошик",
+  "admin/editor.minicart.description": "Невеличкий міні-кошик, який показує всі додані продукти",
+  "admin/editor.minicart.showDiscount.title": "Показує кількість зекономлених грошей",
+  "admin/editor.minicart.iconLabel.title": "Текст, який з’явиться поруч із піктограмою",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "Текст, який з’являється, коли міні-кошик порожній",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "Посилання для переадресації після натискання кнопки Перейти до оформлення замовлення",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "Текст, який відображатиметься у кнопці завершення покупки",
+  "admin/editor.minicart.showShippingCost.title": "Показати вартість доставки вище нижнього колонтитулу",
+  "admin/editor.minicart.type.title": "Тип міні-кошика",
+  "admin/editor.minicart.type.popup": "Спливаючий",
+  "admin/editor.minicart.type.sidebar": "Бічна панель",
+  "store/finish-shopping-button-label": "Перейти до оформлення замовлення",
+  "store/minicart-empty": "Ваш кошик порожній!",
+  "store/sidebar-title": "Мій міні-кошик",
+  "store/minicart-content-footer-discount": "Зберегти",
+  "store/minicart.error-removal": "Видалення елемента не відбулося. Повторіть спробу",
+  "store/minicart.shipping-cost": "Загальна вартість доставки",
+  "store/minicart.checkout-failure": "Щось пішло не так, будь ласка, спробуйте ще раз.",
+  "store/minicart.go-to-checkout": "Перейти до оформлення замовлення",
+  "store/minicart.empty-state": "Ваш кошик порожній.",
+  "store/minicart.title": "Кошик"
+}

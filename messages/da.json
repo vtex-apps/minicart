@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "Minikurv",
+  "admin/editor.minicart.description": "En simpel minikurv, der viser alle produkter, der er tilføjet",
+  "admin/editor.minicart.showDiscount.title": "Vis mængden af sparede penge",
+  "admin/editor.minicart.iconLabel.title": "Tekst der vises ved siden af ikonet",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "Tekst, der skal vises, når minikurven er tom",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "Link til omdirigering efter at have klikket på knappen Gå til kassen",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "Tekst, der skal vises på slutkøbsknappen",
+  "admin/editor.minicart.showShippingCost.title": "Vis forsendelsesomkostninger over sidefoden",
+  "admin/editor.minicart.type.title": "Minikurv type",
+  "admin/editor.minicart.type.popup": "Pop op",
+  "admin/editor.minicart.type.sidebar": "Sidebjælke",
+  "store/finish-shopping-button-label": "Gå til betaling",
+  "store/minicart-empty": "Din kurv er tom!",
+  "store/sidebar-title": "Min minikurv",
+  "store/minicart-content-footer-discount": "Gem",
+  "store/minicart.error-removal": "Kunne ikke fjerne vare, prøv venligst igen",
+  "store/minicart.shipping-cost": "Samlede forsendelsesomkostninger",
+  "store/minicart.checkout-failure": "Der gik noget galt, prøv venligst igen.",
+  "store/minicart.go-to-checkout": "Gå til betaling",
+  "store/minicart.empty-state": "Din kurv er tom.",
+  "store/minicart.title": "Kurv"
+}
