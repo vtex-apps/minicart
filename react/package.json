@@ -18,7 +18,7 @@
     "@vtex/tsconfig": "^0.4.4",
     "apollo-cache-inmemory": "^1.6.5",
     "babel-eslint": "^10.1.0",
-    "typescript": "3.8.3",
+    "typescript": "3.9.7",
     "vtex.checkout-resources": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-resources@0.33.0/public/@types/vtex.checkout-resources",
     "vtex.checkout-summary": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-summary@0.16.0/public/@types/vtex.checkout-summary",
     "vtex.css-handles": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@0.4.4/public/@types/vtex.css-handles",

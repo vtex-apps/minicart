@@ -18,29 +18,32 @@ const countModeHandle = (
   countMode: MinicartTotalItemsType,
   arr: OrderFormItem[]
 ) => {
-  const options = {
-    distinctAvailable: arr.reduce(
-      (itemQuantity: number, item: OrderFormItem) => {
-        if (item.availability === 'available') {
-          return ++itemQuantity
-        }
-        return itemQuantity
-      },
-      0
-    ),
-    totalAvailable: arr.reduce((itemQuantity: number, item: OrderFormItem) => {
+  if (countMode === 'distinctAvailable') {
+    return arr.reduce((itemQuantity: number, item: OrderFormItem) => {
+      if (item.availability === 'available') {
+        return itemQuantity + 1
+      }
+      return itemQuantity
+    }, 0)
+  }
+
+  if (countMode === 'totalAvailable') {
+    return arr.reduce((itemQuantity: number, item: OrderFormItem) => {
       if (item.availability === 'available') {
         return itemQuantity + item.quantity
       }
       return itemQuantity
-    }, 0),
-    total: arr.reduce((itemQuantity: number, item: OrderFormItem) => {
-      return itemQuantity + item.quantity
-    }, 0),
-    distinct: arr.length,
+    }, 0)
   }
 
-  return options[countMode] ?? options.distinct
+  if (countMode === 'total') {
+    return arr.reduce((itemQuantity: number, item: OrderFormItem) => {
+      return itemQuantity + item.quantity
+    }, 0)
+  }
+
+  // countMode === 'distinct'
+  return arr.length
 }
 
 const MinicartIconButton: React.FC<Props> = props => {
