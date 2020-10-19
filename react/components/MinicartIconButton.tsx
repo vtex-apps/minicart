@@ -14,7 +14,7 @@ interface Props {
   itemCountMode: MinicartTotalItemsType
 }
 
-const countModeHandle = (
+const countCartItems = (
   countMode: MinicartTotalItemsType,
   arr: OrderFormItem[]
 ) => {
@@ -52,7 +52,7 @@ const MinicartIconButton: React.FC<Props> = props => {
   const handles = useCssHandles(CSS_HANDLES)
   const { open, openBehavior, openOnHoverProp } = useMinicartState()
   const dispatch = useMinicartDispatch()
-  const quantity = countModeHandle(itemCountMode, orderForm.items)
+  const quantity = countCartItems(itemCountMode, orderForm.items)
   const itemQuantity = loading ? 0 : quantity
 
   const handleClick = () => {
