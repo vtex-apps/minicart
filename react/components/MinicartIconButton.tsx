@@ -14,8 +14,37 @@ interface Props {
   itemCountMode: MinicartTotalItemsType
 }
 
-const totalItemsSum = (arr: OrderFormItem[]) =>
-  arr.reduce((sum: number, product: OrderFormItem) => sum + product.quantity, 0)
+const countCartItems = (
+  countMode: MinicartTotalItemsType,
+  arr: OrderFormItem[]
+) => {
+  if (countMode === 'distinctAvailable') {
+    return arr.reduce((itemQuantity: number, item: OrderFormItem) => {
+      if (item.availability === 'available') {
+        return itemQuantity + 1
+      }
+      return itemQuantity
+    }, 0)
+  }
+
+  if (countMode === 'totalAvailable') {
+    return arr.reduce((itemQuantity: number, item: OrderFormItem) => {
+      if (item.availability === 'available') {
+        return itemQuantity + item.quantity
+      }
+      return itemQuantity
+    }, 0)
+  }
+
+  if (countMode === 'total') {
+    return arr.reduce((itemQuantity: number, item: OrderFormItem) => {
+      return itemQuantity + item.quantity
+    }, 0)
+  }
+
+  // countMode === 'distinct'
+  return arr.length
+}
 
 const MinicartIconButton: React.FC<Props> = props => {
   const { Icon, itemCountMode, quantityDisplay } = props
@@ -23,11 +52,7 @@ const MinicartIconButton: React.FC<Props> = props => {
   const handles = useCssHandles(CSS_HANDLES)
   const { open, openBehavior, openOnHoverProp } = useMinicartState()
   const dispatch = useMinicartDispatch()
-  const quantity =
-    itemCountMode === 'total'
-      ? totalItemsSum(orderForm.items)
-      : orderForm.items.length
-
+  const quantity = countCartItems(itemCountMode, orderForm.items)
   const itemQuantity = loading ? 0 : quantity
 
   const handleClick = () => {

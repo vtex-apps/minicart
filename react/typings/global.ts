@@ -1,6 +1,10 @@
 type QuantityDisplayType = 'always' | 'never' | 'not-empty'
 
-type MinicartTotalItemsType = 'total' | 'distinct'
+type MinicartTotalItemsType =
+  | 'total'
+  | 'distinct'
+  | 'totalAvailable'
+  | 'distinctAvailable'
 
 type SlideDirectionType =
   | 'horizontal'
