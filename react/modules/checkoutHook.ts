@@ -3,13 +3,13 @@ import { useRuntime } from 'vtex.render-runtime'
 
 export default function useCheckout() {
   const { url: checkoutUrl, major } = useCheckoutURL()
-  const { navigate } = useRuntime()
+  const { navigate, rootPath = '' } = useRuntime()
 
   const goToCheckout = (url: string) => {
     if (major > 0 && url === checkoutUrl) {
-      navigate({ to: url, fallbackToWindowLocation: false })
+      navigate({ to: url })
     } else {
-      navigate({ to: url, fallbackToWindowLocation: true })
+      window.location.href = `${rootPath}${url}`
     }
   }
 

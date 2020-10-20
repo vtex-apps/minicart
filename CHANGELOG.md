@@ -7,10 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [2.54.0] - 2020-10-20
 ### Added
 - `totalAvailable` and `distinctAvailable` values for `itemCountMode`.
 
+## [2.54.0] - 2020-10-20 [YANKED]
+### Added
+- `totalAvailable` and `distinctAvailable` values for `itemCountMode`.
 
 ### Fixed
 - Use navigate when redirecting to checkout
