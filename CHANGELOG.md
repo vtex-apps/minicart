@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+- Use navigate when redirecting to checkout
+
 ## [2.54.1] - 2020-10-20
 
 ### Added
