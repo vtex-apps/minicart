@@ -4,7 +4,7 @@ import { useOrderForm } from 'vtex.order-manager/OrderForm'
 
 const Summary: FC = () => {
   const {
-    orderForm: { totalizers, value },
+    orderForm: { totalizers, value, paymentData },
   } = useOrderForm()
 
   return (
@@ -12,6 +12,7 @@ const Summary: FC = () => {
       <ExtensionPoint
         id="checkout-summary"
         totalizers={totalizers}
+        paymentData={paymentData}
         total={value}
       />
     </div>
