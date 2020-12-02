@@ -23,6 +23,7 @@ interface OrderFormItem {
   productCategoryIds: string
   productRefId: string
   refId: string
+  parentItemIndex: number | null
 }
 
 interface ItemAdditionalInfo {
