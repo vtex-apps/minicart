@@ -5,10 +5,6 @@ type MinicartTotalItemsType =
   | 'distinct'
   | 'totalAvailable'
   | 'distinctAvailable'
-  | 'totalWithoutAssemblies'
-  | 'distinctWithoutAssemblies'
-  | 'totalWithoutAssembliesAvailable'
-  | 'distinctWithoutAssembliesAvailable'
 
 type SlideDirectionType =
   | 'horizontal'
