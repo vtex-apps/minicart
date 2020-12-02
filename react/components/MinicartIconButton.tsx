@@ -18,15 +18,10 @@ const countCartItems = (
   countMode: MinicartTotalItemsType,
   arr: OrderFormItem[]
 ) => {
-  if (countMode.indexOf('WithoutAssemblies') !== -1) {
-    // Filter only main products - there is some items with '0' on parentItemIndex
-    arr = arr.filter(item => item.parentItemIndex === null)
-  }
+  // Filter only main products - there is some items with '0' on parentItemIndex
+  arr = arr.filter(item => item.parentItemIndex === null)
 
-  if (
-    countMode === 'distinctAvailable' ||
-    countMode === 'distinctWithoutAssembliesAvailable'
-  ) {
+  if (countMode === 'distinctAvailable') {
     return arr.reduce((itemQuantity: number, item) => {
       if (item.availability === 'available') {
         return itemQuantity + 1
@@ -35,10 +30,7 @@ const countCartItems = (
     }, 0)
   }
 
-  if (
-    countMode === 'totalAvailable' ||
-    countMode === 'totalWithoutAssembliesAvailable'
-  ) {
+  if (countMode === 'totalAvailable') {
     return arr.reduce((itemQuantity: number, item) => {
       if (item.availability === 'available') {
         return itemQuantity + item.quantity
@@ -47,13 +39,13 @@ const countCartItems = (
     }, 0)
   }
 
-  if (countMode === 'total' || countMode === 'totalWithoutAssemblies') {
+  if (countMode === 'total') {
     return arr.reduce((itemQuantity: number, item) => {
       return itemQuantity + item.quantity
     }, 0)
   }
 
-  // countMode === 'distinct' || countMode === 'distinctWithoutAssemblies'
+  // countMode === 'distinct'
   return arr.length
 }
 
