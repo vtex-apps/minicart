@@ -16,10 +16,13 @@ interface Props {
 
 const countCartItems = (
   countMode: MinicartTotalItemsType,
-  arr: OrderFormItem[]
+  allItems: OrderFormItem[]
 ) => {
+  // Filter only main products, remove assembly items from the count
+  const items = allItems.filter(item => item.parentItemIndex === null)
+
   if (countMode === 'distinctAvailable') {
-    return arr.reduce((itemQuantity: number, item: OrderFormItem) => {
+    return items.reduce((itemQuantity: number, item) => {
       if (item.availability === 'available') {
         return itemQuantity + 1
       }
@@ -28,7 +31,7 @@ const countCartItems = (
   }
 
   if (countMode === 'totalAvailable') {
-    return arr.reduce((itemQuantity: number, item: OrderFormItem) => {
+    return items.reduce((itemQuantity: number, item) => {
       if (item.availability === 'available') {
         return itemQuantity + item.quantity
       }
@@ -37,13 +40,13 @@ const countCartItems = (
   }
 
   if (countMode === 'total') {
-    return arr.reduce((itemQuantity: number, item: OrderFormItem) => {
+    return items.reduce((itemQuantity: number, item) => {
       return itemQuantity + item.quantity
     }, 0)
   }
 
   // countMode === 'distinct'
-  return arr.length
+  return items.length
 }
 
 const MinicartIconButton: React.FC<Props> = props => {
