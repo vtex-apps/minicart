@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- `classes` prop to all exported components.
+
+### Changed
+- `vtex.css-handles` dependency is now on major `1.x`.
 
 ## [2.55.0] - 2020-12-17
 
