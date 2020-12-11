@@ -1,10 +1,14 @@
 import React, { FC } from 'react'
-import { useCssHandles } from 'vtex.css-handles'
+import { useCssHandles, CssHandlesTypes } from 'vtex.css-handles'
 
 const CSS_HANDLES = ['minicartEmptyStateContainer'] as const
 
-const EmptyState: FC = ({ children }) => {
-  const handles = useCssHandles(CSS_HANDLES)
+interface Props {
+  classes?: CssHandlesTypes.CustomClasses<typeof CSS_HANDLES>
+}
+
+const EmptyState: FC<Props> = ({ classes, children }) => {
+  const { handles } = useCssHandles(CSS_HANDLES, { classes })
 
   return (
     <div

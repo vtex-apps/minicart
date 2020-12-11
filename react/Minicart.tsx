@@ -1,17 +1,17 @@
 import React, { FC } from 'react'
-import { useCssHandles } from 'vtex.css-handles'
+import { IconCart } from 'vtex.store-icons'
 import { BackdropMode } from 'vtex.store-drawer'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
-import { MaybeResponsiveValue } from 'vtex.responsive-values'
-import { IconCart } from 'vtex.store-icons'
+import { ResponsiveValuesTypes } from 'vtex.responsive-values'
 import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
-import { PixelData } from 'vtex.pixel-manager/react/PixelContext'
+import { PixelEventTypes } from 'vtex.pixel-manager'
+import { useCssHandles, CssHandlesTypes } from 'vtex.css-handles'
 
-import MinicartIconButton from './components/MinicartIconButton'
-import DrawerMode from './components/DrawerMode'
-import { MinicartContextProvider, useMinicartState } from './MinicartContext'
 import PopupMode from './components/Popup'
+import DrawerMode from './components/DrawerMode'
 import useCartIdPixel from './modules/useCartIdPixel'
+import MinicartIconButton from './components/MinicartIconButton'
+import { MinicartContextProvider, useMinicartState } from './MinicartContext'
 
 const CSS_HANDLES = ['minicartWrapperContainer', 'minicartContainer'] as const
 
@@ -24,9 +24,10 @@ interface MinicartProps {
   drawerSlideDirection: SlideDirectionType
   quantityDisplay: QuantityDisplayType
   itemCountMode: MinicartTotalItemsType
-  backdropMode: MaybeResponsiveValue<BackdropMode>
+  backdropMode: ResponsiveValuesTypes.ResponsiveValue<BackdropMode>
   customPixelEventId: string
-  customPixelEventName: PixelData['event']
+  customPixelEventName: PixelEventTypes.EventName
+  classes: CssHandlesTypes.CustomClasses<typeof CSS_HANDLES>
 }
 
 const Minicart: FC<Partial<MinicartProps>> = ({
@@ -40,8 +41,9 @@ const Minicart: FC<Partial<MinicartProps>> = ({
   drawerSlideDirection = 'rightToLeft',
   customPixelEventId,
   customPixelEventName,
+  classes,
 }) => {
-  const handles = useCssHandles(CSS_HANDLES)
+  const { handles } = useCssHandles(CSS_HANDLES, { classes })
   const { variation } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
 

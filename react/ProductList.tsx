@@ -2,24 +2,25 @@ import React, { FC, useCallback } from 'react'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { useOrderItems } from 'vtex.order-items/OrderItems'
 import { ExtensionPoint } from 'vtex.render-runtime'
-import { usePixel } from 'vtex.pixel-manager/PixelContext'
-import { useCssHandles } from 'vtex.css-handles'
+import { usePixel } from 'vtex.pixel-manager'
+import { CssHandlesTypes, useCssHandles } from 'vtex.css-handles'
 
 import { mapCartItemToPixel } from './modules/pixelHelper'
 
-interface Props {
-  renderAsChildren: boolean
-}
-
 const CSS_HANDLES = ['minicartProductListContainer'] as const
 
-const ProductList: FC<Props> = ({ renderAsChildren }) => {
+interface Props {
+  renderAsChildren: boolean
+  classes?: CssHandlesTypes.CustomClasses<typeof CSS_HANDLES>
+}
+
+const ProductList: FC<Props> = ({ renderAsChildren, classes }) => {
   const {
     orderForm: { items },
   } = useOrderForm()
   const { updateQuantity, removeItem } = useOrderItems()
   const { push } = usePixel()
-  const handles = useCssHandles(CSS_HANDLES)
+  const { handles } = useCssHandles(CSS_HANDLES, { classes })
 
   const handleQuantityChange = useCallback(
     (uniqueId: string, quantity: number, item: OrderFormItem) => {

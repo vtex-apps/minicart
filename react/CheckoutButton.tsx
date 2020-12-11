@@ -1,20 +1,21 @@
 import React, { FC } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { Button } from 'vtex.styleguide'
-import { useCssHandles } from 'vtex.css-handles'
+import { CssHandlesTypes, useCssHandles } from 'vtex.css-handles'
 import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 
 import useCheckout from './modules/checkoutHook'
 
-interface Props {
-  finishShoppingButtonLink: string
-}
-
 const CSS_HANDLES = ['minicartCheckoutButton'] as const
 
-const CheckoutButton: FC<Props> = ({ finishShoppingButtonLink }) => {
+interface Props {
+  finishShoppingButtonLink: string
+  classes?: CssHandlesTypes.CustomClasses<typeof CSS_HANDLES>
+}
+
+const CheckoutButton: FC<Props> = ({ finishShoppingButtonLink, classes }) => {
   const { url: checkoutUrl } = useCheckoutURL()
-  const handles = useCssHandles(CSS_HANDLES)
+  const { handles } = useCssHandles(CSS_HANDLES, { classes })
   const goToCheckout = useCheckout()
 
   return (

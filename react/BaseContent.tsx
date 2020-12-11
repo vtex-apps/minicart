@@ -7,9 +7,14 @@ import React, {
   memo,
 } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { ExtensionPoint, useTreePath, useRuntime } from 'vtex.render-runtime'
+import {
+  ExtensionPoint,
+  useTreePath,
+  useRuntime,
+  RenderContext,
+} from 'vtex.render-runtime'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
-import { useCssHandles } from 'vtex.css-handles'
+import { CssHandlesTypes, useCssHandles } from 'vtex.css-handles'
 
 import { useMinicartState } from './MinicartContext'
 import styles from './styles.css'
@@ -17,23 +22,18 @@ import { mapCartItemToPixel } from './modules/pixelHelper'
 import useDebouncedPush from './modules/debouncedPixelHook'
 import CheckoutButton from './CheckoutButton'
 
-interface Props {
-  sideBarMode: boolean
-  finishShoppingButtonLink: string
-}
-
-interface BlocksFromExtension {
-  blockId: string
-  extensionPointId: string
-  children: boolean
-}
-
 const CSS_HANDLES = [
   'minicartContentContainer',
   'minicartProductListContainer',
   'minicartTitle',
   'minicartFooter',
 ] as const
+
+interface Props {
+  sideBarMode: boolean
+  finishShoppingButtonLink: string
+  classes?: CssHandlesTypes.CustomClasses<typeof CSS_HANDLES>
+}
 
 // eslint-disable-next-line react/display-name
 const MinicartHeader: FC<{ minicartTitleHandle: string }> = memo(
@@ -46,12 +46,16 @@ const MinicartHeader: FC<{ minicartTitleHandle: string }> = memo(
   )
 )
 
-const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
+const Content: FC<Props> = ({
+  finishShoppingButtonLink,
+  classes,
+  children,
+}) => {
   const { orderForm, loading }: OrderFormContext = useOrderForm()
   const push = useDebouncedPush()
-  const handles = useCssHandles(CSS_HANDLES)
+  const { handles } = useCssHandles(CSS_HANDLES, { classes })
   const { variation } = useMinicartState()
-  const { extensions } = useRuntime()
+  const { extensions } = useRuntime() as RenderContext.RenderContext
   const { treePath } = useTreePath()
 
   useEffect(() => {
@@ -83,14 +87,14 @@ const Content: FC<Props> = ({ finishShoppingButtonLink, children }) => {
    * the 'blocks' and the 'children' arrays from blocks.json.
    */
   const blocksFromUserImplementation = extensions[treePath].blocks
-  const minicartBlocksFromUserImplementation = blocksFromUserImplementation.filter(
-    (block: BlocksFromExtension) =>
+  const minicartBlocksFromUserImplementation = blocksFromUserImplementation?.filter(
+    block =>
       !block.children &&
       (block.extensionPointId === 'minicart-product-list' ||
         block.extensionPointId === 'minicart-summary')
   )
   const shouldRenderUsingBlocks =
-    minicartBlocksFromUserImplementation.length === 2
+    minicartBlocksFromUserImplementation?.length === 2
 
   if (isCartEmpty) {
     return (
