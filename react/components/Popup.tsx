@@ -1,13 +1,13 @@
 import React, { FC } from 'react'
 import { Overlay } from 'vtex.react-portal'
-import { useCssHandles } from 'vtex.css-handles'
 import { usePixelEventCallback, PixelEventTypes } from 'vtex.pixel-manager'
 
-import { useMinicartState, useMinicartDispatch } from '../MinicartContext'
 import MinicartIconButton from './MinicartIconButton'
+import { useMinicartCssHandles } from './CssHandlesContext'
+import { useMinicartState, useMinicartDispatch } from '../MinicartContext'
 import styles from '../styles.css'
 
-const CSS_HANDLES = [
+export const CSS_HANDLES = [
   'popupWrapper',
   'popupContentContainer',
   'arrowUp',
@@ -40,7 +40,7 @@ const PopupMode: FC<Props> = props => {
   } = useMinicartState()
 
   const dispatch = useMinicartDispatch()
-  const { handles } = useCssHandles(CSS_HANDLES)
+  const { handles } = useMinicartCssHandles()
 
   usePixelEventCallback({
     eventId: customPixelEventId,

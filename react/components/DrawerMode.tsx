@@ -1,13 +1,14 @@
 import React, { FC } from 'react'
-import { useCssHandles } from 'vtex.css-handles'
 import { Drawer, BackdropMode } from 'vtex.store-drawer'
 import { ResponsiveValuesTypes } from 'vtex.responsive-values'
 import { PixelEventTypes } from 'vtex.pixel-manager'
 
 import MinicartIconButton from './MinicartIconButton'
+import { useMinicartCssHandles } from './CssHandlesContext'
 
 const DRAWER_CLOSE_ICON_HEIGHT = 58
-const CSS_HANDLES = ['minicartSideBarContentWrapper'] as const
+
+export const CSS_HANDLES = ['minicartSideBarContentWrapper'] as const
 
 interface Props {
   Icon: React.ComponentType
@@ -31,7 +32,7 @@ const DrawerMode: FC<Props> = ({
   customPixelEventId,
   customPixelEventName,
 }) => {
-  const { handles } = useCssHandles(CSS_HANDLES)
+  const { handles } = useMinicartCssHandles()
 
   return (
     <Drawer

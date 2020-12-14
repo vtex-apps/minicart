@@ -7,13 +7,26 @@ import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 import { PixelEventTypes } from 'vtex.pixel-manager'
 import { useCssHandles, CssHandlesTypes } from 'vtex.css-handles'
 
-import PopupMode from './components/Popup'
-import DrawerMode from './components/DrawerMode'
+import PopupMode, {
+  CSS_HANDLES as PopupModeCssHandles,
+} from './components/Popup'
+import DrawerMode, {
+  CSS_HANDLES as DrawerModeCssHandles,
+} from './components/DrawerMode'
+import MinicartIconButton, {
+  CSS_HANDLES as MinicartIconButtonCssHandles,
+} from './components/MinicartIconButton'
 import useCartIdPixel from './modules/useCartIdPixel'
-import MinicartIconButton from './components/MinicartIconButton'
+import { MinicartCssHandlesProvider } from './components/CssHandlesContext'
 import { MinicartContextProvider, useMinicartState } from './MinicartContext'
 
-const CSS_HANDLES = ['minicartWrapperContainer', 'minicartContainer'] as const
+export const CSS_HANDLES = [
+  ...PopupModeCssHandles,
+  ...DrawerModeCssHandles,
+  ...MinicartIconButtonCssHandles,
+  'minicartWrapperContainer',
+  'minicartContainer',
+] as const
 
 interface MinicartProps {
   variation: MinicartVariationType
@@ -43,7 +56,8 @@ const Minicart: FC<Partial<MinicartProps>> = ({
   customPixelEventName,
   classes,
 }) => {
-  const { handles } = useCssHandles(CSS_HANDLES, { classes })
+  const { handles, withModifiers } = useCssHandles(CSS_HANDLES, { classes })
+
   const { variation } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
 
@@ -54,11 +68,16 @@ const Minicart: FC<Partial<MinicartProps>> = ({
       >
         <div className={`${handles.minicartContainer} flex flex-column`}>
           <a href={linkVariationUrl ?? checkoutUrl}>
-            <MinicartIconButton
-              Icon={MinicartIcon}
-              itemCountMode={itemCountMode}
-              quantityDisplay={quantityDisplay}
-            />
+            <MinicartCssHandlesProvider
+              handles={handles}
+              withModifiers={withModifiers}
+            >
+              <MinicartIconButton
+                Icon={MinicartIcon}
+                itemCountMode={itemCountMode}
+                quantityDisplay={quantityDisplay}
+              />
+            </MinicartCssHandlesProvider>
           </a>
         </div>
       </aside>
@@ -70,30 +89,35 @@ const Minicart: FC<Partial<MinicartProps>> = ({
       className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
     >
       <div className={`${handles.minicartContainer} flex flex-column`}>
-        {variation === 'drawer' ? (
-          <DrawerMode
-            Icon={MinicartIcon}
-            backdropMode={backdropMode}
-            itemCountMode={itemCountMode}
-            maxDrawerWidth={maxDrawerWidth}
-            quantityDisplay={quantityDisplay}
-            drawerSlideDirection={drawerSlideDirection}
-            customPixelEventId={customPixelEventId}
-            customPixelEventName={customPixelEventName}
-          >
-            {children}
-          </DrawerMode>
-        ) : (
-          <PopupMode
-            Icon={MinicartIcon}
-            itemCountMode={itemCountMode}
-            quantityDisplay={quantityDisplay}
-            customPixelEventId={customPixelEventId}
-            customPixelEventName={customPixelEventName}
-          >
-            {children}
-          </PopupMode>
-        )}
+        <MinicartCssHandlesProvider
+          handles={handles}
+          withModifiers={withModifiers}
+        >
+          {variation === 'drawer' ? (
+            <DrawerMode
+              Icon={MinicartIcon}
+              backdropMode={backdropMode}
+              itemCountMode={itemCountMode}
+              maxDrawerWidth={maxDrawerWidth}
+              quantityDisplay={quantityDisplay}
+              drawerSlideDirection={drawerSlideDirection}
+              customPixelEventId={customPixelEventId}
+              customPixelEventName={customPixelEventName}
+            >
+              {children}
+            </DrawerMode>
+          ) : (
+            <PopupMode
+              Icon={MinicartIcon}
+              itemCountMode={itemCountMode}
+              quantityDisplay={quantityDisplay}
+              customPixelEventId={customPixelEventId}
+              customPixelEventName={customPixelEventName}
+            >
+              {children}
+            </PopupMode>
+          )}
+        </MinicartCssHandlesProvider>
       </div>
     </aside>
   )
