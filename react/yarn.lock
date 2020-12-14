@@ -5020,9 +5020,9 @@ verror@1.10.0:
   version "1.0.0"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@1.0.0/public/@types/vtex.css-handles#336b23ef3a9bcb2b809529ba736783acd405d081"
 
-"vtex.device-detector@https://victormiranda--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.device-detector@0.2.5+build1607697725/public/@types/vtex.device-detector":
+"vtex.device-detector@https://victormiranda--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.device-detector@0.2.5+build1607958752/public/@types/vtex.device-detector":
   version "0.2.5"
-  resolved "https://victormiranda--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.device-detector@0.2.5+build1607697725/public/@types/vtex.device-detector#027e67c388330a1b4b412c51b7df45ba8b37c605"
+  resolved "https://victormiranda--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.device-detector@0.2.5+build1607958752/public/@types/vtex.device-detector#675cb31e16ed0607488d97be4d3a59bb2c7111eb"
 
 "vtex.flex-layout@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.flex-layout@0.15.2/public/@types/vtex.flex-layout":
   version "0.15.2"
@@ -5068,9 +5068,9 @@ verror@1.10.0:
   version "0.5.0"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.sandbox@0.5.0/public/@types/vtex.sandbox#7b84d38b20de3d7d0b07c30e93e2a928563da30a"
 
-"vtex.store-components@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-components@3.136.2/public/@types/vtex.store-components":
-  version "3.136.2"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-components@3.136.2/public/@types/vtex.store-components#e2d38752edd26300be39c0add479beefdb33b8f7"
+"vtex.store-components@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-components@3.136.3/public/@types/vtex.store-components":
+  version "3.136.3"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-components@3.136.3/public/@types/vtex.store-components#872e80c82c03dda6db940a56c45fab08d77d6788"
 
 "vtex.store-drawer@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-drawer@0.15.0/public/@types/vtex.store-drawer":
   version "0.15.0"
