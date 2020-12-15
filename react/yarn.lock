@@ -5020,9 +5020,9 @@ verror@1.10.0:
   version "1.0.0"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@1.0.0/public/@types/vtex.css-handles#336b23ef3a9bcb2b809529ba736783acd405d081"
 
-"vtex.device-detector@https://victormiranda--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.device-detector@0.2.5+build1607958752/public/@types/vtex.device-detector":
-  version "0.2.5"
-  resolved "https://victormiranda--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.device-detector@0.2.5+build1607958752/public/@types/vtex.device-detector#675cb31e16ed0607488d97be4d3a59bb2c7111eb"
+"vtex.device-detector@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.device-detector@0.2.6/public/@types/vtex.device-detector":
+  version "0.2.6"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.device-detector@0.2.6/public/@types/vtex.device-detector#3219242fa5c2f14023d33c3549c2d8de93c76d1f"
 
 "vtex.flex-layout@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.flex-layout@0.15.2/public/@types/vtex.flex-layout":
   version "0.15.2"
@@ -5044,9 +5044,9 @@ verror@1.10.0:
   version "0.27.0"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-list@0.27.0/public/@types/vtex.product-list#6697e1204b060c5e40f3209570d0b72411d55ca8"
 
-"vtex.product-summary@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-summary@2.66.0/public/@types/vtex.product-summary":
-  version "2.66.0"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-summary@2.66.0/public/@types/vtex.product-summary#f08b529a0196def55daf899c2658487454b25613"
+"vtex.product-summary@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-summary@2.66.1/public/@types/vtex.product-summary":
+  version "2.66.1"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-summary@2.66.1/public/@types/vtex.product-summary#acda046a7c81293df633200cdf0b5f0009cd416b"
 
 "vtex.react-portal@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.react-portal@0.4.1/public/@types/vtex.react-portal":
   version "0.4.1"
