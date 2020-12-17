@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Crowdin configuration file.
 
+## [2.54.2] - 2020-12-04
+
+### Fixed
+- Ignore assemblies values on `itemCountMode`.
+
 ## [2.54.1] - 2020-10-20
 
 ### Added
