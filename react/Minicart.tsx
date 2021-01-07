@@ -29,21 +29,21 @@ export const CSS_HANDLES = [
 ] as const
 
 interface MinicartProps {
-  variation: MinicartVariationType
-  openOnHover: boolean
-  linkVariationUrl: string
-  maxDrawerWidth: number | string
-  MinicartIcon: React.ComponentType
-  drawerSlideDirection: SlideDirectionType
-  quantityDisplay: QuantityDisplayType
-  itemCountMode: MinicartTotalItemsType
-  backdropMode: ResponsiveValuesTypes.ResponsiveValue<BackdropMode>
-  customPixelEventId: string
-  customPixelEventName: PixelEventTypes.EventName
-  classes: CssHandlesTypes.CustomClasses<typeof CSS_HANDLES>
+  variation?: MinicartVariationType
+  openOnHover?: boolean
+  linkVariationUrl?: string
+  maxDrawerWidth?: number | string
+  MinicartIcon?: React.ComponentType
+  drawerSlideDirection?: SlideDirectionType
+  quantityDisplay?: QuantityDisplayType
+  itemCountMode?: MinicartTotalItemsType
+  backdropMode?: ResponsiveValuesTypes.ResponsiveValue<BackdropMode>
+  customPixelEventId?: string
+  customPixelEventName?: PixelEventTypes.EventName
+  classes?: CssHandlesTypes.CustomClasses<typeof CSS_HANDLES>
 }
 
-const Minicart: FC<Partial<MinicartProps>> = ({
+const Minicart: FC<MinicartProps> = ({
   children,
   backdropMode,
   linkVariationUrl,
