@@ -55,6 +55,7 @@ The VTEX Minicart is a block that displays a summary list of all items added by 
 | `MinicartIcon` | `block` | Icon displayed in the Minicart button. This prop's value must match the name of the block responsible for rendering the desired icon. | `icon-cart` (from [Store Icons](https://vtex.io/docs/components/all/vtex.store-icons/) app) |
 | `customPixelEventId` | `string`   | Store event ID responsible for triggering the `minicart.v2` to automatically open itself on the interface. | `undefined`    |
 | `customPixelEventName` | `string`   | Store event name responsible for triggering the `minicart.v2` to automatically open itself on the interface. Some examples are: `'addToCart'` and `'removeFromCart'`. Notice that using this prop will make the `minicart.v2` open in **every** event with the specified name if no `customPixelEventId` is specified. | `undefined`    |
+| `classes`         | `CustomCSSClasses` | Used to override default CSS handles. To better understand how this prop works, we recommend reading about it [here](https://github.com/vtex-apps/css-handles#usecustomclasses). Note that this is only useful if you're importing this block as a React component.                                      | `undefined`           |
 
 ### Advanced Configuration
 
