@@ -2,7 +2,7 @@
   "vendor": "vtex",
   "name": "minicart",
   "title": "Mini Cart",
-  "version": "2.54.1",
+  "version": "2.56.0",
   "builders": {
     "messages": "1.x",
     "store": "0.x",
@@ -23,7 +23,7 @@
     "vtex.react-portal": "0.x",
     "vtex.store-graphql": "2.x",
     "vtex.sandbox": "0.x",
-    "vtex.css-handles": "0.x",
+    "vtex.css-handles": "1.x",
     "vtex.order-manager": "0.x",
     "vtex.order-items": "0.x",
     "vtex.product-list": "0.x",
@@ -32,7 +32,8 @@
     "vtex.checkout-summary": "0.x",
     "vtex.checkout-resources": "0.x",
     "vtex.flex-layout": "0.x",
-    "vtex.rich-text": "0.x"
+    "vtex.rich-text": "0.x",
+    "vtex.responsive-values": "0.x"
   },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }

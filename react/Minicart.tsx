@@ -1,35 +1,49 @@
 import React, { FC } from 'react'
-import { useCssHandles } from 'vtex.css-handles'
+import { IconCart } from 'vtex.store-icons'
 import { BackdropMode } from 'vtex.store-drawer'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
-import { MaybeResponsiveValue } from 'vtex.responsive-values'
-import { IconCart } from 'vtex.store-icons'
+import { ResponsiveValuesTypes } from 'vtex.responsive-values'
 import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
-import { PixelData } from 'vtex.pixel-manager/react/PixelContext'
+import { PixelEventTypes } from 'vtex.pixel-manager'
+import { useCssHandles, CssHandlesTypes } from 'vtex.css-handles'
 
-import MinicartIconButton from './components/MinicartIconButton'
-import DrawerMode from './components/DrawerMode'
-import { MinicartContextProvider, useMinicartState } from './MinicartContext'
-import PopupMode from './components/Popup'
+import PopupMode, {
+  CSS_HANDLES as PopupModeCssHandles,
+} from './components/Popup'
+import DrawerMode, {
+  CSS_HANDLES as DrawerModeCssHandles,
+} from './components/DrawerMode'
+import MinicartIconButton, {
+  CSS_HANDLES as MinicartIconButtonCssHandles,
+} from './components/MinicartIconButton'
 import useCartIdPixel from './modules/useCartIdPixel'
+import { MinicartCssHandlesProvider } from './components/CssHandlesContext'
+import { MinicartContextProvider, useMinicartState } from './MinicartContext'
 
-const CSS_HANDLES = ['minicartWrapperContainer', 'minicartContainer'] as const
+export const CSS_HANDLES = [
+  ...PopupModeCssHandles,
+  ...DrawerModeCssHandles,
+  ...MinicartIconButtonCssHandles,
+  'minicartWrapperContainer',
+  'minicartContainer',
+] as const
 
 interface MinicartProps {
-  variation: MinicartVariationType
-  openOnHover: boolean
-  linkVariationUrl: string
-  maxDrawerWidth: number | string
-  MinicartIcon: React.ComponentType
-  drawerSlideDirection: SlideDirectionType
-  quantityDisplay: QuantityDisplayType
-  itemCountMode: MinicartTotalItemsType
-  backdropMode: MaybeResponsiveValue<BackdropMode>
-  customPixelEventId: string
-  customPixelEventName: PixelData['event']
+  variation?: MinicartVariationType
+  openOnHover?: boolean
+  linkVariationUrl?: string
+  maxDrawerWidth?: number | string
+  MinicartIcon?: React.ComponentType
+  drawerSlideDirection?: SlideDirectionType
+  quantityDisplay?: QuantityDisplayType
+  itemCountMode?: MinicartTotalItemsType
+  backdropMode?: ResponsiveValuesTypes.ResponsiveValue<BackdropMode>
+  customPixelEventId?: string
+  customPixelEventName?: PixelEventTypes.EventName
+  classes?: CssHandlesTypes.CustomClasses<typeof CSS_HANDLES>
 }
 
-const Minicart: FC<Partial<MinicartProps>> = ({
+const Minicart: FC<MinicartProps> = ({
   children,
   backdropMode,
   linkVariationUrl,
@@ -40,8 +54,10 @@ const Minicart: FC<Partial<MinicartProps>> = ({
   drawerSlideDirection = 'rightToLeft',
   customPixelEventId,
   customPixelEventName,
+  classes,
 }) => {
-  const handles = useCssHandles(CSS_HANDLES)
+  const { handles, withModifiers } = useCssHandles(CSS_HANDLES, { classes })
+
   const { variation } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
 
@@ -52,11 +68,16 @@ const Minicart: FC<Partial<MinicartProps>> = ({
       >
         <div className={`${handles.minicartContainer} flex flex-column`}>
           <a href={linkVariationUrl ?? checkoutUrl}>
-            <MinicartIconButton
-              Icon={MinicartIcon}
-              itemCountMode={itemCountMode}
-              quantityDisplay={quantityDisplay}
-            />
+            <MinicartCssHandlesProvider
+              handles={handles}
+              withModifiers={withModifiers}
+            >
+              <MinicartIconButton
+                Icon={MinicartIcon}
+                itemCountMode={itemCountMode}
+                quantityDisplay={quantityDisplay}
+              />
+            </MinicartCssHandlesProvider>
           </a>
         </div>
       </aside>
@@ -68,30 +89,35 @@ const Minicart: FC<Partial<MinicartProps>> = ({
       className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
     >
       <div className={`${handles.minicartContainer} flex flex-column`}>
-        {variation === 'drawer' ? (
-          <DrawerMode
-            Icon={MinicartIcon}
-            backdropMode={backdropMode}
-            itemCountMode={itemCountMode}
-            maxDrawerWidth={maxDrawerWidth}
-            quantityDisplay={quantityDisplay}
-            drawerSlideDirection={drawerSlideDirection}
-            customPixelEventId={customPixelEventId}
-            customPixelEventName={customPixelEventName}
-          >
-            {children}
-          </DrawerMode>
-        ) : (
-          <PopupMode
-            Icon={MinicartIcon}
-            itemCountMode={itemCountMode}
-            quantityDisplay={quantityDisplay}
-            customPixelEventId={customPixelEventId}
-            customPixelEventName={customPixelEventName}
-          >
-            {children}
-          </PopupMode>
-        )}
+        <MinicartCssHandlesProvider
+          handles={handles}
+          withModifiers={withModifiers}
+        >
+          {variation === 'drawer' ? (
+            <DrawerMode
+              Icon={MinicartIcon}
+              backdropMode={backdropMode}
+              itemCountMode={itemCountMode}
+              maxDrawerWidth={maxDrawerWidth}
+              quantityDisplay={quantityDisplay}
+              drawerSlideDirection={drawerSlideDirection}
+              customPixelEventId={customPixelEventId}
+              customPixelEventName={customPixelEventName}
+            >
+              {children}
+            </DrawerMode>
+          ) : (
+            <PopupMode
+              Icon={MinicartIcon}
+              itemCountMode={itemCountMode}
+              quantityDisplay={quantityDisplay}
+              customPixelEventId={customPixelEventId}
+              customPixelEventName={customPixelEventName}
+            >
+              {children}
+            </PopupMode>
+          )}
+        </MinicartCssHandlesProvider>
       </div>
     </aside>
   )

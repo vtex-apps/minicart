@@ -38,7 +38,7 @@ import setMinicartOpenMutation from './legacy/localState/graphql/setMinicartOpen
 import createLocalState, { ITEMS_STATUS } from './legacy/localState'
 import styles from './legacy/minicart.css'
 import useMarketingSessionParams from './legacy/hooks/useMarketingSessionParams'
-import useCardIdPixel from './modules/useCartIdPixel'
+import useCartIdPixel from './modules/useCartIdPixel'
 
 const DEFAULT_LABEL_CLASSES = ''
 const DEFAULT_ICON_CLASSES = 'gray'
@@ -186,7 +186,7 @@ const MiniCart = ({
   const orderFormId =
     orderForm && orderForm.orderFormId ? orderForm.orderFormId : undefined
 
-  useCardIdPixel(orderFormId)
+  useCartIdPixel(orderFormId)
 
   const minicartItems = useMemo(() => {
     try {
