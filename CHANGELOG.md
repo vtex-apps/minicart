@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.57.0] - 2021-03-17
 ### Added
 - Property `priceIsInt` in pixel events, so it's possible to properly identify when to divide price by 100 in pixel apps.
 
