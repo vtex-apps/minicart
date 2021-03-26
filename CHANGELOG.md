@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Pass paymentData as prop to Summary component
 
+## [2.57.0] - 2021-03-17
+### Added
+- Property `priceIsInt` in pixel events, so it's possible to properly identify when to divide price by 100 in pixel apps.
+
 ## [2.56.0] - 2021-01-07
 ### Added
 - `classes` prop to all exported components.
