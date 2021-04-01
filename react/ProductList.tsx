@@ -9,6 +9,8 @@ import { mapCartItemToPixel } from './modules/pixelHelper'
 
 const CSS_HANDLES = ['minicartProductListContainer'] as const
 
+const allowedOutdatedData = ['paymentData']
+
 interface Props {
   renderAsChildren: boolean
   classes?: CssHandlesTypes.CustomClasses<typeof CSS_HANDLES>
@@ -33,7 +35,7 @@ const ProductList: FC<Props> = ({ renderAsChildren, classes }) => {
         event: 'addToCart',
         items: [adjustedItem],
       })
-      updateQuantity({ uniqueId, quantity })
+      updateQuantity({ uniqueId, quantity }, allowedOutdatedData)
     },
     [push, updateQuantity]
   )
@@ -45,7 +47,7 @@ const ProductList: FC<Props> = ({ renderAsChildren, classes }) => {
         event: 'removeFromCart',
         items: [adjustedItem],
       })
-      removeItem({ uniqueId })
+      removeItem({ uniqueId }, allowedOutdatedData)
     },
     [push, removeItem]
   )
