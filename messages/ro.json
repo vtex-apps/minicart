@@ -20,5 +20,4 @@
   "store/minicart.go-to-checkout": "Finalizează comanda",
   "store/minicart.empty-state": "Coșul tău de cumpărături este gol.",
   "store/minicart.title": "Coș de cumpărături"
-  }
-  
+}

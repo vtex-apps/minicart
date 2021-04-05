@@ -75,7 +75,7 @@ const Minicart: FC<MinicartProps> = ({
         )
 
       case 'drawer':
-        return (          
+        return (
           <DrawerMode
             Icon={MinicartIcon}
             backdropMode={backdropMode}
