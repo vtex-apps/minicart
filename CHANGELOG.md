@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.57.0] - 2021-03-17
+### Added
+- Property `priceIsInt` in pixel events, so it's possible to properly identify when to divide price by 100 in pixel apps.
+
+## [2.56.0] - 2021-01-07
+### Added
+- `classes` prop to all exported components.
+
+### Changed
+- `vtex.css-handles` dependency is now on major `1.x`.
+
+## [2.55.0] - 2020-12-17
+
+### Added
+
+- I18n Ro and Cs.
+
+### Fixed
+
+- Crowdin configuration file.
+
+## [2.54.2] - 2020-12-04
+
+### Fixed
+- Ignore assemblies values on `itemCountMode`.
+
 ## [2.54.1] - 2020-10-20
 
 ### Added

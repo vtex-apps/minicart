@@ -3,6 +3,7 @@ export function mapCartItemToPixel(item: CartItem): PixelCartItem {
     skuId: item.id,
     variant: item.skuName,
     price: item.sellingPrice,
+    priceIsInt: true,
     name: getNameWithoutVariant(item),
     quantity: item.quantity,
     productId: item.productId,
@@ -26,6 +27,7 @@ export function mapBuyButtonItemToPixel(item: BuyButtonItem): PixelCartItem {
     skuId: item.id,
     variant: item.skuName,
     price: item.sellingPrice,
+    priceIsInt: true,
     name: item.name,
     quantity: item.quantity,
     productId: item.productId,
@@ -80,6 +82,7 @@ interface PixelCartItem {
   skuId: string
   variant: string
   price: number
+  priceIsInt: boolean
   name: string
   quantity: number
   productId: string

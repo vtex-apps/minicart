@@ -1,12 +1,15 @@
 import React from 'react'
 import { ButtonWithIcon } from 'vtex.styleguide'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
-import { useCssHandles } from 'vtex.css-handles'
 
-import { useMinicartDispatch, useMinicartState } from '../MinicartContext'
 import styles from '../styles.css'
+import { useMinicartCssHandles } from './CssHandlesContext'
+import { useMinicartDispatch, useMinicartState } from '../MinicartContext'
 
-const CSS_HANDLES = ['minicartIconContainer', 'minicartQuantityBadge'] as const
+export const CSS_HANDLES = [
+  'minicartIconContainer',
+  'minicartQuantityBadge',
+] as const
 
 interface Props {
   Icon: React.ComponentType
@@ -16,10 +19,13 @@ interface Props {
 
 const countCartItems = (
   countMode: MinicartTotalItemsType,
-  arr: OrderFormItem[]
+  allItems: OrderFormItem[]
 ) => {
+  // Filter only main products, remove assembly items from the count
+  const items = allItems.filter(item => item.parentItemIndex === null)
+
   if (countMode === 'distinctAvailable') {
-    return arr.reduce((itemQuantity: number, item: OrderFormItem) => {
+    return items.reduce((itemQuantity: number, item) => {
       if (item.availability === 'available') {
         return itemQuantity + 1
       }
@@ -28,7 +34,7 @@ const countCartItems = (
   }
 
   if (countMode === 'totalAvailable') {
-    return arr.reduce((itemQuantity: number, item: OrderFormItem) => {
+    return items.reduce((itemQuantity: number, item) => {
       if (item.availability === 'available') {
         return itemQuantity + item.quantity
       }
@@ -37,19 +43,19 @@ const countCartItems = (
   }
 
   if (countMode === 'total') {
-    return arr.reduce((itemQuantity: number, item: OrderFormItem) => {
+    return items.reduce((itemQuantity: number, item) => {
       return itemQuantity + item.quantity
     }, 0)
   }
 
   // countMode === 'distinct'
-  return arr.length
+  return items.length
 }
 
 const MinicartIconButton: React.FC<Props> = props => {
   const { Icon, itemCountMode, quantityDisplay } = props
   const { orderForm, loading }: OrderFormContext = useOrderForm()
-  const handles = useCssHandles(CSS_HANDLES)
+  const { handles } = useMinicartCssHandles()
   const { open, openBehavior, openOnHoverProp } = useMinicartState()
   const dispatch = useMinicartDispatch()
   const quantity = countCartItems(itemCountMode, orderForm.items)
