@@ -1,26 +1,19 @@
-import React, {
-  FC,
-  useEffect,
-  Children,
-  ReactElement,
-  Fragment,
-  memo,
-} from 'react'
+import type { FC, ReactElement } from 'react'
+import React, { useEffect, Children, Fragment, memo } from 'react'
 import { FormattedMessage } from 'react-intl'
-import {
-  ExtensionPoint,
-  useTreePath,
-  useRuntime,
-  RenderContext,
-} from 'vtex.render-runtime'
-import { useOrderForm } from 'vtex.order-manager/OrderForm'
-import { CssHandlesTypes, useCssHandles } from 'vtex.css-handles'
+import type { RenderContext } from 'vtex.render-runtime'
+import { ExtensionPoint, useTreePath, useRuntime } from 'vtex.render-runtime'
+import { OrderForm } from 'vtex.order-manager'
+import type { CssHandlesTypes } from 'vtex.css-handles'
+import { useCssHandles } from 'vtex.css-handles'
 
 import { useMinicartState } from './MinicartContext'
 import styles from './styles.css'
 import { mapCartItemToPixel } from './modules/pixelHelper'
 import useDebouncedPush from './modules/debouncedPixelHook'
 import CheckoutButton from './CheckoutButton'
+
+const { useOrderForm } = OrderForm
 
 const CSS_HANDLES = [
   'minicartContentContainer',
@@ -51,11 +44,11 @@ const Content: FC<Props> = ({
   classes,
   children,
 }) => {
-  const { orderForm, loading }: OrderFormContext = useOrderForm()
+  const { orderForm, loading } = useOrderForm()
   const push = useDebouncedPush()
   const { handles } = useCssHandles(CSS_HANDLES, { classes })
   const { variation } = useMinicartState()
-  const { extensions } = useRuntime() as RenderContext.RenderContext
+  const { extensions } = useRuntime() as RenderContext
   const { treePath } = useTreePath()
 
   useEffect(() => {
@@ -65,7 +58,7 @@ const Content: FC<Props> = ({
 
     push({
       event: 'cartChanged',
-      items: orderForm.items.map(mapCartItemToPixel),
+      items: orderForm.items.map((item) => mapCartItemToPixel(item)),
     })
   }, [push, loading, orderForm.items])
 
@@ -88,11 +81,12 @@ const Content: FC<Props> = ({
    */
   const blocksFromUserImplementation = extensions[treePath].blocks
   const minicartBlocksFromUserImplementation = blocksFromUserImplementation?.filter(
-    block =>
+    (block) =>
       !block.children &&
       (block.extensionPointId === 'minicart-product-list' ||
         block.extensionPointId === 'minicart-summary')
   )
+
   const shouldRenderUsingBlocks =
     minicartBlocksFromUserImplementation?.length === 2
 
@@ -125,7 +119,7 @@ const Content: FC<Props> = ({
   return (
     <div className={minicartContentClasses}>
       <MinicartHeader minicartTitleHandle={handles.minicartTitle} />
-      {Children.map(children, child =>
+      {Children.map(children, (child) =>
         React.cloneElement(child as ReactElement, { renderAsChildren: true })
       )}
     </div>

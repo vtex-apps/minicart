@@ -17,20 +17,29 @@ interface Props {
   itemCountMode: MinicartTotalItemsType
 }
 
+const groupByUniqueId = <T extends { uniqueId: string }>(
+  items: T[][],
+  item: T
+): T[][] => {
+  const index = items.findIndex(([{ uniqueId }]) => uniqueId === item.uniqueId)
+
+  if (index !== -1) {
+    items.splice(index, 1, items[index].concat([item]))
+
+    return items
+  }
+
+  return items.concat([[item]])
+}
+
 const countCartItems = (
   countMode: MinicartTotalItemsType,
-  allItems: OrderFormItem[]
+  items: OrderFormItem[]
 ) => {
-  // Filter only main products, remove assembly items from the count
-  const items = allItems.filter(item => item.parentItemIndex === null)
-
   if (countMode === 'distinctAvailable') {
-    return items.reduce((itemQuantity: number, item) => {
-      if (item.availability === 'available') {
-        return itemQuantity + 1
-      }
-      return itemQuantity
-    }, 0)
+    return items
+      .filter((item) => item.availability === 'available')
+      .reduce<OrderFormItem[][]>(groupByUniqueId, []).length
   }
 
   if (countMode === 'totalAvailable') {
@@ -38,6 +47,7 @@ const countCartItems = (
       if (item.availability === 'available') {
         return itemQuantity + item.quantity
       }
+
       return itemQuantity
     }, 0)
   }
@@ -49,10 +59,10 @@ const countCartItems = (
   }
 
   // countMode === 'distinct'
-  return items.length
+  return items.reduce<OrderFormItem[][]>(groupByUniqueId, []).length
 }
 
-const MinicartIconButton: React.FC<Props> = props => {
+const MinicartIconButton: React.FC<Props> = (props) => {
   const { Icon, itemCountMode, quantityDisplay } = props
   const { orderForm, loading }: OrderFormContext = useOrderForm()
   const { handles } = useMinicartCssHandles()

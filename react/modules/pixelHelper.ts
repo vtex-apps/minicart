@@ -1,19 +1,21 @@
-export function mapCartItemToPixel(item: CartItem): PixelCartItem {
+import type { Item } from 'vtex.checkout-graphql'
+
+export function mapCartItemToPixel(item: Item): PixelCartItem {
   return {
     skuId: item.id,
-    variant: item.skuName,
-    price: item.sellingPrice,
+    variant: item.skuName!,
+    price: item.sellingPrice!,
     name: getNameWithoutVariant(item),
     quantity: item.quantity,
-    productId: item.productId,
-    productRefId: item.productRefId,
-    brand: item.additionalInfo ? item.additionalInfo.brandName : '',
+    productId: item.productId!,
+    productRefId: item.productRefId!,
+    brand: item.additionalInfo ? item.additionalInfo.brandName! : '',
     category: productCategory(item),
-    detailUrl: item.detailUrl,
+    detailUrl: item.detailUrl!,
     imageUrl: item.imageUrls
       ? fixUrlProtocol(item.imageUrls.at3x)
-      : item.imageUrl ?? '',
-    referenceId: item.refId,
+      : (item as any).imageUrl ?? '',
+    referenceId: item.refId!,
   }
 }
 
@@ -54,21 +56,26 @@ function fixUrlProtocol(url: string) {
  * Remove the variant from the end of the name.
  * Ex: from "Classic Shoes Pink" to "Classic Shoes"
  */
-function getNameWithoutVariant(item: CartItem) {
-  if (!item.name.includes(item.skuName)) {
-    return item.name
+function getNameWithoutVariant(item: Item) {
+  if (!item.name!.includes(item.skuName!)) {
+    return item.name!
   }
 
   const leadingSpace = 1
-  const variantLength = leadingSpace + item.skuName.length
+  const variantLength = leadingSpace + item.skuName!.length
 
-  return item.name.slice(0, item.name.length - variantLength)
+  return item.name!.slice(0, item.name!.length - variantLength)
 }
 
-function productCategory(item: CartItem) {
+function productCategory(item: Item) {
   try {
-    const categoryIds = item.productCategoryIds.split('/').filter(c => c.length)
-    const category = categoryIds.map(id => item.productCategories[id]).join('/')
+    const categoryIds = item
+      .productCategoryIds!.split('/')
+      .filter((c) => c.length)
+
+    const category = categoryIds
+      .map((id) => item.productCategories[id])
+      .join('/')
 
     return category
   } catch {
@@ -103,30 +110,5 @@ interface BuyButtonItem {
   category: string
   detailUrl: string
   imageUrl: string
-  refId: string
-}
-
-interface CartItem {
-  id: string
-  skuName: string
-  sellingPrice: number
-  name: string
-  quantity: number
-  productId: string
-  productRefId: string
-  additionalInfo: {
-    brandName: string
-  }
-  productCategoryIds: string
-  productCategories: Record<string, string>
-  detailUrl: string
-  // Field from the usual orderForm API
-  imageUrl?: string
-  // Field from the order-manager orderForm API
-  imageUrls?: {
-    at1x: string
-    at2x: string
-    at3x: string
-  }
   refId: string
 }
