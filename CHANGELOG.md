@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- I18n Jp and No.
+
+### Changed
+
+- I18n Ro.
+- Crowdin configuration file.
+
 ## [2.57.0] - 2021-03-17
 ### Added
 - Property `priceIsInt` in pixel events, so it's possible to properly identify when to divide price by 100 in pixel apps.
