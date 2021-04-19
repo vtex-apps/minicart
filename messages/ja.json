@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "ミニカート",
+  "admin/editor.minicart.description": "追加されたすべての製品を表示するシンプルなミニカート",
+  "admin/editor.minicart.showDiscount.title": "節約できた金額を表示する",
+  "admin/editor.minicart.iconLabel.title": "アイコンの隣に表示されるテキスト",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "ミニカートが空の時に表示されるテキスト",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "[チェックアウトに進む] ボタンをクリックしたときのリダイレクト先リンク",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "買い物を終えるボタンの中で表示されるテキスト",
+  "admin/editor.minicart.showShippingCost.title": "フッターの上に発送コストを表示する",
+  "admin/editor.minicart.type.title": "ミニカートタイプ",
+  "admin/editor.minicart.type.popup": "ポップアップ",
+  "admin/editor.minicart.type.sidebar": "サイドバー",
+  "store/finish-shopping-button-label": "チェックアウトに進む",
+  "store/minicart-empty": "カートは空です！",
+  "store/sidebar-title": "マイミニカート",
+  "store/minicart-content-footer-discount": "保存",
+  "store/minicart.error-removal": "項目を削除できませんでした。もう一度やり直してください",
+  "store/minicart.shipping-cost": "合計発送コスト",
+  "store/minicart.checkout-failure": "エラーが発生しました。もう一度やり直してください。",
+  "store/minicart.go-to-checkout": "チェックアウトに進む",
+  "store/minicart.empty-state": "カートは空です。",
+  "store/minicart.title": "カート"
+}
