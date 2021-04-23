@@ -56,7 +56,7 @@ const Minicart: FC<MinicartProps> = ({
   customPixelEventId,
   customPixelEventName,
   classes,
-  popupWithLink
+  popupWithLink = false
 }) => {
   const { handles, withModifiers } = useCssHandles(CSS_HANDLES, { classes })
 
