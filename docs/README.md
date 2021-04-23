@@ -56,8 +56,7 @@ The VTEX Minicart is a block that displays a summary list of all items added by 
 | `customPixelEventId` | `string`   | Store event ID responsible for triggering the `minicart.v2` to automatically open itself on the interface. | `undefined`    |
 | `customPixelEventName` | `string`   | Store event name responsible for triggering the `minicart.v2` to automatically open itself on the interface. Some examples are: `'addToCart'` and `'removeFromCart'`. Notice that using this prop will make the `minicart.v2` open in **every** event with the specified name if no `customPixelEventId` is specified. | `undefined`    |
 | `classes`         | `CustomCSSClasses` | Used to override default CSS handles. To better understand how this prop works, we recommend reading about it [here](https://github.com/vtex-apps/css-handles#usecustomclasses). Note that this is only useful if you're importing this block as a React component.                                      | `undefined`           |
-| `popupWithLink`          | `boolean`                 | 
-If the mini card is in `popup` mode and is like `hover`, when clicking on the button you should redirect to the checkout.  | `false`         |
+| `popupWithLink`          | `boolean`  | If the minicart is in `popup` variation and is `hover` mode, this prop transforms the minicart button in a link to the checkout when clicked  | `false`        |
 
 ### Advanced Configuration
 
