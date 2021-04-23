@@ -41,6 +41,7 @@ interface MinicartProps {
   customPixelEventId?: string
   customPixelEventName?: PixelEventTypes.EventName
   classes?: CssHandlesTypes.CustomClasses<typeof CSS_HANDLES>
+  popupWithLink?: boolean
 }
 
 const Minicart: FC<MinicartProps> = ({
@@ -55,6 +56,7 @@ const Minicart: FC<MinicartProps> = ({
   customPixelEventId,
   customPixelEventName,
   classes,
+  popupWithLink
 }) => {
   const { handles, withModifiers } = useCssHandles(CSS_HANDLES, { classes })
 
@@ -73,6 +75,7 @@ const Minicart: FC<MinicartProps> = ({
               withModifiers={withModifiers}
             >
               <MinicartIconButton
+                popupWithLink={popupWithLink}
                 Icon={MinicartIcon}
                 itemCountMode={itemCountMode}
                 quantityDisplay={quantityDisplay}
@@ -108,6 +111,7 @@ const Minicart: FC<MinicartProps> = ({
             </DrawerMode>
           ) : (
             <PopupMode
+              popupWithLink={popupWithLink}
               Icon={MinicartIcon}
               itemCountMode={itemCountMode}
               quantityDisplay={quantityDisplay}

@@ -5,6 +5,8 @@ import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import styles from '../styles.css'
 import { useMinicartCssHandles } from './CssHandlesContext'
 import { useMinicartDispatch, useMinicartState } from '../MinicartContext'
+import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
+import useCheckout from '../modules/checkoutHook'
 
 export const CSS_HANDLES = [
   'minicartIconContainer',
@@ -15,6 +17,7 @@ interface Props {
   Icon: React.ComponentType
   quantityDisplay: QuantityDisplayType
   itemCountMode: MinicartTotalItemsType
+  popupWithLink?: boolean
 }
 
 const countCartItems = (
@@ -53,34 +56,34 @@ const countCartItems = (
 }
 
 const MinicartIconButton: React.FC<Props> = props => {
-  const { Icon, itemCountMode, quantityDisplay } = props
+  const { Icon, itemCountMode, quantityDisplay, popupWithLink } = props
   const { orderForm, loading }: OrderFormContext = useOrderForm()
   const { handles } = useMinicartCssHandles()
   const { open, openBehavior, openOnHoverProp } = useMinicartState()
   const dispatch = useMinicartDispatch()
   const quantity = countCartItems(itemCountMode, orderForm.items)
   const itemQuantity = loading ? 0 : quantity
-
+  const { url: checkoutUrl } = useCheckoutURL()
+  const goToCheckout = useCheckout()  
   const handleClick = () => {
     if (openOnHoverProp) {
+      if(popupWithLink){
+        goToCheckout(checkoutUrl)
+      }
       if (openBehavior === 'hover') {
         dispatch({
           type: 'SET_OPEN_BEHAVIOR',
           value: 'click',
         })
-
         return
       }
-
       dispatch({ type: 'CLOSE_MINICART' })
       dispatch({
         type: 'SET_OPEN_BEHAVIOR',
         value: 'hover',
       })
-
       return
     }
-
     dispatch({ type: open ? 'CLOSE_MINICART' : 'OPEN_MINICART' })
   }
 
