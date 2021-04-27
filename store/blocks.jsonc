@@ -1,35 +1,57 @@
 // This is the default blocks implementation for the minicart-layout
 {
   "minicart.v2": {
-    "children": ["minicart-base-content"]
+    "children": [
+      "minicart-base-content"
+    ]
   },
   "minicart-base-content": {
-    "blocks": ["minicart-empty-state"],
-    "children": ["minicart-product-list", "flex-layout.row#minicart-footer"]
+    "blocks": [
+      "minicart-empty-state"
+    ],
+    "children": [
+      "minicart-product-list",
+      "flex-layout.row#minicart-footer"
+    ]
   },
   "flex-layout.row#minicart-footer": {
     "props": {
       "blockClass": "minicart-footer"
     },
-    "children": ["flex-layout.col#minicart-footer"]
+    "children": [
+      "flex-layout.col#minicart-footer"
+    ]
   },
   "flex-layout.col#minicart-footer": {
-    "children": ["minicart-summary", "minicart-checkout-button"]
+    "children": [
+      "minicart-summary",
+      "minicart-checkout-button"
+    ]
   },
   "minicart-product-list": {
-    "blocks": ["product-list#minicart"]
+    "blocks": [
+      "product-list#minicart"
+    ]
   },
   "product-list#minicart": {
-    "blocks": ["product-list-content-mobile"]
+    "blocks": [
+      "product-list-content-mobile"
+    ]
   },
   "minicart-summary": {
-    "blocks": ["checkout-summary.compact#minicart"]
+    "blocks": [
+      "checkout-summary.compact#minicart"
+    ]
   },
-
   "checkout-summary.compact#minicart": {
-    "children": ["summary-totalizers#minicart"],
+    "children": [
+      "summary-totalizers#minicart"
+    ],
     "props": {
-      "totalizersToShow": ["Items", "Discounts"]
+      "totalizersToShow": [
+        "Items",
+        "Discounts"
+      ]
     }
   },
   "summary-totalizers#minicart": {
@@ -39,10 +61,14 @@
     }
   },
   "minicart-empty-state": {
-    "children": ["flex-layout.row#empty-state"]
+    "children": [
+      "flex-layout.row#empty-state"
+    ]
   },
   "flex-layout.row#empty-state": {
-    "children": ["flex-layout.col#empty-state"]
+    "children": [
+      "flex-layout.col#empty-state"
+    ]
   },
   "flex-layout.col#empty-state": {
     "children": [
@@ -64,6 +90,11 @@
   "rich-text#minicart-default-empty-state": {
     "props": {
       "text": "Your cart is empty."
+    }
+  },
+  "minicart-close-button": {
+    "props": {
+      "Icon": "icon-close"
     }
   }
 }
