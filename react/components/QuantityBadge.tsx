@@ -45,15 +45,15 @@ interface Props {
 
 
 const QuantityBadge: React.FC<Props> = props => { 
-  const {itemCountMode, quantityDisplay } = props
+  const { itemCountMode, quantityDisplay = 'not-empty' } = props
   const { orderForm, loading }: OrderFormContext = useOrderForm()
   const quantity = countCartItems(itemCountMode, orderForm.items)
   const { handles } = useMinicartCssHandles()
   const itemQuantity = loading ? 0 : quantity
 
   const showQuantityBadge =
-    (itemQuantity > 0 && quantityDisplay === 'not-empty') ||
-    quantityDisplay === 'always'
+  (itemQuantity > 0 && quantityDisplay === 'not-empty') ||
+  quantityDisplay === 'always'
 
   return (
     <>
