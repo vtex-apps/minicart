@@ -28,15 +28,34 @@ const ProductList: FC<Props> = ({ renderAsChildren, classes }) => {
 
   const handleQuantityChange = useCallback(
     (uniqueId: string, quantity: number, item: OrderFormItem) => {
-      const adjustedItem = {
-        ...mapCartItemToPixel(item),
-        quantity,
+      if (quantity === item.quantity) {
+        return
       }
 
-      push({
-        event: 'addToCart',
-        items: [adjustedItem],
-      })
+      const quantityIncreased = quantity > item.quantity
+
+      if (quantityIncreased) {
+        const adjustedItem = {
+          ...mapCartItemToPixel(item),
+          quantity: quantity - item.quantity,
+        }
+
+        push({
+          event: 'addToCart',
+          items: [adjustedItem],
+        })
+      } else {
+        const adjustedItem = {
+          ...mapCartItemToPixel(item),
+          quantity: item.quantity - quantity,
+        }
+
+        push({
+          event: 'removeFromCart',
+          items: [adjustedItem],
+        })
+      }
+
       updateQuantity({ uniqueId, quantity }, options)
     },
     [push, updateQuantity]
