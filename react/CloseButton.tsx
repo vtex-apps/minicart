@@ -1,5 +1,7 @@
 import React, { FC } from 'react'
 import { useCssHandles } from 'vtex.css-handles'
+import { formatIOMessage } from 'vtex.native-types'
+import { useIntl } from 'react-intl'
 
 import { useMinicartDispatch } from './MinicartContext'
 
@@ -17,12 +19,13 @@ interface CloseButtonProps {
 const CloseButton: FC<CloseButtonProps> = props => {
   const { Icon, text } = props
   const dispatch = useMinicartDispatch()
-
+  const intl = useIntl()
   const { handles } = useCssHandles(CSS_HANDLES)
 
   const handleClick = () => {
     dispatch({ type: 'CLOSE_MINICART' })
   }
+
   return (
     <div className={`${handles.closeIconContainer} `}>
       <button
@@ -30,7 +33,11 @@ const CloseButton: FC<CloseButtonProps> = props => {
         onClick={handleClick}
       >
         {Icon && <Icon />}
-        {text && <p className={`${handles.closeButtonText} `}>{text}</p>}
+        {text && (
+          <p className={`${handles.closeButtonText} `}>
+            {formatIOMessage({ id: text, intl })}
+          </p>
+        )}
       </button>
     </div>
   )

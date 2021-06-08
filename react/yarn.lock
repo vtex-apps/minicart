@@ -5028,6 +5028,10 @@ verror@1.10.0:
   version "0.15.2"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.flex-layout@0.15.2/public/@types/vtex.flex-layout#1b3e061cec4711dea3a0b98ce3d0434fdcca890b"
 
+"vtex.native-types@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.native-types@0.7.5/public/@types/vtex.native-types":
+  version "0.7.5"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.native-types@0.7.5/public/@types/vtex.native-types#52d8c0b675fcdf2b6b1ca93f6a99a630519f618f"
+
 "vtex.order-items@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-items@0.9.2/public/@types/vtex.order-items":
   version "0.9.2"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-items@0.9.2/public/@types/vtex.order-items#4e1081e1dc88a6997296b27721fc1049d409e508"
