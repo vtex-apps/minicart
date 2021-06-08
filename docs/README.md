@@ -147,6 +147,14 @@ Therefore, in order to customize the Minicart configuration, you can simply copy
 
 For further information on how to configure each of the blocks used to compose `minicart.v2`, check out [Product List](https://vtex.io/docs/app/vtex.product-list) and [Checkout Summary](https://vtex.io/docs/app/vtex.checkout-summary).
 
+Another block not used in default implementation is `minicart-close-button`, this block can be used to render a custom close button when minicart is in popup mode.
+
+`minicart-close-button` props:
+| Prop name  | Type | Description | Default value |
+| ---------- | ---- | ----------- | ------------- |
+| `Icon` | `block` | Icon block to be showed | `undefined` |
+| `text` | `string` | Text to be showed | `undefined` |
+
 ## Customization
 
 In order to apply CSS customizations in this and other blocks, follow the instructions given in the recipe on [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).
