@@ -62,10 +62,11 @@ const MinicartContextProvider: FC<Props> = ({
   children,
 }) => {
   const { isMobile } = useDevice()
+  const isPopup = variation === 'popup' || variation === 'popupWithLink'
 
   // This prevents a popup minicart from being used on a mobile device
   const resolvedVariation =
-    variation === 'popup' && (isMobile || (window && window.innerWidth <= 480))
+    isPopup && (isMobile || (window && window.innerWidth <= 480))
       ? 'drawer'
       : variation
 
@@ -75,7 +76,7 @@ const MinicartContextProvider: FC<Props> = ({
     hasBeenOpened: false,
     openOnHoverProp,
     openBehavior:
-      resolvedVariation === 'popup' && openOnHoverProp ? 'hover' : 'click',
+      (resolvedVariation === 'popup' || resolvedVariation === 'popupWithLink') && openOnHoverProp ? 'hover' : 'click',
   })
 
   return (
