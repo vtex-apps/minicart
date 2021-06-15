@@ -41,7 +41,6 @@ interface MinicartProps {
   customPixelEventId?: string
   customPixelEventName?: PixelEventTypes.EventName
   classes?: CssHandlesTypes.CustomClasses<typeof CSS_HANDLES>
-  popupWithLink?: boolean
 }
 
 const Minicart: FC<MinicartProps> = ({
@@ -55,14 +54,13 @@ const Minicart: FC<MinicartProps> = ({
   drawerSlideDirection = 'rightToLeft',
   customPixelEventId,
   customPixelEventName,
-  classes,
-  popupWithLink = false
+  classes
 }) => {
   const { handles, withModifiers } = useCssHandles(CSS_HANDLES, { classes })
 
   const { variation } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
-
+  
   if (variation === 'link') {
     return (
       <aside
@@ -75,7 +73,7 @@ const Minicart: FC<MinicartProps> = ({
               withModifiers={withModifiers}
             >
               <MinicartIconButton
-                popupWithLink={popupWithLink}
+                variation={variation}
                 Icon={MinicartIcon}
                 itemCountMode={itemCountMode}
                 quantityDisplay={quantityDisplay}
@@ -86,7 +84,7 @@ const Minicart: FC<MinicartProps> = ({
       </aside>
     )
   }
-
+  
   return (
     <aside
       className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
@@ -109,9 +107,19 @@ const Minicart: FC<MinicartProps> = ({
             >
               {children}
             </DrawerMode>
+          ) : variation === 'popupWithLink' ? (
+            <PopupMode
+              Icon={MinicartIcon}
+              itemCountMode={itemCountMode}
+              quantityDisplay={quantityDisplay}
+              customPixelEventId={customPixelEventId}
+              customPixelEventName={customPixelEventName}
+              variation={variation}
+            >
+              {children}
+            </PopupMode>
           ) : (
             <PopupMode
-              popupWithLink={popupWithLink}
               Icon={MinicartIcon}
               itemCountMode={itemCountMode}
               quantityDisplay={quantityDisplay}
