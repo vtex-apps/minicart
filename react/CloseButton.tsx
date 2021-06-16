@@ -27,7 +27,7 @@ const CloseButton: FC<CloseButtonProps> = props => {
   }
 
   return (
-    <div className={`${handles.closeIconContainer} `}>
+    <div className={handles.closeIconContainer}>
       <button
         className={`${handles.closeIconButton} bg-transparent pointer bg-transparent transparent bn pointer`}
         onClick={handleClick}
