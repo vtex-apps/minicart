@@ -150,6 +150,7 @@ For further information on how to configure each of the blocks used to compose `
 Another block not used in default implementation is `minicart-close-button`, this block can be used to render a custom close button when minicart is in popup mode.
 
 `minicart-close-button` props:
+
 | Prop name  | Type | Description | Default value |
 | ---------- | ---- | ----------- | ------------- |
 | `Icon` | `block` | Icon block to be showed | `undefined` |
