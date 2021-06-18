@@ -76,7 +76,11 @@ const MinicartContextProvider: FC<Props> = ({
     hasBeenOpened: false,
     openOnHoverProp,
     openBehavior:
-      (resolvedVariation === 'popup' || resolvedVariation === 'popupWithLink') && openOnHoverProp ? 'hover' : 'click',
+      (resolvedVariation === 'popup' ||
+        resolvedVariation === 'popupWithLink') &&
+      openOnHoverProp
+        ? 'hover'
+        : 'click',
   })
 
   return (
