@@ -1,11 +1,11 @@
 import React from 'react'
 import { ButtonWithIcon } from 'vtex.styleguide'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
+import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 
 import styles from '../styles.css'
 import { useMinicartCssHandles } from './CssHandlesContext'
 import { useMinicartDispatch, useMinicartState } from '../MinicartContext'
-import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
 import useCheckout from '../modules/checkoutHook'
 
 export const CSS_HANDLES = [
@@ -56,7 +56,7 @@ const countCartItems = (
 }
 
 const MinicartIconButton: React.FC<Props> = props => {
-  const { Icon, itemCountMode, quantityDisplay, variation } = props  
+  const { Icon, itemCountMode, quantityDisplay, variation } = props
   const { orderForm, loading }: OrderFormContext = useOrderForm()
   const { handles } = useMinicartCssHandles()
   const { open, openBehavior, openOnHoverProp } = useMinicartState()
@@ -64,10 +64,10 @@ const MinicartIconButton: React.FC<Props> = props => {
   const quantity = countCartItems(itemCountMode, orderForm.items)
   const itemQuantity = loading ? 0 : quantity
   const { url: checkoutUrl } = useCheckoutURL()
-  const goToCheckout = useCheckout()  
+  const goToCheckout = useCheckout()
   const handleClick = () => {
     if (openOnHoverProp) {
-      if(variation === 'popupWithLink'){
+      if (variation === 'popupWithLink') {
         goToCheckout(checkoutUrl)
       }
       if (openBehavior === 'hover') {

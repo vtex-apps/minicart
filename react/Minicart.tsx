@@ -54,13 +54,13 @@ const Minicart: FC<MinicartProps> = ({
   drawerSlideDirection = 'rightToLeft',
   customPixelEventId,
   customPixelEventName,
-  classes
+  classes,
 }) => {
   const { handles, withModifiers } = useCssHandles(CSS_HANDLES, { classes })
 
   const { variation } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
-  
+
   if (variation === 'link') {
     return (
       <aside
@@ -84,7 +84,7 @@ const Minicart: FC<MinicartProps> = ({
       </aside>
     )
   }
-  
+
   return (
     <aside
       className={`${handles.minicartWrapperContainer} relative fr flex items-center`}

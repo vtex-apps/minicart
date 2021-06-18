@@ -31,7 +31,7 @@ const PopupMode: FC<Props> = props => {
     itemCountMode,
     customPixelEventId,
     customPixelEventName,
-    variation
+    variation,
   } = props
 
   const {
@@ -40,7 +40,7 @@ const PopupMode: FC<Props> = props => {
     hasBeenOpened,
     openOnHoverProp,
   } = useMinicartState()
-  
+
   const dispatch = useMinicartDispatch()
   const { handles } = useMinicartCssHandles()
 
