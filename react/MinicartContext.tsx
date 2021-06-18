@@ -56,13 +56,17 @@ function minicartContextReducer(state: State, action: Action): State {
   }
 }
 
+const checkVariationIsPopup = (variation: string): boolean => {
+  return variation === 'popup' || variation === 'popupWithLink'
+}
+
 const MinicartContextProvider: FC<Props> = ({
   variation = 'drawer',
   openOnHover: openOnHoverProp = false,
   children,
 }) => {
   const { isMobile } = useDevice()
-  const isPopup = variation === 'popup' || variation === 'popupWithLink'
+  const isPopup = checkVariationIsPopup(variation)
 
   // This prevents a popup minicart from being used on a mobile device
   const resolvedVariation =
