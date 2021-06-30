@@ -20,6 +20,7 @@
     "babel-eslint": "^10.1.0",
     "typescript": "3.9.7",
     "vtex.checkout-resources": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-resources@0.40.0/public/@types/vtex.checkout-resources",
+    "vtex.native-types": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.native-types@0.7.5/public/@types/vtex.native-types",
     "vtex.checkout-summary": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-summary@0.17.0/public/@types/vtex.checkout-summary",
     "vtex.css-handles": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@1.0.0/public/@types/vtex.css-handles",
     "vtex.device-detector": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.device-detector@0.2.6/public/@types/vtex.device-detector",

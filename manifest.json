@@ -33,7 +33,8 @@
     "vtex.checkout-resources": "0.x",
     "vtex.flex-layout": "0.x",
     "vtex.rich-text": "0.x",
-    "vtex.responsive-values": "0.x"
+    "vtex.responsive-values": "0.x",
+    "vtex.native-types": "0.x"
   },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }

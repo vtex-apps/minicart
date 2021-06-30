@@ -1,6 +1,9 @@
 {
   "minicart": {
-    "allowed": ["sandbox", "product-summary"],
+    "allowed": [
+      "sandbox",
+      "product-summary"
+    ],
     "component": "index"
   },
   "minicart.v2": {
@@ -19,19 +22,26 @@
   },
   "minicart-product-list": {
     "component": "ProductList",
-    "allowed": ["product-list"]
+    "allowed": [
+      "product-list"
+    ]
   },
   "minicart-checkout-button": {
     "component": "CheckoutButton"
   },
   "minicart-summary": {
     "component": "Summary",
-    "allowed": ["checkout-summary"],
+    "allowed": [
+      "checkout-summary"
+    ],
     "render": "lazy"
   },
   "minicart-empty-state": {
     "component": "EmptyState",
     "composition": "children",
     "render": "lazy"
+  },
+  "minicart-close-button": {
+    "component": "CloseButton"
   }
 }
