@@ -65,16 +65,19 @@ const MinicartIconButton: React.FC<Props> = props => {
   const itemQuantity = loading ? 0 : quantity
   const { url: checkoutUrl } = useCheckoutURL()
   const goToCheckout = useCheckout()
+
   const handleClick = () => {
     if (openOnHoverProp) {
       if (variation === 'popupWithLink') {
         goToCheckout(checkoutUrl)
       }
+
       if (openBehavior === 'hover') {
         dispatch({
           type: 'SET_OPEN_BEHAVIOR',
           value: 'click',
         })
+
         return
       }
       dispatch({ type: 'CLOSE_MINICART' })
@@ -82,8 +85,10 @@ const MinicartIconButton: React.FC<Props> = props => {
         type: 'SET_OPEN_BEHAVIOR',
         value: 'hover',
       })
+
       return
     }
+
     dispatch({ type: open ? 'CLOSE_MINICART' : 'OPEN_MINICART' })
   }
 
