@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Pass paymentData as prop to Summary component
 
+## [2.60.0] - 2021-06-29
+
+## [2.60.0] - 2021-06-29
+### Added
+- Pass paymentData as prop to Summary component
+
 ## [2.59.1] - 2021-06-08
 ### Fixed
 - GTM events to follow Google's defined patterns
