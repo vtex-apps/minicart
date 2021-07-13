@@ -11,7 +11,7 @@ interface Props {
 
 const Summary: FC<Props> = ({ classes }) => {
   const {
-    orderForm: { totalizers, value, paymentData},
+    orderForm: { totalizers, value, paymentData },
   } = useOrderForm()
 
   const { handles } = useCssHandles(CSS_HANDLES, { classes })
