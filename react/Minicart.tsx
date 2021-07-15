@@ -73,6 +73,7 @@ const Minicart: FC<MinicartProps> = ({
               withModifiers={withModifiers}
             >
               <MinicartIconButton
+                variation={variation}
                 Icon={MinicartIcon}
                 itemCountMode={itemCountMode}
                 quantityDisplay={quantityDisplay}
@@ -106,6 +107,17 @@ const Minicart: FC<MinicartProps> = ({
             >
               {children}
             </DrawerMode>
+          ) : variation === 'popupWithLink' ? (
+            <PopupMode
+              Icon={MinicartIcon}
+              itemCountMode={itemCountMode}
+              quantityDisplay={quantityDisplay}
+              customPixelEventId={customPixelEventId}
+              customPixelEventName={customPixelEventName}
+              variation={variation}
+            >
+              {children}
+            </PopupMode>
           ) : (
             <PopupMode
               Icon={MinicartIcon}

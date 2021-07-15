@@ -20,6 +20,7 @@ interface Props {
   itemCountMode: MinicartTotalItemsType
   customPixelEventId?: string
   customPixelEventName?: PixelEventTypes.EventName
+  variation?: string
 }
 
 const PopupMode: FC<Props> = props => {
@@ -30,6 +31,7 @@ const PopupMode: FC<Props> = props => {
     itemCountMode,
     customPixelEventId,
     customPixelEventName,
+    variation,
   } = props
 
   const {
@@ -65,6 +67,7 @@ const PopupMode: FC<Props> = props => {
   return (
     <div onMouseLeave={openBehavior === 'hover' ? handleMouseLeave : undefined}>
       <MinicartIconButton
+        variation={variation}
         Icon={Icon}
         itemCountMode={itemCountMode}
         quantityDisplay={quantityDisplay}

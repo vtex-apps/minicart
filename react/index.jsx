@@ -603,7 +603,7 @@ EnhancedMinicart.schema = {
       title: 'admin/editor.minicart.labelButtonFinishShopping.title',
       type: 'string',
       isLayout: false,
-    },
+    }
   },
 }
 
