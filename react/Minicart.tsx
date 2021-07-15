@@ -61,27 +61,51 @@ const Minicart: FC<MinicartProps> = ({
   const { variation } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
 
-  if (variation === 'link') {
-    return (
-      <aside
-        className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
-      >
-        <div className={`${handles.minicartContainer} flex flex-column`}>
+  const getMinicartVariation = () => {
+    switch (variation) {
+      case 'link':
+        return (
           <a href={linkVariationUrl ?? checkoutUrl}>
-            <MinicartCssHandlesProvider
-              handles={handles}
-              withModifiers={withModifiers}
-            >
-              <MinicartIconButton
-                Icon={MinicartIcon}
-                itemCountMode={itemCountMode}
-                quantityDisplay={quantityDisplay}
-              />
-            </MinicartCssHandlesProvider>
+            <MinicartIconButton
+              Icon={MinicartIcon}
+              itemCountMode={itemCountMode}
+              quantityDisplay={quantityDisplay}
+            />
           </a>
-        </div>
-      </aside>
-    )
+        )
+
+      case 'drawer':
+        return (
+          <DrawerMode
+            Icon={MinicartIcon}
+            backdropMode={backdropMode}
+            itemCountMode={itemCountMode}
+            maxDrawerWidth={maxDrawerWidth}
+            quantityDisplay={quantityDisplay}
+            drawerSlideDirection={drawerSlideDirection}
+            customPixelEventId={customPixelEventId}
+            customPixelEventName={customPixelEventName}
+          >
+            {children}
+          </DrawerMode>
+        )
+
+      case 'alwaysOpen':
+        return children
+
+      default:
+        return (
+          <PopupMode
+            Icon={MinicartIcon}
+            itemCountMode={itemCountMode}
+            quantityDisplay={quantityDisplay}
+            customPixelEventId={customPixelEventId}
+            customPixelEventName={customPixelEventName}
+          >
+            {children}
+          </PopupMode>
+        )
+    }
   }
 
   return (
@@ -93,30 +117,7 @@ const Minicart: FC<MinicartProps> = ({
           handles={handles}
           withModifiers={withModifiers}
         >
-          {variation === 'drawer' ? (
-            <DrawerMode
-              Icon={MinicartIcon}
-              backdropMode={backdropMode}
-              itemCountMode={itemCountMode}
-              maxDrawerWidth={maxDrawerWidth}
-              quantityDisplay={quantityDisplay}
-              drawerSlideDirection={drawerSlideDirection}
-              customPixelEventId={customPixelEventId}
-              customPixelEventName={customPixelEventName}
-            >
-              {children}
-            </DrawerMode>
-          ) : (
-            <PopupMode
-              Icon={MinicartIcon}
-              itemCountMode={itemCountMode}
-              quantityDisplay={quantityDisplay}
-              customPixelEventId={customPixelEventId}
-              customPixelEventName={customPixelEventName}
-            >
-              {children}
-            </PopupMode>
-          )}
+          {getMinicartVariation()}
         </MinicartCssHandlesProvider>
       </div>
     </aside>
