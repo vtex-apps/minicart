@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "Mini kundvagn",
+  "admin/editor.minicart.description": "En enkel mini kundvagn som visar alla produkter som läggs till i den",
+  "admin/editor.minicart.showDiscount.title": "Visa mängden sparade pengar",
+  "admin/editor.minicart.iconLabel.title": "Text som visas bredvid ikonen",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "Text som ska visas när mini kundvagnen är tom",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "Länk till omdirigering efter att man har klickat på knappen Gå till kassan",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "Text som ska visas på knappen slutför köp",
+  "admin/editor.minicart.showShippingCost.title": "Visa fraktkostnaden ovanför sidfoten",
+  "admin/editor.minicart.type.title": "Typ av mini kundvagn",
+  "admin/editor.minicart.type.popup": "Pop Up",
+  "admin/editor.minicart.type.sidebar": "Sidofält",
+  "store/finish-shopping-button-label": "Gå till kassan",
+  "store/minicart-empty": "Din kundvagn är tom!",
+  "store/sidebar-title": "Min mini kundvagn",
+  "store/minicart-content-footer-discount": "Spara",
+  "store/minicart.error-removal": "Borttagning av föremål misslyckades, vänligen försök igen",
+  "store/minicart.shipping-cost": "Total fraktkostnad",
+  "store/minicart.checkout-failure": "Någonting gick fel, vänligen försök igen.",
+  "store/minicart.go-to-checkout": "Gå till kassan",
+  "store/minicart.empty-state": "Din kundvagn är tom.",
+  "store/minicart.title": "Kundvagn"
+}
