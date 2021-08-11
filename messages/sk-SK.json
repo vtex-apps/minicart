@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "Mini košík",
+  "admin/editor.minicart.description": "Jednoduchý malý vozík, ktorý zobrazuje všetky pridané produkty",
+  "admin/editor.minicart.showDiscount.title": "Zobraziť ušetrené peniaze",
+  "admin/editor.minicart.iconLabel.title": "Text sa zobrazí vedľa ikony",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "Text, ktorý sa objaví, keď je mini košík prázdny",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "Odkaz na presmerovanie po kliknutí na tlačidlo Prejsť k pokladni",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "Text sa zobrazí v tlačidle dokončenia nákupu",
+  "admin/editor.minicart.showShippingCost.title": "Zobraziť prepravné náklady nad pätou strany",
+  "admin/editor.minicart.type.title": "Typ mini košíka",
+  "admin/editor.minicart.type.popup": "Vyskakovacie okno",
+  "admin/editor.minicart.type.sidebar": "Bočný panel",
+  "store/finish-shopping-button-label": "Prejsť k pokladni",
+  "store/minicart-empty": "Váš košík je prázdny!",
+  "store/sidebar-title": "Môj mini košík",
+  "store/minicart-content-footer-discount": "Uložiť",
+  "store/minicart.error-removal": "Odstránenie položky zlyhalo, skúste to znova",
+  "store/minicart.shipping-cost": "Celkové náklady na dopravu",
+  "store/minicart.checkout-failure": "Niečo sa nepodarilo. Skúste to znova.",
+  "store/minicart.go-to-checkout": "Prejsť k pokladni",
+  "store/minicart.empty-state": "Váš košík je prázdny.",
+  "store/minicart.title": "Košík"
+}
