@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "Mini koszyk",
+  "admin/editor.minicart.description": "Prosty mini koszyk, który pokazuje wszystkie produkty dodane do niego",
+  "admin/editor.minicart.showDiscount.title": "Pokaż sumę zaoszczędzonych pieniędzy",
+  "admin/editor.minicart.iconLabel.title": "Tekst pojawiający się obok ikony",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "Tekst pojawiający się, gdy mini koszyk jest pusty",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "Link do przekierowania po kliknięciu przycisku Idź do kasy",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "Tekst pojawiający się w przycisku zakończ zakupy",
+  "admin/editor.minicart.showShippingCost.title": "Pokaż koszt wysyłki powyżej stopki",
+  "admin/editor.minicart.type.title": "Typ mini koszyka",
+  "admin/editor.minicart.type.popup": "Wyskakujące okno",
+  "admin/editor.minicart.type.sidebar": "Pasek boczny",
+  "store/finish-shopping-button-label": "Idź do kasy",
+  "store/minicart-empty": "Twój koszyk jest pusty!",
+  "store/sidebar-title": "Mój mini koszyk",
+  "store/minicart-content-footer-discount": "Zapisz",
+  "store/minicart.error-removal": "Niepowodzenie usunięcia pozycji, spróbuj ponownie",
+  "store/minicart.shipping-cost": "Ogólny koszt wysyłki",
+  "store/minicart.checkout-failure": "Coś poszło nie tak. Spróbuj ponownie.",
+  "store/minicart.go-to-checkout": "Idź do kasy",
+  "store/minicart.empty-state": "Twój koszyk jest pusty.",
+  "store/minicart.title": "Koszyk"
+}
