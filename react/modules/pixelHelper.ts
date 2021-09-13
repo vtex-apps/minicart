@@ -55,9 +55,10 @@ function fixUrlProtocol(url: string) {
 /**
  * Remove the variant from the end of the name.
  * Ex: from "Classic Shoes Pink" to "Classic Shoes"
+ * Ps: Some products has the name of the variation the same as the item
  */
 function getNameWithoutVariant(item: CartItem) {
-  if (!item.name.includes(item.skuName)) {
+  if (!item.name.includes(item.skuName) || item.name === item.skuName) {
     return item.name
   }
 
