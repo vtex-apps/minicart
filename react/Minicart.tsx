@@ -85,6 +85,18 @@ const Minicart: FC<MinicartProps> = ({
     )
   }
 
+  if (variation === 'block') {
+    return (
+      <aside
+        className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
+      >
+        <div className={`${handles.minicartContainer} flex flex-column`}>
+          {children}
+        </div>
+      </aside>
+    )
+  }
+
   return (
     <aside
       className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
@@ -107,17 +119,6 @@ const Minicart: FC<MinicartProps> = ({
             >
               {children}
             </DrawerMode>
-          ) : variation === 'popupWithLink' ? (
-            <PopupMode
-              Icon={MinicartIcon}
-              itemCountMode={itemCountMode}
-              quantityDisplay={quantityDisplay}
-              customPixelEventId={customPixelEventId}
-              customPixelEventName={customPixelEventName}
-              variation={variation}
-            >
-              {children}
-            </PopupMode>
           ) : (
             <PopupMode
               Icon={MinicartIcon}
@@ -125,6 +126,7 @@ const Minicart: FC<MinicartProps> = ({
               quantityDisplay={quantityDisplay}
               customPixelEventId={customPixelEventId}
               customPixelEventName={customPixelEventName}
+              variation={variation}
             >
               {children}
             </PopupMode>
