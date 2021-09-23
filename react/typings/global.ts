@@ -12,4 +12,9 @@ type SlideDirectionType =
   | 'rightToLeft'
   | 'leftToRight'
 
-type MinicartVariationType = 'popup' | 'drawer' | 'link' | 'popupWithLink' | 'block'
+type MinicartVariationType = 
+  | 'popup'
+  | 'drawer'
+  | 'link'
+  | 'popupWithLink'
+  | 'block'
