@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "Mini kosár",
+  "admin/editor.minicart.description": "Egyszerű mini kosár, amely megjeleníti az összes hozzáadott terméket",
+  "admin/editor.minicart.showDiscount.title": "A megtakarított összeg megjelenítése",
+  "admin/editor.minicart.iconLabel.title": "Az ikon mellett megjelenő szöveg",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "A szöveg akkor jelenik meg, ha a mini kosár üres",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "Az átirányításra mutató hivatkozás az Ugrás a pénztárhoz gombra kattintást követően",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "A vásárlás befejezése gombban megjelenő szöveg",
+  "admin/editor.minicart.showShippingCost.title": "A szállítási költség megjelenítése a lábléc felett",
+  "admin/editor.minicart.type.title": "Mini kosár típusa",
+  "admin/editor.minicart.type.popup": "Előugró ablak",
+  "admin/editor.minicart.type.sidebar": "Oldalsáv",
+  "store/finish-shopping-button-label": "Ugrás a pénztárhoz",
+  "store/minicart-empty": "A kosár üres!",
+  "store/sidebar-title": "Saját mini kosár",
+  "store/minicart-content-footer-discount": "Mentés",
+  "store/minicart.error-removal": "A tétel eltávolítása sikertelen, próbálja újra",
+  "store/minicart.shipping-cost": "Teljes szállítási költség",
+  "store/minicart.checkout-failure": "Hiba történt. Próbálja újra.",
+  "store/minicart.go-to-checkout": "Ugrás a pénztárhoz",
+  "store/minicart.empty-state": "A kosár üres.",
+  "store/minicart.title": "Kosár"
+}

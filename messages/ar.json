@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "عربة شراء صغيرة",
+  "admin/editor.minicart.description": "عربة صغيرة بسيطة تعرض جميع المنتجات المضافة إليها",
+  "admin/editor.minicart.showDiscount.title": "اعرض كمية الأموال التي تم توفيرها",
+  "admin/editor.minicart.iconLabel.title": "النص الذي سيظهر بجانب الرمز",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "النص الذي سيظهر عندما تكون العربة الصغيرة فارغة",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "رابط لإعادة التوجيه بعد النقر فوق الزر الذهاب إلى الدفع",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "النص الذي سيظهر في زر إنهاء التسوق",
+  "admin/editor.minicart.showShippingCost.title": "إظهار تكلفة الشحن فوق التذييل",
+  "admin/editor.minicart.type.title": "نوع عربة التسوق الصغيرة",
+  "admin/editor.minicart.type.popup": "نافدة منبثقة",
+  "admin/editor.minicart.type.sidebar": "الشريط الجانبي",
+  "store/finish-shopping-button-label": "الذهاب إلى الدفع",
+  "store/minicart-empty": "عربتك فارغة!",
+  "store/sidebar-title": "عربة الشراء الصغيرة الخاصة بي",
+  "store/minicart-content-footer-discount": "حفظ",
+  "store/minicart.error-removal": "فشل إزالة العنصر، يرجى المحاولة مرة أخرى",
+  "store/minicart.shipping-cost": "إجمالي تكلفة الشحن",
+  "store/minicart.checkout-failure": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+  "store/minicart.go-to-checkout": "الذهاب إلى الدفع",
+  "store/minicart.empty-state": "عربتك فارغة.",
+  "store/minicart.title": "العربة"
+}
