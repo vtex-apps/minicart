@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "Minihandlevogn",
+  "admin/editor.minicart.description": "En enkel minihandlevogn som viser alle produktene som er lagt til",
+  "admin/editor.minicart.showDiscount.title": "Vis mengden sparte penger",
+  "admin/editor.minicart.iconLabel.title": "Tekst som skal vises ved siden av ikonet",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "Tekst som skal vises når minihandlevognen er tom",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "Link til omdirigering etter å ha klikket på Gå til kassen-knappen",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "Tekst som skal vises i Ferdig å handle-knappen",
+  "admin/editor.minicart.showShippingCost.title": "Vis fraktkostnaden over bunnteksten",
+  "admin/editor.minicart.type.title": "Type minihandlevogn",
+  "admin/editor.minicart.type.popup": "Popup",
+  "admin/editor.minicart.type.sidebar": "Sidefelt",
+  "store/finish-shopping-button-label": "Gå til kassen",
+  "store/minicart-empty": "Handlevognen din er tom!",
+  "store/sidebar-title": "Min minihandlevogn",
+  "store/minicart-content-footer-discount": "Lagre",
+  "store/minicart.error-removal": "Fjerning av vare mislyktes. Prøv igjen",
+  "store/minicart.shipping-cost": "Total fraktkostnad",
+  "store/minicart.checkout-failure": "Noe gikk galt. Prøv igjen.",
+  "store/minicart.go-to-checkout": "Gå til kassen",
+  "store/minicart.empty-state": "Handlevognen din er tom.",
+  "store/minicart.title": "Handlevogn"
+}
