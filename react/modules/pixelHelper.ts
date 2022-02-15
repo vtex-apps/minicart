@@ -58,7 +58,10 @@ function fixUrlProtocol(url: string) {
  * Ps: Some products has the name of the variation the same as the item
  */
 function getNameWithoutVariant(item: CartItem) {
-  if (!item.name.includes(item.skuName) || item.name === item.skuName) {
+  if (
+    (item?.name && !item.name.includes(item.skuName)) ||
+    item.name === item.skuName
+  ) {
     return item.name
   }
 
