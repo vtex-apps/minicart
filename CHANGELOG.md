@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+- Bug Fixed on pixelHelper if validation.
+
 ## [2.63.0] - 2022-02-08
 
 ### Added
