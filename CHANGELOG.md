@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- Prop `finishShoppingButtonLink` of `minicart-checkout-button`. 
+
 ## [2.63.1] - 2022-02-15
 
 ### Fixed
