@@ -42,7 +42,9 @@ The VTEX Minicart is a block that displays a summary list of all items added by 
  },
 ```
 
-:warning: **The Minicart v2 will only effectively function if the store uses the** [**Add To Cart Button**](https://vtex.io/docs/components/content-blocks/vtex.add-to-cart-button/) **instead of the** [**Buy Button**](https://vtex.io/docs/components/content-blocks/vtex.store-components/buybutton/) in blocks such as the Shelf and the Product Details Page. This is because Minicart v2 was built based on an indirect dependency with the Add To Cart button. That means that any other shopping buttons, as the Buy Button, are unable to render Minicart v2, even if it was correctly configured in the code. `
+> ⚠️
+> 
+>   **The Minicart v2 will only effectively function if the store uses the** [**Add To Cart Button**](https://vtex.io/docs/components/content-blocks/vtex.add-to-cart-button/) **instead of the** [**Buy Button**](https://vtex.io/docs/components/content-blocks/vtex.store-components/buybutton/) in blocks such as the Shelf and the Product Details Page. This is because Minicart v2 was built based on an indirect dependency with the Add To Cart button. That means that any other shopping buttons, as the Buy Button, are unable to render Minicart v2, even if it was correctly configured in the code. `
 
 | Prop name              | Type                      | Description                                                                                                                                                                                                                                     | Default value |
 | ---------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
@@ -99,12 +101,9 @@ According to the `minicart.v2` composition, it can be highly customizable using 
   "minicart-summary": {
     "blocks": ["checkout-summary.compact#minicart"]
   },
-  
-  {
   "minicart-checkout-button": {
     "props": {
       "finishShoppingButtonLink": "/checkout/#/orderform"
-    }
   }
 },
 
