@@ -63,6 +63,15 @@ const Content: FC<Props> = ({
       return
     }
 
+    // if additionalInfo is undefined for the most recent item, orderForm is still updating
+    // and therefore we should not emit the pixel event yet
+    if (
+      orderForm.items.length > 0 &&
+      orderForm.items[orderForm.items.length - 1].additionalInfo === undefined
+    ) {
+      return
+    }
+
     push({
       event: 'cartChanged',
       items: orderForm.items.map(mapCartItemToPixel),
