@@ -63,6 +63,13 @@ const Content: FC<Props> = ({
       return
     }
 
+    if (
+      orderForm.items.length > 0 &&
+      orderForm.items[orderForm.items.length - 1].additionalInfo === undefined
+    ) {
+      return
+    }
+
     push({
       event: 'cartChanged',
       items: orderForm.items.map(mapCartItemToPixel),
