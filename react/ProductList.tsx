@@ -27,7 +27,7 @@ const ProductList: FC<Props> = ({ renderAsChildren, classes }) => {
   const { handles } = useCssHandles(CSS_HANDLES, { classes })
 
   const handleQuantityChange = useCallback(
-    (uniqueId: string, quantity: number, item: OrderFormItem) => {
+    (_: string, quantity: number, item: OrderFormItemWithIndex) => {
       if (quantity === item.quantity) {
         return
       }
@@ -56,7 +56,7 @@ const ProductList: FC<Props> = ({ renderAsChildren, classes }) => {
         })
       }
 
-      updateQuantity({ uniqueId, quantity }, options)
+      updateQuantity({ index: item.index, quantity }, options)
     },
     [push, updateQuantity]
   )
