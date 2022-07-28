@@ -26,6 +26,10 @@ interface OrderFormItem {
   parentItemIndex: number | null
 }
 
+interface OrderFormItemWithIndex extends OrderFormItem {
+  index: number
+}
+
 interface ItemAdditionalInfo {
   brandName: string
 }
