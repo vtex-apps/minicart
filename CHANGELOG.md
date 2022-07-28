@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Fixed
-- using index avoid uniqueid
+- Quantity update by using item index instead of uniqueid
 
 ## [2.63.4] - 2022-05-24
 
