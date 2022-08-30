@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "Minicart",
+  "admin/editor.minicart.description": "Un simple resumen que muestra todos los productos agregados al carrito",
+  "admin/editor.minicart.showDiscount.title": "Mostrar la cantidad de dinero ahorrado",
+  "admin/editor.minicart.iconLabel.title": "Texto que aparecerá junto al ícono",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "Texto que aparecerá cuando el carrito esté vacío",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "Link de redirección al hacer clic en el botón \"Ir al checkout\"",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "Texto que aparecerá en el botón de finalizar la compra",
+  "admin/editor.minicart.showShippingCost.title": "Mostrar los costos de envío sobre el pie de página",
+  "admin/editor.minicart.type.title": "Tipo de carrito",
+  "admin/editor.minicart.type.popup": "Ventana emergente",
+  "admin/editor.minicart.type.sidebar": "Barra lateral",
+  "store/finish-shopping-button-label": "Ir al checkout",
+  "store/minicart-empty": "¡Tu carrito está vacío!",
+  "store/sidebar-title": "Mi carrito",
+  "store/minicart-content-footer-discount": "Guardar",
+  "store/minicart.error-removal": "Error al eliminar el ítem. Por favor, vuelve a intentarlo.",
+  "store/minicart.shipping-cost": "Costo total del envío",
+  "store/minicart.checkout-failure": "Se produjo un error. Por favor, vuelve a intentarlo.",
+  "store/minicart.go-to-checkout": "Ir al checkout",
+  "store/minicart.empty-state": "Tu carrito está vacío.",
+  "store/minicart.title": "Carrito"
+}
