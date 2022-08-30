@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 - Indonesian and Thai translations.
+### Fixed
+- Portuguese, Spanish and Italian translations.
 
 ## [2.64.0] - 2022-12-22
 
