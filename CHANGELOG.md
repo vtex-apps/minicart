@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- Schema to the `checkout button`, this makes it possible to define via admin where the user will be directed after the click
+
 ## [2.63.5] - 2022-07-28
 
 ### Fixed
