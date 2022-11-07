@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { Button } from 'vtex.styleguide'
 import { CssHandlesTypes, useCssHandles } from 'vtex.css-handles'
@@ -13,7 +13,10 @@ interface Props {
   classes?: CssHandlesTypes.CustomClasses<typeof CSS_HANDLES>
 }
 
-const CheckoutButton: FC<Props> = ({ finishShoppingButtonLink, classes }) => {
+const CheckoutButton: StoreFunctionComponent<Props> = ({
+  finishShoppingButtonLink,
+  classes,
+}): JSX.Element => {
   const { url: checkoutUrl } = useCheckoutURL()
   const { handles } = useCssHandles(CSS_HANDLES, { classes })
   const goToCheckout = useCheckout()
@@ -30,6 +33,10 @@ const CheckoutButton: FC<Props> = ({ finishShoppingButtonLink, classes }) => {
       </Button>
     </div>
   )
+}
+
+CheckoutButton.schema = {
+  title: 'store/finish-shopping-button-label',
 }
 
 export default CheckoutButton

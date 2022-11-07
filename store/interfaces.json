@@ -22,7 +22,17 @@
     "allowed": ["product-list"]
   },
   "minicart-checkout-button": {
-    "component": "CheckoutButton"
+    "component": "CheckoutButton",
+    "content": {
+      "title": "store/finish-shopping-button-label",
+      "properties": {
+        "finishShoppingButtonLink": {
+          "type": "string",
+          "title": "admin/editor.minicart.linkButtonFinishShopping.title",
+          "default": "/checkout/#/cart"
+        }
+      }
+    }
   },
   "minicart-summary": {
     "component": "Summary",
