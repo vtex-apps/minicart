@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "Troli Mini",
+  "admin/editor.minicart.description": "Troli mini sederhana yang menampilkan semua produk yang ditambah ke troli",
+  "admin/editor.minicart.showDiscount.title": "Menampilkan jumlah uang yang dihemat",
+  "admin/editor.minicart.iconLabel.title": "Teks akan muncul di samping ikon",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "Teks akan muncul saat troli mini kosong",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "Tautan untuk mengalihkan setelah mengklik tombol Lanjut ke Checkout",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "Teks akan muncul di tombol selesai belanja",
+  "admin/editor.minicart.showShippingCost.title": "Tampilkan ongkos kirim di atas footer",
+  "admin/editor.minicart.type.title": "Jenis Troli Mini",
+  "admin/editor.minicart.type.popup": "Pop Up",
+  "admin/editor.minicart.type.sidebar": "Bilah sisi",
+  "store/finish-shopping-button-label": "Lanjut ke checkout",
+  "store/minicart-empty": "Troli Anda kosong!",
+  "store/sidebar-title": "Troli mini saya",
+  "store/minicart-content-footer-discount": "Simpan",
+  "store/minicart.error-removal": "Gagal menghapus item, silakan coba lagi",
+  "store/minicart.shipping-cost": "Total ongkos kirim",
+  "store/minicart.checkout-failure": "Terjadi kesalahan. Silakan coba lagi.",
+  "store/minicart.go-to-checkout": "Lanjut ke checkout",
+  "store/minicart.empty-state": "Troli Anda kosong.",
+  "store/minicart.title": "Troli"
+}

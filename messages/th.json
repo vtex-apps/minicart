@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "รถเข็นขนาดเล็ก",
+  "admin/editor.minicart.description": "รถเข็นขนาดเล็กที่แสดงผลิตถัณฑ์ทั้งหมดที่เพิ่มลงไป",
+  "admin/editor.minicart.showDiscount.title": "แสดงจำนวนเงินที่ประหยัดได้",
+  "admin/editor.minicart.iconLabel.title": "ข้อความจะปรากฏถัดจากไอคอน",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "ข้อความจะปรากฏเมื่อไม่มีสินค้าในรถเข็นขนาดเล็ก",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "ลิงก์เพื่อเปลี่ยนเส้นทางหลังคลิกปุ่มไปที่หน้าชำระเงิน",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "ข้อความจะปรากฏบนปุ่มซื้อสินค้าเสร็จ",
+  "admin/editor.minicart.showShippingCost.title": "แสดงค่าจัดส่งเหนือส่วนท้ายของหน้า",
+  "admin/editor.minicart.type.title": "ประเภทรถเข็นขนาดเล็ก",
+  "admin/editor.minicart.type.popup": "ปรากฏขึ้นมา",
+  "admin/editor.minicart.type.sidebar": "แถบด้านข้าง",
+  "store/finish-shopping-button-label": "ไปที่หน้าชำระเงิน",
+  "store/minicart-empty": "ไม่มีสินค้าในรถเข็นของคุณ!",
+  "store/sidebar-title": "รถเข็นขนาดเล็กของฉัน",
+  "store/minicart-content-footer-discount": "บันทึก",
+  "store/minicart.error-removal": "ลบสินค้าไม่สำเร็จ กรุณาลองอีกครั้ง",
+  "store/minicart.shipping-cost": "ค่าจัดส่งรวมทั้งหมด",
+  "store/minicart.checkout-failure": "มีบางอย่างผิดพลาด กรุณาลองอีกครั้ง",
+  "store/minicart.go-to-checkout": "ไปที่หน้าชำระเงิน",
+  "store/minicart.empty-state": "ไม่มีสินค้าในรถเข็นของคุณ",
+  "store/minicart.title": "รถเข็น"
+}
