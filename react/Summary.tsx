@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { OrderForm as OrderFormComponent } from 'vtex.order-manager'
-import { OrderForm } from 'vtex.checkout-graphql'
 import { useCssHandles, CssHandlesTypes } from 'vtex.css-handles'
 
 const CSS_HANDLES = ['minicartSummary'] as const
@@ -14,16 +13,10 @@ const Summary: FC<Props> = ({ classes }) => {
   const { useOrderForm } = OrderFormComponent
 
   const {
-    orderForm: { totalizers, value, paymentData, items = [] },
-  }: { orderForm: OrderForm } = useOrderForm()
+    orderForm: { totalizers, value, originalValue = 0, paymentData },
+  } = useOrderForm()
 
   const { handles } = useCssHandles(CSS_HANDLES, { classes })
-  const originalTotal = items.reduce(
-    (total, item) =>
-      (total as number) +
-      ((item?.listPrice as number) ?? 0) * (item?.quantity ?? 1),
-    0
-  )
 
   return (
     <div className={`${handles.minicartSummary} ph4 ph6-l pt5`}>
@@ -32,7 +25,7 @@ const Summary: FC<Props> = ({ classes }) => {
         totalizers={totalizers}
         paymentData={paymentData}
         total={value}
-        originalTotal={originalTotal}
+        originalTotal={originalValue}
       />
     </div>
   )
