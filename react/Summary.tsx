@@ -13,10 +13,18 @@ const Summary: FC<Props> = ({ classes }) => {
   const { useOrderForm } = OrderFormComponent
 
   const {
-    orderForm: { totalizers, value, originalValue = 0, paymentData },
+    orderForm: { totalizers, value, items, paymentData },
   } = useOrderForm()
 
   const { handles } = useCssHandles(CSS_HANDLES, { classes })
+
+  const originalValue =
+    items?.reduce(
+      (total: number, item: OrderFormItem) =>
+        (total as number) +
+        ((item?.listPrice as number) ?? 0) * (item?.quantity ?? 1),
+      0
+    ) ?? 0
 
   return (
     <div className={`${handles.minicartSummary} ph4 ph6-l pt5`}>
