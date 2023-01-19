@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.66.0] - 2023-01-19
+
 ### Added
 - Provide `originalTotal` prop (sum of item list prices) to `checkout-summary` extension point
 
