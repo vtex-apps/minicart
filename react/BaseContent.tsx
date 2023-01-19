@@ -55,7 +55,7 @@ const Content: FC<Props> = ({
   const push = useDebouncedPush()
   const { handles } = useCssHandles(CSS_HANDLES, { classes })
   const { variation } = useMinicartState()
-  const { extensions } = useRuntime() as RenderContext.RenderContext
+  const { extensions } = useRuntime() as RenderContext
   const { treePath } = useTreePath()
 
   useEffect(() => {
