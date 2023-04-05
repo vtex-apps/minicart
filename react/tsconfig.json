@@ -3,12 +3,24 @@
   "compilerOptions": {
     "jsx": "react",
     "noEmitOnError": false,
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["dom"],
-    "types": ["node", "jest", "graphql"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "dom"
+    ],
+    "types": [
+      "node",
+      "jest",
+      "graphql"
+    ],
     "module": "esnext",
     "moduleResolution": "node",
     "target": "es2017"
   },
-  "include": ["./typings/*.d.ts", "./**/*.tsx", "./**/*.ts"]
+  "include": [
+    "./typings/*.d.ts",
+    "./**/*.tsx",
+    "./**/*.ts"
+  ]
 }
