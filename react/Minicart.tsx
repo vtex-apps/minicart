@@ -1,10 +1,10 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { IconCart } from 'vtex.store-icons'
 import { BackdropMode } from 'vtex.store-drawer'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { ResponsiveValuesTypes } from 'vtex.responsive-values'
 import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
-import { PixelEventTypes } from 'vtex.pixel-manager'
+import { PixelEventTypes, usePixel } from 'vtex.pixel-manager'
 import { useCssHandles, CssHandlesTypes } from 'vtex.css-handles'
 
 import PopupMode, {
@@ -58,8 +58,19 @@ const Minicart: FC<MinicartProps> = ({
 }) => {
   const { handles, withModifiers } = useCssHandles(CSS_HANDLES, { classes })
 
-  const { variation } = useMinicartState()
+  const { orderForm }: OrderFormContext = useOrderForm()
+
+  const { push } = usePixel()
+
+  const { variation, open } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
+
+  useEffect(() => {
+    open && push({
+      event: 'viewCart',
+      items: orderForm.items,
+    })
+  }, [open])
 
   if (variation === 'link') {
     return (
