@@ -5028,10 +5028,6 @@ verror@1.10.0:
   version "0.2.6"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.device-detector@0.2.6/public/@types/vtex.device-detector#3219242fa5c2f14023d33c3549c2d8de93c76d1f"
 
-"vtex.flex-layout@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.flex-layout@0.21.0/public/@types/vtex.flex-layout":
-  version "0.21.0"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.flex-layout@0.21.0/public/@types/vtex.flex-layout#aa4a7225567408a4299a9d030c99dcb71555628a"
-
 "vtex.minicart@https://natandevuamerge--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.minicart@2.66.0+build1680722065/public/@types/vtex.minicart":
   version "2.66.0"
   resolved "https://natandevuamerge--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.minicart@2.66.0+build1680722065/public/@types/vtex.minicart#a186b7beecdc9cc52fc545530394761e49de2a8a"

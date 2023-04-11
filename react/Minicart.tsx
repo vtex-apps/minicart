@@ -70,7 +70,7 @@ const Minicart: FC<MinicartProps> = ({
       event: 'viewCart',
       items: orderForm.items,
     })
-  }, [open])
+  }, [open, push, orderForm.items])
 
   if (variation === 'link') {
     return (
