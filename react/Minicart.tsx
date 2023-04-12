@@ -66,10 +66,11 @@ const Minicart: FC<MinicartProps> = ({
   const { url: checkoutUrl } = useCheckoutURL()
 
   useEffect(() => {
-    open && push({
-      event: 'viewCart',
-      items: orderForm.items,
-    })
+    open &&
+      push({
+        event: 'viewCart',
+        items: orderForm.items,
+      })
   }, [open, push, orderForm.items])
 
   if (variation === 'link') {
