@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- Send `view_cart` event to analytics when minicart is opened
+- Send `vtex:viewCart` event to analytics when minicart is opened
 
 ## [2.66.0] - 2023-01-19
 
