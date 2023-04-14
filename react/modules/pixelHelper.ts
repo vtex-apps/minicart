@@ -82,9 +82,9 @@ function productCategory(item: CartItem) {
   }
 }
 
-export function transformOrderFormItems(orderFormItems: OrderForm['items']){
-  if(!orderFormItems || !orderFormItems.length) return []
-	return orderFormItems.map(item => mapCartItemToPixel(item))
+export function transformOrderFormItems(orderFormItems: OrderForm['items']) {
+  if (!orderFormItems || !orderFormItems.length) return []
+  return orderFormItems.map(item => mapCartItemToPixel(item))
 }
 
 interface PixelCartItem {

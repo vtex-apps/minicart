@@ -100,18 +100,16 @@ export const applyModifiers = (handles, modifier) => {
   return splitHandles.concat(modifiedHandles).join(' ').trim()
 }
 
-export const withCssHandles =
-  (handles = [], options) =>
-  Component => {
-    const EnhancedComponent = props => {
-      const { handles: cssHandles } = useCssHandles(handles, options)
+export const withCssHandles = (handles = [], options) => Component => {
+  const EnhancedComponent = props => {
+    const { handles: cssHandles } = useCssHandles(handles, options)
 
-      return <Component handles={cssHandles} {...props} />
-    }
-
-    const displayName = Component.displayName || Component.name || 'Component'
-
-    EnhancedComponent.displayName = `withCssHandles(${displayName})`
-
-    return EnhancedComponent
+    return <Component handles={cssHandles} {...props} />
   }
+
+  const displayName = Component.displayName || Component.name || 'Component'
+
+  EnhancedComponent.displayName = `withCssHandles(${displayName})`
+
+  return EnhancedComponent
+}
