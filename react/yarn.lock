@@ -5028,9 +5028,9 @@ verror@1.10.0:
   version "0.2.6"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.device-detector@0.2.6/public/@types/vtex.device-detector#3219242fa5c2f14023d33c3549c2d8de93c76d1f"
 
-"vtex.flex-layout@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.flex-layout@0.20.1/public/@types/vtex.flex-layout":
-  version "0.20.1"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.flex-layout@0.20.1/public/@types/vtex.flex-layout#dce9424c910091f0ba1f5229ce8ae80c9f7b7765"
+"vtex.flex-layout@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.flex-layout@0.21.0/public/@types/vtex.flex-layout":
+  version "0.21.0"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.flex-layout@0.21.0/public/@types/vtex.flex-layout#aa4a7225567408a4299a9d030c99dcb71555628a"
 
 "vtex.order-items@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-items@0.13.21/public/@types/vtex.order-items":
   version "0.13.21"
@@ -5080,9 +5080,9 @@ verror@1.10.0:
   version "0.16.2"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-drawer@0.16.2/public/@types/vtex.store-drawer#3e3a0e07babcf623922f1eb0c85185bcd12b8002"
 
-"vtex.store-graphql@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-graphql@2.161.1/public/@types/vtex.store-graphql":
-  version "2.161.1"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-graphql@2.161.1/public/@types/vtex.store-graphql#b734710d0b23ee534b96096e30011c84b90150c9"
+"vtex.store-graphql@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-graphql@2.161.2/public/@types/vtex.store-graphql":
+  version "2.161.2"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-graphql@2.161.2/public/@types/vtex.store-graphql#6348bb2c1fe66a47a2a0f5f600cbf84a4a43d144"
 
 "vtex.store-icons@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-icons@0.18.0/public/@types/vtex.store-icons":
   version "0.18.0"
