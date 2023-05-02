@@ -39,6 +39,7 @@ import createLocalState, { ITEMS_STATUS } from './legacy/localState'
 import styles from './legacy/minicart.css'
 import useMarketingSessionParams from './legacy/hooks/useMarketingSessionParams'
 import useCartIdPixel from './modules/useCartIdPixel'
+import useViewCartPixel from './modules/useViewCartPixel'
 
 const DEFAULT_LABEL_CLASSES = ''
 const DEFAULT_ICON_CLASSES = 'gray'
@@ -401,6 +402,8 @@ const MiniCart = ({
     (window && window.innerWidth <= 480)
 
   const isOpen = pathOr(false, ['isOpen'], minicartState)
+
+  useViewCartPixel(isOpen, minicartItems)
 
   const miniCartContent = (
     <MiniCartContent

@@ -30,7 +30,7 @@ interface Props {
 type Action = OpenMinicartAction | CloseMinicartAction | SetOpenBehaviorAction
 type Dispatch = (action: Action) => void
 
-const MinicartStateContext = createContext<State | undefined>(undefined)
+export const MinicartStateContext = createContext<State | undefined>(undefined)
 const MinicartDispatchContext = createContext<Dispatch | undefined>(undefined)
 
 function minicartContextReducer(state: State, action: Action): State {

@@ -1,10 +1,16 @@
 import React from 'react'
 import { render, fireEvent, wait } from '@vtex/test-tools/react'
 import orderFormQuery from 'vtex.store-resources/QueryOrderForm'
-
 import orderForm from '../__fixtures__/orderForm'
 import emptyOrderForm from '../__fixtures__/emptyOrderForm'
 import MiniCart from '../../index'
+import { transformOrderFormItems } from '../../modules/pixelHelper'
+
+const mockedUsePixelPush = jest.fn()
+
+jest.mock('vtex.pixel-manager', () => ({
+  usePixel: () => ({ push: mockedUsePixelPush }),
+}))
 
 const mocks = [
   {
@@ -35,6 +41,10 @@ const emptyMock = [
 describe('<MiniCart />', () => {
   beforeEach(() => {
     jest.useFakeTimers()
+  })
+
+  afterEach(() => {
+    mockedUsePixelPush.mockClear()
   })
 
   it('should render popup onClick', async () => {
@@ -220,5 +230,59 @@ describe('<MiniCart />', () => {
       jest.runAllTimers()
     })
     expect(getByTestId('total-price')).toBeInTheDocument()
+  })
+
+  it('should trigger vtex:viewCart when cart is opened', async () => {
+    const { container } = render(
+      <MiniCart type="sidebar" hideContent={false} />,
+      { graphql: { mocks } }
+    )
+
+    const cartButton = container.getElementsByClassName('IconCart')[0]
+
+    await wait(() => {
+      jest.runAllTimers()
+    })
+    
+    await wait(() => {
+      fireEvent.click(cartButton)
+    })
+
+    await wait(() => {
+      jest.runAllTimers()
+    })
+
+    const expectedPixelEvent = {
+      event: 'viewCart',
+      items: transformOrderFormItems(orderForm.items),
+    }
+
+    expect(mockedUsePixelPush).toHaveBeenCalledWith(expectedPixelEvent)
+  })
+
+  it('should trigger vtex:viewCart when cart is opened with no items', async () => {
+    const { getByText } = render(
+      <MiniCart type="sidebar" hideContent={false} />,
+      { graphql: { mocks: emptyMock } }
+    )
+
+    await wait(() => {
+      jest.runAllTimers()
+    })
+    
+    await wait(() => {
+      fireEvent.click(getByText(/button test/i))
+    })
+
+    await wait(() => {
+      jest.runAllTimers()
+    })
+
+    const expectedPixelEvent = {
+      event: 'viewCart',
+      items: [],
+    }
+
+    expect(mockedUsePixelPush).toHaveBeenCalledWith(expectedPixelEvent)
   })
 })
