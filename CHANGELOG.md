@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - Fixes of i18n on readme.md accorrding to task LOC-10558.
 
+## [2.67.0] - 2023-05-02
+### Added
+- Send `vtex:viewCart` event to analytics when minicart is opened
+
 ## [2.66.0] - 2023-01-19
 
 ### Added

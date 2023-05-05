@@ -19,6 +19,7 @@ import MinicartIconButton, {
 import useCartIdPixel from './modules/useCartIdPixel'
 import { MinicartCssHandlesProvider } from './components/CssHandlesContext'
 import { MinicartContextProvider, useMinicartState } from './MinicartContext'
+import useViewCartPixel from './modules/useViewCartPixel'
 
 export const CSS_HANDLES = [
   ...PopupModeCssHandles,
@@ -43,7 +44,7 @@ interface MinicartProps {
   classes?: CssHandlesTypes.CustomClasses<typeof CSS_HANDLES>
 }
 
-const Minicart: FC<MinicartProps> = ({
+export const Minicart: FC<MinicartProps> = ({
   children,
   backdropMode,
   linkVariationUrl,
@@ -58,8 +59,12 @@ const Minicart: FC<MinicartProps> = ({
 }) => {
   const { handles, withModifiers } = useCssHandles(CSS_HANDLES, { classes })
 
-  const { variation } = useMinicartState()
+  const { orderForm }: OrderFormContext = useOrderForm()
+
+  const { variation, open } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
+
+  useViewCartPixel(open, orderForm?.items)
 
   if (variation === 'link') {
     return (
