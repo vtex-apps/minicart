@@ -6,17 +6,15 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-> ⚠️
-> 
->   **Minicart v1 block has been deprecated in favor of Minicart v2** which can be customized using the blocks defined by [Product List](https://vtex.io/docs/app/vtex.product-list) and [Checkout Summary](https://vtex.io/docs/app/vtex.checkout-summary). If you’re still using the former version, you can find its documentation here: [Minicart v1 documentation](https://github.com/vtex-apps/minicart/blob/383d7bbd3295f06d1b5854a0add561a872e1515c/docs/README.md)
+> ⚠️ Minicart v1 block has been deprecated in favor of Minicart v2, which can be customized using the blocks defined by [Product List](https://developers.vtex.com/docs/apps/vtex.product-list) and [Checkout Summary](https://developers.vtex.com/docs/apps/vtex.checkout-summary). If you still use Minicart v1, see the [Minicart v1 documentation](https://github.com/vtex-apps/minicart/blob/383d7bbd3295f06d1b5854a0add561a872e1515c/docs/README.md).
 
-The VTEX Minicart is a block that displays a summary list of all items added by customers in their shopping cart. Its data is fetched from the Checkout OrderForm API.
+The Minicart is a block that displays a summary list of all items added to the shopping cart, fetched from the Checkout OrderForm API.
 
-![minicart-v2-gif](https://user-images.githubusercontent.com/52087100/73321194-7f477e80-4220-11ea-844b-f24d1c10363c.gif)
+![minicart-v2-gif](https://cdn.jsdelivr.net/gh/vtexdocs/dev-portal-content@main/images/vtex-minicart-0.gif)
 
-## Configuration
+## Configurating Minicart
 
-1. Import the Minicart app to your theme's dependencies in the `manifest.json` as shown below:
+1. Import the Minicart app to your theme dependencies in the `manifest.json`, as shown below:
 
 ```json
 "dependencies": {
@@ -42,31 +40,29 @@ The VTEX Minicart is a block that displays a summary list of all items added by 
  },
 ```
 
-> ⚠️
-> 
->   **The Minicart v2 will only effectively function if the store uses the** [**Add To Cart Button**](https://vtex.io/docs/components/content-blocks/vtex.add-to-cart-button/) **instead of the** [**Buy Button**](https://vtex.io/docs/components/content-blocks/vtex.store-components/buybutton/) in blocks such as the Shelf and the Product Details Page. This is because Minicart v2 was built based on an indirect dependency with the Add To Cart button. That means that any other shopping buttons, as the Buy Button, are unable to render Minicart v2, even if it was correctly configured in the code. `
+> ⚠️ Minicart v2 will only effectively function if the store uses the [`add-to-cart` app](https://developers.vtex.com/docs/apps/vtex.add-to-cart-button) instead of the [`buy-button` block](https://developers.vtex.com/docs/apps/vtex.store-components/buybutton) in blocks such as the Shelf and the Product Details page. This is because Minicart v2 was built based on an indirect dependency on the Add to Cart button. This means that even if Minicart v2 is correctly configured in the code, it cannot be rendered by other shopping buttons, such as the Buy button.
 
-| Prop name              | Type                      | Description                                                                                                                                                                                                                                     | Default value |
-| ---------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `variation`            | `enum`                    | Minicart behavior when rendered. Possible values are: `popup` (it pops up on the Homepage in a minitab window), `drawer` (it is rendered through a sidebar), `link` (when clicked on, it redirects the user to the Checkout page), `popupWithLink` (it joins `link` and `popup` to work together) and `block` renders the minicart as a fixed block on the page | `drawer`    |
-| `drawerSlideDirection` | `enum`                    | Slide direction for the `drawer` Minicart opening. Possible values are: `rightToLeft` or `leftToRight`).                                                                                                                                               | `rightToLeft` |
-| `linkVariationUrl`     | `string`                  | Link associated to the `link` Minicart.                                                                                                                                                                                                       |   `undefined`            |
-| `maxDrawerWidth`       | `number`                  | Maximum width (in pixels) for the `drawer` Minicart when opened.                                                                                                                                                                             | `440`         |
-| `openOnHover`          | `boolean`                 | Whether the `popup` minicart should open when the user hovers over it.                                                                                                                                                                       | `false`         |
-| `quantityDisplay`      | `enum`                    | Shows the quantity badge even when the amount of products in the cart is zero. Possible values are: `always` or `not-empty` or `never`).                                                                                                                | `not-empty` |
-| `itemCountMode` | `enum` | Quantity badge behavior when displaying the number of total items added in Minicart. Possible values are: `total`  (quantity badge displays the number of items added to the cart), `distinct` (only displays the number of different products added to the cart), `totalAvailable`  (displays the number of available items added to the cart), and `distinctAvailable` (displays the number of different *and* available products added to the cart). | `distinct` |
-| `backdropMode`         | `enum` | Controls whether the backdrop should be displayed when the `drawer` Minicart is opened or not. Possible values are: `visible` (rendering the backdrop) or `none` (rendering the `drawer` without backdrop).  | `none` |
-| `MinicartIcon` | `block` | Icon displayed in the Minicart button. This prop's value must match the name of the block responsible for rendering the desired icon. | `icon-cart` (from [Store Icons](https://vtex.io/docs/components/all/vtex.store-icons/) app) |
-| `customPixelEventId` | `string`   | Store event ID responsible for triggering the `minicart.v2` to automatically open itself on the interface. | `undefined`    |
-| `customPixelEventName` | `string`   | Store event name responsible for triggering the `minicart.v2` to automatically open itself on the interface. Some examples are: `'addToCart'` and `'removeFromCart'`. Notice that using this prop will make the `minicart.v2` open in **every** event with the specified name if no `customPixelEventId` is specified. | `undefined`    |
-| `classes`         | `CustomCSSClasses` | Used to override default CSS handles. To better understand how this prop works, we recommend reading about it [here](https://github.com/vtex-apps/css-handles#usecustomclasses). Note that this is only useful if you're importing this block as a React component.                                      | `undefined`           |
+| Prop name              | Type               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                 | Default value                                                                                       |
+| ---------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `variation`            | `enum`             | Minicart behavior when rendered. Possible values for displaying the VTEX Minicart are: `popup` (appears as a pop-up window on the homepage), `drawer` (appears as a sidebar), `link` (redirects the user to the Checkout page when clicked), `popupWithLink` (combines `link` and `popup` functionalities), and `block` (displays the Minicart as a fixed block on the page).                                                               | `drawer`                                                                                            |
+| `drawerSlideDirection` | `enum`             | Slide direction for the `drawer` Minicart opening. Possible values are: `rightToLeft` or `leftToRight`.                                                                                                                                                                                                                                                                                                                                     | `rightToLeft`                                                                                       |
+| `linkVariationUrl`     | `string`           | Link associated with the `link` Minicart.                                                                                                                                                                                                                                                                                                                                                                                                   | `undefined`                                                                                         |
+| `maxDrawerWidth`       | `number`           | Maximum width (in pixels) for the `drawer` Minicart when opened.                                                                                                                                                                                                                                                                                                                                                                            | `440`                                                                                               |
+| `openOnHover`          | `boolean`          | Indicates whether the `popup` Minicart should open when the user hovers over it.                                                                                                                                                                                                                                                                                                                                                            | `false`                                                                                             |
+| `quantityDisplay`      | `enum`             | Shows the quantity badge even when the amount of products in the cart is zero. Possible values are: `always` or `not-empty` or `never`.                                                                                                                                                                                                                                                                                                     | `not-empty`                                                                                         |
+| `itemCountMode`        | `enum`             | Quantity badge behavior when displaying the total items added to Minicart. Possible values are: `total` (quantity badge displays the number of items added to the cart), `distinct` (only displays the number of different products added to the cart), `totalAvailable` (displays the number of available items added to the cart), and `distinctAvailable` (displays the number of different _and_ available products added to the cart). | `distinct`                                                                                          |
+| `backdropMode`         | `enum`             | Controls whether the backdrop should be displayed when the `drawer` Minicart is opened or not. Possible values are: `visible` (renders the backdrop) or `none` (renders the `drawer` without backdrop).                                                                                                                                                                                                                                     | `none`                                                                                              |
+| `MinicartIcon`         | `block`            | Icon displayed on the Minicart button. This prop value must match the block name responsible for rendering the desired icon.                                                                                                                                                                                                                                                                                                                | `icon-cart` (from the [Store Icons](https://developers.vtex.com/docs/guides/vtex-store-icons/) app) |
+| `customPixelEventId`   | `string`           | Store event ID responsible for triggering the `minicart.v2` to automatically open on the interface.                                                                                                                                                                                                                                                                                                                                         | `undefined`                                                                                         |
+| `customPixelEventName` | `string`           | Store event name responsible for triggering the `minicart.v2` to automatically open on the interface. Some examples are: `'addToCart'` and `'removeFromCart'`. Note that using this prop will make the `minicart.v2` open in **every** event with the specified name if no `customPixelEventId` is specified.                                                                                                                               | `undefined`                                                                                         |
+| `classes`              | `CustomCSSClasses` | Used to override default CSS handles. To better understand how this prop works, we recommend reading about it [here](https://github.com/vtex-apps/css-handles#usecustomclasses). Note that this is only useful when importing this block as a React component.                                                                                                                                                                              | `undefined`                                                                                         |
 
-### Advanced Configuration
+### Advanced configurations
 
-According to the `minicart.v2` composition, it can be highly customizable using other blocks. Currently, its default implementation is as follows:
+The default implementation for `minicart.v2` can be highly customizable by using other blocks. Currently, its default implementation is as follows:
 
 ```jsonc
-// This is the default blocks implementation for the minicart-layout
+// This is the default block implementation for the minicart-layout
 {
   "minicart.v2": {
     "props": {
@@ -104,8 +100,8 @@ According to the `minicart.v2` composition, it can be highly customizable using 
   "minicart-checkout-button": {
     "props": {
       "finishShoppingButtonLink": "/checkout/#/orderform"
-  }
-},
+    }
+  },
 
   "checkout-summary.compact#minicart": {
     "children": ["summary-totalizers#minicart"],
@@ -150,17 +146,17 @@ According to the `minicart.v2` composition, it can be highly customizable using 
 }
 ```
 
-By default implementation we mean that whenever you use `minicart.v2` in your store you're actually using the `json` above behind the scenes.
+The default implementation of `minicart.v2` consists of the `JSON` code shown above, which is used behind the scenes whenever you use this block in your store.
 
-Therefore, in order to customize the Minicart configuration, you can simply copy the code above and change it as you wish.
+To customize the Minicart configuration, you can copy the code and modify it to your needs.
 
-For further information on how to configure each of the blocks used to compose `minicart.v2`, check out [Product List](https://vtex.io/docs/app/vtex.product-list) and [Checkout Summary](https://vtex.io/docs/app/vtex.checkout-summary).
+For detailed instructions on how to configure each of the blocks that make up `minicart.v2`, read the [Product List](https://developers.vtex.com/docs/apps/vtex.product-list) and [Checkout Summary](https://developers.vtex.com/docs/apps/vtex.checkout-summary) documentations.
 
 ## Customization
 
-In order to apply CSS customizations in this and other blocks, follow the instructions given in the recipe on [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).
+To apply CSS customizations to this and other blocks, follow the instructions given in the recipe on [Using CSS handles for store customization](https://developers.vtex.com/docs/guides/vtex-io-documentation-using-css-handles-for-store-customization).
 
-| CSS Handles                     |
+| CSS handles                     |
 | ------------------------------- |
 | `arrowUp`                       |
 | `minicartCheckoutButton`        |
