@@ -6,7 +6,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-> ⚠️ **Minicart v1 block has been deprecated in favor of Minicart v2**, which can be customized using the blocks defined by [Product List](https://developers.vtex.com/docs/apps/vtex.product-list) and [Checkout Summary](https://developers.vtex.com/docs/apps/vtex.checkout-summary). If you are still using Minicart v1, see the [Minicart v1 documentation](https://github.com/vtex-apps/minicart/blob/383d7bbd3295f06d1b5854a0add561a872e1515c/docs/README.md).
+> ⚠️ Minicart v1 block has been deprecated in favor of Minicart v2, which can be customized using the blocks defined by [Product List](https://developers.vtex.com/docs/apps/vtex.product-list) and [Checkout Summary](https://developers.vtex.com/docs/apps/vtex.checkout-summary). If you still use Minicart v1, see the [Minicart v1 documentation](https://github.com/vtex-apps/minicart/blob/383d7bbd3295f06d1b5854a0add561a872e1515c/docs/README.md).
 
 The VTEX Minicart is a block that displays a summary list of all items added to the shopping cart, fetched from the Checkout OrderForm API.
 
