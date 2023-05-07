@@ -37,7 +37,7 @@ const ProductList: FC<Props> = ({ renderAsChildren, classes }) => {
       if (quantityIncreased) {
         const adjustedItem = {
           ...mapCartItemToPixel(item),
-          quantity: quantity - item.quantity,
+          quantity,
         }
 
         push({
@@ -47,7 +47,7 @@ const ProductList: FC<Props> = ({ renderAsChildren, classes }) => {
       } else {
         const adjustedItem = {
           ...mapCartItemToPixel(item),
-          quantity: item.quantity - quantity,
+          quantity,
         }
 
         push({
@@ -63,7 +63,7 @@ const ProductList: FC<Props> = ({ renderAsChildren, classes }) => {
 
   const handleRemove = useCallback(
     (uniqueId: string, item: OrderFormItem) => {
-      const adjustedItem = mapCartItemToPixel(item)
+      const adjustedItem = { ...mapCartItemToPixel(item), quantity: 0 }
       push({
         event: 'removeFromCart',
         items: [adjustedItem],
