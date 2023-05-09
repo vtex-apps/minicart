@@ -1,0 +1,23 @@
+{
+  "admin/editor.minicart.title": "迷你購物車",
+  "admin/editor.minicart.description": "簡單的迷你購物村，顯示添加到其中的全部產品",
+  "admin/editor.minicart.showDiscount.title": "顯示優惠的金額數量",
+  "admin/editor.minicart.iconLabel.title": "顯示在圖示旁邊的文字",
+  "admin/editor.minicart.labelMiniCartEmpty.title": "迷你購物車清空時顯示的文字",
+  "admin/editor.minicart.linkButtonFinishShopping.title": "在點按「前往結賬」按鈕後重新導向的連結",
+  "admin/editor.minicart.labelButtonFinishShopping.title": "完成購物按鈕中顯示的文字",
+  "admin/editor.minicart.showShippingCost.title": "在頁尾上方顯示運費",
+  "admin/editor.minicart.type.title": "迷你購物車類型",
+  "admin/editor.minicart.type.popup": "彈出式視窗",
+  "admin/editor.minicart.type.sidebar": "側邊欄",
+  "store/finish-shopping-button-label": "前往結賬",
+  "store/minicart-empty": "您的購物車是空的！",
+  "store/sidebar-title": "我的迷你購物車",
+  "store/minicart-content-footer-discount": "優惠",
+  "store/minicart.error-removal": "商品刪除失敗，請重試。",
+  "store/minicart.shipping-cost": "運費總計：",
+  "store/minicart.checkout-failure": "出错了。请再试一次。",
+  "store/minicart.go-to-checkout": "前往結帳",
+  "store/minicart.empty-state": "您的購物車是空的。",
+  "store/minicart.title": "購物車"
+}
