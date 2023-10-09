@@ -98,6 +98,8 @@ const MinicartIconButton: React.FC<Props> = props => {
 
   return (
     <ButtonWithIcon
+      id="miniCartButton"
+      ariaLabel="Open Minicart"
       icon={
         <span className={`${handles.minicartIconContainer} gray relative`}>
           <Icon />
