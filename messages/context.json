@@ -19,5 +19,6 @@
   "store/minicart.checkout-failure": "Message showed when there is a problem to a request to the server.",
   "store/minicart.go-to-checkout": "Go to checkout",
   "store/minicart.empty-state": "store/cart.empty-state",
-  "store/minicart.title": "store/cart.empty-state"
+  "store/minicart.title": "store/cart.empty-state",
+  "store/minicart.icon-button": "minicart.icon-button"
 }
