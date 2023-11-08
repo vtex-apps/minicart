@@ -1,4 +1,5 @@
 import React from 'react'
+import { useIntl } from 'react-intl'
 import { ButtonWithIcon } from 'vtex.styleguide'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
@@ -65,6 +66,7 @@ const MinicartIconButton: React.FC<Props> = props => {
   const itemQuantity = loading ? 0 : quantity
   const { url: checkoutUrl } = useCheckoutURL()
   const goToCheckout = useCheckout()
+  const intl = useIntl()
 
   const handleClick = () => {
     if (openOnHoverProp) {
@@ -98,10 +100,13 @@ const MinicartIconButton: React.FC<Props> = props => {
 
   return (
     <ButtonWithIcon
-      id="miniCartButton"
-      ariaLabel="Open Minicart"
       icon={
-        <span className={`${handles.minicartIconContainer} gray relative`}>
+        <span 
+          aria-label={intl.formatMessage({
+            id: 'store/minicart.icon-button',
+          })}
+          role="img"
+          className={`${handles.minicartIconContainer} gray relative`}>
           <Icon />
           {showQuantityBadge && (
             <span

@@ -113,7 +113,6 @@ export const Minicart: FC<MinicartProps> = ({
         >
           {variation === 'drawer' ? (
             <DrawerMode
-              aria-label="Minicart"
               Icon={MinicartIcon}
               backdropMode={backdropMode}
               itemCountMode={itemCountMode}

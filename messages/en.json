@@ -19,5 +19,6 @@
   "store/minicart.checkout-failure": "Something went wrong. Please, try again.",
   "store/minicart.go-to-checkout": "Go to checkout",
   "store/minicart.empty-state": "Your cart is empty.",
-  "store/minicart.title": "Cart"
+  "store/minicart.title": "Cart",
+  "store/minicart.icon-button": "Cart icon"
 }
