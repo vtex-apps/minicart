@@ -84,7 +84,7 @@ const Summary: FC<Props> = ({ classes }) => {
   let newTotalizers = totalizers
 
   newTotalizers = JSON.parse(JSON.stringify(totalizers))
-  const totalizerItems = newTotalizers.find((t: any) => t.id === 'Items')
+  const totalizerItems = newTotalizers.find((t: { id: string }) => t.id === 'Items')
 
   if (flegValue && typeof flegValue === 'number') {
     newTotalizers.push({
@@ -94,7 +94,9 @@ const Summary: FC<Props> = ({ classes }) => {
       __typename: 'Totalizer',
     })
 
-    totalizerItems.value -= flegValue ?? 0
+    if (totalizerItems) {
+      totalizerItems.value -= flegValue ?? 0
+    }
   }
 
   if (sgrValue && typeof sgrValue === 'number') {
@@ -104,7 +106,9 @@ const Summary: FC<Props> = ({ classes }) => {
       value: sgrValue,
       __typename: 'Totalizer',
     })
-    totalizerItems.value -= sgrValue ?? 0
+    if (totalizerItems) {
+      totalizerItems.value -= sgrValue ?? 0
+    }
   }
 
   const { handles } = useCssHandles(CSS_HANDLES, { classes })
