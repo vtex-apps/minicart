@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: minicart
+  description: "Cart IO Minicart "
+  annotations:
+    github.com/project-slug: vtex-apps/minicart
+    vtex.com/o11y-os-index: ""
+    vtex.com/janus-acronym: ""
+    grafana/dashboard-selector: ""
+    backstage.io/techdocs-ref: dir:../
+  tags:
+    - typescript
+    - react
+spec:
+  type: frontend-ui
+  lifecycle: experimental
+  owner: checkout-experience
+  system: checkout
+  dependsOn: []
+  subcomponentOf: checkout-cart
