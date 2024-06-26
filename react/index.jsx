@@ -103,7 +103,7 @@ const useUpdateOrderFormOnState = (data, minicartState, updateOrderForm) => {
   useEffect(
     () => {
       const updateLocalOrderForm = async () => {
-        const orderFormData = JSON.parse(localStorage.getItem('orderForm'))
+        const orderFormData = JSON.parse(localStorage.getItem('orderform'))
 
         const remoteOrderForm = data.orderForm
 
@@ -164,6 +164,8 @@ const MiniCart = ({
 }) => {
   useLinkState(client)
 
+  console.log('### Hey Jorge! 👋👋')
+
   const [isUpdatingOrderForm, setUpdatingOrderForm] = useState(false)
   const isOffline = useOffline()
 
@@ -211,7 +213,7 @@ const MiniCart = ({
   useEffect(() => {
     if (orderForm) {
       localStorage.setItem('minicart', JSON.stringify(minicartItems))
-      localStorage.setItem('orderForm', JSON.stringify(orderForm))
+      localStorage.setItem('orderform', JSON.stringify(orderForm))
     }
   }, [minicartItems, orderForm])
 
