@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useCallback, useState } from 'react'
 import { IconCart } from 'vtex.store-icons'
 import { BackdropMode } from 'vtex.store-drawer'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
@@ -104,9 +104,9 @@ export const Minicart: FC<MinicartProps> = ({
     )
   }
 
-  const onDrawerVisibilityChanged = (visible: boolean) => {
+  const onDrawerVisibilityChanged = useCallback((visible: boolean) => {
     setIsDrawerOpen(visible)
-  }
+  }, [setIsDrawerOpen])
 
   return (
     <aside
