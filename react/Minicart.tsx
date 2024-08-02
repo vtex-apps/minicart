@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { IconCart } from 'vtex.store-icons'
 import { BackdropMode } from 'vtex.store-drawer'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
@@ -61,10 +61,12 @@ export const Minicart: FC<MinicartProps> = ({
 
   const { orderForm }: OrderFormContext = useOrderForm()
 
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const { variation, open } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
 
-  useViewCartPixel(open, orderForm?.items)
+  // for Popup it uses "open" and for Drawer it uses "isDrawerOpen" to send view_cart pixel event
+  useViewCartPixel(variation === 'drawer' ? isDrawerOpen : open, orderForm?.items)
 
   if (variation === 'link') {
     return (
@@ -102,6 +104,10 @@ export const Minicart: FC<MinicartProps> = ({
     )
   }
 
+  const onDrawerVisibilityChanged = (visible: boolean) => {
+    setIsDrawerOpen(visible)
+  }
+
   return (
     <aside
       className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
@@ -121,6 +127,7 @@ export const Minicart: FC<MinicartProps> = ({
               drawerSlideDirection={drawerSlideDirection}
               customPixelEventId={customPixelEventId}
               customPixelEventName={customPixelEventName}
+              onVisibilityChanged={onDrawerVisibilityChanged}
             >
               {children}
             </DrawerMode>
