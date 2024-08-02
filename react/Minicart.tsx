@@ -65,8 +65,18 @@ export const Minicart: FC<MinicartProps> = ({
   const { variation, open } = useMinicartState()
   const { url: checkoutUrl } = useCheckoutURL()
 
+  const onDrawerVisibilityChanged = useCallback(
+    (visible: boolean) => {
+      setIsDrawerOpen(visible)
+    },
+    [setIsDrawerOpen]
+  )
+
   // for Popup it uses "open" and for Drawer it uses "isDrawerOpen" to send view_cart pixel event
-  useViewCartPixel(variation === 'drawer' ? isDrawerOpen : open, orderForm?.items)
+  useViewCartPixel(
+    variation === 'drawer' ? isDrawerOpen : open,
+    orderForm?.items
+  )
 
   if (variation === 'link') {
     return (
@@ -103,10 +113,6 @@ export const Minicart: FC<MinicartProps> = ({
       </aside>
     )
   }
-
-  const onDrawerVisibilityChanged = useCallback((visible: boolean) => {
-    setIsDrawerOpen(visible)
-  }, [setIsDrawerOpen])
 
   return (
     <aside
