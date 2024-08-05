@@ -61,8 +61,8 @@ export const Minicart: FC<MinicartProps> = ({
 
   const { orderForm }: OrderFormContext = useOrderForm()
 
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const { variation, open } = useMinicartState()
+  const [isDrawerOpen, setIsDrawerOpen] = useState(open ?? false)
   const { url: checkoutUrl } = useCheckoutURL()
 
   const onDrawerVisibilityChanged = useCallback(

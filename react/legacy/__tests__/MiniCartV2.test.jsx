@@ -47,14 +47,9 @@ describe('<MiniCart /> v2', () => {
       </MinicartStateContext.Provider>
     )
 
-    await wait(
-      async () => {
-        jest.runAllTimers()
-      },
-      {
-        timeout: 1200,
-      }
-    )
+    await wait(async () => {
+      jest.runAllTimers()
+    })
 
     const expectedPixelEvent = {
       event: 'viewCart',
@@ -71,14 +66,9 @@ describe('<MiniCart /> v2', () => {
       </MinicartStateContext.Provider>
     )
 
-    await wait(
-      async () => {
-        jest.runAllTimers()
-      },
-      {
-        timeout: 1200,
-      }
-    )
+    await wait(async () => {
+      jest.runAllTimers()
+    })
 
     const expectedPixelEvent = {
       event: 'viewCart',
