@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Prop `splitItem` of `minicart-product-list`
 
+## [2.67.2] - 2024-08-14
+
+### Added
+- Drawer component onVisibilityChanged property to handle open/close state
+
+### Changed
+- Logic of the useViewCartPixel hook
+
 ## [2.67.1] - 2023-05-05
 ### Fixed
 - Fixes of i18n on readme.md accorrding to task LOC-10558.
