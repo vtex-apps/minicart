@@ -87,7 +87,14 @@ const Summary: FC<Props> = ({ classes }) => {
   }, [items, sgrSkuIds])
 
   listen(QueueStatus.FULFILLED, () => {
-    computeTotalizers()
+    const onlySgrOrBags = items.every(
+      (item: any) =>
+        sgrSkuIds.includes(item.id) || packagesSkuIds.includes(item.id)
+    )
+
+    if (onlySgrOrBags) {
+      computeTotalizers()
+    }
   });
 
   useEffect(() => {
