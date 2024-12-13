@@ -87,7 +87,7 @@ export function transformOrderFormItems(orderFormItems: OrderForm['items']) {
   return orderFormItems.map(item => mapCartItemToPixel(item))
 }
 
-interface PixelCartItem {
+export interface PixelCartItem {
   skuId: string
   variant: string
   price: number

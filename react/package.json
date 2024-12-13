@@ -1,6 +1,6 @@
 {
-  "name": "auchan.minicart",
-  "version": "0.0.1",
+  "name": "vtex.minicart",
+  "version": "2.68.0",
   "description": "A MiniCart Component.",
   "scripts": {
     "pretest": "yarn",
