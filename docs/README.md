@@ -18,7 +18,7 @@ The Minicart is a block that displays a summary list of all items added to the s
 
 ```json
 "dependencies": {
-  "vtex.minicart": "2.x"
+  "auchan.minicart": "0.x"
 }
 ```
 
