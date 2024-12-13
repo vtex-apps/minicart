@@ -1,6 +1,6 @@
-import React, { FC, useCallback, useEffect, useMemo, useState } from 'react'
+import React, { FC, useEffect, useMemo, useState } from 'react'
 import { ExtensionPoint } from 'vtex.render-runtime'
-import { OrderForm as OrderFormComponent } from 'vtex.order-manager'
+import { OrderForm as OrderFormComponent, OrderQueue } from 'vtex.order-manager'
 import { useCssHandles, CssHandlesTypes } from 'vtex.css-handles'
 
 import { fetchWithRetry } from './legacy/utils/fetchWithRetry'
@@ -13,28 +13,15 @@ interface Props {
 
 const Summary: FC<Props> = ({ classes }) => {
   const { useOrderForm } = OrderFormComponent;
+  const { useOrderQueue, QueueStatus } = OrderQueue;
   const orderFormContext = useOrderForm();
 
   const {
     orderForm: { totalizers, value, items, paymentData },
   } = orderFormContext;
-
-  const refreshCart = useCallback(async () => {
-    await orderFormContext.setOrderForm({
-      ...orderFormContext.orderForm,
-      items: [] // This forces a refresh
-    })
-  }, [orderFormContext])
-
+  const { listen } = useOrderQueue();
 
   const [finalTotalizers, setFinalTotalizers] = useState(totalizers);
-  const [isUpdating, setIsUpdating] = useState(false);
-
-  useEffect(() => {
-    setIsUpdating(true);
-    const timeoutId = setTimeout(() => setIsUpdating(false), 100);
-    return () => clearTimeout(timeoutId);
-  }, [items]);
 
   const [packagesSkuIds, setPackagesSkuIds] = useState<string[]>([])
   const [sgrSkuIds, setSgrSkuIds] = useState<string[]>([])
@@ -99,13 +86,15 @@ const Summary: FC<Props> = ({ classes }) => {
     }, 0)
   }, [items, sgrSkuIds])
 
-
+  listen(QueueStatus.FULFILLED, () => {
+    computeTotalizers()
+  });
 
   useEffect(() => {
-    if (isUpdating) {
-      return
-    }
+    computeTotalizers()
+  }, [items, flegValue, sgrValue, totalizers])
 
+  const computeTotalizers = () => {
     if (!items?.length) {
       setFinalTotalizers([])
       return
@@ -113,7 +102,6 @@ const Summary: FC<Props> = ({ classes }) => {
 
     let newTotalizers = JSON.parse(JSON.stringify(totalizers))
 
-    newTotalizers = JSON.parse(JSON.stringify(totalizers))
     const totalizerItems = newTotalizers.find((t: { id: string }) => t.id === 'Items')
 
     if (flegValue && typeof flegValue === 'number') {
@@ -140,8 +128,9 @@ const Summary: FC<Props> = ({ classes }) => {
         totalizerItems.value -= sgrValue ?? 0
       }
     }
+
     setFinalTotalizers(newTotalizers)
-  }, [totalizers, flegValue, sgrValue, items, value, paymentData, isUpdating])
+  }
 
   const { handles } = useCssHandles(CSS_HANDLES, { classes })
 
@@ -152,43 +141,6 @@ const Summary: FC<Props> = ({ classes }) => {
         ((item?.listPrice as number) ?? 0) * (item?.quantity ?? 1),
       0
     ) ?? 0
-
-  const isPackagingItem = useCallback((item: OrderFormItem) => {
-    const packagingIdentifiers = [
-      'PUNGA HARTIE E-COMMERCE',
-      'PUNGA BIO FLEG',
-      'Punga transparenta e commerce'
-    ]
-
-    return packagingIdentifiers.some(identifier =>
-      item.name.toUpperCase().includes(identifier.toUpperCase())
-    )
-  }, [totalizers, items])
-
-  useEffect(() => {
-    let timeoutId: any;
-    const hasOnlyPackagingAndShipping = () => {
-      const hasOnlyPackagingItems = items.every(isPackagingItem)
-
-      const hasOnlyShippingTotalizer = totalizers.length === 1 &&
-        totalizers[0].id === 'Shipping'
-
-      const hasShippingAndPackaging = totalizers.length === 2 &&
-        totalizers.some((t: any) => t.id === 'Shipping') &&
-        totalizers.some((t: any) => t.id === 'Items') &&
-        items.every(isPackagingItem)
-      return hasOnlyPackagingItems && (hasOnlyShippingTotalizer || hasShippingAndPackaging)
-    }
-
-    if (hasOnlyPackagingAndShipping()) {
-      timeoutId = setTimeout(() => {
-        refreshCart()
-      }, 100)
-
-    }
-
-    return () => clearTimeout(timeoutId)
-  }, [totalizers, value, items, paymentData, refreshCart, isPackagingItem])
 
   return (
     <div className={`${handles.minicartSummary} ph4 ph6-l pt5`}>
