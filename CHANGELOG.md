@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Update GitHub actions/cache to v4
+
 ## [2.68.0] - 2024-09-05
 ### Added
 - Prop `splitItem` of `minicart-product-list`
