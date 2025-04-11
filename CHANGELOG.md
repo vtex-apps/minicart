@@ -1154,3 +1154,5 @@ Rename `large` prop to `isSizeLarge` for better description
 ### Added
 
 - Publish first version of the app.
+
+## [0.0.1] - 2024-01-08

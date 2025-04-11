@@ -1,5 +1,5 @@
 {
-  "vendor": "vtex",
+  "vendor": "auchan",
   "name": "minicart",
   "title": "Mini Cart",
   "version": "2.68.0",
@@ -14,6 +14,8 @@
     "postreleasy": "vtex publish --verbose"
   },
   "dependencies": {
+    "auchan.product-list": "0.x",
+    "auchan.checkout-summary": "0.x",
     "vtex.product-summary": "2.x",
     "vtex.store-resources": "0.x",
     "vtex.store-components": "3.x",
@@ -26,10 +28,8 @@
     "vtex.css-handles": "1.x",
     "vtex.order-manager": "0.x",
     "vtex.order-items": "0.x",
-    "vtex.product-list": "0.x",
     "vtex.device-detector": "0.x",
     "vtex.store-drawer": "0.x",
-    "vtex.checkout-summary": "0.x",
     "vtex.checkout-resources": "0.x",
     "vtex.flex-layout": "0.x",
     "vtex.rich-text": "0.x",
