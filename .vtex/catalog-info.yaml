@@ -12,7 +12,7 @@ metadata:
     vtex.com/o11y-os-index: ""
     grafana/dashboard-selector: ""
     github.com/project-slug: vtex-apps/minicart
-    vtex.com/platform-flow-id: ""
+    vtex.com/platform-flow-id: Shopper#2
     backstage.io/techdocs-ref: dir:../
     vtex.com/application-id: 6WQ27P7P
 spec:
