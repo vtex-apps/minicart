@@ -76,7 +76,7 @@ const MinicartIconButton: React.FC<Props> = props => {
   useEffect(() => {
     let isSubscribed = true
 
-    fetchWithRetry('/_v/private/api/cart-bags-manager/app-settings', 3).then(
+    fetchWithRetry('/auchan/v1/cart-manager/app-settings', 3).then(
       (res: PackagesSkuIds) => {
         if (res && isSubscribed) {
           try {

@@ -4,8 +4,33 @@ import { OrderForm as OrderFormComponent } from 'vtex.order-manager'
 import { useCssHandles, CssHandlesTypes } from 'vtex.css-handles'
 
 import { fetchWithRetry } from './legacy/utils/fetchWithRetry'
+import { DeliveryMethod, breakdownFromTotal } from './modules/shippingBreakdown'
 
 const CSS_HANDLES = ['minicartSummary'] as const
+
+type ShippingDataLogisticsInfo = {
+  selectedDeliveryChannel?: string
+}
+
+type ShippingData = {
+  logisticsInfo?: ShippingDataLogisticsInfo[]
+}
+
+type CheckoutOrderFormResponse = {
+  shippingData?: ShippingData
+}
+
+const getDeliveryMethod = (shippingData?: ShippingData): DeliveryMethod => {
+  const firstSelectedChannel = (shippingData?.logisticsInfo ?? []).find(
+    logistics => logistics?.selectedDeliveryChannel
+  )?.selectedDeliveryChannel
+
+  if (firstSelectedChannel === 'pickup-in-point') {
+    return 'pickup-in-point'
+  }
+
+  return 'delivery'
+}
 
 interface Props {
   classes?: CssHandlesTypes.CustomClasses<typeof CSS_HANDLES>
@@ -18,23 +43,42 @@ const Summary: FC<Props> = ({ classes }) => {
     orderForm: { totalizers, value, items, paymentData },
   } = useOrderForm()
 
-  const [packagesSkuIds, setPackagesSkuIds] = useState<string[]>([])
+  const [shippingDataInfo, setShippingDataInfo] = useState<ShippingData>()
   const [sgrSkuIds, setSgrSkuIds] = useState<string[]>([])
 
   useEffect(() => {
     let isSubscribed = true
 
-    fetchWithRetry('/_v/private/api/cart-bags-manager/app-settings', 3).then(
+    fetch('/api/checkout/pub/orderForm')
+      .then(response => response.json())
+      .then((response: CheckoutOrderFormResponse) => {
+        if (isSubscribed) {
+          setShippingDataInfo(response?.shippingData)
+        }
+      })
+      .catch(() => {
+        // Keep default delivery fallback if this endpoint is temporarily unavailable.
+      })
+
+    return () => {
+      isSubscribed = false
+    }
+  }, [value, items.length])
+
+  useEffect(() => {
+    let isSubscribed = true
+
+    fetchWithRetry('/auchan/v1/cart-manager/app-settings', 3).then(
       (res: PackagesSkuIds) => {
         if (res && isSubscribed) {
           try {
-            const { bagsSettings, sgrSettings } = res?.data ?? {}
-
-            setPackagesSkuIds(Object.values(bagsSettings))
+            const { sgrSettings = {} } = res?.data ?? {}
 
             const allSkuIds: string[] = []
 
-            Object.values(sgrSettings).forEach(sgrType => {
+            Object.values(
+              sgrSettings as Record<string, { skuIds?: string[] }>
+            ).forEach(sgrType => {
               if (sgrType?.skuIds) {
                 allSkuIds.push(...sgrType.skuIds)
               }
@@ -52,20 +96,6 @@ const Summary: FC<Props> = ({ classes }) => {
       isSubscribed = false
     }
   }, [])
-
-  const flegValue = useMemo(() => {
-    if (!packagesSkuIds.length) {
-      return
-    }
-    return items.reduce((total: number, item: OrderFormItem) => {
-      if (packagesSkuIds.includes(item.id)) {
-        return (
-          total + ((item?.listPrice as number) ?? 0) * (item?.quantity ?? 1)
-        )
-      }
-      return total
-    }, 0)
-  }, [items, packagesSkuIds])
 
   const sgrValue = useMemo(() => {
     if (!sgrSkuIds.length) {
@@ -85,17 +115,26 @@ const Summary: FC<Props> = ({ classes }) => {
 
   newTotalizers = JSON.parse(JSON.stringify(totalizers))
   const totalizerItems = newTotalizers.find((t: { id: string }) => t.id === 'Items')
+  const shippingTotalizer = newTotalizers.find(
+    (t: { id: string }) => t.id === 'Shipping'
+  )
+  const deliveryMethod = getDeliveryMethod(shippingDataInfo)
+  const shippingBreakdown = breakdownFromTotal(
+    shippingTotalizer?.value ?? 0,
+    deliveryMethod
+  )
+  const bagsValue = shippingBreakdown?.bags ?? 0
 
-  if (flegValue && typeof flegValue === 'number') {
+  if (bagsValue > 0) {
     newTotalizers.push({
       id: 'Packaging',
       name: 'Taxa ambalare',
-      value: flegValue,
+      value: bagsValue,
       __typename: 'Totalizer',
     })
 
-    if (totalizerItems) {
-      totalizerItems.value -= flegValue ?? 0
+    if (shippingTotalizer) {
+      shippingTotalizer.value = Math.max(shippingTotalizer.value - bagsValue, 0)
     }
   }
 

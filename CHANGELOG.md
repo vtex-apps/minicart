@@ -7,4 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Updated minicart shipping/packaging calculation using delivery method breakdown.
+- Switched cart manager app-settings fetch endpoint to `/auchan/v1/cart-manager/app-settings`.
+
 ## [0.0.1] - 2024-01-08
