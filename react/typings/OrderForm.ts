@@ -68,3 +68,15 @@ interface Message {
   status: string
   text: string
 }
+
+interface ShippingDataLogisticsInfo {
+  selectedDeliveryChannel?: 'delivery' | 'pickup-in-point'
+}
+
+interface ShippingData {
+  logisticsInfo?: ShippingDataLogisticsInfo[]
+}
+
+interface CheckoutOrderFormResponse {
+  shippingData?: ShippingData
+}

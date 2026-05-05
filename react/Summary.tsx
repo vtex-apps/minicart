@@ -8,28 +8,12 @@ import { DeliveryMethod, breakdownFromTotal } from './modules/shippingBreakdown'
 
 const CSS_HANDLES = ['minicartSummary'] as const
 
-type ShippingDataLogisticsInfo = {
-  selectedDeliveryChannel?: string
-}
-
-type ShippingData = {
-  logisticsInfo?: ShippingDataLogisticsInfo[]
-}
-
-type CheckoutOrderFormResponse = {
-  shippingData?: ShippingData
-}
-
 const getDeliveryMethod = (shippingData?: ShippingData): DeliveryMethod => {
   const firstSelectedChannel = (shippingData?.logisticsInfo ?? []).find(
     logistics => logistics?.selectedDeliveryChannel
   )?.selectedDeliveryChannel
 
-  if (firstSelectedChannel === 'pickup-in-point') {
-    return 'pickup-in-point'
-  }
-
-  return 'delivery'
+  return firstSelectedChannel ?? 'delivery'
 }
 
 interface Props {
