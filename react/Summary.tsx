@@ -24,30 +24,11 @@ const Summary: FC<Props> = ({ classes }) => {
   const { useOrderForm } = OrderFormComponent
 
   const {
-    orderForm: { totalizers, value, items, paymentData },
+    orderForm: { totalizers, value, items, shippingData },
   } = useOrderForm()
 
-  const [shippingDataInfo, setShippingDataInfo] = useState<ShippingData>()
+
   const [sgrSkuIds, setSgrSkuIds] = useState<string[]>([])
-
-  useEffect(() => {
-    let isSubscribed = true
-
-    fetch('/api/checkout/pub/orderForm')
-      .then(response => response.json())
-      .then((response: CheckoutOrderFormResponse) => {
-        if (isSubscribed) {
-          setShippingDataInfo(response?.shippingData)
-        }
-      })
-      .catch(() => {
-        // Keep default delivery fallback if this endpoint is temporarily unavailable.
-      })
-
-    return () => {
-      isSubscribed = false
-    }
-  }, [value, items.length])
 
   useEffect(() => {
     let isSubscribed = true
@@ -102,7 +83,7 @@ const Summary: FC<Props> = ({ classes }) => {
   const shippingTotalizer = newTotalizers.find(
     (t: { id: string }) => t.id === 'Shipping'
   )
-  const deliveryMethod = getDeliveryMethod(shippingDataInfo)
+  const deliveryMethod = getDeliveryMethod(shippingData)
   const shippingBreakdown = breakdownFromTotal(
     shippingTotalizer?.value ?? 0,
     deliveryMethod
