@@ -24,7 +24,7 @@ const Summary: FC<Props> = ({ classes }) => {
   const { useOrderForm } = OrderFormComponent
 
   const {
-    orderForm: { totalizers, value, items, shippingData },
+    orderForm: { totalizers, value, items, shippingData, paymentData },
   } = useOrderForm()
 
 
