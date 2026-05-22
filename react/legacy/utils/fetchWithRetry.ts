@@ -1,5 +1,5 @@
 interface FetchWithRetry {
-  (url: string, retries: number): Promise<PackagesSkuIds>
+  <T = unknown>(url: string, retries: number): Promise<T | undefined>
 }
 
 export const fetchWithRetry: FetchWithRetry = (url: string, retries: number) =>

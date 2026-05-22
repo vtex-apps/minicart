@@ -1,31 +1,27 @@
 import React, { FC, useEffect, useMemo, useState } from 'react'
 import { ExtensionPoint } from 'vtex.render-runtime'
-import { OrderForm as OrderFormComponent } from 'vtex.order-manager'
+import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { useCssHandles, CssHandlesTypes } from 'vtex.css-handles'
 
 import { fetchWithRetry } from './legacy/utils/fetchWithRetry'
-import { DeliveryMethod, breakdownFromTotal } from './modules/shippingBreakdown'
+import useShippingBreakdownFromCartContext from './modules/useShippingBreakdownFromCartContext'
 
 const CSS_HANDLES = ['minicartSummary'] as const
 
-const getDeliveryMethod = (shippingData?: ShippingData): DeliveryMethod => {
-  const firstSelectedChannel = (shippingData?.logisticsInfo ?? []).find(
-    logistics => logistics?.selectedDeliveryChannel
-  )?.selectedDeliveryChannel
-
-  return firstSelectedChannel ?? 'delivery'
-}
 
 interface Props {
   classes?: CssHandlesTypes.CustomClasses<typeof CSS_HANDLES>
 }
 
 const Summary: FC<Props> = ({ classes }) => {
-  const { useOrderForm } = OrderFormComponent
-
+  const { orderForm }: OrderFormContext = useOrderForm()
   const {
-    orderForm: { totalizers, value, items, shippingData, paymentData },
-  } = useOrderForm()
+    totalizers = [],
+    value = 0,
+    items = [],
+    paymentData,
+  } = orderForm ?? {}
+  const { bagsValue } = useShippingBreakdownFromCartContext()
 
 
   const [sgrSkuIds, setSgrSkuIds] = useState<string[]>([])
@@ -33,8 +29,8 @@ const Summary: FC<Props> = ({ classes }) => {
   useEffect(() => {
     let isSubscribed = true
 
-    fetchWithRetry('/auchan/v1/cart-manager/app-settings', 3).then(
-      (res: PackagesSkuIds) => {
+    fetchWithRetry<PackagesSkuIds>('/auchan/v1/cart-manager/app-settings', 3).then(
+      res => {
         if (res && isSubscribed) {
           try {
             const { sgrSettings = {} } = res?.data ?? {}
@@ -83,12 +79,6 @@ const Summary: FC<Props> = ({ classes }) => {
   const shippingTotalizer = newTotalizers.find(
     (t: { id: string }) => t.id === 'Shipping'
   )
-  const deliveryMethod = getDeliveryMethod(shippingData)
-  const shippingBreakdown = breakdownFromTotal(
-    shippingTotalizer?.value ?? 0,
-    deliveryMethod
-  )
-  const bagsValue = shippingBreakdown?.bags ?? 0
 
   if (bagsValue > 0) {
     newTotalizers.push({

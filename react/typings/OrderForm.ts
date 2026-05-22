@@ -23,6 +23,7 @@ interface OrderFormItem {
   productCategoryIds: string
   productRefId: string
   refId: string
+  seller?: string
   parentItemIndex: number | null
 }
 
@@ -46,6 +47,8 @@ interface OrderForm {
   totalizers: Totalizer[]
   value: number
   messages: OrderFormMessages
+  paymentData?: unknown
+  shippingData?: ShippingData
 }
 
 interface MarketingData {
@@ -56,6 +59,7 @@ interface Totalizer {
   id: string
   name: string
   value: number
+  __typename?: string
 }
 
 interface OrderFormMessages {
@@ -70,11 +74,33 @@ interface Message {
 }
 
 interface ShippingDataLogisticsInfo {
+  itemIndex: number
+  selectedSla: string | null
+  slas: ShippingDataSla[]
   selectedDeliveryChannel?: 'delivery' | 'pickup-in-point'
 }
 
+interface ShippingDataSla {
+  id: string
+  name?: string
+  deliveryChannel: string
+  price: number
+  deliveryIds?: ShippingDataDeliveryId[]
+}
+
+interface ShippingDataDeliveryId {
+  courierId: string
+  warehouseId: string
+  dockId: string
+}
+
 interface ShippingData {
+  address?: ShippingDataAddress
   logisticsInfo?: ShippingDataLogisticsInfo[]
+}
+
+interface ShippingDataAddress {
+  addressId?: string
 }
 
 interface CheckoutOrderFormResponse {
