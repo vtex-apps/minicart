@@ -84,11 +84,11 @@ export function breakdownFromTotal(
 /**
  * Combined shipping breakdown for a VTEX OrderForm.
  *
- * Walks `shippingData.logisticsInfo`, picks the selected SLA on each row, and
- * looks it up in {@link DELIVERY_BY_TOTAL} / {@link PICKUP_IN_POINT_BY_TOTAL}.
- * Items that ride along in the same package (same SLA + same `deliveryIds`)
- * are counted once. Monetary fields are summed; `freeShipping` is true only if
- * **every** package is free.
+ * Walks `shippingData.logisticsInfo`, picks the selected SLA on each row, then
+ * coalesces shipping totals by `deliveryChannel` and `warehouseId` before
+ * looking them up in {@link DELIVERY_BY_TOTAL} / {@link PICKUP_IN_POINT_BY_TOTAL}.
+ * Monetary fields are summed; `freeShipping` is true only if every grouped
+ * shipment is free.
  *
  * Returns `pending` while shipping data is not complete enough to calculate a
  * reliable breakdown, `unmapped` when data is complete but no mapping exists,
@@ -102,7 +102,14 @@ export function breakdownFromLogisticsInfo(
     return { status: "pending" };
   }
 
-  const seenPackages = new Set<string>();
+  const groupedShippingTotals = new Map<
+    string,
+    {
+      deliveryMethod: DeliveryMethod;
+      shippingGroupKey: string;
+      totalCents: number;
+    }
+  >();
   let hasPendingEntry = false;
   let hasMappedBreakdown = false;
   const total: ShippingBreakdown = {
@@ -131,13 +138,26 @@ export function breakdownFromLogisticsInfo(
       continue;
     }
 
-    const packageKey = packageSignature(sla);
-    if (seenPackages.has(packageKey)) {
+    const shippingGroupKey = shippingGroupSignature(sla);
+    const currentGroup = groupedShippingTotals.get(shippingGroupKey);
+
+    if (currentGroup === undefined) {
+      groupedShippingTotals.set(shippingGroupKey, {
+        deliveryMethod: sla.deliveryChannel,
+        shippingGroupKey,
+        totalCents: sla.price,
+      });
       continue;
     }
-    seenPackages.add(packageKey);
 
-    const breakdown = breakdownFromTotal(sla.price, sla.deliveryChannel);
+    currentGroup.totalCents += sla.price;
+  }
+
+  for (const group of groupedShippingTotals.values()) {
+    const breakdown = breakdownFromTotal(
+      group.totalCents,
+      group.deliveryMethod
+    );
     if (breakdown === undefined) {
       continue;
     }
@@ -173,4 +193,28 @@ function packageSignature(sla: VtexSla): string {
     .sort()
     .join(",");
   return `${sla.id}#${fingerprint}`;
+}
+
+function shippingGroupSignature(sla: VtexSla): string {
+  const warehouseFingerprint = warehouseSignature(sla);
+
+  if (warehouseFingerprint !== null) {
+    return `${sla.deliveryChannel}#${warehouseFingerprint}`;
+  }
+
+  return `${sla.deliveryChannel}#${packageSignature(sla)}`;
+}
+
+function warehouseSignature(sla: VtexSla): string | null {
+  const warehouseIds = Array.from(
+    new Set((sla.deliveryIds ?? []).map((deliveryId) => deliveryId.warehouseId))
+  )
+    .filter(Boolean)
+    .sort();
+
+  if (warehouseIds.length === 0) {
+    return null;
+  }
+
+  return warehouseIds.join(",");
 }
