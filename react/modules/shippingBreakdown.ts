@@ -57,7 +57,7 @@ const DELIVERY_BY_TOTAL: Record<string, ShippingBreakdown> = {
 };
 
 const PICKUP_IN_POINT_BY_TOTAL: Record<string, ShippingBreakdown> = {
-  "0": { baseShipping: 0, extraWeight: 0, bags: 499, freeShipping: true },
+  "0": { baseShipping: 0, extraWeight: 0, bags: 0, freeShipping: true },
   "499": { baseShipping: 0, extraWeight: 0, bags: 499, freeShipping: false },
 };
 
