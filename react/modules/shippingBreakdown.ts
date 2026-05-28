@@ -207,7 +207,7 @@ function shippingGroupSignature(sla: VtexSla): string {
 
 function warehouseSignature(sla: VtexSla): string | null {
   const warehouseIds = Array.from(
-    new Set((sla.deliveryIds ?? []).map((deliveryId) => deliveryId.warehouseId))
+    new Set((sla.deliveryIds ?? []).map((deliveryId) => deliveryId.dockId))
   )
     .filter(Boolean)
     .sort();

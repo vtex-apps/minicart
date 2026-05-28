@@ -19,6 +19,7 @@ interface Props {
   backdropMode?: ResponsiveValuesTypes.ResponsiveValue<BackdropMode>
   customPixelEventId?: string
   customPixelEventName?: PixelEventTypes.EventName
+  onVisibilityChanged?: (visible: boolean) => void
 }
 
 const DrawerMode: FC<Props> = ({
@@ -31,6 +32,7 @@ const DrawerMode: FC<Props> = ({
   backdropMode = 'visible',
   customPixelEventId,
   customPixelEventName,
+  onVisibilityChanged,
 }) => {
   const { handles } = useMinicartCssHandles()
 
@@ -41,6 +43,7 @@ const DrawerMode: FC<Props> = ({
       slideDirection={drawerSlideDirection}
       customPixelEventId={customPixelEventId}
       customPixelEventName={customPixelEventName}
+      onVisibilityChanged={onVisibilityChanged}
       customIcon={
         <MinicartIconButton
           Icon={Icon}

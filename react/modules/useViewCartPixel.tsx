@@ -1,7 +1,8 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { usePixel } from 'vtex.pixel-manager'
+import { debounce } from 'debounce'
 
-import { transformOrderFormItems } from './pixelHelper'
+import { PixelCartItem, transformOrderFormItems } from './pixelHelper'
 
 const useViewCartPixel = (
   isOpen: boolean,
@@ -11,16 +12,23 @@ const useViewCartPixel = (
 
   const transformedItems = transformOrderFormItems(orderFormItems)
 
+  const pushViewCart = useCallback(
+    debounce((items: PixelCartItem[]) => {
+      push({
+        event: 'viewCart',
+        items,
+      })
+    }, 1000),
+    [push]
+  )
+
   useEffect(() => {
     if (!isOpen) {
       return
     }
 
-    push({
-      event: 'viewCart',
-      items: transformedItems,
-    })
-  }, [push, isOpen, transformedItems])
+    pushViewCart(transformedItems)
+  }, [pushViewCart, isOpen, transformedItems])
 }
 
 export default useViewCartPixel
