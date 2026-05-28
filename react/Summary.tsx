@@ -83,7 +83,7 @@ const Summary: FC<Props> = ({ classes }) => {
   if (bagsValue > 0) {
     newTotalizers.push({
       id: 'Packaging',
-      name: 'Taxa ambalare',
+      name: 'Taxă operațională',
       value: bagsValue,
       __typename: 'Totalizer',
     })
