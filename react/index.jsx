@@ -289,13 +289,19 @@ const MiniCart = ({
             pick(['id', 'index', 'quantity', 'seller', 'options'])
           )
 
+          // `priceToken` only rides along on add: that is the mutation that
+          // honours it, while `updateItems` reprices a line already in the cart.
+          const pickAddProps = map(
+            pick(['id', 'index', 'quantity', 'seller', 'options', 'priceToken'])
+          )
+
           // server mutation
           const updateItemsResponse = await mutateUpdateItems(
             pickProps(itemsToUpdate)
           )
 
           // server mutation
-          const addItemsResponse = await addItems(pickProps(itemsToAdd))
+          const addItemsResponse = await addItems(pickAddProps(itemsToAdd))
 
           if (itemsToAdd.length > 0) {
             push({
