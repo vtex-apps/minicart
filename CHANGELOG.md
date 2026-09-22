@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.69.0] - 2026-09-22
+
 ### Added
 
 - Forward the search-signed `priceToken` (Pricing Fallback V2) when syncing new items with the server. The v1 minicart picks an explicit set of fields off each local item before calling `addItem`, so the token was dropped on the way out even when `BuyButton` provided it.
