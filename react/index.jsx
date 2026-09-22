@@ -133,6 +133,15 @@ const partitionItemsAddUpdate = clientItems => {
   return partition(compose(isNil, prop('cartIndex')), clientItems)
 }
 
+const SYNC_PROPS = ['id', 'index', 'quantity', 'seller', 'options']
+
+// `priceToken` only rides along on add: that is the mutation that honours it,
+// while `updateItems` reprices a line already in the cart. Exported so the
+// distinction is covered by a test — `pick` keys off key existence, so a
+// regression here is silent.
+export const pickUpdateProps = map(pick(SYNC_PROPS))
+export const pickAddProps = map(pick([...SYNC_PROPS, 'priceToken']))
+
 /**
  * Minicart component
  */
@@ -285,17 +294,14 @@ const MiniCart = ({
           const [itemsToAdd, itemsToUpdate] = partitionItemsAddUpdate(
             modifiedItems
           )
-          const pickProps = map(
-            pick(['id', 'index', 'quantity', 'seller', 'options'])
-          )
 
           // server mutation
           const updateItemsResponse = await mutateUpdateItems(
-            pickProps(itemsToUpdate)
+            pickUpdateProps(itemsToUpdate)
           )
 
           // server mutation
-          const addItemsResponse = await addItems(pickProps(itemsToAdd))
+          const addItemsResponse = await addItems(pickAddProps(itemsToAdd))
 
           if (itemsToAdd.length > 0) {
             push({
