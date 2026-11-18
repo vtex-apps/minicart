@@ -19,5 +19,7 @@
   "store/minicart.checkout-failure": "Message showed when there is a problem to a request to the server.",
   "store/minicart.go-to-checkout": "Go to checkout",
   "store/minicart.empty-state": "store/cart.empty-state",
-  "store/minicart.title": "store/cart.empty-state"
+  "store/minicart.title": "store/cart.empty-state",
+  "store/minicart.open-button-label": "Accessible label of the button that opens the minicart. {itemCount} is the number of items in the cart.",
+  "store/minicart.drawer-label": "Accessible name of the minicart drawer dialog announced to assistive technologies while open."
 }

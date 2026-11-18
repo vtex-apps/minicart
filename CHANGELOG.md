@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- Accessibility: add an `aria-label` to the minicart icon button so assistive technologies announce its purpose, including the current item count. The quantity badge is now `aria-hidden` since it is already included in the button label.
+- Accessibility: replace the `aside` used as `minicartWrapperContainer` with a `div`, removing an invalid `complementary` landmark nested inside the header landmark.
+- Accessibility: pass an `ariaLabel` ("Shopping cart") to the drawer so the open minicart is announced as a named dialog.
+
 ## [2.69.0] - 2026-09-22
 
 ### Added

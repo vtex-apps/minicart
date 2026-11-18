@@ -1,4 +1,5 @@
 import React from 'react'
+import { defineMessages, useIntl } from 'react-intl'
 import { ButtonWithIcon } from 'vtex.styleguide'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { useCheckoutURL } from 'vtex.checkout-resources/Utils'
@@ -7,6 +8,14 @@ import styles from '../styles.css'
 import { useMinicartCssHandles } from './CssHandlesContext'
 import { useMinicartDispatch, useMinicartState } from '../MinicartContext'
 import useCheckout from '../modules/checkoutHook'
+
+const messages = defineMessages({
+  openMinicart: {
+    defaultMessage:
+      '{itemCount, plural, =0 {Open shopping cart} one {Open shopping cart, # item} other {Open shopping cart, # items}}',
+    id: 'store/minicart.open-button-label',
+  },
+})
 
 export const CSS_HANDLES = [
   'minicartIconContainer',
@@ -59,6 +68,7 @@ const MinicartIconButton: React.FC<Props> = props => {
   const { Icon, itemCountMode, quantityDisplay, variation } = props
   const { orderForm, loading }: OrderFormContext = useOrderForm()
   const { handles } = useMinicartCssHandles()
+  const intl = useIntl()
   const { open, openBehavior, openOnHoverProp } = useMinicartState()
   const dispatch = useMinicartDispatch()
   const quantity = countCartItems(itemCountMode, orderForm.items)
@@ -98,11 +108,15 @@ const MinicartIconButton: React.FC<Props> = props => {
 
   return (
     <ButtonWithIcon
+      ariaLabel={intl.formatMessage(messages.openMinicart, {
+        itemCount: itemQuantity,
+      })}
       icon={
         <span className={`${handles.minicartIconContainer} gray relative`}>
           <Icon />
           {showQuantityBadge && (
             <span
+              aria-hidden="true"
               style={{ userSelect: 'none' }}
               className={`${handles.minicartQuantityBadge} ${styles.minicartQuantityBadgeDefault} c-on-emphasis absolute t-mini bg-emphasis br4 w1 h1 pa1 flex justify-center items-center lh-solid`}
             >
