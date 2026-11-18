@@ -80,7 +80,7 @@ export const Minicart: FC<MinicartProps> = ({
 
   if (variation === 'link') {
     return (
-      <aside
+      <div
         className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
       >
         <div className={`${handles.minicartContainer} flex flex-column`}>
@@ -98,24 +98,24 @@ export const Minicart: FC<MinicartProps> = ({
             </MinicartCssHandlesProvider>
           </a>
         </div>
-      </aside>
+      </div>
     )
   }
 
   if (variation === 'block') {
     return (
-      <aside
+      <div
         className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
       >
         <div className={`${handles.minicartContainer} flex flex-column`}>
           {children}
         </div>
-      </aside>
+      </div>
     )
   }
 
   return (
-    <aside
+    <div
       className={`${handles.minicartWrapperContainer} relative fr flex items-center`}
     >
       <div className={`${handles.minicartContainer} flex flex-column`}>
@@ -151,7 +151,7 @@ export const Minicart: FC<MinicartProps> = ({
           )}
         </MinicartCssHandlesProvider>
       </div>
-    </aside>
+    </div>
   )
 }
 

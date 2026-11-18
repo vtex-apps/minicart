@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { defineMessages, useIntl } from 'react-intl'
 import { Drawer, BackdropMode } from 'vtex.store-drawer'
 import { ResponsiveValuesTypes } from 'vtex.responsive-values'
 import { PixelEventTypes } from 'vtex.pixel-manager'
@@ -7,6 +8,13 @@ import MinicartIconButton from './MinicartIconButton'
 import { useMinicartCssHandles } from './CssHandlesContext'
 
 const DRAWER_CLOSE_ICON_HEIGHT = 58
+
+const messages = defineMessages({
+  drawerLabel: {
+    defaultMessage: 'Shopping cart',
+    id: 'store/minicart.drawer-label',
+  },
+})
 
 export const CSS_HANDLES = ['minicartSideBarContentWrapper'] as const
 
@@ -35,9 +43,11 @@ const DrawerMode: FC<Props> = ({
   onVisibilityChanged,
 }) => {
   const { handles } = useMinicartCssHandles()
+  const intl = useIntl()
 
   return (
     <Drawer
+      ariaLabel={intl.formatMessage(messages.drawerLabel)}
       maxWidth={maxDrawerWidth}
       backdropMode={backdropMode}
       slideDirection={drawerSlideDirection}

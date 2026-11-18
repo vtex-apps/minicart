@@ -19,5 +19,7 @@
   "store/minicart.checkout-failure": "Something went wrong. Please, try again.",
   "store/minicart.go-to-checkout": "Go to checkout",
   "store/minicart.empty-state": "Your cart is empty.",
-  "store/minicart.title": "Cart"
+  "store/minicart.title": "Cart",
+  "store/minicart.open-button-label": "{itemCount, plural, =0 {Open shopping cart} one {Open shopping cart, # item} other {Open shopping cart, # items}}",
+  "store/minicart.drawer-label": "Shopping cart"
 }

@@ -19,5 +19,7 @@
   "store/minicart.checkout-failure": "Algo deu errado. Por favor, tente novamente.",
   "store/minicart.go-to-checkout": "Ir para o checkout",
   "store/minicart.empty-state": "Seu carrinho está vazio.",
-  "store/minicart.title": "Carrinho"
+  "store/minicart.title": "Carrinho",
+  "store/minicart.open-button-label": "{itemCount, plural, =0 {Abrir sacola de compras} one {Abrir sacola de compras, # item} other {Abrir sacola de compras, # itens}}",
+  "store/minicart.drawer-label": "Sacola de compras"
 }
